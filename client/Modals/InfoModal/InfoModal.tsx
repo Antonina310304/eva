@@ -4,7 +4,7 @@ import cn from 'classnames';
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
-import styles from './InfoModal.css';
+import styles from './InfoModal.module.css';
 
 export interface InfoModalProps {
   className?: string;

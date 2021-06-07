@@ -6,7 +6,7 @@ import IconClose from '@divanru/ts-ui/IconClose';
 import useModals from '@Hooks/useModals';
 import KeyboardHandler from '@Components/KeyboardHandler';
 import { ModalId } from '@Contexts/Modals';
-import styles from './Modal.css';
+import styles from './Modal.module.css';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
