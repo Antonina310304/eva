@@ -1,0 +1,96 @@
+import path from 'path';
+import { HotModuleReplacementPlugin, Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import TerserJSPlugin from 'terser-webpack-plugin';
+import LoadablePlugin from '@loadable/webpack-plugin';
+
+import commonConfig from './common';
+import { babelWebLoader, cssModulesLoader, cssLoader, postcssLoader } from '../loaders';
+import envs from '../envs';
+import paths from '../paths';
+
+const webConfig: Configuration = merge(commonConfig, {
+  name: 'web',
+  target: 'web',
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        include: [path.resolve(__dirname, '../../node_modules/@divanru'), paths.context],
+        exclude: '/node_modules/',
+        use: [babelWebLoader],
+      },
+      {
+        test: /\.css$/,
+        exclude: /\.module\.css$/,
+        use: [
+          envs.isProd
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+              }
+            : {
+                loader: 'style-loader',
+              },
+          cssLoader,
+          postcssLoader,
+        ],
+      },
+      {
+        test: /\.module\.css$/,
+        use: [
+          envs.isProd
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+              }
+            : {
+                loader: 'style-loader',
+              },
+          cssModulesLoader,
+          postcssLoader,
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|gif|woff|woff2)$/,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  entry: [
+    envs.isDev && 'webpack-hot-middleware/client?name=web&reload=true&quiet=true',
+    paths.entrances.web,
+  ].filter(Boolean),
+  output: {
+    path: paths.dist.web,
+    pathinfo: false,
+    filename: envs.isProd ? `[name].[contenthash].js` : '[name].js',
+    chunkFilename: envs.isProd ? `[name].[contenthash].js` : '[name].js',
+    publicPath: '/react/assets/',
+    libraryTarget: undefined,
+    assetModuleFilename: '[hash][ext]',
+  },
+  optimization: {
+    minimize: envs.isProd,
+    minimizer: [new TerserJSPlugin({}), new CssMinimizerPlugin()],
+    removeAvailableModules: envs.isProd,
+    removeEmptyChunks: envs.isProd,
+    runtimeChunk: envs.isDev,
+  },
+  plugins: [
+    envs.isDev && new HotModuleReplacementPlugin(),
+    envs.isProd &&
+      new MiniCssExtractPlugin({
+        ignoreOrder: true,
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[name].[contenthash].css',
+      }),
+    new CleanWebpackPlugin(),
+    new LoadablePlugin() as any,
+  ].filter(Boolean),
+});
+
+export default webConfig;

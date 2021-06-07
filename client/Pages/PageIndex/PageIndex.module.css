@@ -1,0 +1,12 @@
+.pageIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: var(--size-xl);
+  margin-bottom: var(--space-m);
+}

@@ -1,0 +1,18 @@
+@import '~@divanru/ts-ui/vars.css';
+@import '~@divanru/ts-ui/ui.css';
+
+html {
+  min-width: 360px;
+
+  font-family: Circe, sans-serif;
+  -webkit-text-size-adjust: 100%;
+
+  text-size-adjust: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  overflow-y: scroll;
+}

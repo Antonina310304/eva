@@ -1,0 +1,41 @@
+stages:
+  - review
+
+check_code_style:
+  tags:
+    - divan-react
+  stage: review
+  image: node:14-alpine
+  before_script:
+    - npm ci
+  script:
+    - npm run code-style
+  only:
+    - merge_requests
+  allow_failure: true
+
+lint_css_code:
+  tags:
+    - divan-react
+  stage: review
+  image: node:14-alpine
+  before_script:
+    - npm ci
+  script:
+    - npm run lint:css
+  only:
+    - merge_requests
+  allow_failure: true
+
+lint_javascript_code:
+  tags:
+    - divan-react
+  stage: review
+  image: node:14-alpine
+  before_script:
+    - npm ci
+  script:
+    - npm run lint:js
+  only:
+    - merge_requests
+  allow_failure: true

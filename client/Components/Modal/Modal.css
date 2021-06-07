@@ -1,0 +1,75 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-index-modal);
+
+  width: 100%;
+
+  overflow: auto;
+
+  font-size: var(--size-s);
+
+  background: rgba(0, 0, 0, 0.7);
+
+  animation-name: ModalFadeIn;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.modal.closes {
+  animation-name: ModalFadeOut;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.wrapperContent {
+  position: relative;
+
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.content {
+  overflow: hidden;
+}
+
+.close {
+  position: absolute;
+  z-index: 2;
+  top: var(--space-s);
+  right: var(--space-s);
+  cursor: pointer;
+}
+
+.closeIcon {
+  color: var(--color-base);
+}
+
+@keyframes ModalFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes ModalFadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
