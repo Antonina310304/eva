@@ -1,0 +1,7 @@
+@import './fonts/CeraPro/font.css';
+@import './fonts/CloserText/font.css';
+
+:root {
+  --font-main: CeraPro, sans-serif;
+  --font-hero: CloserText, sans-serif;
+}

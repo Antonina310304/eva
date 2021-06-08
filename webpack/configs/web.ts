@@ -54,7 +54,7 @@ const webConfig: Configuration = merge(commonConfig, {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif|woff|woff2)$/,
+        test: /\.(png|svg|jpg|gif|woff|woff2|otf)$/,
         exclude: /node_modules/,
         type: 'asset/resource',
       },

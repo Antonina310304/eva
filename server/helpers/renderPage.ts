@@ -11,7 +11,6 @@ export default ({ resources, body }): string => {
         ${resources.styleTags}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/react/static/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="/react/static/fonts/fonts.css" />
       </head>
 
       <body>

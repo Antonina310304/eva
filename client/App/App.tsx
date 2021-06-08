@@ -4,6 +4,8 @@ import loadable from '@loadable/component';
 import usePage from '@Hooks/usePage';
 import useMeta from '@Hooks/useMeta';
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
+import '@UI/fonts.module.css';
+import '@UI/vars.module.css';
 import './App.css';
 
 export interface Data {
