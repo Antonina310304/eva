@@ -1,0 +1,32 @@
+:root {
+  -color-white: #ffffff;
+  -color-light-gray: #f5f3f1;
+  -color-medium-gray: #c4c4c4;
+  -color-dark-gray: #989898;
+  -color-grafit: #404040;
+  -color-black: #000000;
+}
+
+.white {
+  color: var(--color-white);
+}
+
+.lightGray {
+  color: var(--color-light-gray);
+}
+
+.mediumGray {
+  color: var(--color-medium-gray);
+}
+
+.darkGray {
+  color: var(--color-dark-gray);
+}
+
+.grafit {
+  color: var(--color-grafit);
+}
+
+.black {
+  color: var(--color-black);
+}

@@ -1,2 +1,17 @@
 :root {
+  --spaces-xxs: 5px;
+  --spaces-xs: 10px;
+  --spaces-s: 15px;
+  --spaces-n: 20px;
+  --spaces-m: 25px;
+  --spaces-l: 30px;
+  --spaces-xl: 35px;
+  --spaces-xxl: 40px;
+  --spaces-b: 50px;
+  --spaces-xb: 60px;
+  --spaces-xxb: 70px;
+  --space-e: 80px;
+  --space-xe: 90px;
+  --space-xxe: 100px;
+  --space-mega: 140px;
 }
