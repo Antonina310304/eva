@@ -1,15 +1,15 @@
 :root {
-  --spaces-xxs: 5px;
-  --spaces-xs: 10px;
-  --spaces-s: 15px;
-  --spaces-n: 20px;
-  --spaces-m: 25px;
-  --spaces-l: 30px;
-  --spaces-xl: 35px;
-  --spaces-xxl: 40px;
-  --spaces-b: 50px;
-  --spaces-xb: 60px;
-  --spaces-xxb: 70px;
+  --space-xxs: 5px;
+  --space-xs: 10px;
+  --space-s: 15px;
+  --space-n: 20px;
+  --space-m: 25px;
+  --space-l: 30px;
+  --space-xl: 35px;
+  --space-xxl: 40px;
+  --space-b: 50px;
+  --space-xb: 60px;
+  --space-xxb: 70px;
   --space-e: 80px;
   --space-xe: 90px;
   --space-xxe: 100px;
