@@ -1,9 +1,6 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import Link from '@divanru/ts-ui/Link';
-import Button from '@divanru/ts-ui/Button';
-
 import useData from '@Hooks/useData';
 import { PageErrorData } from './typings';
 import styles from './PageError.module.css';
@@ -27,12 +24,6 @@ const PageError: FC<Props> = (props) => {
             </div>
           ))}
         </div>
-      )}
-
-      {data.action && (
-        <Link className={styles.link} to={data.action.to}>
-          <Button>{data.action.text}</Button>
-        </Link>
       )}
     </div>
   );

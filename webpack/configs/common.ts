@@ -10,7 +10,6 @@ const commonConfig: Configuration = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       static: paths.static,
-      '@divanru/ts-ui': '@divanru/ts-ui/modern',
       '@App': path.resolve(paths.context, './App'),
       '@Components': path.resolve(paths.context, './Components'),
       '@Containers': path.resolve(paths.context, './Containers'),

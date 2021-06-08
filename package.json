@@ -31,8 +31,6 @@
   "dependencies": {
     "@babel/runtime": "^7.10.4",
     "@divanru/icons": "^1.59.0",
-    "@divanru/storeon": "0.0.1",
-    "@divanru/ts-ui": "^2.11.54",
     "@divanru/ts-utils": "^0.5.0",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.2",

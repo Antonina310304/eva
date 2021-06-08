@@ -1,8 +1,6 @@
 import React, { useCallback, memo, HTMLAttributes, FC } from 'react';
 import cn from 'classnames';
 
-import IconClose from '@divanru/ts-ui/IconClose';
-
 import useModals from '@Hooks/useModals';
 import KeyboardHandler from '@Components/KeyboardHandler';
 import { ModalId } from '@Contexts/Modals';
@@ -36,7 +34,7 @@ const Modal: FC<ModalProps> = (props) => {
 
             {needClose && (
               <div className={styles.close} onClick={handleClose}>
-                <IconClose className={styles.closeIcon} />
+                <div className={styles.closeIcon}>Close</div>
               </div>
             )}
           </div>
