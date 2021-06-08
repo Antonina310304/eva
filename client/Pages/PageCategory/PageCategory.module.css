@@ -1,2 +1,10 @@
 .page {
 }
+
+.title {
+  composes: xb from 'sizes';
+  composes: hero from 'fonts';
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}

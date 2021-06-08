@@ -5,3 +5,11 @@
   --font-main: CeraPro, sans-serif;
   --font-hero: CloserText, sans-serif;
 }
+
+.main {
+  font-family: var(--font-main);
+}
+
+.hero {
+  font-family: var(--font-hero);
+}

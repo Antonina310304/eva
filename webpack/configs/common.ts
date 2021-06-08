@@ -10,6 +10,10 @@ const commonConfig: Configuration = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       static: paths.static,
+      colors: path.resolve(paths.context, './UI/colors.module.css'),
+      fonts: path.resolve(paths.context, './UI/fonts.module.css'),
+      sizes: path.resolve(paths.context, './UI/sizes.module.css'),
+      spaces: path.resolve(paths.context, './UI/spaces.module.css'),
       '@App': path.resolve(paths.context, './App'),
       '@Components': path.resolve(paths.context, './Components'),
       '@Containers': path.resolve(paths.context, './Containers'),
