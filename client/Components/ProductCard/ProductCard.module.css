@@ -28,11 +28,21 @@
   margin-top: var(--space-n);
 }
 
+.price {
+  display: flex;
+  align-items: baseline;
+}
+
 .actualPrice {
   composes: m from 'sizes';
   font-weight: 500;
+  margin-left: var(--space-xxs);
 }
 
 .expiredPrice {
+  margin-left: var(--space-xs);
+}
+
+.discount {
   margin-left: var(--space-xs);
 }
