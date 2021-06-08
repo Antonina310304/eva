@@ -1,0 +1,38 @@
+.productCard {
+}
+
+.productCard.hasExpired .actualPrice {
+  color: var(--color-red);
+}
+
+.containerImage {
+  position: relative;
+  padding: var(--space-l);
+  background-color: var(--color-light-gray);
+  border-radius: 5px;
+}
+
+.image {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.like {
+  position: absolute;
+  z-index: 2;
+  top: var(--space-n);
+  right: var(--space-n);
+}
+
+.info {
+  margin-top: var(--space-n);
+}
+
+.actualPrice {
+  composes: m from 'sizes';
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-xs);
+}

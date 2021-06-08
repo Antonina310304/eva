@@ -11,12 +11,12 @@ const commonConfig: Configuration = {
     alias: {
       static: paths.static,
       colors: path.resolve(paths.context, './UI/colors.module.css'),
+      containers: path.resolve(paths.context, './UI/containers.module.css'),
       fonts: path.resolve(paths.context, './UI/fonts.module.css'),
       sizes: path.resolve(paths.context, './UI/sizes.module.css'),
       spaces: path.resolve(paths.context, './UI/spaces.module.css'),
       '@App': path.resolve(paths.context, './App'),
       '@Components': path.resolve(paths.context, './Components'),
-      '@Containers': path.resolve(paths.context, './Containers'),
       '@Contexts': path.resolve(paths.context, './Contexts'),
       '@Hooks': path.resolve(paths.context, './Hooks'),
       '@Modals': path.resolve(paths.context, './Modals'),
