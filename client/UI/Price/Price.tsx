@@ -11,6 +11,11 @@ export interface PriceProps extends HTMLAttributes<HTMLSpanElement> {
   price: number;
 }
 
+const symbols = {
+  RUB: '₽',
+  BYN: 'руб.',
+};
+
 const Price: FC<PriceProps> = (props) => {
   const { className, expired, price } = props;
   const { currency } = useMeta();
@@ -18,6 +23,7 @@ const Price: FC<PriceProps> = (props) => {
   return (
     <span className={cn(styles.price, { [styles.expired]: expired }, className)}>
       {formatPrice(price)}
+      <span className={styles.symbol}>{` ${symbols[currency]}`}</span>
     </span>
   );
 };
