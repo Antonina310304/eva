@@ -4,9 +4,11 @@ import cn from 'classnames';
 import Like from '@Components/Like';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
-import { ProductData } from '@Types/Product';
+import List from '@UI/List';
+import { ProductData, ProductTagData } from '@Types/Product';
 import styles from './ProductCard.module.css';
 import transformImage from './transformImage';
+import Tag from './elements/Tag';
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -32,6 +34,13 @@ const ProductCard: FC<ProductCardProps> = (props) => {
         />
 
         <Like className={styles.like} />
+        {product.tags.length > 0 && (
+          <List
+            className={styles.tags}
+            items={product.tags}
+            renderChild={(tag: ProductTagData) => <Tag className={styles.tag} tag={tag} />}
+          />
+        )}
       </div>
 
       <div className={styles.info}>

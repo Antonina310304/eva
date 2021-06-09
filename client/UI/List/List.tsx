@@ -7,9 +7,7 @@ export interface Props<T> {
   renderChild: (item: T, index: number) => ReactElement;
 }
 
-export interface Item {
-  id?: string | number;
-}
+export type Item = any;
 
 const List = <T extends Item>(props: Props<T>) => {
   const { className, tagName = 'div', items, renderChild, ...restProps } = props;
@@ -17,7 +15,7 @@ const List = <T extends Item>(props: Props<T>) => {
   return createElement(tagName, {
     ...restProps,
     className,
-    children: items.map((item, index) => {
+    children: items.map((item: Item, index) => {
       const child = renderChild(item, index);
 
       return cloneElement(child, { key: item.id || index });
