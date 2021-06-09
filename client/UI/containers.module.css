@@ -1,8 +1,22 @@
 .main {
+  --gap: var(--space-xxb);
+
   margin: 0 auto;
-  padding-left: var(--space-xxb);
-  padding-right: var(--space-xxb);
+  padding-left: var(--gap);
+  padding-right: var(--gap);
   width: 100%;
   max-width: 1778px;
   box-sizing: border-box;
+}
+
+@media (--desktop-m) {
+  .main {
+    --gap: var(--space-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .main {
+    --gap: var(--space-s);
+  }
 }
