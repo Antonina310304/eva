@@ -1,4 +1,8 @@
 .main {
+  margin: 0 auto;
   padding-left: var(--space-xxb);
   padding-right: var(--space-xxb);
+  width: 100%;
+  max-width: 1778px;
+  box-sizing: border-box;
 }
