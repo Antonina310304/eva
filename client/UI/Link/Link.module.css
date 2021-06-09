@@ -1,0 +1,9 @@
+.link {
+  composes: n from 'sizes';
+  cursor: pointer;
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-black), var(--color-black));
+  background-size: 100% 1px;
+  background-position: left 0 bottom calc(16% - 3px);
+  background-repeat: no-repeat;
+}

@@ -19,13 +19,13 @@
   }
 }
 
-.products {
+.items {
   display: flex;
   flex-wrap: wrap;
   margin: 0 var(--space-s-neg) var(--space-xxb-neg);
 }
 
-.product {
+.item {
   width: 100%;
   max-width: calc(25% - var(--space-s) * 2);
   margin: 0 var(--space-s) var(--space-xxb);

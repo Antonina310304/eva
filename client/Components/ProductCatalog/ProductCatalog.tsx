@@ -2,8 +2,9 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import ProductCard from '@Components/ProductCard';
+import ConstructorStub from '@Components/ConstructorStub';
 import List from '@UI/List';
-import { ProductModel } from '@Types/Category';
+import { ProductModel, ConstructorStubData } from '@Types/Category';
 import { ProductData } from '@Types/Product';
 import Section from './Section';
 import styles from './ProductCatalog.module.css';
@@ -14,6 +15,8 @@ export interface ProductCatalogProps extends HTMLAttributes<HTMLDivElement> {
   products?: ProductData[];
 }
 
+export type SectionItem = ProductData | ConstructorStubData;
+
 const ProductCatalog: FC<ProductCatalogProps> = (props) => {
   const { className, sections = [], products = [], ...restProps } = props;
 
@@ -22,17 +25,30 @@ const ProductCatalog: FC<ProductCatalogProps> = (props) => {
       <List
         className={styles.sections}
         items={sections}
-        renderChild={(section: ProductModel) => (
-          <Section className={styles.section} section={section}>
-            <List
-              className={styles.products}
-              items={products.filter((product) => product.modelId === section.id)}
-              renderChild={(product: ProductData) => (
-                <ProductCard className={styles.product} product={product} />
-              )}
-            />
-          </Section>
-        )}
+        renderChild={(section: ProductModel) => {
+          const sectionProducts = products.filter((product) => product.modelId === section.id);
+          const items: SectionItem[] = [...sectionProducts];
+
+          if (section.constructor) items.push({ id: 'stub', ...section.constructor });
+
+          return (
+            <Section className={styles.section} section={section}>
+              <List
+                className={styles.items}
+                items={items}
+                renderChild={(item: SectionItem) => {
+                  const isStub = item.id === 'stub';
+
+                  return isStub ? (
+                    <ConstructorStub className={styles.item} stub={item as ConstructorStubData} />
+                  ) : (
+                    <ProductCard className={styles.item} product={item as ProductData} />
+                  );
+                }}
+              />
+            </Section>
+          );
+        }}
       />
     </div>
   );
