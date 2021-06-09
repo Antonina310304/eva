@@ -1,3 +1,4 @@
+import path from 'path';
 import postcssNested from 'postcss-nested';
 import postcssPresetEnv from 'postcss-preset-env';
 import postcssCustomMedia from 'postcss-custom-media';
@@ -10,7 +11,9 @@ const postCssLoader: RuleSetRule = {
     postcssOptions: {
       ident: 'postcss',
       plugins: [
-        postcssCustomMedia(),
+        postcssCustomMedia({
+          importFrom: path.resolve(__dirname, '../../client/UI/breakpoints.json'),
+        }),
         postcssNested(),
         postcssPresetEnv({
           stage: 1,
