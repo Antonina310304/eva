@@ -36,3 +36,7 @@
   background: var(--color-white);
   border: 1px solid var(--color-medium-gray);
 }
+
+.before {
+  margin-right: var(--space-xs);
+}
