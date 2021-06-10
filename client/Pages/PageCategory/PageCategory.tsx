@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import useData from '@Hooks/useData';
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
+import ProductMixedCatalog from '@Components/ProductMixedCatalog';
 import Subcategories from './elements/Subcategories';
 import { PageCategoryData } from './typings';
 import styles from './PageCategory.module.css';
@@ -14,6 +15,7 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, ...restProps } = props;
   const data = useData<PageCategoryData>();
+  const isModels = data.productsModel?.length > 0;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -26,7 +28,11 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       )}
 
       <div className={styles.catalogWrapper}>
-        <ProductSectionsCatalog sections={data.productsModel} products={data.products} />
+        {isModels ? (
+          <ProductSectionsCatalog sections={data.productsModel} products={data.products} />
+        ) : (
+          <ProductMixedCatalog products={data.products} />
+        )}
       </div>
     </div>
   );

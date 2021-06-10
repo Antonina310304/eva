@@ -184,3 +184,9 @@
     }
   }
 }
+
+@media (--mobile) {
+  .tags {
+    display: none;
+  }
+}

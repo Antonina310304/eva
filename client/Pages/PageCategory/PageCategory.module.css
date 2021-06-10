@@ -19,6 +19,7 @@
 }
 
 .catalogWrapper {
+  padding-top: var(--space-xxl);
   border-top: 1px solid var(--color-medium-gray);
 }
 

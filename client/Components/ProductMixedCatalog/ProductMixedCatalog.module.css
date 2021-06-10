@@ -1,0 +1,34 @@
+.catalog {
+  --columns: 4;
+  --gap-h: var(--space-l);
+  --gap-v: var(--space-xxb);
+}
+
+.list {
+  display: grid;
+  grid-gap: var(--gap-v) var(--gap-h);
+  grid-template-columns: repeat(var(--columns), 1fr);
+}
+
+.item {
+  min-width: 0;
+}
+
+@media (--desktop-m) {
+  .catalog {
+    --columns: 3;
+    --gap-v: var(--space-b);
+  }
+}
+
+@media (--desktop) {
+  .catalog {
+    --gap-h: var(--space-n);
+  }
+}
+
+@media (--mobile-m) {
+  .catalog {
+    --columns: 2;
+  }
+}
