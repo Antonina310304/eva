@@ -1,7 +1,8 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import List from '@UI/List';
+import Image from '@UI/Image';
 import styles from './Fabrics.module.css';
 
 export interface FabricData {
@@ -10,18 +11,30 @@ export interface FabricData {
 
 export interface FabricsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  fabrics?: FabricData[];
+  fabrics: FabricData[];
+  defaultSelectedFabric?: FabricData;
 }
 
 const Fabrics: FC<FabricsProps> = (props) => {
-  const { className, fabrics, ...restProps } = props;
+  const { className, fabrics, defaultSelectedFabric, ...restProps } = props;
+  const [selectedFabric, setSelectedFabric] = useState(defaultSelectedFabric);
+
+  const handleClickFabric = useCallback((_, clickedFabric) => {
+    setSelectedFabric(clickedFabric);
+  }, []);
 
   return (
     <List
       {...restProps}
       className={cn(styles.fabrics, className)}
       items={fabrics}
-      renderChild={(fabric: FabricData) => <div />}
+      renderChild={(fabric: FabricData) => (
+        <Image
+          className={cn(styles.fabric, { [styles.selected]: fabric === selectedFabric })}
+          src={fabric.image}
+          onClick={(e) => handleClickFabric(e, fabric)}
+        />
+      )}
     />
   );
 };

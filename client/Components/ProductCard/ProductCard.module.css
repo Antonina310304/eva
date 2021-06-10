@@ -74,8 +74,8 @@
     z-index: 2;
     right: 0;
     left: 0;
-    height: var(--space-m);
-    top: var(--space-m-neg);
+    height: var(--space-n);
+    top: var(--space-n-neg);
     background: var(--color-white);
   }
 }
@@ -151,6 +151,10 @@
   }
 }
 
+.parameterGroups {
+  margin-top: var(--space-m);
+}
+
 .parameterGroup {
   margin-bottom: var(--space-xs);
   padding-bottom: var(--space-xs);
@@ -171,4 +175,10 @@
   display: flex;
   justify-content: center;
   margin-top: var(--space-m);
+}
+
+.fabricsMore {
+  composes: darkGray from 'colors';
+  composes: n from 'sizes';
+  margin-top: var(--space-xs);
 }

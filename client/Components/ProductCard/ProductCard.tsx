@@ -12,13 +12,36 @@ import Tag from './elements/Tag';
 import Parameter from './elements/Parameter';
 import Sizes from './elements/Sizes';
 import FastView from './elements/FastView';
+import Fabrics from './elements/Fabrics';
 import transformImage from './transformImage';
+import fabricImages from './fabrics';
 import styles from './ProductCard.module.css';
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   product: ProductData;
 }
+
+const fabrics = [
+  {
+    image: fabricImages[0],
+  },
+  {
+    image: fabricImages[1],
+  },
+  {
+    image: fabricImages[2],
+  },
+  {
+    image: fabricImages[0],
+  },
+  {
+    image: fabricImages[1],
+  },
+  {
+    image: fabricImages[2],
+  },
+];
 
 const ProductCard: FC<ProductCardProps> = (props) => {
   const { className, product, ...restProps } = props;
@@ -70,6 +93,20 @@ const ProductCard: FC<ProductCardProps> = (props) => {
         </div>
 
         <div className={styles.additionalInfo}>
+          <div className={styles.fabricsWrapper}>
+            <Fabrics
+              className={styles.fabrics}
+              fabrics={fabrics}
+              defaultSelectedFabric={fabrics[0]}
+            />
+            <div className={styles.fabricsMore}>
+              {`+150 тканей в `}
+              <Link view='secondary' href='#'>
+                конструкторе
+              </Link>
+            </div>
+          </div>
+
           {product.parameterGroups?.length > 0 && (
             <List
               className={styles.parameterGroups}

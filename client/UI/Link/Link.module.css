@@ -1,6 +1,7 @@
 .link {
   composes: n from 'sizes';
   cursor: pointer;
+  display: inline-block;
   text-decoration: none;
   background-size: 100% 1px;
   background-position: left 0 bottom calc(16% - 3px);
