@@ -15,7 +15,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "is-ci || husky install",
+    "prepare": "is-ci || husky install husky",
     "lint:all": "npm run lint:js && npm run lint:css",
     "lint:all:fix": "npm run lint:js:fix && npm run lint:css:fix",
     "lint:js": "eslint './' --ext '.js, .jsx, .ts, .tsx'",
