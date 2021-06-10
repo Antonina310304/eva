@@ -21,6 +21,15 @@
   margin-left: var(--space-l);
 }
 
+.iconFilters {
+  width: 18px;
+  height: 14px;
+
+  background-image: url('./filters.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 @media (--mobile-m) {
   .button.secondary {
     display: none;

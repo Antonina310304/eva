@@ -15,7 +15,12 @@ const CategoryFilters: FC<CategoryFiltersProps> = (props) => {
     <div {...restProps} className={cn(styles.categoryFilters, className)}>
       <div className={styles.actions}>
         <div className={styles.buttons}>
-          <Button className={cn(styles.button, styles.main)} view='rounded' title='Все фильтры' />
+          <Button
+            className={cn(styles.button, styles.main)}
+            view='rounded'
+            before={<div className={styles.iconFilters} />}
+            title='Все фильтры'
+          />
           <Button
             className={cn(styles.button, styles.secondary)}
             view='rounded'
