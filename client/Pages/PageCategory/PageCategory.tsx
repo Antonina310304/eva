@@ -4,6 +4,7 @@ import cn from 'classnames';
 import useData from '@Hooks/useData';
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
+import CategoryFilters from '@Components/CategoryFilters';
 import Subcategories from './elements/Subcategories';
 import { PageCategoryData } from './typings';
 import styles from './PageCategory.module.css';
@@ -28,10 +29,18 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       )}
 
       <div className={styles.catalogWrapper}>
+        <div className={styles.filtersWrapper}>
+          <CategoryFilters />
+        </div>
+
         {isModels ? (
-          <ProductSectionsCatalog sections={data.productsModel} products={data.products} />
+          <ProductSectionsCatalog
+            className={styles.catalog}
+            sections={data.productsModel}
+            products={data.products}
+          />
         ) : (
-          <ProductMixedCatalog products={data.products} />
+          <ProductMixedCatalog className={styles.catalog} products={data.products} />
         )}
       </div>
     </div>

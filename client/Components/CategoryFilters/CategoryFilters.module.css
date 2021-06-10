@@ -1,0 +1,37 @@
+.categoryFilters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-xs);
+}
+
+.count {
+  composes: darkGray from 'colors';
+  margin-left: var(--space-l);
+}
+
+@media (--mobile-m) {
+  .button.secondary {
+    display: none;
+  }
+}
+
+@media (--mobile) {
+  .categoryFilters {
+    display: block;
+  }
+
+  .groups {
+    margin-top: var(--space-n);
+  }
+}
