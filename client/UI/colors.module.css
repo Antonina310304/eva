@@ -8,7 +8,7 @@
   --color-red: #d70404;
   --color-green: #27ae60;
   --color-blue: #157ee9;
-  --color-dirt: #b1aa8d;
+  --color-dirty: #b1aa8d;
   --color-sky-blue: #d8f1f1;
 }
 
@@ -48,7 +48,7 @@
   color: var(--color-blue);
 }
 
-.dirt {
+.dirty {
   color: var(--color-dirt);
 }
 
