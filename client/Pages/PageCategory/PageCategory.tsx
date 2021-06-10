@@ -8,6 +8,7 @@ import CategoryFilters from '@Components/CategoryFilters';
 import Subcategories from './elements/Subcategories';
 import { PageCategoryData } from './typings';
 import styles from './PageCategory.module.css';
+import PopularLinks from './elements/PopularLinks';
 
 export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -31,6 +32,12 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       <div className={styles.catalogWrapper}>
         <div className={styles.filtersWrapper}>
           <CategoryFilters />
+
+          {data.popularLinks?.length > 0 && (
+            <div className={styles.popularLinksWrapper}>
+              <PopularLinks label='Популярные запросы:' popularLinks={data.popularLinks} />
+            </div>
+          )}
         </div>
 
         {isModels ? (

@@ -1,0 +1,12 @@
+.popularLinks {
+  display: flex;
+}
+
+.label {
+  margin-right: var(--space-n);
+}
+
+.list {
+  display: grid;
+  grid-gap: var(--space-m);
+}

@@ -18,3 +18,8 @@ export interface SubcategoryData {
   icon: string;
   title: string;
 }
+
+export interface PopularLinkData {
+  name: string;
+  link: string;
+}
