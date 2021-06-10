@@ -7,9 +7,9 @@ import List from '@UI/List';
 import { ProductModel, ConstructorStubData } from '@Types/Category';
 import { ProductData } from '@Types/Product';
 import Section from './elements/Section';
-import styles from './ProductCatalog.module.css';
+import styles from './ProductSectionsCatalog.module.css';
 
-export interface ProductCatalogProps extends HTMLAttributes<HTMLDivElement> {
+export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   sections?: ProductModel[];
   products?: ProductData[];
@@ -17,11 +17,11 @@ export interface ProductCatalogProps extends HTMLAttributes<HTMLDivElement> {
 
 export type SectionItem = ProductData | ConstructorStubData;
 
-const ProductCatalog: FC<ProductCatalogProps> = (props) => {
+const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
   const { className, sections = [], products = [], ...restProps } = props;
 
   return (
-    <div {...restProps} className={cn(styles.productCatalog, className)}>
+    <div {...restProps} className={cn(styles.catalog, className)}>
       <List
         className={styles.sections}
         items={sections}
@@ -54,4 +54,4 @@ const ProductCatalog: FC<ProductCatalogProps> = (props) => {
   );
 };
 
-export default memo(ProductCatalog);
+export default memo(ProductSectionsCatalog);

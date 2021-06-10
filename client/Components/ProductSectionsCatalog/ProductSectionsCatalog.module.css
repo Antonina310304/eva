@@ -1,4 +1,4 @@
-.productCatalog {
+.catalog {
   --columns: 4;
   --gap-h: var(--space-l);
   --gap-v: var(--space-xxb);
@@ -29,7 +29,7 @@
 }
 
 @media (--desktop-m) {
-  .productCatalog {
+  .catalog {
     --columns: 3;
   }
 }

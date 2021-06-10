@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import useData from '@Hooks/useData';
-import ProductCatalog from '@Components/ProductCatalog';
+import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import Subcategories from './elements/Subcategories';
 import { PageCategoryData } from './typings';
 import styles from './PageCategory.module.css';
@@ -26,7 +26,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       )}
 
       <div className={styles.catalogWrapper}>
-        <ProductCatalog sections={data.productsModel} products={data.products} />
+        <ProductSectionsCatalog sections={data.productsModel} products={data.products} />
       </div>
     </div>
   );
