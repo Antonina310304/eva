@@ -10,3 +10,11 @@ export interface ProductModel {
   priceMin: number;
   constructor?: ConstructorStubData;
 }
+
+export interface SubcategoryData {
+  id: number;
+  count: number;
+  link: string;
+  icon: string;
+  title: string;
+}

@@ -3,17 +3,20 @@
   cursor: pointer;
   display: inline-block;
   text-decoration: none;
-  background-size: 100% 1px;
-  background-position: left 0 bottom calc(16% - 3px);
-  background-repeat: no-repeat;
 }
 
 .link.primary {
   color: var(--color-black);
   background-image: linear-gradient(var(--color-black), var(--color-black));
+  background-size: 100% 1px;
+  background-position: left 0 bottom calc(16% - 3px);
+  background-repeat: no-repeat;
 }
 
 .link.secondary {
   color: var(--color-dark-gray);
   background-image: linear-gradient(var(--color-dark-gray), var(--color-dark-gray));
+  background-size: 100% 1px;
+  background-position: left 0 bottom calc(16% - 3px);
+  background-repeat: no-repeat;
 }

@@ -6,7 +6,7 @@ import ConstructorStub from '@Components/ConstructorStub';
 import List from '@UI/List';
 import { ProductModel, ConstructorStubData } from '@Types/Category';
 import { ProductData } from '@Types/Product';
-import Section from './Section';
+import Section from './elements/Section';
 import styles from './ProductCatalog.module.css';
 
 export interface ProductCatalogProps extends HTMLAttributes<HTMLDivElement> {
