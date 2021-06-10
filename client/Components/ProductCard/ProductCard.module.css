@@ -2,23 +2,6 @@
   position: relative;
 }
 
-.productCard:hover {
-  .box,
-  .additionalInfo {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .container {
-    z-index: 4;
-  }
-
-  .fastView {
-    pointer-events: all;
-    opacity: 1;
-  }
-}
-
 .productCard.hasExpired .actualPrice {
   color: var(--color-red);
 }
@@ -181,4 +164,23 @@
   composes: darkGray from 'colors';
   composes: n from 'sizes';
   margin-top: var(--space-xs);
+}
+
+@media (--only-desktop) {
+  .productCard:hover {
+    .box,
+    .additionalInfo {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .container {
+      z-index: 4;
+    }
+
+    .fastView {
+      pointer-events: all;
+      opacity: 1;
+    }
+  }
 }

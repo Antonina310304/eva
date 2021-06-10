@@ -6,6 +6,7 @@
     "--mobile-l": "(max-width: 1279px)",
     "--mobile-m": "(max-width: 1023px)",
     "--mobile": "(max-width: 767px)",
-    "--mobile-s": "(max-width: 424px)"
+    "--mobile-s": "(max-width: 424px)",
+    "--only-desktop": "(min-width: 1366px)"
   }
 }

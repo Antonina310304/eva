@@ -21,3 +21,24 @@
 .catalogWrapper {
   border-top: 1px solid var(--color-medium-gray);
 }
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+}
+
+@media (--mobile) {
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+}
