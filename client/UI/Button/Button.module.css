@@ -37,6 +37,12 @@
   border: 1px solid var(--color-medium-gray);
 }
 
+.button.themeDirty {
+  color: var(--color-white);
+
+  background: var(--color-dirty);
+}
+
 .before {
   margin-right: var(--space-xs);
 }
