@@ -41,6 +41,7 @@
 .title {
   composes: s from 'sizes';
   composes: darkGray from 'colors';
+
   margin-bottom: var(--space-xxs);
 }
 
@@ -50,6 +51,7 @@
 
 .separator {
   composes: n from 'sizes';
+
   display: flex;
   align-items: flex-end;
 }

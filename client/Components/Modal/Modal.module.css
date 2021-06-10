@@ -44,9 +44,10 @@
 
 .close {
   position: absolute;
-  z-index: 2;
   top: var(--space-s);
   right: var(--space-s);
+  z-index: 2;
+
   cursor: pointer;
 }
 

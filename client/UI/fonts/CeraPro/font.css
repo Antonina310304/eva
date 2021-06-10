@@ -1,47 +1,47 @@
 @font-face {
+  font-weight: 100;
   font-family: CeraPro;
+  font-style: normal;
   src: url('./CeraPro-Thin.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 100;
 }
 
 @font-face {
+  font-weight: 300;
   font-family: CeraPro;
+  font-style: normal;
   src: url('./CeraPro-Light.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 300;
 }
 
 @font-face {
+  font-weight: 400;
   font-family: CeraPro;
+  font-style: normal;
   src: url('./CeraPro-Regular.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 400;
 }
 
 @font-face {
+  font-weight: 500;
   font-family: CeraPro;
+  font-style: normal;
   src: url('./CeraPro-Medium.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 500;
 }
 
 @font-face {
+  font-weight: 700;
   font-family: CeraPro;
+  font-style: normal;
   src: url('./CeraPro-Bold.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 700;
 }
 
 @font-face {
+  font-weight: 900;
   font-family: CeraPro;
+  font-style: normal;
   src: url('./CeraPro-Black.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 900;
 }

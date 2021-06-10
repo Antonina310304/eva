@@ -17,6 +17,7 @@
 
 .count {
   composes: darkGray from 'colors';
+
   margin-left: var(--space-l);
 }
 

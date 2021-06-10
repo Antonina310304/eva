@@ -9,11 +9,14 @@
 
 .title {
   composes: xxl from 'sizes';
-  font-weight: 500;
+
   margin: 0;
+
+  font-weight: 500;
 }
 
 .priceMin {
   composes: m from 'sizes';
+
   margin-left: var(--space-xs);
 }

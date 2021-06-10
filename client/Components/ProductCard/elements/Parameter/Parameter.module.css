@@ -3,6 +3,8 @@
 
 .title {
   composes: n from 'sizes';
-  font-weight: 500;
+
   margin-bottom: var(--space-xxs);
+
+  font-weight: 500;
 }

@@ -1,71 +1,71 @@
 @font-face {
+  font-weight: 100;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-Thin.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 100;
 }
 
 @font-face {
+  font-weight: 200;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-ExtraLight.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 200;
 }
 
 @font-face {
+  font-weight: 300;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-Light.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 300;
 }
 
 @font-face {
+  font-weight: 400;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-Regular.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 400;
 }
 
 @font-face {
+  font-weight: 500;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-Medium.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 500;
 }
 
 @font-face {
+  font-weight: 600;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-SemiBold.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 600;
 }
 
 @font-face {
+  font-weight: 700;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-Bold.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 700;
 }
 
 @font-face {
+  font-weight: 800;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-ExtraBold.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 800;
 }
 
 @font-face {
+  font-weight: 900;
   font-family: CloserText;
+  font-style: normal;
   src: url('./CloserText-Black.otf');
   font-display: swap;
-  font-style: normal;
-  font-weight: 900;
 }

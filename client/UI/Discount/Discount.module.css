@@ -1,14 +1,16 @@
 .discount {
   composes: s from 'sizes';
   composes: darkGray from 'colors';
+
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50px;
   height: 22px;
+
   background-image: url('./icon.svg');
-  background-size: contain;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .content {

@@ -8,6 +8,7 @@
 
 .subcategory {
   composes: black from 'colors';
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +22,9 @@
 
 .subcategoryTitle {
   composes: n from 'sizes';
+
   margin-top: var(--space-n);
+
   white-space: nowrap;
 }
 

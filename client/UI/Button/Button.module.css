@@ -1,13 +1,15 @@
 .button {
   composes: n from 'sizes';
-  cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
   box-sizing: border-box;
+  height: 50px;
   padding: 0 var(--space-n);
+
   border: 0;
+  cursor: pointer;
 }
 
 .button.wide {
@@ -24,11 +26,13 @@
 
 .button.themePrimary {
   color: var(--color-white);
+
   background: var(--color-grafit);
 }
 
 .button.themeBlank {
   color: var(--color-black);
-  border: 1px solid var(--color-medium-gray);
+
   background: var(--color-white);
+  border: 1px solid var(--color-medium-gray);
 }
