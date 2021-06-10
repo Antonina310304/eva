@@ -9,8 +9,9 @@ export interface ProductPriceData {
 }
 
 export interface ProductParameterGroupData {
-  id: string;
+  id: number;
   title: string;
+  theme: 'sizes';
 }
 
 export interface ProductParameterValueData {

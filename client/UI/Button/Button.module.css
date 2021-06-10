@@ -1,0 +1,15 @@
+.button {
+  composes: n from 'sizes';
+  composes: white from 'colors';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-radius: 4px;
+  border: 0;
+  background: var(--color-grafit);
+}
+
+.button.wide {
+  width: 100%;
+}

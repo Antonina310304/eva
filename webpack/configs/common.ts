@@ -13,6 +13,7 @@ const commonConfig: Configuration = {
       colors: path.resolve(paths.context, './UI/colors.module.css'),
       containers: path.resolve(paths.context, './UI/containers.module.css'),
       fonts: path.resolve(paths.context, './UI/fonts.module.css'),
+      shadows: path.resolve(paths.context, './UI/shadows.module.css'),
       sizes: path.resolve(paths.context, './UI/sizes.module.css'),
       spaces: path.resolve(paths.context, './UI/spaces.module.css'),
       '@App': path.resolve(paths.context, './App'),

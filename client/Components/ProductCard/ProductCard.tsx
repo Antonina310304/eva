@@ -5,10 +5,15 @@ import Like from '@Components/Like';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import List from '@UI/List';
-import { ProductData, ProductTagData } from '@Types/Product';
-import styles from './ProductCard.module.css';
-import transformImage from './transformImage';
+import Button from '@UI/Button';
+import Link from '@UI/Link';
+import { ProductData, ProductParameterGroupData, ProductTagData } from '@Types/Product';
 import Tag from './elements/Tag';
+import Parameter from './elements/Parameter';
+import Sizes from './elements/Sizes';
+import FastView from './elements/FastView';
+import transformImage from './transformImage';
+import styles from './ProductCard.module.css';
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -26,32 +31,82 @@ const ProductCard: FC<ProductCardProps> = (props) => {
       {...restProps}
       className={cn(styles.productCard, { [styles.hasExpired]: hasExpired }, className)}
     >
-      <div className={styles.containerImage}>
-        <div
-          className={styles.image}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: transformImage(firstImage.src, '#f5f3f1') }}
-        />
+      <div className={styles.box} />
 
-        <Like className={styles.like} />
-        {product.tags.length > 0 && (
-          <List
-            className={styles.tags}
-            items={product.tags}
-            renderChild={(tag: ProductTagData) => <Tag className={styles.tag} tag={tag} />}
+      <div className={styles.container}>
+        <div className={styles.containerImage}>
+          <div
+            className={styles.image}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: transformImage(firstImage.src, '#f5f3f1') }}
           />
-        )}
-      </div>
 
-      <div className={styles.info}>
-        <div className={styles.name}>{product.name}</div>
-        <div className={styles.price}>
-          {`Цена `}
-          <Price className={styles.actualPrice} price={product.price.actual} />
-          {hasExpired && (
-            <Price expired className={styles.expiredPrice} price={product.price.expired} />
+          <div className={styles.actions}>
+            <FastView className={cn(styles.action, styles.fastView)} />
+            <Like className={cn(styles.action, styles.like)} />
+          </div>
+
+          {product.tags.length > 0 && (
+            <List
+              className={styles.tags}
+              items={product.tags}
+              renderChild={(tag: ProductTagData) => <Tag className={styles.tag} tag={tag} />}
+            />
           )}
-          {hasDiscount && <Discount className={styles.discount}>{product.price.discount}</Discount>}
+        </div>
+
+        <div className={styles.info}>
+          <div className={styles.name}>{product.name}</div>
+          <div className={styles.price}>
+            {`Цена `}
+            <Price className={styles.actualPrice} price={product.price.actual} />
+            {hasExpired && (
+              <Price expired className={styles.expiredPrice} price={product.price.expired} />
+            )}
+            {hasDiscount && (
+              <Discount className={styles.discount}>{product.price.discount}</Discount>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.additionalInfo}>
+          {product.parameterGroups?.length > 0 && (
+            <List
+              className={styles.parameterGroups}
+              items={product.parameterGroups}
+              renderChild={(parameterGroup: ProductParameterGroupData) => {
+                const parameters = product.parameters.filter((targetParameter) => {
+                  return targetParameter.groupId === parameterGroup.id;
+                });
+
+                if (parameterGroup.theme === 'sizes') {
+                  const sizes = [];
+
+                  parameters.forEach((parameter) => {
+                    sizes.push({
+                      title: parameter.title,
+                      value: '100 см',
+                    });
+                  });
+
+                  return (
+                    <Parameter className={styles.parameterGroup} title={parameterGroup.title}>
+                      <Sizes sizes={sizes} />
+                    </Parameter>
+                  );
+                }
+
+                return null;
+              }}
+            />
+          )}
+
+          <Button className={styles.buy} wide title='В корзину' />
+          <div className={styles.moreWrapper}>
+            <Link className={styles.more} href={product.link} view='secondary'>
+              Подробнее о товаре
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -5,13 +5,24 @@ import styles from './Link.module.css';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string;
+  view?: 'primary' | 'secondary';
 }
 
 const Link: FC<LinkProps> = (props) => {
-  const { className, children, ...restProps } = props;
+  const { className, view = 'primary', children, ...restProps } = props;
 
   return (
-    <a {...restProps} className={cn(styles.link, className)}>
+    <a
+      {...restProps}
+      className={cn(
+        styles.link,
+        {
+          [styles.primary]: view === 'primary',
+          [styles.secondary]: view === 'secondary',
+        },
+        className,
+      )}
+    >
       {children}
     </a>
   );

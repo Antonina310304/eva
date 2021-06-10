@@ -1,8 +1,83 @@
 .productCard {
+  position: relative;
+}
+
+.productCard:hover {
+  .box,
+  .additionalInfo {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .container {
+    z-index: 4;
+  }
+
+  .fastView {
+    pointer-events: all;
+    opacity: 1;
+  }
 }
 
 .productCard.hasExpired .actualPrice {
   color: var(--color-red);
+}
+
+.box {
+  composes: popup from 'shadows';
+  position: absolute;
+  z-index: 3;
+  top: var(--space-l-neg);
+  bottom: var(--space-l-neg);
+  left: var(--space-m-neg);
+  right: var(--space-m-neg);
+  display: block;
+  min-height: 100%;
+  border-radius: 5px 5px 0 0;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  visibility: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    left: 0;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  height: inherit;
+}
+
+.additionalInfo {
+  composes: popup from 'shadows';
+  position: absolute;
+  z-index: 3;
+  top: calc(100% + var(--space-l));
+  left: var(--space-m-neg);
+  right: var(--space-m-neg);
+  display: block;
+  border-radius: 0 0 5px 5px;
+  padding: 0 var(--space-m) var(--space-l);
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  visibility: hidden;
+  background: var(--color-white);
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    left: 0;
+    height: var(--space-m);
+    top: var(--space-m-neg);
+    background: var(--color-white);
+  }
 }
 
 .containerImage {
@@ -17,11 +92,24 @@
   background-repeat: no-repeat;
 }
 
-.like {
+.actions {
   position: absolute;
   z-index: 2;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-xs);
   top: var(--space-n);
   right: var(--space-n);
+}
+
+.action {
+  cursor: pointer;
+}
+
+.fastView {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .info {
@@ -61,4 +149,26 @@
   &:last-child {
     margin-right: 0;
   }
+}
+
+.parameterGroup {
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-medium-gray);
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.buy {
+  margin-top: var(--space-m);
+}
+
+.moreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-m);
 }
