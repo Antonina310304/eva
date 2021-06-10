@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import List from '@UI/List';
+import Button from '@UI/Button';
 import { ProductData } from '@Types/Product';
 import ProductCard from '@Components/ProductCard';
 import styles from './ProductMixedCatalog.module.css';
@@ -23,6 +24,10 @@ const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
           <ProductCard className={styles.item} product={product} />
         )}
       />
+
+      <div className={styles.moreWrapper}>
+        <Button className={styles.moreButton} theme='dirty' title='Смотреть еще' />
+      </div>
     </div>
   );
 };

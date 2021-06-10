@@ -4,6 +4,7 @@ import cn from 'classnames';
 import ProductCard from '@Components/ProductCard';
 import ConstructorStub from '@Components/ConstructorStub';
 import List from '@UI/List';
+import Button from '@UI/Button';
 import { ProductModel, ConstructorStubData } from '@Types/Category';
 import { ProductData } from '@Types/Product';
 import Section from './elements/Section';
@@ -50,6 +51,10 @@ const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
           );
         }}
       />
+
+      <div className={styles.moreWrapper}>
+        <Button className={styles.moreButton} theme='dirty' title='Смотреть еще' />
+      </div>
     </div>
   );
 };

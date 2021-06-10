@@ -30,6 +30,17 @@
   grid-template-columns: repeat(var(--columns), 1fr);
 }
 
+.moreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-b);
+}
+
+.moreButton {
+  width: 100%;
+  max-width: 260px;
+}
+
 @media (--desktop-m) {
   .catalog {
     --columns: 3;
@@ -44,5 +55,9 @@
 
   .item {
     min-width: 300px;
+  }
+
+  .moreButton {
+    max-width: 220px;
   }
 }
