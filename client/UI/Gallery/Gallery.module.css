@@ -20,6 +20,7 @@
   cursor: grab;
 }
 
-.slide {
+.child {
+  display: inline-block;
   height: 100%;
 }

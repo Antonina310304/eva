@@ -24,7 +24,7 @@ export interface GalleryProps
   initialSlideIndex?: number;
   slideIndex?: number;
   gap?: number;
-  children: ReactElement[];
+  children: ReactElement | ReactElement[];
   onDragStart?: TouchEventHandler;
   onDragEnd?: TouchEventHandler;
   onChangeCurrent?({ current }: { current: number }): void;
@@ -431,7 +431,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       type: 'resize',
       data: getSizes(),
     });
-  }, [children.length, getSizes, state.initialized]);
+  }, [children, getSizes, state.initialized]);
 
   return (
     <div {...restProps} className={cn(styles.gallery, className)} ref={refContainer}>
@@ -451,6 +451,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
               key: index,
               ref: addSlideToStore(index),
               style: isFirst || !gap ? {} : { marginLeft: `${gap}px` },
+              className: cn(styles.child, child.props.className),
             });
           })}
         </div>

@@ -49,12 +49,14 @@
 
 @media (--mobile-m) {
   .items {
-    grid-auto-flow: column;
+    display: block;
+    margin: 0 var(--space-xs-neg);
     overflow: hidden;
   }
 
   .item {
     min-width: 300px;
+    padding: 0 var(--space-xs);
   }
 
   .moreButton {
