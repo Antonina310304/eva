@@ -9,6 +9,7 @@ import React, {
   useRef,
   useMemo,
   useReducer,
+  cloneElement,
 } from 'react';
 import cn from 'classnames';
 
@@ -445,16 +446,12 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           {Children.map(children, (child: ReactElement, index: number) => {
             const isFirst = index === 0;
 
-            return (
-              <div
-                className={styles.slide}
-                key={index}
-                ref={addSlideToStore(index)}
-                style={isFirst || !gap ? {} : { marginLeft: `${gap}px` }}
-              >
-                {child}
-              </div>
-            );
+            return cloneElement(child, {
+              ...child.props,
+              key: index,
+              ref: addSlideToStore(index),
+              style: isFirst || !gap ? {} : { marginLeft: `${gap}px` },
+            });
           })}
         </div>
       </Touch>

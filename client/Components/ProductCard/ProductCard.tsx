@@ -1,4 +1,5 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
+import loadable from '@loadable/component';
 import cn from 'classnames';
 
 import Like from '@Components/Like';
@@ -16,6 +17,8 @@ import Fabrics from './elements/Fabrics';
 import transformImage from './transformImage';
 import fabricImages from './fabrics';
 import styles from './ProductCard.module.css';
+
+const Gallery = loadable(() => import('@UI/Gallery'));
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -45,7 +48,9 @@ const fabrics = [
 
 const ProductCard: FC<ProductCardProps> = (props) => {
   const { className, product, ...restProps } = props;
-  const [firstImage] = product.images || [];
+  const images = product.images || [];
+  const [firstImage] = images;
+  const hasGallery = images.length > 1;
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
 
@@ -58,11 +63,24 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
       <div className={styles.container}>
         <div className={styles.containerImage}>
-          <div
-            className={styles.image}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: transformImage(firstImage.src, '#f5f3f1') }}
-          />
+          {hasGallery ? (
+            <Gallery className={styles.gallery}>
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className={styles.image}
+                  // eslint-disable-next-line react/no-danger
+                  dangerouslySetInnerHTML={{ __html: transformImage(image.src, '#f5f3f1') }}
+                />
+              ))}
+            </Gallery>
+          ) : (
+            <div
+              className={styles.image}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: transformImage(firstImage.src, '#f5f3f1') }}
+            />
+          )}
 
           <div className={styles.actions}>
             <FastView className={cn(styles.action, styles.fastView)} />
