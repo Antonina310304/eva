@@ -26,6 +26,16 @@
   margin-left: var(--space-xs);
 }
 
+.arrows {
+  display: none;
+}
+
+@media (--mobile-m) {
+  .arrows {
+    display: block;
+  }
+}
+
 @media (--mobile) {
   .titleWrapper {
     display: block;

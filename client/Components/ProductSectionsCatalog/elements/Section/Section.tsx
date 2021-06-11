@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import Price from '@UI/Price';
 import { ProductModel } from '@Types/Category';
+import Arrows from '../Arrows';
 import styles from './Section.module.css';
 
 export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
@@ -24,6 +25,10 @@ const Section: FC<SectionProps> = (props) => {
               <Price price={section.priceMin} />
             </div>
           )}
+        </div>
+
+        <div className={styles.arrows}>
+          <Arrows />
         </div>
       </div>
 
