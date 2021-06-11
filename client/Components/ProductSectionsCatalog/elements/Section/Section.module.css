@@ -3,8 +3,13 @@
 
 .head {
   display: flex;
-  align-items: baseline;
+  justify-content: space-between;
   margin-bottom: var(--space-b);
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: baseline;
 }
 
 .title {
@@ -19,4 +24,15 @@
   composes: m from 'sizes';
 
   margin-left: var(--space-xs);
+}
+
+@media (--mobile) {
+  .titleWrapper {
+    display: block;
+  }
+
+  .priceMin {
+    margin-top: var(--space-xs);
+    margin-left: 0;
+  }
 }

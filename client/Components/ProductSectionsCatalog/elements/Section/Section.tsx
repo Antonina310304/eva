@@ -16,13 +16,15 @@ const Section: FC<SectionProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.Section, className)}>
       <div className={styles.head}>
-        <h2 className={styles.title}>{section.name}</h2>
-        {section.priceMin && (
-          <div className={styles.priceMin}>
-            {`от `}
-            <Price price={section.priceMin} />
-          </div>
-        )}
+        <div className={styles.titleWrapper}>
+          <h2 className={styles.title}>{section.name}</h2>
+          {section.priceMin && (
+            <div className={styles.priceMin}>
+              {`от `}
+              <Price price={section.priceMin} />
+            </div>
+          )}
+        </div>
       </div>
 
       {children}
