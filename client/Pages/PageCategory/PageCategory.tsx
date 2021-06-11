@@ -25,7 +25,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
       {data.rubrics?.length > 0 && (
         <div className={styles.rubricsWrapper}>
-          <Subcategories subcategories={data.rubrics[0]} />
+          <Subcategories className={styles.rubrics} subcategories={data.rubrics[0]} />
         </div>
       )}
 

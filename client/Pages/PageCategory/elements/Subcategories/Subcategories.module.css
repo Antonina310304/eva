@@ -1,12 +1,16 @@
 .subcategories {
   --gap: var(--space-xb);
+  --gap-half: calc(var(--gap) / 2);
+  --gap-half-neg: calc(var(--gap-half) * -1);
 
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: var(--gap);
+  margin: 0 var(--gap-half-neg);
 }
 
 .subcategory {
+  padding: 0 var(--gap-half);
+}
+
+.link {
   composes: black from 'colors';
 
   display: flex;

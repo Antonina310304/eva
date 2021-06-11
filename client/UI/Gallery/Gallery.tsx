@@ -397,18 +397,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   }, [getSizes]);
 
   /**
-   * Инициализация
-   */
-  useEffect(() => {
-    if (state.initialized) return;
-
-    dispatch({
-      type: 'initial',
-      data: getSizes(),
-    });
-  }, [getSizes, state.initialized]);
-
-  /**
    * Изменение размера страницы
    */
   useEffect(() => {
@@ -425,7 +413,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменение кол-ва вложенных элементов
    */
   useEffect(() => {
-    if (!state.initialized) return;
+    if (state.initialized) return;
 
     dispatch({
       type: 'resize',

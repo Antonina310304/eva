@@ -16,8 +16,13 @@
 .rubricsWrapper {
   display: flex;
   justify-content: center;
+  width: 100%;
   margin: var(--space-xl) 0 var(--space-xxl);
   overflow: hidden;
+}
+
+.rubrics {
+  width: 100%;
 }
 
 .filtersWrapper {
