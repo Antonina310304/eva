@@ -18,7 +18,7 @@ const List = <T extends Item>(props: Props<T>) => {
     children: items.map((item: Item, index) => {
       const child = renderChild(item, index);
 
-      return cloneElement(child, { key: item.id || index });
+      return child && cloneElement(child, { key: item.id || index });
     }),
   });
 };
