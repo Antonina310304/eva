@@ -69,7 +69,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             <Like className={cn(styles.action, styles.like)} />
           </div>
 
-          {product.tags.length > 0 && (
+          {product.tags?.length > 0 && (
             <List
               className={styles.tags}
               items={product.tags}
@@ -120,9 +120,14 @@ const ProductCard: FC<ProductCardProps> = (props) => {
                   const sizes = [];
 
                   parameters.forEach((parameter) => {
+                    const parameterValue = product.parameterValues.find((pv) => {
+                      return pv.parameterId === parameter.id;
+                    });
+                    const unit = product.units.find((u) => u.id === parameterValue.unitId);
+
                     sizes.push({
                       title: parameter.title,
-                      value: '100 см',
+                      value: `${parameterValue.value} ${unit.title}`,
                     });
                   });
 

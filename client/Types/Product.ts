@@ -32,6 +32,11 @@ export interface ProductTagData {
   location: 'down' | 'up';
 }
 
+export interface UnitData {
+  id: number;
+  title: string;
+}
+
 export interface ProductData {
   id: number;
   modelId?: number;
@@ -49,4 +54,5 @@ export interface ProductData {
   // TODO: в случае отсутствия миниатюры сервер отдает false, что неправильно
   miniature?: string;
   variants: any;
+  units?: UnitData[];
 }
