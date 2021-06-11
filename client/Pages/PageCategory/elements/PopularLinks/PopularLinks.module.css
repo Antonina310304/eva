@@ -1,12 +1,18 @@
 .popularLinks {
-  display: flex;
+  margin-bottom: var(--space-xxs-neg);
 }
 
 .label {
   margin-right: var(--space-n);
+
+  white-space: nowrap;
 }
 
-.list {
-  display: grid;
-  grid-gap: var(--space-m);
+.link {
+  margin-right: var(--space-m);
+  margin-bottom: var(--space-xxs);
+
+  &:last-child {
+    margin-right: 0;
+  }
 }

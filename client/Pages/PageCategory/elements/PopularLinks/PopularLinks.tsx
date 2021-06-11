@@ -1,7 +1,6 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import List from '@UI/List';
 import Link from '@UI/Link';
 import { PopularLinkData } from '@Types/Category';
 import styles from './PopularLinks.module.css';
@@ -18,15 +17,11 @@ const PopularLinks: FC<PopularLinksProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.popularLinks, className)}>
       {label && <span className={styles.label}>{label}</span>}
-      <List
-        className={styles.list}
-        items={popularLinks}
-        renderChild={(popularLink: PopularLinkData) => (
-          <Link className={styles.link} href={popularLink.link}>
-            {popularLink.name}
-          </Link>
-        )}
-      />
+      {popularLinks.map((popularLink) => (
+        <Link key={popularLink.name} className={styles.link} href={popularLink.link}>
+          {popularLink.name}
+        </Link>
+      ))}
     </div>
   );
 };
