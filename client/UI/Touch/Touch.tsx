@@ -269,7 +269,7 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
    */
   const handleClick: ClickHandler = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      if (cancelClick) {
+      if (cancelClick.current) {
         cancelClick.current = false;
         e.preventDefault();
       }
