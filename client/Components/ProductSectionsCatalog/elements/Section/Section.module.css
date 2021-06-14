@@ -36,6 +36,10 @@
   grid-template-columns: repeat(var(--columns), 1fr);
 }
 
+.stub {
+  vertical-align: top;
+}
+
 @media (--desktop-m) {
   .title {
     font-size: var(--size-xxl);
@@ -60,7 +64,7 @@
 
   .items {
     display: block;
-    margin: 0 var(--space-xs-neg);
+    margin: 0 var(--space-xs-neg) var(--space-xb);
     overflow: hidden;
   }
 

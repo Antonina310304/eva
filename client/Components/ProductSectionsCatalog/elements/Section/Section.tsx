@@ -5,6 +5,7 @@ import ProductCard from '@Components/ProductCard';
 import ConstructorStub from '@Components/ConstructorStub';
 import Price from '@UI/Price';
 import Gallery from '@UI/Gallery';
+import ProgressBar from '@UI/ProgressBar';
 import useMedias from '@Hooks/useMedias';
 import { ProductModel, ConstructorStubData } from '@Types/Category';
 import { ProductData } from '@Types/Product';
@@ -17,14 +18,15 @@ export interface ItemsProps {
   className?: string;
   children: ReactElement | ReactElement[];
   slide: number;
+  onChange?({ current }: { current: number }): void;
 }
 
 const Items: FC<ItemsProps> = (props) => {
-  const { slide, children, ...restProps } = props;
+  const { slide, children, onChange, ...restProps } = props;
   const { isMobileM } = useMedias();
 
   return isMobileM ? (
-    <Gallery {...restProps} slideIndex={slide}>
+    <Gallery {...restProps} slideIndex={slide} onChangeCurrent={onChange}>
       {children}
     </Gallery>
   ) : (
@@ -40,6 +42,7 @@ export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
 
 const Section: FC<SectionProps> = (props) => {
   const { className, section, items, ...restProps } = props;
+  const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
 
   const normalizeSlide = useCallback(
@@ -62,6 +65,10 @@ const Section: FC<SectionProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide]);
 
+  const handleChangeSlide = useCallback(({ current }) => {
+    setSlide(current);
+  }, []);
+
   return (
     <div {...restProps} className={cn(styles.Section, className)}>
       <div className={styles.head}>
@@ -80,12 +87,12 @@ const Section: FC<SectionProps> = (props) => {
         </div>
       </div>
 
-      <Items className={styles.items} slide={slide}>
+      <Items className={styles.items} slide={slide} onChange={handleChangeSlide}>
         {items.map((item, index) => {
           const isStub = item.id === 'stub';
 
           return (
-            <div className={styles.item} key={index}>
+            <div className={cn(styles.item, styles.stub)} key={index}>
               {isStub ? (
                 <ConstructorStub stub={item as ConstructorStubData} />
               ) : (
@@ -95,6 +102,8 @@ const Section: FC<SectionProps> = (props) => {
           );
         })}
       </Items>
+
+      {isMobileM && <ProgressBar currentItem={slide} totalItems={items.length} />}
     </div>
   );
 };

@@ -42,6 +42,12 @@
 }
 
 @media (--mobile-m) {
+  .section {
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+
   .moreButton {
     max-width: 220px;
   }
