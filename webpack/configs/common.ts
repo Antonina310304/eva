@@ -16,6 +16,7 @@ const commonConfig: Configuration = {
       shadows: path.resolve(paths.context, './UI/shadows.module.css'),
       sizes: path.resolve(paths.context, './UI/sizes.module.css'),
       spaces: path.resolve(paths.context, './UI/spaces.module.css'),
+      '@Api': path.resolve(paths.context, './Api'),
       '@App': path.resolve(paths.context, './App'),
       '@Components': path.resolve(paths.context, './Components'),
       '@Contexts': path.resolve(paths.context, './Contexts'),

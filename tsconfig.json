@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
+      "@Api": ["./client/Api"],
       "@App": ["./client/App"],
       "@Components/*": ["./client/Components/*"],
       "@Contexts/*": ["./client/Contexts/*"],
