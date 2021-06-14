@@ -1,34 +1,12 @@
-import React, { cloneElement, FC, HTMLAttributes, memo, ReactElement, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import ProductCard from '@Components/ProductCard';
-import ConstructorStub from '@Components/ConstructorStub';
 import List from '@UI/List';
 import Button from '@UI/Button/Button';
-import Gallery from '@UI/Gallery';
-import useMedias from '@Hooks/useMedias';
-import { ProductModel, ConstructorStubData } from '@Types/Category';
+import { ProductModel } from '@Types/Category';
 import { ProductData } from '@Types/Product';
-import Section from './elements/Section';
+import Section, { SectionItem } from './elements/Section';
 import styles from './ProductSectionsCatalog.module.css';
-
-export type SectionItem = ProductData | ConstructorStubData;
-
-export interface ItemsProps {
-  className?: string;
-  children: ReactElement | ReactElement[];
-}
-
-const Items: FC<ItemsProps> = (props) => {
-  const { children, ...restProps } = props;
-  const { isMobileM } = useMedias();
-
-  return isMobileM ? (
-    <Gallery {...restProps}>{children}</Gallery>
-  ) : (
-    <div {...restProps}>{children}</div>
-  );
-};
 
 export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -50,25 +28,7 @@ const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
 
           if (section.constructor) items.push({ id: 'stub', ...section.constructor });
 
-          return (
-            <Section className={styles.section} section={section}>
-              <Items className={styles.items}>
-                {items.map((item, index) => {
-                  const isStub = item.id === 'stub';
-
-                  return (
-                    <div className={styles.item} key={index}>
-                      {isStub ? (
-                        <ConstructorStub stub={item as ConstructorStubData} />
-                      ) : (
-                        <ProductCard product={item as ProductData} />
-                      )}
-                    </div>
-                  );
-                })}
-              </Items>
-            </Section>
-          );
+          return <Section className={styles.section} section={section} items={items} />;
         }}
       />
 

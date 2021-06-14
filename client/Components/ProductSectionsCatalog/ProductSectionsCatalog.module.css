@@ -24,12 +24,6 @@
   }
 }
 
-.items {
-  display: grid;
-  grid-gap: var(--gap-v) var(--gap-h);
-  grid-template-columns: repeat(var(--columns), 1fr);
-}
-
 .moreWrapper {
   display: flex;
   justify-content: center;
@@ -48,17 +42,6 @@
 }
 
 @media (--mobile-m) {
-  .items {
-    display: block;
-    margin: 0 var(--space-xs-neg);
-    overflow: hidden;
-  }
-
-  .item {
-    min-width: 300px;
-    padding: 0 var(--space-xs);
-  }
-
   .moreButton {
     max-width: 220px;
   }
