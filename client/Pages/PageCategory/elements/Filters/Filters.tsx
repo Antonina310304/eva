@@ -3,13 +3,13 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 import useModals from '@Hooks/useModals';
-import styles from './CategoryFilters.module.css';
+import styles from './Filters.module.css';
 
-export interface CategoryFiltersProps extends HTMLAttributes<HTMLDivElement> {
+export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const CategoryFilters: FC<CategoryFiltersProps> = (props) => {
+const Filters: FC<FiltersProps> = (props) => {
   const { className, ...restProps } = props;
   const [, { openModal }] = useModals();
 
@@ -18,7 +18,7 @@ const CategoryFilters: FC<CategoryFiltersProps> = (props) => {
   }, [openModal]);
 
   return (
-    <div {...restProps} className={cn(styles.categoryFilters, className)}>
+    <div {...restProps} className={cn(styles.filters, className)}>
       <div className={styles.actions}>
         <div className={styles.buttons}>
           <Button
@@ -56,4 +56,4 @@ const CategoryFilters: FC<CategoryFiltersProps> = (props) => {
   );
 };
 
-export default memo(CategoryFilters);
+export default memo(Filters);
