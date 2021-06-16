@@ -1,6 +1,5 @@
-import React, { useCallback, memo, HTMLAttributes, FC } from 'react';
+import React, { useCallback, useRef, memo, HTMLAttributes, FC, MouseEvent } from 'react';
 import cn from 'classnames';
-import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
 
 import useModals from '@Hooks/useModals';
 import KeyboardHandler from '@Components/KeyboardHandler';
@@ -17,16 +16,18 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 
 const Modal: FC<ModalProps> = (props) => {
   const { className, id, visible, children, view = 'default', onClose } = props;
-  const [{ animatings }] = useModals();
+  const [{ animatings }, { closeModal }] = useModals();
+  const refWrapper = useRef();
 
   const handleClose = useCallback(
-    (e) => {
+    (e: MouseEvent<HTMLDivElement>) => {
+      if (e.target !== refWrapper.current) return;
+
+      closeModal(id);
       if (onClose) onClose(e);
     },
-    [onClose],
+    [closeModal, id, onClose],
   );
-
-  const refContent = useOnClickOutside(handleClose);
 
   return (
     <KeyboardHandler onEscape={onClose}>
@@ -41,11 +42,9 @@ const Modal: FC<ModalProps> = (props) => {
           className,
         )}
       >
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} ref={refWrapper} onClick={handleClose}>
           <div className={styles.wrapperContent}>
-            <div className={styles.content} ref={refContent}>
-              {children}
-            </div>
+            <div className={styles.content}>{children}</div>
           </div>
         </div>
       </div>

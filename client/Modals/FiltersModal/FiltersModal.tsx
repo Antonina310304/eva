@@ -29,7 +29,6 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
       id={modal.id}
       visible={modal.visible}
       view='slide-right'
-      onClose={handleClose}
     >
       <div className={styles.container}>
         <div className={styles.head}>
