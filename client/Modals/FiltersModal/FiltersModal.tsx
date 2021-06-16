@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Modal from '@Components/Modal';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
+import Scroller from '@UI/Scroller';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import Group from './elements/Group';
@@ -36,14 +37,14 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
           <div className={styles.iconClose} onClick={handleClose} />
         </div>
 
-        <div className={styles.content}>
+        <Scroller className={styles.content}>
           <Group className={styles.group} title='Цена'>
             Тестовый
           </Group>
           <Group className={styles.group} title='Цена'>
             Тестовый
           </Group>
-        </div>
+        </Scroller>
 
         <div className={styles.footer}>
           <Button className={styles.apply} wide title='Применить' />
