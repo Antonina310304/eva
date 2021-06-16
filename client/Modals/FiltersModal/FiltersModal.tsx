@@ -6,6 +6,7 @@ import Button from '@UI/Button';
 import Link from '@UI/Link';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
+import Group from './elements/Group';
 import styles from './FiltersModal.module.css';
 
 export interface FiltersModalProps {
@@ -35,7 +36,14 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
           <div className={styles.iconClose} onClick={handleClose} />
         </div>
 
-        <div className={styles.content}>Content</div>
+        <div className={styles.content}>
+          <Group className={styles.group} title='Цена'>
+            Тестовый
+          </Group>
+          <Group className={styles.group} title='Цена'>
+            Тестовый
+          </Group>
+        </div>
 
         <div className={styles.footer}>
           <Button className={styles.apply} wide title='Применить' />

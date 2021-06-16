@@ -37,6 +37,18 @@
   height: calc(100% - var(--header-height) - var(--footer-height));
 }
 
+.group {
+  margin-bottom: var(--space-b);
+
+  border-bottom: 1px solid var(--color-light-gray);
+
+  &:last-child {
+    margin-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
 .footerAdditional {
   display: flex;
   align-items: center;

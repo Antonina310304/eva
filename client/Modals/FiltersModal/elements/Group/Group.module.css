@@ -1,0 +1,35 @@
+.group {
+  padding-bottom: var(--space-xs);
+}
+
+.group.collapsed {
+  .arrow {
+    transform: rotate(-180deg);
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.title {
+}
+
+.arrow {
+  width: 11px;
+  height: 6px;
+
+  background-image: url('./arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transition: transform 0.2s;
+}
+
+.content {
+  padding: var(--space-n) 0;
+}
