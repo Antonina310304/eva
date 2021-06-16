@@ -1,7 +1,8 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
+import useModals from '@Hooks/useModals';
 import styles from './CategoryFilters.module.css';
 
 export interface CategoryFiltersProps extends HTMLAttributes<HTMLDivElement> {
@@ -10,6 +11,11 @@ export interface CategoryFiltersProps extends HTMLAttributes<HTMLDivElement> {
 
 const CategoryFilters: FC<CategoryFiltersProps> = (props) => {
   const { className, ...restProps } = props;
+  const [, { openModal }] = useModals();
+
+  const handleClickAll = useCallback(() => {
+    openModal('Filters');
+  }, [openModal]);
 
   return (
     <div {...restProps} className={cn(styles.categoryFilters, className)}>
@@ -20,6 +26,7 @@ const CategoryFilters: FC<CategoryFiltersProps> = (props) => {
             view='rounded'
             before={<div className={styles.iconFilters} />}
             title='Все фильтры'
+            onClick={handleClickAll}
           />
           <Button
             className={cn(styles.button, styles.secondary)}
