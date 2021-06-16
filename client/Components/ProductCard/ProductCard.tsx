@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import loadable from '@loadable/component';
 import cn from 'classnames';
 
@@ -8,6 +8,7 @@ import Discount from '@UI/Discount';
 import List from '@UI/List';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
+import ProgressBar from '@UI/ProgressBar';
 import { ProductData, ProductParameterGroupData, ProductTagData } from '@Types/Product';
 import Tag from './elements/Tag';
 import Parameter from './elements/Parameter';
@@ -53,6 +54,11 @@ const ProductCard: FC<ProductCardProps> = (props) => {
   const hasGallery = images.length > 1;
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
+  const [slide, setSlide] = useState(0);
+
+  const handleChangeCurrent = useCallback(({ current }) => {
+    setSlide(current);
+  }, []);
 
   return (
     <div
@@ -64,7 +70,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
       <div className={styles.container}>
         <div className={styles.containerImage}>
           {hasGallery ? (
-            <Gallery className={styles.gallery}>
+            <Gallery className={styles.gallery} onChangeCurrent={handleChangeCurrent}>
               {images.map((image, index) => (
                 <div
                   key={index}
@@ -95,6 +101,16 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             />
           )}
         </div>
+
+        {hasGallery ? (
+          <ProgressBar
+            className={styles.progressBar}
+            currentItem={slide}
+            totalItems={images.length}
+          />
+        ) : (
+          <div className={styles.progressBar} />
+        )}
 
         <div className={styles.info}>
           <div className={styles.name}>{product.name}</div>

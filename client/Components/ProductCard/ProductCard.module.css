@@ -79,8 +79,6 @@
 .containerImage {
   position: relative;
 
-  padding: var(--space-l);
-
   background-color: var(--color-light-gray);
   border-radius: 5px;
 }
@@ -120,8 +118,14 @@
   pointer-events: none;
 }
 
+.progressBar {
+  margin-top: var(--space-xs);
+
+  opacity: 0;
+}
+
 .info {
-  margin-top: var(--space-n);
+  margin-top: var(--space-xs);
 }
 
 .price {
@@ -213,6 +217,10 @@
       opacity: 1;
 
       pointer-events: all;
+    }
+
+    .progressBar {
+      opacity: 1;
     }
   }
 }
