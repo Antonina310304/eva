@@ -45,7 +45,7 @@ const Scroller: FC<ScrollerProps> = (props) => {
               {...restScrollbarProps}
               ref={elementRef}
               className={styles.content}
-              style={{ paddingRight: `${space}px` }}
+              style={{ paddingRight: `${space + 3}px` }}
             />
           );
         },
