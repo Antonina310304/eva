@@ -6,6 +6,32 @@
     cursor: pointer;
   }
 }
+.row.colored {
+  .box {
+    position: relative;
+
+    width: 30px;
+    height: 30px;
+    margin: 4px;
+    margin-right: var(--space-xs);
+
+    border: 0;
+  }
+
+  .check {
+    background: none;
+  }
+
+  .control:checked ~ .container .box .check {
+    position: absolute;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid var(--color-dark-gray);
+    border-radius: 50%;
+  }
+}
 
 .control {
   position: absolute;

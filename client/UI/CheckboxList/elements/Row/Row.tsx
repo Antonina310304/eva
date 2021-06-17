@@ -17,8 +17,8 @@ const CheckboxRow: FC<CheckboxRowProps> = (props) => {
       <input
         className={styles.control}
         type='checkbox'
-        {...restProps}
         defaultChecked={item.defaultChecked}
+        {...restProps}
       />
 
       <div className={styles.container}>
