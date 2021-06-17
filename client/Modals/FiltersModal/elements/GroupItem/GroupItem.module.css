@@ -1,0 +1,8 @@
+.groupItem {
+}
+
+.title {
+  composes: s from 'sizes';
+
+  margin-bottom: var(--space-xs);
+}

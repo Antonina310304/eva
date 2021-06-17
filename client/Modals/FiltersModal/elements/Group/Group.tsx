@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import React, { Children, FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Collapse from '@UI/Collapse';
@@ -26,7 +26,13 @@ const Group: FC<GroupProps> = (props) => {
       </div>
 
       <Collapse className={styles.wrapperContent} collapsed={collapsed}>
-        <div className={styles.content}>{children}</div>
+        <div className={styles.content}>
+          {Children.map(children, (child, index) => (
+            <div className={styles.item} key={index}>
+              {child}
+            </div>
+          ))}
+        </div>
       </Collapse>
     </div>
   );

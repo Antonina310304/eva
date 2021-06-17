@@ -9,6 +9,7 @@ import InputsRange from '@UI/InputsRange';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import Group from './elements/Group';
+import GroupItem from './elements/GroupItem';
 import styles from './FiltersModal.module.css';
 
 export interface FiltersModalProps {
@@ -41,8 +42,17 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
           <Group className={styles.group} title='Цена'>
             <InputsRange min={1000} max={30000} valueMin={1500} valueMax={25000} />
           </Group>
-          <Group className={styles.group} title='Цена'>
-            Тестовый
+
+          <Group className={styles.group} title='Размеры'>
+            <GroupItem title='Длина, см'>
+              <InputsRange min={100} max={300} valueMin={120} valueMax={280} />
+            </GroupItem>
+            <GroupItem title='Ширина, см'>
+              <InputsRange min={100} max={300} valueMin={120} valueMax={280} />
+            </GroupItem>
+            <GroupItem title='Высота, см'>
+              <InputsRange min={100} max={300} valueMin={120} valueMax={280} />
+            </GroupItem>
           </Group>
         </Scroller>
 
