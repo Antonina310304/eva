@@ -165,22 +165,29 @@ const InputsRange: FC<InputsRangeProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.inputsRange, className)}>
       <div className={styles.inputs}>
-        <Input
-          className={styles.input}
-          value={formatNumber(inputValueMin)}
-          data-name='from'
-          onChange={handleChangeMin}
-          onBlur={handleBlurMin}
-          onKeyDown={handleKeyDown}
-        />
-        <Input
-          className={styles.input}
-          value={formatNumber(inputValueMax)}
-          data-name='to'
-          onChange={handleChangeMax}
-          onBlur={handleBlurMax}
-          onKeyDown={handleKeyDown}
-        />
+        <div className={styles.inputWrapper}>
+          <div className={styles.inputBefore}>от</div>
+          <Input
+            className={styles.input}
+            value={formatNumber(inputValueMin)}
+            data-name='from'
+            onChange={handleChangeMin}
+            onBlur={handleBlurMin}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+
+        <div className={styles.inputWrapper}>
+          <div className={styles.inputBefore}>до</div>
+          <Input
+            className={styles.input}
+            value={formatNumber(inputValueMax)}
+            data-name='to'
+            onChange={handleChangeMax}
+            onBlur={handleBlurMax}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
       </div>
 
       <RangeSlider
