@@ -37,7 +37,7 @@
 }
 
 @media (--mobile) {
-  .categoryFilters {
+  .filters {
     display: block;
   }
 

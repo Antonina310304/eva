@@ -6,6 +6,13 @@
   color: var(--color-red);
 }
 
+.productCard.viewMini {
+  .labelPrice,
+  .discount {
+    display: none;
+  }
+}
+
 .box {
   composes: popup from 'shadows';
 
@@ -226,7 +233,9 @@
 }
 
 @media (--mobile) {
-  .tags {
+  .tags,
+  .box,
+  .additionalInfo {
     display: none;
   }
 }

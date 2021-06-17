@@ -21,7 +21,7 @@ const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
         className={styles.list}
         items={products}
         renderChild={(product: ProductData) => (
-          <ProductCard className={styles.item} product={product} />
+          <ProductCard className={styles.item} product={product} view='mini' />
         )}
       />
 

@@ -8,8 +8,8 @@ export type QueryVariant =
   | '--mobile-m'
   | '--mobile'
   | '--mobile-s'
-  | '--desktop-only'
-  | '--mobile-only';
+  | '--only-desktop'
+  | '--only-mobile';
 
 export interface Matches {
   isDesktopL?: boolean;
@@ -19,8 +19,8 @@ export interface Matches {
   isMobileM?: boolean;
   isMobile?: boolean;
   isMobileS?: boolean;
-  isDesktopOnly?: boolean;
-  isMobileOnly?: boolean;
+  isOnlyDesktop?: boolean;
+  isOnlyMobile?: boolean;
 }
 
 function matchMedia(query: QueryVariant): MediaQueryList {
@@ -32,8 +32,8 @@ function matchMedia(query: QueryVariant): MediaQueryList {
     '--mobile-m': '(max-width: 1023px)',
     '--mobile': '(max-width: 767px)',
     '--mobile-s': '(max-width: 424px)',
-    '--desktop-only': '(min-width: 768px)',
-    '--mobile-only': '(max-width: 767px)',
+    '--only-desktop': '(min-width: 1366px)',
+    '--only-mobile': '(max-width: 1365px)',
   };
 
   return window.matchMedia(List[query] || query);
@@ -52,8 +52,8 @@ export default function useMedia(): Matches {
         isMobileM: matchMedia('--mobile-m').matches,
         isMobile: matchMedia('--mobile').matches,
         isMobileS: matchMedia('--mobile-s').matches,
-        isDesktopOnly: matchMedia('--desktop-only').matches,
-        isMobileOnly: matchMedia('--mobile-only').matches,
+        isOnlyDesktop: matchMedia('--only-desktop').matches,
+        isOnlyMobile: matchMedia('--only-mobile').matches,
       });
     }
 
