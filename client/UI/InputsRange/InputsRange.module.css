@@ -1,0 +1,23 @@
+.inputs {
+  display: flex;
+
+  margin-bottom: var(--space-xs);
+}
+
+.input {
+  margin-right: var(--space-xs);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+@media (--mobile) {
+  .inputs {
+    margin-bottom: var(--space-m);
+  }
+
+  .input {
+    margin-right: var(--space-m);
+  }
+}
