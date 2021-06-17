@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, useRef, useState, forwardRef, memo } from 'react';
+import React, { MouseEvent, useCallback, useRef, useState, FC, memo, useEffect } from 'react';
 import cn from 'classnames';
 
 import Droplet, { DropletType } from './elements/Droplet';
@@ -13,18 +13,30 @@ export interface ChangeData {
 
 export interface RangeProps {
   className?: string;
-  defaultMin: number;
-  defaultMax: number;
+  defaultMin?: number;
+  defaultMax?: number;
+  min?: number;
+  max?: number;
   onChange?: (e: MouseEvent, data: ChangeData) => void;
   onChangeEnd?: (e: MouseEvent, type: DropletType) => void;
 }
 
-const [min, max] = [0, 100];
-const Range = forwardRef<RangeRef, RangeProps>((props, ref) => {
-  const { className, defaultMin, defaultMax, onChange, onChangeEnd, ...restProps } = props;
-  const defaultGap = defaultMax - defaultMin;
-  const [from, setFrom] = useState(defaultMin);
-  const [to, setTo] = useState(defaultMax);
+const Range: FC<RangeProps> = (props) => {
+  const {
+    className,
+    defaultMin,
+    defaultMax,
+    min,
+    max,
+    onChange,
+    onChangeEnd,
+    ...restProps
+  } = props;
+  const trueMin = min || defaultMin;
+  const trueMax = max || defaultMax;
+  const gap = Math.abs(trueMax - trueMin);
+  const [from, setFrom] = useState(trueMin);
+  const [to, setTo] = useState(trueMax);
   const refDroplets = useRef<HTMLDivElement>();
 
   const handleChangeX = useCallback(
@@ -34,40 +46,43 @@ const Range = forwardRef<RangeRef, RangeProps>((props, ref) => {
       const isMax = type === 'max';
 
       if (isMin) {
-        let newFrom = from + (val * defaultGap) / 100;
+        let newFrom = from + (val * gap) / 100;
 
-        if (newFrom < min) {
-          newFrom = min;
+        if (newFrom < 0) {
+          newFrom = 0;
         }
         if (newFrom >= to - 1) {
           newFrom = to - 1;
         }
+        if (onChange) onChange(e, { type, val: newFrom });
 
         setFrom(newFrom);
       }
 
       if (isMax) {
-        let newTo = to + (val * defaultGap) / 100;
+        let newTo = to + (val * gap) / 100;
 
-        if (newTo > max) {
-          newTo = max;
+        if (newTo > 0) {
+          newTo = 0;
         }
         if (newTo <= from + 1) {
           newTo = from + 1;
         }
+        if (onChange) onChange(e, { type, val: newTo });
 
         setTo(newTo);
       }
-
-      if (onChange) {
-        onChange(e, { type, val });
-      }
     },
-    [defaultGap, to, from, onChange],
+    [gap, to, from, onChange],
   );
 
+  useEffect(() => {
+    setFrom(min);
+    setTo(max);
+  }, [max, min]);
+
   return (
-    <div {...restProps} className={cn(styles.rangeSlider, className)} ref={ref}>
+    <div {...restProps} className={cn(styles.rangeSlider, className)}>
       <div className={styles.line} />
 
       <div className={styles.droplets} ref={refDroplets}>
@@ -90,7 +105,7 @@ const Range = forwardRef<RangeRef, RangeProps>((props, ref) => {
       </div>
     </div>
   );
-});
+};
 
 Range.displayName = 'Range';
 
