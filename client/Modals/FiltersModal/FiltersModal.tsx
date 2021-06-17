@@ -5,6 +5,7 @@ import Modal from '@Components/Modal';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import Scroller from '@UI/Scroller';
+import InputsRange from '@UI/InputsRange';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import Group from './elements/Group';
@@ -38,7 +39,7 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
 
         <Scroller className={styles.content}>
           <Group className={styles.group} title='Цена'>
-            Тестовый
+            <InputsRange min={1000} max={30000} valueMin={1500} valueMax={25000} />
           </Group>
           <Group className={styles.group} title='Цена'>
             Тестовый
