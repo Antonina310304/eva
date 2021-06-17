@@ -7,6 +7,7 @@ export type QueryVariant =
   | '--mobile-l'
   | '--mobile-m'
   | '--mobile'
+  | '--mobile-s'
   | '--desktop-only'
   | '--mobile-only';
 
@@ -17,6 +18,7 @@ export interface Matches {
   isMobileL?: boolean;
   isMobileM?: boolean;
   isMobile?: boolean;
+  isMobileS?: boolean;
   isDesktopOnly?: boolean;
   isMobileOnly?: boolean;
 }
@@ -29,6 +31,7 @@ function matchMedia(query: QueryVariant): MediaQueryList {
     '--mobile-l': '(max-width: 1279px)',
     '--mobile-m': '(max-width: 1023px)',
     '--mobile': '(max-width: 767px)',
+    '--mobile-s': '(max-width: 424px)',
     '--desktop-only': '(min-width: 768px)',
     '--mobile-only': '(max-width: 767px)',
   };
@@ -48,6 +51,7 @@ export default function useMedia(): Matches {
         isMobileL: matchMedia('--mobile-l').matches,
         isMobileM: matchMedia('--mobile-m').matches,
         isMobile: matchMedia('--mobile').matches,
+        isMobileS: matchMedia('--mobile-s').matches,
         isDesktopOnly: matchMedia('--desktop-only').matches,
         isMobileOnly: matchMedia('--mobile-only').matches,
       });
