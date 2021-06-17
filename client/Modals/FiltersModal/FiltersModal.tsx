@@ -9,6 +9,7 @@ import InputsRange from '@UI/InputsRange';
 import CheckboxList from '@UI/CheckboxList';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
+import useMedias from '@Hooks/useMedias';
 import Group from './elements/Group';
 import GroupItem from './elements/GroupItem';
 import styles from './FiltersModal.module.css';
@@ -53,6 +54,7 @@ const types = [
 const FiltersModal: FC<FiltersModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeModal }] = useModals();
+  const { isMobileS } = useMedias();
 
   const handleClose = useCallback(() => {
     closeModal(modal.id);
@@ -71,7 +73,7 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
           <div className={styles.iconClose} onClick={handleClose} />
         </div>
 
-        <Scroller className={styles.content}>
+        <Scroller className={styles.content} space={isMobileS ? 0 : 40} invisible={isMobileS}>
           <Group className={styles.group} title='Цена'>
             <InputsRange min={1000} max={30000} valueMin={1500} valueMax={25000} />
           </Group>
