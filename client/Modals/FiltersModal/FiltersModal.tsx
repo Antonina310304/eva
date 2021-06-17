@@ -92,7 +92,7 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
             <CheckboxList items={colors} />
           </Group>
 
-          <Group className={styles.group} title='Тип обивки'>
+          <Group className={styles.group} title='Тип обивки' selectedText='Натуральная кожа'>
             <CheckboxList items={types} />
           </Group>
         </Scroller>

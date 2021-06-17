@@ -17,12 +17,37 @@
 }
 
 .title {
+  max-width: calc(40% - var(--space-xs));
+  margin-right: var(--space-xs);
+  overflow: hidden;
+
   font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 60%;
+}
+
+.selectedText {
+  composes: darkGray from 'colors';
+  composes: s from 'sizes';
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .arrow {
+  flex-shrink: 0;
   width: 11px;
   height: 6px;
+  margin-left: var(--space-xs);
 
   background-image: url('./arrow.svg');
   background-repeat: no-repeat;

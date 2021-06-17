@@ -7,11 +7,12 @@ import styles from './Group.module.css';
 export interface GroupProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
+  selectedText?: string;
   defaultCollapsed?: boolean;
 }
 
 const Group: FC<GroupProps> = (props) => {
-  const { className, title, defaultCollapsed, children, ...restProps } = props;
+  const { className, title, selectedText, defaultCollapsed, children, ...restProps } = props;
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   const handleClickHead = useCallback(() => {
@@ -22,7 +23,11 @@ const Group: FC<GroupProps> = (props) => {
     <div {...restProps} className={cn(styles.group, { [styles.collapsed]: collapsed }, className)}>
       <div className={styles.head} onClick={handleClickHead}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.arrow} />
+
+        <div className={styles.right}>
+          {selectedText && <div className={styles.selectedText}>{selectedText}</div>}
+          <div className={styles.arrow} />
+        </div>
       </div>
 
       <Collapse className={styles.wrapperContent} collapsed={collapsed}>
