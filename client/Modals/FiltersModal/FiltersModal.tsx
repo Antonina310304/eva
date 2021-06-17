@@ -6,6 +6,7 @@ import Button from '@UI/Button';
 import Link from '@UI/Link';
 import Scroller from '@UI/Scroller';
 import InputsRange from '@UI/InputsRange';
+import CheckboxList from '@UI/CheckboxList';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import Group from './elements/Group';
@@ -16,6 +17,19 @@ export interface FiltersModalProps {
   className?: string;
   modal: IModal;
 }
+
+const types = [
+  {
+    defaultChecked: true,
+    text: 'Натуральная кожа',
+  },
+  {
+    text: 'Ткань',
+  },
+  {
+    text: 'Экокожа',
+  },
+];
 
 const FiltersModal: FC<FiltersModalProps> = (props) => {
   const { className, modal } = props;
@@ -53,6 +67,10 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
             <GroupItem title='Высота, см'>
               <InputsRange min={100} max={300} valueMin={120} valueMax={280} />
             </GroupItem>
+          </Group>
+
+          <Group className={styles.group} title='Тип обивки'>
+            <CheckboxList items={types} />
           </Group>
         </Scroller>
 
