@@ -1,0 +1,33 @@
+.droplet {
+  position: absolute;
+  top: 0;
+  z-index: 4;
+
+  box-sizing: border-box;
+  width: var(--range-height);
+  height: var(--range-height);
+
+  background: var(--color-grafit);
+
+  border: var(--line-height) solid var(--color-base);
+  border-radius: 100%;
+  transform: translateX(calc(var(--range-height) / -2));
+
+  transition: transform 0.2s;
+
+  user-select: none;
+}
+
+.droplet:hover,
+.droplet.dragged {
+  transform: translateX(calc(var(--range-height) / -2)) scale(1.05);
+  cursor: pointer;
+}
+
+.droplet.min {
+  left: 0;
+}
+
+.droplet.max {
+  right: 0;
+}
