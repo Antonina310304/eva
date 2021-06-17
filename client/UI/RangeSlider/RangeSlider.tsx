@@ -62,8 +62,8 @@ const Range: FC<RangeProps> = (props) => {
       if (isMax) {
         let newTo = to + (val * gap) / 100;
 
-        if (newTo > 0) {
-          newTo = 0;
+        if (newTo > 100) {
+          newTo = 100;
         }
         if (newTo <= from + 1) {
           newTo = from + 1;
