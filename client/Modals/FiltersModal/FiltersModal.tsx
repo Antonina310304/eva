@@ -18,6 +18,25 @@ export interface FiltersModalProps {
   modal: IModal;
 }
 
+const colors = [
+  {
+    defaultChecked: true,
+    text: 'Зеленый',
+    color: '#717C53',
+  },
+  {
+    text: 'Бежевый',
+    color: '#DACEA1',
+  },
+  {
+    text: 'Желтый',
+    color: '#F1E67D',
+  },
+  {
+    text: 'Синий',
+    color: '#49637C',
+  },
+];
 const types = [
   {
     defaultChecked: true,
@@ -67,6 +86,10 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
             <GroupItem title='Высота, см'>
               <InputsRange min={100} max={300} valueMin={120} valueMax={280} />
             </GroupItem>
+          </Group>
+
+          <Group className={styles.group} title='Цвет'>
+            <CheckboxList items={colors} />
           </Group>
 
           <Group className={styles.group} title='Тип обивки'>
