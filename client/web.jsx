@@ -12,7 +12,13 @@ import App from '@App';
 const isDev = process.env.NODE_ENV === 'development';
 
 loadableReady(() => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   const state = window.__SERVER_STATE__;
 
   // eslint-disable-next-line no-console
