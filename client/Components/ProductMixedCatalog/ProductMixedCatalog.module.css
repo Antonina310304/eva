@@ -2,6 +2,7 @@
   --columns: 4;
   --gap-h: var(--space-l);
   --gap-v: var(--space-xxb);
+  composes: main from 'containers';
 }
 
 .list {
@@ -41,6 +42,8 @@
 @media (--mobile-m) {
   .catalog {
     --columns: 2;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .moreButton {

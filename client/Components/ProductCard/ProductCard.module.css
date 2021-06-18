@@ -232,7 +232,7 @@
   }
 }
 
-@media (--mobile) {
+@media (--mobile-m) {
   .tags,
   .box,
   .additionalInfo {
