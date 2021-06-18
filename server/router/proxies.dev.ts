@@ -34,4 +34,11 @@ const routes = [
 
 routes.map((route) => router.use(route, proxy(backend, proxyOptions)));
 
+router.use(
+  '/api',
+  proxy(backend, {
+    proxyReqPathResolver: (req) => `${req.url}`,
+  }),
+);
+
 export default router;

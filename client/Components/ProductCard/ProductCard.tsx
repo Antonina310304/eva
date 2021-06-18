@@ -143,7 +143,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
               />
               <div className={styles.fabricsMore}>
                 {`+150 тканей в `}
-                <Link view='secondary' href='#'>
+                <Link view='secondary' to='#'>
                   конструкторе
                 </Link>
               </div>
@@ -187,7 +187,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
             <Button className={styles.buy} wide title='В корзину' />
             <div className={styles.moreWrapper}>
-              <Link className={styles.more} href={product.link} view='secondary'>
+              <Link className={styles.more} to={product.link} view='secondary'>
                 Подробнее о товаре
               </Link>
             </div>

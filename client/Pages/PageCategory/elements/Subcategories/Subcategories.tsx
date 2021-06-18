@@ -18,7 +18,7 @@ const Subcategories: FC<SubcategoriesProps> = (props) => {
     <Gallery {...restProps} className={cn(styles.subcategories, className)}>
       {subcategories.map((subcategory, index) => (
         <div className={styles.subcategory} key={index}>
-          <Link className={styles.link} href={subcategory.link} view='simple'>
+          <Link className={styles.link} to={subcategory.link} view='simple'>
             <div
               className={styles.subcategoryIcon}
               // eslint-disable-next-line react/no-danger

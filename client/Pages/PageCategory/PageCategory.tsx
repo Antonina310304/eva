@@ -1,14 +1,18 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 
-import useData from '@Hooks/useData';
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
+import useCategory from '@Queries/useCategory';
 import Filters from './elements/Filters';
 import Subcategories from './elements/Subcategories';
-import { PageCategoryData } from './typings';
 import styles from './PageCategory.module.css';
 import PopularLinks from './elements/PopularLinks';
+
+export interface RouteParams {
+  slug: string;
+}
 
 export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -16,7 +20,12 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, ...restProps } = props;
-  const data = useData<PageCategoryData>();
+  const { slug } = useParams<RouteParams>();
+  const category = useCategory({ slug });
+
+  if (!category.isSuccess) return null;
+
+  const { data } = category;
   const isModels = data.productsModel?.length > 0;
 
   return (

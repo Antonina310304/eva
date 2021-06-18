@@ -26,7 +26,7 @@ const ConstructorStub: FC<ConstructorStubProps> = (props) => {
       <div className={styles.icon} />
 
       <div className={styles.linkWrapper}>
-        <Link className={styles.link} onClick={handleOpenConstructor}>
+        <Link className={styles.link} to='#' onClick={handleOpenConstructor}>
           {stub.title}
         </Link>
       </div>

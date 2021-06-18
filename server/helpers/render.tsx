@@ -1,67 +1,63 @@
 import React from 'react';
-import path from 'path';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import { renderToString } from 'react-dom/server';
 import { ChunkExtractor } from '@loadable/server';
+import { StaticRouterContext } from 'react-router';
+import { StaticRouter } from 'react-router-dom';
+import { RequestHandler } from 'express';
 
-import DataProvider from '../../client/Contexts/Data/DataProvider';
-import createScriptTagState from './createScriptTagState';
 import { paths } from '../../utils/paths';
+import renderPage from './renderPage';
 
-const nodeStats = path.resolve(paths.dist.node, 'loadable-stats.json');
-const webStats = path.resolve(paths.dist.web, 'loadable-stats.json');
+const render: RequestHandler = async (req, res) => {
+  const routerContext: StaticRouterContext = {};
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+  const nodeExtractor = new ChunkExtractor({ statsFile: paths.stats.node });
+  const { default: Entry } = nodeExtractor.requireEntrypoint();
 
-const isDev = process.env.NODE_ENV === 'development';
-const options = {
-  publicPath: process.env.REACT_PUBLIC_PATH,
-};
-
-const mapExtractors = {};
-function getExtractors(page: string) {
-  // В режиме разработки всегда нужны актуальные экстракторы, иначе клиентский и серверный рендер
-  // начнет отличаться после любого изменения кода компонентов
-  if (isDev || !mapExtractors[page]) {
-    const nodeExtractor = new ChunkExtractor({
-      ...options,
-      statsFile: nodeStats,
-    });
-    const webExtractor = new ChunkExtractor({
-      ...options,
-      statsFile: webStats,
-    });
-    const Entry = nodeExtractor.requireEntrypoint().default;
-
-    mapExtractors[page] = {
-      nodeExtractor,
-      webExtractor,
-      Entry,
-    };
+  // Redirect
+  if (routerContext.url) {
+    return res.redirect(routerContext.statusCode, routerContext.url);
   }
 
-  return mapExtractors[page];
-}
+  const webExtractor = new ChunkExtractor({ statsFile: paths.stats.web });
+  const renderAndWait = async () => {
+    const components = (
+      <QueryClientProvider client={queryClient}>
+        <StaticRouter location={req.url} context={routerContext}>
+          <Entry />
+        </StaticRouter>
+      </QueryClientProvider>
+    );
+    const jsx = webExtractor.collectChunks(components);
+    const html = renderToString(jsx);
+    const queryCache = queryClient.getQueryCache();
+    const queries = queryCache.findAll();
+    const newQueries = queries.filter((query) => !query.state.data);
 
-export default ({ page, body }) => {
-  const { Entry, webExtractor } = getExtractors(page);
-  const fullBody = { ...body, page };
+    if (newQueries.length) {
+      const promises = newQueries.map((query) => query.fetch());
+      await Promise.all(promises);
 
-  const components = (
-    <DataProvider body={fullBody}>
-      <Entry />
-    </DataProvider>
-  );
-  const jsx = webExtractor.collectChunks(components);
+      const result = await renderAndWait();
 
-  // Сначала рендерим HTML и после этого используем getScriptsTags и прочее,
-  // иначе @loadable не найдёт чанки
-  const html = `<div id="root">${renderToString(jsx)}</div>`;
-  const linkTags = webExtractor.getLinkTags();
-  const styleTags = webExtractor.getStyleTags();
-  const scriptTags = createScriptTagState(fullBody) + webExtractor.getScriptTags();
+      return result;
+    }
 
-  return {
-    html,
-    linkTags,
-    styleTags,
-    scriptTags,
+    return html;
   };
+  const html = await renderAndWait();
+  const state = dehydrate(queryClient);
+  const htmlDocument = renderPage({ html, state, webExtractor });
+
+  return res.status(routerContext.statusCode || 200).send(htmlDocument);
 };
+
+export default render;

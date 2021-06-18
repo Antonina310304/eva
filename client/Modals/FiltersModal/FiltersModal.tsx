@@ -103,7 +103,9 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
           <Button className={styles.apply} wide title='Применить' />
           <div className={styles.footerAdditional}>
             <div className={styles.count}>Найдено 154 модели</div>
-            <Link className={styles.reset}>Сбросить фильтр</Link>
+            <Link className={styles.reset} to='#'>
+              Сбросить фильтр
+            </Link>
           </div>
         </div>
       </div>

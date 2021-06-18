@@ -1,9 +1,10 @@
-import React, { FC, AnchorHTMLAttributes, memo } from 'react';
+import React, { FC, memo } from 'react';
 import cn from 'classnames';
+import { Link as BaseLink, LinkProps as BaseLinkProps } from 'react-router-dom';
 
 import styles from './Link.module.css';
 
-export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends BaseLinkProps {
   className?: string;
   view?: 'primary' | 'secondary' | 'simple';
 }
@@ -12,7 +13,7 @@ const Link: FC<LinkProps> = (props) => {
   const { className, view = 'primary', children, ...restProps } = props;
 
   return (
-    <a
+    <BaseLink
       {...restProps}
       className={cn(
         styles.link,
@@ -25,7 +26,7 @@ const Link: FC<LinkProps> = (props) => {
       )}
     >
       {children}
-    </a>
+    </BaseLink>
   );
 };
 
