@@ -3,7 +3,7 @@ export default ({ resources, body }): string => {
 
   return `
     <!doctype html>
-    <html>
+    <html lang="ru">
       <head>
         ${title && `<title>${title}</title>`}
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">

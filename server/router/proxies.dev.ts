@@ -28,6 +28,8 @@ const routes = [
   '/shop-product/info-by-params',
   '/cabinet/formes',
   '/json-schema',
+  '/robots.txt',
+  '/sitemap.xml',
 ];
 
 routes.map((route) => router.use(route, proxy(backend, proxyOptions)));

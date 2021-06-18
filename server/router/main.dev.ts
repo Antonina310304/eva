@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import render from '../helpers/render';
 import renderPage from '../helpers/renderPage';
+import { envs } from '../../utils/envs';
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ const router = express.Router();
 
 // Monitoring availability
 router.get('/health', (_req, res) => {
-  res.header('Content-type', 'text/plain; charset=utf-8').send('React render is running');
+  res.header('Content-type', 'text/plain; charset=utf-8').send('Eva is running');
 });
 
 // Render all pages
@@ -32,8 +33,10 @@ router.get('*', async (req, res) => {
 
     res.send(html);
   } catch (err) {
-    console.log(`Error on rendering URL ${originalUrl}`);
-    console.log(err);
+    if (envs.isDev) {
+      console.log(`Error on rendering URL ${originalUrl}`);
+      console.log(err);
+    }
 
     res.status(502).send();
   }

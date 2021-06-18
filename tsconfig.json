@@ -39,6 +39,7 @@
     "server/**/*.tsx",
     "typings/**/*.ts",
     "webpack/**/*.ts",
+    "utils/**/*.ts",
     "jest.config.js",
     "setupTests.ts",
     "__mocks__/**/*.js",

@@ -1,6 +1,6 @@
 import { RuleSetRule } from 'webpack';
 
-import envs from '../envs';
+import { envs } from '../../utils/envs';
 
 const babelNodeLoader: RuleSetRule = {
   loader: 'babel-loader',

@@ -10,20 +10,22 @@ import webConfig from '../webpack/configs/web';
 import { compilerPromise } from './helpers';
 import proxyRoutes from './router/proxies.dev';
 import mainRoutes from './router/main.dev';
-import paths from './paths';
+import { envs } from '../utils/envs';
+import { paths } from '../utils/paths';
 
 const app = express();
-const multiCompiler = webpack([nodeConfig, webConfig]);
-const webCompiler = multiCompiler.compilers.find((compiler) => compiler.name === webConfig.name);
-const nodeCompiler = multiCompiler.compilers.find((compiler) => compiler.name === nodeConfig.name);
 const publicPath = webConfig.output.publicPath.toString();
 const watchOptions = {
   ignored: /node_modules/,
   stats: nodeConfig.stats,
 };
+const multiCompiler = webpack([nodeConfig, webConfig]);
+const webCompiler = multiCompiler.compilers.find((compiler) => compiler.name === webConfig.name);
+const nodeCompiler = multiCompiler.compilers.find((compiler) => compiler.name === nodeConfig.name);
 
 const start = async () => {
   app.use(publicPath, express.static(paths.dist.web));
+  app.use('/react/static', express.static(paths.static));
   app.use(proxyRoutes);
 
   app.use(express.json({ limit: '5mb' }));
@@ -34,7 +36,6 @@ const start = async () => {
     next();
   });
 
-  // Hot reload in dev mode
   app.use(
     webpackDevMiddleware(webCompiler, {
       publicPath,
@@ -48,8 +49,8 @@ const start = async () => {
 
   app.use(mainRoutes);
 
-  app.listen(4444, () => {
-    console.log('Eva listening on port 4444!');
+  app.listen(envs.port, () => {
+    console.log(`Eva listening on port ${envs.port}!`);
   });
 
   nodeCompiler.watch(watchOptions, (err) => {

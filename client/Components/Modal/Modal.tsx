@@ -15,7 +15,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Modal: FC<ModalProps> = (props) => {
-  const { className, id, visible, children, view = 'default', onClose } = props;
+  const { className, id, children, view = 'default', onClose } = props;
   const [{ animatings }, { closeModal }] = useModals();
   const refWrapper = useRef();
 

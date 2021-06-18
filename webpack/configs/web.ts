@@ -1,4 +1,3 @@
-import path from 'path';
 import { HotModuleReplacementPlugin, Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -9,8 +8,8 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 
 import commonConfig from './common';
 import { babelWebLoader, cssModulesLoader, cssLoader, postcssLoader } from '../loaders';
-import envs from '../envs';
-import paths from '../paths';
+import { envs } from '../../utils/envs';
+import { paths } from '../../utils/paths';
 
 const webConfig: Configuration = merge(commonConfig, {
   name: 'web',
@@ -20,8 +19,7 @@ const webConfig: Configuration = merge(commonConfig, {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        include: [path.resolve(__dirname, '../../node_modules/@divanru'), paths.context],
-        exclude: '/node_modules/',
+        exclude: /node_modules/,
         use: [babelWebLoader],
       },
       {

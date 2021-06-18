@@ -1,3 +1,3 @@
 interface Window {
-  __SERVER_STATE__: any;
+  __SERVER_STATE__: unknown;
 }

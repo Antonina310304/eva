@@ -1,12 +1,22 @@
 /* eslint-disable no-console */
 
 import express from 'express';
+import compression from 'compression';
 
-import { partialRender, fullRender, errorHandler } from './middlewares';
-import paths from './paths';
+import webConfig from '../webpack/configs/web';
+import proxyRoutes from './router/proxies.dev';
+import mainRoutes from './router/main.dev';
+import { envs } from '../utils/envs';
+import { paths } from '../utils/paths';
 
 const app = express();
-app.use('/assets', express.static(paths.dist.web));
+const publicPath = webConfig.output.publicPath.toString();
+
+app.use(compression());
+app.use(publicPath, express.static(paths.dist.web));
+app.use('/react/static', express.static(paths.static));
+app.use(proxyRoutes);
+
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use('*', (_req, res, next) => {
@@ -15,17 +25,8 @@ app.use('*', (_req, res, next) => {
   next();
 });
 
-// Мониторинг доступности для внешних сервисов
-app.get('/health', (_req, res) => {
-  res.header('Content-type', 'text/plain; charset=utf-8').send('Eva is running');
-});
+app.use(mainRoutes);
 
-// Разные типы рендера страниц
-app.post('/render', partialRender);
-app.post('/full-render', fullRender);
-
-app.use(errorHandler);
-
-app.listen(4444, () => {
-  console.log('Eva listening on port 4444!');
+app.listen(envs.port, () => {
+  console.log(`Eva listening on port ${envs.port}!`);
 });

@@ -4,8 +4,8 @@ import { renderToString } from 'react-dom/server';
 import { ChunkExtractor } from '@loadable/server';
 
 import DataProvider from '../../client/Contexts/Data/DataProvider';
-import paths from '../paths';
 import createScriptTagState from './createScriptTagState';
+import { paths } from '../../utils/paths';
 
 const nodeStats = path.resolve(paths.dist.node, 'loadable-stats.json');
 const webStats = path.resolve(paths.dist.web, 'loadable-stats.json');

@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
+
+export interface DataContextValue {
+  body: unknown;
+  update: Dispatch<unknown>;
+}
 
 const contextSymbol =
   typeof Symbol === 'function' && Symbol.for ? Symbol.for('__DATA_CONTEXT__') : '__DATA_CONTEXT__';
@@ -15,7 +20,7 @@ export function resetDataContext(): void {
   });
 }
 
-export function getDataContext(): React.Context<any> {
+export function getDataContext(): React.Context<DataContextValue> {
   if (!React[contextSymbol]) {
     resetDataContext();
   }

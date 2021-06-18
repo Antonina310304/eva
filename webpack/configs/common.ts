@@ -1,8 +1,8 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 
-import paths from '../paths';
-import envs from '../envs';
+import { paths } from '../../utils/paths';
+import { envs } from '../../utils/envs';
 
 const commonConfig: Configuration = {
   mode: envs.mode,

@@ -24,7 +24,7 @@
     "lint:css:fix": "stylelint **.css --fix",
     "code-style": "prettier --check .",
     "code-style:fix": "prettier --write .",
-    "type-check": "eslint --ext '.js, .jsx, .ts, .tsx' ./client/* ./server/* ./webpack/*"
+    "type-check": "eslint --ext '.js, .jsx, .ts, .tsx' ./client/* ./server/* ./webpack/configs/* ./webpack/loaders/* ./utils/*"
   },
   "author": "Yury Kundin",
   "license": "ISC",
@@ -37,6 +37,7 @@
     "@u-wave/react-vimeo": "^0.9.0",
     "abortcontroller-polyfill": "^1.4.0",
     "classnames": "^2.3.1",
+    "compression": "^1.7.4",
     "core-js": "^3.6.5",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
@@ -71,6 +72,7 @@
     "@loadable/webpack-plugin": "^5.14.2",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
+    "@types/compression": "^1.7.0",
     "@types/css-minimizer-webpack-plugin": "^1.1.1",
     "@types/express": "^4.17.8",
     "@types/express-http-proxy": "^1.6.1",

@@ -1,8 +1,12 @@
-import React, { createElement, useState } from 'react';
+import React, { FC, createElement, useState } from 'react';
 
 import { getDataContext } from './DataContext';
 
-const DataProvider = ({ body, children }) => {
+export interface DataProviderProps {
+  body: unknown;
+}
+
+const DataProvider: FC<DataProviderProps> = ({ body, children }) => {
   const DataContext = getDataContext();
   const [state, setState] = useState(body);
 
