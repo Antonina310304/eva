@@ -90,18 +90,6 @@
   border-radius: 5px;
 }
 
-.gallery {
-  overflow: hidden;
-}
-
-.image {
-  display: inline-block;
-  width: 100%;
-
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
 .actions {
   position: absolute;
   top: var(--space-n);

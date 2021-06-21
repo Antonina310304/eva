@@ -1,5 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
-import loadable from '@loadable/component';
+import React, { FC, HTMLAttributes, useState, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import Like from '@Components/Like';
@@ -16,11 +15,9 @@ import Parameter from './elements/Parameter';
 import Sizes from './elements/Sizes';
 import FastView from './elements/FastView';
 import Fabrics from './elements/Fabrics';
-import transformImage from './transformImage';
+import Preview from './elements/Preview';
 import fabricImages from './fabrics';
 import styles from './ProductCard.module.css';
-
-const Gallery = loadable(() => import('@UI/Gallery'));
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -52,14 +49,13 @@ const fabrics = [
 const ProductCard: FC<ProductCardProps> = (props) => {
   const { className, product, view, ...restProps } = props;
   const images = product.images || [];
-  const [firstImage] = images;
   const hasGallery = images.length > 1;
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
-  const [slide, setSlide] = useState(0);
   const { isOnlyDesktop } = useMedias();
+  const [slide, setSlide] = useState(0);
 
-  const handleChangeCurrent = useCallback(({ current }) => {
+  const handleChangeSlide = useCallback((current: number) => {
     setSlide(current);
   }, []);
 
@@ -76,24 +72,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
       <div className={styles.container}>
         <div className={styles.containerImage}>
-          {hasGallery ? (
-            <Gallery className={styles.gallery} onChangeCurrent={handleChangeCurrent}>
-              {images.map((image, index) => (
-                <div
-                  key={index}
-                  className={styles.image}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: transformImage(image.src, '#f5f3f1') }}
-                />
-              ))}
-            </Gallery>
-          ) : (
-            <div
-              className={styles.image}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: transformImage(firstImage.src, '#f5f3f1') }}
-            />
-          )}
+          <Preview images={product.images} onChangeSlide={handleChangeSlide} />
 
           <div className={styles.actions}>
             <FastView className={cn(styles.action, styles.fastView)} />

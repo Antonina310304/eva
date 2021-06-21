@@ -1,0 +1,14 @@
+.preview {
+}
+
+.gallery {
+  overflow: hidden;
+}
+
+.image {
+  display: inline-block;
+  width: 100%;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
