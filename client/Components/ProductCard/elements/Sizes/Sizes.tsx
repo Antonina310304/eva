@@ -14,7 +14,7 @@ export interface SizesProps extends HTMLAttributes<HTMLDivElement> {
   sizes: Size[];
 }
 
-const Tag: FC<SizesProps> = (props) => {
+const Sizes: FC<SizesProps> = (props) => {
   const { className, sizes, ...restProps } = props;
 
   return (
@@ -36,4 +36,4 @@ const Tag: FC<SizesProps> = (props) => {
   );
 };
 
-export default memo(Tag);
+export default memo(Sizes);
