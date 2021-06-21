@@ -1,4 +1,5 @@
 import { ChunkExtractor } from '@loadable/server';
+import serialize from 'serialize-javascript';
 
 export interface Params {
   html: string;
@@ -19,7 +20,7 @@ export default ({ html, state, webExtractor }: Params): string => {
     <body>
       <div id="root">${html}</div>
       <script>
-        window.__SERVER_STATE__=${JSON.stringify(state)}
+        window.__SERVER_STATE__=${serialize(state, { isJSON: true })}
       </script>
       ${webExtractor.getScriptTags()}
     </body>
