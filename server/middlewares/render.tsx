@@ -8,7 +8,7 @@ import { StaticRouter } from 'react-router-dom';
 import { RequestHandler } from 'express';
 
 import { paths } from '../../utils/paths';
-import renderPage from './renderPage';
+import { renderPage } from '../helpers';
 
 const render: RequestHandler = async (req, res) => {
   const routerContext: StaticRouterContext = {};

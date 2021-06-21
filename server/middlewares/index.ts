@@ -1,2 +1,2 @@
 export { default as errorHandler } from './errorHandler';
-export default null;
+export { default as render } from './render';

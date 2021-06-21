@@ -1,6 +1,6 @@
 import express from 'express';
 
-import render from '../helpers/render';
+import { render } from '../middlewares';
 
 const router = express.Router();
 
