@@ -6,22 +6,14 @@
 }
 
 .list {
-  display: grid;
-  grid-gap: var(--gap-v) var(--gap-h);
-  grid-template-columns: repeat(var(--columns), 1fr);
+  display: block;
+  margin-bottom: calc(var(--gap-v) * -1);
 }
 
 .item {
-  min-width: 0;
-}
-
-.item.landscape {
-  &:before {
-    display: block;
-    padding-top: 32%;
-
-    content: '';
-  }
+  display: inline-block;
+  width: calc((100% / var(--columns)) - var(--gap-h));
+  padding: 0 calc(var(--gap-h) / 2) var(--gap-v);
 }
 
 .moreWrapper {

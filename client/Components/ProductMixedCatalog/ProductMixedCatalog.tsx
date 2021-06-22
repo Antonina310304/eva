@@ -20,20 +20,11 @@ const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
       <List
         className={styles.list}
         items={products}
-        renderChild={(product: ProductData) => {
-          const [firstImage] = product.images || [];
-
-          return (
-            <div
-              className={cn(styles.item, {
-                [styles.landscape]: firstImage?.orientation === 'landscape',
-                [styles.portrait]: firstImage?.orientation === 'portrait',
-              })}
-            >
-              <ProductCard product={product} view='mini' />
-            </div>
-          );
-        }}
+        renderChild={(product: ProductData) => (
+          <div className={cn(styles.item)}>
+            <ProductCard product={product} view='mini' />
+          </div>
+        )}
       />
 
       <div className={styles.moreWrapper}>

@@ -114,6 +114,13 @@
   margin-top: var(--space-n);
 }
 
+.name {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .price {
   display: flex;
   align-items: baseline;
