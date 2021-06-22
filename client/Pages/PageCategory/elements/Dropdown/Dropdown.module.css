@@ -1,0 +1,23 @@
+.dropdown {
+}
+
+.containerLabel {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.label {
+  composes: n from 'sizes';
+}
+
+.arrow {
+  width: 10px;
+  height: 6px;
+  margin-left: var(--space-xxs);
+
+  background-image: url('./arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

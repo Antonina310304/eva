@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 import useModals from '@Hooks/useModals';
+import Dropdown from '../Dropdown';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
@@ -51,7 +52,10 @@ const Filters: FC<FiltersProps> = (props) => {
         <div className={styles.count}>Найдено 1440</div>
       </div>
 
-      <div className={styles.groups}>Groups</div>
+      <div className={styles.labels}>
+        <Dropdown className={styles.label} label='По группам' />
+        <Dropdown className={styles.label} label='Выводить сначала' />
+      </div>
     </div>
   );
 };
