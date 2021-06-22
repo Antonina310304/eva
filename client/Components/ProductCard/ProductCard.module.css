@@ -208,6 +208,10 @@
 }
 
 @media (--mobile-m) {
+  .productCard.viewMini .info {
+    padding: 0 var(--space-s);
+  }
+
   .tags,
   .box,
   .additionalInfo {
@@ -216,6 +220,5 @@
 
   .info {
     margin-top: var(--space-xs);
-    padding: 0 var(--space-s);
   }
 }
