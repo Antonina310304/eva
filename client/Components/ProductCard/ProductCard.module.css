@@ -110,12 +110,8 @@
   pointer-events: none;
 }
 
-.preview {
-  margin-bottom: var(--space-n);
-}
-
 .info {
-  margin-top: var(--space-xs);
+  margin-top: var(--space-n);
 }
 
 .price {
@@ -216,5 +212,10 @@
   .box,
   .additionalInfo {
     display: none;
+  }
+
+  .info {
+    margin-top: var(--space-xs);
+    padding: 0 var(--space-s);
   }
 }
