@@ -26,7 +26,12 @@ const Items: FC<ItemsProps> = (props) => {
   const { isMobileM } = useMedias();
 
   return isMobileM ? (
-    <Gallery {...restProps} slideIndex={slide} onChangeCurrent={onChange}>
+    <Gallery
+      {...restProps}
+      slideIndex={slide}
+      cnViewport={styles.galleryViewport}
+      onChangeCurrent={onChange}
+    >
       {children}
     </Gallery>
   ) : (

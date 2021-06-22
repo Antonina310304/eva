@@ -21,6 +21,7 @@ type GetSlideRef = (index: number) => RefCallback<HTMLElement>;
 export interface GalleryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onDragStart' | 'onDragEnd'> {
   className?: string;
+  cnViewport?: string;
   initialSlideIndex?: number;
   slideIndex?: number;
   gap?: number;
@@ -76,6 +77,7 @@ const initialState: InitialState = {
 const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const {
     className,
+    cnViewport,
     initialSlideIndex,
     slideIndex,
     gap,
@@ -424,7 +426,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   return (
     <div {...restProps} className={cn(styles.gallery, className)} ref={refContainer}>
       <Touch
-        className={styles.viewport}
+        className={cn(styles.viewport, cnViewport)}
         ref={refViewport}
         onStartX={handleStartX}
         onMoveX={handleMoveX}

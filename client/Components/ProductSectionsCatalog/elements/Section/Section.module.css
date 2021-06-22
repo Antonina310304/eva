@@ -62,9 +62,13 @@
     margin-left: var(--space-xxs);
   }
 
+  .galleryViewport {
+    padding: 0 var(--space-xxs);
+  }
+
   .items {
     display: block;
-    margin: 0 var(--space-xs-neg) var(--space-xb);
+    margin: 0 var(--space-s-neg) var(--space-xb);
     overflow: hidden;
   }
 
