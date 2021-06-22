@@ -1,4 +1,4 @@
-import { HotModuleReplacementPlugin, Configuration } from 'webpack';
+import { HotModuleReplacementPlugin, DefinePlugin, Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -86,6 +86,10 @@ const webConfig: Configuration = merge(commonConfig, {
         filename: '[name].[contenthash].css',
         chunkFilename: '[name].[contenthash].css',
       }),
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(envs.mode),
+      'process.env.DOMAIN': JSON.stringify(envs.domain),
+    }),
     new CleanWebpackPlugin(),
     new LoadablePlugin() as any,
   ].filter(Boolean),
