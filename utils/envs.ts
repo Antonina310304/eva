@@ -1,3 +1,5 @@
+import './setupEnvs';
+
 export type EnvMode = 'production' | 'development';
 
 const mode = process.env.NODE_ENV as EnvMode;

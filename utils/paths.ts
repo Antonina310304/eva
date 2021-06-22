@@ -17,7 +17,10 @@ export const paths = {
     web: resolveAppPath('./client/web.jsx'),
     node: resolveAppPath('./client/node.jsx'),
   },
-  envFile: resolveAppPath('.env'),
+  env: {
+    main: resolveAppPath('.env'),
+    local: resolveAppPath('.env.local'),
+  },
   static: resolveAppPath('./static'),
   breakpoints: resolveAppPath('./client/UI/breakpoints.json'),
 };
