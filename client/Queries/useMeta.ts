@@ -1,8 +1,8 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryResult } from 'react-query';
 
 import { ApiMeta } from '@Api/Meta';
 
-const useMeta = () => {
+const useMeta = (): UseQueryResult => {
   return useQuery('meta', () => ApiMeta.fetch(), {
     retryOnMount: false,
     refetchOnMount: false,
