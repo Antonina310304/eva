@@ -215,8 +215,14 @@
 }
 
 @media (--mobile-m) {
-  .productCard.viewMini .info {
-    padding: 0 var(--space-s);
+  .productCard.viewMini {
+    .info {
+      padding: 0 var(--space-s);
+    }
+
+    .actualPrice {
+      margin-left: 0;
+    }
   }
 
   .tags,
