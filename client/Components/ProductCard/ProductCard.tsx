@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useState, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Like from '@Components/Like';
@@ -7,7 +7,6 @@ import Discount from '@UI/Discount';
 import List from '@UI/List';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
-import ProgressBar from '@UI/ProgressBar';
 import useMedias from '@Hooks/useMedias';
 import { ProductData, ProductParameterGroupData, ProductTagData } from '@Types/Product';
 import Tag from './elements/Tag';
@@ -48,16 +47,9 @@ const fabrics = [
 
 const ProductCard: FC<ProductCardProps> = (props) => {
   const { className, product, view, ...restProps } = props;
-  const images = product.images || [];
-  const hasGallery = images.length > 1;
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
   const { isOnlyDesktop } = useMedias();
-  const [slide, setSlide] = useState(0);
-
-  const handleChangeSlide = useCallback((current: number) => {
-    setSlide(current);
-  }, []);
 
   return (
     <div
@@ -72,7 +64,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
       <div className={styles.container}>
         <div className={styles.containerImage}>
-          <Preview images={product.images} onChangeSlide={handleChangeSlide} />
+          <Preview className={styles.preview} images={product.images} />
 
           <div className={styles.actions}>
             <FastView className={cn(styles.action, styles.fastView)} />
@@ -87,16 +79,6 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             />
           )}
         </div>
-
-        {hasGallery ? (
-          <ProgressBar
-            className={styles.progressBar}
-            currentItem={slide}
-            totalItems={images.length}
-          />
-        ) : (
-          <div className={styles.progressBar} />
-        )}
 
         <div className={styles.info}>
           <div className={styles.name}>{product.name}</div>

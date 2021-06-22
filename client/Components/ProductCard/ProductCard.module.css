@@ -85,9 +85,6 @@
 
 .containerImage {
   position: relative;
-
-  background-color: var(--color-light-gray);
-  border-radius: 5px;
 }
 
 .actions {
@@ -113,10 +110,8 @@
   pointer-events: none;
 }
 
-.progressBar {
-  margin-top: var(--space-xs);
-
-  opacity: 0;
+.preview {
+  margin-bottom: var(--space-n);
 }
 
 .info {
@@ -212,10 +207,6 @@
       opacity: 1;
 
       pointer-events: all;
-    }
-
-    .progressBar {
-      opacity: 1;
     }
   }
 }
