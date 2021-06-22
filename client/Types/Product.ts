@@ -1,5 +1,6 @@
 export interface ProductImageData {
   src: string;
+  orientation: 'landscape' | 'portrait';
 }
 
 export interface ProductPriceData {

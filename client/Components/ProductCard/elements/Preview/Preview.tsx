@@ -4,16 +4,13 @@ import loadable from '@loadable/component';
 
 import useMedias from '@Hooks/useMedias';
 import Image from '@UI/Image';
+import { ProductImageData } from '@Types/Product';
 import ImageAreas from '../ImageAreas';
 import styles from './Preview.module.css';
 
-export interface ImageData {
-  src: string;
-}
-
 export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  images?: ImageData[];
+  images?: ProductImageData[];
   onChangeSlide?: (slide: number) => void;
 }
 
@@ -36,10 +33,24 @@ const Preview: FC<PreviewProps> = (props) => {
   );
 
   return (
-    <div {...restProps} className={cn(styles.preview, className)}>
+    <div
+      {...restProps}
+      className={cn(
+        styles.preview,
+        {
+          [styles.landscape]: firstImage.orientation === 'landscape',
+          [styles.portrait]: firstImage.orientation === 'portrait',
+        },
+        className,
+      )}
+    >
       {isOnlyDesktop ? (
         <div className={styles.content}>
-          <ImageAreas images={images} />
+          {hasGallery ? (
+            <ImageAreas images={images} />
+          ) : (
+            <Image className={styles.image} src={firstImage.src} />
+          )}
         </div>
       ) : (
         <div className={styles.content}>

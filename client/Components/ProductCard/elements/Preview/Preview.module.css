@@ -1,13 +1,22 @@
 .preview {
+  --proportion: 68%;
+
   position: relative;
 
-  &:before {
+  &:after {
     display: block;
     width: 100%;
-    padding-bottom: 68%;
+    padding-bottom: var(--proportion);
 
     content: '';
   }
+}
+
+.preview.landscape {
+  --proportion: 68%;
+}
+.preview.portrait {
+  --proportion: 100%;
 }
 
 .content {
@@ -35,8 +44,11 @@
   display: inline-block;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   background-repeat: no-repeat;
   background-size: cover;
+
+  border-radius: 5px;
   filter: brightness(0.94);
 }

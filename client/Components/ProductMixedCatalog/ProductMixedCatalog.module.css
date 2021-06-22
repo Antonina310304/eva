@@ -15,6 +15,15 @@
   min-width: 0;
 }
 
+.item.landscape {
+  &:before {
+    display: block;
+    padding-top: 32%;
+
+    content: '';
+  }
+}
+
 .moreWrapper {
   display: flex;
   justify-content: center;
