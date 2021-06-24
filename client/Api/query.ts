@@ -1,9 +1,9 @@
 import fetch from 'cross-fetch';
 
-const domain = process.env.DOMAIN;
+const backend = process.env.BACKEND_ORIGIN;
 
 export default async <T>(url: string, opts?: RequestInit): Promise<T> => {
-  const fullUrl = `${domain}${url}`;
+  const fullUrl = `${backend}${url}`;
   const options = opts || {};
   const headers = options.headers || {};
   const fullOpts = {

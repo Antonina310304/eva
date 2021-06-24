@@ -5,7 +5,7 @@ export interface Params {
 }
 
 export default async ({ slug }: Params): Promise<any> => {
-  const url = `/api/category/${slug}`;
+  const url = `/category/${slug}`;
   const res = await Api.query<any>(url);
 
   return res.body.data;
