@@ -29,13 +29,13 @@
 
 @media (--desktop-m) {
   .catalog {
-    --columns: 3;
     --gap-v: var(--space-b);
   }
 }
 
 @media (--desktop) {
   .catalog {
+    --columns: 3;
     --gap-h: var(--space-n);
   }
 }

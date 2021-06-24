@@ -37,7 +37,7 @@
   max-width: 260px;
 }
 
-@media (--desktop-m) {
+@media (--desktop) {
   .catalog {
     --columns: 3;
   }
