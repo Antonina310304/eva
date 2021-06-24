@@ -7,7 +7,6 @@
 }
 
 .productCard.viewMini {
-  .labelPrice,
   .discount {
     display: none;
   }
@@ -218,6 +217,10 @@
   .productCard.viewMini {
     .info {
       padding: 0 var(--space-s);
+    }
+
+    .labelPrice {
+      display: none;
     }
 
     .actualPrice {
