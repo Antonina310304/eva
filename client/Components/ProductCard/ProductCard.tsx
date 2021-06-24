@@ -34,15 +34,6 @@ const fabrics = [
   {
     image: fabricImages[2],
   },
-  {
-    image: fabricImages[0],
-  },
-  {
-    image: fabricImages[1],
-  },
-  {
-    image: fabricImages[2],
-  },
 ];
 
 const ProductCard: FC<ProductCardProps> = (props) => {
@@ -92,24 +83,24 @@ const ProductCard: FC<ProductCardProps> = (props) => {
               <Discount className={styles.discount}>{product.price.discount}</Discount>
             )}
           </div>
+
+          <div className={styles.fabricsWrapper}>
+            <Fabrics
+              className={styles.fabrics}
+              fabrics={fabrics}
+              defaultSelectedFabric={fabrics[0]}
+            />
+            <div className={styles.fabricsMore}>
+              {`+150 `}
+              <Link className={styles.openConstructor} view='secondary' to='#'>
+                в конструкторе
+              </Link>
+            </div>
+          </div>
         </div>
 
         {isOnlyDesktop && (
           <div className={styles.additionalInfo}>
-            <div className={styles.fabricsWrapper}>
-              <Fabrics
-                className={styles.fabrics}
-                fabrics={fabrics}
-                defaultSelectedFabric={fabrics[0]}
-              />
-              <div className={styles.fabricsMore}>
-                {`+150 тканей в `}
-                <Link view='secondary' to='#'>
-                  конструкторе
-                </Link>
-              </div>
-            </div>
-
             {product.parameterGroups?.length > 0 && (
               <List
                 className={styles.parameterGroups}

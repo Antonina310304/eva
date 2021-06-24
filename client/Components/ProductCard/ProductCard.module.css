@@ -186,11 +186,25 @@
   margin-top: var(--space-m);
 }
 
+.fabricsWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-m);
+}
+
 .fabricsMore {
   composes: darkGray from 'colors';
   composes: n from 'sizes';
 
-  margin-top: var(--space-xs);
+  display: flex;
+  margin-left: var(--space-xs);
+
+  white-space: nowrap;
+}
+
+.openConstructor {
+  display: none;
+  margin-left: var(--space-xxs);
 }
 
 @media (--only-desktop) {
@@ -210,6 +224,10 @@
 
       pointer-events: all;
     }
+
+    .openConstructor {
+      display: block;
+    }
   }
 }
 
@@ -225,6 +243,10 @@
 
     .actualPrice {
       margin-left: 0;
+    }
+
+    .fabricsWrapper {
+      margin-top: var(--space-xs);
     }
   }
 
