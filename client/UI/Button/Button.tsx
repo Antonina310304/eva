@@ -8,7 +8,7 @@ export interface SizesProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   wide?: boolean;
   before?: ReactChild;
-  theme?: 'primary' | 'blank' | 'dirty';
+  theme?: 'primary' | 'secondary' | 'blank' | 'dirty';
   view?: 'main' | 'rounded';
 }
 
@@ -34,6 +34,7 @@ const Button: FC<SizesProps> = (props) => {
           [styles.viewMain]: view === 'main',
           [styles.viewRounded]: view === 'rounded',
           [styles.themePrimary]: theme === 'primary',
+          [styles.themeSecondary]: theme === 'secondary',
           [styles.themeBlank]: theme === 'blank',
           [styles.themeDirty]: theme === 'dirty',
         },

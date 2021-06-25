@@ -30,6 +30,30 @@
   background: var(--color-grafit);
 }
 
+.button.themeSecondary {
+  color: var(--color-black);
+
+  background: var(--color-light-gray);
+  border: 1px solid var(--color-light-gray);
+  outline: none;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: var(--color-medium-gray);
+    border-color: var(--color-medium-gray);
+  }
+
+  &:focus {
+    border-color: var(--color-black);
+  }
+
+  &:active {
+    background: var(--color-dark-gray);
+    border-color: var(--color-black);
+  }
+}
+
 .button.themeBlank {
   color: var(--color-black);
 
