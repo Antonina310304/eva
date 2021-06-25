@@ -14,6 +14,7 @@ export interface Data {
 
 const PageIndex = loadable(() => import('@Pages/PageIndex'));
 const PageCategory = loadable(() => import('@Pages/PageCategory'));
+const PageProduct = loadable(() => import('@Pages/PageProduct'));
 const TemplateMain = loadable(() => import('@Templates/TemplateMain'));
 
 const App: FC = () => {
@@ -29,6 +30,12 @@ const App: FC = () => {
         <Route exact path='/category/:slug'>
           <TemplateMain>
             <PageCategory />
+          </TemplateMain>
+        </Route>
+
+        <Route exact path='/product/:slug'>
+          <TemplateMain>
+            <PageProduct />
           </TemplateMain>
         </Route>
       </Switch>
