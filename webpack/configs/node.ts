@@ -7,7 +7,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import commonConfig from './common';
 import { babelNodeLoader, cssModulesLoader, postcssLoader } from '../loaders';
-import paths from '../paths';
+import { paths } from '../../utils/paths';
 
 const nodeConfig: Configuration = merge(commonConfig, {
   name: 'node',
@@ -36,7 +36,7 @@ const nodeConfig: Configuration = merge(commonConfig, {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif|woff|woff2)$/,
+        test: /\.(png|svg|jpg|gif|eot|ttf|woff|woff2|otf)$/,
         exclude: /node_modules/,
         use: 'null-loader',
       },
@@ -51,7 +51,7 @@ const nodeConfig: Configuration = merge(commonConfig, {
     libraryTarget: 'commonjs2',
     assetModuleFilename: '[hash][ext]',
   },
-  externals: ['@loadable/component', nodeExternals() as any],
+  externals: ['@loadable/component', nodeExternals()],
   plugins: [new CleanWebpackPlugin(), new LoadablePlugin() as any, new MiniCssExtractPlugin()],
 });
 

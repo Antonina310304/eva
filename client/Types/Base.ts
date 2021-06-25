@@ -1,4 +1,4 @@
-export type PageName = 'Index' | 'Error';
+export type PageName = 'Index' | 'Category' | 'Error';
 
 export type CountryData = 'RUS' | 'BLR';
 

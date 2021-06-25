@@ -1,0 +1,100 @@
+@font-face {
+  font-weight: 100;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-Thin.eot);
+  src: url(./CloserText-Thin.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-Thin.ttf) format('truetype'), url(./CloserText-Thin.woff) format('woff'),
+    url(./CloserText-Thin.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 200;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-ExtraLight.eot);
+  src: url(./CloserText-ExtraLight.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-ExtraLight.ttf) format('truetype'),
+    url(./CloserText-ExtraLight.woff) format('woff'),
+    url(./CloserText-ExtraLight.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-Light.eot);
+  src: url(./CloserText-Light.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-Light.ttf) format('truetype'), url(./CloserText-Light.woff) format('woff'),
+    url(./CloserText-Light.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-Regular.eot);
+  src: url(./CloserText-Regular.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-Regular.ttf) format('truetype'), url(./CloserText-Regular.woff) format('woff'),
+    url(./CloserText-Regular.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-Medium.eot);
+  src: url(./CloserText-Medium.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-Medium.ttf) format('truetype'), url(./CloserText-Medium.woff) format('woff'),
+    url(./CloserText-Medium.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-SemiBold.eot);
+  src: url(./CloserText-SemiBold.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-SemiBold.ttf) format('truetype'),
+    url(./CloserText-SemiBold.woff) format('woff'), url(./CloserText-SemiBold.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-Bold.eot);
+  src: url(./CloserText-Bold.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-Bold.ttf) format('truetype'), url(./CloserText-Bold.woff) format('woff'),
+    url(./CloserText-Bold.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-ExtraBold.eot);
+  src: url(./CloserText-ExtraBold.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-ExtraBold.ttf) format('truetype'),
+    url(./CloserText-ExtraBold.woff2) format('woff2'),
+    url(./CloserText-ExtraBold.woff) format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 900;
+  font-family: CloserText;
+  font-style: normal;
+  src: url(./CloserText-Black.eot);
+  src: url(./CloserText-Black.eot?#iefix) format('embedded-opentype'),
+    url(./CloserText-Black.ttf) format('truetype'), url(./CloserText-Black.woff) format('woff'),
+    url(./CloserText-Black.woff2) format('woff2');
+  font-display: swap;
+}

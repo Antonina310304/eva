@@ -1,8 +1,8 @@
-export type ModalId = 'Info';
+export type ModalId = 'Info' | 'Filters';
 
 export interface Modal {
   id: ModalId;
-  data: any;
+  data: unknown;
   visible?: boolean;
 }
 
@@ -15,10 +15,10 @@ export interface ModalsState {
 }
 
 export interface ModalsMethods {
-  openModal: (id: ModalId, data?: any) => void;
+  openModal: (id: ModalId, data?: unknown) => void;
   closeModal: (id: ModalId) => void;
   closeAllModals: () => void;
-  getData: (id: ModalId) => any;
+  getData: (id: ModalId) => unknown;
   isVisible: (id: ModalId) => boolean;
   isAnimating: (id: ModalId) => boolean;
 }

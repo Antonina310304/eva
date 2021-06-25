@@ -1,0 +1,18 @@
+.popularLinks {
+  margin-bottom: var(--space-xxs-neg);
+}
+
+.label {
+  margin-right: var(--space-n);
+
+  white-space: nowrap;
+}
+
+.link {
+  margin-right: var(--space-m);
+  margin-bottom: var(--space-xxs);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

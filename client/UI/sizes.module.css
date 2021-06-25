@@ -1,0 +1,82 @@
+:root {
+  --size-xxs: 9px;
+  --size-xs: 12px;
+  --size-s: 14px;
+  --size-n: 16px;
+  --size-m: 18px;
+  --size-l: 22px;
+  --size-xl: 25px;
+  --size-xxl: 30px;
+  --size-b: 35px;
+  --size-xb: 44px;
+  --size-xxb: 50px;
+}
+
+:root {
+  --lh-xxs: 10px;
+  --lh-xs: 15px;
+  --lh-s: 18px;
+  --lh-n: 24px;
+  --lh-m: 27px;
+  --lh-l: 33px;
+  --lh-xl: 30px;
+  --lh-xxl: 40px;
+  --lh-b: 46px;
+  --lh-xb: 58px;
+  --lh-xxb: 79px;
+}
+
+.xxs {
+  font-size: var(--size-xxs);
+  line-height: var(--lh-xxs);
+}
+
+.xs {
+  font-size: var(--size-xs);
+  line-height: var(--lh-xs);
+}
+
+.s {
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+.n {
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.m {
+  font-size: var(--size-m);
+  line-height: var(--lh-m);
+}
+
+.l {
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
+}
+
+.xl {
+  font-size: var(--size-xl);
+  line-height: var(--lh-xl);
+}
+
+.xxl {
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.b {
+  font-size: var(--size-b);
+  line-height: var(--lh-b);
+}
+
+.xb {
+  font-size: var(--size-xb);
+  line-height: var(--lh-xb);
+}
+
+.xxb {
+  font-size: var(--size-xxb);
+  line-height: var(--lh-xxb);
+}

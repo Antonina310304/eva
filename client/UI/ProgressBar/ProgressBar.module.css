@@ -1,0 +1,18 @@
+.progress {
+  position: relative;
+
+  height: 1px;
+
+  background: var(--color-medium-gray);
+}
+
+.die {
+  position: absolute;
+  top: 0;
+
+  height: 100%;
+
+  background: var(--color-black);
+
+  transition: left 0.2s;
+}

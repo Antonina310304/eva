@@ -1,0 +1,41 @@
+.rangeSlider {
+  --range-height: 13px;
+  --line-height: 1px;
+
+  position: relative;
+
+  height: var(--range-height);
+}
+
+.line {
+  position: relative;
+  top: calc((var(--range-height) - var(--line-height)) / 2);
+  z-index: 1;
+
+  height: var(--line-height);
+
+  background: var(--color-medium-gray);
+}
+
+.line.active {
+  position: absolute;
+  z-index: 3;
+
+  background: var(--color-grafit);
+}
+
+.droplets {
+  position: absolute;
+  top: 0;
+  right: calc(var(--range-height) / 2);
+  bottom: 0;
+  left: calc(var(--range-height) / 2);
+  z-index: 4;
+}
+
+@media (--mobile) {
+  .range {
+    --range-height: 30px;
+    --line-height: 7px;
+  }
+}

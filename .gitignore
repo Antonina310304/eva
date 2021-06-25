@@ -3,4 +3,6 @@ dist
 build
 .idea
 .eslintcache
+.gitignore
+.env.local
 coverage

@@ -1,0 +1,65 @@
+@font-face {
+  font-weight: 100;
+  font-family: CeraPro;
+  font-style: normal;
+  src: url(./CeraPro-Thin.eot);
+  src: url(./CeraPro-Thin.eot?#iefix) format('embedded-opentype'),
+    url(./CeraPro-Thin.ttf) format('truetype'), url(./CeraPro-Thin.woff) format('woff'),
+    url(./CeraPro-Thin.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: CeraPro;
+  font-style: normal;
+  src: url(./CeraPro-Light.eot);
+  src: url(./CeraPro-Light.eot?#iefix) format('embedded-opentype'),
+    url(./CeraPro-Light.ttf) format('truetype'), url(./CeraPro-Light.woff) format('woff'),
+    url(./CeraPro-Light.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: CeraPro;
+  font-style: normal;
+  src: url(./CeraPro-Regular.eot);
+  src: url(./CeraPro-Regular.eot?#iefix) format('embedded-opentype'),
+    url(./CeraPro-Regular.ttf) format('truetype'), url(./CeraPro-Regular.woff) format('woff'),
+    url(./CeraPro-Regular.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: CeraPro;
+  font-style: normal;
+  src: url(./CeraPro-Medium.eot);
+  src: url(./CeraPro-Medium.eot?#iefix) format('embedded-opentype'),
+    url(./CeraPro-Medium.ttf) format('truetype'), url(./CeraPro-Medium.woff) format('woff'),
+    url(./CeraPro-Medium.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: CeraPro;
+  font-style: normal;
+  src: url(./CeraPro-Bold.eot);
+  src: url(./CeraPro-Bold.eot?#iefix) format('embedded-opentype'),
+    url(./CeraPro-Bold.ttf) format('truetype'), url(./CeraPro-Bold.woff) format('woff'),
+    url(./CeraPro-Bold.woff2) format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 900;
+  font-family: CeraPro;
+  font-style: normal;
+  src: url(./CeraPro-Black.eot);
+  src: url(./CeraPro-Black.eot?#iefix) format('embedded-opentype'),
+    url(./CeraPro-Black.ttf) format('truetype'), url(./CeraPro-Black.woff) format('woff'),
+    url(./CeraPro-Black.woff2) format('woff2');
+  font-display: swap;
+}

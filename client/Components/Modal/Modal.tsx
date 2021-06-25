@@ -1,7 +1,5 @@
-import React, { useCallback, memo, HTMLAttributes, FC } from 'react';
+import React, { useCallback, useRef, memo, HTMLAttributes, FC, MouseEvent } from 'react';
 import cn from 'classnames';
-
-import IconClose from '@divanru/ts-ui/IconClose';
 
 import useModals from '@Hooks/useModals';
 import KeyboardHandler from '@Components/KeyboardHandler';
@@ -11,34 +9,42 @@ import styles from './Modal.module.css';
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   id: ModalId;
-  needClose?: boolean;
   visible?: boolean;
+  view?: 'default' | 'slide-right';
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
 }
 
 const Modal: FC<ModalProps> = (props) => {
-  const { className, id, needClose = true, visible, children, onClose } = props;
-  const [{ animatings }] = useModals();
+  const { className, id, children, view = 'default', onClose } = props;
+  const [{ animatings }, { closeModal }] = useModals();
+  const refWrapper = useRef();
 
   const handleClose = useCallback(
-    (e) => {
-      if (visible && onClose) onClose(e);
+    (e: MouseEvent<HTMLDivElement>) => {
+      if (e.target !== refWrapper.current) return;
+
+      closeModal(id);
+      if (onClose) onClose(e);
     },
-    [visible, onClose],
+    [closeModal, id, onClose],
   );
 
   return (
     <KeyboardHandler onEscape={onClose}>
-      <div className={cn(styles.modal, { [styles.closes]: animatings.includes(id) }, className)}>
-        <div className={styles.wrapper}>
+      <div
+        className={cn(
+          styles.modal,
+          {
+            [styles.closes]: animatings.includes(id),
+            [styles.viewDefault]: view === 'default',
+            [styles.viewSlideRight]: view === 'slide-right',
+          },
+          className,
+        )}
+      >
+        <div className={styles.wrapper} ref={refWrapper} onClick={handleClose}>
           <div className={styles.wrapperContent}>
             <div className={styles.content}>{children}</div>
-
-            {needClose && (
-              <div className={styles.close} onClick={handleClose}>
-                <IconClose className={styles.closeIcon} />
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -1,0 +1,7 @@
+:root {
+  --shadow-popup: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup {
+  box-shadow: var(--shadow-popup);
+}

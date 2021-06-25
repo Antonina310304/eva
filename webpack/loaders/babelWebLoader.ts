@@ -1,5 +1,6 @@
 import { RuleSetRule } from 'webpack';
-import envs from '../envs';
+
+import { envs } from '../../utils/envs';
 
 const babelWebLoader: RuleSetRule = {
   loader: 'babel-loader',
@@ -20,7 +21,7 @@ const babelWebLoader: RuleSetRule = {
         {
           useBuiltIns: 'entry',
           corejs: 3,
-          modules: 'umd',
+          modules: 'auto',
         },
       ],
     ],

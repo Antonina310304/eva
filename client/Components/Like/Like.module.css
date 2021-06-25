@@ -1,0 +1,9 @@
+.like {
+  width: 21px;
+  height: 19px;
+
+  background-image: url('./icon.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}

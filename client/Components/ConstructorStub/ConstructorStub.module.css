@@ -1,0 +1,22 @@
+.constructorStub {
+  cursor: pointer;
+}
+
+.icon {
+  width: 100%;
+  padding-bottom: 81%;
+
+  background-image: url('./icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  margin-top: var(--space-l);
+}

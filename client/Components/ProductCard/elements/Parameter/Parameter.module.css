@@ -1,0 +1,10 @@
+.parameter {
+}
+
+.title {
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-xxs);
+
+  font-weight: 500;
+}

@@ -1,5 +1,4 @@
-import path from 'path';
-import { HotModuleReplacementPlugin, Configuration } from 'webpack';
+import { HotModuleReplacementPlugin, DefinePlugin, Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -9,8 +8,8 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 
 import commonConfig from './common';
 import { babelWebLoader, cssModulesLoader, cssLoader, postcssLoader } from '../loaders';
-import envs from '../envs';
-import paths from '../paths';
+import { envs } from '../../utils/envs';
+import { paths } from '../../utils/paths';
 
 const webConfig: Configuration = merge(commonConfig, {
   name: 'web',
@@ -20,8 +19,7 @@ const webConfig: Configuration = merge(commonConfig, {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        include: [path.resolve(__dirname, '../../node_modules/@divanru'), paths.context],
-        exclude: '/node_modules/',
+        exclude: /node_modules/,
         use: [babelWebLoader],
       },
       {
@@ -54,7 +52,7 @@ const webConfig: Configuration = merge(commonConfig, {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif|woff|woff2)$/,
+        test: /\.(png|svg|jpg|gif|eot|ttf|woff|woff2|otf)$/,
         exclude: /node_modules/,
         type: 'asset/resource',
       },
@@ -88,6 +86,10 @@ const webConfig: Configuration = merge(commonConfig, {
         filename: '[name].[contenthash].css',
         chunkFilename: '[name].[contenthash].css',
       }),
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(envs.mode),
+      'process.env.BACKEND_ORIGIN': JSON.stringify(envs.backendOrigin),
+    }),
     new CleanWebpackPlugin(),
     new LoadablePlugin() as any,
   ].filter(Boolean),

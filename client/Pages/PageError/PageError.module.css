@@ -1,15 +1,6 @@
 .pageError {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 400px;
-}
-
-.info {
-  margin-bottom: var(--space-xl);
-}
-
-.text {
-  text-align: center;
 }

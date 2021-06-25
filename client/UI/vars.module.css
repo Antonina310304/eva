@@ -1,0 +1,6 @@
+@import './colors.module.css';
+@import './fonts.module.css';
+@import './shadows.module.css';
+@import './sizes.module.css';
+@import './spaces.module.css';
+@import './z-indexes.module.css';

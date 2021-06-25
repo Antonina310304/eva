@@ -1,0 +1,68 @@
+.title,
+.filtersWrapper {
+  composes: main from 'containers';
+}
+
+.title {
+  composes: xb from 'sizes';
+  composes: hero from 'fonts';
+
+  margin: 0 auto;
+  padding: var(--space-xl) 0;
+
+  font-weight: 500;
+  text-align: center;
+}
+
+.rubricsWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 var(--space-xxl);
+  overflow: hidden;
+}
+
+.rubrics {
+  width: 100%;
+}
+
+.filtersWrapper {
+  margin-top: var(--space-m);
+}
+
+.popularLinksWrapper {
+  margin-top: var(--space-xl);
+}
+
+.catalogWrapper {
+  border-top: 1px solid var(--color-medium-gray);
+}
+
+.catalog {
+  margin-top: var(--space-xxl);
+}
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+}
+
+@media (--mobile) {
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+
+  .popularLinksWrapper {
+    display: none;
+  }
+}

@@ -1,0 +1,48 @@
+.button {
+  composes: n from 'sizes';
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 50px;
+  padding: 0 var(--space-n);
+
+  border: 0;
+  cursor: pointer;
+}
+
+.button.wide {
+  width: 100%;
+}
+
+.button.viewMain {
+  border-radius: 4px;
+}
+
+.button.viewRounded {
+  border-radius: 45px;
+}
+
+.button.themePrimary {
+  color: var(--color-white);
+
+  background: var(--color-grafit);
+}
+
+.button.themeBlank {
+  color: var(--color-black);
+
+  background: var(--color-white);
+  border: 1px solid var(--color-medium-gray);
+}
+
+.button.themeDirty {
+  color: var(--color-white);
+
+  background: var(--color-dirty);
+}
+
+.before {
+  margin-right: var(--space-xs);
+}

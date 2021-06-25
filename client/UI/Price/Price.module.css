@@ -1,0 +1,8 @@
+.price {
+  white-space: nowrap;
+}
+
+.price.expired {
+  color: var(--color-dark-gray);
+  text-decoration: line-through;
+}

@@ -1,0 +1,33 @@
+:root {
+  --space-xxs: 5px;
+  --space-xs: 10px;
+  --space-s: 15px;
+  --space-n: 20px;
+  --space-m: 25px;
+  --space-l: 30px;
+  --space-xl: 35px;
+  --space-xxl: 40px;
+  --space-b: 50px;
+  --space-xb: 60px;
+  --space-xxb: 70px;
+  --space-e: 80px;
+  --space-xe: 90px;
+  --space-xxe: 100px;
+  --space-mega: 140px;
+
+  --space-xxs-neg: -5px;
+  --space-xs-neg: -10px;
+  --space-s-neg: -15px;
+  --space-n-neg: -20px;
+  --space-m-neg: -25px;
+  --space-l-neg: -30px;
+  --space-xl-neg: -35px;
+  --space-xxl-neg: -40px;
+  --space-b-neg: -50px;
+  --space-xb-neg: -60px;
+  --space-xxb-neg: -70px;
+  --space-e-neg: -80px;
+  --space-xe-neg: -90px;
+  --space-xxe-neg: -100px;
+  --space-mega-neg: -140px;
+}

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import loadable from '@loadable/component';
+import { Switch, Route } from 'react-router-dom';
 
-import MediaProvider from '@divanru/ts-ui/Media/MediaProvider';
-
-import usePage from '@Hooks/usePage';
-import useMeta from '@Hooks/useMeta';
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
+import '@UI/fonts.module.css';
+import '@UI/vars.module.css';
 import './App.css';
 
 export interface Data {
@@ -14,44 +13,26 @@ export interface Data {
 }
 
 const PageIndex = loadable(() => import('@Pages/PageIndex'));
-const PageError = loadable(() => import('@Pages/PageError'));
+const PageCategory = loadable(() => import('@Pages/PageCategory'));
 const TemplateMain = loadable(() => import('@Templates/TemplateMain'));
 
 const App: FC = () => {
-  const page = usePage();
-  const meta = useMeta();
-
   return (
-    <MediaProvider>
-      <ModalsProvider>
-        {(() => {
-          switch (page) {
-            case 'Index':
-              return (
-                <TemplateMain>
-                  <PageIndex />
-                </TemplateMain>
-              );
+    <ModalsProvider>
+      <Switch>
+        <Route exact path='/'>
+          <TemplateMain>
+            <PageIndex />
+          </TemplateMain>
+        </Route>
 
-            case 'Error':
-              return (
-                <>
-                  {meta ? (
-                    <TemplateMain>
-                      <PageError />
-                    </TemplateMain>
-                  ) : (
-                    <PageError />
-                  )}
-                </>
-              );
-
-            default:
-              return <TemplateMain />;
-          }
-        })()}
-      </ModalsProvider>
-    </MediaProvider>
+        <Route exact path='/category/:slug'>
+          <TemplateMain>
+            <PageCategory />
+          </TemplateMain>
+        </Route>
+      </Switch>
+    </ModalsProvider>
   );
 };
 
