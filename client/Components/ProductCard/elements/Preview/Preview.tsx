@@ -21,6 +21,7 @@ const Preview: FC<PreviewProps> = (props) => {
   const [firstImage] = images;
   const hasGallery = images.length > 1;
   const [slide, setSlide] = useState(0);
+  const [hovered, setHovered] = useState(false);
   const { isOnlyDesktop } = useMedias();
 
   const handleChangeCurrent = useCallback(
@@ -31,6 +32,10 @@ const Preview: FC<PreviewProps> = (props) => {
     },
     [onChangeSlide],
   );
+
+  const handleHover = useCallback(() => {
+    setHovered(true);
+  }, []);
 
   return (
     <div
@@ -43,11 +48,13 @@ const Preview: FC<PreviewProps> = (props) => {
         },
         className,
       )}
+      onMouseEnter={handleHover}
+      onPointerEnter={handleHover}
     >
       {isOnlyDesktop ? (
         <div className={styles.content}>
           {hasGallery ? (
-            <ImageAreas images={images} />
+            <ImageAreas images={images} needLoad={hovered} />
           ) : (
             <Image className={styles.image} src={firstImage.src} />
           )}
@@ -61,7 +68,11 @@ const Preview: FC<PreviewProps> = (props) => {
             >
               {images.map((image, index) => (
                 <div className={styles.item} key={index}>
-                  <Image className={styles.image} src={image.src} />
+                  <Image
+                    className={styles.image}
+                    src={image.src}
+                    needLoad={hovered || index === 0}
+                  />
                 </div>
               ))}
             </Gallery>

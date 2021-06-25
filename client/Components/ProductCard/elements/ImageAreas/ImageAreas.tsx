@@ -12,10 +12,11 @@ export interface ImageData {
 export interface ImageAreasProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   images?: ImageData[];
+  needLoad?: boolean;
 }
 
 const ImageAreas: FC<ImageAreasProps> = (props) => {
-  const { className, images, ...restProps } = props;
+  const { className, images, needLoad, ...restProps } = props;
   const widthItem = Number((100 / images.length).toFixed(5));
 
   return (
@@ -31,7 +32,7 @@ const ImageAreas: FC<ImageAreasProps> = (props) => {
           >
             <div className={styles.indicator} />
           </div>
-          <Image className={styles.image} src={image.src} />
+          <Image className={styles.image} src={image.src} needLoad={needLoad || index === 0} />
         </Fragment>
       )}
     />
