@@ -1,23 +1,25 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import React, { AnchorHTMLAttributes, FC, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
 import useMedias from '@Hooks/useMedias';
 import Image from '@UI/Image';
+import Link from '@UI/Link';
 import { ProductImageData } from '@Types/Product';
 import ImageAreas from '../ImageAreas';
 import styles from './Preview.module.css';
 
-export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
+export interface PreviewProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string;
   images?: ProductImageData[];
+  link: string;
   onChangeSlide?: (slide: number) => void;
 }
 
 const Gallery = loadable(() => import('@UI/Gallery'));
 
 const Preview: FC<PreviewProps> = (props) => {
-  const { className, images = [], onChangeSlide, ...restProps } = props;
+  const { className, images = [], link, onChangeSlide, ...restProps } = props;
   const [firstImage] = images;
   const hasGallery = images.length > 1;
   const [slide, setSlide] = useState(0);
@@ -38,7 +40,7 @@ const Preview: FC<PreviewProps> = (props) => {
   }, []);
 
   return (
-    <div
+    <Link
       {...restProps}
       className={cn(
         styles.preview,
@@ -48,6 +50,7 @@ const Preview: FC<PreviewProps> = (props) => {
         },
         className,
       )}
+      to={link}
       onMouseEnter={handleHover}
       onPointerEnter={handleHover}
     >
@@ -81,7 +84,7 @@ const Preview: FC<PreviewProps> = (props) => {
           )}
         </div>
       )}
-    </div>
+    </Link>
   );
 };
 

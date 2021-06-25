@@ -114,6 +114,8 @@
 }
 
 .name {
+  composes: black from 'colors';
+
   overflow: hidden;
 
   white-space: nowrap;
@@ -205,6 +207,10 @@
 .openConstructor {
   display: none;
   margin-left: var(--space-xxs);
+}
+
+.link {
+  display: block;
 }
 
 @media (--only-desktop) {

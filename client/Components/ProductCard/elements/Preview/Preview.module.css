@@ -3,6 +3,8 @@
 
   position: relative;
 
+  display: block;
+
   &:after {
     display: block;
     width: 100%;

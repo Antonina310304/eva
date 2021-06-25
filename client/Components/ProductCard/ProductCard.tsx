@@ -55,7 +55,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
       <div className={styles.container}>
         <div className={styles.containerImage}>
-          <Preview className={styles.preview} images={product.images} />
+          <Preview className={styles.preview} images={product.images} link={product.link} />
 
           <div className={styles.actions}>
             <FastView className={cn(styles.action, styles.fastView)} />
@@ -72,7 +72,9 @@ const ProductCard: FC<ProductCardProps> = (props) => {
         </div>
 
         <div className={styles.info}>
-          <div className={styles.name}>{product.name}</div>
+          <Link className={styles.name} to={product.link} view='simple'>
+            {product.name}
+          </Link>
           <div className={styles.price}>
             <span className={styles.labelPrice}>{`Цена `}</span>
             <Price className={styles.actualPrice} price={product.price.actual} />
