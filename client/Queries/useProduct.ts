@@ -1,6 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { ApiProduct } from '@Api/Product';
+import { ProductData } from '@Types/Product';
 
 export interface Params {
   slug: string;
