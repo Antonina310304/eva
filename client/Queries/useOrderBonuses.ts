@@ -13,12 +13,12 @@ export interface Result {
 }
 
 const useOrderBonuses = (params: Params): UseQueryResult<Result> => {
-  const { ssr } = params;
-  const keys = ['order-bonuses'];
+  const { ssr, productIds } = params;
+  const keys = ['order-bonuses', ...productIds];
 
   if (ssr) keys.push('ssr');
 
-  return useQuery(keys, () => ApiOrder.getBonuses(params), {
+  return useQuery(keys, () => ApiOrder.getBonuses({ productIds }), {
     retryOnMount: false,
     refetchOnMount: false,
   });
