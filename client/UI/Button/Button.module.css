@@ -5,8 +5,8 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  height: 50px;
-  padding: 0 var(--space-n);
+
+  font-family: var(--font-main);
 
   border: 0;
   cursor: pointer;
@@ -25,6 +25,9 @@
 }
 
 .button.themePrimary {
+  height: 50px;
+  padding: 0 var(--space-n);
+
   color: var(--color-white);
 
   background: var(--color-grafit);
@@ -51,6 +54,9 @@
 }
 
 .button.themeSecondary {
+  height: 50px;
+  padding: 0 var(--space-n);
+
   color: var(--color-black);
 
   background: var(--color-light-gray);
@@ -75,6 +81,9 @@
 }
 
 .button.themeBlank {
+  height: 50px;
+  padding: 0 var(--space-n);
+
   color: var(--color-black);
 
   background: var(--color-white);
@@ -82,9 +91,47 @@
 }
 
 .button.themeDirty {
+  height: 50px;
+  padding: 0 var(--space-n);
+
   color: var(--color-white);
 
   background: var(--color-dirty);
+}
+
+.button.themeLinkSecondary {
+  padding: 0;
+
+  color: var(--color-dark-gray);
+
+  background-color: transparent;
+  background-image: linear-gradient(var(--color-dark-gray), var(--color-dark-gray));
+  background-repeat: no-repeat;
+  background-position: left 0 bottom calc(16% - 3px);
+  background-size: 100% 1px;
+  border: 0;
+  outline: none;
+
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--color-black);
+
+    background-image: none;
+  }
+
+  &:focus {
+    color: var(--color-black);
+
+    background-image: linear-gradient(var(--color-black), var(--color-black));
+  }
+
+  &:active {
+    color: var(--color-black);
+    font-weight: 500;
+
+    background-image: none;
+  }
 }
 
 .before {
