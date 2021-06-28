@@ -3,8 +3,6 @@
 
   position: relative;
 
-  display: block;
-
   &:after {
     display: block;
     width: 100%;
@@ -19,6 +17,9 @@
 }
 .preview.portrait {
   --proportion: 100%;
+}
+
+.link {
 }
 
 .content {

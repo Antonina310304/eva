@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, FC, memo, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
@@ -9,7 +9,7 @@ import { ProductImageData } from '@Types/Product';
 import ImageAreas from '../ImageAreas';
 import styles from './Preview.module.css';
 
-export interface PreviewProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   images?: ProductImageData[];
   link: string;
@@ -40,7 +40,7 @@ const Preview: FC<PreviewProps> = (props) => {
   }, []);
 
   return (
-    <Link
+    <div
       {...restProps}
       className={cn(
         styles.preview,
@@ -50,41 +50,42 @@ const Preview: FC<PreviewProps> = (props) => {
         },
         className,
       )}
-      to={link}
       onMouseEnter={handleHover}
       onPointerEnter={handleHover}
     >
-      {isOnlyDesktop ? (
-        <div className={styles.content}>
-          {hasGallery ? (
-            <ImageAreas images={images} needLoad={hovered} />
-          ) : (
-            <Image className={styles.image} src={firstImage.src} />
-          )}
-        </div>
-      ) : (
-        <div className={styles.content}>
-          {hasGallery ? (
-            <Gallery
-              className={cn(styles.gallery, className)}
-              onChangeCurrent={handleChangeCurrent}
-            >
-              {images.map((image, index) => (
-                <div className={styles.item} key={index}>
-                  <Image
-                    className={styles.image}
-                    src={image.src}
-                    needLoad={hovered || index === 0}
-                  />
-                </div>
-              ))}
-            </Gallery>
-          ) : (
-            <Image className={styles.image} src={firstImage.src} />
-          )}
-        </div>
-      )}
-    </Link>
+      <Link to={link}>
+        {isOnlyDesktop ? (
+          <div className={styles.content}>
+            {hasGallery ? (
+              <ImageAreas images={images} needLoad={hovered} />
+            ) : (
+              <Image className={styles.image} src={firstImage.src} />
+            )}
+          </div>
+        ) : (
+          <div className={styles.content}>
+            {hasGallery ? (
+              <Gallery
+                className={cn(styles.gallery, className)}
+                onChangeCurrent={handleChangeCurrent}
+              >
+                {images.map((image, index) => (
+                  <div className={styles.item} key={index}>
+                    <Image
+                      className={styles.image}
+                      src={image.src}
+                      needLoad={hovered || index === 0}
+                    />
+                  </div>
+                ))}
+              </Gallery>
+            ) : (
+              <Image className={styles.image} src={firstImage.src} />
+            )}
+          </div>
+        )}
+      </Link>
+    </div>
   );
 };
 
