@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Like from '@Components/Like';
+import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import List from '@UI/List';
@@ -13,7 +14,6 @@ import Tag from './elements/Tag';
 import Parameter from './elements/Parameter';
 import Sizes from './elements/Sizes';
 import FastView from './elements/FastView';
-import Fabrics from './elements/Fabrics';
 import Preview from './elements/Preview';
 import fabricImages from './fabrics';
 import styles from './ProductCard.module.css';

@@ -60,6 +60,10 @@
   margin-top: var(--space-xs);
 }
 
+.wrapperFabrics {
+  margin-top: var(--space-xxl);
+}
+
 .actions {
   margin-top: var(--space-xxl);
 }

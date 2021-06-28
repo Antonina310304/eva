@@ -4,12 +4,14 @@ import { useParams } from 'react-router-dom';
 
 import Like from '@Components/Like';
 import OrderBonuses from '@Components/OrderBonuses';
+import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import useProduct from '@Queries/useProduct';
 import MainImageGrid from './elements/MainImageGrid';
 import styles from './PageProduct.module.css';
+import fabricImages from './fabrics';
 
 export interface RouteParams {
   slug: string;
@@ -18,6 +20,18 @@ export interface RouteParams {
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
+
+const fabrics = [
+  {
+    image: fabricImages[0],
+  },
+  {
+    image: fabricImages[1],
+  },
+  {
+    image: fabricImages[2],
+  },
+];
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
@@ -57,6 +71,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
           </div>
 
           <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+
+          <div className={styles.wrapperFabrics}>
+            <Fabrics fabrics={fabrics} defaultSelectedFabric={fabrics[0]} size='m' />
+          </div>
 
           <div className={styles.actions}>
             <Button

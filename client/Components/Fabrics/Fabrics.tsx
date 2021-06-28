@@ -13,10 +13,11 @@ export interface FabricsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   fabrics: FabricData[];
   defaultSelectedFabric?: FabricData;
+  size?: 's' | 'm';
 }
 
 const Fabrics: FC<FabricsProps> = (props) => {
-  const { className, fabrics, defaultSelectedFabric, ...restProps } = props;
+  const { className, fabrics, defaultSelectedFabric, size = 's', ...restProps } = props;
   const [selectedFabric, setSelectedFabric] = useState(defaultSelectedFabric);
 
   const handleClickFabric = useCallback((_, clickedFabric) => {
@@ -26,7 +27,14 @@ const Fabrics: FC<FabricsProps> = (props) => {
   return (
     <List
       {...restProps}
-      className={cn(styles.fabrics, className)}
+      className={cn(
+        styles.fabrics,
+        {
+          [styles.sizeS]: size === 's',
+          [styles.sizeM]: size === 'm',
+        },
+        className,
+      )}
       items={fabrics}
       renderChild={(fabric: FabricData) => (
         <Image
