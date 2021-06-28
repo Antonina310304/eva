@@ -7,7 +7,12 @@ export interface Params {
   ssr?: boolean;
 }
 
-const useOrderBonuses = (params: Params): UseQueryResult<any> => {
+export interface Result {
+  earnedAmount: number;
+  extraBonus?: boolean;
+}
+
+const useOrderBonuses = (params: Params): UseQueryResult<Result> => {
   const { ssr } = params;
   const keys = ['order-bonuses'];
 

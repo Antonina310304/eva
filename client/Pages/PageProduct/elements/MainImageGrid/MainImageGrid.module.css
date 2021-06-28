@@ -1,0 +1,20 @@
+.grid {
+}
+
+.list {
+  width: 100%;
+}
+
+.image {
+  margin-bottom: var(--space-l);
+  padding-bottom: 60%;
+
+  background-color: var(--color-light-gray);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

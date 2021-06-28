@@ -1,2 +1,73 @@
 .page {
 }
+
+.wrapperMain {
+  composes: main from 'containers';
+
+  display: grid;
+  grid-gap: var(--space-xe);
+  grid-template-columns: 1fr 422px;
+}
+
+.sidebar {
+  position: relative;
+}
+
+.shortName {
+  composes: xb from 'sizes';
+
+  font-family: var(--font-hero);
+}
+
+.fullName {
+  composes: s from 'sizes';
+}
+
+.like {
+  position: absolute;
+  top: var(--space-n);
+  right: 0;
+}
+
+.wrapperPrice {
+  margin-top: var(--space-l);
+}
+
+.labelPrice {
+  composes: s from 'sizes';
+}
+
+.containerPrices {
+  display: flex;
+  align-items: center;
+}
+
+.actualPrice {
+  composes: xl from 'sizes';
+
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-s);
+}
+
+.discount {
+  margin-left: var(--space-s);
+}
+
+.bonuses {
+  margin-top: var(--space-xs);
+}
+
+.actions {
+  margin-top: var(--space-xxl);
+}
+
+.action {
+  margin-bottom: var(--space-s);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
