@@ -18,7 +18,7 @@ const symbols = {
 
 const Price: FC<PriceProps> = (props) => {
   const { className, expired, price } = props;
-  const meta = useMeta();
+  const meta = useMeta({ ssr: true });
 
   if (!meta.isSuccess) return null;
 

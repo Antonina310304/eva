@@ -21,7 +21,7 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, ...restProps } = props;
   const { slug } = useParams<RouteParams>();
-  const category = useCategory({ slug });
+  const category = useCategory({ slug, ssr: true });
 
   if (!category.isSuccess) return null;
 

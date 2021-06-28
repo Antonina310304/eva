@@ -4,12 +4,16 @@ import { ApiProduct } from '@Api/Product';
 
 export interface Params {
   slug: string;
+  ssr?: boolean;
 }
 
-const useProduct = (params: Params): UseQueryResult => {
-  const { slug } = params;
+const useProduct = (params: Params): UseQueryResult<any> => {
+  const { slug, ssr } = params;
+  const keys = ['product', slug];
 
-  return useQuery(['product', slug], () => ApiProduct.fetchProduct({ slug }), {
+  if (ssr) keys.push('ssr');
+
+  return useQuery(keys, () => ApiProduct.fetchProduct({ slug }), {
     retryOnMount: false,
     refetchOnMount: false,
   });

@@ -4,12 +4,16 @@ import { ApiCategory } from '@Api/Category';
 
 export interface Params {
   slug: string;
+  ssr?: boolean;
 }
 
 const useCategory = (params: Params): UseQueryResult => {
-  const { slug } = params;
+  const { slug, ssr } = params;
+  const keys = ['category', slug];
 
-  return useQuery(['category', slug], () => ApiCategory.fetchCategory({ slug }), {
+  if (ssr) keys.push('ssr');
+
+  return useQuery(keys, () => ApiCategory.fetchCategory({ slug }), {
     retryOnMount: false,
     refetchOnMount: false,
   });

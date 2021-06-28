@@ -1,21 +1,21 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { ApiMeta } from '@Api/Meta';
+import { ApiProfile } from '@Api/Profile';
 
 export interface Params {
   ssr?: boolean;
 }
 
-const useMeta = (params?: Params): UseQueryResult => {
+const useProfile = (params?: Params): UseQueryResult<any> => {
   const { ssr } = params || {};
-  const keys = ['meta'];
+  const keys = ['profile'];
 
   if (ssr) keys.push('ssr');
 
-  return useQuery(keys, () => ApiMeta.fetch(), {
+  return useQuery(keys, () => ApiProfile.fetchProfile(), {
     retryOnMount: false,
     refetchOnMount: false,
   });
 };
 
-export default useMeta;
+export default useProfile;

@@ -3,7 +3,7 @@ import fetch from 'cross-fetch';
 const domain = process.env.DOMAIN;
 
 export default async <T>(url: string, opts?: RequestInit): Promise<T> => {
-  const fullUrl = `${domain}/proxy${url}`;
+  const fullUrl = `${domain}${url}`;
   const options = opts || {};
   const headers = options.headers || {};
   const fullOpts = {

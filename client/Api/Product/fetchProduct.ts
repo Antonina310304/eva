@@ -6,7 +6,7 @@ export interface Params {
 
 export default async ({ slug }: Params): Promise<any> => {
   const url = `/product/${slug}`;
-  const res = await Api.query<any>(url);
+  const res = await Api.queryProxi<any>(url);
 
   return res.body.data;
 };
