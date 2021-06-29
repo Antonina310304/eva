@@ -8,7 +8,7 @@ import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
-import useProduct from '@Queries/useProduct';
+import usePageProduct from '@Queries/usePageProduct';
 import MainImageGrid from './elements/MainImageGrid';
 import styles from './PageProduct.module.css';
 import fabricImages from './fabrics';
@@ -36,7 +36,7 @@ const fabrics = [
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { slug } = useParams<RouteParams>();
-  const { data, isSuccess } = useProduct({ slug, ssr: true });
+  const { data, isSuccess } = usePageProduct({ slug, ssr: true });
 
   if (!isSuccess) return null;
 

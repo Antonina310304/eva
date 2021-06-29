@@ -1,14 +1,13 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { ApiProduct } from '@Api/Product';
-import { ProductData } from '@Types/Product';
 
 export interface Params {
   slug: string;
   ssr?: boolean;
 }
 
-const useProduct = (params: Params): UseQueryResult<any> => {
+const usePageProduct = (params: Params): UseQueryResult<any> => {
   const { slug, ssr } = params;
   const keys = ['product', slug];
 
@@ -20,4 +19,4 @@ const useProduct = (params: Params): UseQueryResult<any> => {
   });
 };
 
-export default useProduct;
+export default usePageProduct;
