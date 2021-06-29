@@ -74,6 +74,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
           <div className={styles.wrapperFabrics}>
             <Fabrics fabrics={fabrics} defaultSelectedFabric={fabrics[0]} size='m' />
+            <Button
+              className={styles.orderFabrics}
+              theme='linkSecondary'
+              title='Заказать образцы тканей'
+            />
           </div>
 
           <div className={styles.actions}>

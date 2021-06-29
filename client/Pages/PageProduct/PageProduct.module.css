@@ -64,6 +64,10 @@
   margin-top: var(--space-xxl);
 }
 
+.orderFabrics {
+  margin-top: var(--space-s);
+}
+
 .actions {
   margin-top: var(--space-xxl);
 }
