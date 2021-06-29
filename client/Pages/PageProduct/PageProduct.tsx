@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import Like from '@Components/Like';
 import OrderBonuses from '@Components/OrderBonuses';
@@ -8,7 +8,7 @@ import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
-import usePageProduct from '@Queries/usePageProduct';
+import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
 import MainImageGrid from './elements/MainImageGrid';
 import styles from './PageProduct.module.css';
@@ -36,13 +36,13 @@ const fabrics = [
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
-  const { slug } = useParams<RouteParams>();
-  const pageProduct = usePageProduct({ slug, ssr: true });
+  const { pathname } = useLocation();
+  const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
 
-  if (!pageProduct.isSuccess) return null;
+  if (!page.isSuccess) return null;
 
-  const { product, mediaGallery } = pageProduct.data;
+  const { product, mediaGallery } = page.data;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
