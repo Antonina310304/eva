@@ -9,6 +9,7 @@ import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import usePageProduct from '@Queries/usePageProduct';
+import useMeta from '@Queries/useMeta';
 import MainImageGrid from './elements/MainImageGrid';
 import styles from './PageProduct.module.css';
 import fabricImages from './fabrics';
@@ -36,11 +37,12 @@ const fabrics = [
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { slug } = useParams<RouteParams>();
-  const { data, isSuccess } = usePageProduct({ slug, ssr: true });
+  const pageProduct = usePageProduct({ slug, ssr: true });
+  const meta = useMeta({ ssr: true });
 
-  if (!isSuccess) return null;
+  if (!pageProduct.isSuccess) return null;
 
-  const { product } = data;
+  const { product, mediaGallery } = pageProduct.data;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
@@ -49,7 +51,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={styles.wrapperMain}>
         <div className={styles.mainContent}>
-          <MainImageGrid images={data.mediaGallery} />
+          <MainImageGrid images={mediaGallery} />
         </div>
 
         <div className={styles.sidebar}>
@@ -71,6 +73,14 @@ const PageProduct: FC<PageProductProps> = (props) => {
           </div>
 
           <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+
+          {meta.data.country === 'RUS' && (
+            <Button
+              className={styles.priceReduction}
+              theme='linkSecondary'
+              title='Подписаться на изменение цены'
+            />
+          )}
 
           <div className={styles.wrapperFabrics}>
             <Fabrics fabrics={fabrics} defaultSelectedFabric={fabrics[0]} size='m' />
