@@ -4,23 +4,23 @@ import cn from 'classnames';
 import Image from '@UI/Image';
 import List from '@UI/List';
 import { ProductTagData } from '@Types/Product';
-import styles from './MainImageGrid.module.css';
+import styles from './PhotoGallery.module.css';
 
 export interface MediaGalleryItem {
   image: string;
 }
 
-export interface MainImageGridProps extends HTMLAttributes<HTMLDivElement> {
+export interface PhotoGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   images: MediaGalleryItem[];
   tags?: ProductTagData[];
 }
 
-const MainImageGrid: FC<MainImageGridProps> = (props) => {
+const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   const { className, images = [], tags = [], ...restProps } = props;
 
   return (
-    <div {...restProps} className={cn(styles.grid)}>
+    <div {...restProps} className={cn(styles.photogallery)}>
       <List
         className={styles.list}
         items={images.slice(0, 3)}
@@ -50,4 +50,4 @@ const MainImageGrid: FC<MainImageGridProps> = (props) => {
   );
 };
 
-export default memo(MainImageGrid);
+export default memo(PhotoGallery);

@@ -13,7 +13,7 @@ import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
-import MainImageGrid from './elements/MainImageGrid';
+import PhotoGallery from './elements/PhotoGallery';
 import LinksList from './elements/LinksList';
 import styles from './PageProduct.module.css';
 import fabricImages from './fabrics';
@@ -59,7 +59,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={styles.wrapperMain}>
         <div className={styles.mainContent}>
-          <MainImageGrid images={mediaGallery} tags={product.tags} />
+          <PhotoGallery images={mediaGallery} tags={product.tags} />
         </div>
 
         <div className={styles.sidebar}>
