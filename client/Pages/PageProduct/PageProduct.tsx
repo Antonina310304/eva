@@ -63,8 +63,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
 
         <div className={styles.sidebar}>
-          <Like className={styles.like} />
-          <div className={styles.shortName}>{shortName}</div>
+          <div className={styles.shortName}>
+            {shortName}
+            <Like className={styles.like} />
+          </div>
           <div className={styles.fullName}>{product.name}</div>
 
           {reviewsPhotoCount > 0 && (

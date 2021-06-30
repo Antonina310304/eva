@@ -18,17 +18,15 @@
 .shortName {
   composes: xb from 'sizes';
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   font-family: var(--font-hero);
 }
 
 .fullName {
   composes: s from 'sizes';
-}
-
-.like {
-  position: absolute;
-  top: var(--space-n);
-  right: 0;
 }
 
 .wrapperRating {
@@ -129,6 +127,11 @@
   .page {
     --sidebar-width: 31.78%;
   }
+
+  .shortName {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
 }
 
 @media (--mobile-m) {
@@ -139,6 +142,11 @@
   .wrapperMain {
     display: block;
     margin-bottom: var(--space-xb);
+  }
+
+  .shortName {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
   }
 
   .sidebar {
