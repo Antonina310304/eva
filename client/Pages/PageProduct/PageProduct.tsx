@@ -59,7 +59,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={styles.wrapperMain}>
         <div className={styles.mainContent}>
-          <MainImageGrid images={mediaGallery} />
+          <MainImageGrid images={mediaGallery} tags={product.tags} />
         </div>
 
         <div className={styles.sidebar}>

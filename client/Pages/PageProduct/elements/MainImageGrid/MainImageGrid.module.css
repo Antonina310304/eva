@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.containerImage {
+  position: relative;
+}
+
 .image {
   margin-bottom: var(--space-l);
   padding-bottom: 60%;
@@ -16,5 +20,32 @@
 
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+.tags {
+  position: absolute;
+  top: var(--space-n);
+  right: var(--space-n);
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-xs);
+}
+
+.tag {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+
+  background-color: var(--color-white);
+  background-size: contain;
+  border-radius: 50%;
+}
+
+@media (--desktop) {
+  .tag {
+    width: 40px;
+    height: 40px;
   }
 }
