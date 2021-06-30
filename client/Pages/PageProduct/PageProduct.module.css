@@ -31,6 +31,16 @@
   right: 0;
 }
 
+.wrapperRating {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-n);
+}
+
+.countReviews {
+  margin-left: var(--space-xs);
+}
+
 .wrapperPrice {
   margin-top: var(--space-l);
 }

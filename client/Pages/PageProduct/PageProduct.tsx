@@ -2,12 +2,15 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
+import declOfNum from '@divanru/ts-utils/declOfNum';
+
 import Like from '@Components/Like';
 import OrderBonuses from '@Components/OrderBonuses';
 import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
+import Rating from '@UI/Rating';
 import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
 import MainImageGrid from './elements/MainImageGrid';
@@ -43,10 +46,14 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess) return null;
 
-  const { product, mediaGallery } = page.data;
+  const { product, mediaGallery, reviewsPhotoCount } = page.data;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
+
+  const labels = ['отзыв', 'отзыва', 'отзывов'];
+  const label = declOfNum(reviewsPhotoCount, labels);
+  const countReviewsText = `${reviewsPhotoCount} ${label}`;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -59,6 +66,17 @@ const PageProduct: FC<PageProductProps> = (props) => {
           <Like className={styles.like} />
           <div className={styles.shortName}>{shortName}</div>
           <div className={styles.fullName}>{product.name}</div>
+
+          {reviewsPhotoCount > 0 && (
+            <div className={styles.wrapperRating}>
+              <Rating className={styles.rating} defaultValue={product.rating} />
+              <Button
+                className={styles.countReviews}
+                theme='linkSecondary'
+                title={countReviewsText}
+              />
+            </div>
+          )}
 
           <div className={styles.wrapperPrice}>
             <div className={styles.labelPrice}>Цена</div>

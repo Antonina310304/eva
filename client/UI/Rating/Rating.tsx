@@ -56,7 +56,7 @@ const Rating: FC<RatingProps> = (props) => {
       className={cn(styles.rating, className)}
       items={stars}
       renderChild={(star: number) => {
-        const selected = star <= selectedStar;
+        const selected = star < selectedStar;
 
         return (
           <div
