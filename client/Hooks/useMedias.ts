@@ -39,7 +39,7 @@ function matchMedia(query: QueryVariant): MediaQueryList {
   return window.matchMedia(List[query] || query);
 }
 
-export default function useMedia(): Matches {
+export default function useMedias(): Matches {
   const [matches, setMatches] = useState<Matches>({});
 
   useEffect(() => {

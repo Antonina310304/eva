@@ -1,16 +1,19 @@
 .photogallery {
 }
 
-.list {
+.items {
   width: 100%;
 }
 
-.containerImage {
+.containerImages {
   position: relative;
 }
 
-.image {
+.containerImage {
   margin-bottom: var(--space-l);
+}
+
+.image {
   padding-bottom: 60%;
 
   background-color: var(--color-light-gray);
@@ -47,5 +50,26 @@
   .tag {
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (--mobile-m) {
+  .items {
+    height: 66.27vw;
+  }
+
+  .items {
+    width: calc(100% + var(--space-s) * 2);
+    margin: 0 var(--space-s-neg);
+  }
+
+  .containerImage {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .image {
+    height: 100%;
+    padding-bottom: 0%;
   }
 }
