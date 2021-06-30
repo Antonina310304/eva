@@ -11,6 +11,7 @@ import Button from '@UI/Button';
 import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
 import MainImageGrid from './elements/MainImageGrid';
+import LinksList from './elements/LinksList';
 import styles from './PageProduct.module.css';
 import fabricImages from './fabrics';
 
@@ -99,6 +100,36 @@ const PageProduct: FC<PageProductProps> = (props) => {
               title='Изменить конфигурацию'
             />
             <Button className={styles.action} wide title='В корзину' />
+          </div>
+
+          <div className={styles.linksList}>
+            <LinksList
+              items={[
+                {
+                  icon: <div className={cn(styles.icon, styles.perzent)} />,
+                  label: 'Купить в кредит без переплаты',
+                },
+                {
+                  icon: <div className={cn(styles.icon, styles.attention)} />,
+                  label: 'Гарантируем качество',
+                },
+                {
+                  label: 'Эта модель в шоурумах',
+                },
+                {
+                  label: 'Характеристики',
+                },
+                {
+                  label: 'Сопутствующие товары',
+                },
+                {
+                  label: 'Фото и отзывы',
+                },
+                {
+                  label: 'Способы оплаты',
+                },
+              ]}
+            />
           </div>
         </div>
       </div>

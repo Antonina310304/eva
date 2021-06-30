@@ -83,3 +83,22 @@
     margin-bottom: 0;
   }
 }
+
+.linksList {
+  margin-top: var(--space-xxl);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.icon.perzent {
+  background-image: url('./icons/perzent.svg');
+}
+
+.icon.attention {
+  background-image: url('./icons/attention.svg');
+}
