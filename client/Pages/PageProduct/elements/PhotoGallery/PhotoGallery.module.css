@@ -14,7 +14,7 @@
 }
 
 .image {
-  padding-bottom: 60%;
+  padding-bottom: 66.7%;
 
   background-color: var(--color-light-gray);
   background-repeat: no-repeat;
@@ -55,7 +55,7 @@
 
 @media (--mobile-m) {
   .items {
-    height: 66.27vw;
+    height: 66.7vw;
   }
 
   .items {
