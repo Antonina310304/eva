@@ -114,23 +114,22 @@
 
   transition: all 0.2s;
 
+  &:focus {
+    color: var(--color-dark-gray);
+
+    background-image: none;
+  }
+
   &:hover {
     color: var(--color-black);
 
     background-image: none;
   }
 
-  &:focus {
+  &:active {
     color: var(--color-black);
 
     background-image: linear-gradient(var(--color-black), var(--color-black));
-  }
-
-  &:active {
-    color: var(--color-black);
-    font-weight: 500;
-
-    background-image: none;
   }
 }
 
