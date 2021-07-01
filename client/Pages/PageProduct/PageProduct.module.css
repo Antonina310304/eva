@@ -9,6 +9,10 @@
   margin-bottom: var(--space-e);
 }
 
+.description {
+  margin-top: var(--space-xxl);
+}
+
 @media (--mobile-m) {
   .wrapperMain {
     margin-bottom: var(--space-xb);

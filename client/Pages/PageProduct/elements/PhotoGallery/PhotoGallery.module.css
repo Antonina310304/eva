@@ -52,4 +52,9 @@
     height: 100%;
     padding-bottom: 0%;
   }
+
+  .tags {
+    top: var(--space-s);
+    right: 0;
+  }
 }
