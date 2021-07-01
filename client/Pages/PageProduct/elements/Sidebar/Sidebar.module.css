@@ -1,0 +1,111 @@
+.shortName {
+  composes: xb from 'sizes';
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: var(--font-hero);
+}
+
+.fullName {
+  composes: s from 'sizes';
+}
+
+.wrapperRating {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-n);
+}
+
+.countReviews {
+  margin-left: var(--space-xs);
+}
+
+.wrapperPrice {
+  margin-top: var(--space-l);
+}
+
+.labelPrice {
+  composes: s from 'sizes';
+}
+
+.containerPrices {
+  display: flex;
+  align-items: center;
+}
+
+.actualPrice {
+  composes: xl from 'sizes';
+
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-s);
+}
+
+.discount {
+  margin-left: var(--space-s);
+}
+
+.bonuses {
+  margin-top: var(--space-xs);
+}
+
+.priceReduction {
+  margin-top: var(--space-s);
+}
+
+.wrapperFabrics {
+  margin-top: var(--space-xxl);
+}
+
+.orderFabrics {
+  margin-top: var(--space-s);
+}
+
+.actions {
+  margin-top: var(--space-xxl);
+}
+
+.action {
+  margin-bottom: var(--space-s);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.linksList {
+  margin-top: var(--space-xxl);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.icon.perzent {
+  background-image: url('./icons/perzent.svg');
+}
+
+.icon.attention {
+  background-image: url('./icons/attention.svg');
+}
+
+@media (--desktop) {
+  .shortName {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+}
+
+@media (--mobile-m) {
+  .shortName {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+}
