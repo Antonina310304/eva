@@ -26,7 +26,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts } = page.data;
+  const { product, mediaGallery, crossSalesProducts, sameProducts } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -50,19 +50,29 @@ const PageProduct: FC<PageProductProps> = (props) => {
       <div className={styles.separator} />
 
       <div className={styles.wrapperAdditional}>
-        <CrossSaleSection
-          className={styles.sectionCrossSale}
-          title='С этим обычно покупают'
-          products={crossSalesProducts.products}
-          tabs={[
-            { id: '0', label: 'Все категории' },
-            { id: '1', label: 'Диваны' },
-            { id: '2', label: 'Кресла' },
-            { id: '3', label: 'Пуфы' },
-          ]}
-          // Обязательно рендерим компонент заново при изменении товара, иначе его внутреннее состояние будет сохраняться
-          key={product.id}
-        />
+        {crossSalesProducts.products?.length > 0 && (
+          <CrossSaleSection
+            className={styles.sectionCrossSale}
+            title='С этим обычно покупают'
+            products={crossSalesProducts.products}
+            tabs={[
+              { id: '0', label: 'Все категории' },
+              { id: '1', label: 'Диваны' },
+              { id: '2', label: 'Кресла' },
+              { id: '3', label: 'Пуфы' },
+            ]}
+            key={`cross-sale-${product.id}`}
+          />
+        )}
+
+        {sameProducts.products?.length > 0 && (
+          <CrossSaleSection
+            className={styles.sectionSimilar}
+            title='Похожие модели'
+            products={sameProducts.products}
+            key={`similar-${product.id}`}
+          />
+        )}
       </div>
     </div>
   );
