@@ -4,20 +4,20 @@ import loadable from '@loadable/component';
 
 import Image from '@UI/Image';
 import Link from '@UI/Link';
-import { ProductImageData } from '@Types/Product';
+import { ProductData } from '@Types/Product';
 import styles from './Preview.module.css';
 
 export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  images?: ProductImageData[];
-  link: string;
+  product?: ProductData;
   onChangeSlide?: (slide: number) => void;
 }
 
 const Gallery = loadable(() => import('@UI/Gallery'));
 
 const Preview: FC<PreviewProps> = (props) => {
-  const { className, images = [], link, onChangeSlide, ...restProps } = props;
+  const { className, product, onChangeSlide, ...restProps } = props;
+  const images = product.images || [];
   const [firstImage] = images;
   const hasGallery = images.length > 1;
   const [slide, setSlide] = useState(0);
@@ -50,7 +50,7 @@ const Preview: FC<PreviewProps> = (props) => {
       onMouseEnter={handleHover}
       onPointerEnter={handleHover}
     >
-      <Link to={link}>
+      <Link to={product.link} aria-label={product.name}>
         <div className={styles.content}>
           {hasGallery ? (
             <Gallery

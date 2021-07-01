@@ -20,7 +20,7 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.card, className)}>
-      <Preview className={styles.preview} images={product.images} link={product.link} />
+      <Preview className={styles.preview} product={product} />
 
       <div className={styles.containerInfo}>
         <div className={styles.info}>
@@ -38,7 +38,7 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
           </div>
         </div>
 
-        <Button className={styles.action} theme='circle'>
+        <Button className={styles.action} theme='circle' aria-label='Добавить в корзину'>
           <div className={styles.iconCart} />
         </Button>
       </div>
