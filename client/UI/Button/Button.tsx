@@ -8,7 +8,7 @@ export interface SizesProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   wide?: boolean;
   before?: ReactChild;
-  theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary';
+  theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary' | 'circle';
   view?: 'main' | 'rounded';
 }
 
@@ -18,6 +18,7 @@ const Button: FC<SizesProps> = (props) => {
     wide,
     title,
     before,
+    children,
     type = 'button',
     theme = 'primary',
     view = 'main',
@@ -38,6 +39,7 @@ const Button: FC<SizesProps> = (props) => {
           [styles.themeBlank]: theme === 'blank',
           [styles.themeDirty]: theme === 'dirty',
           [styles.themeLinkSecondary]: theme === 'linkSecondary',
+          [styles.themeCircle]: theme === 'circle',
         },
         className,
       )}
@@ -45,6 +47,7 @@ const Button: FC<SizesProps> = (props) => {
     >
       {before && <div className={styles.before}>{before}</div>}
       {title}
+      {children}
     </button>
   );
 };

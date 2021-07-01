@@ -133,6 +133,34 @@
   }
 }
 
+.button.themeCircle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+
+  color: var(--color-dark-gray);
+
+  background-color: var(--color-grafit);
+  border: 0;
+  border-radius: 50%;
+  outline: none;
+
+  transition: all 0.2s;
+
+  &:focus {
+  }
+
+  &:hover {
+  }
+
+  &:active {
+  }
+}
+
 .before {
   margin-right: var(--space-xs);
 }
