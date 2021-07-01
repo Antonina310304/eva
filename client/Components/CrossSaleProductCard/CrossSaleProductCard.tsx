@@ -24,7 +24,7 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
 
       <div className={styles.containerInfo}>
         <div className={styles.info}>
-          <div className={styles.title}>{product.name}</div>
+          <div className={styles.name}>{product.name}</div>
 
           <div className={styles.price}>
             <span className={styles.labelPrice}>{`Цена `}</span>

@@ -7,6 +7,13 @@
   margin-top: var(--space-n);
 }
 
+.name {
+  max-height: calc(var(--lh-n) * 2);
+  overflow: hidden;
+
+  white-space: normal;
+}
+
 .price {
   display: flex;
   align-items: baseline;
