@@ -1,18 +1,12 @@
 .page {
-  --sidebar-width: 23.7%;
+}
+
+.mainContainer {
+  composes: main from 'containers';
 }
 
 .wrapperMain {
-  composes: main from 'containers';
-
-  display: grid;
-  grid-gap: var(--space-xe);
-  grid-template-columns: 1fr var(--sidebar-width);
   margin-bottom: var(--space-e);
-}
-
-.sidebar {
-  position: relative;
 }
 
 .shortName {
@@ -113,21 +107,7 @@
   background-image: url('./icons/attention.svg');
 }
 
-@media (--desktop-m) {
-  .page {
-    --sidebar-width: 25.66%;
-  }
-
-  .wrapperMain {
-    grid-gap: var(--space-xb);
-  }
-}
-
 @media (--desktop) {
-  .page {
-    --sidebar-width: 31.78%;
-  }
-
   .shortName {
     font-size: var(--size-b);
     line-height: var(--lh-b);
@@ -135,22 +115,12 @@
 }
 
 @media (--mobile-m) {
-  .page {
-    --sidebar-width: 100%;
-  }
-
   .wrapperMain {
-    display: block;
     margin-bottom: var(--space-xb);
   }
 
   .shortName {
     font-size: var(--size-l);
     line-height: var(--lh-l);
-  }
-
-  .sidebar {
-    max-width: 486px;
-    margin: var(--space-n) auto 0;
   }
 }
