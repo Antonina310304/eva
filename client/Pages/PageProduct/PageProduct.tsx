@@ -3,9 +3,12 @@ import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
 import usePage from '@Queries/usePage';
+import Section from '@Components/Section';
+import ButtonTabs from '@UI/ButtonTabs';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
+import CrossSaleSection from './elements/CrossSaleSection';
 import styles from './PageProduct.module.css';
 
 export interface RouteParams {
@@ -23,7 +26,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess) return null;
 
-  const { product, mediaGallery } = page.data;
+  const { product, mediaGallery, crossSalesProducts } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -43,6 +46,22 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
       </MainGrid>
+
+      <div className={styles.separator} />
+
+      <div className={styles.wrapperAdditional}>
+        <CrossSaleSection
+          className={styles.sectionCrossSale}
+          title='С этим обычно покупают'
+          products={crossSalesProducts.products}
+          tabs={[
+            { id: '0', label: 'Все категории' },
+            { id: '1', label: 'Диваны' },
+            { id: '2', label: 'Кресла' },
+            { id: '3', label: 'Пуфы' },
+          ]}
+        />
+      </div>
     </div>
   );
 };

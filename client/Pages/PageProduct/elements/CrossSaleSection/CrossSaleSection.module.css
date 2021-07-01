@@ -1,0 +1,30 @@
+.section {
+  padding-bottom: 100px;
+  overflow: hidden;
+}
+
+.tabs {
+  composes: main from 'containers';
+
+  margin-top: var(--space-n);
+  margin-bottom: var(--space-xxl);
+}
+
+.wrapperGallery {
+  composes: main from 'containers';
+}
+
+.gallery {
+  margin: 0 var(--space-xs-neg) var(--space-xxl);
+}
+
+.galleryViewport {
+  overflow: visible;
+}
+
+.item {
+  width: 28.405vw;
+  min-width: 300px;
+  max-width: 422px;
+  padding: 0 var(--space-xs);
+}

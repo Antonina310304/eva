@@ -2,9 +2,10 @@
 }
 
 .head {
+  composes: main from 'containers';
+
   display: flex;
   justify-content: space-between;
-  margin-bottom: var(--space-b);
 }
 
 .titleWrapper {
@@ -26,10 +27,6 @@
   margin-left: var(--space-xs);
 }
 
-.arrows {
-  display: none;
-}
-
 @media (--desktop-m) {
   .title {
     font-size: var(--size-xxl);
@@ -48,7 +45,6 @@
   }
 
   .arrows {
-    display: block;
     margin-left: var(--space-xxs);
   }
 }
