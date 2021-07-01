@@ -1,0 +1,28 @@
+.tabs {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  margin-right: var(--space-xs);
+  padding: var(--space-xs) var(--space-n);
+
+  font-family: var(--font-main);
+
+  background-color: var(--color-white);
+  border: 1px solid var(--color-medium-gray);
+  border-radius: 45px;
+  cursor: pointer;
+
+  transition: all 0.2s;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.button.selected {
+  font-weight: 500;
+
+  background-color: var(--color-light-gray);
+  border-color: var(--color-light-gray);
+}
