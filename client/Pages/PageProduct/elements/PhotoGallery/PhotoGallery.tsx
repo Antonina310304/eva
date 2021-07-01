@@ -2,8 +2,8 @@ import React, { FC, HTMLAttributes, memo, useMemo, ReactElement } from 'react';
 import cn from 'classnames';
 
 import useMedias from '@Hooks/useMedias';
+import ProductTags from '@Components/ProductTags';
 import Image from '@UI/Image';
-import List from '@UI/List';
 import Gallery from '@UI/Gallery';
 import { ProductTagData } from '@Types/Product';
 import styles from './PhotoGallery.module.css';
@@ -60,15 +60,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
           })}
         </Items>
 
-        {tags.length > 0 && (
-          <List
-            className={styles.tags}
-            items={tags}
-            renderChild={(tag: ProductTagData) => (
-              <Image className={styles.tag} src={tag.image.src} />
-            )}
-          />
-        )}
+        {tags.length > 0 && <ProductTags className={styles.tags} tags={tags} />}
       </div>
     </div>
   );

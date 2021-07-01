@@ -18,3 +18,10 @@
   background-position: 50%;
   background-size: contain;
 }
+
+@media (--desktop) {
+  .tag {
+    width: 40px;
+    height: 40px;
+  }
+}

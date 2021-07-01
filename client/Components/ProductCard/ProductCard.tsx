@@ -3,14 +3,14 @@ import cn from 'classnames';
 
 import Like from '@Components/Like';
 import Fabrics from '@Components/Fabrics';
+import ProductTags from '@Components/ProductTags';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import List from '@UI/List';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
-import { ProductData, ProductParameterGroupData, ProductTagData } from '@Types/Product';
-import Tag from './elements/Tag';
+import { ProductData, ProductParameterGroupData } from '@Types/Product';
 import Parameter from './elements/Parameter';
 import Sizes from './elements/Sizes';
 import FastView from './elements/FastView';
@@ -62,13 +62,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             <Like className={cn(styles.action, styles.like)} />
           </div>
 
-          {product.tags?.length > 0 && (
-            <List
-              className={styles.tags}
-              items={product.tags}
-              renderChild={(tag: ProductTagData) => <Tag className={styles.tag} tag={tag} />}
-            />
-          )}
+          {product.tags?.length > 0 && <ProductTags className={styles.tags} tags={product.tags} />}
         </div>
 
         <div className={styles.info}>

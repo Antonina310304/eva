@@ -147,17 +147,7 @@
   position: absolute;
   right: var(--space-s);
   bottom: var(--space-s);
-
-  display: flex;
-  justify-content: flex-end;
-}
-
-.tag {
-  margin-right: var(--space-xs);
-
-  &:last-child {
-    margin-right: 0;
-  }
+  z-index: 2;
 }
 
 .parameterGroups {
@@ -233,6 +223,10 @@
 
     .openConstructor {
       display: block;
+    }
+
+    .tags {
+      opacity: 0;
     }
   }
 }

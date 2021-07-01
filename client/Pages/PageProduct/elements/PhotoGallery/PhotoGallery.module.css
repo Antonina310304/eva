@@ -30,27 +30,7 @@
   position: absolute;
   top: var(--space-n);
   right: var(--space-n);
-
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: var(--space-xs);
-}
-
-.tag {
-  width: 60px;
-  height: 60px;
-  overflow: hidden;
-
-  background-color: var(--color-white);
-  background-size: contain;
-  border-radius: 50%;
-}
-
-@media (--desktop) {
-  .tag {
-    width: 40px;
-    height: 40px;
-  }
+  z-index: 2;
 }
 
 @media (--mobile-m) {
