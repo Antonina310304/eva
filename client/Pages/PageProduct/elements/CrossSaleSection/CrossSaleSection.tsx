@@ -46,8 +46,8 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
           onChangeCurrent={handleChangeCurrent}
         >
           {products.map((product) => (
-            <div className={styles.item}>
-              <CrossSaleProductCard product={product} key={product.id} />
+            <div className={styles.item} key={product.id}>
+              <CrossSaleProductCard product={product} />
             </div>
           ))}
         </Gallery>
