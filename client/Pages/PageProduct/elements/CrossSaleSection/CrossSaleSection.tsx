@@ -17,7 +17,7 @@ export interface CrossSaleSectionProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
-  const { className, title, products, tabs, ...restProps } = props;
+  const { className, title, products, tabs = [], ...restProps } = props;
   const [slide, setSlide] = useState(0);
 
   const handleChangeCurrent = useCallback(({ current }) => {
@@ -26,18 +26,7 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
 
   return (
     <Section {...restProps} className={cn(styles.section, className)} title={title}>
-      {tabs.length > 0 && (
-        <ButtonTabs
-          className={styles.tabs}
-          defaultValue='0'
-          tabs={[
-            { id: '0', label: 'Все категории' },
-            { id: '1', label: 'Диваны' },
-            { id: '2', label: 'Кресла' },
-            { id: '3', label: 'Пуфы' },
-          ]}
-        />
-      )}
+      {tabs.length > 0 && <ButtonTabs className={styles.tabs} defaultValue='0' tabs={tabs} />}
 
       <div className={styles.wrapperGallery}>
         <Gallery

@@ -7,11 +7,12 @@
   composes: main from 'containers';
 
   margin-top: var(--space-n);
-  margin-bottom: var(--space-xxl);
 }
 
 .wrapperGallery {
   composes: main from 'containers';
+
+  margin-top: var(--space-xxl);
 }
 
 .gallery {
