@@ -8,8 +8,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import nodeConfig from '../webpack/configs/node';
 import webConfig from '../webpack/configs/web';
 import { compilerPromise } from './helpers';
-import proxyRoutes from './router/proxies.dev';
-import mainRoutes from './router/main.dev';
+import proxyRoutes from './router/proxies';
+import mainRoutes from './router/main';
 import { envs } from '../utils/envs';
 import { paths } from '../utils/paths';
 
