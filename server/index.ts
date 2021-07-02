@@ -3,8 +3,8 @@
 import express from 'express';
 import compression from 'compression';
 
-import proxyRoutes from './router/proxies.dev';
-import mainRoutes from './router/main.dev';
+import proxyRoutes from './router/proxies';
+import mainRoutes from './router/main';
 import { envs } from '../utils/envs';
 import { paths } from '../utils/paths';
 
