@@ -1,41 +1,127 @@
 stages:
+  - prepare
+  - lint
+  - build
+  - push
   - review
+  - deploy
+
+prepare:
+  tags:
+    - divan
+  stage: prepare
+  image: node:14-alpine
+  script:
+    - npm ci
+  cache:
+    key: '$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA'
+    paths:
+      - node_modules/
+  only:
+    - merge_requests
 
 check_code_style:
   tags:
-    - divan-react
-  stage: review
+    - divan
+  stage: lint
   image: node:14-alpine
-  before_script:
-    - npm ci
   script:
     - npm run code-style
+  cache:
+    key: '$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA'
+    paths:
+      - node_modules/
   only:
     - merge_requests
   allow_failure: true
 
 lint_css_code:
   tags:
-    - divan-react
-  stage: review
+    - divan
+  stage: lint
   image: node:14-alpine
-  before_script:
-    - npm ci
   script:
     - npm run lint:css
+  cache:
+    key: '$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA'
+    paths:
+      - node_modules/
   only:
     - merge_requests
   allow_failure: true
 
 lint_javascript_code:
   tags:
-    - divan-react
-  stage: review
+    - divan
+  stage: lint
   image: node:14-alpine
-  before_script:
-    - npm ci
   script:
     - npm run lint:js
+  cache:
+    key: '$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA'
+    paths:
+      - node_modules/
   only:
     - merge_requests
   allow_failure: true
+
+build:
+  tags:
+    - divan
+  stage: build
+  interruptible: true
+  script:
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA  -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest --build-arg NPM_REGISTRY="$NPM_REGISTRY" --build-arg NPM_TOKEN="$NPM_TOKEN" .
+  only:
+    - master
+    - merge_requests
+
+push:
+  tags:
+    - divan
+  stage: push
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - docker --config ~/.$CI_PROJECT_PATH_SLUG login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  script:
+    - docker --config ~/.$CI_PROJECT_PATH_SLUG push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
+  only:
+    - master
+    - merge_requests
+
+latest:
+  tags:
+    - divan
+  stage: push
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - docker --config ~/.$CI_PROJECT_PATH_SLUG login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  script:
+    - docker --config ~/.$CI_PROJECT_PATH_SLUG push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
+  only:
+    - master
+    - merge_requests
+
+review:
+  tags:
+    - divan
+  stage: review
+  allow_failure: true
+  image: dtzar/helm-kubectl:3.6.0
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: https://$CI_COMMIT_REF_SLUG.eva.hhw.ru
+  script:
+    - kubectl config set-cluster apps --insecure-skip-tls-verify=true --server="$REVIEW_K8S_API_ENDPOINT"
+    - kubectl config set-credentials ci --token="$REVIEW_K8S_SECRET_ACCESS_KEY"
+    - kubectl config set-context ci --cluster=apps --user=ci
+    - kubectl config use-context ci
+    - kubectl create namespace $CI_COMMIT_REF_SLUG --dry-run=client --output="yaml" | kubectl apply -f -
+    - sed -i "s/<CI_COMMIT_REF_SLUG>/${CI_COMMIT_REF_SLUG}/g" ./.kubernetes/*.yaml
+    - sed -i "s/<COMMIT_SHORT_SHA>/${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}/g" ./.kubernetes/*.yaml
+    - kubectl apply -n $CI_COMMIT_REF_SLUG -f ./.kubernetes/
+  only:
+    - master
+    - merge_requests
