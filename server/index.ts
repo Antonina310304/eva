@@ -3,17 +3,15 @@
 import express from 'express';
 import compression from 'compression';
 
-import webConfig from '../webpack/configs/web';
 import proxyRoutes from './router/proxies.dev';
 import mainRoutes from './router/main.dev';
 import { envs } from '../utils/envs';
 import { paths } from '../utils/paths';
 
 const app = express();
-const publicPath = webConfig.output.publicPath.toString();
 
 app.use(compression());
-app.use(publicPath, express.static(paths.dist.web));
+app.use('/react/assets', express.static(paths.dist.web));
 app.use('/react/static', express.static(paths.static));
 app.use(proxyRoutes);
 
