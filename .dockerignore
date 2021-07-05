@@ -16,4 +16,5 @@ build
 .gitignore
 .gitlab-ci.yml
 Dockerfile
-env.local
+.env
+.env.local

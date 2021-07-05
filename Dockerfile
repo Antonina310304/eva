@@ -53,5 +53,5 @@ ENV API_PECOM="https://shipping.divan.ru/api"
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 
-EXPOSE 3333
+EXPOSE 4444
 CMD ["node", "./dist/server/index.js"]

@@ -121,6 +121,7 @@ review:
     - kubectl create namespace $CI_COMMIT_REF_SLUG --dry-run=client --output="yaml" | kubectl apply -f -
     - sed -i "s/<CI_COMMIT_REF_SLUG>/${CI_COMMIT_REF_SLUG}/g" ./.kubernetes/*.yaml
     - sed -i "s/<COMMIT_SHORT_SHA>/${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}/g" ./.kubernetes/*.yaml
+    - kubectl create configmap env-configmap --from-file=./.env --dry-run=client --output="yaml" | kubectl apply -n $CI_COMMIT_REF_SLUG -f -
     - kubectl apply -n $CI_COMMIT_REF_SLUG -f ./.kubernetes/
   only:
     - master

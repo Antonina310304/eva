@@ -20,17 +20,16 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 4444
+          envFrom:
+            - configMapRef:
+                name: env-configmap
           env:
             - name: NODE_ENV
               value: production
             - name: NODE_OPTIONS
               value: --max-http-header-size=65536
-            - name: REACT_PUBLIC_PATH
-              value: /react/assets/
             - name: DOMAIN
               value: https://test:test@<CI_COMMIT_REF_SLUG>.eva.hhw.ru
-            - name: BACKEND_ORIGIN
-              value: https://www.divan.ru
           resources:
             limits:
               memory: 384Mi
