@@ -10,8 +10,10 @@ RUN apk update \
 # Настраиваем работу с NPM
 ARG NPM_REGISTRY
 ARG NPM_TOKEN
+ARG DOMAIN
 ENV NPM_REGISTRY ${NPM_REGISTRY:-}
 ENV NPM_TOKEN ${NPM_TOKEN:-}
+ENV DOMAIN ${DOMAIN:-}
 RUN npm config set "${NPM_REGISTRY}" "${NPM_TOKEN}"
 
 # Устанавливаем все зависимости, в том числе и dev-зависимости, которые нужны для сборки
@@ -53,5 +55,5 @@ ENV API_PECOM="https://shipping.divan.ru/api"
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 
-EXPOSE 3333
+EXPOSE 4444
 CMD ["node", "./dist/server/index.js"]

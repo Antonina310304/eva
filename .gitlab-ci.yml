@@ -71,7 +71,7 @@ build:
   stage: build
   interruptible: true
   script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA  -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest --build-arg NPM_REGISTRY="$NPM_REGISTRY" --build-arg NPM_TOKEN="$NPM_TOKEN" .
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA  -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest --build-arg NPM_REGISTRY="$NPM_REGISTRY" --build-arg NPM_TOKEN="$NPM_TOKEN" --build-arg DOMAIN="https://test:test@$CI_COMMIT_REF_SLUG.eva.hhw.ru" .
   only:
     - master
     - merge_requests
@@ -121,6 +121,7 @@ review:
     - kubectl create namespace $CI_COMMIT_REF_SLUG --dry-run=client --output="yaml" | kubectl apply -f -
     - sed -i "s/<CI_COMMIT_REF_SLUG>/${CI_COMMIT_REF_SLUG}/g" ./.kubernetes/*.yaml
     - sed -i "s/<COMMIT_SHORT_SHA>/${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}/g" ./.kubernetes/*.yaml
+    - kubectl create configmap env-configmap --from-env-file=./.env --dry-run=client --output="yaml" | kubectl apply -n $CI_COMMIT_REF_SLUG -f -
     - kubectl apply -n $CI_COMMIT_REF_SLUG -f ./.kubernetes/
   only:
     - master
