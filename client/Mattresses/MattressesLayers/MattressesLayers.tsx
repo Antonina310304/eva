@@ -39,8 +39,10 @@ const MattressesLayers: FC<MattressesLayersProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.layers, className)}>
-      <div className={styles.wrapperStock}>
-        <MattressesStack activeLayer={activeIndex} onToggleLayer={handleToggleLayerStock} />
+      <div className={styles.wrapperStack}>
+        <div className={styles.stack}>
+          <MattressesStack activeLayer={activeIndex} onToggleLayer={handleToggleLayerStock} />
+        </div>
 
         {priorityParameter.length > 0 && (
           <div className={styles.characteristic}>

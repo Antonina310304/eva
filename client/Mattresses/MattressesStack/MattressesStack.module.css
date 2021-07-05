@@ -6,6 +6,8 @@
   transition: all var(--animation-duration-fast);
 
   svg {
+    width: 100%;
+    height: auto;
     overflow: visible;
 
     transition: all 0.2s;

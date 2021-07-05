@@ -9,8 +9,14 @@
   margin-bottom: var(--space-e);
 }
 
-.description {
-  margin-top: var(--space-xxl);
+.description p {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .wrapperAdditional {

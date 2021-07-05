@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.wrapperStock {
+.wrapperStack {
   flex-shrink: 0;
   width: 56.2%;
   margin-right: var(--space-xxe);
@@ -45,19 +45,49 @@
   }
 }
 
-@media (--mobile-l) {
+@media (--desktop) {
   .layers {
     flex-direction: column;
   }
 
-  .wrapperStock {
+  .wrapperStack {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
     margin-right: 0;
-    overflow: visible;
+  }
+
+  .stack {
+    flex-grow: 1;
+    margin-right: var(--space-xxl);
+  }
+
+  .characteristic {
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 188px;
+    margin-top: 0;
+  }
+
+  .characteristicItem {
+    margin-bottom: var(--space-xxl);
+    margin-left: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .wrapperAccordion {
     width: 100%;
-    margin-top: 20px;
+    margin-top: var(--space-xxl);
+  }
+
+  .title {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
   }
 }
 
@@ -66,15 +96,41 @@
     flex-direction: row;
   }
 
-  .wrapperStock {
-    max-width: calc(100% - 330px - var(--space-3xl));
-    margin-right: var(--space-3xl);
+  .wrapperStack {
+    flex-direction: column;
+    width: calc(50% - var(--space-xb) / 2);
+    margin-right: var(--space-xb);
+  }
+
+  .stack {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: var(--space-xxl);
   }
 
   .wrapperAccordion {
     flex-shrink: 0;
-    width: 330px;
+    width: calc(50% - var(--space-xb) / 2);
     margin-top: 0;
+  }
+
+  .characteristic {
+    flex-direction: row;
+    max-width: 100%;
+  }
+
+  .characteristicItem {
+    margin-right: var(--space-xb);
+    margin-bottom: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
   }
 }
 
@@ -87,7 +143,7 @@
     margin-bottom: var(--space-s);
   }
 
-  .wrapperStock {
+  .wrapperStack {
     flex-wrap: wrap;
     width: 100%;
     max-width: 100%;
@@ -97,12 +153,11 @@
 
   .wrapperAccordion {
     width: 100%;
-    margin-top: 60px;
+    margin-top: var(--space-xxl);
   }
 
-  .characteristic {
-    position: static;
-
-    width: 100%;
+  .title {
+    font-size: var(--size-m);
+    line-height: var(--lh-m);
   }
 }
