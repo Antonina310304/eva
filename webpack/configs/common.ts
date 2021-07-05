@@ -21,6 +21,7 @@ const commonConfig: Configuration = {
       '@Components': path.resolve(paths.context, './Components'),
       '@Contexts': path.resolve(paths.context, './Contexts'),
       '@Hooks': path.resolve(paths.context, './Hooks'),
+      '@Mattresses': path.resolve(paths.context, './Mattresses'),
       '@Modals': path.resolve(paths.context, './Modals'),
       '@Pages': path.resolve(paths.context, './Pages'),
       '@Queries': path.resolve(paths.context, './Queries'),

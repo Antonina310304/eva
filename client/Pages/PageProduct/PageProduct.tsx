@@ -3,8 +3,7 @@ import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
 import usePage from '@Queries/usePage';
-import Section from '@Components/Section';
-import ButtonTabs from '@UI/ButtonTabs';
+import MattressesLayers from '@Mattresses/MattressesLayers';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -44,6 +43,15 @@ const PageProduct: FC<PageProductProps> = (props) => {
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: page.data.description }}
           />
+        )}
+
+        {page.data.layers?.length > 0 && (
+          <div className={styles.layers}>
+            <MattressesLayers
+              layers={page.data.layers}
+              priorityParameter={page.data.priorityParameter}
+            />
+          </div>
         )}
       </MainGrid>
 
