@@ -10,8 +10,10 @@ RUN apk update \
 # Настраиваем работу с NPM
 ARG NPM_REGISTRY
 ARG NPM_TOKEN
+ARG DOMAIN
 ENV NPM_REGISTRY ${NPM_REGISTRY:-}
 ENV NPM_TOKEN ${NPM_TOKEN:-}
+ENV DOMAIN ${DOMAIN:-}
 RUN npm config set "${NPM_REGISTRY}" "${NPM_TOKEN}"
 
 # Устанавливаем все зависимости, в том числе и dev-зависимости, которые нужны для сборки
