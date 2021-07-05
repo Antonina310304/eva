@@ -79,7 +79,7 @@ const MattressesLayersAccordion: FC<MattressesLayersAccordionProps> = (props) =>
               </div>
             </div>
 
-            <Collapse collapsed={collapsed}>
+            <Collapse collapsed={collapsed} duration={200}>
               <div className={styles.description}>{layer.description}</div>
             </Collapse>
           </div>
