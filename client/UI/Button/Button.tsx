@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React, { ButtonHTMLAttributes, FC, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
@@ -8,7 +7,7 @@ export interface SizesProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   wide?: boolean;
   before?: ReactChild;
-  theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary' | 'circle';
+  theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary' | 'linkPrimary' | 'circle';
   view?: 'main' | 'rounded';
 }
 
@@ -39,10 +38,12 @@ const Button: FC<SizesProps> = (props) => {
           [styles.themeBlank]: theme === 'blank',
           [styles.themeDirty]: theme === 'dirty',
           [styles.themeLinkSecondary]: theme === 'linkSecondary',
+          [styles.themeLinkPrimary]: theme === 'linkPrimary',
           [styles.themeCircle]: theme === 'circle',
         },
         className,
       )}
+      // eslint-disable-next-line react/button-has-type
       type={type}
     >
       {before && <div className={styles.before}>{before}</div>}
