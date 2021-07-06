@@ -1,8 +1,10 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
 import usePage from '@Queries/usePage';
+import useMeta from '@Queries/useMeta';
+import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
 import MattressesLayers from '@Mattresses/MattressesLayers';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
@@ -22,8 +24,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
+  const meta = useMeta();
 
-  if (!page.isSuccess) return null;
+  const handleCalcMatrasy = useCallback(() => {
+    console.log('Event to analytic!');
+  }, []);
+
+  if (!page.isSuccess || !meta.isSuccess) return null;
 
   const { product, mediaGallery, crossSalesProducts, sameProducts } = page.data;
 
@@ -55,6 +62,21 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
       </MainGrid>
 
+      {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
+        <ChooseMattressBanner
+          categoryColor={product.categoryColor}
+          title='Подбери лучший!'
+          action={{
+            title: 'Подобрать матрас',
+            link: '/promo/mattrasses',
+          }}
+          onLink={handleCalcMatrasy}
+        >
+          Пройди простой Quiz и узнай,
+          <br />
+          {` какие матрасы подойдут именно для тебя.`}
+        </ChooseMattressBanner>
+      )}
       <div className={styles.separator} />
 
       <div className={styles.wrapperAdditional}>
