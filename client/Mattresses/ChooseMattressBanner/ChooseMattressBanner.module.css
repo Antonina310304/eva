@@ -24,7 +24,6 @@
 }
 
 .title {
-
   composes: xl from 'sizes';
 
   margin-bottom: var(--space-xs);
