@@ -26,27 +26,19 @@ const Filters: FC<FiltersProps> = (props) => {
             className={cn(styles.button, styles.main)}
             view='rounded'
             before={<div className={styles.iconFilters} />}
-            title='Все фильтры'
             onClick={handleClickAll}
-          />
-          <Button
-            className={cn(styles.button, styles.secondary)}
-            view='rounded'
-            theme='blank'
-            title='Цена'
-          />
-          <Button
-            className={cn(styles.button, styles.secondary)}
-            view='rounded'
-            theme='blank'
-            title='Цвет'
-          />
-          <Button
-            className={cn(styles.button, styles.secondary)}
-            view='rounded'
-            theme='blank'
-            title='Стиль'
-          />
+          >
+            Все фильтры
+          </Button>
+          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
+            Цена
+          </Button>
+          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
+            Цвет
+          </Button>
+          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
+            Стиль
+          </Button>
         </div>
 
         <div className={styles.count}>Найдено 1440</div>

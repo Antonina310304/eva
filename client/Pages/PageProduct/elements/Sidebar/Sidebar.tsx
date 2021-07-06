@@ -58,7 +58,9 @@ const Sidebar: FC<SidebarProps> = (props) => {
       {page.reviewsPhotoCount > 0 && (
         <div className={styles.wrapperRating}>
           <Rating className={styles.rating} defaultValue={product.rating} />
-          <Button className={styles.countReviews} theme='linkSecondary' title={countReviewsText} />
+          <Button className={styles.countReviews} theme='linkSecondary'>
+            {countReviewsText}
+          </Button>
         </div>
       )}
 
@@ -76,25 +78,25 @@ const Sidebar: FC<SidebarProps> = (props) => {
       <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
 
       {meta.data.country === 'RUS' && (
-        <Button
-          className={styles.priceReduction}
-          theme='linkSecondary'
-          title='Подписаться на изменение цены'
-        />
+        <Button className={styles.priceReduction} theme='linkSecondary'>
+          Подписаться на изменение цены
+        </Button>
       )}
 
       <div className={styles.wrapperFabrics}>
         <Fabrics fabrics={fabrics} defaultSelectedFabric={fabrics[0]} size='m' />
-        <Button
-          className={styles.orderFabrics}
-          theme='linkSecondary'
-          title='Заказать образцы тканей'
-        />
+        <Button className={styles.orderFabrics} theme='linkSecondary'>
+          Заказать образцы тканей
+        </Button>
       </div>
 
       <div className={styles.actions}>
-        <Button className={styles.action} wide theme='secondary' title='Изменить конфигурацию' />
-        <Button className={styles.action} wide title='В корзину' />
+        <Button className={styles.action} wide theme='secondary'>
+          Изменить конфигурацию
+        </Button>
+        <Button className={styles.action} wide>
+          В корзину
+        </Button>
       </div>
 
       <div className={styles.linksList}>

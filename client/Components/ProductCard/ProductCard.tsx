@@ -133,7 +133,9 @@ const ProductCard: FC<ProductCardProps> = (props) => {
               />
             )}
 
-            <Button className={styles.buy} wide title='В корзину' />
+            <Button className={styles.buy} wide>
+              В корзину
+            </Button>
             <div className={styles.moreWrapper}>
               <Link className={styles.more} to={product.link} view='secondary'>
                 Подробнее о товаре

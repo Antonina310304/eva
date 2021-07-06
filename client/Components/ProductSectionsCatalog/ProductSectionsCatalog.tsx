@@ -33,7 +33,9 @@ const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
       />
 
       <div className={styles.moreWrapper}>
-        <Button className={styles.moreButton} theme='dirty' title='Смотреть еще' />
+        <Button className={styles.moreButton} theme='dirty'>
+          Смотреть еще
+        </Button>
       </div>
     </div>
   );

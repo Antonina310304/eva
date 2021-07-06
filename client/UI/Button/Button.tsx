@@ -15,7 +15,6 @@ const Button: FC<SizesProps> = (props) => {
   const {
     className,
     wide,
-    title,
     before,
     children,
     type = 'button',
@@ -47,7 +46,6 @@ const Button: FC<SizesProps> = (props) => {
       type={type}
     >
       {before && <div className={styles.before}>{before}</div>}
-      {title}
       {children}
     </button>
   );
