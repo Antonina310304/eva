@@ -20,6 +20,9 @@ const Link: FC<LinkProps> = (props) => {
   const handleClick = useCallback(
     async (e: MouseEvent) => {
       e.preventDefault();
+      if (window.cancelClick) return;
+
+      console.log('click');
 
       await queryClient.prefetchQuery(['page', to, 'ssr'], () => ApiPages.fetchPage({ path: to }));
       history.push(to);
