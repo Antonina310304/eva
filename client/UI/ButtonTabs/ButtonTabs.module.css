@@ -6,6 +6,10 @@
 }
 
 .button {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
   margin-right: var(--space-xs);
   margin-bottom: var(--space-xs);
   padding: var(--space-xs) var(--space-n);
@@ -29,4 +33,16 @@
 
   background-color: var(--color-light-gray);
   border-color: var(--color-light-gray);
+}
+
+.boldText {
+  font-weight: 500;
+
+  opacity: 0;
+
+  user-select: none;
+}
+
+.text {
+  position: absolute;
 }

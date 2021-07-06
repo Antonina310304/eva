@@ -62,7 +62,8 @@ const ButtonTabs: FC<ButtonTabsProps> = (props) => {
             type='button'
             onClick={(e: MouseEvent) => handleClickTab(e, tab)}
           >
-            {tab.label}
+            <span className={styles.boldText}>{tab.label}</span>
+            <span className={styles.text}>{tab.label}</span>
           </button>
         );
       }}
