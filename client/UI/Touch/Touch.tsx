@@ -155,15 +155,15 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
       };
 
       if (onEnd) {
-        onEnd(outputEvent);
+        setTimeout(() => onEnd(outputEvent), 10);
       }
 
       if (isSlideY && onEndY) {
-        onEndY(outputEvent);
+        setTimeout(() => onEndY(outputEvent), 10);
       }
 
       if (isSlideX && onEndX) {
-        onEndX(outputEvent);
+        setTimeout(() => onEndX(outputEvent), 10);
       }
 
       // Если закончили жест на ссылке, выставляем флаг для отмены перехода
@@ -258,17 +258,17 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
     function cleanup() {
       versions.forEach((events) => {
         refContainer.current.removeEventListener(events[0], handleStart, listenerParams);
-        refContainer.current.removeEventListener(events[1], handleMove, listenerParams);
-        refContainer.current.removeEventListener(events[2], handleEnd, listenerParams);
-        refContainer.current.removeEventListener(events[3], handleEnd, listenerParams);
+        window.document.documentElement.removeEventListener(events[1], handleMove, listenerParams);
+        window.document.documentElement.removeEventListener(events[2], handleEnd, listenerParams);
+        window.document.documentElement.removeEventListener(events[3], handleEnd, listenerParams);
       });
     }
 
     versions.forEach((events) => {
       refContainer.current.addEventListener(events[0], handleStart, listenerParams);
-      refContainer.current.addEventListener(events[1], handleMove, listenerParams);
-      refContainer.current.addEventListener(events[2], handleEnd, listenerParams);
-      refContainer.current.addEventListener(events[3], handleEnd, listenerParams);
+      window.document.documentElement.addEventListener(events[1], handleMove, listenerParams);
+      window.document.documentElement.addEventListener(events[2], handleEnd, listenerParams);
+      window.document.documentElement.addEventListener(events[3], handleEnd, listenerParams);
     });
 
     return cleanup;

@@ -346,6 +346,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    */
   const handleStartX = useCallback((e: TouchEvent) => {
     startT.current = e.startT;
+    window.draggableTarget = window.draggableTarget || refContainer.current;
 
     dispatch('disableAnimation');
     dispatch({ type: 'setStartT', data: { startT: e.startT } });
@@ -356,19 +357,19 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    */
   const handleMoveX = useCallback(
     (e: TouchEvent) => {
-      if (!state.isDraggable) return;
-
       e.originalEvent.preventDefault();
 
+      if (!state.isDraggable) return;
       if (!e.isSlideX) return;
-
-      if (onDragStart) onDragStart(e);
+      if (window.draggableTarget && window.draggableTarget !== refContainer.current) return;
 
       dispatch({
         type: 'setDelta',
         data: { deltaX: e.shiftX },
       });
       dispatch('enableDragging');
+
+      if (onDragStart) onDragStart(e);
     },
     [onDragStart, state],
   );
@@ -382,6 +383,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         dispatch('slide');
       }
       dispatch('disableDragging');
+
+      window.draggableTarget = null;
 
       if (onDragEnd) onDragEnd(e);
     },
