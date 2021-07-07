@@ -88,9 +88,11 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             />
             <div className={styles.fabricsMore}>
               {`+150 `}
-              <Link className={styles.openConstructor} view='secondary' to='#'>
-                в конструкторе
-              </Link>
+              <div className={styles.openConstructor}>
+                <Link view='secondary' to='#'>
+                  в конструкторе
+                </Link>
+              </div>
             </div>
           </div>
         </div>
