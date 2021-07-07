@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, {
   DragEvent,
-  MouseEvent,
+  MouseEvent as ReactMouseEvent,
   FC,
   useCallback,
   useEffect,
@@ -13,11 +13,11 @@ import React, {
   Ref,
 } from 'react';
 
-import { coordX, coordY, DivanTouchEvent, DivanTouchEventHander } from './lib';
-
+export type DivanTouchEvent = any;
 export type TouchEventHandler = (e: TouchEvent) => void;
-export type ClickHandler = (e: MouseEvent<HTMLElement>) => void;
+export type ClickHandler = (e: ReactMouseEvent<HTMLElement>) => void;
 export type DragHandler = (e: DragEvent<HTMLElement>) => void;
+export type DivanTouchEventHander = (e: DivanTouchEvent) => void;
 
 export interface Gesture {
   startX?: number;
@@ -60,6 +60,20 @@ const versions = [
   ['touchstart', 'touchmove', 'touchend', 'touchcancel'],
   ['mousedown', 'mousemove', 'mouseup', 'mouseleave'],
 ];
+
+/*
+ * Получает кординату по оси абсцисс из touch- или mouse-события
+ */
+const coordX = (e: DivanTouchEvent): number => {
+  return e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
+};
+
+/*
+ * Получает кординату по оси ординат из touch- или mouse-события
+ */
+const coordY = (e: DivanTouchEvent): number => {
+  return e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
+};
 
 const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElement>) => {
   const {
