@@ -10,6 +10,12 @@
   .discount {
     display: none;
   }
+
+  .name {
+    height: calc(var(--lh-n) * 2);
+
+    white-space: normal;
+  }
 }
 
 .box {
@@ -115,6 +121,8 @@
 
 .name {
   composes: black from 'colors';
+
+  max-width: 100%;
 
   overflow: hidden;
 
@@ -232,6 +240,10 @@
 }
 
 @media (--mobile-m) {
+  .productCard {
+    max-width: 300px;
+  }
+
   .productCard.viewMini {
     .info {
       padding: 0 var(--space-s);
@@ -258,5 +270,27 @@
 
   .info {
     margin-top: var(--space-xs);
+  }
+}
+
+@media (--mobile) {
+  .productCard {
+    .actions {
+      display: none;
+    }
+  }
+
+  .productCard.viewMini {
+    .name {
+      height: calc(var(--lh-s) * 2);
+
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
+
+    .expiredPrice {
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
   }
 }
