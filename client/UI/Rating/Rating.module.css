@@ -1,0 +1,16 @@
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  width: 14px;
+  height: 14px;
+
+  background-image: url('./starDefault.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.star.selected {
+  background-image: url('./starSelected.svg');
+}

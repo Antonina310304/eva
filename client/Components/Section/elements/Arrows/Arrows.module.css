@@ -1,0 +1,29 @@
+.arrows {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-xs);
+}
+
+.arrow {
+  width: 42px;
+  height: 42px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  opacity: 0.4;
+
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.arrow.prev {
+  background-image: url('./icon-prev.svg');
+}
+
+.arrow.next {
+  background-image: url('./icon-next.svg');
+}

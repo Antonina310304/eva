@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eva
+  labels:
+    app: eva
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eva
+  template:
+    metadata:
+      labels:
+        app: eva
+    spec:
+      containers:
+        - name: app
+          image: git.intranet.hhw.ru:4567/divan-services/eva:<COMMIT_SHORT_SHA>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4444
+          envFrom:
+            - configMapRef:
+                name: env-configmap
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: NODE_OPTIONS
+              value: --max-http-header-size=65536
+            - name: DOMAIN
+              value: https://test:test@<CI_COMMIT_REF_SLUG>.eva.hhw.ru
+          resources:
+            limits:
+              memory: 384Mi
+            requests:
+              memory: 384Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4444
+            initialDelaySeconds: 5
+            periodSeconds: 5

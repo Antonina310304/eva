@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, {
   DragEvent,
-  MouseEvent,
+  MouseEvent as ReactMouseEvent,
   FC,
   useCallback,
   useEffect,
-  ElementType,
   ReactChild,
   HTMLAttributes,
   useRef,
@@ -14,18 +13,11 @@ import React, {
   Ref,
 } from 'react';
 
-import {
-  supportedEvents,
-  coordX,
-  coordY,
-  touchEnabled,
-  DivanTouchEvent,
-  DivanTouchEventHander,
-} from './lib';
-
+export type DivanTouchEvent = any;
 export type TouchEventHandler = (e: TouchEvent) => void;
-export type ClickHandler = (e: MouseEvent<HTMLElement>) => void;
+export type ClickHandler = (e: ReactMouseEvent<HTMLElement>) => void;
 export type DragHandler = (e: DragEvent<HTMLElement>) => void;
+export type DivanTouchEventHander = (e: DivanTouchEvent) => void;
 
 export interface Gesture {
   startX?: number;
@@ -60,10 +52,28 @@ export interface TouchProps extends HTMLAttributes<HTMLElement> {
   onEndX?(outputEvent: TouchEvent): void;
   onEndY?(outputEvent: TouchEvent): void;
   useCapture?: boolean;
-  Component?: ElementType;
   children?: ReactChild;
   ref?: Ref<HTMLElement>;
 }
+
+const versions = [
+  ['touchstart', 'touchmove', 'touchend', 'touchcancel'],
+  ['mousedown', 'mousemove', 'mouseup', 'mouseleave'],
+];
+
+/*
+ * Получает кординату по оси абсцисс из touch- или mouse-события
+ */
+const coordX = (e: DivanTouchEvent): number => {
+  return e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
+};
+
+/*
+ * Получает кординату по оси ординат из touch- или mouse-события
+ */
+const coordY = (e: DivanTouchEvent): number => {
+  return e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
+};
 
 const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElement>) => {
   const {
@@ -78,32 +88,15 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
     onEndY,
     onClick,
     useCapture,
-    Component,
     children,
     ...restProps
   } = props;
 
-  const cancelClick = useRef(false);
-  const refContainer = useRef<HTMLElement>();
+  const refContainer = useRef<HTMLDivElement>();
   const gesture = useRef<Partial<Gesture>>();
-  const events = supportedEvents();
   const listenerParams = {
     capture: useCapture,
     passive: false,
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const subscribe = (element: HTMLElement) => {
-    element.addEventListener(events[1], handleMove, listenerParams);
-    element.addEventListener(events[2], handleEnd, listenerParams);
-    element.addEventListener(events[3], handleEnd, listenerParams);
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const unsubscribe = (element: HTMLElement) => {
-    element.removeEventListener(events[1], handleMove, listenerParams);
-    element.removeEventListener(events[2], handleEnd, listenerParams);
-    element.removeEventListener(events[3], handleEnd, listenerParams);
   };
 
   /**
@@ -141,10 +134,8 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
       if (onStartY) {
         onStartY(outputEvent);
       }
-
-      if (!touchEnabled) subscribe(window.document.documentElement);
     },
-    [onStart, onStartX, onStartY, subscribe],
+    [onStart, onStartX, onStartY],
   );
 
   /**
@@ -152,37 +143,37 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
    */
   const handleEnd: DivanTouchEventHander = useCallback(
     (e: DivanTouchEvent) => {
-      const { isPressed, isSlide, isSlideX, isSlideY } = gesture.current;
+      if (!gesture.current) return;
+      if (!gesture.current.isPressed) return;
 
-      if (isPressed) {
-        // Вызываем нужные колбеки из props
-        const outputEvent: TouchEvent = {
-          ...gesture.current,
-          originalEvent: e,
-        };
+      const { isSlide, isSlideX, isSlideY } = gesture.current;
 
-        if (onEnd) {
-          onEnd(outputEvent);
-        }
+      // Вызываем нужные колбеки из props
+      const outputEvent: TouchEvent = {
+        ...gesture.current,
+        originalEvent: e,
+      };
 
-        if (isSlideY && onEndY) {
-          onEndY(outputEvent);
-        }
-
-        if (isSlideX && onEndX) {
-          onEndX(outputEvent);
-        }
+      if (onEnd) {
+        setTimeout(() => onEnd(outputEvent), 10);
       }
 
-      const target = e.target as HTMLElement;
+      if (isSlideY && onEndY) {
+        setTimeout(() => onEndY(outputEvent), 10);
+      }
+
+      if (isSlideX && onEndX) {
+        setTimeout(() => onEndX(outputEvent), 10);
+      }
 
       // Если закончили жест на ссылке, выставляем флаг для отмены перехода
-      cancelClick.current = target.tagName === 'A' && isSlide;
+      window.cancelClick = isSlide;
+      setTimeout(() => {
+        window.cancelClick = false;
+      }, 10);
       gesture.current = {};
-
-      if (!touchEnabled) unsubscribe(window.document.documentElement);
     },
-    [onEnd, onEndX, onEndY, unsubscribe],
+    [onEnd, onEndX, onEndY],
   );
 
   /**
@@ -190,63 +181,65 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
    */
   const handleMove: DivanTouchEventHander = useCallback(
     (e: DivanTouchEvent) => {
-      const { isPressed, isX, isY, startX, startY } = gesture.current;
+      if (!gesture.current) return;
+      if (!gesture.current.isPressed) return;
 
-      if (isPressed) {
-        // смещения
-        const shiftX = coordX(e) - startX;
-        const shiftY = coordY(e) - startY;
+      const { isSlide, isX, isY, startX, startY } = gesture.current;
 
-        // абсолютные значения смещений
-        const shiftXAbs = Math.abs(shiftX);
-        const shiftYAbs = Math.abs(shiftY);
+      // смещения
+      const shiftX = coordX(e) - startX;
+      const shiftY = coordY(e) - startY;
 
-        // Если определяем мультитач, то прерываем жест
-        if (!!e.touches && e.touches.length > 1) {
-          return handleEnd(e);
-        }
+      // абсолютные значения смещений
+      const shiftXAbs = Math.abs(shiftX);
+      const shiftYAbs = Math.abs(shiftY);
 
-        // если мы ещё не определились
-        if (!isX && !isY) {
-          const willBeX = shiftXAbs >= 5 && shiftXAbs > shiftYAbs;
-          const willBeY = shiftYAbs >= 5 && shiftYAbs > shiftXAbs;
-          const willBeSlidedX = (willBeX && !!onMoveX) || !!onMove;
-          const willBeSlidedY = (willBeY && !!onMoveY) || !!onMove;
-
-          gesture.current.isY = willBeY;
-          gesture.current.isX = willBeX;
-          gesture.current.isSlideX = willBeSlidedX;
-          gesture.current.isSlideY = willBeSlidedY;
-          gesture.current.isSlide = willBeSlidedX || willBeSlidedY;
-        }
-
-        if (gesture.current.isSlide) {
-          gesture.current.shiftX = shiftX;
-          gesture.current.shiftY = shiftY;
-          gesture.current.shiftXAbs = shiftXAbs;
-          gesture.current.shiftYAbs = shiftYAbs;
-
-          // Вызываем нужные колбеки из props
-          const outputEvent: TouchEvent = {
-            ...gesture.current,
-            originalEvent: e,
-          };
-
-          if (onMove) {
-            return onMove(outputEvent);
-          }
-
-          if (gesture.current.isSlideX && onMoveX) {
-            return onMoveX(outputEvent);
-          }
-
-          if (gesture.current.isSlideY && onMoveY) {
-            return onMoveY(outputEvent);
-          }
-        }
+      // Если определяем мультитач, то прерываем жест
+      if (!!e.touches && e.touches.length > 1) {
+        handleEnd(e);
+        return;
       }
 
-      return null;
+      // если мы ещё не определились
+      if (!isX && !isY) {
+        const willBeX = shiftXAbs >= 5 && shiftXAbs > shiftYAbs;
+        const willBeY = shiftYAbs >= 5 && shiftYAbs > shiftXAbs;
+        const willBeSlidedX = (willBeX && !!onMoveX) || !!onMove;
+        const willBeSlidedY = (willBeY && !!onMoveY) || !!onMove;
+
+        gesture.current.isY = willBeY;
+        gesture.current.isX = willBeX;
+        gesture.current.isSlideX = willBeSlidedX;
+        gesture.current.isSlideY = willBeSlidedY;
+        gesture.current.isSlide = willBeSlidedX || willBeSlidedY;
+      }
+
+      if (isSlide) {
+        gesture.current.shiftX = shiftX;
+        gesture.current.shiftY = shiftY;
+        gesture.current.shiftXAbs = shiftXAbs;
+        gesture.current.shiftYAbs = shiftYAbs;
+
+        // Вызываем нужные колбеки из props
+        const outputEvent: TouchEvent = {
+          ...gesture.current,
+          originalEvent: e,
+        };
+
+        if (onMove) {
+          onMove(outputEvent);
+          return;
+        }
+
+        if (gesture.current.isSlideX && onMoveX) {
+          onMoveX(outputEvent);
+          return;
+        }
+
+        if (gesture.current.isSlideY && onMoveY) {
+          onMoveY(outputEvent);
+        }
+      }
     },
     [gesture, handleEnd, onMove, onMoveX, onMoveY],
   );
@@ -256,69 +249,38 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
    * Отменяет нативное браузерное поведение для вложенных ссылок и изображений
    */
   const handleDragStart: DragHandler = useCallback((e: DragEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-
-    if (target.tagName === 'A' || target.tagName === 'IMG') {
-      e.preventDefault();
-    }
+    e.preventDefault();
   }, []);
 
-  /**
-   * Обработчик клика по компоненту
-   * Отменяет переход по вложенной ссылке, если был зафиксирован свайп
-   */
-  const handleClick: ClickHandler = useCallback(
-    (e: MouseEvent<HTMLElement>) => {
-      if (cancelClick.current) {
-        cancelClick.current = false;
-        e.preventDefault();
-      }
-
-      if (onClick) {
-        onClick(e);
-      }
-    },
-    [onClick],
-  );
-
-  /**
-   *
-   */
   useImperativeHandle(ref, () => refContainer.current);
 
-  /**
-   *
-   */
   useEffect(() => {
     function cleanup() {
-      refContainer.current.removeEventListener(events[0], handleStart, listenerParams);
-
-      if (touchEnabled) unsubscribe(refContainer.current);
+      versions.forEach((events) => {
+        refContainer.current.removeEventListener(events[0], handleStart, listenerParams);
+        window.document.documentElement.removeEventListener(events[1], handleMove, listenerParams);
+        window.document.documentElement.removeEventListener(events[2], handleEnd, listenerParams);
+        window.document.documentElement.removeEventListener(events[3], handleEnd, listenerParams);
+      });
     }
 
-    refContainer.current.addEventListener(events[0], handleStart, listenerParams);
-
-    if (touchEnabled) subscribe(refContainer.current);
+    versions.forEach((events) => {
+      refContainer.current.addEventListener(events[0], handleStart, listenerParams);
+      window.document.documentElement.addEventListener(events[1], handleMove, listenerParams);
+      window.document.documentElement.addEventListener(events[2], handleEnd, listenerParams);
+      window.document.documentElement.addEventListener(events[3], handleEnd, listenerParams);
+    });
 
     return cleanup;
-  }, [events, handleStart, listenerParams, subscribe, unsubscribe]);
+  }, [handleEnd, handleMove, handleStart, listenerParams]);
 
   return (
-    <Component
-      {...restProps}
-      onDragStart={handleDragStart}
-      onClick={handleClick}
-      ref={refContainer}
-    >
+    <div {...restProps} onDragStart={handleDragStart} ref={refContainer}>
       {children}
-    </Component>
+    </div>
   );
 });
 
 Touch.displayName = 'Touch';
-Touch.defaultProps = {
-  Component: 'div',
-  children: '',
-};
 
 export default Touch;

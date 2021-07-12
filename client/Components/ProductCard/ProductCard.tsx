@@ -2,18 +2,18 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Like from '@Components/Like';
+import Fabrics from '@Components/Fabrics';
+import ProductTags from '@Components/ProductTags';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import List from '@UI/List';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
-import { ProductData, ProductParameterGroupData, ProductTagData } from '@Types/Product';
-import Tag from './elements/Tag';
+import { ProductData, ProductParameterGroupData } from '@Types/Product';
 import Parameter from './elements/Parameter';
 import Sizes from './elements/Sizes';
 import FastView from './elements/FastView';
-import Fabrics from './elements/Fabrics';
 import Preview from './elements/Preview';
 import fabricImages from './fabrics';
 import styles from './ProductCard.module.css';
@@ -55,24 +55,20 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
       <div className={styles.container}>
         <div className={styles.containerImage}>
-          <Preview className={styles.preview} images={product.images} />
+          <Preview className={styles.preview} images={product.images} link={product.link} />
 
           <div className={styles.actions}>
             <FastView className={cn(styles.action, styles.fastView)} />
             <Like className={cn(styles.action, styles.like)} />
           </div>
 
-          {product.tags?.length > 0 && (
-            <List
-              className={styles.tags}
-              items={product.tags}
-              renderChild={(tag: ProductTagData) => <Tag className={styles.tag} tag={tag} />}
-            />
-          )}
+          {product.tags?.length > 0 && <ProductTags className={styles.tags} tags={product.tags} />}
         </div>
 
         <div className={styles.info}>
-          <div className={styles.name}>{product.name}</div>
+          <Link className={styles.name} to={product.link} view='simple'>
+            {product.name}
+          </Link>
           <div className={styles.price}>
             <span className={styles.labelPrice}>{`Цена `}</span>
             <Price className={styles.actualPrice} price={product.price.actual} />
@@ -92,9 +88,11 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             />
             <div className={styles.fabricsMore}>
               {`+150 `}
-              <Link className={styles.openConstructor} view='secondary' to='#'>
-                в конструкторе
-              </Link>
+              <div className={styles.openConstructor}>
+                <Link view='secondary' to='#'>
+                  в конструкторе
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -137,7 +135,9 @@ const ProductCard: FC<ProductCardProps> = (props) => {
               />
             )}
 
-            <Button className={styles.buy} wide title='В корзину' />
+            <Button className={styles.buy} wide>
+              В корзину
+            </Button>
             <div className={styles.moreWrapper}>
               <Link className={styles.more} to={product.link} view='secondary'>
                 Подробнее о товаре

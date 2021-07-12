@@ -1,0 +1,163 @@
+.layers {
+  display: flex;
+}
+
+.wrapperStack {
+  flex-shrink: 0;
+  width: 56.2%;
+  margin-right: var(--space-xxe);
+}
+
+.wrapperAccordion {
+  margin-top: 0;
+}
+
+.title {
+  composes: hero from 'fonts';
+  composes: xxl from 'sizes';
+
+  margin-bottom: var(--space-l);
+}
+
+.characteristic {
+  display: flex;
+  margin-top: var(--space-xxl);
+
+  white-space: nowrap;
+}
+
+.characteristicValue {
+  composes: hero from 'fonts';
+  composes: xxl from 'sizes';
+}
+
+.characteristicTitle {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-xxs);
+}
+
+.characteristicItem {
+  margin-left: var(--space-xb);
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+@media (--desktop) {
+  .layers {
+    flex-direction: column;
+  }
+
+  .wrapperStack {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .stack {
+    flex-grow: 1;
+    margin-right: var(--space-xxl);
+  }
+
+  .characteristic {
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 188px;
+    margin-top: 0;
+  }
+
+  .characteristicItem {
+    margin-bottom: var(--space-xxl);
+    margin-left: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .wrapperAccordion {
+    width: 100%;
+    margin-top: var(--space-xxl);
+  }
+
+  .title {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
+  }
+}
+
+@media (--mobile-m) {
+  .layers {
+    flex-direction: row;
+  }
+
+  .wrapperStack {
+    flex-direction: column;
+    width: calc(50% - var(--space-xb) / 2);
+    margin-right: var(--space-xb);
+  }
+
+  .stack {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: var(--space-xxl);
+  }
+
+  .wrapperAccordion {
+    flex-shrink: 0;
+    width: calc(50% - var(--space-xb) / 2);
+    margin-top: 0;
+  }
+
+  .characteristic {
+    flex-direction: row;
+    max-width: 100%;
+  }
+
+  .characteristicItem {
+    margin-right: var(--space-xb);
+    margin-bottom: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+}
+
+@media (--mobile) {
+  .layers {
+    flex-direction: column;
+  }
+
+  .title {
+    margin-bottom: var(--space-s);
+  }
+
+  .wrapperStack {
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    overflow: visible;
+  }
+
+  .wrapperAccordion {
+    width: 100%;
+    margin-top: var(--space-xxl);
+  }
+
+  .title {
+    font-size: var(--size-m);
+    line-height: var(--lh-m);
+  }
+}

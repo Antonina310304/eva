@@ -10,6 +10,12 @@
   .discount {
     display: none;
   }
+
+  .name {
+    height: calc(var(--lh-n) * 2);
+
+    white-space: normal;
+  }
 }
 
 .box {
@@ -114,6 +120,10 @@
 }
 
 .name {
+  composes: black from 'colors';
+
+  max-width: 100%;
+
   overflow: hidden;
 
   white-space: nowrap;
@@ -145,17 +155,7 @@
   position: absolute;
   right: var(--space-s);
   bottom: var(--space-s);
-
-  display: flex;
-  justify-content: flex-end;
-}
-
-.tag {
-  margin-right: var(--space-xs);
-
-  &:last-child {
-    margin-right: 0;
-  }
+  z-index: 2;
 }
 
 .parameterGroups {
@@ -207,6 +207,10 @@
   margin-left: var(--space-xxs);
 }
 
+.link {
+  display: block;
+}
+
 @media (--only-desktop) {
   .productCard:hover {
     .box,
@@ -228,10 +232,18 @@
     .openConstructor {
       display: block;
     }
+
+    .tags {
+      opacity: 0;
+    }
   }
 }
 
 @media (--mobile-m) {
+  .productCard {
+    max-width: 300px;
+  }
+
   .productCard.viewMini {
     .info {
       padding: 0 var(--space-s);
@@ -258,5 +270,27 @@
 
   .info {
     margin-top: var(--space-xs);
+  }
+}
+
+@media (--mobile) {
+  .productCard {
+    .actions {
+      display: none;
+    }
+  }
+
+  .productCard.viewMini {
+    .name {
+      height: calc(var(--lh-s) * 2);
+
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
+
+    .expiredPrice {
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
   }
 }

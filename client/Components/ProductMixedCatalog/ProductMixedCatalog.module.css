@@ -51,3 +51,15 @@
     max-width: 220px;
   }
 }
+
+@media (--mobile) {
+  .catalog {
+    --gap-h: var(--space-xs);
+    overflow: hidden;
+  }
+
+  .list {
+    margin-right: var(--space-xxs-neg);
+    margin-left: var(--space-xxs-neg);
+  }
+}

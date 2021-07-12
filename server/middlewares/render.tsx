@@ -40,10 +40,16 @@ const render: RequestHandler = async (req, res) => {
     const html = renderToString(jsx);
     const queryCache = queryClient.getQueryCache();
     const queries = queryCache.findAll();
-    const newQueries = queries.filter((query) => !query.state.data);
+    const ssrQueries = queries.filter((query) => {
+      return (
+        Array.isArray(query.queryKey) &&
+        query.queryKey.includes('ssr') &&
+        query.state.dataUpdateCount < 1
+      );
+    });
 
-    if (newQueries.length) {
-      const promises = newQueries.map((query) => query.fetch());
+    if (ssrQueries.length) {
+      const promises = ssrQueries.map((query) => query.fetch());
       await Promise.all(promises);
 
       const result = await renderAndWait();

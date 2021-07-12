@@ -1,9 +1,19 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { ApiMeta } from '@Api/Meta';
+import { MetaData } from '@Types/Meta';
 
-const useMeta = (): UseQueryResult => {
-  return useQuery('meta', () => ApiMeta.fetch(), {
+export interface Params {
+  ssr?: boolean;
+}
+
+const useMeta = (params?: Params): UseQueryResult<MetaData> => {
+  const { ssr } = params || {};
+  const keys = ['meta'];
+
+  if (ssr) keys.push('ssr');
+
+  return useQuery(keys, () => ApiMeta.fetch(), {
     retryOnMount: false,
     refetchOnMount: false,
   });

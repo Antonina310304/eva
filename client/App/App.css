@@ -1,11 +1,12 @@
 html {
-  composes: n from 'sizes';
-
   min-width: 360px;
 
   font-weight: 400;
 
+  font-size: var(--size-n);
+
   font-family: var(--font-main);
+  line-height: var(--lh-n);
   -webkit-text-size-adjust: 100%;
 
   text-size-adjust: none;

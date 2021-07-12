@@ -1,0 +1,44 @@
+.list {
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-s) 0;
+
+  border-bottom: 1px solid var(--color-light-gray);
+  cursor: pointer;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
+.itemContent {
+  display: flex;
+  align-items: center;
+}
+
+.itemIcon {
+  margin-right: var(--space-xs);
+}
+
+.itemLabel {
+  composes: n from 'sizes';
+}
+
+.arrow {
+  width: 10px;
+  height: 10px;
+
+  background-image: url('./arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

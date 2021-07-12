@@ -1,10 +1,10 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
-import useCategory from '@Queries/useCategory';
+import usePage from '@Queries/usePage';
 import Filters from './elements/Filters';
 import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
@@ -20,21 +20,21 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, ...restProps } = props;
-  const { slug } = useParams<RouteParams>();
-  const category = useCategory({ slug });
+  const { pathname } = useLocation();
+  const page = usePage({ path: pathname, ssr: true });
 
-  if (!category.isSuccess) return null;
+  if (!page.isSuccess) return null;
 
-  const { data } = category;
-  const isModels = data.productsModel?.length > 0;
+  const category = page.data;
+  const isModels = category.productsModel?.length > 0;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      <h1 className={styles.title}>{data.title}</h1>
+      <h1 className={styles.title}>{category.title}</h1>
 
-      {data.rubrics?.length > 0 && (
+      {category.rubrics?.length > 0 && (
         <div className={styles.rubricsWrapper}>
-          <Subcategories className={styles.rubrics} subcategories={data.rubrics[0]} />
+          <Subcategories className={styles.rubrics} subcategories={category.rubrics[0]} />
         </div>
       )}
 
@@ -42,9 +42,9 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
         <div className={styles.filtersWrapper}>
           <Filters />
 
-          {data.popularLinks?.length > 0 && (
+          {category.popularLinks?.length > 0 && (
             <div className={styles.popularLinksWrapper}>
-              <PopularLinks label='Популярные запросы:' popularLinks={data.popularLinks} />
+              <PopularLinks label='Популярные запросы:' popularLinks={category.popularLinks} />
             </div>
           )}
         </div>
@@ -52,11 +52,11 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
         {isModels ? (
           <ProductSectionsCatalog
             className={styles.catalog}
-            sections={data.productsModel}
-            products={data.products}
+            sections={category.productsModel}
+            products={category.products}
           />
         ) : (
-          <ProductMixedCatalog className={styles.catalog} products={data.products} />
+          <ProductMixedCatalog className={styles.catalog} products={category.products} />
         )}
       </div>
     </div>
