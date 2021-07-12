@@ -42,7 +42,12 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
   }, []);
 
   return (
-    <Section {...restProps} className={cn(styles.section, className)} title={title}>
+    <Section
+      {...restProps}
+      className={cn(styles.section, className)}
+      title={title}
+      hasArrows={track && track.width < 100}
+    >
       {tabs.length > 0 && <ButtonTabs className={styles.tabs} defaultValue='0' tabs={tabs} />}
 
       <div className={styles.wrapperGallery}>

@@ -83,9 +83,11 @@ const Section: FC<SectionProps> = (props) => {
           )}
         </div>
 
-        <div className={styles.arrows}>
-          <Arrows onPrev={handlePrev} onNext={handleNext} />
-        </div>
+        {track?.width < 100 && (
+          <div className={styles.arrows}>
+            <Arrows onPrev={handlePrev} onNext={handleNext} />
+          </div>
+        )}
       </div>
 
       {isMobileM ? (

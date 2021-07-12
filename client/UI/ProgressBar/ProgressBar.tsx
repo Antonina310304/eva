@@ -24,7 +24,14 @@ const ProgressBar: FC<ProgressBarProps> = (props) => {
     : {};
 
   return (
-    <div {...restProps} className={cn(styles.progress, { [styles.invisible]: !track }, className)}>
+    <div
+      {...restProps}
+      className={cn(
+        styles.progress,
+        { [styles.invisible]: !track || track.width === 100 },
+        className,
+      )}
+    >
       <div className={styles.die} style={dieStyles} />
     </div>
   );
