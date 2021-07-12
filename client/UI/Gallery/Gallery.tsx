@@ -437,8 +437,13 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   useEffect(() => {
     if (!onChangeProgress) return;
 
+    let width = (state.containerWidth * 100) / state.layerWidth;
+
+    if (width < 0) width = 0;
+    if (width > 100) width = 100;
+
     onChangeProgress({
-      width: (state.containerWidth * 100) / state.layerWidth,
+      width,
       offset: Math.abs(state.shiftX * 100) / state.layerWidth,
     });
   }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth]);
