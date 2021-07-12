@@ -40,18 +40,47 @@
   padding-top: var(--space-xxl);
 }
 
+.sectionSimilar,
+.sectionHistory {
+  margin-top: var(--space-xxe);
+}
+
 .layers {
   padding: 50px 0;
+}
+
+.productItem {
+  width: 28.405vw;
+  min-width: 300px;
+  max-width: 422px;
+  padding: 0 var(--space-xs);
+}
+
+.nanoProductItem {
+  width: 13.836vw;
+  min-width: 140px;
+  max-width: 189px;
+  padding: 0 var(--space-xs);
 }
 
 @media (--desktop-m) {
   .separator {
     margin-top: var(--space-e);
   }
+
+  .sectionSimilar,
+  .sectionHistory {
+    margin-top: var(--space-e);
+  }
 }
 
 @media (--desktop) {
   .separator {
+    margin-top: var(--space-xb);
+  }
+
+  .sectionSimilar,
+  .sectionHistory {
     margin-top: var(--space-xb);
   }
 }
