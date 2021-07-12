@@ -28,7 +28,8 @@ export interface GalleryProps
   children: ReactElement | ReactElement[];
   onDragStart?: TouchEventHandler;
   onDragEnd?: TouchEventHandler;
-  onChangeCurrent?({ current }: { current: number }): void;
+  onChangeCurrent?(state: any): void;
+  onChangeProgress?(params: ProgressOptions): void;
   onBegin?({ current }: { current: number }): void;
   onFinish?({ current }: { current: number }): void;
 }
@@ -54,6 +55,11 @@ export interface InitialState {
   startT: Date;
   isDraggable: boolean;
   generalIndent: number;
+}
+
+export interface ProgressOptions {
+  width: number;
+  offset: number;
 }
 
 const initialState: InitialState = {
@@ -87,6 +93,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     onChangeCurrent,
     onBegin,
     onFinish,
+    onChangeProgress,
     ...restProps
   } = props;
   const refContainer = useRef<HTMLDivElement>();
@@ -226,9 +233,16 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         const newShiftX = getIndent(targetIndex);
         const isChangeCurrent = newShiftX !== state.shiftX;
         const newCurrent = isChangeCurrent ? targetIndex : state.current;
+        const newState = {
+          ...state,
+          animation: true,
+          current: newCurrent,
+          deltaX: 0,
+          shiftX: newShiftX,
+        };
 
         if (onChangeCurrent && isChangeCurrent) {
-          onChangeCurrent({ current: newCurrent });
+          onChangeCurrent(newState);
         }
 
         if (onBegin && isChangeCurrent && newShiftX === state.max) {
@@ -239,13 +253,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           onFinish({ current: slides.length });
         }
 
-        return {
-          ...state,
-          animation: true,
-          current: newCurrent,
-          deltaX: 0,
-          shiftX: newShiftX,
-        };
+        return newState;
       },
 
       setStartT: ({ startT }) => {
@@ -425,6 +433,15 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       data: getSizes(),
     });
   }, [children, getSizes, state.initialized]);
+
+  useEffect(() => {
+    if (!onChangeProgress) return;
+
+    onChangeProgress({
+      width: (state.containerWidth * 100) / state.layerWidth,
+      offset: Math.abs(state.shiftX * 100) / state.layerWidth,
+    });
+  }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth]);
 
   return (
     <div {...restProps} className={cn(styles.gallery, className)} ref={refContainer}>
