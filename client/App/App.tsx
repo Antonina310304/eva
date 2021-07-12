@@ -3,6 +3,7 @@ import loadable from '@loadable/component';
 import { Switch, Route } from 'react-router-dom';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
+import ProductModel from '@Components/ProductModel';
 import '@UI/fonts.module.css';
 import '@UI/vars.module.css';
 import './App.css';
@@ -23,7 +24,10 @@ const App: FC = () => {
       <Switch>
         <Route exact path='/'>
           <TemplateMain>
-            <PageIndex />
+            {/* <PageIndex /> */}
+            <div className='container'>
+              <ProductModel />
+            </div>
           </TemplateMain>
         </Route>
 

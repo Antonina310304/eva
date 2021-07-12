@@ -1,0 +1,80 @@
+.productModel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.specialButton {
+  display: flex;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+
+  background: #f5f3f1;
+  border-radius: 30px;
+  cursor: pointer;
+
+  &:last-child {
+    margin-left: 15px;
+  }
+}
+
+/* .WrapperCylindo {
+  width: 600px;
+  height: 400px;
+} */
+
+.WrapperRotateHint {
+  color: #989898;
+}
+
+.WrapperCylindo {
+  position: relative;
+
+  width: 100%;
+  padding-bottom: 61%;
+
+  &_zoomed {
+    .ProductSlider {
+      &-WrapperRotateHint {
+        opacity: 0;
+      }
+
+      &-CylindoViewer {
+        transform: unset;
+      }
+    }
+  }
+
+  &_hidden {
+    .ProductSlider-WrapperRotateHint {
+      opacity: 0;
+    }
+  }
+}
+
+.CylindoViewer {
+  /* Нужно чтобы переопределить стили Cylindo для правильного позиционирования */
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.WrapperRotateHint {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  opacity: 1;
+
+  transition: opacity var(--animation-duration-fast);
+}

@@ -18,3 +18,12 @@ body {
 
   overflow-y: scroll;
 }
+
+.container {
+  width: 1268px;
+  height: 760px;
+  padding: 20px;
+  padding-bottom: 40px;
+
+  border: 1px solid #c4c4c4;
+}

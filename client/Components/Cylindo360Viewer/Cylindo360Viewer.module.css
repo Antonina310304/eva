@@ -1,0 +1,9 @@
+.Cylindo360Viewer {
+  display: block;
+  height: 100%;
+
+  /* Скрываем некоторые внутренние элементы внешнего компонента Cylindo, которые нам не нужны */
+  .cylindo-tooltip {
+    display: none !important;
+  }
+}

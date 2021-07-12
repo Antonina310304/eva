@@ -1,0 +1,28 @@
+.CylindoRotateHint {
+  --height: 42px;
+  --gap: var(--space-xs);
+  display: flex;
+  align-items: center;
+  height: var(--height);
+  padding: 0 var(--space-xs);
+
+  font-size: var(--size-xs);
+
+  background: var(--color-bg-default);
+  border: 1px solid var(--color-border-light);
+  border-radius: 50px;
+}
+
+.ArrowPrev {
+  margin-right: var(--gap);
+}
+
+.ArrowNext {
+  margin-left: var(--gap);
+}
+
+@media (--mobile) {
+  .CylindoRotateHint {
+    --height: 32px;
+  }
+}
