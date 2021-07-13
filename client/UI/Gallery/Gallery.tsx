@@ -256,6 +256,32 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         return newState;
       },
 
+      slideTo: ({ newCurrent }) => {
+        let normalizedNewCurrent = newCurrent;
+
+        if (normalizedNewCurrent < 0) {
+          normalizedNewCurrent = 0;
+        }
+        if (normalizedNewCurrent > state.slides.length - 1) {
+          normalizedNewCurrent = state.slides.length - 1;
+        }
+
+        const newShiftX = getIndent(normalizedNewCurrent);
+        const newState = {
+          ...state,
+          animation: true,
+          current: normalizedNewCurrent,
+          deltaX: 0,
+          shiftX: newShiftX,
+        };
+
+        if (onChangeCurrent) {
+          onChangeCurrent(newState);
+        }
+
+        return newState;
+      },
+
       setStartT: ({ startT }) => {
         return { ...state, startT };
       },
@@ -434,6 +460,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     });
   }, [children, getSizes, state.initialized]);
 
+  /** Генерируем событие изменения прогресса при изменении размеров и смещения */
   useEffect(() => {
     if (!onChangeProgress) return;
 
@@ -447,6 +474,13 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       offset: Math.abs(state.shiftX * 100) / state.layerWidth,
     });
   }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth]);
+
+  /** Програмное изменение слайда */
+  useEffect(() => {
+    if (typeof slideIndex !== 'number') return;
+
+    dispatch({ type: 'slideTo', data: { newCurrent: slideIndex } });
+  }, [slideIndex]);
 
   return (
     <div {...restProps} className={cn(styles.gallery, className)} ref={refContainer}>
