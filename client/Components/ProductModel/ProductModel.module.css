@@ -15,7 +15,6 @@
   height: 60px;
 
   background: #f5f3f1;
-  border-radius: 30px;
   cursor: pointer;
 
   &:last-child {
@@ -23,12 +22,13 @@
   }
 }
 
-/* .WrapperCylindo {
-  width: 600px;
-  height: 400px;
-} */
-
 .WrapperRotateHint {
+  color: #989898;
+}
+
+.view360 {
+  margin-right: 10px;
+
   color: #989898;
 }
 
@@ -36,33 +36,17 @@
   position: relative;
 
   width: 100%;
-  padding-bottom: 61%;
+  margin-right: 10px;
+}
 
-  &_zoomed {
-    .ProductSlider {
-      &-WrapperRotateHint {
-        opacity: 0;
-      }
-
-      &-CylindoViewer {
-        transform: unset;
-      }
-    }
-  }
-
-  &_hidden {
-    .ProductSlider-WrapperRotateHint {
-      opacity: 0;
-    }
+.WrapperCylindo.zoomed {
+  .WrapperRotateHint {
+    opacity: 0;
   }
 }
 
 .CylindoViewer {
-  /* Нужно чтобы переопределить стили Cylindo для правильного позиционирования */
-  position: absolute !important;
-  top: 0;
-  right: 0;
-  left: 0;
+  height: inherit;
 }
 
 .WrapperRotateHint {
@@ -76,5 +60,5 @@
 
   opacity: 1;
 
-  transition: opacity var(--animation-duration-fast);
+  transition: opacity 0.5s;
 }

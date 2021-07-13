@@ -26,7 +26,7 @@ const App: FC = () => {
           <TemplateMain>
             {/* <PageIndex /> */}
             <div className='container'>
-              <ProductModel />
+              <ProductModel height={329} />
             </div>
           </TemplateMain>
         </Route>

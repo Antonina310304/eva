@@ -1,0 +1,49 @@
+.fullCover {
+  position: fixed;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: white;
+}
+
+.TopPanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
+
+  display: flex;
+  justify-content: center;
+  width: 119px;
+  height: 100%;
+
+  cursor: pointer;
+
+  transition: background 0.2s;
+
+  &:hover {
+    background: #efefef;
+  }
+}
+
+.IconClose {
+  padding: var(--space-l);
+
+  transition: transform 0.4s;
+
+  &:hover {
+    transform: rotate(360deg);
+  }
+}
+
+@media (--mobile) {
+  .TopPanel {
+    justify-content: flex-end;
+    width: 100%;
+    height: 80px;
+
+    background: #efefef;
+  }
+}

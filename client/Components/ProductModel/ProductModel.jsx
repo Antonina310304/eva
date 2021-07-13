@@ -1,89 +1,70 @@
-import React, { useCallback, useState, useRef, useMemo } from 'react';
+import React, { useCallback, useState } from 'react';
 import cns from 'classnames';
 
 import Icon38360 from '@divanru/icons/dist/38/360';
-import Icon21PlusZoom from '@divanru/icons/dist/21/plus_zoom';
-import Icon21MinusZoom from '@divanru/icons/dist/21/minus_zoom';
-import Icon16Fullscreen from '@divanru/icons/dist/16/fullscreen';
-import Icon18FullscreenOut from '@divanru/icons/dist/18/fullscreen_out';
 import Cylindo360Viewer from '@Components/Cylindo360Viewer';
 import CylindoRotateHint from '@Components/CylindoRotateHint';
+import MainSliderPanel from '@Components/MainSliderPanel';
+import useModals from '@Hooks/useModals';
+import useMedia from '@divanru/ts-utils/useMedia';
 
 import styles from './ProductModel.module.css';
-import datata from './staticDatas';
+import medias from './staticDatas';
 
 const ProductModel = (props) => {
-  const { className, isFullscreen, isZoom, onFullscreen, ...restProps } = props;
+  const { className, height, ...restProps } = props;
+  const [, { openModal }] = useModals();
 
   const [zoom, setZoom] = useState(null);
 
-  const IconFullscreen = isFullscreen ? Icon18FullscreenOut : Icon16Fullscreen;
-  const IconZoom = zoom ? Icon21MinusZoom : Icon21PlusZoom;
+  const isMobileL = useMedia('--desktop');
 
-  const [hidden, setHidden] = useState(false);
-  const refTimeout = useRef();
+  const iconSize = isMobileL ? 40 : 60;
+  const cylindoHeight = height || 400;
+  const onZoomEnter = useCallback(() => {
+    setZoom([0.5, 0.5]);
+  }, []);
 
-  const data = datata;
-
-  const medias = useMemo(() => {
-    const items = data.mediaGallery.map((item) => {
-      return {
-        type: item.video !== null ? 'video' : 'image',
-        src: item.image,
-        videoId: item.video,
-        poster: item.video !== null ? item.image : null,
-      };
-    });
-
-    if (data.cylindo) {
-      items.unshift({
-        type: 'cylindo',
-        fixed: true,
-        data: data.cylindo,
-      });
-    }
-
-    return items;
-  }, [data.cylindo, data.mediaGallery]);
-
-  const handleChangeFrameIndex = useCallback(() => {
-    setHidden(true);
-
-    clearTimeout(refTimeout.current);
-    refTimeout.current = setTimeout(() => setHidden(false), 3000);
+  const onZoomExit = useCallback(() => {
+    setZoom(null);
   }, []);
 
   const onZoom = useCallback(() => {
     setZoom((prev) => (prev ? null : [0.5, 0.5]));
   }, []);
 
+  const onFullscreen = useCallback(() => {
+    openModal('Fullscreen360', {
+      opts: medias.data,
+    });
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cns(styles.productModel, className)}>
-      <Icon38360 width={58} height={58} />
+      <Icon38360 width={iconSize} height={iconSize} className={styles.view360} />
 
-      <div className={styles.WrapperCylindo}>
+      <div
+        className={cns(styles.WrapperCylindo, { [styles.zoomed]: !!zoom })}
+        style={{ height: `${cylindoHeight}px` }}
+      >
         <Cylindo360Viewer
           className={styles.CylindoViewer}
-          opts={medias[0].data}
+          opts={medias.data}
           zoom={zoom}
-          // autonomic={autonomic}
-          // onZoomEnter={onZoomEnter}
-          // onZoomExit={onZoomExit}
-          // onChangeFrameIndex={handleChangeFrameIndex}
+          onZoomEnter={onZoomEnter}
+          onZoomExit={onZoomExit}
         />
         <div className={styles.WrapperRotateHint}>
           <CylindoRotateHint className={styles.RotateHint} />
         </div>
       </div>
 
-      <div className={styles.specialButton}>
-        <div className={styles.button} onClick={onZoom}>
-          <IconZoom width={30} height={30} />
-        </div>
-        <div className={styles.button} onClick={onFullscreen}>
-          <IconFullscreen width={30} height={30} />
-        </div>
-      </div>
+      <MainSliderPanel
+        className={styles.ButtonsPanel}
+        isZoom={!!zoom}
+        onFullscreen={onFullscreen}
+        onZoom={onZoom}
+      />
     </div>
   );
 };
