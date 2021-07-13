@@ -22,7 +22,6 @@ export interface GalleryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onDragStart' | 'onDragEnd'> {
   className?: string;
   cnViewport?: string;
-  initialSlideIndex?: number;
   slideIndex?: number;
   gap?: number;
   children: ReactElement | ReactElement[];
@@ -82,9 +81,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const {
     className,
     cnViewport,
-    initialSlideIndex,
     slideIndex,
-    gap,
+    gap = 0,
     children,
     onDragStart,
     onDragEnd,
@@ -260,7 +258,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         const newShiftX = getIndent(normalizedNewCurrent);
         const newState = {
           ...state,
-          animation: true,
+          animation: state.initialized,
           current: normalizedNewCurrent,
           deltaX: 0,
           shiftX: newShiftX,
@@ -297,7 +295,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    current: typeof slideIndex === 'number' ? slideIndex : initialSlideIndex,
+    current: slideIndex || 0,
   });
 
   /**
@@ -310,15 +308,24 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   /**
    * Получить все нужные размеры
    */
-  const getSizes = useCallback(() => {
+  const sizes = useMemo(() => {
+    if (!state.initialized) {
+      return {
+        slides: [],
+        viewportWidth: 0,
+        containerWidth: 0,
+        layerWidth: 0,
+      };
+    }
+
     const slides: GallerySlidesState[] = Children.map(
       children,
       (_child: ReactElement, index: number): GallerySlidesState => {
         const elem = storeSlides.current[index];
 
         return {
-          coordX: elem.offsetLeft,
-          width: elem.offsetWidth,
+          coordX: elem ? elem.offsetLeft : 0,
+          width: elem ? elem.offsetWidth : 0,
         };
       },
     );
@@ -336,7 +343,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       containerWidth,
       layerWidth,
     };
-  }, [children, gap]);
+  }, [children, gap, state.initialized]);
 
   /**
    * Стили для подвижного слоя
@@ -407,11 +414,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменился размер страницы
    */
   const handleResize = useCallback(() => {
-    dispatch({
-      type: 'init',
-      data: getSizes(),
-    });
-  }, [getSizes]);
+    dispatch({ type: 'init', data: sizes });
+  }, [sizes]);
 
   /** Подписываемся на DOM-события */
   useEffect(() => {
@@ -428,11 +432,10 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменение кол-ва вложенных элементов
    */
   useEffect(() => {
-    dispatch({
-      type: 'init',
-      data: getSizes(),
-    });
-  }, [childrenCount, getSizes]);
+    if (!state.initialized) return;
+
+    dispatch({ type: 'init', data: sizes });
+  }, [childrenCount, sizes, state.initialized]);
 
   /** Генерируем событие изменения прогресса при изменении размеров и смещения */
   useEffect(() => {
@@ -452,9 +455,16 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   /** Програмное изменение слайда */
   useEffect(() => {
     if (typeof slideIndex !== 'number') return;
+    if (!state.initialized) return;
 
     dispatch({ type: 'slideTo', data: { newCurrent: slideIndex } });
-  }, [slideIndex]);
+  }, [slideIndex, state.initialized]);
+
+  useEffect(() => {
+    if (state.initialized) return;
+
+    dispatch({ type: 'init', data: sizes });
+  }, [sizes, state.initialized]);
 
   return (
     <div
@@ -485,11 +495,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       </Touch>
     </div>
   );
-};
-
-Gallery.defaultProps = {
-  initialSlideIndex: 0,
-  gap: 0,
 };
 
 export default Gallery;

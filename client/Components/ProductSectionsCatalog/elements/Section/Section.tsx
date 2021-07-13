@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import ProductCard from '@Components/ProductCard';
