@@ -308,7 +308,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   /**
    * Получить все нужные размеры
    */
-  const sizes = useMemo(() => {
+  const getSizes = useCallback(() => {
     if (!state.initialized) {
       return {
         slides: [],
@@ -414,8 +414,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменился размер страницы
    */
   const handleResize = useCallback(() => {
-    dispatch({ type: 'init', data: sizes });
-  }, [sizes]);
+    dispatch({ type: 'init', data: getSizes() });
+  }, [getSizes]);
 
   /** Подписываемся на DOM-события */
   useEffect(() => {
@@ -434,8 +434,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   useEffect(() => {
     if (!state.initialized) return;
 
-    dispatch({ type: 'init', data: sizes });
-  }, [childrenCount, sizes, state.initialized]);
+    dispatch({ type: 'init', data: getSizes() });
+  }, [childrenCount, getSizes, state.initialized]);
 
   /** Генерируем событие изменения прогресса при изменении размеров и смещения */
   useEffect(() => {
@@ -463,8 +463,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   useEffect(() => {
     if (state.initialized) return;
 
-    dispatch({ type: 'init', data: sizes });
-  }, [sizes, state.initialized]);
+    dispatch({ type: 'init', data: getSizes() });
+  }, [getSizes, state.initialized]);
 
   return (
     <div
