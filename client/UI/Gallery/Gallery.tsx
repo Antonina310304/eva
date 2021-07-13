@@ -98,6 +98,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const refViewport = useRef<HTMLDivElement>();
   const startT = useRef<Date>();
   const storeSlides = useRef<unknown>({});
+  const childrenCount = useMemo(() => Children.count(children), [children]);
   const duration = 0.24;
 
   function reducer(state: GalleryState, action) {
@@ -178,19 +179,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     }
 
     const actions = {
-      initial: (data) => {
-        return {
-          ...state,
-          ...data,
-          shiftX: getIndent(data.current),
-          min: calcMin(data),
-          max: calcMax(),
-          canDrag: data.layerWidth > data.containerWidth,
-          initialized: true,
-        };
-      },
-
-      resize: (data) => {
+      init: (data) => {
         return {
           ...state,
           ...data,
@@ -198,6 +187,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           min: calcMin(data),
           max: calcMax(),
           canDrag: data.layerWidth > data.containerWidth,
+          initialized: true,
         };
       },
 
@@ -418,14 +408,12 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    */
   const handleResize = useCallback(() => {
     dispatch({
-      type: 'resize',
+      type: 'init',
       data: getSizes(),
     });
   }, [getSizes]);
 
-  /**
-   * Изменение размера страницы
-   */
+  /** Подписываемся на DOM-события */
   useEffect(() => {
     function cleanup() {
       window.removeEventListener('resize', handleResize);
@@ -440,13 +428,11 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменение кол-ва вложенных элементов
    */
   useEffect(() => {
-    if (state.initialized) return;
-
     dispatch({
-      type: 'resize',
+      type: 'init',
       data: getSizes(),
     });
-  }, [children, getSizes, state.initialized]);
+  }, [childrenCount, getSizes]);
 
   /** Генерируем событие изменения прогресса при изменении размеров и смещения */
   useEffect(() => {
