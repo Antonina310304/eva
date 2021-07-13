@@ -33,6 +33,16 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
+  const normalizeSlide = useCallback(
+    (value: number) => {
+      if (value < 0) return 0;
+      if (value > products.length) return products.length;
+
+      return value;
+    },
+    [products.length],
+  );
+
   const handleChangeCurrent = useCallback(({ current }) => {
     setSlide(current);
   }, []);
@@ -41,12 +51,22 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
     setTrack(opts);
   }, []);
 
+  const handlePrev = useCallback(() => {
+    setSlide((prev) => normalizeSlide(prev - 1));
+  }, [normalizeSlide]);
+
+  const handleNext = useCallback(() => {
+    setSlide((prev) => normalizeSlide(prev + 1));
+  }, [normalizeSlide]);
+
   return (
     <Section
       {...restProps}
       className={cn(styles.section, className)}
       title={title}
       hasArrows={track && track.width < 100}
+      onPrev={handlePrev}
+      onNext={handleNext}
     >
       {tabs.length > 0 && <ButtonTabs className={styles.tabs} defaultValue='0' tabs={tabs} />}
 
@@ -54,6 +74,7 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
         <Gallery
           className={styles.gallery}
           cnViewport={styles.galleryViewport}
+          slideIndex={slide}
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >

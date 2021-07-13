@@ -27,18 +27,16 @@ const Section: FC<SectionProps> = (props) => {
   const [track, setTrack] = useState<ProgressOptions>(null);
 
   const normalizeSlide = useCallback(
-    (index: number) => {
-      const total = items.length - 1;
+    (value: number) => {
+      if (value < 0) return 0;
+      if (value > items.length) return items.length;
 
-      if (index < 0) return 0;
-      if (index > total) return total;
-
-      return index;
+      return value;
     },
     [items.length],
   );
 
-  const content = useMemo(() => {
+  const renderItems = useCallback(() => {
     return items.map((item, index) => {
       const isStub = item.id === 'stub';
 
@@ -98,10 +96,10 @@ const Section: FC<SectionProps> = (props) => {
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >
-          {content}
+          {renderItems()}
         </Gallery>
       ) : (
-        <div className={styles.items}>{content}</div>
+        <div className={styles.items}>{renderItems()}</div>
       )}
 
       {isMobileM && <ProgressBar track={track} />}
