@@ -39,7 +39,7 @@ export interface GallerySlidesState {
   width: number;
 }
 
-export interface InitialState {
+export interface GalleryState {
   slides: GallerySlidesState[];
   min: number;
   max: number;
@@ -52,7 +52,6 @@ export interface InitialState {
   dragging: boolean;
   current: number;
   animation: boolean;
-  startT: Date;
   canDrag: boolean;
   generalIndent: number;
 }
@@ -62,7 +61,7 @@ export interface ProgressOptions {
   offset: number;
 }
 
-const initialState: InitialState = {
+const initialState: GalleryState = {
   slides: [],
   min: 0,
   max: 0,
@@ -75,7 +74,6 @@ const initialState: InitialState = {
   dragging: false,
   current: 0,
   animation: false,
-  startT: new Date(),
   canDrag: false,
   generalIndent: 0,
 };
@@ -98,8 +96,11 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   } = props;
   const refContainer = useRef<HTMLDivElement>();
   const refViewport = useRef<HTMLDivElement>();
+  const startT = useRef<Date>();
+  const storeSlides = useRef<unknown>({});
+  const duration = 0.24;
 
-  function reducer(state: InitialState, action) {
+  function reducer(state: GalleryState, action) {
     /**
      * Валидирует отступ с учётом минимального и максимального значения
      */
@@ -163,14 +164,14 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     };
 
     /**
-     * Рассчитать что-то минимальное
+     * Рассчитать минимальную позицию галереи
      */
     function calcMin({ viewportWidth, containerWidth, layerWidth }) {
       return viewportWidth - (containerWidth - viewportWidth) / 2 - layerWidth;
     }
 
     /**
-     * Рассчитать что-то максимальное
+     * Рассчитать максимальную позицию галереи
      */
     function calcMax() {
       return 0;
@@ -202,13 +203,13 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
 
       slide: () => {
         let { current } = state;
-        const { slides, max, deltaX, shiftX, startT } = state;
+        const { slides, max, deltaX, shiftX } = state;
 
         if (current > slides.length - 1) {
           current = slides.length - 1;
         }
 
-        const expectDeltaX = (deltaX / (Date.now() - startT.getTime())) * 240 * 0.6;
+        const expectDeltaX = (deltaX / (Date.now() - startT.current.getTime())) * 240 * 0.6;
         const shift = shiftX + deltaX + expectDeltaX - max;
         const direction = deltaX < 0 ? 1 : -1;
 
@@ -282,10 +283,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         return newState;
       },
 
-      setStartT: ({ startT }) => {
-        return { ...state, startT };
-      },
-
       setDelta: ({ deltaX }) => {
         return { ...state, deltaX, generalIndent: getGeneralIndent() };
       },
@@ -301,13 +298,9 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       disableAnimation: () => ({ ...state, animation: false }),
     };
 
-    let newState;
-
-    if (typeof action === 'string') {
-      newState = actions[action]();
-    } else {
-      newState = actions[action.type](action.data);
-    }
+    const actionName = typeof action === 'string' ? action : action.type;
+    const actionData = typeof action === 'string' ? undefined : action.data;
+    const newState = actions[actionName](actionData);
 
     return { ...newState, generalIndent: getGeneralIndent() };
   }
@@ -316,10 +309,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     ...initialState,
     current: typeof slideIndex === 'number' ? slideIndex : initialSlideIndex,
   });
-
-  const storeSlides = useRef<unknown>({});
-  const startT = useRef<Date>();
-  const duration = 0.24;
 
   /**
    * Добавить слайд во внутреннее хранилище
@@ -383,7 +372,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     window.draggableTarget = window.draggableTarget || refContainer.current;
 
     dispatch('disableAnimation');
-    dispatch({ type: 'setStartT', data: { startT: e.startT } });
   }, []);
 
   /**
