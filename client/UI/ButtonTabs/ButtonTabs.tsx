@@ -24,11 +24,12 @@ export interface ButtonTabsProps extends HTMLAttributes<HTMLDivElement> {
   tabs: Tab[];
   defaultValue?: TabId;
   value?: TabId;
+  inversed?: boolean;
   onChangeTab?: (e: MouseEvent, tab: Tab) => void;
 }
 
 const ButtonTabs: FC<ButtonTabsProps> = (props) => {
-  const { className, defaultValue, value, tabs, onChangeTab, ...restProps } = props;
+  const { className, defaultValue, value, tabs, inversed, onChangeTab, ...restProps } = props;
   const [selectedTab, setSelectedTab] = useState<TabId>(defaultValue || value);
 
   const handleClickTab = useCallback(
@@ -51,7 +52,7 @@ const ButtonTabs: FC<ButtonTabsProps> = (props) => {
   return (
     <List
       {...restProps}
-      className={cn(styles.tabs, className)}
+      className={cn(styles.tabs, { [styles.inversed]: inversed }, className)}
       items={tabs}
       renderChild={(tab: Tab) => {
         const selected = tab.id === selectedTab;
