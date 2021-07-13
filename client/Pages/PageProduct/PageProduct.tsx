@@ -6,6 +6,8 @@ import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
 import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
 import MattressesLayers from '@Mattresses/MattressesLayers';
+import CrossSaleProductCard from '@Components/CrossSaleProductCard';
+import NanoProductCard from '@Components/NanoProductCard';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -32,7 +34,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts, sameProducts } = page.data;
+  const { product, mediaGallery, crossSalesProducts, sameProducts, historyProducts } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -92,6 +94,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
               { id: '3', label: 'Пуфы' },
             ]}
             key={`cross-sale-${product.id}`}
+            renderItem={(productCardProps) => (
+              <div className={styles.productItem}>
+                <CrossSaleProductCard {...productCardProps} />
+              </div>
+            )}
           />
         )}
 
@@ -101,6 +108,25 @@ const PageProduct: FC<PageProductProps> = (props) => {
             title='Похожие модели'
             products={sameProducts.products}
             key={`similar-${product.id}`}
+            renderItem={(productCardProps) => (
+              <div className={styles.productItem}>
+                <CrossSaleProductCard {...productCardProps} />
+              </div>
+            )}
+          />
+        )}
+
+        {historyProducts.products?.length > 0 && (
+          <CrossSaleSection
+            className={styles.sectionHistory}
+            title='Вы недавно смотрели'
+            products={historyProducts.products}
+            key={`history-${product.id}`}
+            renderItem={(productCardProps) => (
+              <div className={styles.nanoProductItem}>
+                <NanoProductCard {...productCardProps} />
+              </div>
+            )}
           />
         )}
       </div>

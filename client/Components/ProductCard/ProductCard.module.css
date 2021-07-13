@@ -7,6 +7,8 @@
 }
 
 .productCard.viewMini {
+  max-width: 100%;
+
   .discount {
     display: none;
   }

@@ -22,13 +22,13 @@ export interface GalleryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onDragStart' | 'onDragEnd'> {
   className?: string;
   cnViewport?: string;
-  initialSlideIndex?: number;
   slideIndex?: number;
   gap?: number;
   children: ReactElement | ReactElement[];
   onDragStart?: TouchEventHandler;
   onDragEnd?: TouchEventHandler;
-  onChangeCurrent?({ current }: { current: number }): void;
+  onChangeCurrent?(state: any): void;
+  onChangeProgress?(params: ProgressOptions): void;
   onBegin?({ current }: { current: number }): void;
   onFinish?({ current }: { current: number }): void;
 }
@@ -38,7 +38,7 @@ export interface GallerySlidesState {
   width: number;
 }
 
-export interface InitialState {
+export interface GalleryState {
   slides: GallerySlidesState[];
   min: number;
   max: number;
@@ -51,12 +51,17 @@ export interface InitialState {
   dragging: boolean;
   current: number;
   animation: boolean;
-  startT: Date;
-  isDraggable: boolean;
+  canDrag: boolean;
   generalIndent: number;
 }
 
-const initialState: InitialState = {
+export interface ProgressOptions {
+  width: number;
+  offset: number;
+  finished: boolean;
+}
+
+const initialState: GalleryState = {
   slides: [],
   min: 0,
   max: 0,
@@ -69,8 +74,7 @@ const initialState: InitialState = {
   dragging: false,
   current: 0,
   animation: false,
-  startT: new Date(),
-  isDraggable: false,
+  canDrag: false,
   generalIndent: 0,
 };
 
@@ -78,21 +82,25 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const {
     className,
     cnViewport,
-    initialSlideIndex,
     slideIndex,
-    gap,
+    gap = 0,
     children,
     onDragStart,
     onDragEnd,
     onChangeCurrent,
     onBegin,
     onFinish,
+    onChangeProgress,
     ...restProps
   } = props;
   const refContainer = useRef<HTMLDivElement>();
   const refViewport = useRef<HTMLDivElement>();
+  const startT = useRef<Date>();
+  const storeSlides = useRef<unknown>({});
+  const childrenCount = useMemo(() => Children.count(children), [children]);
+  const duration = 0.24;
 
-  function reducer(state: InitialState, action) {
+  function reducer(state: GalleryState, action) {
     /**
      * Валидирует отступ с учётом минимального и максимального значения
      */
@@ -114,7 +122,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
      * Отступ слоя галереи
      */
     const getIndent = (current) => {
-      if (!state.isDraggable) return 0;
+      if (!state.canDrag) return 0;
 
       const { slides } = state;
 
@@ -156,52 +164,41 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     };
 
     /**
-     * Рассчитать что-то минимальное
+     * Рассчитать минимальную позицию галереи
      */
     function calcMin({ viewportWidth, containerWidth, layerWidth }) {
       return viewportWidth - (containerWidth - viewportWidth) / 2 - layerWidth;
     }
 
     /**
-     * Рассчитать что-то максимальное
+     * Рассчитать максимальную позицию галереи
      */
     function calcMax() {
       return 0;
     }
 
     const actions = {
-      initial: (data) => {
-        return {
-          ...state,
-          ...data,
-          shiftX: getIndent(data.current),
-          min: calcMin(data),
-          max: calcMax(),
-          isDraggable: data.layerWidth > data.containerWidth,
-          initialized: true,
-        };
-      },
-
-      resize: (data) => {
+      init: (data) => {
         return {
           ...state,
           ...data,
           shiftX: getIndent(state.current),
           min: calcMin(data),
           max: calcMax(),
-          isDraggable: data.layerWidth > data.containerWidth,
+          canDrag: data.layerWidth > data.containerWidth,
+          initialized: true,
         };
       },
 
       slide: () => {
         let { current } = state;
-        const { slides, max, deltaX, shiftX, startT } = state;
+        const { slides, max, deltaX, shiftX } = state;
 
         if (current > slides.length - 1) {
           current = slides.length - 1;
         }
 
-        const expectDeltaX = (deltaX / (Date.now() - startT.getTime())) * 240 * 0.6;
+        const expectDeltaX = (deltaX / (Date.now() - startT.current.getTime())) * 240 * 0.6;
         const shift = shiftX + deltaX + expectDeltaX - max;
         const direction = deltaX < 0 ? 1 : -1;
 
@@ -226,9 +223,16 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         const newShiftX = getIndent(targetIndex);
         const isChangeCurrent = newShiftX !== state.shiftX;
         const newCurrent = isChangeCurrent ? targetIndex : state.current;
+        const newState = {
+          ...state,
+          animation: true,
+          current: newCurrent,
+          deltaX: 0,
+          shiftX: newShiftX,
+        };
 
         if (onChangeCurrent && isChangeCurrent) {
-          onChangeCurrent({ current: newCurrent });
+          onChangeCurrent(newState);
         }
 
         if (onBegin && isChangeCurrent && newShiftX === state.max) {
@@ -239,17 +243,33 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           onFinish({ current: slides.length });
         }
 
-        return {
+        return newState;
+      },
+
+      slideTo: ({ newCurrent }) => {
+        let normalizedNewCurrent = newCurrent;
+
+        if (normalizedNewCurrent < 0) {
+          normalizedNewCurrent = 0;
+        }
+        if (normalizedNewCurrent > state.slides.length - 1) {
+          normalizedNewCurrent = state.slides.length - 1;
+        }
+
+        const newShiftX = getIndent(normalizedNewCurrent);
+        const newState = {
           ...state,
-          animation: true,
-          current: newCurrent,
+          animation: state.initialized,
+          current: normalizedNewCurrent,
           deltaX: 0,
           shiftX: newShiftX,
         };
-      },
 
-      setStartT: ({ startT }) => {
-        return { ...state, startT };
+        if (onChangeCurrent) {
+          onChangeCurrent(newState);
+        }
+
+        return newState;
       },
 
       setDelta: ({ deltaX }) => {
@@ -267,25 +287,17 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       disableAnimation: () => ({ ...state, animation: false }),
     };
 
-    let newState;
-
-    if (typeof action === 'string') {
-      newState = actions[action]();
-    } else {
-      newState = actions[action.type](action.data);
-    }
+    const actionName = typeof action === 'string' ? action : action.type;
+    const actionData = typeof action === 'string' ? undefined : action.data;
+    const newState = actions[actionName](actionData);
 
     return { ...newState, generalIndent: getGeneralIndent() };
   }
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    current: typeof slideIndex === 'number' ? slideIndex : initialSlideIndex,
+    current: slideIndex || 0,
   });
-
-  const storeSlides = useRef<unknown>({});
-  const startT = useRef<Date>();
-  const duration = 0.24;
 
   /**
    * Добавить слайд во внутреннее хранилище
@@ -298,14 +310,23 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Получить все нужные размеры
    */
   const getSizes = useCallback(() => {
+    if (!state.initialized) {
+      return {
+        slides: [],
+        viewportWidth: 0,
+        containerWidth: 0,
+        layerWidth: 0,
+      };
+    }
+
     const slides: GallerySlidesState[] = Children.map(
       children,
       (_child: ReactElement, index: number): GallerySlidesState => {
         const elem = storeSlides.current[index];
 
         return {
-          coordX: elem.offsetLeft,
-          width: elem.offsetWidth,
+          coordX: elem ? elem.offsetLeft : 0,
+          width: elem ? elem.offsetWidth : 0,
         };
       },
     );
@@ -323,7 +344,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       containerWidth,
       layerWidth,
     };
-  }, [children, gap]);
+  }, [children, gap, state.initialized]);
 
   /**
    * Стили для подвижного слоя
@@ -349,7 +370,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     window.draggableTarget = window.draggableTarget || refContainer.current;
 
     dispatch('disableAnimation');
-    dispatch({ type: 'setStartT', data: { startT: e.startT } });
   }, []);
 
   /**
@@ -359,7 +379,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     (e: TouchEvent) => {
       e.originalEvent.preventDefault();
 
-      if (!state.isDraggable) return;
+      if (!state.canDrag) return;
       if (!e.isSlideX) return;
       if (window.draggableTarget && window.draggableTarget !== refContainer.current) return;
 
@@ -395,15 +415,10 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменился размер страницы
    */
   const handleResize = useCallback(() => {
-    dispatch({
-      type: 'resize',
-      data: getSizes(),
-    });
+    dispatch({ type: 'init', data: getSizes() });
   }, [getSizes]);
 
-  /**
-   * Изменение размера страницы
-   */
+  /** Подписываемся на DOM-события */
   useEffect(() => {
     function cleanup() {
       window.removeEventListener('resize', handleResize);
@@ -418,16 +433,53 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Изменение кол-ва вложенных элементов
    */
   useEffect(() => {
+    if (!state.initialized) return;
+
+    dispatch({ type: 'init', data: getSizes() });
+  }, [childrenCount, getSizes, state.initialized]);
+
+  /** Генерируем событие изменения прогресса при изменении размеров и смещения */
+  useEffect(() => {
+    if (!onChangeProgress) return;
+    if (!state.initialized) return;
+    if (!state.layerWidth) return;
+
+    const normalize = (v: number) => {
+      if (v < 0) return 0;
+      if (v > 100) return 100;
+
+      return v;
+    };
+
+    const pureWidth = (state.containerWidth * 100) / state.layerWidth;
+    const pureOffset = Math.abs(state.shiftX * 100) / state.layerWidth;
+    const width = Math.round(normalize(pureWidth));
+    const offset = Math.round(normalize(pureOffset));
+    const finished = width + offset >= 100;
+
+    onChangeProgress({ width, offset, finished });
+  }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth, state.initialized]);
+
+  /** Програмное изменение слайда */
+  useEffect(() => {
+    if (typeof slideIndex !== 'number') return;
+    if (!state.initialized) return;
+
+    dispatch({ type: 'slideTo', data: { newCurrent: slideIndex } });
+  }, [slideIndex, state.initialized]);
+
+  useEffect(() => {
     if (state.initialized) return;
 
-    dispatch({
-      type: 'resize',
-      data: getSizes(),
-    });
-  }, [children, getSizes, state.initialized]);
+    dispatch({ type: 'init', data: getSizes() });
+  }, [getSizes, state.initialized]);
 
   return (
-    <div {...restProps} className={cn(styles.gallery, className)} ref={refContainer}>
+    <div
+      {...restProps}
+      className={cn(styles.gallery, { [styles.canDrag]: state.canDrag }, className)}
+      ref={refContainer}
+    >
       <Touch
         className={cn(styles.viewport, cnViewport)}
         ref={refViewport}
@@ -451,11 +503,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       </Touch>
     </div>
   );
-};
-
-Gallery.defaultProps = {
-  initialSlideIndex: 0,
-  gap: 0,
 };
 
 export default Gallery;

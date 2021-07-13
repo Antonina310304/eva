@@ -5,6 +5,9 @@
 
   background: var(--color-medium-gray);
 }
+.progress.invisible {
+  opacity: 0;
+}
 
 .die {
   position: absolute;

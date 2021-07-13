@@ -7,7 +7,9 @@
 
 .list {
   display: block;
+  margin-right: calc(var(--gap-h) / -2);
   margin-bottom: calc(var(--gap-v) * -1);
+  margin-left: calc(var(--gap-h) / -2);
 }
 
 .item {
@@ -56,10 +58,5 @@
   .catalog {
     --gap-h: var(--space-xs);
     overflow: hidden;
-  }
-
-  .list {
-    margin-right: var(--space-xxs-neg);
-    margin-left: var(--space-xxs-neg);
   }
 }

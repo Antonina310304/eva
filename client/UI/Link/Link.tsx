@@ -22,8 +22,6 @@ const Link: FC<LinkProps> = (props) => {
       e.preventDefault();
       if (window.cancelClick) return;
 
-      console.log('click');
-
       await queryClient.prefetchQuery(['page', to, 'ssr'], () => ApiPages.fetchPage({ path: to }));
       history.push(to);
       window.scrollTo({ top: 0 });
