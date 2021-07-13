@@ -53,7 +53,7 @@ export interface InitialState {
   current: number;
   animation: boolean;
   startT: Date;
-  isDraggable: boolean;
+  canDrag: boolean;
   generalIndent: number;
 }
 
@@ -76,7 +76,7 @@ const initialState: InitialState = {
   current: 0,
   animation: false,
   startT: new Date(),
-  isDraggable: false,
+  canDrag: false,
   generalIndent: 0,
 };
 
@@ -121,7 +121,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
      * Отступ слоя галереи
      */
     const getIndent = (current) => {
-      if (!state.isDraggable) return 0;
+      if (!state.canDrag) return 0;
 
       const { slides } = state;
 
@@ -184,7 +184,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           shiftX: getIndent(data.current),
           min: calcMin(data),
           max: calcMax(),
-          isDraggable: data.layerWidth > data.containerWidth,
+          canDrag: data.layerWidth > data.containerWidth,
           initialized: true,
         };
       },
@@ -196,7 +196,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           shiftX: getIndent(state.current),
           min: calcMin(data),
           max: calcMax(),
-          isDraggable: data.layerWidth > data.containerWidth,
+          canDrag: data.layerWidth > data.containerWidth,
         };
       },
 
@@ -393,7 +393,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     (e: TouchEvent) => {
       e.originalEvent.preventDefault();
 
-      if (!state.isDraggable) return;
+      if (!state.canDrag) return;
       if (!e.isSlideX) return;
       if (window.draggableTarget && window.draggableTarget !== refContainer.current) return;
 
@@ -483,7 +483,11 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   }, [slideIndex]);
 
   return (
-    <div {...restProps} className={cn(styles.gallery, className)} ref={refContainer}>
+    <div
+      {...restProps}
+      className={cn(styles.gallery, { [styles.canDrag]: state.canDrag }, className)}
+      ref={refContainer}
+    >
       <Touch
         className={cn(styles.viewport, cnViewport)}
         ref={refViewport}

@@ -2,6 +2,12 @@
   position: relative;
 
   height: 100%;
+
+  &.canDrag {
+    .layer {
+      cursor: grab;
+    }
+  }
 }
 
 .viewport {
@@ -16,11 +22,11 @@
   height: 100%;
 
   white-space: nowrap;
-
-  cursor: grab;
 }
 
 .child {
   display: inline-block;
   height: 100%;
+
+  white-space: normal;
 }
