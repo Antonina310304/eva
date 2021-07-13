@@ -57,8 +57,10 @@ const Section: FC<SectionProps> = (props) => {
   }, [normalizeSlide]);
 
   const handleNext = useCallback(() => {
+    if (track.finished) return;
+
     setSlide((prev) => normalizeSlide(prev + 1));
-  }, [normalizeSlide]);
+  }, [normalizeSlide, track]);
 
   const handleChangeCurrent = useCallback((params) => {
     setSlide(params.current);

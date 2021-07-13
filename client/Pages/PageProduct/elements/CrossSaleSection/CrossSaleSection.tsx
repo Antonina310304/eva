@@ -24,8 +24,8 @@ export interface CrossSaleSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
   products: ProductData[];
-  renderItem?: (props: RenderItem) => ReactElement;
   tabs?: Tab[];
+  renderItem?: (props: RenderItem) => ReactElement;
 }
 
 const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
@@ -56,8 +56,10 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
   }, [normalizeSlide]);
 
   const handleNext = useCallback(() => {
+    if (track.finished) return;
+
     setSlide((prev) => normalizeSlide(prev + 1));
-  }, [normalizeSlide]);
+  }, [normalizeSlide, track]);
 
   return (
     <Section
