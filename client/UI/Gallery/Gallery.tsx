@@ -58,6 +58,7 @@ export interface GalleryState {
 export interface ProgressOptions {
   width: number;
   offset: number;
+  finished: boolean;
 }
 
 const initialState: GalleryState = {
@@ -440,17 +441,24 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   /** Генерируем событие изменения прогресса при изменении размеров и смещения */
   useEffect(() => {
     if (!onChangeProgress) return;
+    if (!state.initialized) return;
+    if (!state.layerWidth) return;
 
-    let width = (state.containerWidth * 100) / state.layerWidth;
+    const normalize = (v: number) => {
+      if (v < 0) return 0;
+      if (v > 100) return 100;
 
-    if (width < 0) width = 0;
-    if (width > 100) width = 100;
+      return v;
+    };
 
-    onChangeProgress({
-      width,
-      offset: Math.abs(state.shiftX * 100) / state.layerWidth,
-    });
-  }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth]);
+    const pureWidth = (state.containerWidth * 100) / state.layerWidth;
+    const pureOffset = Math.abs(state.shiftX * 100) / state.layerWidth;
+    const width = Math.round(normalize(pureWidth));
+    const offset = Math.round(normalize(pureOffset));
+    const finished = width + offset >= 100;
+
+    onChangeProgress({ width, offset, finished });
+  }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth, state.initialized]);
 
   /** Програмное изменение слайда */
   useEffect(() => {
