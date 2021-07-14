@@ -12,6 +12,7 @@ import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import ReviewsSection from './elements/ReviewsSection';
 import styles from './PageProduct.module.css';
 
 export interface RouteParams {
@@ -100,6 +101,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
               </div>
             )}
           />
+        )}
+
+        {page.data.reviewsSubgallery?.length > 0 && (
+          <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+            <ReviewsSection reviews={page.data.reviewsSubgallery} />
+          </div>
         )}
 
         {sameProducts.products?.length > 0 && (

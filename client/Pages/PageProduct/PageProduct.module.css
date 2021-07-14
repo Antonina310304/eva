@@ -36,8 +36,17 @@
   }
 }
 
+.littleContainer {
+  max-width: 1066px;
+  margin: 0 auto;
+}
+
 .sectionCrossSale {
   padding-top: var(--space-xxl);
+}
+
+.sectionReviews {
+  margin-top: var(--space-e);
 }
 
 .sectionSimilar,
@@ -81,6 +90,10 @@
 
   .sectionSimilar,
   .sectionHistory {
+    margin-top: var(--space-xb);
+  }
+
+  .sectionReviews {
     margin-top: var(--space-xb);
   }
 }
