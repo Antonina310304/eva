@@ -1,0 +1,14 @@
+.CylindoRotateHint {
+  display: flex;
+  align-items: center;
+
+  font-size: var(--size-xs);
+}
+
+.ArrowPrev {
+  margin-right: var(--space-xs);
+}
+
+.ArrowNext {
+  margin-left: var(--space-xs);
+}
