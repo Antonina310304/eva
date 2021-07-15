@@ -41,7 +41,7 @@ const Review: FC<ReviewProps> = (props) => {
 
           {review?.photos.length > 0 && (
             <Gallery className={styles.photoGallery}>
-              {[...review.photos, ...review.photos, ...review.photos].map((photo) => (
+              {review.photos.map((photo) => (
                 <div className={styles.photoItem} key={photo.id}>
                   <Image className={styles.photo} src={photo.image} />
                 </div>
