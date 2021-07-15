@@ -8,6 +8,7 @@ import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
 import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
+import ProductModel from '@Components/ProductModel';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -48,6 +49,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
+        <ProductModel className={styles.cylindo} height={329} />
+
         {page.data.description && (
           <div
             className={styles.description}

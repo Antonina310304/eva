@@ -9,13 +9,21 @@
   margin-bottom: var(--space-e);
 }
 
-.description p {
-  &:first-child {
-    margin-top: 0;
-  }
+.cylindo {
+  border: 1px solid var(--color-medium-gray);
+}
 
-  &:last-child {
-    margin-bottom: 0;
+.description {
+  margin-top: var(--space-xxl);
+
+  p {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
