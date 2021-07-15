@@ -37,7 +37,7 @@
 }
 
 .littleContainer {
-  max-width: 1066px;
+  max-width: 1146px;
   margin: 0 auto;
 }
 
@@ -70,6 +70,12 @@
   min-width: 140px;
   max-width: 189px;
   padding: 0 var(--space-xs);
+}
+
+.listReviews {
+  composes: main from 'containers';
+
+  margin-top: var(--space-b);
 }
 
 @media (--desktop-m) {
