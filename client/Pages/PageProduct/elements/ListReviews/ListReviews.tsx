@@ -37,14 +37,16 @@ const ListReviews: FC<ListReviewsProps> = (props) => {
         renderChild={(review: ReviewData) => <Review className={styles.review} review={review} />}
       />
 
-      <div className={styles.wrapperNav}>
-        <Paginator
-          className={styles.paginator}
-          now={nowPage}
-          total={total}
-          onChange={handleChangePage}
-        />
-      </div>
+      {total > 1 && (
+        <div className={styles.wrapperNav}>
+          <Paginator
+            className={styles.paginator}
+            now={nowPage}
+            total={total}
+            onChange={handleChangePage}
+          />
+        </div>
+      )}
     </div>
   );
 };
