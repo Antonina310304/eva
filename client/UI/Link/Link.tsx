@@ -1,6 +1,6 @@
 import React, { FC, memo, useCallback, MouseEvent } from 'react';
 import cn from 'classnames';
-import { Link as BaseLink, LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
+import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
@@ -9,11 +9,21 @@ import styles from './Link.module.css';
 export interface LinkProps extends BaseLinkProps {
   className?: string;
   view?: 'primary' | 'secondary' | 'simple';
+  needFetch?: boolean;
   to: string;
+  onClick?(e: MouseEvent): void;
 }
 
 const Link: FC<LinkProps> = (props) => {
-  const { className, to, view = 'primary', children, ...restProps } = props;
+  const {
+    className,
+    to,
+    view = 'primary',
+    needFetch = true,
+    children,
+    onClick,
+    ...restProps
+  } = props;
   const queryClient = useQueryClient();
   const history = useHistory();
 
@@ -21,18 +31,22 @@ const Link: FC<LinkProps> = (props) => {
     async (e: MouseEvent) => {
       e.preventDefault();
       if (window.cancelClick) return;
-
-      await queryClient.prefetchQuery(['page', to, 'ssr'], () => ApiPages.fetchPage({ path: to }));
-      history.push(to);
-      window.scrollTo({ top: 0 });
+      if (needFetch) {
+        await queryClient.prefetchQuery(['page', to, 'ssr'], () =>
+          ApiPages.fetchPage({ path: to }),
+        );
+        history.push(to);
+        window.scrollTo({ top: 0 });
+      }
+      if (onClick) onClick(e);
     },
-    [history, queryClient, to],
+    [history, needFetch, onClick, queryClient, to],
   );
 
   return (
-    <BaseLink
+    <a
       {...restProps}
-      to={to}
+      href={to}
       className={cn(
         styles.link,
         {
@@ -45,7 +59,7 @@ const Link: FC<LinkProps> = (props) => {
       onClick={handleClick}
     >
       {children}
-    </BaseLink>
+    </a>
   );
 };
 
