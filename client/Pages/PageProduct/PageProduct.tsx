@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useMemo } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
@@ -30,6 +30,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta();
+
+  const siteReviews = useMemo(() => {
+    if (!page.isSuccess) return [];
+
+    return page.data.reviewsSubgallery.filter((review) => review.source === 'site');
+  }, [page.data, page.isSuccess]);
 
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
@@ -110,7 +116,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
         {page.data.reviewsSubgallery?.length > 0 && (
           <div className={cn(styles.littleContainer, styles.sectionReviews)}>
             <ReviewsSection reviews={page.data.reviewsSubgallery} />
-            <ListReviews className={styles.listReviews} reviews={page.data.reviewsSubgallery} />
+            {siteReviews.length > 0 && (
+              <ListReviews className={styles.listReviews} reviews={siteReviews} />
+            )}
           </div>
         )}
 
