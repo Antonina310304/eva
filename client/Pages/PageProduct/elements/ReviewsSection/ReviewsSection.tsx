@@ -87,7 +87,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
           ))}
         </Gallery>
 
-        <ProgressBar track={track} />
+        {track?.width < 100 && <ProgressBar className={styles.progressBar} track={track} />}
       </div>
 
       <div className={styles.wrapperButton}>

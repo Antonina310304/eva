@@ -25,12 +25,16 @@
 }
 
 .gallery {
-  margin: var(--space-xxl) 0 var(--space-xxl);
+  margin-top: var(--space-xxl);
   overflow: hidden;
 }
 
 .galleryViewport {
   margin: 0 var(--space-xs-neg);
+}
+
+.progressBar {
+  margin-top: var(--space-xxl);
 }
 
 .item {
