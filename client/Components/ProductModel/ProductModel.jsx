@@ -9,10 +9,9 @@ import useModals from '@Hooks/useModals';
 import useMedia from '@divanru/ts-utils/useMedia';
 
 import styles from './ProductModel.module.css';
-import medias from './staticDatas';
 
 const ProductModel = (props) => {
-  const { className, height, ...restProps } = props;
+  const { className, height, medias, ...restProps } = props;
   const [, { openModal }] = useModals();
 
   const [zoom, setZoom] = useState(null);
@@ -21,6 +20,7 @@ const ProductModel = (props) => {
 
   const iconSize = isMobileL ? 40 : 60;
   const cylindoHeight = height || 400;
+
   const onZoomEnter = useCallback(() => {
     setZoom([0.5, 0.5]);
   }, []);
@@ -35,9 +35,9 @@ const ProductModel = (props) => {
 
   const onFullscreen = useCallback(() => {
     openModal('Fullscreen360', {
-      opts: medias.data,
+      opts: medias,
     });
-  }, [openModal]);
+  }, [medias, openModal]);
 
   return (
     <div {...restProps} className={cns(styles.productModel, className)}>
@@ -45,11 +45,11 @@ const ProductModel = (props) => {
 
       <div
         className={cns(styles.WrapperCylindo, { [styles.zoomed]: !!zoom })}
-        style={{ height: `${cylindoHeight}px` }}
+        // style={{ height: `${cylindoHeight}px` }}
       >
         <Cylindo360Viewer
           className={styles.CylindoViewer}
-          opts={medias.data}
+          opts={medias}
           zoom={zoom}
           onZoomEnter={onZoomEnter}
           onZoomExit={onZoomExit}

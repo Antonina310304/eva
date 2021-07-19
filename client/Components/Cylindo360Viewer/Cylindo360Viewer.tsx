@@ -78,13 +78,31 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
   const handleRotateLeft = useCallback(() => {
     if (autonomic) return;
 
-    setAngle((prev) => (prev <= 0 ? 360 : prev - 10));
+    // подогнанный огород из-за не равномерности распределения картинок по окружности
+    let ang = refCylindo.current.getCurrentFrameIndex();
+    if (ang > 23) {
+      ang = (ang - 1) * 11;
+    } else if (ang === 23) {
+      ang = (ang - 1) * 10;
+    } else if (ang <= 6) {
+      ang = (ang - 1) * 5;
+    } else {
+      ang = (ang - 1) * 10;
+    }
+
+    refCylindo.current.goToAngle(ang === 0 ? 350 : ang);
+
+    // в этой реализации не происходит синхронизация вращения мышкой и стрелками
+    // setAngle((prev) => (prev <= 0 ? 360 : prev - 10));
   }, [autonomic]);
 
   const handleRotateRight = useCallback(() => {
     if (autonomic) return;
 
-    setAngle((prev) => (prev >= 360 ? 0 : prev + 10));
+    const ang = refCylindo.current.getCurrentFrameIndex() * 12;
+    refCylindo.current.goToAngle(ang >= 360 ? 0 : ang);
+
+    // setAngle((prev) => (prev >= 360 ? 0 : prev + 10));
   }, [autonomic]);
 
   useEffect(() => {
