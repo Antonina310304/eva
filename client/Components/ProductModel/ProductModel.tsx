@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cns from 'classnames';
 
 import Icon38360 from '@divanru/icons/dist/38/360';
-import Fullscreen360 from '@Components/Fullscreen360';
 import Cylindo360Viewer from '@Components/Cylindo360Viewer';
 import CylindoRotateHint from '@Components/CylindoRotateHint';
 import MainSliderPanel from '@Components/MainSliderPanel';

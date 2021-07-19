@@ -1,3 +1,2 @@
-import ProductModel from './ProductModel';
-
-export default ProductModel;
+export * from './ProductModel';
+export { default } from './ProductModel';
