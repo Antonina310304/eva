@@ -26,6 +26,7 @@ export interface Cylindo360ViewerProps extends HTMLAttributes<HTMLDivElement> {
   onZoomExit?: () => void;
   onChangeFrameIndex?: (index: number) => void;
   onViewerReady?: () => void;
+  onError?: () => void;
 }
 
 const defaultOpts = {
@@ -49,6 +50,7 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
     onZoomExit,
     onChangeFrameIndex,
     onViewerReady,
+    onError,
     ...restProps
   } = props;
   const [containerID, setContainerID] = useState(null);
@@ -64,10 +66,11 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
 
     const { events } = refCylindo.current;
 
-    if (onZoomEnter) refCylindo.current.on(events.ZOOM_ENTER, onZoomEnter);
+    if (onZoomEnter) refCylindo.current.on(events.ZOOM_ENTER, () => onZoomEnter());
     if (onZoomExit) refCylindo.current.on(events.ZOOM_EXIT, onZoomExit);
     if (onViewerReady) refCylindo.current.on(events.VIEWER_READY, onViewerReady);
-  }, [fullOpts, onViewerReady, onZoomEnter, onZoomExit]);
+    if (onError) refCylindo.current.on(events.ERROR, () => console.log('ERROR FFFF'));
+  }, [fullOpts, onError, onViewerReady, onZoomEnter, onZoomExit]);
 
   const handleLoad = useCallback(() => {
     if (!window.cylindo) return;

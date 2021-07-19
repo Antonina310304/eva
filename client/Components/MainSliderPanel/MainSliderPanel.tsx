@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, memo, HTMLAttributes, FC, MouseEvent } from 'react';
+import React, { useRef, useEffect, memo, HTMLAttributes, FC, MouseEvent } from 'react';
 import cns from 'classnames';
 
 import Icon16Fullscreen from '@divanru/icons/dist/16/fullscreen';
@@ -6,9 +6,7 @@ import Icon18FullscreenOut from '@divanru/icons/dist/18/fullscreen_out';
 import Icon21PlusZoom from '@divanru/icons/dist/21/plus_zoom';
 import Icon21MinusZoom from '@divanru/icons/dist/21/minus_zoom';
 import useMedia from '@divanru/ts-utils/useMedia';
-import Image from '@UI/Image';
 
-import iconZoom from './icons/zoom.svg';
 import styles from './MainSliderPanel.module.css';
 
 export interface MainSliderPanelProps extends HTMLAttributes<HTMLDivElement> {
@@ -65,7 +63,6 @@ const MainSliderPanel: FC<MainSliderPanelProps> = (props) => {
         </div>
         <div className={cns(styles.Button, { [styles.actived]: isZoom })} onClick={onZoom}>
           <IconZoom width={iconSize} height={iconSize} />
-          {/* <Image src={iconZoom} /> */}
         </div>
       </div>
     </div>

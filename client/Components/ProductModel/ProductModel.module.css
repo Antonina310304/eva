@@ -35,8 +35,14 @@
 .WrapperCylindo {
   position: relative;
 
+  display: none;
+
   width: 100%;
   margin-right: 10px;
+}
+
+.WrapperCylindo.loaded {
+  display: block;
 }
 
 .WrapperCylindo.zoomed {
@@ -65,4 +71,8 @@
 
 .WrapperRotateHint.hide {
   opacity: 0;
+}
+
+.loading.loaded {
+  display: none;
 }
