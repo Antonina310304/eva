@@ -62,3 +62,7 @@
 
   transition: opacity 0.5s;
 }
+
+.WrapperRotateHint.hide {
+  opacity: 0;
+}

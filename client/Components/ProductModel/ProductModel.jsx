@@ -15,6 +15,7 @@ const ProductModel = (props) => {
   const [, { openModal }] = useModals();
 
   const [zoom, setZoom] = useState(null);
+  const [hideRotateHint, setHideRotateHint] = useState(false);
 
   const isMobileL = useMedia('--desktop');
 
@@ -22,11 +23,11 @@ const ProductModel = (props) => {
   const cylindoHeight = height || 400;
 
   const onZoomEnter = useCallback(() => {
-    setZoom([0.5, 0.5]);
+    setHideRotateHint(true);
   }, []);
 
   const onZoomExit = useCallback(() => {
-    setZoom(null);
+    setHideRotateHint(false);
   }, []);
 
   const onZoom = useCallback(() => {
@@ -54,7 +55,7 @@ const ProductModel = (props) => {
           onZoomEnter={onZoomEnter}
           onZoomExit={onZoomExit}
         />
-        <div className={styles.WrapperRotateHint}>
+        <div className={cns(styles.WrapperRotateHint, { [styles.hide]: hideRotateHint })}>
           <CylindoRotateHint className={styles.RotateHint} />
         </div>
       </div>

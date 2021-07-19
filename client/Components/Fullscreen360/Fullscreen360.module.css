@@ -46,6 +46,10 @@
   transition: opacity 0.4s;
 }
 
+.WrapperRotateHint.hide {
+  opacity: 0;
+}
+
 .RotateHint {
   color: #989898;
 }
