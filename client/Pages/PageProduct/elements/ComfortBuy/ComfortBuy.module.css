@@ -36,6 +36,7 @@
 }
 
 .heading {
+  margin: 0;
   padding-top: var(--space-xb);
   padding-bottom: var(--space-xxl);
 
@@ -81,12 +82,15 @@
 
   .advantagesList {
     flex-wrap: wrap;
-    min-width: 700px;
     max-width: 700px;
   }
 
   .advantagesItem {
     max-width: 330px;
+  }
+
+  .advantagesItem:first-child {
+    margin-bottom: var(--size-b);
   }
 }
 
@@ -100,6 +104,9 @@
 @media (--mobile) {
   .advantagesList {
     flex-direction: column;
-    min-width: 330px;
+  }
+
+  .advantagesItem:not(:last-child) {
+    margin-bottom: var(--space-xxl);
   }
 }
