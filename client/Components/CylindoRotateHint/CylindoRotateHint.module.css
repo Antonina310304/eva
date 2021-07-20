@@ -1,14 +1,31 @@
-.CylindoRotateHint {
+.cylindoRotateHint {
   display: flex;
   align-items: center;
 
   font-size: var(--size-xs);
 }
 
-.ArrowPrev {
-  margin-right: var(--space-xs);
+.text {
+  font-size: var(--size-xs);
+  line-height: var(--lh-xs);
 }
 
-.ArrowNext {
+.arrowPrev {
+  width: 16px;
+  height: 11px;
+  margin-right: var(--space-xs);
+
+  background-image: url('./left.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.arrowNext {
+  width: 16px;
+  height: 11px;
   margin-left: var(--space-xs);
+
+  background-image: url('./right.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }

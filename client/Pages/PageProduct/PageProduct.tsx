@@ -43,7 +43,14 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts, sameProducts, historyProducts } = page.data;
+  const {
+    product,
+    mediaGallery,
+    cylindo,
+    crossSalesProducts,
+    sameProducts,
+    historyProducts,
+  } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -55,7 +62,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        <ProductModel className={styles.cylindo} height={329} />
+        {page.data.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
 
         {page.data.description && (
           <div

@@ -26,6 +26,7 @@ export interface Cylindo360ViewerProps extends HTMLAttributes<HTMLDivElement> {
   onZoomExit?: () => void;
   onChangeFrameIndex?: (index: number) => void;
   onViewerReady?: () => void;
+  onError?: () => void;
 }
 
 const defaultOpts = {
@@ -49,6 +50,7 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
     onZoomExit,
     onChangeFrameIndex,
     onViewerReady,
+    onError,
     ...restProps
   } = props;
   const [containerID, setContainerID] = useState(null);
@@ -64,10 +66,11 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
 
     const { events } = refCylindo.current;
 
-    if (onZoomEnter) refCylindo.current.on(events.ZOOM_ENTER, onZoomEnter);
+    if (onZoomEnter) refCylindo.current.on(events.ZOOM_ENTER, () => onZoomEnter());
     if (onZoomExit) refCylindo.current.on(events.ZOOM_EXIT, onZoomExit);
     if (onViewerReady) refCylindo.current.on(events.VIEWER_READY, onViewerReady);
-  }, [fullOpts, onViewerReady, onZoomEnter, onZoomExit]);
+    if (onError) refCylindo.current.on(events.ERROR, () => console.log('ERROR'));
+  }, [fullOpts, onError, onViewerReady, onZoomEnter, onZoomExit]);
 
   const handleLoad = useCallback(() => {
     if (!window.cylindo) return;
@@ -78,13 +81,26 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
   const handleRotateLeft = useCallback(() => {
     if (autonomic) return;
 
-    setAngle((prev) => (prev <= 0 ? 360 : prev - 10));
+    // подогнанный огород из-за не равномерности распределения картинок по окружности
+    let ang = refCylindo.current.getCurrentFrameIndex();
+    if (ang > 23) {
+      ang = (ang - 1) * 11;
+    } else if (ang === 23) {
+      ang = (ang - 1) * 10;
+    } else if (ang <= 6) {
+      ang = (ang - 1) * 5;
+    } else {
+      ang = (ang - 1) * 10;
+    }
+
+    refCylindo.current.goToAngle(ang === 0 ? 350 : ang);
   }, [autonomic]);
 
   const handleRotateRight = useCallback(() => {
     if (autonomic) return;
 
-    setAngle((prev) => (prev >= 360 ? 0 : prev + 10));
+    const ang = refCylindo.current.getCurrentFrameIndex() * 12;
+    refCylindo.current.goToAngle(ang >= 360 ? 0 : ang);
   }, [autonomic]);
 
   useEffect(() => {
@@ -171,7 +187,7 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
   useKeyboardEvents({ onArrowLeft: handleRotateLeft, onArrowRight: handleRotateRight });
 
   return (
-    <div {...restProps} className={cns(styles.Cylindo360Viewer, className)} id={containerID} />
+    <div {...restProps} className={cns(styles.cylindo360Viewer, className)} id={containerID} />
   );
 };
 

@@ -1,17 +1,17 @@
-.Fullscreen360 {
+.fullscreen360 {
   width: 100%;
   height: 100%;
 }
 
-.Fullscreen360.zoomed {
-  .WrapperRotateHint {
+.fullscreen360.zoomed {
+  .wrapperRotateHint {
     opacity: 0;
 
     transition: none;
   }
 }
 
-.Container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,20 +19,20 @@
   height: 100%;
 }
 
-.ImageContainer {
+.imageContainer {
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto 60px;
+  margin: 0 auto var(-space-xb);
   overflow: hidden;
 }
 
-.CylindoContainer {
+.cylindoContainer {
   position: relative;
 
-  padding: 0 10px;
+  padding: 0 var(-space-xs);
 }
 
-.WrapperRotateHint {
+.wrapperRotateHint {
   position: absolute;
   bottom: 0;
   z-index: 2;
@@ -46,18 +46,26 @@
   transition: opacity 0.4s;
 }
 
-.RotateHint {
-  color: #989898;
+.wrapperRotateHint.hide {
+  opacity: 0;
+}
+
+.rotateHint {
+  color: var(--color-dark-gray);
+}
+
+.panel {
+  margin-top: var(--space-s);
 }
 
 @media (--desktop) {
-  .ImageContainer {
+  .imageContainer {
     max-width: 760px;
   }
 }
 
 @media (--mobile) {
-  .ImageContainer {
+  .imageContainer {
     margin: 0 0 var(--space-xl);
   }
 }

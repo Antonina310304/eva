@@ -16,43 +16,44 @@ export interface Fullscreen360Props extends Cylindo360ViewerProps {
 const Fullscreen360: FC<Fullscreen360Props> = (props) => {
   const { className, opts, isFullscreen, onFullscreen, ...restProps } = props;
   const [zoom, setZoom] = useState(null);
+  const [hideRotateHint, setHideRotateHint] = useState(false);
 
   const toggleZoom = useCallback(() => {
     setZoom((prev) => (prev ? null : [0.5, 0.5]));
   }, []);
 
   const handleZoomEnter = useCallback(() => {
-    setZoom([0.5, 0.5]);
+    setHideRotateHint(true);
   }, []);
 
   const handleZoomExit = useCallback(() => {
-    setZoom(null);
+    setHideRotateHint(false);
   }, []);
 
   return (
     <div
       {...restProps}
-      className={cns(styles.Fullscreen360, { [styles.zoomed]: !!zoom }, className)}
+      className={cns(styles.fullscreen360, { [styles.zoomed]: !!zoom }, className)}
     >
-      <div className={styles.Container}>
-        <div className={styles.ImageContainer}>
-          <div className={styles.CylindoContainer}>
+      <div className={styles.container}>
+        <div className={styles.imageContainer}>
+          <div className={styles.cylindoContainer}>
             <Cylindo360Viewer
-              className={styles.Viewer}
+              className={styles.viewer}
               opts={opts}
               zoom={zoom}
               onZoomEnter={handleZoomEnter}
               onZoomExit={handleZoomExit}
             />
 
-            <div className={styles.WrapperRotateHint}>
-              <CylindoRotateHint className={styles.RotateHint} />
+            <div className={cns(styles.wrapperRotateHint, { [styles.hide]: hideRotateHint })}>
+              <CylindoRotateHint className={styles.rotateHint} />
             </div>
           </div>
         </div>
 
         <MainSliderPanel
-          className={styles.Panel}
+          className={styles.panel}
           isFullscreen={isFullscreen}
           isZoom={!!zoom}
           onFullscreen={onFullscreen}

@@ -1,12 +1,12 @@
-.MainSliderPanel {
+.mainSliderPanel {
   display: flex;
 }
 
-.SpecialButton {
+.specialButton {
   display: flex;
 }
 
-.Button {
+.button {
   position: relative;
 
   display: flex;
@@ -58,7 +58,7 @@
   }
 }
 
-.Button.actived {
+.button.actived {
   &:before {
     top: 0;
     left: 0;
@@ -68,14 +68,42 @@
   }
 }
 
+.fullScreen {
+  width: 30px;
+  height: 30px;
+
+  background-image: url('./full-screen.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.zoom {
+  width: 30px;
+  height: 30px;
+
+  background-image: url('./zoom.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 @media (--desktop) {
-  .SpecialButton {
+  .specialButton {
     width: 90px;
     height: 40px;
   }
 
-  .Button {
+  .button {
     min-width: 40px;
     height: 40px;
+  }
+
+  .fullScreen {
+    width: 20px;
+    height: 20px;
+  }
+
+  .zoom {
+    width: 20px;
+    height: 20px;
   }
 }
