@@ -1,0 +1,15 @@
+.section {
+  overflow: hidden;
+}
+
+.wrapperGallery {
+  composes: main from 'containers';
+}
+
+.gallery {
+  margin-top: var(--space-l);
+}
+
+.galleryViewport {
+  overflow: visible;
+}

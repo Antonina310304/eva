@@ -1,16 +1,44 @@
 .rating {
   display: flex;
   align-items: center;
+
+  &.sizeS {
+    .star {
+      width: 14px;
+      height: 14px;
+    }
+
+    .score {
+      margin-left: var(--space-s);
+    }
+  }
+
+  &.sizeM {
+    .star {
+      width: 22px;
+      height: 22px;
+    }
+
+    .score {
+      margin-left: var(--space-s);
+
+      font-size: var(--size-l);
+      line-height: var(--lh-l);
+    }
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
 }
 
 .star {
-  width: 14px;
-  height: 14px;
-
   background-image: url('./starDefault.svg');
   background-repeat: no-repeat;
   background-size: contain;
-}
-.star.selected {
-  background-image: url('./starSelected.svg');
+
+  &.selected {
+    background-image: url('./starSelected.svg');
+  }
 }
