@@ -13,18 +13,18 @@ export interface Advantage {
 export interface ComfortBuyProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   heading: string;
-  advantages: Advantage[];
+  items: Advantage[];
 }
 
 const ComfortBuy: FC<ComfortBuyProps> = (props) => {
-  const { className, heading, advantages, ...restProps } = props;
+  const { className, heading, items, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.comfortBuy, className)}>
       <h3 className={styles.heading}>{heading}</h3>
       <List
         className={cn(styles.advantagesList, className)}
-        items={advantages}
+        items={items}
         renderChild={(item: Advantage) => (
           <div className={styles.advantagesItem}>
             <Image className={styles.advantagesPic} src={item.img} />

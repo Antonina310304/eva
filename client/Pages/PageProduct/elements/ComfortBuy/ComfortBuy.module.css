@@ -23,16 +23,12 @@
 }
 
 .advantagesPic {
-  height: 135px;
+  width: 100%;
+  min-height: 135px;
   margin-bottom: var(--size-xxl);
-}
 
-.advantagesItem:nth-child(odd) .advantagesPic {
-  width: 240px;
-}
-
-.advantagesItem:nth-child(even) .advantagesPic {
-  width: 120px;
+  background-position: 50% 50%;
+  background-size: contain;
 }
 
 .heading {
