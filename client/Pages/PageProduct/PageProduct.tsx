@@ -12,7 +12,10 @@ import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import ComfortBuy from './elements/ComfortBuy';
 import styles from './PageProduct.module.css';
+
+import fakeData from './fakeData.json';
 
 export interface RouteParams {
   slug: string;
@@ -101,7 +104,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             )}
           />
         )}
-
+        <ComfortBuy advantages={fakeData.advantages} heading={fakeData.heading} />
         {sameProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionSimilar}

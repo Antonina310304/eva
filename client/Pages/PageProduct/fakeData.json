@@ -1,0 +1,23 @@
+{
+  "heading": " Покупайте с комфортом",
+
+  "advantages": [
+    {
+      "img": "/react/static/comfortBuy/pic1.png",
+      "description": "Привезем товар в удобное время, поднимем до квартиры и поможем собрать."
+    },
+    {
+      "img": "/react/static/comfortBuy/pic2.png",
+      "description": "Мы уверены в качестве материалов. Гарантия на мебель от 18 месяцев."
+    },
+    {
+      "img": "/react/static/comfortBuy/pic3.png",
+      "description": "Выбирайте способ оплаты: банковской картой или наличными при получении."
+    },
+    {
+      "img": "/react/static/comfortBuy/pic4.png",
+      "description":  "Вы легко сможете вернуть или обменять товар в течение одной недели."
+    }
+  ]
+
+}
