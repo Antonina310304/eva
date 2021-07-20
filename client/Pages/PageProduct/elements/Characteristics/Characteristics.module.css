@@ -1,0 +1,11 @@
+.characteristics {
+  padding: var(--space-xb);
+
+  background: var(--color-light-gray);
+}
+
+.title {
+  composes: xxl from 'sizes';
+
+  margin: 0 0 var(--space-xb);
+}

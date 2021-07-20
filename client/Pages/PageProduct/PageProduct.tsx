@@ -12,6 +12,7 @@ import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import Characteristics from './elements/Characteristics';
 import styles from './PageProduct.module.css';
 
 export interface RouteParams {
@@ -34,7 +35,14 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts, sameProducts, historyProducts } = page.data;
+  const {
+    product,
+    mediaGallery,
+    crossSalesProducts,
+    sameProducts,
+    historyProducts,
+    parameters,
+  } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -62,6 +70,27 @@ const PageProduct: FC<PageProductProps> = (props) => {
             />
           </div>
         )}
+
+        <div className={styles.characteristics}>
+          <Characteristics
+            title='Характеристики'
+            tabs={[
+              { id: '0', label: 'Собранный' },
+              { id: '1', label: 'Разобранный' },
+            ]}
+            schemes={[
+              {
+                id: '0',
+                images: ['/react/static/img/scheme1.jpg', '/react/static/img/scheme2.jpg'],
+              },
+              {
+                id: '1',
+                images: ['/react/static/img/scheme3.jpg', '/react/static/img/scheme4.jpg'],
+              },
+            ]}
+            parameters={parameters}
+          />
+        </div>
       </MainGrid>
 
       {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
