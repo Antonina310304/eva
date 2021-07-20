@@ -1,5 +1,10 @@
 .section {
 }
+.section.hasDescription {
+  .head {
+    align-items: flex-end;
+  }
+}
 
 .head {
   composes: main from 'containers';
@@ -26,6 +31,10 @@
   margin-left: var(--space-xs);
 }
 
+.arrows {
+  margin-left: var(--space-xxs);
+}
+
 @media (--desktop-m) {
   .title {
     font-size: var(--size-xxl);
@@ -42,13 +51,20 @@
   .title {
     font-size: var(--size-l);
   }
-
-  .arrows {
-    margin-left: var(--space-xxs);
-  }
 }
 
 @media (--mobile) {
+  .section.hasDescription {
+    .head {
+      flex-direction: column;
+    }
+
+    .arrows {
+      margin-top: var(--space-xxl);
+      margin-left: 0;
+    }
+  }
+
   .title {
     font-size: var(--size-l);
   }

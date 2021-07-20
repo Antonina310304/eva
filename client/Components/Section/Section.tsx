@@ -29,7 +29,10 @@ const Section: FC<SectionProps> = (props) => {
   } = props;
 
   return (
-    <div {...restProps} className={cn(styles.Section, className)}>
+    <div
+      {...restProps}
+      className={cn(styles.section, { [styles.hasDescription]: !!description }, className)}
+    >
       <div className={styles.head}>
         <div className={styles.headContent}>
           {typeof title === 'string' && <h2 className={styles.title}>{title}</h2>}
