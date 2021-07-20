@@ -5,7 +5,7 @@ stages:
   - push
   - review
   - deploy
-
+  - clear_review
 prepare:
   tags:
     - divan
@@ -129,10 +129,16 @@ review:
     - merge_requests
 
 stop_review:
-  stage: review
+  stage: clear_review
   script:
     - kubectl delete namespace $CI_COMMIT_REF_SLUG
+  variables:
+    GIT_STRATEGY: none
+  dependencies:
+    - review
   environment:
     name: review/$CI_COMMIT_REF_NAME
     action: stop
   when: manual
+  only:
+    - merge_requests
