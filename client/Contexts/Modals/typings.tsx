@@ -2,7 +2,7 @@ export type ModalId = 'Info' | 'Filters' | 'Fullscreen360';
 
 export interface Modal {
   id: ModalId;
-  data: unknown;
+  data: any;
   visible?: boolean;
 }
 
