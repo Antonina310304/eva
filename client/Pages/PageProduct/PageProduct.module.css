@@ -51,6 +51,17 @@
   margin: 0 auto;
 }
 
+.sectionInstagram {
+  margin-top: var(--space-xxe);
+}
+
+.instagramDescription {
+  composes: m from 'sizes';
+
+  width: 100%;
+  max-width: 875px;
+}
+
 .sectionCrossSale {
   padding-top: var(--space-xxl);
 }

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent, ReactChild } from 'react';
+import React, { FC, HTMLAttributes, memo, MouseEvent, ReactChild } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';
@@ -10,6 +10,7 @@ export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   title: ReactChild;
   hasArrows?: boolean;
   priceMin?: number;
+  description?: ReactChild | ReactChild[];
   onPrev?: (e: MouseEvent) => void;
   onNext?: (e: MouseEvent) => void;
 }
@@ -20,30 +21,17 @@ const Section: FC<SectionProps> = (props) => {
     title,
     hasArrows = true,
     priceMin,
+    description,
     children,
     onPrev,
     onNext,
     ...restProps
   } = props;
 
-  const handlePrev = useCallback(
-    (e) => {
-      if (onPrev) onPrev(e);
-    },
-    [onPrev],
-  );
-
-  const handleNext = useCallback(
-    (e) => {
-      if (onNext) onNext(e);
-    },
-    [onNext],
-  );
-
   return (
     <div {...restProps} className={cn(styles.Section, className)}>
       <div className={styles.head}>
-        <div className={styles.titleWrapper}>
+        <div className={styles.headContent}>
           {typeof title === 'string' && <h2 className={styles.title}>{title}</h2>}
           {typeof title === 'object' && <div className={styles.title}>{title}</div>}
 
@@ -53,11 +41,13 @@ const Section: FC<SectionProps> = (props) => {
               <Price price={priceMin} />
             </div>
           )}
+
+          {description && <div className={styles.description}>{description}</div>}
         </div>
 
         {hasArrows && (
           <div className={styles.arrows}>
-            <Arrows onPrev={handlePrev} onNext={handleNext} />
+            <Arrows onPrev={onPrev} onNext={onNext} />
           </div>
         )}
       </div>
