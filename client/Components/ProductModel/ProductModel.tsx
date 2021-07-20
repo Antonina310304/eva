@@ -55,7 +55,7 @@ const ProductModel: FC<ProductModelProps> = (props) => {
     setHeight(imgHeight[0].height);
   }, []);
 
-  const [dimensions, setDimensions] = useState(window.innerWidth);
+  const [dimensions, setDimensions] = useState(null);
 
   const handleResize = useCallback(() => {
     if (fullLoaded) {
