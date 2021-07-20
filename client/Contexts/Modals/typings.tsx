@@ -2,7 +2,7 @@ export type ModalId = 'Info' | 'Filters';
 
 export interface Modal {
   id: ModalId;
-  data: unknown;
+  data: any;
   visible?: boolean;
 }
 
