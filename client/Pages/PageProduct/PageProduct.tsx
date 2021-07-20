@@ -9,6 +9,8 @@ import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
 import ProductModel from '@Components/ProductModel';
+import InstagramSection from '@Components/InstagramSection';
+import Link from '@UI/Link';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -29,7 +31,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta();
+  const meta = useMeta({ ssr: true });
 
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];
@@ -120,6 +122,24 @@ const PageProduct: FC<PageProductProps> = (props) => {
               <ListReviews className={styles.listReviews} reviews={siteReviews} />
             )}
           </div>
+        )}
+
+        {page.data.instagram?.length > 0 && (
+          <InstagramSection
+            className={styles.sectionInstagram}
+            title='Обустраиваете дом? Мы хотим посмотреть!'
+            description={
+              <div className={styles.instagramDescription}>
+                {`Cтилизуете интерьер вместе с Divan.ru – отмечайте `}
+                <Link view='native' to='/'>
+                  @official_divan.ru
+                </Link>
+                {` на фото в своем аккаунте Instagram, добавляйте хештег #купилвдиванру. Мы публикуем
+                лучшие кадры.`}
+              </div>
+            }
+            posts={page.data.instagram}
+          />
         )}
 
         {sameProducts.products?.length > 0 && (
