@@ -64,6 +64,8 @@
 .wrapperContent {
   position: relative;
 
+  width: 100%;
+
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }

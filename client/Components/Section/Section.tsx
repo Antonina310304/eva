@@ -1,15 +1,16 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react';
+import React, { FC, HTMLAttributes, memo, MouseEvent, ReactChild } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';
 import Arrows from './elements/Arrows';
 import styles from './Section.module.css';
 
-export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
+export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   className?: string;
-  title: string;
+  title: ReactChild;
   hasArrows?: boolean;
   priceMin?: number;
+  description?: ReactChild | ReactChild[];
   onPrev?: (e: MouseEvent) => void;
   onNext?: (e: MouseEvent) => void;
 }
@@ -20,42 +21,36 @@ const Section: FC<SectionProps> = (props) => {
     title,
     hasArrows = true,
     priceMin,
+    description,
     children,
     onPrev,
     onNext,
     ...restProps
   } = props;
 
-  const handlePrev = useCallback(
-    (e) => {
-      if (onPrev) onPrev(e);
-    },
-    [onPrev],
-  );
-
-  const handleNext = useCallback(
-    (e) => {
-      if (onNext) onNext(e);
-    },
-    [onNext],
-  );
-
   return (
-    <div {...restProps} className={cn(styles.Section, className)}>
+    <div
+      {...restProps}
+      className={cn(styles.section, { [styles.hasDescription]: !!description }, className)}
+    >
       <div className={styles.head}>
-        <div className={styles.titleWrapper}>
-          <h2 className={styles.title}>{title}</h2>
+        <div className={styles.headContent}>
+          {typeof title === 'string' && <h2 className={styles.title}>{title}</h2>}
+          {typeof title === 'object' && <div className={styles.title}>{title}</div>}
+
           {priceMin && (
             <div className={styles.priceMin}>
               {`от `}
               <Price price={priceMin} />
             </div>
           )}
+
+          {description && <div className={styles.description}>{description}</div>}
         </div>
 
         {hasArrows && (
           <div className={styles.arrows}>
-            <Arrows onPrev={handlePrev} onNext={handleNext} />
+            <Arrows onPrev={onPrev} onNext={onNext} />
           </div>
         )}
       </div>

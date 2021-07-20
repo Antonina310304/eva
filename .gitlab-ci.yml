@@ -65,6 +65,21 @@ lint_javascript_code:
     - merge_requests
   allow_failure: true
 
+check_types:
+  tags:
+    - divan
+  stage: lint
+  image: node:14-alpine
+  script:
+    - npm run type-check
+  cache:
+    key: '$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA'
+    paths:
+      - node_modules/
+  only:
+    - merge_requests
+  allow_failure: true
+
 build:
   tags:
     - divan

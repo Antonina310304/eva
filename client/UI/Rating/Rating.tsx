@@ -20,11 +20,22 @@ export interface RatingProps extends HTMLAttributes<HTMLDivElement> {
   defaultValue?: number;
   value?: number;
   countStars?: number;
+  size?: 's' | 'm';
+  scored?: boolean;
   onChangeStar?: OnChangeStarCallback;
 }
 
 const Rating: FC<RatingProps> = (props) => {
-  const { className, defaultValue, value, countStars = 5, onChangeStar, ...restProps } = props;
+  const {
+    className,
+    defaultValue,
+    value,
+    countStars = 5,
+    size = 's',
+    scored,
+    onChangeStar,
+    ...restProps
+  } = props;
   const [selectedStar, setSelectedStar] = useState(defaultValue || value);
 
   const stars: number[] = useMemo(() => {
@@ -51,21 +62,30 @@ const Rating: FC<RatingProps> = (props) => {
   }, [value]);
 
   return (
-    <List
+    <div
       {...restProps}
-      className={cn(styles.rating, className)}
-      items={stars}
-      renderChild={(star: number) => {
-        const selected = star < selectedStar;
+      className={cn(
+        styles.rating,
+        { [styles.sizeS]: size === 's', [styles.sizeM]: size === 'm' },
+        className,
+      )}
+    >
+      <List
+        className={styles.list}
+        items={stars}
+        renderChild={(star: number) => {
+          const selected = star < selectedStar;
 
-        return (
-          <div
-            className={cn(styles.star, { [styles.selected]: selected })}
-            onClick={(e: MouseEvent) => handleClickStar(e, star)}
-          />
-        );
-      }}
-    />
+          return (
+            <div
+              className={cn(styles.star, { [styles.selected]: selected })}
+              onClick={(e: MouseEvent) => handleClickStar(e, star)}
+            />
+          );
+        }}
+      />
+      {scored && <div className={styles.score}>{`${value}/${countStars}`}</div>}
+    </div>
   );
 };
 

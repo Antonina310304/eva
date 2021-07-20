@@ -56,9 +56,9 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
 
   const transformPaths = useCallback((paths: SVGPathElement[]) => {
     paths.forEach((path) => {
-      if (path.classList.contains('Layers-Aside')) path.classList.add(styles.aside);
-      if (path.classList.contains('Layers-Upper')) path.classList.add(styles.upper);
-      if (path.classList.contains('Layers-Pattern')) path.classList.add(styles.pattern);
+      if (path.classList.contains('Aside')) path.classList.add(styles.aside);
+      if (path.classList.contains('Upper')) path.classList.add(styles.upper);
+      if (path.classList.contains('Pattern')) path.classList.add(styles.pattern);
     });
   }, []);
 

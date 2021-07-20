@@ -1,0 +1,44 @@
+.instagram {
+  --gap: var(--space-s);
+}
+
+.gallery {
+  margin: 0 calc(var(--gap) / -2);
+}
+
+.item {
+  width: 22.547vw;
+  min-width: 300px;
+  max-width: 423px;
+  padding: 0 var(--gap);
+}
+
+.track {
+  margin-top: var(--space-l);
+}
+
+@media (--desktop-m) {
+  .gallery {
+    --gap: var(--space-xxs);
+  }
+}
+
+@media (--desktop) {
+  .item {
+    width: 300px;
+  }
+}
+
+@media (--mobile-m) {
+  .item {
+    width: 265px;
+    min-width: 265px;
+  }
+}
+
+@media (--mobile) {
+  .item {
+    width: 225px;
+    min-width: 225px;
+  }
+}

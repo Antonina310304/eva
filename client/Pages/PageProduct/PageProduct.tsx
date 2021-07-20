@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useMemo } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
@@ -8,11 +8,16 @@ import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
 import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
+import ProductModel from '@Components/ProductModel';
+import InstagramSection from '@Components/InstagramSection';
+import Link from '@UI/Link';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
 import ComfortBuy from './elements/ComfortBuy';
+import ReviewsSection from './elements/ReviewsSection';
+import ListReviews from './elements/ListReviews';
 import styles from './PageProduct.module.css';
 
 import fakeData from './fakeData.json';
@@ -29,7 +34,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta();
+  const meta = useMeta({ ssr: true });
+
+  const siteReviews = useMemo(() => {
+    if (!page.isSuccess) return [];
+
+    return page.data.reviewsSubgallery.filter((review) => review.source === 'site');
+  }, [page.data, page.isSuccess]);
 
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
@@ -37,7 +48,14 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts, sameProducts, historyProducts } = page.data;
+  const {
+    product,
+    mediaGallery,
+    cylindo,
+    crossSalesProducts,
+    sameProducts,
+    historyProducts,
+  } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -49,6 +67,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
+        {page.data.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
+
         {page.data.description && (
           <div
             className={styles.description}
@@ -107,6 +127,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         {fakeData.heading && fakeData.advantages?.length > 0 && (
           <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
         )}
+
         {sameProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionSimilar}

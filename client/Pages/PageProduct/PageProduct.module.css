@@ -9,13 +9,23 @@
   margin-bottom: var(--space-e);
 }
 
-.description p {
-  &:first-child {
-    margin-top: 0;
-  }
+.cylindo {
+  margin-bottom: var(--space-xxl);
+  padding: var(--space-n);
+  padding-bottom: var(--space-xxl);
 
-  &:last-child {
-    margin-bottom: 0;
+  border: 1px solid var(--color-medium-gray);
+}
+
+.description {
+  p {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -36,8 +46,28 @@
   }
 }
 
+.littleContainer {
+  max-width: 1146px;
+  margin: 0 auto;
+}
+
+.sectionInstagram {
+  margin-top: var(--space-xxe);
+}
+
+.instagramDescription {
+  composes: m from 'sizes';
+
+  width: 100%;
+  max-width: 875px;
+}
+
 .sectionCrossSale {
   padding-top: var(--space-xxl);
+}
+
+.sectionReviews {
+  margin-top: var(--space-e);
 }
 
 .sectionSimilar,
@@ -63,6 +93,12 @@
   padding: 0 var(--space-xs);
 }
 
+.listReviews {
+  composes: main from 'containers';
+
+  margin-top: var(--space-b);
+}
+
 @media (--desktop-m) {
   .separator {
     margin-top: var(--space-e);
@@ -75,12 +111,21 @@
 }
 
 @media (--desktop) {
+  .cylindo {
+    padding: var(--space-xs);
+    padding-bottom: var(--space-n);
+  }
+
   .separator {
     margin-top: var(--space-xb);
   }
 
   .sectionSimilar,
   .sectionHistory {
+    margin-top: var(--space-xb);
+  }
+
+  .sectionReviews {
     margin-top: var(--space-xb);
   }
 }
