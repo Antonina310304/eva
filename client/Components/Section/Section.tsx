@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent, ReactChild } from 'react';
+import React, { FC, HTMLAttributes, memo, MouseEvent, ReactChild } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';
@@ -26,20 +26,6 @@ const Section: FC<SectionProps> = (props) => {
     ...restProps
   } = props;
 
-  const handlePrev = useCallback(
-    (e) => {
-      if (onPrev) onPrev(e);
-    },
-    [onPrev],
-  );
-
-  const handleNext = useCallback(
-    (e) => {
-      if (onNext) onNext(e);
-    },
-    [onNext],
-  );
-
   return (
     <div {...restProps} className={cn(styles.Section, className)}>
       <div className={styles.head}>
@@ -57,7 +43,7 @@ const Section: FC<SectionProps> = (props) => {
 
         {hasArrows && (
           <div className={styles.arrows}>
-            <Arrows onPrev={handlePrev} onNext={handleNext} />
+            <Arrows onPrev={onPrev} onNext={onNext} />
           </div>
         )}
       </div>
