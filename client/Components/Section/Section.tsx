@@ -10,6 +10,7 @@ export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   title: ReactChild;
   hasArrows?: boolean;
   priceMin?: number;
+  description?: ReactChild | ReactChild[];
   onPrev?: (e: MouseEvent) => void;
   onNext?: (e: MouseEvent) => void;
 }
@@ -20,6 +21,7 @@ const Section: FC<SectionProps> = (props) => {
     title,
     hasArrows = true,
     priceMin,
+    description,
     children,
     onPrev,
     onNext,
@@ -29,7 +31,7 @@ const Section: FC<SectionProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.Section, className)}>
       <div className={styles.head}>
-        <div className={styles.titleWrapper}>
+        <div className={styles.headContent}>
           {typeof title === 'string' && <h2 className={styles.title}>{title}</h2>}
           {typeof title === 'object' && <div className={styles.title}>{title}</div>}
 
@@ -39,6 +41,8 @@ const Section: FC<SectionProps> = (props) => {
               <Price price={priceMin} />
             </div>
           )}
+
+          {description && <div className={styles.description}>{description}</div>}
         </div>
 
         {hasArrows && (
