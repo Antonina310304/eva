@@ -152,7 +152,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write",
+    "*.{js,jsx,ts,tsx,md,json,html,css}": "prettier --write",
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
     "*.css": "stylelint --fix"
   }
