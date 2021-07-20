@@ -104,7 +104,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
             )}
           />
         )}
-        <ComfortBuy advantages={fakeData.advantages} heading={fakeData.heading} />
+        {fakeData.heading.length > 0 && fakeData.advantages.length > 0 && (
+          <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
+        )}
         {sameProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionSimilar}
