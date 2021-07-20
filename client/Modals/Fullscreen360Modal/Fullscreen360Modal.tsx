@@ -25,17 +25,17 @@ const Fullscreen360Modal: FC<Fullscreen360ModalProps> = (props) => {
 
   return (
     <Modal
-      className={cns(styles.Fullscreen360Modal, className)}
+      className={cns(styles.fullscreen360Modal, className)}
       id={modal.id}
       visible={isVisible(modal.id)}
     >
       <div className={styles.fullCover} />
 
-      <div className={styles.TopPanel} onClick={handleClose}>
-        <Icon18Close className={styles.IconClose} />
+      <div className={styles.topPanel} onClick={handleClose}>
+        <Icon18Close className={styles.iconClose} />
       </div>
 
-      <div className={styles.Container}>
+      <div className={styles.container}>
         <Fullscreen360 isFullscreen opts={opts} onFullscreen={handleClose} />
       </div>
     </Modal>

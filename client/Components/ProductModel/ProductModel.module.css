@@ -3,59 +3,49 @@
   justify-content: space-between;
 }
 
-.specialButton {
-  display: flex;
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-
-  background: #f5f3f1;
-  cursor: pointer;
-
-  &:last-child {
-    margin-left: 15px;
-  }
-}
-
-.WrapperRotateHint {
-  color: #989898;
+.icon360Wrapper {
+  margin-right: var(--space-xs);
 }
 
 .view360 {
-  margin-right: 10px;
+  width: 60px;
+  height: 60px;
 
-  color: #989898;
+  background-image: url('./360.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
-.WrapperCylindo {
+.wrapperCylindo {
   position: relative;
 
   display: none;
-
   width: 100%;
-  margin-right: 10px;
 }
 
-.WrapperCylindo.loaded {
+.wrapperCylindo.loaded {
   display: block;
 }
 
-.WrapperCylindo.zoomed {
-  .WrapperRotateHint {
+.wrapperCylindo.zoomed {
+  .wrapperRotateHint {
     opacity: 0;
   }
 }
 
-.CylindoViewer {
+.specialButton {
+  display: flex;
+}
+
+.wrapperRotateHint {
+  color: var(--color-dark-gray);
+}
+
+.cylindoViewer {
   height: inherit;
 }
 
-.WrapperRotateHint {
+.wrapperRotateHint {
   position: absolute;
   bottom: 0;
   z-index: 2;
@@ -69,10 +59,21 @@
   transition: opacity 0.5s;
 }
 
-.WrapperRotateHint.hide {
+.wrapperRotateHint.hide {
   opacity: 0;
 }
 
 .loading.loaded {
   display: none;
+}
+
+.buttonsPanel {
+  margin-left: var(--space-xs);
+}
+
+@media (--desktop) {
+  .view360 {
+    width: 40px;
+    height: 40px;
+  }
 }

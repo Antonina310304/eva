@@ -56,9 +56,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        {page.data.cylindo && (
-          <ProductModel className={styles.cylindo} medias={cylindo} height={390} />
-        )}
+        {page.data.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
 
         {page.data.description && (
           <div

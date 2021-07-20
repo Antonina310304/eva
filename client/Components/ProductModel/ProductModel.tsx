@@ -1,12 +1,10 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useRef, useEffect, useState, useCallback } from 'react';
 import cns from 'classnames';
 
-import Icon38360 from '@divanru/icons/dist/38/360';
 import Cylindo360Viewer from '@Components/Cylindo360Viewer';
 import CylindoRotateHint from '@Components/CylindoRotateHint';
 import MainSliderPanel from '@Components/MainSliderPanel';
 import useModals from '@Hooks/useModals';
-import useMedia from '@divanru/ts-utils/useMedia';
 
 import styles from './ProductModel.module.css';
 
@@ -18,23 +16,18 @@ export interface CylindoData {
 
 export interface ProductModelProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  height?: number;
   medias: CylindoData;
 }
 
 const ProductModel: FC<ProductModelProps> = (props) => {
-  const { className, height, medias, ...restProps } = props;
+  const { className, medias, ...restProps } = props;
   const [, { openModal }] = useModals();
 
   const [zoom, setZoom] = useState(null);
   const [hideRotateHint, setHideRotateHint] = useState(false);
   const [fullLoaded, setFullLoaded] = useState(false);
   const [errorLoad, setErrorLoad] = useState(false);
-
-  const isMobileL = useMedia('--desktop');
-
-  const iconSize = isMobileL ? 40 : 60;
-  const cylindoHeight = height || 400;
+  const cylinRef = useRef(null);
 
   const onZoomEnter = useCallback(() => {
     setHideRotateHint(true);
@@ -54,32 +47,64 @@ const ProductModel: FC<ProductModelProps> = (props) => {
     });
   }, [medias, openModal]);
 
-  const onFullLoaded = useCallback(() => setFullLoaded(true), []);
+  const [height, setHeight] = useState(0);
+
+  const onFullLoaded = useCallback(() => {
+    setFullLoaded(true);
+    const imgHeight = cylinRef.current.getElementsByTagName('img');
+    setHeight(imgHeight[0].height);
+  }, []);
+
+  const [dimensions, setDimensions] = useState(window.innerWidth);
+
+  const handleResize = useCallback(() => {
+    if (fullLoaded) {
+      const imgHeight = cylinRef.current.getElementsByTagName('img');
+
+      setDimensions((prev) => {
+        if (prev < window.innerWidth) {
+          setHeight(9000);
+          return window.innerWidth;
+        }
+        return window.innerWidth;
+      });
+
+      setHeight(imgHeight[0].height);
+    }
+  }, [fullLoaded]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize, false);
+  }, [handleResize]);
 
   const onError = useCallback(() => setErrorLoad(true), []);
 
   return (
     <div {...restProps} className={cns(styles.productModel, className)}>
-      <Icon38360 width={iconSize} height={iconSize} className={styles.view360} />
+      <div className={styles.icon360Wrapper}>
+        <div className={styles.view360} />
+      </div>
 
       <div
-        className={cns(styles.WrapperCylindo, {
+        className={cns(styles.wrapperCylindo, {
           [styles.zoomed]: !!zoom,
           [styles.loaded]: fullLoaded,
         })}
-        // style={{ height: `${cylindoHeight}px` }}
       >
-        <Cylindo360Viewer
-          className={styles.CylindoViewer}
-          opts={medias}
-          zoom={zoom}
-          onZoomEnter={onZoomEnter}
-          onZoomExit={onZoomExit}
-          onViewerReady={onFullLoaded}
-          onError={onError}
-        />
-        <div className={cns(styles.WrapperRotateHint, { [styles.hide]: hideRotateHint })}>
-          <CylindoRotateHint className={styles.RotateHint} />
+        <div ref={cylinRef}>
+          <Cylindo360Viewer
+            className={styles.cylindoViewer}
+            opts={medias}
+            zoom={zoom}
+            onZoomEnter={onZoomEnter}
+            onZoomExit={onZoomExit}
+            onViewerReady={onFullLoaded}
+            onError={onError}
+            style={{ height: `${height}px` }}
+          />
+        </div>
+        <div className={cns(styles.wrapperRotateHint, { [styles.hide]: hideRotateHint })}>
+          <CylindoRotateHint />
         </div>
       </div>
 
@@ -96,7 +121,7 @@ const ProductModel: FC<ProductModelProps> = (props) => {
       )}
 
       <MainSliderPanel
-        className={styles.ButtonsPanel}
+        className={styles.buttonsPanel}
         isZoom={!!zoom}
         onFullscreen={onFullscreen}
         onZoom={onZoom}

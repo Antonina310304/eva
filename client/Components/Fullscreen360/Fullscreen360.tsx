@@ -33,27 +33,27 @@ const Fullscreen360: FC<Fullscreen360Props> = (props) => {
   return (
     <div
       {...restProps}
-      className={cns(styles.Fullscreen360, { [styles.zoomed]: !!zoom }, className)}
+      className={cns(styles.fullscreen360, { [styles.zoomed]: !!zoom }, className)}
     >
-      <div className={styles.Container}>
-        <div className={styles.ImageContainer}>
-          <div className={styles.CylindoContainer}>
+      <div className={styles.container}>
+        <div className={styles.imageContainer}>
+          <div className={styles.cylindoContainer}>
             <Cylindo360Viewer
-              className={styles.Viewer}
+              className={styles.viewer}
               opts={opts}
               zoom={zoom}
               onZoomEnter={handleZoomEnter}
               onZoomExit={handleZoomExit}
             />
 
-            <div className={cns(styles.WrapperRotateHint, { [styles.hide]: hideRotateHint })}>
-              <CylindoRotateHint className={styles.RotateHint} />
+            <div className={cns(styles.wrapperRotateHint, { [styles.hide]: hideRotateHint })}>
+              <CylindoRotateHint className={styles.rotateHint} />
             </div>
           </div>
         </div>
 
         <MainSliderPanel
-          className={styles.Panel}
+          className={styles.panel}
           isFullscreen={isFullscreen}
           isZoom={!!zoom}
           onFullscreen={onFullscreen}

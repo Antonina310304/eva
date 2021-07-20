@@ -69,7 +69,7 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
     if (onZoomEnter) refCylindo.current.on(events.ZOOM_ENTER, () => onZoomEnter());
     if (onZoomExit) refCylindo.current.on(events.ZOOM_EXIT, onZoomExit);
     if (onViewerReady) refCylindo.current.on(events.VIEWER_READY, onViewerReady);
-    if (onError) refCylindo.current.on(events.ERROR, () => console.log('ERROR FFFF'));
+    if (onError) refCylindo.current.on(events.ERROR, () => console.log('ERROR'));
   }, [fullOpts, onError, onViewerReady, onZoomEnter, onZoomExit]);
 
   const handleLoad = useCallback(() => {
@@ -94,9 +94,6 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
     }
 
     refCylindo.current.goToAngle(ang === 0 ? 350 : ang);
-
-    // в этой реализации не происходит синхронизация вращения мышкой и стрелками
-    // setAngle((prev) => (prev <= 0 ? 360 : prev - 10));
   }, [autonomic]);
 
   const handleRotateRight = useCallback(() => {
@@ -104,8 +101,6 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
 
     const ang = refCylindo.current.getCurrentFrameIndex() * 12;
     refCylindo.current.goToAngle(ang >= 360 ? 0 : ang);
-
-    // setAngle((prev) => (prev >= 360 ? 0 : prev + 10));
   }, [autonomic]);
 
   useEffect(() => {
@@ -192,7 +187,7 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
   useKeyboardEvents({ onArrowLeft: handleRotateLeft, onArrowRight: handleRotateRight });
 
   return (
-    <div {...restProps} className={cns(styles.Cylindo360Viewer, className)} id={containerID} />
+    <div {...restProps} className={cns(styles.cylindo360Viewer, className)} id={containerID} />
   );
 };
 
