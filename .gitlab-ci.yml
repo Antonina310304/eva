@@ -114,8 +114,6 @@ review:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_COMMIT_REF_SLUG.eva.hhw.ru
     on_stop: stop_review
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
   script:
     - kubectl config set-cluster apps --insecure-skip-tls-verify=true --server="$REVIEW_K8S_API_ENDPOINT"
     - kubectl config set-credentials ci --token="$REVIEW_K8S_SECRET_ACCESS_KEY"
@@ -139,6 +137,6 @@ stop_review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     action: stop
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-      when: manual
+  only:
+    - master
+    - merge_requests
