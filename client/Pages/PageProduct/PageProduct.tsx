@@ -104,7 +104,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             )}
           />
         )}
-        {fakeData.heading.length > 0 && fakeData.advantages.length > 0 && (
+        {fakeData.heading && fakeData.advantages?.length > 0 && (
           <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
         )}
         {sameProducts.products?.length > 0 && (
