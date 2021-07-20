@@ -129,6 +129,8 @@ review:
     - merge_requests
 
 stop_review:
+  tags:
+    - divan
   stage: clear_review
   script:
     - kubectl delete namespace $CI_COMMIT_REF_SLUG
