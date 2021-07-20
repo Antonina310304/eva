@@ -113,7 +113,6 @@ review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_COMMIT_REF_SLUG.eva.hhw.ru
-    on_stop: stop_review
   script:
     - kubectl config set-cluster apps --insecure-skip-tls-verify=true --server="$REVIEW_K8S_API_ENDPOINT"
     - kubectl config set-credentials ci --token="$REVIEW_K8S_SECRET_ACCESS_KEY"
@@ -124,19 +123,6 @@ review:
     - sed -i "s/<COMMIT_SHORT_SHA>/${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}/g" ./.kubernetes/*.yaml
     - kubectl create configmap env-configmap --from-env-file=./.env --dry-run=client --output="yaml" | kubectl apply -n $CI_COMMIT_REF_SLUG -f -
     - kubectl apply -n $CI_COMMIT_REF_SLUG -f ./.kubernetes/
-  only:
-    - master
-    - merge_requests
-
-stop_review:
-  tags:
-    - divan
-  stage: review
-  script:
-    - kubectl delete daemonsets,replicasets,services,deployments,pods,rc,statefulset,job -n $CI_COMMIT_REF_SLUG
-  environment:
-    name: review/$CI_COMMIT_REF_NAME
-    action: stop
   only:
     - master
     - merge_requests
