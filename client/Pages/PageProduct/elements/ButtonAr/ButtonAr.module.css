@@ -1,0 +1,31 @@
+.buttonAr {
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+
+  background-image: url('./ar.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.buttonText {
+  margin-left: 18px;
+}
+
+.button {
+  height: 40px !important;
+}
+
+@media (--desktop) {
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .button {
+    width: 40px;
+    padding: 0 !important;
+  }
+}

@@ -34,7 +34,15 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts, sameProducts, historyProducts } = page.data;
+  const {
+    product,
+    ar,
+    breadcrumbs,
+    mediaGallery,
+    crossSalesProducts,
+    sameProducts,
+    historyProducts,
+  } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -42,7 +50,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
         className={cn(styles.mainContainer, styles.wrapperMain)}
         sidebar={<Sidebar page={page.data} />}
       >
-        <PhotoGallery images={mediaGallery} tags={product.tags} />
+        <PhotoGallery
+          images={mediaGallery}
+          tags={product.tags}
+          ar={ar}
+          category={breadcrumbs[1].text}
+        />
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
