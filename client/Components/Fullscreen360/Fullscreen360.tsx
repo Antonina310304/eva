@@ -15,7 +15,7 @@ export interface Fullscreen360Props extends Cylindo360ViewerProps {
 
 const Fullscreen360: FC<Fullscreen360Props> = (props) => {
   const { className, opts, isFullscreen, onFullscreen, ...restProps } = props;
-  const [zoom, setZoom] = useState(null);
+  const [zoom, setZoom] = useState<[number, number]>(null);
   const [hideRotateHint, setHideRotateHint] = useState(false);
 
   const toggleZoom = useCallback(() => {
