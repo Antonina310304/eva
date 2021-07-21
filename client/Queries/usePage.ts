@@ -1,6 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
+import useRequest from '@Hooks/useRequest';
 import { ProductData } from '@Types/Product';
 
 export interface Params {
@@ -29,12 +30,13 @@ export interface UsePageResult {
 }
 
 const usePage = (params: Params): UseQueryResult<UsePageResult> => {
+  const { cookie } = useRequest();
   const { path, ssr } = params;
   const keys = ['page', path];
 
   if (ssr) keys.push('ssr');
 
-  const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
+  const result = useQuery(keys, () => ApiPages.fetchPage({ path }, { headers: { cookie } }), {
     keepPreviousData: true,
     retryOnMount: false,
     refetchOnMount: false,
