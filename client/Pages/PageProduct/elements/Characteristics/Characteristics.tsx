@@ -1,13 +1,43 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
 import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
+import Dimension from './elements/Dimension';
+import ImportantInfo from './elements/ImportantInfo';
 import styles from './Characteristics.module.css';
+
+export interface SchemeImage {
+  url: string;
+  width: number;
+  height: number;
+}
 
 export interface Scheme {
   id: string;
-  images: string[];
+  images: SchemeImage[];
+}
+
+export interface Value {
+  name: string;
+  value: string;
+}
+
+export interface Variant {
+  id: number;
+  name: string;
+  image: string;
+  theme: string;
+  selected: boolean;
+}
+
+export interface Parameter {
+  theme: 'default' | 'dropdown' | 'dimension';
+  name?: string;
+  variant?: string;
+  groupId?: number;
+  values?: Value[];
+  variants?: Variant[];
 }
 
 export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,15 +45,24 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   tabs?: Tab[];
   schemes?: Scheme[];
+  parameters: Parameter[];
+  importantInfo?: {
+    text: string;
+    title: string;
+  };
 }
 
 const Characteristics: FC<CharacteristicsProps> = (props) => {
-  const { className, title, tabs, schemes, ...restProps } = props;
+  const { className, title, tabs, schemes, parameters, importantInfo, ...restProps } = props;
   const [currentTab, setCurrentTab] = useState('0');
 
   const handleChangeTab = useCallback((e, tab) => {
     setCurrentTab(tab.id);
   }, []);
+
+  const parametersDimension = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'dimension');
+  }, [parameters]);
 
   return (
     <div {...restProps} className={cn(styles.characteristics, className)}>
@@ -40,25 +79,42 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
         )}
       </div>
       {schemes && (
-        <div className={styles.schemes}>
-          <List
-            items={schemes}
-            renderChild={(item: Scheme) => (
-              <div className={cn(styles.scheme, { [styles.active]: item.id === currentTab })}>
-                <List
-                  items={item.images}
-                  renderChild={(image: string) => (
-                    <img src={image} alt='' className={styles.schemeImg} />
-                  )}
-                />
-              </div>
-            )}
-          />
-        </div>
+        <List
+          className={styles.schemes}
+          items={schemes}
+          renderChild={(item: Scheme) => (
+            <List
+              className={cn(styles.scheme, { [styles.active]: item.id === currentTab })}
+              items={item.images}
+              renderChild={(image: SchemeImage) => (
+                <img src={image.url} className={styles.schemeImg} alt='' />
+              )}
+            />
+          )}
+        />
       )}
       <div className={styles.row}>
+        <List
+          className={styles.col}
+          items={parametersDimension}
+          renderChild={(dimension: Parameter) => (
+            <Dimension
+              className={styles.dimension}
+              name={dimension.name}
+              value={dimension.values}
+            />
+          )}
+        />
         <div className={styles.col} />
-        <div className={styles.col} />
+      </div>
+      <div className={styles.row}>
+        {importantInfo && (
+          <ImportantInfo
+            className={styles.ImportantInfo}
+            title={importantInfo.title}
+            text={importantInfo.text}
+          />
+        )}
       </div>
     </div>
   );

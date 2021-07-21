@@ -1,0 +1,57 @@
+.dimension {
+}
+
+.name {
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-xxs);
+
+  font-weight: 500;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.valueItem {
+  position: relative;
+
+  display: flex;
+  align-items: baseline;
+  width: calc(100% / 3);
+}
+
+.valueItem:first-child {
+  justify-content: flex-start;
+}
+
+.valueItem:nth-child(2) {
+  justify-content: center;
+}
+
+.valueItem:nth-child(3) {
+  justify-content: flex-end;
+}
+
+.valueName {
+  composes: s from 'sizes';
+
+  margin-right: var(--space-xs);
+}
+
+.valueValue {
+  composes: n from 'sizes';
+}
+
+.delimiter {
+  composes: n from 'sizes';
+
+  position: absolute;
+  right: var(--space-xs-neg);
+
+  width: var(--space-n);
+
+  text-align: center;
+}

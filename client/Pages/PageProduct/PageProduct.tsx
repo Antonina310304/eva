@@ -42,6 +42,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     sameProducts,
     historyProducts,
     parameters,
+    importantInfo,
   } = page.data;
 
   return (
@@ -81,14 +82,37 @@ const PageProduct: FC<PageProductProps> = (props) => {
             schemes={[
               {
                 id: '0',
-                images: ['/react/static/img/scheme1.jpg', '/react/static/img/scheme2.jpg'],
+                images: [
+                  {
+                    url: '/react/static/img/scheme1.jpg',
+                    width: 511,
+                    height: 236,
+                  },
+                  {
+                    url: '/react/static/img/scheme2.jpg',
+                    width: 269,
+                    height: 235,
+                  },
+                ],
               },
               {
                 id: '1',
-                images: ['/react/static/img/scheme3.jpg', '/react/static/img/scheme4.jpg'],
+                images: [
+                  {
+                    url: '/react/static/img/scheme3.jpg',
+                    width: 232,
+                    height: 389,
+                  },
+                  {
+                    url: '/react/static/img/scheme4.jpg',
+                    width: 81,
+                    height: 388,
+                  },
+                ],
               },
             ]}
             parameters={parameters}
+            importantInfo={importantInfo}
           />
         </div>
       </MainGrid>
