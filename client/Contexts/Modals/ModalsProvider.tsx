@@ -24,7 +24,7 @@ const ModalsProvider: FC = (props) => {
     setStack((prev) => {
       const newStack = [].concat(prev, [id]);
 
-      setModals((prevModals) => {
+      setModals((prevModals: any) => {
         if (!prevModals) {
           return {
             [id]: {
@@ -35,7 +35,7 @@ const ModalsProvider: FC = (props) => {
           };
         }
 
-        Object.values(prevModals).map((modal) => {
+        Object.values(prevModals).map((modal: any) => {
           return { ...modal, visible: modal.id === newStack[newStack.length - 1] };
         });
 
