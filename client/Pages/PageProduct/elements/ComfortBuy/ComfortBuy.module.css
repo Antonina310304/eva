@@ -98,11 +98,20 @@
 }
 
 @media (--mobile) {
+  .heading {
+    padding: var(--space-xxl) var(--space-s);
+  }
+
   .advantagesList {
     flex-direction: column;
+    align-items: center;
   }
 
   .advantagesItem:not(:last-child) {
     margin-bottom: var(--space-xxl);
+  }
+
+  .advantagesItem {
+    min-width: 330px;
   }
 }
