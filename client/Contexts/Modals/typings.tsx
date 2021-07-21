@@ -2,7 +2,7 @@ export type ModalId = 'Info' | 'Filters' | 'QrCode' | 'ProductSlider';
 
 export interface Modal {
   id: ModalId;
-  data: unknown;
+  data: any;
   visible?: boolean;
 }
 
