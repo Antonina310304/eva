@@ -22,12 +22,14 @@ const Fullscreen360: FC<Fullscreen360Props> = (props) => {
     setZoom((prev) => (prev ? null : [0.5, 0.5]));
   }, []);
 
-  const handleZoomEnter = useCallback(() => {
+  const handleZoomEnter = useCallback(({ x, y }) => {
     setHideRotateHint(true);
+    setZoom([x, y]);
   }, []);
 
   const handleZoomExit = useCallback(() => {
     setHideRotateHint(false);
+    setZoom(null);
   }, []);
 
   return (
