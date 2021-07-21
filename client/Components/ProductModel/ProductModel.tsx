@@ -23,10 +23,10 @@ const ProductModel: FC<ProductModelProps> = (props) => {
   const { className, medias, ...restProps } = props;
   const [, { openModal }] = useModals();
 
-  const [zoom, setZoom] = useState(null);
-  const [hideRotateHint, setHideRotateHint] = useState(false);
-  const [fullLoaded, setFullLoaded] = useState(false);
-  const [errorLoad, setErrorLoad] = useState(false);
+  const [zoom, setZoom] = useState<[number, number]>(null);
+  const [hideRotateHint, setHideRotateHint] = useState<boolean>(false);
+  const [fullLoaded, setFullLoaded] = useState<boolean>(false);
+  const [errorLoad, setErrorLoad] = useState<boolean>(false);
 
   const onZoomEnter = useCallback(({ x, y }) => {
     setHideRotateHint(true);
