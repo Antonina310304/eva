@@ -101,7 +101,7 @@ const RangeDroplet: FC<RangeDropletProps> = (props: RangeDropletProps) => {
 
   // Отслеживаем перемещение мыши
   useEffect(() => {
-    function onMouseMove(e) {
+    function onMouseMove(e: any) {
       if (!dragged) {
         return;
       }
@@ -124,7 +124,7 @@ const RangeDroplet: FC<RangeDropletProps> = (props: RangeDropletProps) => {
       });
     }
 
-    function onMouseUp(e) {
+    function onMouseUp(e: any) {
       if (dragged && onChangeEnd) {
         // Заменяем таргет на таргет из onMouseDown для определения позиции элемента
         const trueEvent = { ...e, currentTarget: refTarget.current };

@@ -24,15 +24,16 @@ export interface MattressesLayersAccordionProps extends HTMLAttributes<HTMLDivEl
 }
 
 const iconProps = { className: styles.icon, width: 15, height: 15 };
-function uniq(arr) {
+
+function getUniqLayers(layers: MattressesLayerData[]) {
   const retArr = [];
-  for (let i = 0; i < arr.length; i += 1) {
+  for (let i = 0; i < layers.length; i += 1) {
     if (
       retArr.findIndex(
-        (item) => item.title.trim().toLowerCase() === arr[i].title.trim().toLowerCase(),
+        (item) => item.title.trim().toLowerCase() === layers[i].title.trim().toLowerCase(),
       ) === -1
     ) {
-      retArr.push(arr[i]);
+      retArr.push(layers[i]);
     }
   }
   return retArr;
@@ -66,7 +67,7 @@ const MattressesLayersAccordion: FC<MattressesLayersAccordionProps> = (props) =>
 
   return (
     <div {...restProps} className={cn(styles.accordion, className)}>
-      {uniq(layers).map((layer, index) => {
+      {getUniqLayers(layers).map((layer, index) => {
         const collapsed = !openedLayer || openedLayer !== layer;
 
         return (

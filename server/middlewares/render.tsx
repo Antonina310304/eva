@@ -28,7 +28,7 @@ const render: RequestHandler = async (req, res) => {
   }
 
   const webExtractor = new ChunkExtractor({ statsFile: paths.stats.web });
-  const renderAndWait = async () => {
+  const renderAndWait = async (): Promise<string> => {
     const components = (
       <QueryClientProvider client={queryClient}>
         <StaticRouter location={req.url} context={routerContext}>
