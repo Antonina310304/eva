@@ -1,0 +1,78 @@
+.review {
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  composes: darkGray from 'colors';
+}
+
+.date {
+  composes: darkGray from 'colors';
+}
+
+.criterias {
+  margin-right: var(--space-xb);
+}
+
+.criteria {
+  display: flex;
+  align-items: center;
+}
+
+.criteriaName {
+  min-width: 60px;
+  margin-right: var(--space-s);
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.wrapperMain {
+  display: flex;
+  align-items: flex-start;
+  margin-top: var(--space-l);
+}
+
+.content {
+  padding-right: var(--space-xe);
+}
+
+.photoGallery {
+  width: 100%;
+  margin: var(--space-n) var(--space-xs-neg) 0;
+  overflow: hidden;
+}
+
+.photoItem {
+  padding: 0 var(--space-xs);
+}
+
+.photo {
+  width: 225px;
+  padding-bottom: 73.333%;
+}
+
+@media (--mobile) {
+  .wrapperMain {
+    display: block;
+    margin-top: var(--space-n);
+  }
+
+  .criterias {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 0;
+  }
+
+  .content {
+    margin-top: var(--space-n);
+    padding-right: 0;
+  }
+}
