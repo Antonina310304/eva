@@ -21,6 +21,7 @@ export interface PhotoGalleryProps extends HTMLAttributes<HTMLDivElement> {
   images: MediaGalleryItem[];
   tags?: ProductTagData[];
   category: 'Шкафы' | 'Диваны и кресла';
+  ar?: any;
 }
 
 export interface ItemsProps {
@@ -35,7 +36,12 @@ const Items: FC<ItemsProps> = (props) => {
   const { isMobileM } = useMedias();
 
   return isMobileM ? (
-    <Gallery {...restProps} slideIndex={slideIndex} onChangeCurrent={onChange}>
+    <Gallery
+      {...restProps}
+      className={styles.gallery}
+      slideIndex={slideIndex}
+      onChangeCurrent={onChange}
+    >
       {children}
     </Gallery>
   ) : (
@@ -49,35 +55,41 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   const [, { openModal }] = useModals();
 
   const items = useMemo(() => {
-    const arr = [];
-    const arr2 = [...images];
-    let cut;
+    const galleryViewArray = [];
+    const copyImages = [...images];
 
     if (category === 'Диваны и кресла') {
-      while (arr2.length > 0) {
-        arr.push(...arr2.splice(0, 3));
-        if (arr2.length >= 1) {
-          arr.push([...arr2.splice(0, 2)]);
+      while (copyImages.length > 0) {
+        galleryViewArray.push(...copyImages.splice(0, 3));
+        if (copyImages.length >= 1) {
+          galleryViewArray.push([...copyImages.splice(0, 2)]);
         }
       }
-      cut = 4;
     } else if (category === 'Шкафы') {
-      while (arr2.length > 0) {
-        arr.push(...arr2.splice(0, 1));
-        if (arr2.length >= 1) {
-          arr.push([...arr2.splice(0, 2)]);
+      while (copyImages.length > 0) {
+        galleryViewArray.push(...copyImages.splice(0, 1));
+        if (copyImages.length >= 1) {
+          galleryViewArray.push([...copyImages.splice(0, 2)]);
         }
       }
-      cut = 5;
     }
 
-    const offset = isMobileM ? -1 : cut;
+    const offset = isMobileM ? -1 : 4;
 
-    const result = isMobileM ? images.slice(0, offset) : arr.slice(0, offset);
-    console.log('result', result);
+    const result = isMobileM ? images.slice(0, offset) : galleryViewArray.slice(0, offset);
 
     return result;
   }, [category, images, isMobileM]);
+
+  const itemsInCategory = useMemo(() => {
+    let result;
+    if (category === 'Диваны и кресла') {
+      result = 5;
+    } else if (category === 'Шкафы') {
+      result = 6;
+    }
+    return result;
+  }, [category]);
 
   const handleOpen = useCallback(() => {
     openModal('ProductSlider', { images });
@@ -95,31 +107,43 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
               >
                 {Array.isArray(item) ? (
                   <div className={styles.doubleImg}>
-                    <Image className={styles.smallImage} src={item[0]?.image} />
-                    <Image className={styles.smallImage} src={item[1]?.image} />
+                    <Image
+                      className={cn(styles.smallImage, {
+                        [styles.verticalView]: category === 'Шкафы',
+                      })}
+                      src={item[0]?.image}
+                    />
+                    <Image
+                      className={cn(styles.smallImage, {
+                        [styles.verticalView]: category === 'Шкафы',
+                      })}
+                      src={item[1]?.image}
+                    />
                   </div>
                 ) : (
                   <div>
                     <Image className={styles.image} src={item.image} />
-                    {/* {index === 0 && ar && <ButtonAr className={styles.buttonAr} ar={ar} />} */}
                   </div>
                 )}
 
-                {index === 0 && ar && <ButtonAr className={styles.buttonAr} ar={ar} />}
+                {!isMobileM && index === 0 && ar && (
+                  <ButtonAr className={styles.buttonAr} ar={ar} />
+                )}
               </div>
             );
           })}
         </Items>
 
         <div className={styles.openGallery}>
-          {images.length > 4 && (
+          {images.length > itemsInCategory && (
             <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
-              !!!! no!!!! wrong count Открыть фотогалерею
+              Открыть фотогалерею
             </Button>
           )}
         </div>
 
         {tags.length > 0 && <ProductTags className={styles.tags} tags={tags} />}
+        {isMobileM && ar && <ButtonAr className={cn(styles.buttonAr, styles.mobileAr)} ar={ar} />}
       </div>
     </div>
   );

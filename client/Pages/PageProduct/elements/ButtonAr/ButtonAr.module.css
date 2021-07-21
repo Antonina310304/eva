@@ -11,7 +11,7 @@
 }
 
 .buttonText {
-  margin-left: 18px;
+  margin-left: var(--space-s);
 }
 
 .button {

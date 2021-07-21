@@ -11,6 +11,7 @@ import styles from './ButtonAr.module.css';
 export interface ButtonArProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   actived?: boolean;
+  ar?: any;
   expanded?: boolean;
   hiddenPopup?: boolean;
   onLoading?: (e: MouseEvent) => void;

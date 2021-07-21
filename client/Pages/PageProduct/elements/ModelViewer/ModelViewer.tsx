@@ -5,8 +5,18 @@ import useMedia from '@divanru/ts-utils/useMedia';
 
 import useModals from '@Hooks/useModals';
 
+export interface AR {
+  id: number;
+  name: string;
+  translite: string;
+  glb: string;
+  usdz: string;
+  qrcode: string;
+}
+
 export interface ModelViewerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  ar: AR;
   onLoading?: (e: MouseEvent) => void;
 }
 
