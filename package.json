@@ -24,7 +24,7 @@
     "lint:css:fix": "stylelint **.css --fix",
     "code-style": "prettier --check .",
     "code-style:fix": "prettier --write .",
-    "type-check": "eslint --ext '.js, .jsx, .ts, .tsx' ./client/* ./server/* ./webpack/configs/* ./webpack/loaders/* ./utils/*"
+    "type-check": "tsc -p tsconfig.json --noEmit"
   },
   "author": "Yury Kundin",
   "license": "ISC",
