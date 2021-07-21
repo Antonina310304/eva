@@ -5,7 +5,7 @@ stages:
   - push
   - review
   - deploy
-
+  - clear_review
 prepare:
   tags:
     - divan
@@ -128,6 +128,7 @@ review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_COMMIT_REF_SLUG.eva.hhw.ru
+    on_stop: stop_review
   script:
     - kubectl config set-cluster apps --insecure-skip-tls-verify=true --server="$REVIEW_K8S_API_ENDPOINT"
     - kubectl config set-credentials ci --token="$REVIEW_K8S_SECRET_ACCESS_KEY"
@@ -140,4 +141,21 @@ review:
     - kubectl apply -n $CI_COMMIT_REF_SLUG -f ./.kubernetes/
   only:
     - master
+    - merge_requests
+
+stop_review:
+  tags:
+    - divan
+  stage: clear_review
+  script:
+    - kubectl delete namespace $CI_COMMIT_REF_SLUG
+  variables:
+    GIT_STRATEGY: none
+  dependencies:
+    - review
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  when: manual
+  only:
     - merge_requests
