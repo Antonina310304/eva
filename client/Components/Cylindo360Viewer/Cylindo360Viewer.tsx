@@ -16,13 +16,18 @@ import { Cylindo360ViewerOpts } from '@Types/Cylindo360Viewer';
 
 import styles from './Cylindo360Viewer.module.css';
 
+export interface Coordinates {
+  x: number;
+  y: number;
+}
+
 export interface Cylindo360ViewerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   opts?: Cylindo360ViewerOpts;
   zoom?: [number, number];
   angle?: number;
   autonomic?: boolean;
-  onZoomEnter?: () => void;
+  onZoomEnter?: (coordinates: Coordinates) => void;
   onZoomExit?: () => void;
   onChangeFrameIndex?: (index: number) => void;
   onViewerReady?: () => void;
@@ -66,7 +71,10 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
 
     const { events } = refCylindo.current;
 
-    if (onZoomEnter) refCylindo.current.on(events.ZOOM_ENTER, () => onZoomEnter());
+    if (onZoomEnter)
+      refCylindo.current.on(events.ZOOM_ENTER, (_: string, params: Coordinates) =>
+        onZoomEnter(params),
+      );
     if (onZoomExit) refCylindo.current.on(events.ZOOM_EXIT, onZoomExit);
     if (onViewerReady) refCylindo.current.on(events.VIEWER_READY, onViewerReady);
     if (onError) refCylindo.current.on(events.ERROR, () => onError());
