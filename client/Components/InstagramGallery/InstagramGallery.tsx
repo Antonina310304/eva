@@ -47,8 +47,8 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
         onChangeCurrent={onChangeCurrent}
       >
         {posts.map((post) => (
-          <div className={styles.item}>
-            <Post className={styles.post} post={post} key={post.id} />
+          <div className={styles.item} key={post.id}>
+            <Post className={styles.post} post={post} />
           </div>
         ))}
       </Gallery>

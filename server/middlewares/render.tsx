@@ -6,8 +6,10 @@ import { ChunkExtractor } from '@loadable/server';
 import { StaticRouterContext } from 'react-router';
 import { StaticRouter } from 'react-router-dom';
 import { RequestHandler } from 'express';
+import RequestProvider from '../../client/Contexts/Request/RequestProvider';
 
 import { paths } from '../../utils/paths';
+import { envs } from '../../utils/envs';
 import { renderPage } from '../helpers';
 
 const render: RequestHandler = async (req, res) => {
@@ -28,13 +30,18 @@ const render: RequestHandler = async (req, res) => {
   }
 
   const webExtractor = new ChunkExtractor({ statsFile: paths.stats.web });
-  const renderAndWait = async () => {
+  const renderAndWait = async (): Promise<string> => {
     const components = (
-      <QueryClientProvider client={queryClient}>
-        <StaticRouter location={req.url} context={routerContext}>
-          <Entry />
-        </StaticRouter>
-      </QueryClientProvider>
+      <RequestProvider
+        origin={`${req.protocol}://${req.hostname}:${envs.port}`}
+        cookie={req.headers.cookie}
+      >
+        <QueryClientProvider client={queryClient}>
+          <StaticRouter location={req.url} context={routerContext}>
+            <Entry />
+          </StaticRouter>
+        </QueryClientProvider>
+      </RequestProvider>
     );
     const jsx = webExtractor.collectChunks(components);
     const html = renderToString(jsx);

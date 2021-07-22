@@ -61,6 +61,12 @@ export interface ProgressOptions {
   finished: boolean;
 }
 
+export interface CalcMinParams {
+  viewportWidth: number;
+  containerWidth: number;
+  layerWidth: number;
+}
+
 const initialState: GalleryState = {
   slides: [],
   min: 0,
@@ -77,6 +83,13 @@ const initialState: GalleryState = {
   canDrag: false,
   generalIndent: 0,
 };
+
+/**
+ * Рассчитать минимальную позицию галереи
+ */
+function calcMin({ viewportWidth, containerWidth, layerWidth }: CalcMinParams) {
+  return viewportWidth - (containerWidth - viewportWidth) / 2 - layerWidth;
+}
 
 const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const {
@@ -96,11 +109,11 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const refContainer = useRef<HTMLDivElement>();
   const refViewport = useRef<HTMLDivElement>();
   const startT = useRef<Date>();
-  const storeSlides = useRef<unknown>({});
+  const storeSlides = useRef<any>({});
   const childrenCount = useMemo(() => Children.count(children), [children]);
   const duration = 0.24;
 
-  function reducer(state: GalleryState, action) {
+  function reducer(state: GalleryState, action: any) {
     /**
      * Валидирует отступ с учётом минимального и максимального значения
      */
@@ -121,7 +134,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     /*
      * Отступ слоя галереи
      */
-    const getIndent = (current) => {
+    const getIndent = (current: number) => {
       if (!state.canDrag) return 0;
 
       const { slides } = state;
@@ -164,13 +177,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     };
 
     /**
-     * Рассчитать минимальную позицию галереи
-     */
-    function calcMin({ viewportWidth, containerWidth, layerWidth }) {
-      return viewportWidth - (containerWidth - viewportWidth) / 2 - layerWidth;
-    }
-
-    /**
      * Рассчитать максимальную позицию галереи
      */
     function calcMax() {
@@ -178,7 +184,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     }
 
     const actions = {
-      init: (data) => {
+      init: (data: any) => {
         return {
           ...state,
           ...data,
@@ -246,7 +252,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         return newState;
       },
 
-      slideTo: ({ newCurrent }) => {
+      slideTo: ({ newCurrent }: { newCurrent: number }) => {
         let normalizedNewCurrent = newCurrent;
 
         if (normalizedNewCurrent < 0) {
@@ -272,7 +278,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         return newState;
       },
 
-      setDelta: ({ deltaX }) => {
+      setDelta: ({ deltaX }: { deltaX: number }) => {
         return { ...state, deltaX, generalIndent: getGeneralIndent() };
       },
 
@@ -287,9 +293,9 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       disableAnimation: () => ({ ...state, animation: false }),
     };
 
-    const actionName = typeof action === 'string' ? action : action.type;
+    const actionName: string = typeof action === 'string' ? action : action.type;
     const actionData = typeof action === 'string' ? undefined : action.data;
-    const newState = actions[actionName](actionData);
+    const newState = (actions as any)[actionName](actionData);
 
     return { ...newState, generalIndent: getGeneralIndent() };
   }

@@ -23,7 +23,7 @@ const ProductModel: FC<ProductModelProps> = (props) => {
   const { className, medias, ...restProps } = props;
   const [, { openModal }] = useModals();
 
-  const [zoom, setZoom] = useState(null);
+  const [zoom, setZoom] = useState<[number, number]>(null);
   const [hideRotateHint, setHideRotateHint] = useState(false);
   const [fullLoaded, setFullLoaded] = useState(false);
   const [errorLoad, setErrorLoad] = useState(false);
@@ -55,7 +55,7 @@ const ProductModel: FC<ProductModelProps> = (props) => {
     setHeight(imgHeight[0].height);
   }, []);
 
-  const [dimensions, setDimensions] = useState(null);
+  const [dimensions, setDimensions] = useState<number>(null);
 
   const handleResize = useCallback(() => {
     if (fullLoaded) {
