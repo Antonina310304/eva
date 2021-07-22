@@ -1,8 +1,6 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { Api } from '@Api/index';
 import { ApiPages } from '@Api/Pages';
-import useRequest from '@Hooks/useRequest';
 import { ProductData } from '@Types/Product';
 
 export interface Params {
@@ -31,25 +29,16 @@ export interface UsePageResult {
 }
 
 const usePage = (params: Params): UseQueryResult<UsePageResult> => {
-  const request = useRequest();
   const { path, ssr } = params;
   const keys = ['page', path];
 
   if (ssr) keys.push('ssr');
 
-  const result = useQuery(
-    keys,
-    () => {
-      Api.setRequest(request);
-
-      return ApiPages.fetchPage({ path });
-    },
-    {
-      keepPreviousData: true,
-      retryOnMount: false,
-      refetchOnMount: false,
-    },
-  );
+  const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
+    keepPreviousData: true,
+    retryOnMount: false,
+    refetchOnMount: false,
+  });
 
   return result;
 };
