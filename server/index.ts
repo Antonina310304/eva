@@ -11,6 +11,8 @@ import { paths } from '../utils/paths';
 const app = express();
 
 app.use(compression());
+app.disable('x-powered-by');
+
 app.use('/react/assets', express.static(paths.dist.web));
 app.use('/react/static', express.static(paths.static));
 app.use(proxyRoutes);

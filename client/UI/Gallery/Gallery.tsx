@@ -24,7 +24,6 @@ export interface GalleryProps
   cnViewport?: string;
   slideIndex?: number;
   gap?: number;
-  children: ReactElement | ReactElement[];
   onDragStart?: TouchEventHandler;
   onDragEnd?: TouchEventHandler;
   onChangeCurrent?(state: any): void;
@@ -496,6 +495,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         <div className={styles.layer} style={styleLayer}>
           {Children.map(children, (child: ReactElement, index: number) => {
             const isFirst = index === 0;
+
+            if (!child) return null;
 
             return cloneElement(child, {
               ...child.props,

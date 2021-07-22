@@ -16,9 +16,12 @@ import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
 import styles from './PageProduct.module.css';
+
+import fakeData from './fakeData.json';
 
 export interface RouteParams {
   slug: string;
@@ -142,6 +145,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         {page.data.instagram?.length > 0 && (
           <InstagramSection
             className={styles.sectionInstagram}
+            hasPromoPlaceholder
             title='Обустраиваете дом? Мы хотим посмотреть!'
             description={
               <div className={styles.instagramDescription}>
@@ -155,6 +159,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
             }
             posts={page.data.instagram}
           />
+        )}
+
+        {fakeData.heading && fakeData.advantages?.length > 0 && (
+          <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
         )}
 
         {sameProducts.products?.length > 0 && (
