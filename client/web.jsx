@@ -29,7 +29,7 @@ loadableReady(() => {
 
   hydrateState(queryClient, state);
   hydrate(
-    <RequestProvider cookie={document.cookie}>
+    <RequestProvider origin={window.location.origin} cookie={document.cookie}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={state}>
           <BrowserRouter>

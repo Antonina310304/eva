@@ -9,6 +9,7 @@ import { RequestHandler } from 'express';
 import RequestProvider from '../../client/Contexts/Request/RequestProvider';
 
 import { paths } from '../../utils/paths';
+import { envs } from '../../utils/envs';
 import { renderPage } from '../helpers';
 
 const render: RequestHandler = async (req, res) => {
@@ -31,7 +32,10 @@ const render: RequestHandler = async (req, res) => {
   const webExtractor = new ChunkExtractor({ statsFile: paths.stats.web });
   const renderAndWait = async (): Promise<string> => {
     const components = (
-      <RequestProvider cookie={req.headers.cookie}>
+      <RequestProvider
+        origin={`${req.protocol}://${req.hostname}:${envs.port}`}
+        cookie={req.headers.cookie}
+      >
         <QueryClientProvider client={queryClient}>
           <StaticRouter location={req.url} context={routerContext}>
             <Entry />

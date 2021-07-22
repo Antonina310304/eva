@@ -4,9 +4,9 @@ export interface Params {
   path: string;
 }
 
-export default async (params: Params, opts?: RequestInit): Promise<any> => {
+export default async (params: Params): Promise<any> => {
   const { path } = params;
-  const res = await Api.queryProxi<any>(path, opts);
+  const res = await Api.queryProxi<any>(path);
 
   return res.body.data;
 };

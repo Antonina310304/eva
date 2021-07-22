@@ -1,13 +1,14 @@
 import React from 'react';
 
 export interface RequestState {
+  origin: string;
   cookie: string;
 }
 
 const symbolName = '__DATA_CONTEXT__';
 const hasSymbol = typeof Symbol === 'function' && Symbol.for;
 const contextSymbol = hasSymbol ? Symbol.for(symbolName) : symbolName;
-const initialState: RequestState = { cookie: '' };
+const initialState: RequestState = { origin: null, cookie: null };
 
 export function resetContext(): void {
   Object.defineProperty(React, contextSymbol, {
