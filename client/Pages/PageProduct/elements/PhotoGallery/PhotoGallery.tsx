@@ -7,6 +7,7 @@ import Image from '@UI/Image';
 import Gallery from '@UI/Gallery';
 import Button from '@UI/Button';
 import { ProductTagData } from '@Types/Product';
+import { AR } from '@Types/AR';
 import useModals from '@Hooks/useModals';
 
 import ButtonAr from '../ButtonAr';
@@ -21,7 +22,7 @@ export interface PhotoGalleryProps extends HTMLAttributes<HTMLDivElement> {
   images: MediaGalleryItem[];
   tags?: ProductTagData[];
   category: 'Шкафы' | 'Диваны и кресла';
-  ar?: any;
+  ar?: AR;
 }
 
 export interface ItemsProps {
@@ -54,9 +55,19 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   const { isMobileM } = useMedias();
   const [, { openModal }] = useModals();
 
+  const maxItemsCountInGallery = useMemo(() => {
+    let result;
+    if (category === 'Диваны и кресла') {
+      result = 5;
+    } else if (category === 'Шкафы') {
+      result = 6;
+    }
+    return result;
+  }, [category]);
+
   const items = useMemo(() => {
     const galleryViewArray = [];
-    const copyImages = [...images];
+    const copyImages = images.slice(0, maxItemsCountInGallery);
 
     if (category === 'Диваны и кресла') {
       while (copyImages.length > 0) {
@@ -79,17 +90,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
     const result = isMobileM ? images.slice(0, offset) : galleryViewArray.slice(0, offset);
 
     return result;
-  }, [category, images, isMobileM]);
-
-  const itemsInCategory = useMemo(() => {
-    let result;
-    if (category === 'Диваны и кресла') {
-      result = 5;
-    } else if (category === 'Шкафы') {
-      result = 6;
-    }
-    return result;
-  }, [category]);
+  }, [category, images, isMobileM, maxItemsCountInGallery]);
 
   const handleOpen = useCallback(() => {
     openModal('ProductSlider', { images });
@@ -135,7 +136,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
         </Items>
 
         <div className={styles.openGallery}>
-          {images.length > itemsInCategory && (
+          {images.length > maxItemsCountInGallery && (
             <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
               Открыть фотогалерею
             </Button>

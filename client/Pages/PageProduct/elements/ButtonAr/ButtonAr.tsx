@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 import useMedias from '@Hooks/useMedias';
+import { AR } from '@Types/AR';
 
 import ModelViewer from '../ModelViewer';
 
@@ -11,7 +12,7 @@ import styles from './ButtonAr.module.css';
 export interface ButtonArProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   actived?: boolean;
-  ar?: any;
+  ar?: AR;
   expanded?: boolean;
   hiddenPopup?: boolean;
   onLoading?: (e: MouseEvent) => void;

@@ -4,7 +4,7 @@ import cn from 'classnames';
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
-import ModelViewer from '@Pages/PageProduct/elements/ModelViewer';
+
 import styles from './ProductSliderModal.module.css';
 
 export interface ProductSliderModalProps {
@@ -27,8 +27,8 @@ const ProductSliderModal: FC<ProductSliderModalProps> = (props) => {
       visible={modal.visible}
       onClose={handleClose}
     >
-      {modal.data && <div className={styles.container}>ProductSliderModal</div>}
-      {modal.data.images && modal.data.images[0].title}
+      <div className={styles.container}>ProductSliderModal</div>
+      {modal.data.images[0].title}
     </Modal>
   );
 };

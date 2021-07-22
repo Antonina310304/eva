@@ -2,17 +2,8 @@ import React, { useCallback, memo, useEffect, useRef, FC, MouseEvent, HTMLAttrib
 import cn from 'classnames';
 
 import useMedia from '@divanru/ts-utils/useMedia';
-
+import { AR } from '@Types/AR';
 import useModals from '@Hooks/useModals';
-
-export interface AR {
-  id: number;
-  name: string;
-  translite: string;
-  glb: string;
-  usdz: string;
-  qrcode: string;
-}
 
 export interface ModelViewerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

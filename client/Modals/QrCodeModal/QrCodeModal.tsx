@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
+
 import styles from './QrCodeModal.module.css';
 
 export interface QrCodeModalProps {
@@ -26,11 +27,9 @@ const QrCodeModal: FC<QrCodeModalProps> = (props) => {
       visible={modal.visible}
       onClose={handleClose}
     >
-      {modal.data && (
-        <div className={styles.container}>
-          <div className={styles.text}>{modal.data.qrcode}</div>
-        </div>
-      )}
+      <div className={styles.container}>
+        <div className={styles.text}>{modal.data.qrcode}</div>
+      </div>
     </Modal>
   );
 };

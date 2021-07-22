@@ -10,8 +10,10 @@ import CheckboxList from '@UI/CheckboxList';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
+
 import Group from './elements/Group';
 import GroupItem from './elements/GroupItem';
+
 import styles from './FiltersModal.module.css';
 
 export interface FiltersModalProps {

@@ -49,7 +49,7 @@ const Paginator: FC<PaginatorProps> = (props) => {
     const generatorUrl = generateUrl || generateUrlDefault;
     const prevPage = now - 1;
     const nextPage = now + 1;
-    const result = [];
+    const result: PaginatorItem[] = [];
 
     for (let i = 0; i < total; i += 1) {
       const page = i + 1;
