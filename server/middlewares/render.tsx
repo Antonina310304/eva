@@ -33,7 +33,7 @@ const render: RequestHandler = async (req, res) => {
   const renderAndWait = async (): Promise<string> => {
     const components = (
       <RequestProvider
-        origin={`${req.protocol}://${req.hostname}:${envs.port}`}
+        origin={`${req.protocol}://${req.hostname}${envs.isDev ? `:${envs.port}` : ''}`}
         cookie={req.headers.cookie}
       >
         <QueryClientProvider client={queryClient}>
