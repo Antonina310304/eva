@@ -8,12 +8,13 @@ import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
   className?: string;
-  view?: 'primary' | 'secondary' | 'simple';
+  view?: 'primary' | 'secondary' | 'simple' | 'native';
+  size?: 's';
   to: string;
 }
 
 const Link: FC<LinkProps> = (props) => {
-  const { className, to, view = 'primary', children, ...restProps } = props;
+  const { className, to, view = 'primary', children, size = 'n', ...restProps } = props;
   const queryClient = useQueryClient();
   const history = useHistory();
 
@@ -39,6 +40,9 @@ const Link: FC<LinkProps> = (props) => {
           [styles.primary]: view === 'primary',
           [styles.secondary]: view === 'secondary',
           [styles.simple]: view === 'simple',
+          [styles.native]: view === 'native',
+          [styles.sizeS]: size === 's',
+          [styles.sizeN]: size === 'n',
         },
         className,
       )}

@@ -4,6 +4,9 @@ import cn from 'classnames';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
 import Dimension from './elements/Dimension';
+import Document from './elements/Document';
+import SynchronousSchemes from './elements/SynchronousSchemes';
+import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
 import styles from './Characteristics.module.css';
 
@@ -40,6 +43,18 @@ export interface Parameter {
   variants?: Variant[];
 }
 
+export interface Document {
+  icon: string;
+  name: string;
+  sizeInfo: string;
+  url: string;
+}
+
+export interface Documents {
+  title: string;
+  items: Document[];
+}
+
 export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
@@ -50,10 +65,20 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
     text: string;
     title: string;
   };
+  documents: Documents;
 }
 
 const Characteristics: FC<CharacteristicsProps> = (props) => {
-  const { className, title, tabs, schemes, parameters, importantInfo, ...restProps } = props;
+  const {
+    className,
+    title,
+    tabs,
+    schemes,
+    parameters,
+    importantInfo,
+    documents,
+    ...restProps
+  } = props;
   const [currentTab, setCurrentTab] = useState('0');
 
   const handleChangeTab = useCallback((e, tab) => {
@@ -62,6 +87,14 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
 
   const parametersDimension = useMemo(() => {
     return parameters.filter((parameter) => parameter.theme === 'dimension');
+  }, [parameters]);
+
+  const parametersDefault = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'default');
+  }, [parameters]);
+
+  const parametersDropdown = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'dropdown');
   }, [parameters]);
 
   return (
@@ -83,17 +116,14 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
           className={styles.schemes}
           items={schemes}
           renderChild={(item: Scheme) => (
-            <List
+            <SynchronousSchemes
               className={cn(styles.scheme, { [styles.active]: item.id === currentTab })}
-              items={item.images}
-              renderChild={(image: SchemeImage) => (
-                <img src={image.url} className={styles.schemeImg} alt='' />
-              )}
+              schemes={item.images}
             />
           )}
         />
       )}
-      <div className={styles.row}>
+      <div className={cn(styles.row, { [styles.columns]: true })}>
         <List
           className={styles.col}
           items={parametersDimension}
@@ -105,7 +135,19 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
             />
           )}
         />
-        <div className={styles.col} />
+        <div className={styles.col}>
+          <List
+            className={styles.col}
+            items={parametersDefault}
+            renderChild={(parameter: Parameter) => {
+              // TODO: поменять формат
+              const name = parameter.variant.split(':')[0];
+              const value = parameter.variant.split(':')[1];
+
+              return <StringParameter className={styles.parameter} name={name} value={value} />;
+            }}
+          />
+        </div>
       </div>
       <div className={styles.row}>
         {importantInfo && (
@@ -113,6 +155,21 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
             className={styles.ImportantInfo}
             title={importantInfo.title}
             text={importantInfo.text}
+          />
+        )}
+        {documents && (
+          <List
+            className={styles.documents}
+            items={documents.items}
+            renderChild={(document: Document) => (
+              <Document
+                className={styles.document}
+                icon={document.icon}
+                name={document.name}
+                sizeInfo={document.sizeInfo}
+                url={document.url}
+              />
+            )}
           />
         )}
       </div>

@@ -12,6 +12,7 @@
 .value {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -20,19 +21,7 @@
 
   display: flex;
   align-items: baseline;
-  width: calc(100% / 3);
-}
-
-.valueItem:first-child {
-  justify-content: flex-start;
-}
-
-.valueItem:nth-child(2) {
-  justify-content: center;
-}
-
-.valueItem:nth-child(3) {
-  justify-content: flex-end;
+  min-width: 90px;
 }
 
 .valueName {
@@ -43,15 +32,27 @@
 
 .valueValue {
   composes: n from 'sizes';
+
+  white-space: nowrap;
 }
 
 .delimiter {
   composes: n from 'sizes';
 
-  position: absolute;
-  right: var(--space-xs-neg);
-
   width: var(--space-n);
 
   text-align: center;
+}
+
+@media (--mobile-m) {
+  .valueName {
+    display: block;
+    margin: 0 0 var(--space-xxs);
+  }
+
+  .valueItem {
+    flex-direction: column;
+
+    text-align: center;
+  }
 }

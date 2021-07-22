@@ -24,28 +24,23 @@
 
 .scheme {
   display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
   width: 100%;
 }
 
 .scheme.active {
-  display: flex;
-}
-
-.schemeImg {
-  display: block;
-  height: 100%;
-  margin-left: 120px;
-}
-
-.schemeImg:first-child {
-  margin-left: 0;
+  display: grid;
 }
 
 .row {
   margin-top: var(--space-xb);
-  /*display: grid;*/
-  /*gap: 120px;*/
-  /*grid-template-columns: 1fr 1fr;*/
+}
+
+.row.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
 }
 
 .dimension {
@@ -59,5 +54,21 @@
   border: none;
 }
 
+.document {
+  display: inline-block;
+  margin-top: var(--space-xs);
+  margin-right: var(--space-xxl);
+
+  vertical-align: middle;
+}
+
 .col {
+}
+
+.parameter {
+  margin-top: var(--space-s);
+
+  &:first-child {
+    margin-top: 0;
+  }
 }

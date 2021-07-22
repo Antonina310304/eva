@@ -28,11 +28,21 @@ const Dimension: FC<DimensionProps> = (props) => {
           const isLast = index + 1 === value.length;
 
           return (
-            <div className={styles.valueItem}>
-              <div className={styles.valueName}>{item.name}</div>
-              <div className={styles.valueValue}>{item.value}</div>
+            <>
+              <div className={styles.valueItem}>
+                <div className={styles.valueName}>{item.name}</div>
+                <div className={styles.valueValue}>{item.value}</div>
+              </div>
+
               {!isLast && <div className={styles.delimiter}>x</div>}
-            </div>
+
+              {isLast && value.length === 2 && (
+                <>
+                  <div className={styles.delimiter} />
+                  <div className={styles.valueItem} />
+                </>
+              )}
+            </>
           );
         }}
       />

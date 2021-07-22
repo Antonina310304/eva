@@ -15,10 +15,6 @@ import CrossSaleSection from './elements/CrossSaleSection';
 import Characteristics from './elements/Characteristics';
 import styles from './PageProduct.module.css';
 
-export interface RouteParams {
-  slug: string;
-}
-
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
@@ -43,6 +39,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     historyProducts,
     parameters,
     importantInfo,
+    documents,
   } = page.data;
 
   return (
@@ -113,6 +110,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             ]}
             parameters={parameters}
             importantInfo={importantInfo}
+            documents={documents}
           />
         </div>
       </MainGrid>
