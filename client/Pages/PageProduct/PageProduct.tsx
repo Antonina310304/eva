@@ -124,6 +124,34 @@ const PageProduct: FC<PageProductProps> = (props) => {
             )}
           />
         )}
+
+        {page.data.reviewsSubgallery?.length > 0 && (
+          <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+            <ReviewsSection reviews={page.data.reviewsSubgallery} />
+            {siteReviews.length > 0 && (
+              <ListReviews className={styles.listReviews} reviews={siteReviews} />
+            )}
+          </div>
+        )}
+
+        {page.data.instagram?.length > 0 && (
+          <InstagramSection
+            className={styles.sectionInstagram}
+            title='Обустраиваете дом? Мы хотим посмотреть!'
+            description={
+              <div className={styles.instagramDescription}>
+                {`Cтилизуете интерьер вместе с Divan.ru – отмечайте `}
+                <Link view='native' to='/'>
+                  @official_divan.ru
+                </Link>
+                {` на фото в своем аккаунте Instagram, добавляйте хештег #купилвдиванру. Мы публикуем
+                лучшие кадры.`}
+              </div>
+            }
+            posts={page.data.instagram}
+          />
+        )}
+
         {fakeData.heading && fakeData.advantages?.length > 0 && (
           <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
         )}
