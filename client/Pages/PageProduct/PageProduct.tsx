@@ -137,6 +137,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         {page.data.instagram?.length > 0 && (
           <InstagramSection
             className={styles.sectionInstagram}
+            hasPromoPlaceholder
             title='Обустраиваете дом? Мы хотим посмотреть!'
             description={
               <div className={styles.instagramDescription}>
