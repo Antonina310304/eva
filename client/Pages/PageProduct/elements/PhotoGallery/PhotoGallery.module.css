@@ -68,7 +68,7 @@
 }
 
 .btnOpenGallery {
-  width: 300px;
+  width: 330px;
 }
 
 .tags {
@@ -81,6 +81,10 @@
 @media (--desktop-m) {
   .containerImage.firstImage {
     padding: var(-space-xxl) 85px;
+  }
+
+  .btnOpenGallery {
+    width: 240px;
   }
 }
 
@@ -132,11 +136,6 @@
 
   .openGallery {
     display: none;
-  }
-
-  .mobileAr {
-    bottom: 15px;
-    left: 15px;
   }
 }
 

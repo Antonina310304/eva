@@ -8,6 +8,7 @@ import Gallery from '@UI/Gallery';
 import Button from '@UI/Button';
 import { ProductTagData } from '@Types/Product';
 import { AR } from '@Types/AR';
+import { Size } from '@Types/Sizes';
 import useModals from '@Hooks/useModals';
 
 import ButtonAr from '../ButtonAr';
@@ -21,7 +22,7 @@ export interface PhotoGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   images: MediaGalleryItem[];
   tags?: ProductTagData[];
-  category: 'Шкафы' | 'Диваны и кресла';
+  category: string;
   ar?: AR;
 }
 
@@ -52,8 +53,21 @@ const Items: FC<ItemsProps> = (props) => {
 
 const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   const { className, ar, category, images = [], tags = [], ...restProps } = props;
+  const { isDesktopM } = useMedias();
+  const { isDesktop } = useMedias();
   const { isMobileM } = useMedias();
   const [, { openModal }] = useModals();
+
+  const buttonSize = useMemo(() => {
+    let result = 'l';
+    if (isDesktopM) {
+      result = 'm';
+    }
+    if (isDesktop) {
+      result = 's';
+    }
+    return result;
+  }, [isDesktop, isDesktopM]);
 
   const maxItemsCountInGallery = useMemo(() => {
     let result;
@@ -61,6 +75,8 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
       result = 5;
     } else if (category === 'Шкафы') {
       result = 6;
+    } else {
+      result = 3;
     }
     return result;
   }, [category]);
@@ -83,6 +99,8 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
           galleryViewArray.push([...copyImages.splice(0, 2)]);
         }
       }
+    } else {
+      galleryViewArray.push(...copyImages);
     }
 
     const offset = isMobileM ? -1 : 4;
@@ -128,7 +146,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
                 )}
 
                 {!isMobileM && index === 0 && ar && (
-                  <ButtonAr className={styles.buttonAr} ar={ar} />
+                  <ButtonAr className={styles.buttonAr} size='m' ar={ar} />
                 )}
               </div>
             );
@@ -137,14 +155,19 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
 
         <div className={styles.openGallery}>
           {images.length > maxItemsCountInGallery && (
-            <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
+            <Button
+              className={styles.btnOpenGallery}
+              theme='blank'
+              size={buttonSize}
+              onClick={handleOpen}
+            >
               Открыть фотогалерею
             </Button>
           )}
         </div>
 
         {tags.length > 0 && <ProductTags className={styles.tags} tags={tags} />}
-        {isMobileM && ar && <ButtonAr className={cn(styles.buttonAr, styles.mobileAr)} ar={ar} />}
+        {isMobileM && ar && <ButtonAr className={styles.buttonAr} size='m' ar={ar} />}
       </div>
     </div>
   );
