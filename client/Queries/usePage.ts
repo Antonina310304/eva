@@ -26,6 +26,9 @@ export interface UsePageResult {
   historyProducts: any;
   instagram: any;
   productsModel: any;
+  parameters: any;
+  importantInfo: any;
+  documents: any;
 }
 
 const usePage = (params: Params): UseQueryResult<UsePageResult> => {
