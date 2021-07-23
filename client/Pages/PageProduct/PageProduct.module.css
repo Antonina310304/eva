@@ -95,10 +95,16 @@
   vertical-align: bottom;
 }
 
-.listReviews {
+.wrapperListReviews {
   composes: main from 'containers';
 
   margin-top: var(--space-b);
+}
+
+.listReviews {
+  padding-top: var(--space-xxl);
+
+  border-top: 1px solid var(--color-medium-gray);
 }
 
 .characteristics {

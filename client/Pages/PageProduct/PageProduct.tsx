@@ -184,14 +184,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
-        {page.data.reviewsSubgallery?.length > 0 && (
-          <div className={cn(styles.littleContainer, styles.sectionReviews)}>
-            <ReviewsSection reviews={page.data.reviewsSubgallery} />
-            {siteReviews.length > 0 && (
-              <ListReviews className={styles.listReviews} reviews={siteReviews} />
-            )}
+        <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+          <ReviewsSection reviews={page.data.reviewsSubgallery} />
+          <div className={styles.wrapperListReviews}>
+            <ListReviews className={styles.listReviews} reviews={siteReviews} />
           </div>
-        )}
+        </div>
 
         {page.data.instagram?.length > 0 && (
           <InstagramSection

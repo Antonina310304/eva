@@ -1,9 +1,23 @@
 .section {
+  composes: main from 'containers';
+
   overflow: hidden;
 }
 
-.wrapperTitle {
+.head {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headMain {
+  display: flex;
+}
+
+.headAdditional {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
 }
 
 .title {
@@ -19,8 +33,6 @@
 }
 
 .wrapperGallery {
-  composes: main from 'containers';
-
   margin-top: var(--space-xxl);
 }
 
@@ -87,8 +99,14 @@
 }
 
 @media (--mobile) {
-  .wrapperTitle {
+  .head,
+  .headMain {
     display: block;
+  }
+
+  .headAdditional {
+    justify-content: center;
+    margin-top: var(--space-xxl);
   }
 
   .title {
