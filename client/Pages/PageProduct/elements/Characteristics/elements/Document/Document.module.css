@@ -1,0 +1,30 @@
+.document {
+  white-space: nowrap;
+}
+
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 25px;
+  margin-right: var(--space-xs);
+
+  vertical-align: middle;
+
+  background-position: center;
+  background-size: contain;
+}
+
+.link {
+  display: inline-block;
+
+  vertical-align: middle;
+}
+
+.sizeInfo {
+  composes: s from 'sizes';
+
+  display: inline-block;
+  margin-left: var(--space-xxs);
+
+  vertical-align: middle;
+}

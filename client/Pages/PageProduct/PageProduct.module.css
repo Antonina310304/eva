@@ -99,6 +99,10 @@
   margin-top: var(--space-b);
 }
 
+.characteristics {
+  margin-top: var(--space-xxe);
+}
+
 @media (--desktop-m) {
   .separator {
     margin-top: var(--space-e);
@@ -133,5 +137,10 @@
 @media (--mobile-m) {
   .wrapperMain {
     margin-bottom: var(--space-xb);
+  }
+
+  .characteristics {
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
   }
 }

@@ -18,9 +18,9 @@ import CrossSaleSection from './elements/CrossSaleSection';
 import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
-import styles from './PageProduct.module.css';
-
+import Characteristics from './elements/Characteristics';
 import fakeData from './fakeData.json';
+import styles from './PageProduct.module.css';
 
 export interface RouteParams {
   slug: string;
@@ -55,6 +55,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
     crossSalesProducts,
     sameProducts,
     historyProducts,
+    parameters,
+    importantInfo,
+    documents,
   } = page.data;
 
   return (
@@ -85,6 +88,51 @@ const PageProduct: FC<PageProductProps> = (props) => {
             />
           </div>
         )}
+
+        <div className={styles.characteristics}>
+          <Characteristics
+            title='Характеристики'
+            tabs={[
+              { id: '0', label: 'Собранный' },
+              { id: '1', label: 'Разобранный' },
+            ]}
+            schemes={[
+              {
+                id: '0',
+                images: [
+                  {
+                    url: '/react/static/img/scheme1.jpg',
+                    width: 511,
+                    height: 236,
+                  },
+                  {
+                    url: '/react/static/img/scheme2.jpg',
+                    width: 269,
+                    height: 235,
+                  },
+                ],
+              },
+              {
+                id: '1',
+                images: [
+                  {
+                    url: '/react/static/img/scheme3.jpg',
+                    width: 232,
+                    height: 389,
+                  },
+                  {
+                    url: '/react/static/img/scheme4.jpg',
+                    width: 81,
+                    height: 388,
+                  },
+                ],
+              },
+            ]}
+            parameters={parameters}
+            importantInfo={importantInfo}
+            documents={documents}
+          />
+        </div>
       </MainGrid>
 
       {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
@@ -102,6 +150,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           {` какие матрасы подойдут именно для тебя.`}
         </ChooseMattressBanner>
       )}
+
       <div className={styles.separator} />
 
       <div className={styles.wrapperAdditional}>

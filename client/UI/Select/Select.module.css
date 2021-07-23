@@ -1,2 +1,172 @@
-.select {
+.Select {
+  position: relative;
+
+  &_disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+
+  &_faked {
+    .Select {
+      &-Field {
+        cursor: default;
+      }
+
+      &-FieldIcon {
+        display: none;
+      }
+    }
+  }
+
+  &_wide {
+    .Select-Field {
+      display: flex;
+    }
+
+    .Select-WrapperOptions {
+      right: 0;
+    }
+  }
+
+  &_opened {
+    .Select {
+      &-FieldIcon {
+        transform: rotate(-180deg);
+      }
+
+      &-Popup {
+        display: inline-block;
+      }
+    }
+  }
+
+  &-Control {
+    display: none;
+  }
+
+  &-Field {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+
+    padding: var(--space-xs) var(--space-s);
+
+    background: var(--color-bg-light);
+    cursor: pointer;
+  }
+
+  &-FieldText {
+    overflow: hidden;
+
+    font-size: var(--size-s);
+    line-height: 24px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &-FieldIcon {
+    margin-left: var(--space-s);
+
+    transition: transform var(--animation-duration-fast);
+  }
+
+  &-FieldLoader {
+    position: relative;
+
+    width: 25px;
+    margin-left: var(--space-s);
+  }
+
+  &-Popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: var(--z-index-popup);
+
+    display: none;
+
+    background: var(--color-default);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  &-WrapperOptions {
+    max-height: 300px;
+
+    &_view {
+      &_indent {
+        padding-bottom: var(--space-m);
+      }
+
+      &_small {
+        padding: var(--space-2xs) 0;
+
+        .ScrollbarsCustom-Track {
+          right: var(--space-2xs);
+        }
+      }
+    }
+  }
+
+  &-FieldImg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+
+    vertical-align: middle;
+  }
+
+  &-FieldValue {
+    display: flex;
+    align-items: center;
+    max-width: calc(100% - 25px);
+  }
+}
+
+@media (--mobile) {
+  .Select {
+    &-Backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 9999998;
+
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    &-Popup {
+      position: fixed;
+      top: unset;
+      bottom: 0;
+      z-index: 9999998;
+
+      display: block;
+      padding-bottom: var(--space-s);
+
+      box-shadow: unset;
+      transform: translate3d(0, 100%, 0);
+    }
+
+    &-Head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: var(--space-s);
+    }
+
+    &-Title {
+      font-size: var(--size-l);
+    }
+
+    &-WrapperClose {
+      padding: var(--space-s);
+    }
+
+    &-WrapperOptions {
+      max-height: 80vh;
+    }
+  }
 }

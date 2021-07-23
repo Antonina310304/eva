@@ -10,6 +10,7 @@ export interface LinkProps extends BaseLinkProps {
   className?: string;
   view?: 'primary' | 'secondary' | 'simple' | 'native';
   needFetch?: boolean;
+  size?: 's';
   to: string;
   onClick?(e: MouseEvent): void;
 }
@@ -21,6 +22,7 @@ const Link: FC<LinkProps> = (props) => {
     view = 'primary',
     needFetch = true,
     children,
+    size = 'n',
     onClick,
     ...restProps
   } = props;
@@ -54,6 +56,8 @@ const Link: FC<LinkProps> = (props) => {
           [styles.secondary]: view === 'secondary',
           [styles.simple]: view === 'simple',
           [styles.native]: view === 'native',
+          [styles.sizeS]: size === 's',
+          [styles.sizeN]: size === 'n',
         },
         className,
       )}
