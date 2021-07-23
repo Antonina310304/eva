@@ -40,7 +40,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];
 
-    return page.data.reviewsSubgallery.filter((review: ReviewData) => review.source === 'site');
+    return (page.data.reviewsSubgallery || []).filter((review: ReviewData) => {
+      return review.source === 'site';
+    });
   }, [page.data, page.isSuccess]);
 
   const handleCalcMatrasy = useCallback(() => {
