@@ -7,7 +7,6 @@ import React, {
   useRef,
   useEffect,
   ReactElement,
-  cloneElement,
   useMemo,
 } from 'react';
 // import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
@@ -366,7 +365,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         className,
       )}
     >
-      <div className={styles.wrapper} ref={mainRef}>
+      <div className={styles.wrapper}>
         <input {...restProps} className={styles.control} value={inputValue} readOnly />
         <div className={styles.field} onClick={handleClick} ref={refField}>
           <div className={styles.fieldValue}>
