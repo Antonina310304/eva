@@ -10,13 +10,17 @@ import React, {
   cloneElement,
   useMemo,
 } from 'react';
-// import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
+import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
 // import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
 
 import cn from 'classnames';
 import useMedias from '@Hooks/useMedias';
 
+import Collapse from '@UI/Collapse';
+import Image from '@UI/Image';
 import styles from './Select.module.css';
+
+import IconArrow from './icons/arrow.svg';
 
 export type SelectCallback = (e: MouseEvent, item: SelectItemData) => void;
 
@@ -39,9 +43,10 @@ export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
   name?: string;
   title?: string;
   countVisible?: number;
-  checked?: SelectItemData | SelectItemData[];
+  defaultChecked?: SelectItemData | SelectItemData[];
   items?: SelectItemData[];
   waiting?: boolean;
+  renderItem?: (props: SelectItemData, active: boolean) => ReactElement;
   onClick?: (e: MouseEvent) => void;
   onOpen?: (e: MouseEvent) => void;
   onClose?: (e: MouseEvent) => void;
@@ -57,10 +62,11 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     portal,
     title,
     wide,
-    checked: propsChecked,
+    defaultChecked,
     items,
     className,
     waiting,
+    renderItem,
     onClick,
     onOpen,
     onClose,
@@ -72,7 +78,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   const refField = useRef<HTMLDivElement>();
   const refOptions = useRef<HTMLDivElement>();
   const [checked, setChecked] = useState<SelectItemData[]>(() => {
-    return Array.isArray(propsChecked) ? propsChecked : [propsChecked];
+    return Array.isArray(defaultChecked) ? defaultChecked : [defaultChecked];
   });
   const [opened, setOpened] = useState(false);
   const [heightWrapper, setHeightWrapper] = useState<string | number>('100%');
@@ -101,15 +107,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     }
     return result;
   }, [checked, items, title]);
-
-  // Формируем иконку для выбранной опции
-  const FieldImg = useMemo(() => {
-    if (mode === 'multiple') return null;
-    if (checked.find((item) => item.icon)) {
-      return checked.find((item) => item.icon).icon;
-    }
-    return null;
-  }, [checked, mode]);
 
   // Формируем value выбранных опций
   const inputValue = useMemo(() => {
@@ -340,12 +337,12 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   // Изменяем внутреннее состояние при изменении пропсов
   useEffect(() => {
     setChecked(() => {
-      return Array.isArray(propsChecked) ? propsChecked : [propsChecked];
+      return Array.isArray(defaultChecked) ? defaultChecked : [defaultChecked];
     });
-  }, [propsChecked]);
-  //
-  // const mainRef = useOnClickOutside(handleClose, !opened || isOnlyMobile, []);
-  //
+  }, [defaultChecked]);
+
+  const mainRef = useOnClickOutside(handleClose);
+
   // useKeyboardEvents({
   //   onArrowDown: handleArrowDown,
   //   onArrowUp: handleArrowUp,
@@ -368,32 +365,52 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     >
       <div className={styles.wrapper} ref={mainRef}>
         <input {...restProps} className={styles.control} value={inputValue} readOnly />
-        <div className={styles.field} onClick={handleClick} ref={refField}>
+        <div
+          className={cn(styles.field, {
+            [styles.placeholder]: true,
+          })}
+          onClick={handleClick}
+          ref={refField}
+        >
           <div className={styles.fieldValue}>
-            {FieldImg && <div className={styles.fieldImg}>{FieldImg}</div>}
-            <div className={styles.fieldText}>{fieldText}</div>
+            <div className={styles.fieldText}>
+              <span className={styles.fieldTitle}>{`${title}: `}</span>
+              {fieldText}
+            </div>
           </div>
           {waiting ? <div className={styles.fieldLoader} /> : <div className={styles.fieldIcon} />}
         </div>
 
         {items.length > 0 && (
-          <>
-            <div className={styles.backdrop} onClick={handleClose} />
-
-            <div className={styles.popup} style={{ ...positionPortal }}>
-              {isOnlyMobile && (
-                <div className={styles.head}>
-                  <div className={styles.title}>{title}</div>
-                  <div className={styles.close} />
-                </div>
-              )}
-              <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
-                <div className={styles.options} ref={refOptions}>
-                  renderItem
+          <div className={styles.popup} style={{ ...positionPortal }}>
+            <div className={styles.field} onClick={handleClick}>
+              <div className={styles.fieldValue}>
+                <div className={styles.fieldText}>
+                  <span className={styles.fieldTitle}>{`${title}: `}</span>
+                  <span className={styles.checkedValue}>{fieldText}</span>
                 </div>
               </div>
+              <Image className={styles.iconArrow} src={IconArrow} />
             </div>
-          </>
+            <Collapse collapsed={!opened}>
+              <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
+                <div className={styles.options} ref={refOptions}>
+                  {items.map((item) => {
+                    const active = item.id === checked.id;
+                    const option = renderItem(item, active);
+
+                    return cloneElement(option, {
+                      ...option.props,
+                      key: item.id,
+                      price: 1200,
+                      onCheck: handleCheckItem,
+                      onUncheck: handleUncheckItem,
+                    });
+                  })}
+                </div>
+              </div>
+            </Collapse>
+          </div>
         )}
       </div>
     </div>
@@ -403,7 +420,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 Select.defaultProps = {
   mode: 'single-required',
   wide: false,
-  checked: [],
+  defaultChecked: [],
   items: [],
 };
 

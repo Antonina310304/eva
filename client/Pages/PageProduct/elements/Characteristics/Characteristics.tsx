@@ -138,29 +138,32 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
               />
             )}
           />
-          {/* <List */}
-          {/*  className={styles.selects} */}
-          {/*  items={parametersDropdown} */}
-          {/*  renderChild={(dropdown: Parameter) => { */}
-          {/*    const variants = dropdown.variants.map((variant) => { */}
-          {/*      return { ...variant, title: variant.name }; */}
-          {/*    }); */}
+          <List
+            className={styles.selects}
+            items={parametersDropdown}
+            renderChild={(dropdown: Parameter) => {
+              const variants = dropdown.variants.map((variant) => {
+                return { ...variant, title: variant.name };
+              });
 
-          {/*    return ( */}
-          {/*      <Select */}
-          {/*        className={styles.select} */}
-          {/*        title={dropdown.name} */}
-          {/*        checked={variants.find((variant) => variant.selected)} */}
-          {/*        items={variants} */}
-          {/*        renderItem={(option) => ( */}
-          {/*          <div className={styles.select}> */}
-          {/*            <SampleOption {...option} /> */}
-          {/*          </div> */}
-          {/*        )} */}
-          {/*      /> */}
-          {/*    ); */}
-          {/*  }} */}
-          {/* /> */}
+              return (
+                <Select
+                  className={styles.select}
+                  title={dropdown.name}
+                  defaultChecked={variants.find((variant) => variant.selected)}
+                  items={variants}
+                  wide
+                  renderItem={(option, active) => (
+                    <SampleOption
+                      className={cn(styles.option, { [styles.active]: active })}
+                      active={active}
+                      {...option}
+                    />
+                  )}
+                />
+              );
+            }}
+          />
         </div>
         <List
           className={styles.col}

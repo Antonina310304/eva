@@ -1,172 +1,208 @@
-.Select {
+.select {
   position: relative;
+  z-index: 1;
 
-  &_disabled {
+  transition: z-index 0.4s ease-in-out;
+
+  &.disabled {
     cursor: default;
     opacity: 0.7;
   }
 
-  &_faked {
-    .Select {
-      &-Field {
-        cursor: default;
-      }
+  &.faked {
+    .field {
+      cursor: default;
+    }
 
-      &-FieldIcon {
-        display: none;
-      }
+    .fieldIcon {
+      display: none;
     }
   }
 
-  &_wide {
-    .Select-Field {
+  &.wide {
+    .field {
       display: flex;
     }
 
-    .Select-WrapperOptions {
+    .wrapperOptions {
       right: 0;
     }
   }
 
-  &_opened {
-    .Select {
-      &-FieldIcon {
-        transform: rotate(-180deg);
-      }
+  &.opened {
+    z-index: 99;
 
-      &-Popup {
-        display: inline-block;
-      }
+    .checkedValue {
+      opacity: 0;
     }
-  }
 
-  &-Control {
-    display: none;
-  }
-
-  &-Field {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 100%;
-
-    padding: var(--space-xs) var(--space-s);
-
-    background: var(--color-bg-light);
-    cursor: pointer;
-  }
-
-  &-FieldText {
-    overflow: hidden;
-
-    font-size: var(--size-s);
-    line-height: 24px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  &-FieldIcon {
-    margin-left: var(--space-s);
-
-    transition: transform var(--animation-duration-fast);
-  }
-
-  &-FieldLoader {
-    position: relative;
-
-    width: 25px;
-    margin-left: var(--space-s);
-  }
-
-  &-Popup {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: var(--z-index-popup);
-
-    display: none;
-
-    background: var(--color-default);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-  }
-
-  &-WrapperOptions {
-    max-height: 300px;
-
-    &_view {
-      &_indent {
-        padding-bottom: var(--space-m);
-      }
-
-      &_small {
-        padding: var(--space-2xs) 0;
-
-        .ScrollbarsCustom-Track {
-          right: var(--space-2xs);
-        }
-      }
+    .fieldIcon {
+      transform: rotate(-180deg);
     }
-  }
 
-  &-FieldImg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
+    .popup {
+      background: var(--color-white);
+      border-color: var(--color-black);
+    }
 
-    vertical-align: middle;
-  }
-
-  &-FieldValue {
-    display: flex;
-    align-items: center;
-    max-width: calc(100% - 25px);
+    .iconArrow {
+      transform: rotate(-180deg);
+    }
   }
 }
 
+.control {
+  display: none;
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+
+  padding: var(--space-xs) var(--space-s);
+
+  cursor: pointer;
+}
+
+.fieldText {
+  overflow: hidden;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fieldIcon {
+  margin-left: var(--space-s);
+
+  transition: transform 0.2s;
+}
+
+.fieldLoader {
+  position: relative;
+
+  width: 25px;
+  margin-left: var(--space-s);
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background: transparent;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: 5px;
+
+  transition: border-color 0.2s ease-in-out;
+}
+
+.wapperOptions {
+  max-height: 300px;
+
+  &.view {
+    &.indent {
+      padding-bottom: var(--space-m);
+    }
+
+    &.small {
+      padding: var(--space-xxs) 0;
+    }
+  }
+}
+
+.fieldImg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+
+  vertical-align: middle;
+}
+
+.fieldValue {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 25px);
+}
+
+.wrapperOptions {
+  padding: var(--space-s) var(--space-b) var(--space-s) var(--space-s);
+
+  background: var(--color-white);
+}
+
+.fieldTitle {
+  composes: n from 'sizes';
+
+  font-weight: 500;
+}
+
+.field {
+  &.placeholder {
+    opacity: 0;
+  }
+}
+
+.iconArrow {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+
+  background-position: center;
+  background-size: contain;
+  transform: rotate(0);
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.checkedValue {
+  display: inline;
+
+  opacity: 1;
+
+  transition: opacity 0.2s ease-in-out;
+}
+
 @media (--mobile) {
-  .Select {
-    &-Backdrop {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 9999998;
+  .popup {
+    position: fixed;
+    top: unset;
+    bottom: 0;
+    z-index: 9999998;
 
-      background: rgba(0, 0, 0, 0.7);
-    }
+    display: block;
+    padding-bottom: var(--space-s);
 
-    &-Popup {
-      position: fixed;
-      top: unset;
-      bottom: 0;
-      z-index: 9999998;
+    background: var(--color-white);
 
-      display: block;
-      padding-bottom: var(--space-s);
+    box-shadow: unset;
+    transform: translate3d(0, 100%, 0);
+  }
 
-      box-shadow: unset;
-      transform: translate3d(0, 100%, 0);
-    }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: var(--space-s);
+  }
 
-    &-Head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-left: var(--space-s);
-    }
+  .title {
+    font-size: var(--size-l);
+  }
 
-    &-Title {
-      font-size: var(--size-l);
-    }
+  .wrapperClose {
+    padding: var(--space-s);
+  }
 
-    &-WrapperClose {
-      padding: var(--space-s);
-    }
-
-    &-WrapperOptions {
-      max-height: 80vh;
-    }
+  .wrapperOptions {
+    max-height: 80vh;
   }
 }

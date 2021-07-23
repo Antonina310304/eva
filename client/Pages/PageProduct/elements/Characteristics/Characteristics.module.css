@@ -74,6 +74,22 @@
   }
 }
 
+.option {
+  margin-top: var(--space-xxs);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.select {
+  margin-top: var(--space-s);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 @media (--desktop-m) {
   .scheme {
     gap: 80px;
