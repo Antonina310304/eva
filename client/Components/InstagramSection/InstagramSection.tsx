@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Section from '@Components/Section';
 import InstagramGallery from '@Components/InstagramGallery';
 import { ProgressOptions } from '@UI/Gallery';
+import NavArrows from '@UI/NavArrows';
 import { InstagramPostData } from '@Types/InstagramPost';
 import styles from './InstagramSection.module.css';
 
@@ -54,9 +55,7 @@ const InstragramSection: FC<InstagramSectionProps> = (props) => {
       className={cn(styles.section, className)}
       title={title}
       description={description}
-      hasArrows={track && track.width < 100}
-      onPrev={handlePrev}
-      onNext={handleNext}
+      additional={track?.width < 100 && <NavArrows onPrev={handlePrev} onNext={handleNext} />}
     >
       <div className={styles.wrapperGallery}>
         <InstagramGallery

@@ -31,7 +31,7 @@
   margin-left: var(--space-xs);
 }
 
-.arrows {
+.additional {
   margin-left: var(--space-xxs);
 }
 
@@ -59,7 +59,7 @@
       flex-direction: column;
     }
 
-    .arrows {
+    .additional {
       margin-top: var(--space-xxl);
       margin-left: 0;
     }
