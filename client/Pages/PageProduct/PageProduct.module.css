@@ -91,6 +91,8 @@
   min-width: 140px;
   max-width: 189px;
   padding: 0 var(--space-xs);
+
+  vertical-align: bottom;
 }
 
 .listReviews {
