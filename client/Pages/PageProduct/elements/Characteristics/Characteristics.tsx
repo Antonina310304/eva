@@ -3,11 +3,13 @@ import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
+import Select from '@UI/Select';
 import Dimension from './elements/Dimension';
 import Document from './elements/Document';
 import SynchronousSchemes from './elements/SynchronousSchemes';
 import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
+import SampleOption from './elements/SampleOption';
 import styles from './Characteristics.module.css';
 
 export interface SchemeImage {
@@ -124,30 +126,53 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
         />
       )}
       <div className={cn(styles.row, { [styles.columns]: true })}>
-        <List
-          className={styles.col}
-          items={parametersDimension}
-          renderChild={(dimension: Parameter) => (
-            <Dimension
-              className={styles.dimension}
-              name={dimension.name}
-              value={dimension.values}
-            />
-          )}
-        />
         <div className={styles.col}>
           <List
-            className={styles.col}
-            items={parametersDefault}
-            renderChild={(parameter: Parameter) => {
-              // TODO: поменять формат
-              const name = parameter.variant.split(':')[0];
-              const value = parameter.variant.split(':')[1];
-
-              return <StringParameter className={styles.parameter} name={name} value={value} />;
-            }}
+            className={styles.dimensions}
+            items={parametersDimension}
+            renderChild={(dimension: Parameter) => (
+              <Dimension
+                className={styles.dimension}
+                name={dimension.name}
+                value={dimension.values}
+              />
+            )}
           />
+          {/* <List */}
+          {/*  className={styles.selects} */}
+          {/*  items={parametersDropdown} */}
+          {/*  renderChild={(dropdown: Parameter) => { */}
+          {/*    const variants = dropdown.variants.map((variant) => { */}
+          {/*      return { ...variant, title: variant.name }; */}
+          {/*    }); */}
+
+          {/*    return ( */}
+          {/*      <Select */}
+          {/*        className={styles.select} */}
+          {/*        title={dropdown.name} */}
+          {/*        checked={variants.find((variant) => variant.selected)} */}
+          {/*        items={variants} */}
+          {/*        renderItem={(option) => ( */}
+          {/*          <div className={styles.select}> */}
+          {/*            <SampleOption {...option} /> */}
+          {/*          </div> */}
+          {/*        )} */}
+          {/*      /> */}
+          {/*    ); */}
+          {/*  }} */}
+          {/* /> */}
         </div>
+        <List
+          className={styles.col}
+          items={parametersDefault}
+          renderChild={(parameter: Parameter) => {
+            // TODO: поменять формат
+            const name = parameter.variant.split(':')[0];
+            const value = parameter.variant.split(':')[1];
+
+            return <StringParameter className={styles.parameter} name={name} value={value} />;
+          }}
+        />
       </div>
       <div className={styles.row}>
         {importantInfo && (

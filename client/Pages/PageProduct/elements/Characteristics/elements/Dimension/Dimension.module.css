@@ -52,6 +52,12 @@
 
   .valueItem {
     flex-direction: column;
+    min-width: 50px;
+  }
+
+  .valueName,
+  .valueValue {
+    width: 100%;
 
     text-align: center;
   }

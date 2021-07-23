@@ -93,4 +93,9 @@
   .wrapperMain {
     margin-bottom: var(--space-xb);
   }
+
+  .characteristics {
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
+  }
 }

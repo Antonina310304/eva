@@ -10,15 +10,13 @@ import React, {
   cloneElement,
   useMemo,
 } from 'react';
-import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
-import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
-
-import Icon5ArrowDown from '@divanru/icons/dist/5/arrow_down';
+// import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
+// import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
 
 import cn from 'classnames';
 import useMedias from '@Hooks/useMedias';
 
-import styles from './StringParameter.module.css';
+import styles from './Select.module.css';
 
 export type SelectCallback = (e: MouseEvent, item: SelectItemData) => void;
 
@@ -43,9 +41,6 @@ export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
   countVisible?: number;
   checked?: SelectItemData | SelectItemData[];
   items?: SelectItemData[];
-  hardPlaceholder?: string;
-  slotField?: ReactElement;
-  ssr?: boolean;
   waiting?: boolean;
   onClick?: (e: MouseEvent) => void;
   onOpen?: (e: MouseEvent) => void;
@@ -64,10 +59,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     wide,
     checked: propsChecked,
     items,
-    hardPlaceholder,
     className,
-    slotField,
-    ssr,
     waiting,
     onClick,
     onOpen,
@@ -351,15 +343,15 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
       return Array.isArray(propsChecked) ? propsChecked : [propsChecked];
     });
   }, [propsChecked]);
-
-  const mainRef = useOnClickOutside(handleClose, !opened || isOnlyMobile, []);
-
-  useKeyboardEvents({
-    onArrowDown: handleArrowDown,
-    onArrowUp: handleArrowUp,
-    onSpace: handleSpace,
-    onEscape: handleEscape,
-  });
+  //
+  // const mainRef = useOnClickOutside(handleClose, !opened || isOnlyMobile, []);
+  //
+  // useKeyboardEvents({
+  //   onArrowDown: handleArrowDown,
+  //   onArrowUp: handleArrowUp,
+  //   onSpace: handleSpace,
+  //   onEscape: handleEscape,
+  // });
 
   return (
     <div
@@ -376,28 +368,13 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     >
       <div className={styles.wrapper} ref={mainRef}>
         <input {...restProps} className={styles.control} value={inputValue} readOnly />
-        {slotField ? (
-          cloneElement(slotField, {
-            ref: refField,
-            text: hardPlaceholder || fieldText,
-            onClick: handleClick,
-            opened,
-          })
-        ) : (
-          <div className={styles.field} onClick={handleClick} ref={refField}>
-            <div className={styles.fieldValue}>
-              {FieldImg && <div className={styles.fieldImg}>{FieldImg}</div>}
-              <div className={styles.fieldText}>{hardPlaceholder || fieldText}</div>
-            </div>
-            {waiting ? (
-              <div className={styles.fieldLoader} />
-            ) : (
-              <div className={styles.fieldIcon}>
-                <Icon5ArrowDown width={10} height={10} />
-              </div>
-            )}
+        <div className={styles.field} onClick={handleClick} ref={refField}>
+          <div className={styles.fieldValue}>
+            {FieldImg && <div className={styles.fieldImg}>{FieldImg}</div>}
+            <div className={styles.fieldText}>{fieldText}</div>
           </div>
-        )}
+          {waiting ? <div className={styles.fieldLoader} /> : <div className={styles.fieldIcon} />}
+        </div>
 
         {items.length > 0 && (
           <>
@@ -428,7 +405,6 @@ Select.defaultProps = {
   wide: false,
   checked: [],
   items: [],
-  ssr: false,
 };
 
 export default Select;
