@@ -12,7 +12,7 @@ import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
 import { ProductData, ProductParameterGroupData } from '@Types/Product';
 import Parameter from './elements/Parameter';
-import Sizes from './elements/Sizes';
+import Sizes, { SizeData } from './elements/Sizes';
 import FastView from './elements/FastView';
 import Preview from './elements/Preview';
 import fabricImages from './fabrics';
@@ -109,7 +109,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
                   });
 
                   if (parameterGroup.theme === 'sizes') {
-                    const sizes = [];
+                    const sizes: SizeData[] = [];
 
                     parameters.forEach((parameter) => {
                       const parameterValue = product.parameterValues.find((pv) => {

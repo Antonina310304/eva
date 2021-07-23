@@ -53,7 +53,7 @@ const ModalsProvider: FC = (props) => {
     });
   }, []);
 
-  const closeModal = useCallback((id) => {
+  const closeModal = useCallback((id: ModalId) => {
     setAnimatings((prev) => prev.concat([id]));
 
     setTimeout(() => {
@@ -93,7 +93,7 @@ const ModalsProvider: FC = (props) => {
   }, [stack]);
 
   const getData = useCallback(
-    (id) => {
+    (id: ModalId) => {
       if (!modals) return false;
 
       return modals[id] && modals[id].data;
@@ -102,7 +102,7 @@ const ModalsProvider: FC = (props) => {
   );
 
   const isVisible = useCallback(
-    (id) => {
+    (id: ModalId) => {
       return modals && modals[id] ? modals[id].visible : false;
     },
     [modals],
