@@ -11,6 +11,7 @@ import NanoProductCard from '@Components/NanoProductCard';
 import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
+import { ReviewData } from '@Types/Review';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -39,7 +40,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];
 
-    return page.data.reviewsSubgallery.filter((review) => review.source === 'site');
+    return page.data.reviewsSubgallery.filter((review: ReviewData) => review.source === 'site');
   }, [page.data, page.isSuccess]);
 
   const handleCalcMatrasy = useCallback(() => {
@@ -50,6 +51,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   const {
     product,
+    ar,
+    breadcrumbs,
     mediaGallery,
     cylindo,
     crossSalesProducts,
@@ -66,7 +69,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
         className={cn(styles.mainContainer, styles.wrapperMain)}
         sidebar={<Sidebar page={page.data} />}
       >
-        <PhotoGallery images={mediaGallery} tags={product.tags} />
+        <PhotoGallery
+          images={mediaGallery}
+          tags={product.tags}
+          ar={ar}
+          category={breadcrumbs[1].text}
+        />
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>

@@ -1,6 +1,3 @@
-.photogallery {
-}
-
 .items {
   width: 100%;
 }
@@ -11,6 +8,14 @@
 
 .containerImage {
   margin-bottom: var(--space-l);
+}
+
+.containerImage.firstImage {
+  position: relative;
+
+  padding: var(--space-xb) 126px;
+
+  background-color: var(--color-light-gray);
 }
 
 .image {
@@ -26,6 +31,46 @@
   }
 }
 
+.doubleImg {
+  display: flex;
+}
+
+.smallImage {
+  width: 50%;
+  padding-bottom: 30.3%;
+
+  background-color: var(--color-light-gray);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &:last-child {
+    margin-left: var(--space-l);
+  }
+}
+
+.smallImage.verticalView {
+  padding-bottom: 77.3%;
+}
+
+.buttonAr {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.openGallery {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: var(--space-l);
+}
+
+.btnOpenGallery {
+  width: 300px;
+}
+
 .tags {
   position: absolute;
   top: var(--space-n);
@@ -33,28 +78,70 @@
   z-index: 2;
 }
 
-@media (--mobile-m) {
-  .items {
-    height: 66.7vw;
+@media (--desktop-m) {
+  .containerImage.firstImage {
+    padding: var(-space-xxl) 85px;
+  }
+}
+
+@media (--desktop) {
+  .containerImage.firstImage {
+    padding: var(--space-l) var(--space-xb);
   }
 
-  .items {
+  .buttonAr {
+    bottom: 15px;
+    left: 15px;
+
+    transform: none;
+  }
+}
+
+@media (--mobile-m) {
+  .photogallery {
     width: calc(100% + var(--space-s) * 2);
     margin: 0 var(--space-s-neg);
   }
 
+  .gallery {
+    padding: var(--space-l) 67px;
+
+    background-color: var(--color-light-gray);
+  }
+
   .containerImage {
+    position: relative;
+
     width: 100%;
     margin-bottom: 0;
+    padding: 0;
+  }
+
+  .containerImage.firstImage {
+    padding: 0;
   }
 
   .image {
-    height: 100%;
-    padding-bottom: 0%;
+    padding-bottom: 65.2%;
   }
 
   .tags {
     top: var(--space-s);
-    right: 0;
+    right: 15px;
+  }
+
+  .openGallery {
+    display: none;
+  }
+
+  .mobileAr {
+    bottom: 15px;
+    left: 15px;
+  }
+}
+
+@media (--mobile) {
+  .gallery {
+    padding: var(-space-s) 33px;
   }
 }

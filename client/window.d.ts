@@ -3,4 +3,5 @@ interface Window {
   cancelClick: boolean;
   draggableTarget: any;
   cylindo: any;
+  dataLayer: any;
 }

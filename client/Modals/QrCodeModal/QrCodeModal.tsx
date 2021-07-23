@@ -5,14 +5,14 @@ import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 
-import styles from './InfoModal.module.css';
+import styles from './QrCodeModal.module.css';
 
-export interface InfoModalProps {
+export interface QrCodeModalProps {
   className?: string;
   modal: IModal;
 }
 
-const InfoModal: FC<InfoModalProps> = (props) => {
+const QrCodeModal: FC<QrCodeModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeAllModals }] = useModals();
 
@@ -28,11 +28,10 @@ const InfoModal: FC<InfoModalProps> = (props) => {
       onClose={handleClose}
     >
       <div className={styles.container}>
-        <div className={styles.title}>{modal.data.title}</div>
-        <div className={styles.text}>{modal.data.text}</div>
+        <div className={styles.text}>{modal.data.qrcode}</div>
       </div>
     </Modal>
   );
 };
 
-export default memo(InfoModal);
+export default memo(QrCodeModal);

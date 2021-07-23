@@ -12,6 +12,7 @@ export interface ReviewData {
   link: string;
   photos: ReviewPhotoData[];
   rating: number;
+  source: string;
   text: string;
   usefull_count: number;
   useless_count: number;

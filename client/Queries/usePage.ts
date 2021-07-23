@@ -9,6 +9,8 @@ export interface Params {
 }
 
 export interface UsePageResult {
+  ar: any;
+  breadcrumbs: any[];
   title: string;
   rubrics: any[];
   popularLinks: any[];
