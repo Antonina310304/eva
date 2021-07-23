@@ -1,5 +1,5 @@
 import React, { memo, HTMLAttributes, FC, MouseEvent } from 'react';
-import cns from 'classnames';
+import cn from 'classnames';
 
 import styles from './MainSliderPanel.module.css';
 
@@ -30,16 +30,16 @@ const MainSliderPanel: FC<MainSliderPanelProps> = (props) => {
   } = props;
 
   return (
-    <div {...restProps} className={cns(styles.mainSliderPanel, className)}>
+    <div {...restProps} className={cn(styles.mainSliderPanel, className)}>
       <div className={styles.specialButton}>
         <div
-          className={cns(styles.button, { [styles.actived]: isFullscreen })}
+          className={cn(styles.button, { [styles.actived]: isFullscreen })}
           onClick={onFullscreen}
         >
-          <div className={styles.fullScreen} />
+          <div className={cn(styles.fullScreenIcon, { [styles.onFullScreen]: isFullscreen })} />
         </div>
-        <div className={cns(styles.button, { [styles.actived]: isZoom })} onClick={onZoom}>
-          <div className={styles.zoom} />
+        <div className={cn(styles.button, { [styles.actived]: isZoom })} onClick={onZoom}>
+          <div className={cn(styles.zoomIcon, { [styles.onZoom]: isZoom })} />
         </div>
       </div>
     </div>

@@ -1,10 +1,12 @@
-.productModel {
-  display: flex;
-  justify-content: space-between;
+.blockWrapper {
+  position: relative;
 }
 
 .icon360Wrapper {
-  margin-right: var(--space-xs);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 .view360 {
@@ -16,11 +18,24 @@
   background-size: contain;
 }
 
+.buttonsPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
+
 .wrapperCylindo {
   position: relative;
 
   display: none;
   width: 100%;
+  padding-bottom: 57.2%;
 }
 
 .wrapperCylindo.loaded {
@@ -33,16 +48,12 @@
   }
 }
 
-.specialButton {
-  display: flex;
-}
-
-.wrapperRotateHint {
-  color: var(--color-dark-gray);
-}
-
 .cylindoViewer {
-  height: inherit;
+  /* Нужно чтобы переопределить стили Cylindo для правильного позиционирования */
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 
 .wrapperRotateHint {
@@ -53,6 +64,8 @@
   display: flex;
   justify-content: center;
   width: 100%;
+
+  color: var(--color-dark-gray);
 
   opacity: 1;
 
@@ -67,13 +80,25 @@
   display: none;
 }
 
-.buttonsPanel {
-  margin-left: var(--space-xs);
+@media (--desktop-m) {
+  .wrapperCylindo {
+    padding-bottom: 55.6%;
+  }
 }
 
 @media (--desktop) {
   .view360 {
     width: 40px;
     height: 40px;
+  }
+
+  .wrapperCylindo {
+    padding-bottom: 62%;
+  }
+}
+
+@media (--mobile) {
+  .wrapperCylindo {
+    padding-bottom: 80.5%;
   }
 }
