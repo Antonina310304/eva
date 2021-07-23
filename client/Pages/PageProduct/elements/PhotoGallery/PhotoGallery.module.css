@@ -141,6 +141,6 @@
 
 @media (--mobile) {
   .gallery {
-    padding: var(-space-s) 33px;
+    padding: var(--space-s) 33px;
   }
 }

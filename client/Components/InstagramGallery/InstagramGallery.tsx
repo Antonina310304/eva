@@ -5,6 +5,7 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import { InstagramPostData } from '@Types/InstagramPost';
 import Post from './elems/Post';
+import PromoPlaceholder from './elems/PromoPlaceholder';
 import styles from './InstagramGallery.module.css';
 
 export interface InstagramGalleryProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,6 +13,7 @@ export interface InstagramGalleryProps extends HTMLAttributes<HTMLDivElement> {
   slideIndex?: number;
   posts: InstagramPostData[];
   cnViewport?: string;
+  hasPromoPlaceholder?: boolean;
   onChangeProgress?(opts: ProgressOptions): void;
   onChangeCurrent?(state: any): void;
 }
@@ -22,6 +24,7 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
     slideIndex,
     cnViewport,
     posts,
+    hasPromoPlaceholder,
     onChangeProgress,
     onChangeCurrent,
     ...restProps
@@ -46,9 +49,14 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
         onChangeProgress={handleChangeProgress}
         onChangeCurrent={onChangeCurrent}
       >
-        {posts.map((post) => (
+        {hasPromoPlaceholder && (
           <div className={styles.item}>
-            <Post className={styles.post} post={post} key={post.id} />
+            <PromoPlaceholder />
+          </div>
+        )}
+        {posts.map((post) => (
+          <div className={styles.item} key={post.id}>
+            <Post className={styles.post} post={post} />
           </div>
         ))}
       </Gallery>

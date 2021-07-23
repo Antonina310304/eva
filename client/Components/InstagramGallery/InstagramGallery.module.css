@@ -11,6 +11,8 @@
   min-width: 300px;
   max-width: 423px;
   padding: 0 var(--gap);
+
+  vertical-align: top;
 }
 
 .track {

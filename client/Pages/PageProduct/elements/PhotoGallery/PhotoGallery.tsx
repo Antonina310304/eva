@@ -85,16 +85,16 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
     const galleryViewArray = [];
     const copyImages = images.slice(0, maxItemsCountInGallery);
 
-    if (category === 'Диваны и кресла') {
+    if (category === 'Шкафы') {
       while (copyImages.length > 0) {
-        galleryViewArray.push(...copyImages.splice(0, 3));
+        galleryViewArray.push(...copyImages.splice(0, 1));
         if (copyImages.length >= 1) {
           galleryViewArray.push([...copyImages.splice(0, 2)]);
         }
       }
-    } else if (category === 'Шкафы') {
+    } else if (category === 'Диваны и кресла') {
       while (copyImages.length > 0) {
-        galleryViewArray.push(...copyImages.splice(0, 1));
+        galleryViewArray.push(...copyImages.splice(0, 3));
         if (copyImages.length >= 1) {
           galleryViewArray.push([...copyImages.splice(0, 2)]);
         }

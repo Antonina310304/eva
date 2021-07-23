@@ -12,10 +12,11 @@ export interface InstagramSectionProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: ReactChild | ReactChild[];
   posts: InstagramPostData[];
+  hasPromoPlaceholder?: boolean;
 }
 
 const InstragramSection: FC<InstagramSectionProps> = (props) => {
-  const { className, title, description, posts, ...restProps } = props;
+  const { className, title, description, posts, hasPromoPlaceholder, ...restProps } = props;
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -63,6 +64,7 @@ const InstragramSection: FC<InstagramSectionProps> = (props) => {
           cnViewport={styles.galleryViewport}
           slideIndex={slideIndex}
           posts={posts}
+          hasPromoPlaceholder={hasPromoPlaceholder}
           onChangeProgress={handleChangeProgress}
           onChangeCurrent={handleChangeCurrent}
         />
