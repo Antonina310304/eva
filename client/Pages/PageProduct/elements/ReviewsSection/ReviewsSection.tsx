@@ -69,7 +69,14 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   );
 
   return (
-    <div {...restProps} className={cn(styles.section, className)}>
+    <div
+      {...restProps}
+      className={cn(
+        styles.section,
+        { [styles.hasArrows]: hasPhotos && track?.width < 100 },
+        className,
+      )}
+    >
       <div className={styles.head}>
         <div className={styles.headMain}>
           <h2 className={styles.title}>{`Отзывы (${reviews.length})`}</h2>
