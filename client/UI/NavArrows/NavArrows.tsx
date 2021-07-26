@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, MouseEvent } from 'react';
 import cn from 'classnames';
 
-import styles from './Arrows.module.css';
+import styles from './NavArrows.module.css';
 
 export interface ArrowsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
