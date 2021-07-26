@@ -8,10 +8,13 @@ import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
 import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
+import ProductModel from '@Components/ProductModel';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import ReviewsSection from './elements/ReviewsSection';
+import ListReviews from './elements/ListReviews';
 import styles from './PageProduct.module.css';
 
 export interface RouteParams {
@@ -34,7 +37,14 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
-  const { product, mediaGallery, crossSalesProducts, sameProducts, historyProducts } = page.data;
+  const {
+    product,
+    mediaGallery,
+    cylindo,
+    crossSalesProducts,
+    sameProducts,
+    historyProducts,
+  } = page.data;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -46,6 +56,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
+        {page.data.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
+
         {page.data.description && (
           <div
             className={styles.description}
@@ -100,6 +112,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
               </div>
             )}
           />
+        )}
+
+        {page.data.reviewsSubgallery?.length > 0 && (
+          <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+            <ReviewsSection reviews={page.data.reviewsSubgallery} />
+            <ListReviews className={styles.listReviews} reviews={page.data.reviewsSubgallery} />
+          </div>
         )}
 
         {sameProducts.products?.length > 0 && (

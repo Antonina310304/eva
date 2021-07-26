@@ -3,10 +3,9 @@
     "--desktop-l": "(min-width: 1920px)",
     "--desktop-m": "(max-width: 1919px)",
     "--desktop": "(max-width: 1365px)",
-    "--mobile-l": "(max-width: 1279px)",
     "--mobile-m": "(max-width: 1023px)",
     "--mobile": "(max-width: 767px)",
-    "--mobile-s": "(max-width: 424px)",
-    "--only-desktop": "(min-width: 1366px)"
+    "--only-desktop": "(min-width: 1366px)",
+    "--only-mobile": "(max-width: 1365px)"
   }
 }

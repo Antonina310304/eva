@@ -64,7 +64,7 @@
   white-space: nowrap;
 }
 
-@media (--mobile-l) {
+@media (--desktop) {
   .container {
     --main-width: 448px;
     padding: var(--space-xb) var(--space-l) var(--space-n) var(--space-l);
@@ -76,7 +76,7 @@
   }
 }
 
-@media (--mobile-s) {
+@media (--mobile) {
   .container {
     width: 100vw;
     max-width: var(--main-width);

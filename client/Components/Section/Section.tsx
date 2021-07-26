@@ -1,13 +1,13 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent, ReactChild } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';
 import Arrows from './elements/Arrows';
 import styles from './Section.module.css';
 
-export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
+export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   className?: string;
-  title: string;
+  title: ReactChild;
   hasArrows?: boolean;
   priceMin?: number;
   onPrev?: (e: MouseEvent) => void;
@@ -44,7 +44,9 @@ const Section: FC<SectionProps> = (props) => {
     <div {...restProps} className={cn(styles.Section, className)}>
       <div className={styles.head}>
         <div className={styles.titleWrapper}>
-          <h2 className={styles.title}>{title}</h2>
+          {typeof title === 'string' && <h2 className={styles.title}>{title}</h2>}
+          {typeof title === 'object' && <div className={styles.title}>{title}</div>}
+
           {priceMin && (
             <div className={styles.priceMin}>
               {`от `}
