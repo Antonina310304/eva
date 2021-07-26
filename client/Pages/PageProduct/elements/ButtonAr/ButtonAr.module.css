@@ -1,4 +1,9 @@
 .buttonAr {
+  opacity: 0;
+
+  &.visibled {
+    opacity: 1;
+  }
 }
 
 .icon {
@@ -19,7 +24,19 @@
 }
 
 @media (--desktop) {
+  .button {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
   .icon {
+    position: absolute;
+
     width: 25px;
     height: 25px;
   }

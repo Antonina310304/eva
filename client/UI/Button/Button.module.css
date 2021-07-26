@@ -24,8 +24,12 @@
   border-radius: 45px;
 }
 
+.button.viewCircle {
+  border-radius: 100%;
+}
+
 .button.sizeL {
-  height: var(--space-b);
+  height: 50px;
 }
 
 .button.sizeM {
@@ -33,7 +37,7 @@
 }
 
 .button.sizeS {
-  height: var(--space-xl);
+  height: 35px;
 }
 
 .button.themePrimary {
@@ -107,16 +111,6 @@
   color: var(--color-white);
 
   background: var(--color-dirty);
-}
-
-.button.themeRoundedDirty {
-  width: var(--space-xxl);
-  height: var(--space-xxl);
-
-  color: var(--color-white);
-
-  background: var(--color-dirty);
-  border-radius: 100%;
 }
 
 .button.themeLinkSecondary {
@@ -220,14 +214,14 @@
 }
 
 @media (--desktop-m) {
-  .button.themeBlank {
-    /* height: 42px; */
+  .button {
+    height: 42px;
   }
 }
 
 @media (--mobile-m) {
-  .button.themeBlank {
-    /* height: var(--space-xl); */
+  .button {
+    height: 35px;
 
     font-size: var(--size-s);
     line-height: var(--lh-s);
