@@ -54,7 +54,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   const [, { openModal }] = useModals();
 
   const buttonSize = useMemo(() => {
-    let result = 'l';
+    let result: Size = 'l';
     if (isDesktopM) {
       result = 'm';
     }
