@@ -38,12 +38,7 @@ const Items: FC<ItemsProps> = (props) => {
   const { isMobileM } = useMedias();
 
   return isMobileM ? (
-    <Gallery
-      {...restProps}
-      className={styles.gallery}
-      slideIndex={slideIndex}
-      onChangeCurrent={onChange}
-    >
+    <Gallery {...restProps} slideIndex={slideIndex} onChangeCurrent={onChange}>
       {children}
     </Gallery>
   ) : (
@@ -125,19 +120,13 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
                 key={index}
               >
                 {Array.isArray(item) ? (
-                  <div className={styles.doubleImg}>
-                    <Image
-                      className={cn(styles.smallImage, {
-                        [styles.verticalView]: category === 'Шкафы',
-                      })}
-                      src={item[0]?.image}
-                    />
-                    <Image
-                      className={cn(styles.smallImage, {
-                        [styles.verticalView]: category === 'Шкафы',
-                      })}
-                      src={item[1]?.image}
-                    />
+                  <div
+                    className={cn(styles.doubleImg, {
+                      [styles.verticalView]: category === 'Шкафы',
+                    })}
+                  >
+                    <Image className={styles.smallImage} src={item[0]?.image} />
+                    <Image className={styles.smallImage} src={item[1]?.image} />
                   </div>
                 ) : (
                   <div>

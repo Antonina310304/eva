@@ -12,10 +12,6 @@
 
 .containerImage.firstImage {
   position: relative;
-
-  padding: var(--space-xb) 126px;
-
-  background-color: var(--color-light-gray);
 }
 
 .image {
@@ -35,22 +31,23 @@
   display: flex;
 }
 
+.doubleImg.verticalView {
+  .smallImage {
+    padding-bottom: 77.3%;
+  }
+}
+
 .smallImage {
-  width: 50%;
+  width: 100%;
   padding-bottom: 30.3%;
 
-  background-color: var(--color-light-gray);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
 
   &:last-child {
     margin-left: var(--space-l);
   }
-}
-
-.smallImage.verticalView {
-  padding-bottom: 77.3%;
 }
 
 .buttonAr {
@@ -79,20 +76,12 @@
 }
 
 @media (--desktop-m) {
-  .containerImage.firstImage {
-    padding: var(-space-xxl) 85px;
-  }
-
   .btnOpenGallery {
     width: 240px;
   }
 }
 
 @media (--desktop) {
-  .containerImage.firstImage {
-    padding: var(--space-l) var(--space-xb);
-  }
-
   .buttonAr {
     bottom: 15px;
     left: 15px;
@@ -107,21 +96,11 @@
     margin: 0 var(--space-s-neg);
   }
 
-  .gallery {
-    padding: var(--space-l) 67px;
-
-    background-color: var(--color-light-gray);
-  }
-
   .containerImage {
     position: relative;
 
     width: 100%;
     margin-bottom: 0;
-    padding: 0;
-  }
-
-  .containerImage.firstImage {
     padding: 0;
   }
 
@@ -136,11 +115,5 @@
 
   .openGallery {
     display: none;
-  }
-}
-
-@media (--mobile) {
-  .gallery {
-    padding: var(--space-s) 33px;
   }
 }
