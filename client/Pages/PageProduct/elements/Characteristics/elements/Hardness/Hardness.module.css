@@ -1,0 +1,42 @@
+.hardness {
+  position: relative;
+}
+
+.popoverInfo {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  left: 0;
+
+  width: 100%;
+  max-width: 360px;
+}
+
+.name {
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-xs);
+
+  font-weight: 500;
+}
+
+.icon {
+  width: 20px;
+  height: 25px;
+  margin-right: var(--space-xs);
+
+  background-position: center;
+  background-size: contain;
+}
+
+.info {
+  margin-left: var(--space-xs);
+}
+
+.value {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  composes: n from 'sizes';
+}

@@ -1,8 +1,9 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useRef } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useRef, useMemo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
 import Price from '@UI/Price';
+import Link from '@UI/Link';
 import styles from './SampleOption.module.css';
 
 import checkIcon from './check.svg';
@@ -16,6 +17,7 @@ export interface SampleOptionProps extends HTMLAttributes<HTMLDivElement> {
   name: string;
   active: boolean;
   price?: number;
+  href?: string;
   onClickOption?: SelectCallback;
   onCheck?: SelectCallback;
   onUncheck?: SelectCallback;
@@ -29,12 +31,13 @@ const SampleOption: FC<SampleOptionProps> = (props) => {
     price,
     active,
     id,
+    href,
     onClickOption,
     onCheck,
     onUncheck,
     ...restProps
   } = props;
-  const item = useRef({ image, name, price, id, active });
+  const item = useRef({ image, name, price, id, active, href });
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
@@ -47,20 +50,34 @@ const SampleOption: FC<SampleOptionProps> = (props) => {
     [active, item, onCheck, onClickOption, onUncheck],
   );
 
+  const content = useMemo(() => {
+    return (
+      <>
+        {image && (
+          <div className={styles.border}>
+            <Image className={styles.sample} src={image} />
+          </div>
+        )}
+        <div className={styles.name}>{name}</div>
+        {price && <Price price={price} className={styles.price} />}
+        <Image src={checkIcon} className={cn(styles.checkIcon, { [styles.active]: active })} />
+      </>
+    );
+  }, [active, image, name, price]);
+
   return (
     <div
       {...restProps}
       className={cn(styles.option, { [styles.active]: active }, className)}
       onClick={handleClick}
     >
-      {image && (
-        <div className={styles.border}>
-          <Image className={styles.sample} src={image} />
-        </div>
+      {href ? (
+        <Link className={styles.container} to={href} view='simple'>
+          {content}
+        </Link>
+      ) : (
+        <div className={styles.container}>{content}</div>
       )}
-      <div className={styles.name}>{name}</div>
-      {price && <Price price={price} className={styles.price} />}
-      {active && <Image src={checkIcon} className={styles.checkIcon} />}
     </div>
   );
 };

@@ -33,7 +33,7 @@
     z-index: 99;
 
     .checkedValue {
-      opacity: 0;
+      display: none;
     }
 
     .fieldIcon {
@@ -59,6 +59,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
   max-width: 100%;
 
   padding: var(--space-xs) var(--space-s);
@@ -134,7 +135,7 @@
 }
 
 .wrapperOptions {
-  padding: var(--space-s) var(--space-b) var(--space-s) var(--space-s);
+  padding: var(--space-s);
 
   background: var(--color-white);
 }
@@ -165,13 +166,35 @@
 
 .checkedValue {
   display: inline;
+}
 
-  opacity: 1;
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999998;
 
-  transition: opacity 0.2s ease-in-out;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 @media (--mobile) {
+  .field {
+    display: flex;
+    width: 100%;
+
+    &.placeholder {
+      border: 1px solid var(--color-dark-gray);
+      border-radius: 5px;
+      opacity: 1;
+    }
+  }
+
+  .checkedValue {
+    display: none;
+  }
+
   .popup {
     position: fixed;
     top: unset;
@@ -182,9 +205,18 @@
     padding-bottom: var(--space-s);
 
     background: var(--color-white);
+    border: none;
+    border-radius: 0;
 
     box-shadow: unset;
-    transform: translate3d(0, 100%, 0);
+
+    .fieldTitle {
+      font-weight: normal;
+    }
+
+    .field {
+      padding: var(--space-n) var(--space-s) 0;
+    }
   }
 
   .head {

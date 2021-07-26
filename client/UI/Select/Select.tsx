@@ -11,11 +11,12 @@ import React, {
   useMemo,
 } from 'react';
 import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
-// import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
+import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
 
 import cn from 'classnames';
 import useMedias from '@Hooks/useMedias';
 
+import UniversalPortal from '@UI/UniversalPortal';
 import Collapse from '@UI/Collapse';
 import Image from '@UI/Image';
 import styles from './Select.module.css';
@@ -28,10 +29,8 @@ export interface SelectItemData {
   id: string;
   title: string;
   data?: unknown;
-  icon?: ReactElement;
   href?: string;
   price?: number;
-  currency?: 'RUB' | 'BYN';
 }
 
 export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
@@ -74,7 +73,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     onUncheck,
     ...restProps
   } = props;
-  const { isOnlyMobile } = useMedias();
+  const { isMobile } = useMedias();
   const refField = useRef<HTMLDivElement>();
   const refOptions = useRef<HTMLDivElement>();
   const [checked, setChecked] = useState<SelectItemData[]>(() => {
@@ -85,6 +84,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   const [initialized, setInitialized] = useState(false);
   const [positionPortal, setPositionPortal] = useState({ width: '100%' });
   const [focusedItemIndex, setFocusedItemIndex] = useState<number>(null);
+  const refTop = useRef(0);
 
   const faked = useMemo(() => {
     const [firstItem] = items;
@@ -178,8 +178,15 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
       changeFocusedItemIndex(null);
 
       if (onClose) onClose(e);
+
+      if (isMobile) {
+        document.documentElement.style.position = '';
+        document.documentElement.style.top = '';
+        document.documentElement.style.width = '';
+        window.scrollTo(0, refTop.current);
+      }
     },
-    [changeFocusedItemIndex, onClose],
+    [isMobile, changeFocusedItemIndex, onClose],
   );
 
   const handleOpen = useCallback(
@@ -187,8 +194,15 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
       setOpened(true);
 
       if (onOpen) onOpen(e);
+
+      if (isMobile) {
+        refTop.current = window.scrollY;
+        document.documentElement.style.top = `-${refTop.current}px`;
+        document.documentElement.style.position = 'fixed';
+        document.documentElement.style.width = '100%';
+      }
     },
-    [onOpen],
+    [isMobile, onOpen],
   );
 
   const handleClick = useCallback(
@@ -224,19 +238,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     },
     [onUncheck, uncheckItem],
   );
-
-  const handleMouseEnterItem = useCallback(
-    (_e, eventItem: SelectItemData) => {
-      const index = items.findIndex((item) => item.id === eventItem.id);
-
-      setFocusedItemIndex(index);
-    },
-    [items],
-  );
-
-  const handleMouseLeaveItem = useCallback(() => {
-    setFocusedItemIndex(null);
-  }, []);
 
   const handleArrowDown = useCallback(
     (e) => {
@@ -321,7 +322,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
       });
 
       setPositionPortal((prev) => {
-        if (isOnlyMobile || !portal || !refField) return prev;
+        if (isMobile || !portal || !refField) return prev;
 
         const rect = refField.current.getBoundingClientRect();
 
@@ -332,7 +333,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         };
       });
     }, 10);
-  }, [initialized, isOnlyMobile, opened, portal]);
+  }, [initialized, isMobile, opened, portal]);
 
   // Изменяем внутреннее состояние при изменении пропсов
   useEffect(() => {
@@ -341,14 +342,14 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     });
   }, [defaultChecked]);
 
-  const mainRef = useOnClickOutside(handleClose);
+  const mainRef = useOnClickOutside(handleClose, !opened);
 
-  // useKeyboardEvents({
-  //   onArrowDown: handleArrowDown,
-  //   onArrowUp: handleArrowUp,
-  //   onSpace: handleSpace,
-  //   onEscape: handleEscape,
-  // });
+  useKeyboardEvents({
+    onArrowDown: handleArrowDown,
+    onArrowUp: handleArrowUp,
+    onSpace: handleSpace,
+    onEscape: handleEscape,
+  });
 
   return (
     <div
@@ -378,39 +379,48 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
               {fieldText}
             </div>
           </div>
-          {waiting ? <div className={styles.fieldLoader} /> : <div className={styles.fieldIcon} />}
+          <Image className={styles.iconArrow} src={IconArrow} />
         </div>
 
         {items.length > 0 && (
-          <div className={styles.popup} style={{ ...positionPortal }}>
-            <div className={styles.field} onClick={handleClick}>
-              <div className={styles.fieldValue}>
-                <div className={styles.fieldText}>
-                  <span className={styles.fieldTitle}>{`${title}: `}</span>
-                  <span className={styles.checkedValue}>{fieldText}</span>
-                </div>
-              </div>
-              <Image className={styles.iconArrow} src={IconArrow} />
-            </div>
-            <Collapse collapsed={!opened}>
-              <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
-                <div className={styles.options} ref={refOptions}>
-                  {items.map((item) => {
-                    const active = item.id === checked.id;
-                    const option = renderItem(item, active);
+          <UniversalPortal condition={portal || (isMobile && initialized)}>
+            <>
+              {isMobile && opened && <div className={styles.backdrop} onClick={handleClose} />}
 
-                    return cloneElement(option, {
-                      ...option.props,
-                      key: item.id,
-                      price: 1200,
-                      onCheck: handleCheckItem,
-                      onUncheck: handleUncheckItem,
-                    });
-                  })}
+              {((isMobile && opened) || !isMobile) && (
+                <div className={styles.popup} style={{ ...positionPortal }}>
+                  <div className={styles.field} onClick={handleClick}>
+                    <div className={styles.fieldValue}>
+                      <div className={styles.fieldText}>
+                        <span className={styles.fieldTitle}>{`${title}: `}</span>
+                        <span className={styles.checkedValue}>{fieldText}</span>
+                      </div>
+                    </div>
+                    <Image className={styles.iconArrow} src={IconArrow} />
+                  </div>
+                  <Collapse collapsed={!opened}>
+                    <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
+                      <div className={styles.options} ref={refOptions}>
+                        {items.map((item) => {
+                          const active = checked.some((option) =>
+                            option.id ? option.id === item.id : item.selected,
+                          );
+                          const option = renderItem(item, active);
+
+                          return cloneElement(option, {
+                            ...option.props,
+                            key: item.id,
+                            onCheck: handleCheckItem,
+                            onUncheck: handleUncheckItem,
+                          });
+                        })}
+                      </div>
+                    </div>
+                  </Collapse>
                 </div>
-              </div>
-            </Collapse>
-          </div>
+              )}
+            </>
+          </UniversalPortal>
         )}
       </div>
     </div>

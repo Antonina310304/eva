@@ -58,6 +58,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     parameters,
     importantInfo,
     documents,
+    modules,
   } = page.data;
 
   return (
@@ -131,6 +132,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             parameters={parameters}
             importantInfo={importantInfo}
             documents={documents}
+            modules={modules}
           />
         </div>
       </MainGrid>

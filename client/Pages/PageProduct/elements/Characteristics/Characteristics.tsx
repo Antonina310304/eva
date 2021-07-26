@@ -6,10 +6,12 @@ import List from '@UI/List';
 import Select from '@UI/Select';
 import Dimension from './elements/Dimension';
 import Document from './elements/Document';
+import Hardness from './elements/Hardness';
 import SynchronousSchemes from './elements/SynchronousSchemes';
 import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
 import SampleOption from './elements/SampleOption';
+import SampleParameter from './elements/SampleParameter';
 import styles from './Characteristics.module.css';
 
 export interface SchemeImage {
@@ -29,20 +31,28 @@ export interface Value {
 }
 
 export interface Variant {
-  id: number;
+  id?: number;
+  productId?: number;
   name: string;
+  title?: string;
   image: string;
+  detailImage?: string;
   theme: string;
   selected: boolean;
+  url?: string;
+  price?: string;
 }
 
 export interface Parameter {
-  theme: 'default' | 'dropdown' | 'dimension';
+  theme: 'default' | 'dropdown' | 'dimension' | 'circle' | 'hardness';
   name?: string;
   variant?: string;
   groupId?: number;
   values?: Value[];
   variants?: Variant[];
+  value?: string;
+  icon?: string;
+  description?: string[];
 }
 
 export interface Document {
@@ -99,6 +109,14 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
     return parameters.filter((parameter) => parameter.theme === 'dropdown');
   }, [parameters]);
 
+  const parametersCircle = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'circle');
+  }, [parameters]);
+
+  const parametersHardness = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'hardness');
+  }, [parameters]);
+
   return (
     <div {...restProps} className={cn(styles.characteristics, className)}>
       <div className={styles.top}>
@@ -127,80 +145,124 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
       )}
       <div className={cn(styles.row, { [styles.columns]: true })}>
         <div className={styles.col}>
-          <List
-            className={styles.dimensions}
-            items={parametersDimension}
-            renderChild={(dimension: Parameter) => (
-              <Dimension
-                className={styles.dimension}
-                name={dimension.name}
-                value={dimension.values}
-              />
-            )}
-          />
-          <List
-            className={styles.selects}
-            items={parametersDropdown}
-            renderChild={(dropdown: Parameter) => {
-              const variants = dropdown.variants.map((variant) => {
-                return { ...variant, title: variant.name };
-              });
-
-              return (
-                <Select
-                  className={styles.select}
-                  title={dropdown.name}
-                  defaultChecked={variants.find((variant) => variant.selected)}
-                  items={variants}
-                  wide
-                  renderItem={(option, active) => (
-                    <SampleOption
-                      className={cn(styles.option, { [styles.active]: active })}
-                      active={active}
-                      {...option}
-                    />
-                  )}
+          {parametersDimension.length > 0 && (
+            <List
+              className={styles.dimensions}
+              items={parametersDimension}
+              renderChild={(dimension: Parameter) => (
+                <Dimension
+                  className={styles.dimension}
+                  name={dimension.name}
+                  value={dimension.values}
                 />
-              );
-            }}
-          />
+              )}
+            />
+          )}
+          {parametersDropdown.length > 0 && (
+            <List
+              className={styles.selects}
+              items={parametersDropdown}
+              renderChild={(dropdown: Parameter) => {
+                const options: Variant[] = [];
+                dropdown.variants.forEach((variant) => {
+                  options.push({
+                    id: variant.id ? variant.id : variant.productId,
+                    name: variant.name,
+                    image: variant.image,
+                    title: variant.name,
+                    href: variant.url,
+                    price: variant.price,
+                    selected: variant.selected,
+                    data: variant,
+                  });
+                });
+
+                return (
+                  <Select
+                    className={styles.select}
+                    title={dropdown.name}
+                    defaultChecked={options.find((variant) => variant.selected)}
+                    items={options}
+                    wide
+                    renderItem={(option, active) => {
+                      return (
+                        <SampleOption
+                          className={cn(styles.option, { [styles.active]: active })}
+                          {...option}
+                          active={active}
+                        />
+                      );
+                    }}
+                  />
+                );
+              }}
+            />
+          )}
+
+          {parametersHardness.length > 0 && (
+            <List
+              className={styles.hardness}
+              items={parametersHardness}
+              renderChild={(hardness: Parameter) => (
+                <Hardness
+                  name={hardness.name}
+                  value={hardness.value}
+                  icon={hardness.icon}
+                  description={hardness.description}
+                />
+              )}
+            />
+          )}
         </div>
-        <List
-          className={styles.col}
-          items={parametersDefault}
-          renderChild={(parameter: Parameter) => {
+        <div className={styles.col}>
+          {parametersDefault.map((parameter, index) => {
             // TODO: поменять формат
             const name = parameter.variant.split(':')[0];
             const value = parameter.variant.split(':')[1];
 
-            return <StringParameter className={styles.parameter} name={name} value={value} />;
-          }}
-        />
-      </div>
-      <div className={styles.row}>
-        {importantInfo && (
-          <ImportantInfo
-            className={styles.ImportantInfo}
-            title={importantInfo.title}
-            text={importantInfo.text}
-          />
-        )}
-        {documents && (
-          <List
-            className={styles.documents}
-            items={documents.items}
-            renderChild={(document: Document) => (
-              <Document
-                className={styles.document}
-                icon={document.icon}
-                name={document.name}
-                sizeInfo={document.sizeInfo}
-                url={document.url}
+            return (
+              <StringParameter key={index} className={styles.parameter} name={name} value={value} />
+            );
+          })}
+          {parametersCircle.map((parameter) =>
+            parameter.variants.map((variant: Variant, index) => (
+              <SampleParameter
+                key={index}
+                className={styles.parameter}
+                name={variant.name}
+                title={variant.title}
+                image={variant.image}
               />
-            )}
-          />
-        )}
+            )),
+          )}
+        </div>
       </div>
+      {importantInfo && documents && (
+        <div className={styles.row}>
+          {importantInfo && (
+            <ImportantInfo
+              className={styles.ImportantInfo}
+              title={importantInfo.title}
+              text={importantInfo.text}
+            />
+          )}
+          {documents && (
+            <List
+              className={styles.documents}
+              items={documents.items}
+              renderChild={(document: Document) => (
+                <Document
+                  className={styles.document}
+                  icon={document.icon}
+                  name={document.name}
+                  sizeInfo={document.sizeInfo}
+                  url={document.url}
+                />
+              )}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };
