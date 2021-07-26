@@ -34,7 +34,7 @@ export interface Cylindo360ViewerProps extends HTMLAttributes<HTMLDivElement> {
   onError?: () => void;
 }
 
-const defaultOpts: Partial<Cylindo360ViewerOpts> = {
+const defaultOpts: Cylindo360ViewerOpts = {
   progressBar: false,
   fullscreen: false,
   thumbs: false,

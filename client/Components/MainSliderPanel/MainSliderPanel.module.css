@@ -56,6 +56,10 @@
     position: relative;
     z-index: 2;
   }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .button.actived {
@@ -68,7 +72,7 @@
   }
 }
 
-.fullScreen {
+.fullScreenIcon {
   width: 30px;
   height: 30px;
 
@@ -77,13 +81,21 @@
   background-size: contain;
 }
 
-.zoom {
+.fullScreenIcon.onFullScreen {
+  transform: rotate(90deg);
+}
+
+.zoomIcon {
   width: 30px;
   height: 30px;
 
   background-image: url('./zoom.svg');
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.zoomIcon.onZoom {
+  transform: rotate(90deg);
 }
 
 @media (--desktop) {
@@ -97,12 +109,12 @@
     height: 40px;
   }
 
-  .fullScreen {
+  .fullScreenIcon {
     width: 20px;
     height: 20px;
   }
 
-  .zoom {
+  .zoomIcon {
     width: 20px;
     height: 20px;
   }
