@@ -1,10 +1,5 @@
 .section {
 }
-.section.hasDescription {
-  .head {
-    align-items: flex-end;
-  }
-}
 
 .head {
   composes: main from 'containers';
@@ -54,13 +49,13 @@
 }
 
 @media (--mobile) {
-  .section.hasDescription {
+  .section.additionalBreakup {
     .head {
       flex-direction: column;
     }
 
     .additional {
-      margin-top: var(--space-xxl);
+      margin-top: var(--space-n);
       margin-left: 0;
     }
   }

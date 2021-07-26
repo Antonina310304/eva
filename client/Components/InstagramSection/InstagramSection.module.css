@@ -13,3 +13,10 @@
 .galleryViewport {
   overflow: visible;
 }
+
+@media (--mobile) {
+  .navArrows {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

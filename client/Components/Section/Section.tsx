@@ -7,18 +7,28 @@ import styles from './Section.module.css';
 export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   className?: string;
   title: ReactChild;
-  additional: ReactChild | ReactChild[];
+  additional?: ReactChild | ReactChild[];
+  additionalBreakup?: boolean;
   priceMin?: number;
   description?: ReactChild | ReactChild[];
 }
 
 const Section: FC<SectionProps> = (props) => {
-  const { className, title, additional, priceMin, description, children, ...restProps } = props;
+  const {
+    className,
+    title,
+    additional,
+    additionalBreakup,
+    priceMin,
+    description,
+    children,
+    ...restProps
+  } = props;
 
   return (
     <div
       {...restProps}
-      className={cn(styles.section, { [styles.hasDescription]: !!description }, className)}
+      className={cn(styles.section, { [styles.additionalBreakup]: additionalBreakup }, className)}
     >
       <div className={styles.head}>
         <div className={styles.headContent}>
