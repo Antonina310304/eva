@@ -1,25 +1,15 @@
 import React, { ButtonHTMLAttributes, FC, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
-import { Size } from '@Types/Sizes';
-
 import styles from './Button.module.css';
 
 export interface SizesProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   wide?: boolean;
   before?: ReactChild;
-  theme?:
-    | 'primary'
-    | 'secondary'
-    | 'blank'
-    | 'dirty'
-    | 'roundedDirty'
-    | 'linkSecondary'
-    | 'linkPrimary'
-    | 'circle';
-  view?: 'main' | 'rounded';
-  size?: Size;
+  theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary' | 'linkPrimary' | 'circle';
+  view?: 'main' | 'rounded' | 'circle';
+  size?: 'l' | 'm' | 's';
 }
 
 const Button: FC<SizesProps> = (props) => {
@@ -31,7 +21,7 @@ const Button: FC<SizesProps> = (props) => {
     type = 'button',
     theme = 'primary',
     view = 'main',
-    size = 'l',
+    size,
     ...restProps
   } = props;
 
@@ -44,11 +34,11 @@ const Button: FC<SizesProps> = (props) => {
           [styles.wide]: wide,
           [styles.viewMain]: view === 'main',
           [styles.viewRounded]: view === 'rounded',
+          [styles.viewCircle]: view === 'circle',
           [styles.themePrimary]: theme === 'primary',
           [styles.themeSecondary]: theme === 'secondary',
           [styles.themeBlank]: theme === 'blank',
           [styles.themeDirty]: theme === 'dirty',
-          [styles.themeRoundedDirty]: theme === 'roundedDirty',
           [styles.themeLinkSecondary]: theme === 'linkSecondary',
           [styles.themeLinkPrimary]: theme === 'linkPrimary',
           [styles.themeCircle]: theme === 'circle',

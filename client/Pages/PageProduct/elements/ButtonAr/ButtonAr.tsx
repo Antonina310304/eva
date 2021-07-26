@@ -1,10 +1,9 @@
-import React, { FC, HTMLAttributes, memo, MouseEvent } from 'react';
+import React, { FC, HTMLAttributes, memo, MouseEvent, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
 import useMedias from '@Hooks/useMedias';
 import { AR } from '@Types/AR';
-import { Size } from '@Types/Sizes';
 
 import ModelViewer from '../ModelViewer';
 
@@ -13,7 +12,6 @@ import styles from './ButtonAr.module.css';
 export interface ButtonArProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   actived?: boolean;
-  size?: Size;
   ar?: AR;
   expanded?: boolean;
   hiddenPopup?: boolean;
@@ -21,31 +19,22 @@ export interface ButtonArProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ButtonAr: FC<ButtonArProps> = (props) => {
-  const {
-    className,
-    ar,
-    actived,
-    size = 'l',
-    expanded,
-    onLoading,
-    hiddenPopup,
-    ...restProps
-  } = props;
+  const { className, ar, actived, expanded, onLoading, hiddenPopup, ...restProps } = props;
+  const [visibled, setVisibled] = useState(false);
   const { isDesktop } = useMedias();
 
+  useEffect(() => setVisibled(true), []);
+
   return (
-    <div {...restProps} className={cn(styles.buttonAr, [className])}>
+    <div
+      {...restProps}
+      className={cn(styles.buttonAr, { [styles.visibled]: visibled }, [className])}
+    >
       <ModelViewer ar={ar} className={styles.modelViewer} onLoading={onLoading}>
-        {isDesktop ? (
-          <Button className={styles.button} theme='roundedDirty'>
-            <div className={styles.icon} />
-          </Button>
-        ) : (
-          <Button className={styles.button} theme='dirty' size={size}>
-            <div className={styles.icon} />
-            <div className={styles.buttonText}>Примерить в комнате</div>
-          </Button>
-        )}
+        <Button className={styles.button} theme='dirty' view={isDesktop ? 'circle' : 'main'}>
+          <div className={styles.icon} />
+          {!isDesktop && <div className={styles.buttonText}>Примерить в комнате</div>}
+        </Button>
       </ModelViewer>
     </div>
   );
