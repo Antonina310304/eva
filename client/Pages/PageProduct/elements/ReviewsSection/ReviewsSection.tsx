@@ -6,6 +6,7 @@ import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import Rating from '@UI/Rating';
 import Button from '@UI/Button';
+import useModals from '@Hooks/useModals';
 import { ReviewData, ReviewPhotoData } from '@Types/Review';
 import Arrows from './elements/Arrows';
 import styles from './ReviewsSection.module.css';
@@ -17,6 +18,7 @@ export interface ReviewsSectionProps extends HTMLAttributes<HTMLDivElement> {
 
 const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const { className, reviews, title, ...restProps } = props;
+  const [, { openModal }] = useModals();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -62,8 +64,12 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
+  const handleClickAddReview = useCallback(() => {
+    openModal('AddReview');
+  }, [openModal]);
+
   const addReviewButton = (
-    <Button className={styles.button} wide theme='blank'>
+    <Button className={styles.button} wide theme='blank' onClick={handleClickAddReview}>
       Оставить отзыв
     </Button>
   );

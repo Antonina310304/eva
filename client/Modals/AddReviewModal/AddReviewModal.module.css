@@ -1,0 +1,26 @@
+.title {
+  margin-bottom: var(--space-m);
+
+  font-size: var(--size-xl);
+}
+
+.text {
+  font-size: var(--size-s);
+}
+
+.container {
+  width: 100%;
+  max-width: 622px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-l);
+
+  background: var(--color-white);
+  border-radius: 5px;
+}
+
+@media (--mobile) {
+  .container {
+    width: 100%;
+    padding: var(--space-xl) var(--space-s);
+  }
+}
