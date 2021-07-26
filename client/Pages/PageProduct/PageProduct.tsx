@@ -16,6 +16,7 @@ import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import DeliverySection from './elements/DeliverySection';
 import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
@@ -209,6 +210,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
             posts={page.data.instagram}
           />
         )}
+
+        <div className={cn(styles.littleContainer, styles.sectionDelivery)}>
+          <DeliverySection title='Стоимость доставки' />
+        </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (
           <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />

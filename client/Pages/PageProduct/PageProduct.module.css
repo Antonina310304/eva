@@ -71,7 +71,8 @@
 }
 
 .sectionSimilar,
-.sectionHistory {
+.sectionHistory,
+.sectionDelivery {
   margin-top: var(--space-xxe);
 }
 
@@ -117,7 +118,8 @@
   }
 
   .sectionSimilar,
-  .sectionHistory {
+  .sectionHistory,
+  .sectionDelivery {
     margin-top: var(--space-e);
   }
 }
@@ -133,7 +135,8 @@
   }
 
   .sectionSimilar,
-  .sectionHistory {
+  .sectionHistory,
+  .sectionDelivery {
     margin-top: var(--space-xb);
   }
 
