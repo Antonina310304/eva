@@ -24,8 +24,19 @@
   border-radius: 45px;
 }
 
+.button.sizeL {
+  height: var(--space-b);
+}
+
+.button.sizeM {
+  height: 42px;
+}
+
+.button.sizeS {
+  height: var(--space-xl);
+}
+
 .button.themePrimary {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-white);
@@ -54,7 +65,6 @@
 }
 
 .button.themeSecondary {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-black);
@@ -81,7 +91,6 @@
 }
 
 .button.themeBlank {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-black);
@@ -93,12 +102,21 @@
 }
 
 .button.themeDirty {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-white);
 
   background: var(--color-dirty);
+}
+
+.button.themeRoundedDirty {
+  width: var(--space-xxl);
+  height: var(--space-xxl);
+
+  color: var(--color-white);
+
+  background: var(--color-dirty);
+  border-radius: 100%;
 }
 
 .button.themeLinkSecondary {
@@ -203,13 +221,13 @@
 
 @media (--desktop-m) {
   .button.themeBlank {
-    height: 42px;
+    /* height: 42px; */
   }
 }
 
 @media (--mobile-m) {
   .button.themeBlank {
-    height: 35px;
+    /* height: var(--space-xl); */
 
     font-size: var(--size-s);
     line-height: var(--lh-s);

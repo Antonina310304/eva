@@ -15,17 +15,12 @@
 }
 
 .button {
-  height: 40px !important;
+  padding: 0;
 }
 
 @media (--desktop) {
   .icon {
     width: 25px;
     height: 25px;
-  }
-
-  .button {
-    width: 40px;
-    padding: 0 !important;
   }
 }

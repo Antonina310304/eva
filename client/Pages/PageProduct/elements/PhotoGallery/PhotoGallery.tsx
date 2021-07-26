@@ -8,6 +8,7 @@ import Gallery from '@UI/Gallery';
 import Button from '@UI/Button';
 import { ProductTagData } from '@Types/Product';
 import { AR } from '@Types/AR';
+import { Size } from '@Types/Sizes';
 import useModals from '@Hooks/useModals';
 
 import ButtonAr from '../ButtonAr';
@@ -21,7 +22,7 @@ export interface PhotoGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   images: MediaGalleryItem[];
   tags?: ProductTagData[];
-  category: 'Шкафы' | 'Диваны и кресла';
+  category: string;
   ar?: AR;
 }
 
@@ -37,12 +38,7 @@ const Items: FC<ItemsProps> = (props) => {
   const { isMobileM } = useMedias();
 
   return isMobileM ? (
-    <Gallery
-      {...restProps}
-      className={styles.gallery}
-      slideIndex={slideIndex}
-      onChangeCurrent={onChange}
-    >
+    <Gallery {...restProps} slideIndex={slideIndex} onChangeCurrent={onChange}>
       {children}
     </Gallery>
   ) : (
@@ -52,13 +48,32 @@ const Items: FC<ItemsProps> = (props) => {
 
 const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   const { className, ar, category, images = [], tags = [], ...restProps } = props;
+  const { isDesktopM } = useMedias();
+  const { isDesktop } = useMedias();
   const { isMobileM } = useMedias();
   const [, { openModal }] = useModals();
 
-  const maxItemsCountInGallery = useMemo(() => {
-    if (category === 'Шкафы') return 6;
+  const buttonSize = useMemo(() => {
+    let result: Size = 'l';
+    if (isDesktopM) {
+      result = 'm';
+    }
+    if (isDesktop) {
+      result = 's';
+    }
+    return result;
+  }, [isDesktop, isDesktopM]);
 
-    return 5;
+  const maxItemsCountInGallery = useMemo(() => {
+    let result;
+    if (category === 'Диваны и кресла') {
+      result = 5;
+    } else if (category === 'Шкафы') {
+      result = 6;
+    } else {
+      result = 3;
+    }
+    return result;
   }, [category]);
 
   const items = useMemo(() => {
@@ -72,13 +87,15 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
           galleryViewArray.push([...copyImages.splice(0, 2)]);
         }
       }
-    } else {
+    } else if (category === 'Диваны и кресла') {
       while (copyImages.length > 0) {
         galleryViewArray.push(...copyImages.splice(0, 3));
         if (copyImages.length >= 1) {
           galleryViewArray.push([...copyImages.splice(0, 2)]);
         }
       }
+    } else {
+      galleryViewArray.push(...copyImages);
     }
 
     const offset = isMobileM ? -1 : 4;
@@ -103,19 +120,13 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
                 key={index}
               >
                 {Array.isArray(item) ? (
-                  <div className={styles.doubleImg}>
-                    <Image
-                      className={cn(styles.smallImage, {
-                        [styles.verticalView]: category === 'Шкафы',
-                      })}
-                      src={item[0]?.image}
-                    />
-                    <Image
-                      className={cn(styles.smallImage, {
-                        [styles.verticalView]: category === 'Шкафы',
-                      })}
-                      src={item[1]?.image}
-                    />
+                  <div
+                    className={cn(styles.doubleImg, {
+                      [styles.verticalView]: category === 'Шкафы',
+                    })}
+                  >
+                    <Image className={styles.smallImage} src={item[0]?.image} />
+                    <Image className={styles.smallImage} src={item[1]?.image} />
                   </div>
                 ) : (
                   <div>
@@ -124,7 +135,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
                 )}
 
                 {!isMobileM && index === 0 && ar && (
-                  <ButtonAr className={styles.buttonAr} ar={ar} />
+                  <ButtonAr className={styles.buttonAr} size='m' ar={ar} />
                 )}
               </div>
             );
@@ -133,14 +144,19 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
 
         <div className={styles.openGallery}>
           {images.length > maxItemsCountInGallery && (
-            <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
+            <Button
+              className={styles.btnOpenGallery}
+              theme='blank'
+              size={buttonSize}
+              onClick={handleOpen}
+            >
               Открыть фотогалерею
             </Button>
           )}
         </div>
 
         {tags.length > 0 && <ProductTags className={styles.tags} tags={tags} />}
-        {isMobileM && ar && <ButtonAr className={cn(styles.buttonAr, styles.mobileAr)} ar={ar} />}
+        {isMobileM && ar && <ButtonAr className={styles.buttonAr} size='m' ar={ar} />}
       </div>
     </div>
   );
