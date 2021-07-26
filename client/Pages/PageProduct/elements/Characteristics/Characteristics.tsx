@@ -11,6 +11,7 @@ import SynchronousSchemes from './elements/SynchronousSchemes';
 import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
 import SampleOption from './elements/SampleOption';
+import ModuleCounter from './elements/ModuleCounter';
 import SampleParameter from './elements/SampleParameter';
 import styles from './Characteristics.module.css';
 
@@ -18,6 +19,9 @@ export interface SchemeImage {
   url: string;
   width: number;
   height: number;
+}
+export interface ModuleImage {
+  src: string;
 }
 
 export interface Scheme {
@@ -62,6 +66,18 @@ export interface Document {
   url: string;
 }
 
+export interface Module {
+  categoryColor: string;
+  count: number;
+  extraBonus: boolean;
+  id: number;
+  images: ModuleImage[];
+  link: string;
+  maxQuantity: number;
+  minQuantity: number;
+  modelId: number;
+}
+
 export interface Documents {
   title: string;
   items: Document[];
@@ -78,6 +94,7 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
     title: string;
   };
   documents: Documents;
+  modules: Module[];
 }
 
 const Characteristics: FC<CharacteristicsProps> = (props) => {
@@ -89,6 +106,7 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
     parameters,
     importantInfo,
     documents,
+    modules,
     ...restProps
   } = props;
   const [currentTab, setCurrentTab] = useState('0');
@@ -237,6 +255,20 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
           )}
         </div>
       </div>
+      {modules.length > 0 && (
+        <div className={cn(styles.row, { [styles.columns]: true })}>
+          <h2 className={styles.title}>Состав комплекта</h2>
+          <div className={styles.col}>
+            <List
+              className={styles.modules}
+              items={modules}
+              renderChild={(module: Module) => (
+                <ModuleCounter className={styles.module} name={module.name} count={module.count} />
+              )}
+            />
+          </div>
+        </div>
+      )}
       {importantInfo && documents && (
         <div className={styles.row}>
           {importantInfo && (
