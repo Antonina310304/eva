@@ -1,0 +1,18 @@
+.outOfStock {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: var(--space-s);
+
+  background-image: url('./info.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.text {
+  color: var(--color-dark-gray);
+}

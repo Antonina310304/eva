@@ -16,12 +16,13 @@ import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import CrossSaleSection from './elements/CrossSaleSection';
+import DeliverySection from './elements/DeliverySection';
 import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
-import styles from './PageProduct.module.css';
-
+import Characteristics from './elements/Characteristics';
 import fakeData from './fakeData.json';
+import styles from './PageProduct.module.css';
 
 export interface RouteParams {
   slug: string;
@@ -40,7 +41,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];
 
-    return page.data.reviewsSubgallery.filter((review: ReviewData) => review.source === 'site');
+    return (page.data.reviewsSubgallery || []).filter((review: ReviewData) => {
+      return review.source === 'site';
+    });
   }, [page.data, page.isSuccess]);
 
   const handleCalcMatrasy = useCallback(() => {
@@ -58,6 +61,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
     crossSalesProducts,
     sameProducts,
     historyProducts,
+    parameters,
+    importantInfo,
+    documents,
   } = page.data;
 
   return (
@@ -93,6 +99,51 @@ const PageProduct: FC<PageProductProps> = (props) => {
             />
           </div>
         )}
+
+        <div className={styles.characteristics}>
+          <Characteristics
+            title='Характеристики'
+            tabs={[
+              { id: '0', label: 'Собранный' },
+              { id: '1', label: 'Разобранный' },
+            ]}
+            schemes={[
+              {
+                id: '0',
+                images: [
+                  {
+                    url: '/react/static/img/scheme1.jpg',
+                    width: 511,
+                    height: 236,
+                  },
+                  {
+                    url: '/react/static/img/scheme2.jpg',
+                    width: 269,
+                    height: 235,
+                  },
+                ],
+              },
+              {
+                id: '1',
+                images: [
+                  {
+                    url: '/react/static/img/scheme3.jpg',
+                    width: 232,
+                    height: 389,
+                  },
+                  {
+                    url: '/react/static/img/scheme4.jpg',
+                    width: 81,
+                    height: 388,
+                  },
+                ],
+              },
+            ]}
+            parameters={parameters}
+            importantInfo={importantInfo}
+            documents={documents}
+          />
+        </div>
       </MainGrid>
 
       {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
@@ -110,6 +161,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           {` какие матрасы подойдут именно для тебя.`}
         </ChooseMattressBanner>
       )}
+
       <div className={styles.separator} />
 
       <div className={styles.wrapperAdditional}>
@@ -133,14 +185,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
-        {page.data.reviewsSubgallery?.length > 0 && (
-          <div className={cn(styles.littleContainer, styles.sectionReviews)}>
-            <ReviewsSection reviews={page.data.reviewsSubgallery} />
-            {siteReviews.length > 0 && (
-              <ListReviews className={styles.listReviews} reviews={siteReviews} />
-            )}
+        <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+          <ReviewsSection reviews={page.data.reviewsSubgallery} />
+          <div className={styles.wrapperListReviews}>
+            <ListReviews className={styles.listReviews} reviews={siteReviews} />
           </div>
-        )}
+        </div>
 
         {page.data.instagram?.length > 0 && (
           <InstagramSection
@@ -160,6 +210,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
             posts={page.data.instagram}
           />
         )}
+
+        <div className={cn(styles.littleContainer, styles.sectionDelivery)}>
+          <DeliverySection title='Стоимость доставки' />
+        </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (
           <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />

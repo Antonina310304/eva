@@ -63,7 +63,7 @@
   }
 }
 
-@media (--mobile-l) {
+@media (--desktop) {
   .comfortBuy {
     margin-top: var(--space-xb);
     margin-bottom: var(--space-xb);
@@ -78,7 +78,9 @@
 
   .advantagesList {
     flex-wrap: wrap;
+    min-width: 700px;
     max-width: 700px;
+    padding: 0 0 var(--space-xb) 0;
   }
 
   .advantagesItem {
@@ -105,6 +107,8 @@
   .advantagesList {
     flex-direction: column;
     align-items: center;
+    min-width: 330px;
+    max-width: 330px;
   }
 
   .advantagesItem:not(:last-child) {

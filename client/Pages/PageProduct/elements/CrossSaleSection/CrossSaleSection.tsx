@@ -12,6 +12,7 @@ import cn from 'classnames';
 import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
+import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import { ProductData } from '@Types/Product';
 import styles from './CrossSaleSection.module.css';
@@ -66,9 +67,7 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
       {...restProps}
       className={cn(styles.section, className)}
       title={title}
-      hasArrows={track && track.width < 100}
-      onPrev={handlePrev}
-      onNext={handleNext}
+      additional={track?.width < 100 && <NavArrows onPrev={handlePrev} onNext={handleNext} />}
     >
       {tabs.length > 0 && <ButtonTabs className={styles.tabs} defaultValue='0' tabs={tabs} />}
 

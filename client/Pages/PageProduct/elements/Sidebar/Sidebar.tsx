@@ -1,10 +1,10 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
+import loadable from '@loadable/component';
 import cn from 'classnames';
 
 import declOfNum from '@divanru/ts-utils/declOfNum';
 
 import Like from '@Components/Like';
-import OrderBonuses from '@Components/OrderBonuses';
 import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
@@ -32,13 +32,16 @@ const fabrics = [
   },
 ];
 
+const OrderBonuses = loadable(() => import('@Components/OrderBonuses'));
+const OutOfStock = loadable(() => import('../OutOfStock'));
+
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, ...restProps } = props;
   const meta = useMeta({ ssr: true });
 
   if (!meta.isSuccess) return null;
 
-  const { product } = page;
+  const { product, isAvailable } = page;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
@@ -64,23 +67,33 @@ const Sidebar: FC<SidebarProps> = (props) => {
         </div>
       )}
 
-      <div className={styles.wrapperPrice}>
-        <div className={styles.labelPrice}>Цена</div>
-        <div className={styles.containerPrices}>
-          <Price className={styles.actualPrice} price={product.price.actual} />
-          {hasExpired && (
-            <Price expired className={styles.expiredPrice} price={product.price.expired} />
+      {isAvailable ? (
+        <>
+          <div className={styles.wrapperPrice}>
+            <div className={styles.labelPrice}>Цена</div>
+            <div className={styles.containerPrices}>
+              <Price className={styles.actualPrice} price={product.price.actual} />
+              {hasExpired && (
+                <Price expired className={styles.expiredPrice} price={product.price.expired} />
+              )}
+              {hasDiscount && (
+                <Discount className={styles.discount}>{product.price.discount}</Discount>
+              )}
+            </div>
+          </div>
+
+          <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+
+          {meta.data.country === 'RUS' && (
+            <Button className={styles.priceReduction} theme='linkSecondary'>
+              Подписаться на изменение цены
+            </Button>
           )}
-          {hasDiscount && <Discount className={styles.discount}>{product.price.discount}</Discount>}
+        </>
+      ) : (
+        <div className={styles.wrapperOutOfStock}>
+          <OutOfStock />
         </div>
-      </div>
-
-      <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
-
-      {meta.data.country === 'RUS' && (
-        <Button className={styles.priceReduction} theme='linkSecondary'>
-          Подписаться на изменение цены
-        </Button>
       )}
 
       <div className={styles.wrapperFabrics}>

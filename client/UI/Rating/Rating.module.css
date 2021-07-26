@@ -42,3 +42,7 @@
     background-image: url('./starSelected.svg');
   }
 }
+
+.score {
+  font-weight: 500;
+}
