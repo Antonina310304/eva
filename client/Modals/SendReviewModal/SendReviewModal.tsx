@@ -5,6 +5,7 @@ import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import SendReviewForm from '@Forms/SendReviewForm';
+import { ProductData } from '@Types/Product';
 import styles from './SendReviewModal.module.css';
 
 export interface SendReviewModalProps {
@@ -12,9 +13,14 @@ export interface SendReviewModalProps {
   modal: IModal;
 }
 
+export interface ModalData {
+  product: ProductData;
+}
+
 const SendReviewModal: FC<SendReviewModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeAllModals }] = useModals();
+  const { product } = modal.data as ModalData;
 
   const handleClose = useCallback(() => {
     closeAllModals();
@@ -32,10 +38,10 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
           <div className={styles.title}>Мой отзыв</div>
           <div className={styles.iconClose} onClick={handleClose} />
         </div>
-        <div className={styles.productName}>Диван Динс Velvet Yellow</div>
+        <div className={styles.productName}>{`${product.type} ${product.name}`}</div>
 
         <div className={styles.form}>
-          <SendReviewForm product={{ id: 4884 }} onCancel={handleClose} />
+          <SendReviewForm product={product} onCancel={handleClose} />
         </div>
       </div>
     </Modal>
