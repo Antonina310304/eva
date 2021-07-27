@@ -56,7 +56,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     if (!page.isSuccess) return;
 
     openModal('SendReview', { product: page.data.product });
-  }, [openModal, page.data.product, page.isSuccess]);
+  }, [openModal, page.data, page.isSuccess]);
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
