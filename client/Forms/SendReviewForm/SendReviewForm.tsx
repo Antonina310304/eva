@@ -17,12 +17,12 @@ export interface SendReviewFormProps {
   className?: string;
   orderId?: string;
   product: ProductData;
-  onClose?: () => void;
+  onCancel?: () => void;
   onSendReview?: (item: any) => void;
 }
 
 const SendReviewForm: FC<SendReviewFormProps> = (props) => {
-  const { className, product, orderId, onClose, onSendReview } = props;
+  const { className, product, orderId, onCancel, onSendReview } = props;
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const [, { openModal }] = useModals();
@@ -45,12 +45,11 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
   }, []);
 
   const handleError = useCallback(() => {
-    onClose();
     // openModal('info', {
     //   title: 'Произошла ошибка',
     //   text: 'Пожалуйста, повторите попытку позже.',
     // });
-  }, [onClose]);
+  }, []);
 
   const handleResponse = useCallback(
     (response) => {
@@ -62,7 +61,6 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
       }
 
       if (response.ok) {
-        onClose();
         if (response.data.view === 'YandexMarket') {
           textAreaRef.current.select();
           document.execCommand('copy');
@@ -92,7 +90,7 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
         handleError();
       }
     },
-    [handleError, onClose, onSendReview],
+    [handleError, onSendReview],
   );
 
   const handleChangeUploadError = useCallback((e, err) => {
@@ -172,7 +170,7 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
         <Button className={cn(styles.action, styles.buy)} type='submit'>
           Оставить отзыв
         </Button>
-        <Button className={styles.action} type='button' theme='linkSecondary' onClick={onClose}>
+        <Button className={styles.action} type='button' theme='linkSecondary' onClick={onCancel}>
           Отменить
         </Button>
       </div>
