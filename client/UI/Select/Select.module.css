@@ -135,7 +135,7 @@
 }
 
 .wrapperOptions {
-  padding: var(--space-s);
+  padding: var(--space-xs);
 
   background: var(--color-white);
 }

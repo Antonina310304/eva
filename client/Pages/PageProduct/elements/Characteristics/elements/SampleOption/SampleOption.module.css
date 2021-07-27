@@ -1,11 +1,19 @@
 .option {
+  padding: var(--space-xxs);
+
+  background-color: transparent;
   cursor: pointer;
 
+  transition: background-color 0.2s ease-in-out;
+
   &.active {
-    .border {
-      background: var(--color-white);
+    .sample:before {
       border-color: var(--color-dark-gray);
     }
+  }
+
+  &:hover {
+    background-color: var(--color-light-gray);
   }
 }
 
@@ -17,26 +25,34 @@
   text-decoration: none;
 }
 
-.border {
-  width: 110px;
-  height: 110px;
-
-  margin-right: var(--space-s);
-  padding: var(--space-xxs);
-  overflow: hidden;
-
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 5px;
-
-  transition: all 0.2s ease-in-out;
-}
-
 .sample {
-  width: 100%;
-  height: 100%;
+  position: relative;
+
+  width: 100px;
+  height: 100px;
+  margin-right: var(--space-s);
 
   border-radius: 5px;
+
+  &:before {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+
+    display: block;
+    padding: var(--space-xxs);
+    overflow: hidden;
+
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    transition: all 0.2s ease-in-out;
+
+    content: '';
+  }
 }
 
 .name {

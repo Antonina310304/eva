@@ -191,7 +191,6 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
                     href: variant.url,
                     price: variant.price,
                     selected: variant.selected,
-                    data: variant,
                   });
                 });
 

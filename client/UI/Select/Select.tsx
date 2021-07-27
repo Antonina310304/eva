@@ -342,6 +342,16 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     });
   }, [defaultChecked]);
 
+  //
+  useEffect(() => {
+    if (!isMobile) {
+      document.documentElement.style.position = '';
+      document.documentElement.style.top = '';
+      document.documentElement.style.width = '';
+      window.scrollTo(0, refTop.current);
+    }
+  }, [isMobile]);
+
   const mainRef = useOnClickOutside(handleClose, !opened);
 
   useKeyboardEvents({
