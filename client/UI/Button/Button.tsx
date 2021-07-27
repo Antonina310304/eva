@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, memo, ReactChild } from 'react';
+import React, { ButtonHTMLAttributes, FC, memo, ReactChild, isValidElement } from 'react';
 import cn from 'classnames';
 
 import styles from './Button.module.css';
@@ -22,6 +22,9 @@ const Button: FC<SizesProps> = (props) => {
     view = 'main',
     ...restProps
   } = props;
+  const isText =
+    typeof children === 'string' ||
+    (Array.isArray(children) && children.every((child) => typeof child === 'string'));
 
   return (
     <button
@@ -45,8 +48,8 @@ const Button: FC<SizesProps> = (props) => {
       // eslint-disable-next-line react/button-has-type
       type={type}
     >
-      {before && <div className={styles.before}>{before}</div>}
-      {children}
+      {before && <span className={styles.before}>{before}</span>}
+      {isText ? <span className={styles.text}>{children}</span> : children}
     </button>
   );
 };

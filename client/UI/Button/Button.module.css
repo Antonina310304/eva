@@ -201,6 +201,13 @@
   margin-right: var(--space-xs);
 }
 
+.text {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: hidden;
+}
+
 @media (--desktop-m) {
   .button.themeBlank {
     height: 42px;
