@@ -29,6 +29,10 @@
   &.wide {
     width: 100%;
   }
+
+  &.errored {
+    border-color: var(--color-red);
+  }
 }
 
 .before,
@@ -68,4 +72,10 @@
   &::placeholder {
     color: var(--color-dark-gray);
   }
+}
+
+.error {
+  margin-top: var(--space-xs);
+
+  color: var(--color-red);
 }

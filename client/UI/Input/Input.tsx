@@ -91,29 +91,33 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
   useImperativeHandle(ref, () => inputRef.current);
 
   return (
-    <div
-      className={cn(
-        styles.input,
-        {
-          [styles.wide]: wide,
-          [styles.focused]: focused,
-          [styles.readonly]: readOnly,
-        },
-        [className],
-      )}
-      onClick={handleClick}
-    >
-      {before && <span className={styles.before}>{before}</span>}
-      <input
-        {...restProps}
-        className={styles.control}
-        ref={inputRef}
-        readOnly={readOnly}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
-      {after && <span className={styles.after}>{after}</span>}
-    </div>
+    <>
+      <div
+        className={cn(
+          styles.input,
+          {
+            [styles.wide]: wide,
+            [styles.focused]: focused,
+            [styles.readonly]: readOnly,
+            [styles.errored]: !!error,
+          },
+          [className],
+        )}
+        onClick={handleClick}
+      >
+        {before && <span className={styles.before}>{before}</span>}
+        <input
+          {...restProps}
+          className={styles.control}
+          ref={inputRef}
+          readOnly={readOnly}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+        {after && <span className={styles.after}>{after}</span>}
+      </div>
+      {error && <div className={styles.error}>{error}</div>}
+    </>
   );
 });
 
