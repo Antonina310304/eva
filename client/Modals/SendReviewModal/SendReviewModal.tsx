@@ -30,7 +30,8 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
 
   const handleSuccess = useCallback(() => {
     queryClient.invalidateQueries('page');
-  }, [queryClient]);
+    closeAllModals();
+  }, [closeAllModals, queryClient]);
 
   return (
     <Modal
