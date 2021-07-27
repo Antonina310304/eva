@@ -41,7 +41,7 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
         <div className={styles.productName}>{`${product.type} ${product.name}`}</div>
 
         <div className={styles.form}>
-          <SendReviewForm product={product} onCancel={handleClose} />
+          <SendReviewForm product={product} onCancel={handleClose} onSuccess={handleClose} />
         </div>
       </div>
     </Modal>

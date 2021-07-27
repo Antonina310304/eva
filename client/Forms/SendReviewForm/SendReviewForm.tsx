@@ -18,11 +18,11 @@ export interface SendReviewFormProps {
   orderId?: string;
   product: ProductData;
   onCancel?: () => void;
-  onSendReview?: (item: any) => void;
+  onSuccess?: (review: any) => void;
 }
 
 const SendReviewForm: FC<SendReviewFormProps> = (props) => {
-  const { className, product, orderId, onCancel, onSendReview } = props;
+  const { className, product, orderId, onCancel, onSuccess } = props;
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const [, { openModal }] = useModals();
@@ -31,12 +31,18 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
   const textAreaRef = useRef(null);
 
   const transformDataBeforeSubmit = useCallback((data) => {
+    const idField = 'SendReviewForm[id]';
     const fileField = 'SendReviewForm[file]';
+    const qualityField = 'SendReviewForm[quality]';
+    const serviceField = 'SendReviewForm[service]';
     const isFileEmpty = data[fileField].name === '' || data[fileField] === '';
 
     return {
       ...data,
       [fileField]: isFileEmpty ? {} : data[fileField],
+      [idField]: +data[idField],
+      [qualityField]: +data[qualityField],
+      [serviceField]: +data[serviceField],
     };
   }, []);
 
@@ -81,16 +87,15 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
           // });
         }
 
-        if (!onSendReview) return;
-
+        if (!onSuccess) return;
         if (!response.data.review.text) return;
 
-        onSendReview(response.data.review);
+        onSuccess(response.data.review);
       } else {
         handleError();
       }
     },
-    [handleError, onSendReview],
+    [handleError, onSuccess],
   );
 
   const handleChangeUploadError = useCallback((e, err) => {
@@ -109,7 +114,7 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
       onResponse={handleResponse}
       onError={handleError}
     >
-      <input hidden name='SendReviewForm[id]' value={product.id} />
+      <input hidden name='SendReviewForm[id]' defaultValue={product.id} />
 
       <div className={styles.main}>
         <div className={styles.inputs}>
