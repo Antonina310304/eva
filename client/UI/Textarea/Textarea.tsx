@@ -15,24 +15,26 @@ export interface EpicTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEl
 
 const EpicTextarea = forwardRef<EpicTextareaRef, EpicTextareaProps>((props, ref) => {
   const { className, wide, placeholder, error, disabled, ...restProps } = props;
-  const hasError = error && error.length > 0;
 
   return (
-    <textarea
-      {...restProps}
-      className={cn(
-        styles.textarea,
-        {
-          [styles.wide]: wide,
-          [styles.disabled]: disabled,
-          [styles.hasError]: hasError,
-        },
-        [className],
-      )}
-      ref={ref}
-      placeholder={placeholder}
-      readOnly={disabled}
-    />
+    <>
+      <textarea
+        {...restProps}
+        className={cn(
+          styles.textarea,
+          {
+            [styles.wide]: wide,
+            [styles.disabled]: disabled,
+            [styles.errored]: !!error,
+          },
+          [className],
+        )}
+        ref={ref}
+        placeholder={placeholder}
+        readOnly={disabled}
+      />
+      {error && <div className={styles.error}>{error}</div>}
+    </>
   );
 });
 

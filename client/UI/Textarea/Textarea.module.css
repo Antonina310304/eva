@@ -34,4 +34,12 @@
   &.wide {
     width: 100%;
   }
+
+  &.errored {
+    border-color: var(--color-red);
+  }
+}
+
+.error {
+  color: var(--color-red);
 }
