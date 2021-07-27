@@ -65,7 +65,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   }, [normalizeSlide, track]);
 
   const handleClickAddReview = useCallback(() => {
-    openModal('AddReview');
+    openModal('SendReview');
   }, [openModal]);
 
   const addReviewButton = (

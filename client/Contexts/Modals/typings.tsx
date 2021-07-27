@@ -4,7 +4,7 @@ export type ModalId =
   | 'QrCode'
   | 'ProductSlider'
   | 'Fullscreen360'
-  | 'AddReview';
+  | 'SendReview';
 
 export interface Modal {
   id: ModalId;
