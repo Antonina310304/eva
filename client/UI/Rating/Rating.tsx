@@ -15,25 +15,29 @@ import styles from './Rating.module.css';
 
 export type OnChangeStarCallback = (e: MouseEvent, index: number) => void;
 
-export interface RatingProps extends HTMLAttributes<HTMLDivElement> {
+export interface RatingProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   className?: string;
+  name?: string;
   defaultValue?: number;
   value?: number;
   countStars?: number;
   size?: 's' | 'm';
   scored?: boolean;
-  onChangeStar?: OnChangeStarCallback;
+  editable?: boolean;
+  onChange?: OnChangeStarCallback;
 }
 
 const Rating: FC<RatingProps> = (props) => {
   const {
     className,
+    name,
     defaultValue,
     value,
     countStars = 5,
     size = 's',
     scored,
-    onChangeStar,
+    editable,
+    onChange,
     ...restProps
   } = props;
   const [selectedStar, setSelectedStar] = useState(defaultValue || value);
@@ -42,7 +46,7 @@ const Rating: FC<RatingProps> = (props) => {
     const items = [];
 
     for (let i = 0; i < countStars; i += 1) {
-      items.push(i);
+      items.push(i + 1);
     }
 
     return items;
@@ -50,9 +54,12 @@ const Rating: FC<RatingProps> = (props) => {
 
   const handleClickStar: OnChangeStarCallback = useCallback(
     (e, index) => {
-      if (onChangeStar) onChangeStar(e, index);
+      if (!editable) return;
+
+      setSelectedStar(index);
+      if (onChange) onChange(e, index);
     },
-    [onChangeStar],
+    [editable, onChange],
   );
 
   useEffect(() => {
@@ -66,15 +73,16 @@ const Rating: FC<RatingProps> = (props) => {
       {...restProps}
       className={cn(
         styles.rating,
-        { [styles.sizeS]: size === 's', [styles.sizeM]: size === 'm' },
+        { [styles.sizeS]: size === 's', [styles.sizeM]: size === 'm', [styles.editable]: editable },
         className,
       )}
     >
+      <input hidden type='text' name={name} value={value} />
       <List
         className={styles.list}
         items={stars}
         renderChild={(star: number) => {
-          const selected = star < selectedStar;
+          const selected = star <= selectedStar;
 
           return (
             <div
