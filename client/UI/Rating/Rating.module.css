@@ -26,6 +26,10 @@
       line-height: var(--lh-l);
     }
   }
+
+  &.editable {
+    cursor: pointer;
+  }
 }
 
 .list {

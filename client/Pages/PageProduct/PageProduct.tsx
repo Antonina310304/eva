@@ -11,6 +11,7 @@ import NanoProductCard from '@Components/NanoProductCard';
 import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
+import useModals from '@Hooks/useModals';
 import { ReviewData } from '@Types/Review';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
@@ -35,6 +36,7 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { pathname } = useLocation();
+  const [, { openModal }] = useModals();
   const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
 
@@ -49,6 +51,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
   }, []);
+
+  const handleAddReview = useCallback(() => {
+    if (!page.isSuccess) return;
+
+    openModal('SendReview', { product: page.data.product });
+  }, [openModal, page.data, page.isSuccess]);
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
@@ -186,7 +194,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionReviews)}>
-          <ReviewsSection reviews={page.data.reviewsSubgallery} />
+          <ReviewsSection reviews={page.data.reviewsSubgallery} onAddReview={handleAddReview} />
           <div className={styles.wrapperListReviews}>
             <ListReviews className={styles.listReviews} reviews={siteReviews} />
           </div>

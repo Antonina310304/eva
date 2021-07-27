@@ -1,0 +1,167 @@
+.upload {
+  display: flex;
+  flex-direction: column;
+
+  &.viewVertical {
+    .button {
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      padding: var(--space-xs) var(--space-l);
+    }
+
+    .textes {
+      text-align: center;
+    }
+
+    .icon {
+      margin: 0 0 var(--space-s);
+    }
+
+    .description {
+      margin-top: var(--space-xxs);
+    }
+
+    .wrapperControl {
+      height: 100%;
+    }
+  }
+}
+
+.wrapperControl {
+  position: relative;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-xs);
+
+  border: 1px dashed var(--color-medium-gray);
+  border-radius: 3px;
+
+  transition: border-color var(--animation-duration-fast) ease-in-out;
+}
+
+.icon {
+  margin-right: var(--space-s);
+}
+
+.title {
+  composes: s from 'sizes';
+}
+
+.description {
+  composes: xs from 'sizes';
+
+  margin-top: var(--space-xxs);
+
+  color: var(--color-dark-gray);
+}
+
+.control {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  width: 100%;
+
+  opacity: 0;
+
+  transition: border-color 0.2s;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+
+    + .button {
+      border-color: var(--color-black);
+    }
+  }
+}
+
+.list {
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-s);
+  margin-bottom: var(--space-xs-neg);
+
+  &.errored {
+    border: 1px solid var(--color-bg-error);
+  }
+}
+
+.error {
+  width: calc(100% + 2px);
+
+  border-radius: 0 0 2px 2px !important;
+  /* Компенсируем бордюры */
+  transform: translateX(-1px);
+}
+
+.listItem {
+  position: relative;
+
+  width: 54px;
+  height: 54px;
+  margin-right: var(--space-xs);
+  margin-bottom: var(--space-xs);
+
+  &:hover {
+    cursor: pointer;
+
+    .EpicUpload-Die {
+      opacity: 1;
+    }
+  }
+}
+
+.listPreview {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  border: 1px solid var(--color-border-light);
+}
+
+.die {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+
+  transition: opacity var(--animation-duration-fast);
+}
+
+.iconFileRemove {
+  color: var(--color-default);
+}
+
+.iconCamera {
+  flex-shrink: 0;
+  width: 38px;
+  height: 30px;
+
+  background-image: url('./camera.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
