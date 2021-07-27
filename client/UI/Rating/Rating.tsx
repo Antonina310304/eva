@@ -77,7 +77,7 @@ const Rating: FC<RatingProps> = (props) => {
         className,
       )}
     >
-      <input hidden type='text' name={name} value={value} />
+      <input hidden type='text' name={name} value={selectedStar} />
       <List
         className={styles.list}
         items={stars}
