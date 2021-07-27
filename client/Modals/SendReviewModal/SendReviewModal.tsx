@@ -1,5 +1,6 @@
 import React, { useCallback, memo, FC } from 'react';
 import cn from 'classnames';
+import { useQueryClient } from 'react-query';
 
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
@@ -19,12 +20,17 @@ export interface ModalData {
 
 const SendReviewModal: FC<SendReviewModalProps> = (props) => {
   const { className, modal } = props;
+  const queryClient = useQueryClient();
   const [, { closeAllModals }] = useModals();
   const { product } = modal.data as ModalData;
 
   const handleClose = useCallback(() => {
     closeAllModals();
   }, [closeAllModals]);
+
+  const handleSuccess = useCallback(() => {
+    queryClient.invalidateQueries('page');
+  }, [queryClient]);
 
   return (
     <Modal
@@ -41,7 +47,7 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
         <div className={styles.productName}>{`${product.type} ${product.name}`}</div>
 
         <div className={styles.form}>
-          <SendReviewForm product={product} onCancel={handleClose} onSuccess={handleClose} />
+          <SendReviewForm product={product} onCancel={handleClose} onSuccess={handleSuccess} />
         </div>
       </div>
     </Modal>
