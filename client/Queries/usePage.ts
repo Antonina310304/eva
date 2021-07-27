@@ -27,6 +27,7 @@ export interface UsePageResult {
   sameProducts: any;
   historyProducts: any;
   instagram: any;
+  features: any[];
   productsModel: any;
   parameters: any;
   importantInfo: any;

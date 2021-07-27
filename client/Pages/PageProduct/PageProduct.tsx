@@ -22,6 +22,7 @@ import ListReviews from './elements/ListReviews';
 import Characteristics from './elements/Characteristics';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
+import ProductFeatures from './elements/ProductFeatures';
 
 export interface RouteParams {
   slug: string;
@@ -62,6 +63,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     historyProducts,
     parameters,
     importantInfo,
+    features,
     documents,
   } = page.data;
 
@@ -144,6 +146,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         </div>
       </MainGrid>
+
+      {page.data.features?.length > 0 && <ProductFeatures features={page.data.features} />}
 
       {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
         <ChooseMattressBanner
