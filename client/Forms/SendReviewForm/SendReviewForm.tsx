@@ -169,10 +169,10 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
       </div>
 
       <div className={styles.actions}>
-        <Button className={styles.buy} type='submit'>
+        <Button className={cn(styles.action, styles.buy)} type='submit'>
           Оставить отзыв
         </Button>
-        <Button className={styles.cancel} type='button' theme='linkSecondary' onClick={onClose}>
+        <Button className={styles.action} type='button' theme='linkSecondary' onClick={onClose}>
           Отменить
         </Button>
       </div>

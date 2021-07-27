@@ -9,8 +9,8 @@
   align-items: center;
 }
 
-.cancel {
-  margin-left: var(--space-xxl);
+.action:not(:last-child) {
+  margin-right: var(--space-xxl);
 }
 
 .ratings {
@@ -57,6 +57,26 @@
   .files {
     flex: 0 0 100%;
     margin: 0;
+  }
+
+  .ratings {
+    flex-direction: column;
+  }
+
+  .actions {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .action {
+    &:not(&:last-child) {
+      margin-bottom: var(--space-s);
+    }
+  }
+
+  .buy {
+    width: 100%;
   }
 
   .ratingItem {
