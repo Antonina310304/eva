@@ -7,6 +7,7 @@ import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import Rating from '@UI/Rating';
 import Button from '@UI/Button';
+import useModals from '@Hooks/useModals';
 import { ReviewData, ReviewPhotoData } from '@Types/Review';
 import styles from './ReviewsSection.module.css';
 
@@ -19,6 +20,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const { className, reviews, title, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const [, { openModal }] = useModals();
 
   const photos = useMemo((): ReviewPhotoData[] => {
     return reviews.reduce((prevReviews, review) => [...prevReviews, ...review.photos], []);
@@ -58,6 +60,16 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
+  const handleClickReviewImage = useCallback(
+    (photo) => {
+      openModal('Review', {
+        selectedReview: photo,
+        reviews,
+      });
+    },
+    [openModal, reviews],
+  );
+
   return (
     <Section
       {...restProps}
@@ -82,7 +94,11 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
         >
           {photos.map((photo) => (
             <div className={styles.item} key={photo.id}>
-              <Image className={styles.photo} src={photo.image} />
+              <Image
+                className={styles.photo}
+                src={photo.image}
+                onClick={() => handleClickReviewImage(photo)}
+              />
             </div>
           ))}
         </Gallery>

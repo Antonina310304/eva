@@ -64,6 +64,40 @@
   padding-bottom: 73.333%;
 }
 
+.modalWrapper {
+  display: flex;
+
+  .photo {
+    width: 52.65%;
+    padding-bottom: 31.26%;
+  }
+
+  .contentModal {
+
+    flex-grow: 1;
+    width: 40%;
+    height: 387px;
+    margin-left: var(--space-xxl);
+  }
+
+  .criterias {
+    display: flex;
+    margin-top: var(--space-l);
+  }
+
+  .criteria {
+    margin-right: var(--space-l);
+  }
+
+  .criteriaName {
+    min-width: 0;
+  }
+
+  .text {
+    margin-top: var(--space-n);
+  }
+}
+
 @media (--mobile) {
   .wrapperMain {
     display: block;
