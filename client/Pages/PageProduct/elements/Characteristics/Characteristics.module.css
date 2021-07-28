@@ -123,7 +123,6 @@
   }
 
   .row.columns {
-
     grid-template-columns: calc(50% - 40px) calc(50% - 40px);
     gap: 80px;
   }

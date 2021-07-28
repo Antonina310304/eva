@@ -16,10 +16,12 @@ import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
 import cn from 'classnames';
 import useMedias from '@Hooks/useMedias';
 
+import FadeTransition from '@UI/FadeTransition';
+import SlideBottomTransition from '@UI/SlideBottomTransition';
 import UniversalPortal from '@UI/UniversalPortal';
-import Collapse from '@UI/Collapse';
 import Image from '@UI/Image';
 import styles from './Select.module.css';
+import Popup from './elements/Popup';
 
 import IconArrow from './icons/arrow.svg';
 
@@ -28,9 +30,12 @@ export type SelectCallback = (e: MouseEvent, item: SelectItemData) => void;
 export interface SelectItemData {
   id: string;
   title: string;
-  data?: unknown;
   href?: string;
+  image?: string;
+  name?: string;
   price?: number;
+  selected?: boolean;
+  data?: unknown;
 }
 
 export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
@@ -75,15 +80,14 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   } = props;
   const { isMobile } = useMedias();
   const refField = useRef<HTMLDivElement>();
-  const refOptions = useRef<HTMLDivElement>();
   const [checked, setChecked] = useState<SelectItemData[]>(() => {
     return Array.isArray(defaultChecked) ? defaultChecked : [defaultChecked];
   });
   const [opened, setOpened] = useState(false);
-  const [heightWrapper, setHeightWrapper] = useState<string | number>('100%');
   const [initialized, setInitialized] = useState(false);
   const [positionPortal, setPositionPortal] = useState({ width: '100%' });
   const [focusedItemIndex, setFocusedItemIndex] = useState<number>(null);
+
   const refTop = useRef(0);
 
   const faked = useMemo(() => {
@@ -172,6 +176,13 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     [mode],
   );
 
+  const handleUnblockScroll = useCallback(() => {
+    document.documentElement.style.position = '';
+    document.documentElement.style.top = '';
+    document.documentElement.style.width = '';
+    window.scrollTo(0, refTop.current);
+  }, []);
+
   const handleClose = useCallback(
     (e?: MouseEvent) => {
       setOpened(false);
@@ -179,30 +190,27 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
       if (onClose) onClose(e);
 
-      if (isMobile) {
-        document.documentElement.style.position = '';
-        document.documentElement.style.top = '';
-        document.documentElement.style.width = '';
-        window.scrollTo(0, refTop.current);
-      }
+      if (isMobile) handleUnblockScroll();
     },
-    [isMobile, changeFocusedItemIndex, onClose],
+    [changeFocusedItemIndex, isMobile, handleUnblockScroll, onClose],
   );
+
+  const handleBlockScroll = useCallback(() => {
+    document.documentElement.style.top = `-${refTop.current}px`;
+    document.documentElement.style.position = 'fixed';
+    document.documentElement.style.width = '100%';
+  }, []);
 
   const handleOpen = useCallback(
     (e: MouseEvent) => {
+      refTop.current = refTop.current || window.scrollY;
       setOpened(true);
 
       if (onOpen) onOpen(e);
 
-      if (isMobile) {
-        refTop.current = window.scrollY;
-        document.documentElement.style.top = `-${refTop.current}px`;
-        document.documentElement.style.position = 'fixed';
-        document.documentElement.style.width = '100%';
-      }
+      if (isMobile) handleBlockScroll();
     },
-    [isMobile, onOpen],
+    [isMobile, onOpen, handleBlockScroll],
   );
 
   const handleClick = useCallback(
@@ -315,12 +323,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   //
   useEffect(() => {
     setTimeout(() => {
-      setHeightWrapper((prev) => {
-        if (!refOptions || !refOptions.current) return prev;
-
-        return refOptions.current.offsetHeight;
-      });
-
       setPositionPortal((prev) => {
         if (isMobile || !portal || !refField) return prev;
 
@@ -344,13 +346,14 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
   //
   useEffect(() => {
-    if (!isMobile) {
+    if (isMobile && opened) {
+      handleBlockScroll();
+    } else {
       document.documentElement.style.position = '';
       document.documentElement.style.top = '';
       document.documentElement.style.width = '';
-      window.scrollTo(0, refTop.current);
     }
-  }, [isMobile]);
+  }, [isMobile, opened, handleBlockScroll]);
 
   const mainRef = useOnClickOutside(handleClose, !opened);
 
@@ -395,39 +398,49 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         {items.length > 0 && (
           <UniversalPortal condition={portal || (isMobile && initialized)}>
             <>
-              {isMobile && opened && <div className={styles.backdrop} onClick={handleClose} />}
-
-              {((isMobile && opened) || !isMobile) && (
-                <div className={styles.popup} style={{ ...positionPortal }}>
-                  <div className={styles.field} onClick={handleClick}>
-                    <div className={styles.fieldValue}>
-                      <div className={styles.fieldText}>
-                        <span className={styles.fieldTitle}>{`${title}: `}</span>
-                        <span className={styles.checkedValue}>{fieldText}</span>
-                      </div>
+              {isMobile ? (
+                <>
+                  <FadeTransition in={opened} unmountOnExit>
+                    <div className={styles.backdrop} onClick={handleClose} />
+                  </FadeTransition>
+                  <SlideBottomTransition in={opened} unmountOnExit>
+                    <div className={styles.popup} style={{ ...positionPortal }}>
+                      <Popup
+                        items={items}
+                        checked={checked}
+                        opened={opened}
+                        wide={wide}
+                        disabled={disabled}
+                        faked={faked}
+                        title={title}
+                        fieldText={fieldText}
+                        isMobile={isMobile}
+                        renderItem={renderItem}
+                        onClickField={handleClick}
+                        onCheckItem={handleCheckItem}
+                        onUncheckItem={handleUncheckItem}
+                      />
                     </div>
-                    <Image className={styles.iconArrow} src={IconArrow} />
-                  </div>
-                  <Collapse collapsed={!opened}>
-                    <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
-                      <div className={styles.options} ref={refOptions}>
-                        {items.map((item) => {
-                          const active = checked.some((option) =>
-                            option.id ? option.id === item.id : item.selected,
-                          );
-                          const option = renderItem(item, active);
-
-                          return cloneElement(option, {
-                            ...option.props,
-                            key: item.id,
-                            onCheck: handleCheckItem,
-                            onUncheck: handleUncheckItem,
-                          });
-                        })}
-                      </div>
-                    </div>
-                  </Collapse>
-                </div>
+                  </SlideBottomTransition>
+                </>
+              ) : (
+                <Popup
+                  className={styles.popup}
+                  style={{ ...positionPortal }}
+                  items={items}
+                  checked={checked}
+                  opened={opened}
+                  wide={wide}
+                  disabled={disabled}
+                  faked={faked}
+                  title={title}
+                  fieldText={fieldText}
+                  isMobile={isMobile}
+                  renderItem={renderItem}
+                  onClickField={handleClick}
+                  onCheckItem={handleCheckItem}
+                  onUncheckItem={handleUncheckItem}
+                />
               )}
             </>
           </UniversalPortal>

@@ -10,7 +10,7 @@ import Hardness from './elements/Hardness';
 import SynchronousSchemes from './elements/SynchronousSchemes';
 import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
-import SampleOption from './elements/SampleOption';
+import SampleOption, { SampleOptionProps } from './elements/SampleOption';
 import ModuleCounter from './elements/ModuleCounter';
 import SampleParameter from './elements/SampleParameter';
 import styles from './Characteristics.module.css';
@@ -181,13 +181,13 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
               className={styles.selects}
               items={parametersDropdown}
               renderChild={(dropdown: Parameter) => {
-                const options: Variant[] = [];
+                const options: any[] = [];
                 dropdown.variants.forEach((variant) => {
                   options.push({
                     id: variant.id ? variant.id : variant.productId,
+                    title: variant.name,
                     name: variant.name,
                     image: variant.image,
-                    title: variant.name,
                     href: variant.url,
                     price: variant.price,
                     selected: variant.selected,
@@ -198,14 +198,14 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
                   <Select
                     className={styles.select}
                     title={dropdown.name}
-                    defaultChecked={options.find((variant) => variant.selected)}
+                    defaultChecked={options.find((option) => option.selected)}
                     items={options}
                     wide
-                    renderItem={(option, active) => {
+                    renderItem={(option: SampleOptionProps, active) => {
                       return (
                         <SampleOption
-                          className={cn(styles.option, { [styles.active]: active })}
                           {...option}
+                          className={cn(styles.option, { [styles.active]: active })}
                           active={active}
                         />
                       );
