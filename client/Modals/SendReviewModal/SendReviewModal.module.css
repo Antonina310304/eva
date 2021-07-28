@@ -21,16 +21,6 @@
   font-weight: 500;
 }
 
-.iconClose {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('./close.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-}
-
 .productName {
   composes: n from 'sizes';
 
