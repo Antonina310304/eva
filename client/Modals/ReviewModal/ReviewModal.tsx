@@ -18,6 +18,7 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeAllModals }] = useModals();
   const { reviews, selectedReview } = modal.data;
+
   const [slide, setSlide] = useState<ReviewData>(
     reviews.find((item: ReviewData) => item.id === selectedReview.id),
   );

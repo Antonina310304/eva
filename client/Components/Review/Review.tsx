@@ -6,6 +6,7 @@ import Gallery from '@UI/Gallery';
 import Image from '@UI/Image';
 import Scroller from '@UI/Scroller';
 import { ReviewData } from '@Types/Review';
+import useMedias from '@Hooks/useMedias';
 import styles from './Review.module.css';
 
 export interface ReviewProps extends HTMLAttributes<HTMLDivElement> {
@@ -16,34 +17,60 @@ export interface ReviewProps extends HTMLAttributes<HTMLDivElement> {
 
 const Review: FC<ReviewProps> = (props) => {
   const { className, review, modalView = false, ...restProps } = props;
+  const { isDesktop, isMobile } = useMedias();
 
   return (
     <div {...restProps} className={cn(styles.review, className)}>
       {modalView ? (
-        <div className={styles.modalWrapper}>
-          <Image className={styles.photo} src={review.photos[0].image} />
+        <Scroller className={styles.reviewScroller} space={isMobile ? 10 : 30}>
+          <div className={styles.modalWrapper}>
+            <Image className={styles.photo} src={review.photos[0].image} />
 
-          <Scroller className={styles.contentModal} space={30}>
-            <div className={styles.head}>
-              <div className={styles.name}>{review.author}</div>
-              <div className={styles.date}>{review.created_at}</div>
-            </div>
+            {isDesktop ? (
+              <div>
+                <div className={styles.head}>
+                  <div className={styles.name}>{review.author}</div>
+                  <div className={styles.date}>{review.created_at}</div>
+                </div>
 
-            <div className={styles.criterias}>
-              <div className={styles.criteria}>
-                <div className={styles.criteriaName}>Товар</div>
-                <Rating className={styles.criteriaRating} value={review.rating} />
+                <div className={styles.criterias}>
+                  <div className={styles.criteria}>
+                    <div className={styles.criteriaName}>Товар</div>
+                    <Rating className={styles.criteriaRating} value={review.rating} />
+                  </div>
+
+                  <div className={styles.criteria}>
+                    <div className={styles.criteriaName}>Сервис</div>
+                    <Rating className={styles.criteriaRating} value={review.rating} />
+                  </div>
+                </div>
+
+                <div className={styles.text}>{review.text}</div>
               </div>
+            ) : (
+              <Scroller className={styles.infoScroller} space={30}>
+                <div className={styles.head}>
+                  <div className={styles.name}>{review.author}</div>
+                  <div className={styles.date}>{review.created_at}</div>
+                </div>
 
-              <div className={styles.criteria}>
-                <div className={styles.criteriaName}>Сервис</div>
-                <Rating className={styles.criteriaRating} value={review.rating} />
-              </div>
-            </div>
+                <div className={styles.criterias}>
+                  <div className={styles.criteria}>
+                    <div className={styles.criteriaName}>Товар</div>
+                    <Rating className={styles.criteriaRating} value={review.rating} />
+                  </div>
 
-            <div className={styles.text}>{review.text}</div>
-          </Scroller>
-        </div>
+                  <div className={styles.criteria}>
+                    <div className={styles.criteriaName}>Сервис</div>
+                    <Rating className={styles.criteriaRating} value={review.rating} />
+                  </div>
+                </div>
+
+                <div className={styles.text}>{review.text}</div>
+              </Scroller>
+            )}
+          </div>
+        </Scroller>
       ) : (
         <div>
           <div className={styles.head}>
