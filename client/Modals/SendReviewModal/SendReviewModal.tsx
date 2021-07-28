@@ -2,6 +2,7 @@ import React, { useCallback, memo, FC } from 'react';
 import cn from 'classnames';
 import { useQueryClient } from 'react-query';
 
+import IconClose from '@UI/IconClose';
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
@@ -43,7 +44,7 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
       <div className={styles.container}>
         <div className={styles.wrapperTitle}>
           <div className={styles.title}>Мой отзыв</div>
-          <div className={styles.iconClose} onClick={handleClose} />
+          <IconClose onClick={handleClose} />
         </div>
         <div className={styles.productName}>{`${product.type} ${product.name}`}</div>
 

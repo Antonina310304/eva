@@ -4,7 +4,7 @@ import cn from 'classnames';
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
-
+import IconClose from '@UI/IconClose';
 import styles from './InfoModal.module.css';
 
 export interface InfoModalProps {
@@ -27,7 +27,14 @@ const InfoModal: FC<InfoModalProps> = (props) => {
       visible={modal.visible}
       onClose={handleClose}
     >
-      <div className={styles.container}>
+      <div className={cn(styles.container, { [styles.neutral]: !modal.data.view })}>
+        <IconClose className={styles.iconClose} onClick={handleClose} />
+        <div
+          className={cn(styles.icon, {
+            [styles.success]: modal.data.view === 'success',
+            [styles.error]: modal.data.view === 'error',
+          })}
+        />
         <div className={styles.title}>{modal.data.title}</div>
         <div className={styles.text}>{modal.data.text}</div>
       </div>
