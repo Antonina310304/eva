@@ -76,6 +76,7 @@ export interface Module {
   maxQuantity: number;
   minQuantity: number;
   modelId: number;
+  name: string;
 }
 
 export interface Documents {

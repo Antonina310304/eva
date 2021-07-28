@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useRef, useMemo } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useRef, useMemo, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
@@ -13,9 +13,9 @@ export type SelectCallback = (e: MouseEvent, item: SampleOptionProps) => void;
 export interface SampleOptionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   id: string;
-  image: string;
-  name: string;
-  active: boolean;
+  image?: string;
+  name?: string;
+  active?: boolean;
   price?: number;
   href?: string;
   onClickOption?: SelectCallback;

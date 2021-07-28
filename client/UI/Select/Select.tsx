@@ -7,7 +7,6 @@ import React, {
   useRef,
   useEffect,
   ReactElement,
-  cloneElement,
   useMemo,
 } from 'react';
 import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
@@ -36,9 +35,10 @@ export interface SelectItemData {
   price?: number;
   selected?: boolean;
   data?: unknown;
+  active?: boolean;
 }
 
-export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
+export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultChecked'> {
   className?: string;
   mode?: 'single' | 'single-required' | 'multiple';
   disabled?: boolean;

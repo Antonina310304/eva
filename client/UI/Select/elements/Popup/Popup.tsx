@@ -1,6 +1,5 @@
 import React, {
   FC,
-  ReactChild,
   memo,
   cloneElement,
   useCallback,
@@ -9,6 +8,7 @@ import React, {
   useEffect,
   useRef,
   ReactElement,
+  HTMLAttributes,
 } from 'react';
 import cn from 'classnames';
 
@@ -19,7 +19,7 @@ import Scroller from '@UI/Scroller';
 import { SelectItemData } from '@UI/Select';
 import styles from './Popup.module.css';
 
-export interface PopupProps {
+export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   opened?: boolean;
   wide?: boolean;
