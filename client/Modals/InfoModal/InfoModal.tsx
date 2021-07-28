@@ -28,7 +28,7 @@ const InfoModal: FC<InfoModalProps> = (props) => {
       onClose={handleClose}
     >
       <div className={cn(styles.container, { [styles.neutral]: !modal.data.view })}>
-        <IconClose className={styles.iconClose} />
+        <IconClose className={styles.iconClose} onClick={handleClose} />
         <div
           className={cn(styles.icon, {
             [styles.success]: modal.data.view === 'success',
