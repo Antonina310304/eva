@@ -40,16 +40,6 @@
   color: var(--color-dark-gray);
 }
 
-.iconClose {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('./close.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-}
-
 @media (--mobile) {
   .container {
     width: 100%;

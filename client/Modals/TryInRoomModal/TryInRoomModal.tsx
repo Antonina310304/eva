@@ -2,6 +2,7 @@ import React, { useCallback, memo, FC } from 'react';
 import QRCode from 'qrcode.react';
 import cn from 'classnames';
 
+import IconClose from '@UI/IconClose';
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
@@ -31,7 +32,7 @@ const TryInRoomModal: FC<TryInRoomModalProps> = (props) => {
       <div className={styles.container}>
         <div className={styles.head}>
           <h2 className={styles.title}>Примерить в комнате</h2>
-          <div className={styles.iconClose} onClick={handleClose} />
+          <IconClose onClick={handleClose} />
         </div>
         <div className={styles.description}>
           Наведите камеру телефона на QR-код, чтобы посмотреть на мебель в интерьере с помощью
