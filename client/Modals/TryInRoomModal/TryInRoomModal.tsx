@@ -5,14 +5,14 @@ import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 
-import styles from './QrCodeModal.module.css';
+import styles from './TryInRoomModal.module.css';
 
-export interface QrCodeModalProps {
+export interface TryInRoomModalProps {
   className?: string;
   modal: IModal;
 }
 
-const QrCodeModal: FC<QrCodeModalProps> = (props) => {
+const TryInRoomModal: FC<TryInRoomModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeAllModals }] = useModals();
 
@@ -34,4 +34,4 @@ const QrCodeModal: FC<QrCodeModalProps> = (props) => {
   );
 };
 
-export default memo(QrCodeModal);
+export default memo(TryInRoomModal);
