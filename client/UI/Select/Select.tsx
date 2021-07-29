@@ -31,11 +31,11 @@ export interface SelectItemData {
   title: string;
   href?: string;
   image?: string;
-  name?: string;
+  name: string;
   price?: number;
-  selected?: boolean;
   data?: unknown;
   active?: boolean;
+  selected?: boolean;
 }
 
 export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultChecked'> {
@@ -46,11 +46,10 @@ export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'def
   wide?: boolean;
   name?: string;
   title?: string;
-  countVisible?: number;
   defaultChecked?: SelectItemData | SelectItemData[];
   items?: SelectItemData[];
   waiting?: boolean;
-  renderItem?: (props: SelectItemData, active: boolean) => ReactElement;
+  renderItem?: (props: SelectItemData) => ReactElement;
   onClick?: (e: MouseEvent) => void;
   onOpen?: (e: MouseEvent) => void;
   onClose?: (e: MouseEvent) => void;
@@ -61,7 +60,7 @@ export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'def
 
 const Select: FC<SelectProps> = (props: SelectProps) => {
   const {
-    mode,
+    mode = 'single',
     disabled,
     portal,
     title,

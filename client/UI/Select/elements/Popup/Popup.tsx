@@ -30,7 +30,7 @@ export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
   isMobile: boolean;
   items?: SelectItemData[];
   checked: SelectItemData[];
-  renderItem?: (props: SelectItemData, active: boolean) => ReactElement;
+  renderItem?: (props: SelectItemData) => ReactElement;
   onClickField?: (e: MouseEvent) => void;
   onCheckItem?: (e: MouseEvent, item: any) => void;
   onUncheckItem?: (e: MouseEvent, item: any) => void;
@@ -103,10 +103,8 @@ const Popup: FC<PopupProps> = (props) => {
           <Scroller className={styles.scroll} space={10} invisible={isMobile}>
             <div className={styles.options} ref={refOptions}>
               {items.map((item) => {
-                const active = checked.some((option) =>
-                  option.id ? option.id === item.id : item.selected,
-                );
-                const option = renderItem(item, active);
+                const selected = checked.some((option) => option.id === item.id);
+                const option = renderItem({ ...item, selected });
 
                 return cloneElement(option, {
                   ...option.props,

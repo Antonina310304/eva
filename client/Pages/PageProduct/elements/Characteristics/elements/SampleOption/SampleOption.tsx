@@ -14,8 +14,8 @@ export interface SampleOptionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   id: string;
   image?: string;
-  name?: string;
-  active?: boolean;
+  name: string;
+  selected?: boolean;
   price?: number;
   href?: string;
   onClickOption?: SelectCallback;
@@ -29,7 +29,7 @@ const SampleOption: FC<SampleOptionProps> = (props) => {
     image,
     name,
     price,
-    active,
+    selected,
     id,
     href,
     onClickOption,
@@ -37,17 +37,17 @@ const SampleOption: FC<SampleOptionProps> = (props) => {
     onUncheck,
     ...restProps
   } = props;
-  const item = useRef({ image, name, price, id, active, href });
+  const item = useRef({ image, name, price, id, selected, href });
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
       if (!item.current) return;
 
       if (onClickOption) onClickOption(e, item.current);
-      if (onCheck && !active) onCheck(e, item.current);
-      if (onUncheck && active) onUncheck(e, item.current);
+      if (onCheck && !selected) onCheck(e, item.current);
+      if (onUncheck && selected) onUncheck(e, item.current);
     },
-    [active, item, onCheck, onClickOption, onUncheck],
+    [onCheck, onClickOption, onUncheck, selected],
   );
 
   const content = useMemo(() => {
@@ -56,15 +56,15 @@ const SampleOption: FC<SampleOptionProps> = (props) => {
         {image && <Image className={styles.sample} src={image} />}
         <div className={styles.name}>{name}</div>
         {price && <Price price={price} className={styles.price} />}
-        <Image src={checkIcon} className={cn(styles.checkIcon, { [styles.active]: active })} />
+        <Image src={checkIcon} className={cn(styles.checkIcon, { [styles.selected]: selected })} />
       </>
     );
-  }, [active, image, name, price]);
+  }, [image, name, price, selected]);
 
   return (
     <div
       {...restProps}
-      className={cn(styles.option, { [styles.active]: active }, className)}
+      className={cn(styles.option, { [styles.selected]: selected }, className)}
       onClick={handleClick}
     >
       {href ? (

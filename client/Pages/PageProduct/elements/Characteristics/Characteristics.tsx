@@ -3,14 +3,14 @@ import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
-import Select from '@UI/Select';
+import Select, { SelectItemData } from '@UI/Select';
 import Dimension from './elements/Dimension';
 import Document from './elements/Document';
 import Hardness from './elements/Hardness';
 import SynchronousSchemes from './elements/SynchronousSchemes';
 import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
-import SampleOption, { SampleOptionProps } from './elements/SampleOption';
+import SampleOption from './elements/SampleOption';
 import ModuleCounter from './elements/ModuleCounter';
 import SampleParameter from './elements/SampleParameter';
 import styles from './Characteristics.module.css';
@@ -44,7 +44,7 @@ export interface Variant {
   theme: string;
   selected: boolean;
   url?: string;
-  price?: string;
+  price?: number;
 }
 
 export interface Parameter {
@@ -182,10 +182,12 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
               className={styles.selects}
               items={parametersDropdown}
               renderChild={(dropdown: Parameter) => {
-                const options: any[] = [];
+                const options: SelectItemData[] = [];
                 dropdown.variants.forEach((variant) => {
+                  const id = variant.id ? variant.id : variant.productId;
+
                   options.push({
-                    id: variant.id ? variant.id : variant.productId,
+                    id: id.toString(),
                     title: variant.name,
                     name: variant.name,
                     image: variant.image,
@@ -202,14 +204,8 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
                     defaultChecked={options.find((option) => option.selected)}
                     items={options}
                     wide
-                    renderItem={(option: SampleOptionProps, active) => {
-                      return (
-                        <SampleOption
-                          {...option}
-                          className={cn(styles.option, { [styles.active]: active })}
-                          active={active}
-                        />
-                      );
+                    renderItem={(itemProps: SelectItemData) => {
+                      return <SampleOption {...itemProps} className={cn(styles.option)} />;
                     }}
                   />
                 );

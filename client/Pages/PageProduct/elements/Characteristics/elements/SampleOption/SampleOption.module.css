@@ -6,7 +6,7 @@
 
   transition: background-color 0.2s ease-in-out;
 
-  &.active {
+  &.selected {
     .sample:before {
       border-color: var(--color-dark-gray);
     }
@@ -27,6 +27,8 @@
 
 .sample {
   position: relative;
+
+  flex-shrink: 0;
 
   width: 100px;
   height: 100px;
@@ -81,7 +83,7 @@
 
   transition: opacity 0.2s;
 
-  &.active {
+  &.selected {
     opacity: 1;
   }
 }
