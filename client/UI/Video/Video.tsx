@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import cn from 'classnames';
 import useMedias from '@Hooks/useMedias';
 
-import './Video.css';
+import styles from './Video.module.css';
 
 export interface VideoProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -16,8 +16,6 @@ export interface VideoProps extends HTMLAttributes<HTMLDivElement> {
   playOnHover?: boolean;
   loop?: boolean;
 }
-
-const b = cn('Video');
 
 const Video: FC<VideoProps> = (props) => {
   const {
@@ -68,13 +66,13 @@ const Video: FC<VideoProps> = (props) => {
     <div {...restProps} className={cn({}, [className])} ref={ref}>
       {inView && (
         <div
-          className={b('Helper')}
+          className={styles.helper}
           ref={refVideo}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <video
-            className={b('Player')}
+            className={styles.player}
             autoPlay={autoPlay}
             controls={controls}
             src={src}

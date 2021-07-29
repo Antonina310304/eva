@@ -15,7 +15,7 @@ export interface FeatureItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => {
-  const { openModal } = useModals();
+  const [, { openModal }] = useModals();
   const isMobile = useMedias('--mobile');
 
   const onClick = useCallback(() => {
@@ -25,7 +25,7 @@ const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => 
   }, [openModal, feature]);
 
   return (
-    <div {...props} className={cn({}, [className])}>
+    <div {...props} className={cn(styles.featuresItem, [className])}>
       <div className={cn(styles.imgWrapper, { [styles.viewVideo]: !!feature.fileVideo })}>
         {feature.image && (
           <Image
@@ -44,8 +44,10 @@ const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => 
           </div>
         )}
       </div>
-      <div className={styles.name}>{feature.name}</div>
-      <div className={styles.description}>{feature.description}</div>
+      <div className={styles.textWrapper}>
+        <div className={styles.name}>{feature.name}</div>
+        <div className={styles.description}>{feature.description}</div>
+      </div>
     </div>
   );
 };

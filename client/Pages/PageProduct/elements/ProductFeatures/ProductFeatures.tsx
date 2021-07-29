@@ -5,20 +5,25 @@ import FeatureItem from '../FeatureItem';
 
 import styles from './ProductFeatures.module.css';
 
+export interface Features {
+  description: string;
+  fileVideo: string;
+  image: string;
+  name: string;
+  youtubeVideo: string;
+}
 export interface ProductFeaturesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  features: any;
+  features: Features;
 }
 
 const ProductFeatures: FC<ProductFeaturesProps> = (props) => {
   const { className, features, ...restProps } = props;
 
   return (
-    <div {...restProps} className={cn({}, className)}>
+    <div {...restProps} className={cn(styles.wrapper, [className])}>
       {features.map((feature, index) => (
-        <div key={index}>
-          <FeatureItem feature={feature} />
-        </div>
+        <FeatureItem feature={feature} key={index} />
       ))}
     </div>
   );
