@@ -27,6 +27,8 @@
 .back {
   display: flex;
 
+  cursor: pointer;
+
   & span {
     margin-left: var(--space-xs);
   }
@@ -48,6 +50,7 @@
   background-image: url('./close.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 .review {

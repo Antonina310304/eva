@@ -1,9 +1,11 @@
 import React, { memo, FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
+import { HashRouter, useHistory } from 'react-router-dom';
 
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import Review from '@Components/Review';
+import Link from '@UI/Link';
 import useModals from '@Hooks/useModals';
 import { ReviewData } from '@Types/Review';
 
@@ -18,6 +20,7 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeAllModals }] = useModals();
   const { reviews, selectedReview } = modal.data;
+  const history = useHistory();
 
   const [slide, setSlide] = useState<ReviewData>(
     reviews.find((item: ReviewData) => item.id === selectedReview.id),
@@ -32,9 +35,32 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
     }, []);
   }, [reviews]);
 
+  const nextId = useMemo(() => {
+    const position = photos.findIndex((item) => item.id === slide.id);
+    let res;
+    if (position !== photos.length - 1) {
+      res = photos[position + 1].id;
+    } else {
+      res = photos[0].id;
+    }
+    return res;
+  }, [photos, slide.id]);
+
+  const prevId = useMemo(() => {
+    const position = photos.findIndex((item) => item.id === slide.id);
+    let res;
+    if (position === 0) {
+      res = photos[photos.length - 1].id;
+    } else {
+      res = photos[position - 1].id;
+    }
+    return res;
+  }, [photos, slide.id]);
+
   const handleClose = useCallback(() => {
+    history.push(history.location.pathname);
     closeAllModals();
-  }, [closeAllModals]);
+  }, [closeAllModals, history]);
 
   const handlePrev = useCallback(() => {
     const position = photos.findIndex((item) => item.id === slide.id);
@@ -57,37 +83,49 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   }, [photos, slide.id]);
 
   return (
-    <Modal
-      className={cn(styles.reviewModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
-      onClose={handleClose}
-    >
-      {modal.data && (
-        <div className={styles.modalView}>
-          <div className={cn(styles.arrowBackground, { [styles.prev]: true })} onClick={handlePrev}>
-            <div className={styles.arrow} />
-          </div>
+    <HashRouter basename={history.location.pathname} hashType='noslash'>
+      <Modal
+        className={cn(styles.reviewModal, [className])}
+        id={modal.id}
+        visible={modal.visible}
+        onClose={handleClose}
+      >
+        {modal.data && (
+          <div className={styles.modalView}>
+            <Link to={`review-${prevId}`}>
+              <div
+                className={cn(styles.arrowBackground, { [styles.prev]: true })}
+                onClick={handlePrev}
+              >
+                <div className={styles.arrow} />
+              </div>
+            </Link>
 
-          <div className={styles.container}>
-            <div className={styles.header}>
-              <div className={styles.back}>
-                <div className={styles.iconBack} />
-                <span>Назад</span>
+            <div className={styles.container}>
+              <div className={styles.header}>
+                <div className={styles.back}>
+                  <div className={styles.iconBack} />
+                  <span>Назад</span>
+                </div>
+
+                <div className={styles.iconClose} onClick={handleClose} />
               </div>
 
-              <div className={styles.iconClose} onClick={handleClose} />
+              <Review className={styles.review} modalView review={slide} />
             </div>
 
-            <Review className={styles.review} modalView review={slide} />
+            <Link to={`review-${nextId}`}>
+              <div
+                className={cn(styles.arrowBackground, { [styles.next]: true })}
+                onClick={handleNext}
+              >
+                <div className={styles.arrow} />
+              </div>
+            </Link>
           </div>
-
-          <div className={cn(styles.arrowBackground, { [styles.next]: true })} onClick={handleNext}>
-            <div className={styles.arrow} />
-          </div>
-        </div>
-      )}
-    </Modal>
+        )}
+      </Modal>
+    </HashRouter>
   );
 };
 

@@ -1,5 +1,6 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo, useEffect } from 'react';
 import cn from 'classnames';
+import { useHistory, HashRouter } from 'react-router-dom';
 
 import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
@@ -7,6 +8,7 @@ import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import Rating from '@UI/Rating';
 import Button from '@UI/Button';
+import Link from '@UI/Link';
 import useModals from '@Hooks/useModals';
 import { ReviewData, ReviewPhotoData } from '@Types/Review';
 import styles from './ReviewsSection.module.css';
@@ -21,6 +23,8 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
+
+  const history = useHistory();
 
   const photos = useMemo((): ReviewPhotoData[] => {
     return reviews.reduce((prevReviews, review) => [...prevReviews, ...review.photos], []);
@@ -70,48 +74,60 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     [openModal, reviews],
   );
 
+  useEffect(() => {
+    if (history.location.hash) {
+      handleClickReviewImage(
+        reviews.find((item: ReviewData) => item.id === Number(history.location.hash.split('-')[1])),
+      );
+    }
+  }, [handleClickReviewImage, history, reviews]);
+
   return (
-    <Section
-      {...restProps}
-      className={cn(styles.section, className)}
-      title={
-        <div className={styles.wrapperTitle}>
-          <h2 className={styles.title}>{`Отзывы (${reviews.length})`}</h2>
-          <Rating className={styles.rating} size='m' value={averageRating} scored />
+    <HashRouter basename={history.location.pathname} hashType='noslash'>
+      <Section
+        {...restProps}
+        className={cn(styles.section, className)}
+        title={
+          <div className={styles.wrapperTitle}>
+            <h2 className={styles.title}>{`Отзывы (${reviews.length})`}</h2>
+            <Rating className={styles.rating} size='m' value={averageRating} scored />
+          </div>
+        }
+        hasArrows={track && track.width < 100}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      >
+        <div className={styles.wrapperGallery}>
+          <Gallery
+            className={styles.gallery}
+            cnViewport={styles.galleryViewport}
+            slideIndex={slide}
+            onChangeCurrent={handleChangeCurrent}
+            onChangeProgress={handleChangeProgress}
+          >
+            {photos.map((photo) => (
+              <div className={styles.linkWrapper} key={photo.id}>
+                <Link to={`review-${photo.id}`} className={styles.item} view='simple'>
+                  <Image
+                    className={styles.photo}
+                    src={photo.image}
+                    onClick={() => handleClickReviewImage(photo)}
+                  />
+                </Link>
+              </div>
+            ))}
+          </Gallery>
+
+          <ProgressBar track={track} />
         </div>
-      }
-      hasArrows={track && track.width < 100}
-      onPrev={handlePrev}
-      onNext={handleNext}
-    >
-      <div className={styles.wrapperGallery}>
-        <Gallery
-          className={styles.gallery}
-          cnViewport={styles.galleryViewport}
-          slideIndex={slide}
-          onChangeCurrent={handleChangeCurrent}
-          onChangeProgress={handleChangeProgress}
-        >
-          {photos.map((photo) => (
-            <div className={styles.item} key={photo.id}>
-              <Image
-                className={styles.photo}
-                src={photo.image}
-                onClick={() => handleClickReviewImage(photo)}
-              />
-            </div>
-          ))}
-        </Gallery>
 
-        <ProgressBar track={track} />
-      </div>
-
-      <div className={styles.wrapperButton}>
-        <Button className={styles.button} wide theme='blank'>
-          Оставить отзыв
-        </Button>
-      </div>
-    </Section>
+        <div className={styles.wrapperButton}>
+          <Button className={styles.button} wide theme='blank'>
+            Оставить отзыв
+          </Button>
+        </div>
+      </Section>
+    </HashRouter>
   );
 };
 
