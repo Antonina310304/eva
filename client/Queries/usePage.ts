@@ -31,6 +31,7 @@ export interface UsePageResult {
   parameters: any;
   importantInfo: any;
   documents: any;
+  modules: any[];
 }
 
 const usePage = (params: Params): UseQueryResult<UsePageResult> => {

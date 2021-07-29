@@ -1,0 +1,16 @@
+.popoverInfo {
+  display: none;
+  padding: var(--space-s);
+
+  background: var(--color-white);
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  &.visible {
+    display: block;
+  }
+}
+
+.p {
+  composes: xs from 'sizes';
+}

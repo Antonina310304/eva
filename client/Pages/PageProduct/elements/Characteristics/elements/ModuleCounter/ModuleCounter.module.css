@@ -1,0 +1,7 @@
+.parameter {
+  composes: n from 'sizes';
+}
+
+.name {
+  font-weight: 500;
+}
