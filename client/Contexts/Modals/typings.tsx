@@ -1,4 +1,4 @@
-export type ModalId = 'Info' | 'Filters' | 'Fullscreen360';
+export type ModalId = 'Info' | 'Filters' | 'Fullscreen360' | 'ClientsPhotos';
 
 export interface Modal {
   id: ModalId;
