@@ -1,4 +1,4 @@
-import React, { FC, ReactChild, memo } from 'react';
+import React, { FC, ReactNode, memo } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 import cn from 'classnames';
 
@@ -6,13 +6,12 @@ import styles from './Scroller.module.css';
 
 export interface ScrollerProps {
   className?: string;
-  space?: number;
   invisible?: boolean;
-  children: ReactChild | ReactChild[];
+  children: ReactNode | ReactNode[];
 }
 
 const Scroller: FC<ScrollerProps> = (props) => {
-  const { className, children, space = 0, invisible, ...restProps } = props;
+  const { className, children, invisible, ...restProps } = props;
 
   return (
     <Scrollbar
@@ -45,7 +44,7 @@ const Scroller: FC<ScrollerProps> = (props) => {
               {...restScrollbarProps}
               ref={elementRef}
               className={styles.content}
-              style={{ paddingRight: `${space + 3}px` }}
+              style={{ paddingRight: '15px' }}
             />
           );
         },

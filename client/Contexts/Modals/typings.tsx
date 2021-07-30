@@ -4,7 +4,8 @@ export type ModalId =
   | 'TryInRoom'
   | 'ProductSlider'
   | 'Fullscreen360'
-  | 'SendReview';
+  | 'SendReview'
+  | 'BuyInCredit';
 
 export interface Modal {
   id: ModalId;

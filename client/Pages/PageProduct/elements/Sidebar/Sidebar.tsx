@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import loadable from '@loadable/component';
 import cn from 'classnames';
 
@@ -11,6 +11,7 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useMeta from '@Queries/useMeta';
+import useModals from '@Hooks/useModals';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
 import styles from './Sidebar.module.css';
@@ -38,6 +39,11 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, ...restProps } = props;
   const meta = useMeta({ ssr: true });
+  const [, { openModal }] = useModals();
+
+  const handleClickCredit = useCallback(() => {
+    openModal('BuyInCredit', { productId: page.product.id });
+  }, [openModal, page]);
 
   if (!meta.isSuccess) return null;
 
@@ -82,7 +88,9 @@ const Sidebar: FC<SidebarProps> = (props) => {
             </div>
           </div>
 
-          <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+          {meta.data.country === 'RUS' && (
+            <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+          )}
 
           {meta.data.country === 'RUS' && (
             <Button className={styles.priceReduction} theme='linkSecondary'>
@@ -118,6 +126,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
               label: 'Купить в кредит без переплаты',
+              onClick: handleClickCredit,
             },
             {
               icon: <div className={cn(styles.icon, styles.attention)} />,

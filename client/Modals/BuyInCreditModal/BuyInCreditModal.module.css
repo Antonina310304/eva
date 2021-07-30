@@ -1,0 +1,98 @@
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 522px;
+  padding: var(--space-xxl) var(--space-xxb) var(--space-xxl);
+
+  background: var(--color-white);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  composes: xxl from 'sizes';
+
+  margin: 0;
+
+  font-weight: 500;
+}
+
+.iconClose {
+  flex-shrink: 0;
+  margin-left: 15px;
+}
+
+.content {
+  height: calc(100% - 120px);
+  margin-top: var(--space-xxl);
+}
+
+.bankLogo {
+  margin-top: var(--space-xxl);
+}
+
+.numbers {
+  margin-top: var(--space-xxl);
+}
+
+.variants {
+  margin-top: var(--space-xl);
+}
+
+.description {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-l);
+}
+
+.hint {
+  composes: xs from 'sizes';
+
+  margin-top: var(--space-s);
+
+  color: var(--color-dark-gray);
+}
+
+.button {
+  margin-top: var(--space-xxl);
+}
+
+.price {
+  margin-left: var(--space-xxs);
+}
+
+@media (--desktop) {
+  .container {
+    padding: var(--space-xxl);
+  }
+
+  .title {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
+  }
+}
+
+@media (--mobile) {
+  .container {
+    position: relative;
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-n) var(--space-s) var(--space-l);
+  }
+
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+}

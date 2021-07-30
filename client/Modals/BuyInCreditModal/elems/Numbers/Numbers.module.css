@@ -1,0 +1,33 @@
+.numbers {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  margin-right: var(--space-m);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.before,
+.after {
+  font-size: var(--size-b);
+  line-height: 1;
+}
+
+.before {
+  margin-right: var(--space-xxs);
+}
+
+.after {
+  margin-left: var(--space-xxs);
+}
+
+.value {
+  font-size: 75px;
+  line-height: 1;
+}

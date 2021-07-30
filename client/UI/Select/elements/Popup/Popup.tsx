@@ -100,7 +100,7 @@ const Popup: FC<PopupProps> = (props) => {
       </div>
       <Collapse collapsed={!opened}>
         <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
-          <Scroller className={styles.scroll} space={10} invisible={isMobile}>
+          <Scroller className={styles.scroll} invisible={isMobile}>
             <div className={styles.options} ref={refOptions}>
               {items.map((item) => {
                 const selected = checked.some((option) => option.id === item.id);
