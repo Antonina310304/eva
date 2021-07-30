@@ -156,8 +156,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
       </MainGrid>
 
-      {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
+      {['matrasy', 'krovati'].includes(page.data.categoryTranslite) &&
+      meta.data.country === 'RUS' ? (
         <ChooseMattressBanner
+          className={styles.mattressesBanner}
           categoryColor={product.categoryColor}
           title='Подбери лучший!'
           action={{
@@ -170,9 +172,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
           <br />
           {` какие матрасы подойдут именно для тебя.`}
         </ChooseMattressBanner>
+      ) : (
+        <div className={styles.separator} />
       )}
-
-      <div className={styles.separator} />
 
       <div className={styles.wrapperAdditional}>
         {crossSalesProducts.products?.length > 0 && (
@@ -226,7 +228,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (
-          <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
+          <ComfortBuy
+            className={styles.comfortBuy}
+            heading={fakeData.heading}
+            items={fakeData.advantages}
+          />
         )}
 
         {sameProducts.products?.length > 0 && (
