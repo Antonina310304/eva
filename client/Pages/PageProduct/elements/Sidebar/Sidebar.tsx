@@ -88,7 +88,9 @@ const Sidebar: FC<SidebarProps> = (props) => {
             </div>
           </div>
 
-          <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+          {meta.data.country === 'RUS' && (
+            <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+          )}
 
           {meta.data.country === 'RUS' && (
             <Button className={styles.priceReduction} theme='linkSecondary'>
