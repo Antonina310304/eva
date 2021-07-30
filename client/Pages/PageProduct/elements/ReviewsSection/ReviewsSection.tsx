@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo, useEffect } from 'react';
 import cn from 'classnames';
-import { useHistory, HashRouter } from 'react-router-dom';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
@@ -24,8 +23,6 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
-
-  const history = useHistory();
 
   const photos = useMemo((): ReviewPhotoData[] => {
     return reviews.reduce((prevReviews, review) => [...prevReviews, ...review.photos], []);
@@ -70,9 +67,9 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   }, [normalizeSlide, track]);
 
   const handleClickReviewImage = useCallback(
-    (photo) => {
+    (selectedPhoto) => {
       openModal('Review', {
-        selectedReview: photo,
+        selectedPhoto,
         reviews,
       });
     },
@@ -80,12 +77,12 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   );
 
   useEffect(() => {
-    if (history.location.hash) {
+    if (window.location.hash) {
       handleClickReviewImage(
-        reviews.find((item: ReviewData) => item.id === Number(history.location.hash.split('-')[1])),
+        reviews.find((item: ReviewData) => item.id === Number(window.location.hash.split('-')[1])),
       );
     }
-  }, [handleClickReviewImage, history, reviews]);
+  }, [handleClickReviewImage, reviews]);
 
   const addReviewButton = (
     <Button className={styles.button} wide theme='blank' onClick={onAddReview}>
@@ -137,7 +134,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
             >
               {photos.map((photo) => (
                 <div className={styles.linkWrapper} key={photo.id}>
-                  <Link to={`review-${photo.id}`} className={styles.item} view='simple'>
+                  <Link to={`#review-${photo.id}`} className={styles.item} view='simple'>
                     <Image
                       className={styles.photo}
                       src={photo.image}

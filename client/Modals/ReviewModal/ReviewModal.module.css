@@ -43,16 +43,6 @@
   background-size: contain;
 }
 
-.iconClose {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('./close.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-}
-
 .review {
   margin-top: var(--space-n);
 }
