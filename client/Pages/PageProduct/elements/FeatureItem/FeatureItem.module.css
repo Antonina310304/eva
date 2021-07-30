@@ -17,6 +17,13 @@
   overflow: hidden;
 }
 
+.imgWrapper:before {
+  display: block;
+  padding: 0 0 66.6666666666667%;
+
+  content: '';
+}
+
 .image {
   position: absolute;
   top: 0;
