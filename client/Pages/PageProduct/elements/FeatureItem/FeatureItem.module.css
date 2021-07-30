@@ -85,7 +85,7 @@
   line-height: var(--size-xl);
 }
 
-/* .video {
+.video {
   position: absolute;
   top: 0;
   right: 0;
@@ -96,7 +96,7 @@
 .video:hover .video + .iconPlay {
   visibility: hidden;
   opacity: 0;
-} */
+}
 
 @media (--desktop-m) {
   .featuresItem {

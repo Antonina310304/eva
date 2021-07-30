@@ -1,0 +1,19 @@
+.VideoModal {
+  &-Container {
+    font-size: 0;
+  }
+
+  .Modal-Content {
+    background: transparent;
+  }
+}
+
+@media (--mobile-l) {
+  .VideoModal {
+    .Modal-Close {
+      position: fixed;
+      top: var(--space-m);
+      right: var(--space-s);
+    }
+  }
+}
