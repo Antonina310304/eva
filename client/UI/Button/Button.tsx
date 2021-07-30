@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, memo, ReactChild } from 'react';
+import React, { ButtonHTMLAttributes, FC, memo, ReactChild, isValidElement } from 'react';
 import cn from 'classnames';
 
 import styles from './Button.module.css';
@@ -8,7 +8,8 @@ export interface SizesProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   wide?: boolean;
   before?: ReactChild;
   theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary' | 'linkPrimary' | 'circle';
-  view?: 'main' | 'rounded';
+  view?: 'main' | 'rounded' | 'circle';
+  size?: 'l' | 'm' | 's';
 }
 
 const Button: FC<SizesProps> = (props) => {
@@ -20,8 +21,12 @@ const Button: FC<SizesProps> = (props) => {
     type = 'button',
     theme = 'primary',
     view = 'main',
+    size,
     ...restProps
   } = props;
+  const isText =
+    typeof children === 'string' ||
+    (Array.isArray(children) && children.every((child) => typeof child === 'string'));
 
   return (
     <button
@@ -32,6 +37,7 @@ const Button: FC<SizesProps> = (props) => {
           [styles.wide]: wide,
           [styles.viewMain]: view === 'main',
           [styles.viewRounded]: view === 'rounded',
+          [styles.viewCircle]: view === 'circle',
           [styles.themePrimary]: theme === 'primary',
           [styles.themeSecondary]: theme === 'secondary',
           [styles.themeBlank]: theme === 'blank',
@@ -39,14 +45,17 @@ const Button: FC<SizesProps> = (props) => {
           [styles.themeLinkSecondary]: theme === 'linkSecondary',
           [styles.themeLinkPrimary]: theme === 'linkPrimary',
           [styles.themeCircle]: theme === 'circle',
+          [styles.sizeL]: size === 'l',
+          [styles.sizeM]: size === 'm',
+          [styles.sizeS]: size === 's',
         },
         className,
       )}
       // eslint-disable-next-line react/button-has-type
       type={type}
     >
-      {before && <div className={styles.before}>{before}</div>}
-      {children}
+      {before && <span className={styles.before}>{before}</span>}
+      {isText ? <span className={styles.text}>{children}</span> : children}
     </button>
   );
 };

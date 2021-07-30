@@ -51,6 +51,17 @@
   margin: 0 auto;
 }
 
+.sectionInstagram {
+  margin-top: var(--space-xxe);
+}
+
+.instagramDescription {
+  composes: m from 'sizes';
+
+  width: 100%;
+  max-width: 875px;
+}
+
 .sectionCrossSale {
   padding-top: var(--space-xxl);
 }
@@ -60,7 +71,8 @@
 }
 
 .sectionSimilar,
-.sectionHistory {
+.sectionHistory,
+.sectionDelivery {
   margin-top: var(--space-xxe);
 }
 
@@ -80,12 +92,24 @@
   min-width: 140px;
   max-width: 189px;
   padding: 0 var(--space-xs);
+
+  vertical-align: bottom;
 }
 
-.listReviews {
+.wrapperListReviews {
   composes: main from 'containers';
 
   margin-top: var(--space-b);
+}
+
+.listReviews {
+  padding-top: var(--space-xxl);
+
+  border-top: 1px solid var(--color-medium-gray);
+}
+
+.characteristics {
+  margin-top: var(--space-xxe);
 }
 
 @media (--desktop-m) {
@@ -94,7 +118,8 @@
   }
 
   .sectionSimilar,
-  .sectionHistory {
+  .sectionHistory,
+  .sectionDelivery {
     margin-top: var(--space-e);
   }
 }
@@ -110,7 +135,8 @@
   }
 
   .sectionSimilar,
-  .sectionHistory {
+  .sectionHistory,
+  .sectionDelivery {
     margin-top: var(--space-xb);
   }
 
@@ -122,5 +148,10 @@
 @media (--mobile-m) {
   .wrapperMain {
     margin-bottom: var(--space-xb);
+  }
+
+  .characteristics {
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
   }
 }

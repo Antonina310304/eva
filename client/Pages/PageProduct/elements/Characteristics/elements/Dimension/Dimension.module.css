@@ -1,0 +1,64 @@
+.dimension {
+}
+
+.name {
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-xxs);
+
+  font-weight: 500;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.valueItem {
+  position: relative;
+
+  display: flex;
+  align-items: baseline;
+  min-width: 90px;
+}
+
+.valueName {
+  composes: s from 'sizes';
+
+  margin-right: var(--space-xs);
+}
+
+.valueValue {
+  composes: n from 'sizes';
+
+  white-space: nowrap;
+}
+
+.delimiter {
+  composes: n from 'sizes';
+
+  width: var(--space-n);
+
+  text-align: center;
+}
+
+@media (--mobile-m) {
+  .valueName {
+    display: block;
+    margin: 0 0 var(--space-xxs);
+  }
+
+  .valueItem {
+    flex-direction: column;
+    min-width: 50px;
+  }
+
+  .valueName,
+  .valueValue {
+    width: 100%;
+
+    text-align: center;
+  }
+}

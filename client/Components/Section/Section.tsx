@@ -1,49 +1,37 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent, ReactChild } from 'react';
+import React, { FC, HTMLAttributes, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';
-import Arrows from './elements/Arrows';
 import styles from './Section.module.css';
 
 export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   className?: string;
   title: ReactChild;
-  hasArrows?: boolean;
+  additional?: ReactChild | ReactChild[];
+  additionalBreakup?: boolean;
   priceMin?: number;
-  onPrev?: (e: MouseEvent) => void;
-  onNext?: (e: MouseEvent) => void;
+  description?: ReactChild | ReactChild[];
 }
 
 const Section: FC<SectionProps> = (props) => {
   const {
     className,
     title,
-    hasArrows = true,
+    additional,
+    additionalBreakup,
     priceMin,
+    description,
     children,
-    onPrev,
-    onNext,
     ...restProps
   } = props;
 
-  const handlePrev = useCallback(
-    (e) => {
-      if (onPrev) onPrev(e);
-    },
-    [onPrev],
-  );
-
-  const handleNext = useCallback(
-    (e) => {
-      if (onNext) onNext(e);
-    },
-    [onNext],
-  );
-
   return (
-    <div {...restProps} className={cn(styles.Section, className)}>
+    <div
+      {...restProps}
+      className={cn(styles.section, { [styles.additionalBreakup]: additionalBreakup }, className)}
+    >
       <div className={styles.head}>
-        <div className={styles.titleWrapper}>
+        <div className={styles.headContent}>
           {typeof title === 'string' && <h2 className={styles.title}>{title}</h2>}
           {typeof title === 'object' && <div className={styles.title}>{title}</div>}
 
@@ -53,13 +41,11 @@ const Section: FC<SectionProps> = (props) => {
               <Price price={priceMin} />
             </div>
           )}
+
+          {description && <div className={styles.description}>{description}</div>}
         </div>
 
-        {hasArrows && (
-          <div className={styles.arrows}>
-            <Arrows onPrev={handlePrev} onNext={handleNext} />
-          </div>
-        )}
+        {additional && <div className={styles.additional}>{additional}</div>}
       </div>
 
       <div className={styles.contentn}>{children}</div>

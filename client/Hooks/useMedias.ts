@@ -36,7 +36,15 @@ function matchMedia(query: QueryVariant): MediaQueryList {
 }
 
 export default function useMedias(): Matches {
-  const [matches, setMatches] = useState<Matches>({});
+  const [matches, setMatches] = useState<Matches>({
+    isDesktopL: true,
+    isDesktopM: true,
+    isDesktop: false,
+    isMobileM: false,
+    isMobile: false,
+    isOnlyDesktop: true,
+    isOnlyMobile: false,
+  });
 
   useEffect(() => {
     function handleResze() {

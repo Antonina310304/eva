@@ -43,12 +43,6 @@
   padding-right: var(--space-xe);
 }
 
-.title {
-  composes: l from 'sizes';
-
-  margin-bottom: var(--space-xs);
-}
-
 .photoGallery {
   width: 100%;
   margin: var(--space-n) var(--space-xs-neg) 0;

@@ -1,5 +1,5 @@
 import React, { FC, useCallback, memo } from 'react';
-import cns from 'classnames';
+import cn from 'classnames';
 
 import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
@@ -25,7 +25,7 @@ const Fullscreen360Modal: FC<Fullscreen360ModalProps> = (props) => {
 
   return (
     <Modal
-      className={cns(styles.fullscreen360Modal, className)}
+      className={cn(styles.fullscreen360Modal, className)}
       id={modal.id}
       visible={isVisible(modal.id)}
     >
