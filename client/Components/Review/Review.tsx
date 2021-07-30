@@ -22,7 +22,7 @@ const Review: FC<ReviewProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.review, className)}>
       {modalView ? (
-        <Scroller className={styles.reviewScroller} space={isMobile ? 10 : 30}>
+        <Scroller className={styles.reviewScroller} space={isMobile ? 0 : 30} invisible={isMobile}>
           <div className={styles.modalWrapper}>
             <Image className={styles.photo} src={review.photos[0].image} />
 
@@ -48,7 +48,7 @@ const Review: FC<ReviewProps> = (props) => {
                 <div className={styles.text}>{review.text}</div>
               </div>
             ) : (
-              <Scroller className={styles.infoScroller} space={30}>
+              <Scroller className={styles.infoScroller} space={30} invisible={isMobile}>
                 <div className={styles.head}>
                   <div className={styles.name}>{review.author}</div>
                   <div className={styles.date}>{review.created_at}</div>

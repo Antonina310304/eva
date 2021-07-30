@@ -105,7 +105,7 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
               <div className={styles.header}>
                 <div className={styles.back}>
                   <div className={styles.iconBack} />
-                  <span>Назад</span>
+                  <span className={styles.backText}>Назад</span>
                 </div>
 
                 <div className={styles.iconClose} onClick={handleClose} />
