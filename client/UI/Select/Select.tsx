@@ -365,6 +365,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
   return (
     <div
+      ref={mainRef}
       className={cn(
         styles.select,
         {
