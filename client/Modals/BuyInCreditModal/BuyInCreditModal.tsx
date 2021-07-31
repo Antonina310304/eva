@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
 import { ApiOrder } from '@Api/Order';
@@ -42,6 +42,13 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
   const [banks, setBanks] = useState<InstallmentBank[]>([]);
   const [selectedBank, setSelectedBank] = useState<InstallmentBank>(null);
   const [selectedVariant, setSelectedVariant] = useState<InstallmentVariant>(null);
+
+  const tabs = useMemo(() => {
+    return banks.map((bank) => ({
+      id: bank.id,
+      label: bank.id,
+    }));
+  }, [banks]);
 
   const handleChangeBank = useCallback(
     (_e, tab: Tab) => {
@@ -114,20 +121,16 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
         </div>
 
         <Container className={styles.content} invisible={isMobile}>
-          <ButtonTabs
-            defaultValue={selectedBank.id}
-            tabs={banks.map((bank) => ({
-              id: bank.id,
-              label: bank.id,
-            }))}
-            onChangeTab={handleChangeBank}
-          />
+          {banks.length > 1 && (
+            <ButtonTabs
+              className={styles.tabs}
+              defaultValue={selectedBank.id}
+              tabs={tabs}
+              onChangeTab={handleChangeBank}
+            />
+          )}
 
-          <img
-            className={styles.bankLogo}
-            src={images[selectedBank.id]}
-            alt={`Logo of bank ${selectedBank.id}`}
-          />
+          <img src={images[selectedBank.id]} alt={`Logo of bank ${selectedBank.id}`} />
 
           <Numbers
             className={styles.numbers}
