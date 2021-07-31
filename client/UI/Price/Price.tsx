@@ -1,4 +1,5 @@
 import React, { memo, FC, HTMLAttributes } from 'react';
+import { useParams } from 'react-router';
 import cn from 'classnames';
 import formatPrice from '@divanru/ts-utils/formatPrice';
 
@@ -11,6 +12,10 @@ export interface PriceProps extends HTMLAttributes<HTMLSpanElement> {
   price: number;
 }
 
+export interface RouteParams {
+  region?: string;
+}
+
 const symbols = {
   RUB: '₽',
   BYN: 'руб.',
@@ -18,7 +23,8 @@ const symbols = {
 
 const Price: FC<PriceProps> = (props) => {
   const { className, expired, price } = props;
-  const meta = useMeta({ ssr: true });
+  const { region } = useParams<RouteParams>();
+  const meta = useMeta({ ssr: true, region });
 
   if (!meta.isSuccess) return null;
 

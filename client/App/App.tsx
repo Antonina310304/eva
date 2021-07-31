@@ -39,7 +39,19 @@ const App: FC = () => {
           </TemplateMain>
         </Route>
 
+        <Route exact path='/:region/category/:slug'>
+          <TemplateMain>
+            <PageCategory />
+          </TemplateMain>
+        </Route>
+
         <Route exact path='/product/:slug'>
+          <TemplateMain>
+            <PageProduct />
+          </TemplateMain>
+        </Route>
+
+        <Route exact path='/:region/product/:slug'>
           <TemplateMain>
             <PageProduct />
           </TemplateMain>

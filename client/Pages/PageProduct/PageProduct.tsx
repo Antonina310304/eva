@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, useCallback, memo, useMemo } from 'react';
 import cn from 'classnames';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
@@ -26,7 +26,7 @@ import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
 export interface RouteParams {
-  slug: string;
+  region: string;
 }
 
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
@@ -36,9 +36,10 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { pathname } = useLocation();
+  const { region } = useParams<RouteParams>();
   const [, { openModal }] = useModals();
   const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta({ ssr: true, region });
 
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];
@@ -79,7 +80,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     <div {...restProps} className={cn(styles.page, [className])}>
       <MainGrid
         className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={<Sidebar page={page.data} />}
+        sidebar={<Sidebar page={page.data} meta={meta.data} />}
       >
         <PhotoGallery
           images={mediaGallery}
