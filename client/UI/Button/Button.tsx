@@ -55,7 +55,7 @@ const Button: FC<ButtonProps> = (props) => {
       )}
       // eslint-disable-next-line react/button-has-type
       type={type}
-      style={color ? { backgroundColor: color } : undefined}
+      style={color ? { backgroundColor: color, borderColor: color } : undefined}
     >
       {before && <span className={styles.before}>{before}</span>}
       {isText ? <span className={styles.text}>{children}</span> : children}
