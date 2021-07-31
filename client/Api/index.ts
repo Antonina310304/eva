@@ -1,6 +1,6 @@
 import query from './query';
 import queryProxi from './queryProxi';
-import { getRequest, setRequest } from './settings';
+import * as settings from './settings';
 
-export const Api = { query, queryProxi, getRequest, setRequest };
+export const Api = { query, queryProxi, ...settings };
 export default null;

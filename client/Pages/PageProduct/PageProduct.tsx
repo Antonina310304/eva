@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, useCallback, memo, useMemo } from 'react';
 import cn from 'classnames';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
@@ -25,10 +25,6 @@ import Characteristics from './elements/Characteristics';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
-export interface RouteParams {
-  region: string;
-}
-
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
@@ -36,10 +32,9 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, ...restProps } = props;
   const { pathname } = useLocation();
-  const { region } = useParams<RouteParams>();
   const [, { openModal }] = useModals();
   const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true, region });
+  const meta = useMeta({ ssr: true });
 
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];

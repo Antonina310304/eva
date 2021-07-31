@@ -54,4 +54,7 @@ export interface MetaData {
       url: string;
     };
   };
+  services?: {
+    shipping: string;
+  };
 }

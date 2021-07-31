@@ -36,9 +36,7 @@ export interface UsePageResult {
 
 const usePage = (params: Params): UseQueryResult<UsePageResult> => {
   const { path, ssr } = params;
-  const keys = ['page', path];
-
-  if (ssr) keys.push('ssr');
+  const keys = ['page', ssr && 'ssr', path];
 
   const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
     keepPreviousData: true,
