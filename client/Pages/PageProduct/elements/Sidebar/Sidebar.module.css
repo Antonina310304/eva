@@ -26,6 +26,10 @@
   margin-top: var(--space-l);
 }
 
+.wrapperOutOfStock {
+  margin-top: var(--space-l);
+}
+
 .labelPrice {
   composes: s from 'sizes';
 }

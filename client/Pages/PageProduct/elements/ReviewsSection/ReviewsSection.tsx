@@ -1,22 +1,23 @@
 import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
-import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import Rating from '@UI/Rating';
 import Button from '@UI/Button';
 import { ReviewData, ReviewPhotoData } from '@Types/Review';
+import Arrows from './elements/Arrows';
 import styles from './ReviewsSection.module.css';
 
 export interface ReviewsSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   reviews: ReviewData[];
+  onAddReview?: () => void;
 }
 
 const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
-  const { className, reviews, title, ...restProps } = props;
+  const { className, reviews, title, onAddReview, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -25,10 +26,14 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   }, [reviews]);
 
   const averageRating = useMemo(() => {
+    if (!reviews.length) return 0;
+
     const summRating = reviews.reduce((prevRating, review) => prevRating + review.rating, 0);
 
     return Number((summRating / reviews.length).toFixed(1));
   }, [reviews]);
+
+  const hasPhotos = photos.length > 0;
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -58,44 +63,68 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
+  const addReviewButton = (
+    <Button className={styles.button} wide theme='blank' onClick={onAddReview}>
+      Оставить отзыв
+    </Button>
+  );
+
   return (
-    <Section
+    <div
       {...restProps}
-      className={cn(styles.section, className)}
-      title={
-        <div className={styles.wrapperTitle}>
-          <h2 className={styles.title}>{`Отзывы (${reviews.length})`}</h2>
-          <Rating className={styles.rating} size='m' value={averageRating} scored />
-        </div>
-      }
-      hasArrows={track && track.width < 100}
-      onPrev={handlePrev}
-      onNext={handleNext}
+      className={cn(
+        styles.section,
+        { [styles.hasArrows]: hasPhotos && track?.width < 100 },
+        className,
+      )}
     >
-      <div className={styles.wrapperGallery}>
-        <Gallery
-          className={styles.gallery}
-          cnViewport={styles.galleryViewport}
-          slideIndex={slide}
-          onChangeCurrent={handleChangeCurrent}
-          onChangeProgress={handleChangeProgress}
-        >
-          {photos.map((photo) => (
-            <div className={styles.item} key={photo.id}>
-              <Image className={styles.photo} src={photo.image} />
-            </div>
-          ))}
-        </Gallery>
+      <div className={styles.head}>
+        <div className={styles.headMain}>
+          <h2 className={styles.title}>{`Отзывы (${reviews.length})`}</h2>
+          {averageRating > 0 && (
+            <Rating className={styles.rating} size='m' value={averageRating} scored />
+          )}
+        </div>
 
-        <ProgressBar track={track} />
+        <div className={styles.headAdditional}>
+          {hasPhotos ? (
+            <>
+              {track && track.width < 100 && (
+                <div className={styles.arrows}>
+                  <Arrows onPrev={handlePrev} onNext={handleNext} />
+                </div>
+              )}
+            </>
+          ) : (
+            addReviewButton
+          )}
+        </div>
       </div>
 
-      <div className={styles.wrapperButton}>
-        <Button className={styles.button} wide theme='blank'>
-          Оставить отзыв
-        </Button>
-      </div>
-    </Section>
+      {hasPhotos && (
+        <>
+          <div className={styles.wrapperGallery}>
+            <Gallery
+              className={styles.gallery}
+              cnViewport={styles.galleryViewport}
+              slideIndex={slide}
+              onChangeCurrent={handleChangeCurrent}
+              onChangeProgress={handleChangeProgress}
+            >
+              {photos.map((photo) => (
+                <div className={styles.item} key={photo.id}>
+                  <Image className={styles.photo} src={photo.image} />
+                </div>
+              ))}
+            </Gallery>
+
+            {track?.width < 100 && <ProgressBar className={styles.progressBar} track={track} />}
+          </div>
+
+          <div className={styles.wrapperButton}>{addReviewButton}</div>
+        </>
+      )}
+    </div>
   );
 };
 

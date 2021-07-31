@@ -8,9 +8,18 @@
   border-top: 1px solid var(--color-medium-gray);
 
   &:first-child {
-    margin-top: 0;
     padding-top: 0;
 
     border-top: 0;
   }
+}
+
+.wrapperNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-xxl);
+  padding-top: var(--space-xxl);
+
+  border-top: 1px solid var(--color-medium-gray);
 }

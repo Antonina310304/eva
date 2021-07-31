@@ -1,0 +1,139 @@
+.popup {
+  &.faked {
+    .field {
+      cursor: default;
+    }
+
+    .fieldIcon {
+      display: none;
+    }
+  }
+
+  &.wide {
+    .field {
+      display: flex;
+    }
+
+    .wrapperOptions {
+      right: 0;
+    }
+  }
+
+  &.opened {
+    .checkedValue {
+      display: none;
+    }
+
+    .fieldIcon {
+      transform: rotate(-180deg);
+    }
+
+    .iconArrow {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  max-width: 100%;
+
+  padding: var(--space-xs) var(--space-s);
+
+  cursor: pointer;
+}
+
+.fieldText {
+  overflow: hidden;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fieldIcon {
+  margin-left: var(--space-s);
+
+  transition: transform 0.2s;
+}
+
+.fieldLoader {
+  position: relative;
+
+  width: 25px;
+  margin-left: var(--space-s);
+}
+
+.fieldValue {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 25px);
+}
+
+.wrapperOptions {
+  max-height: 340px;
+  padding: var(--space-xs);
+
+  background: var(--color-white);
+}
+
+.scroll {
+  height: 100%;
+}
+
+.fieldTitle {
+  composes: n from 'sizes';
+
+  font-weight: 500;
+}
+
+.field {
+  &.placeholder {
+    opacity: 0;
+  }
+}
+
+.iconArrow {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+
+  background-position: center;
+  background-size: contain;
+  transform: rotate(0);
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.checkedValue {
+  display: inline;
+}
+
+.wrapperOptions {
+  max-height: 340px;
+  padding: var(--space-xs);
+
+  background: var(--color-white);
+}
+
+@media (--mobile) {
+  .fieldTitle {
+    font-weight: normal;
+  }
+
+  .field {
+    padding: var(--space-n) var(--space-s) 0;
+  }
+
+  .checkedValue {
+    display: none;
+  }
+
+  .wrapperOptions {
+    max-height: 80vh;
+  }
+}

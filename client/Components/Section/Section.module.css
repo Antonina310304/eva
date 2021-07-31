@@ -8,9 +8,8 @@
   justify-content: space-between;
 }
 
-.titleWrapper {
-  display: flex;
-  align-items: baseline;
+.description {
+  margin-top: var(--space-m);
 }
 
 .title {
@@ -25,6 +24,10 @@
   composes: m from 'sizes';
 
   margin-left: var(--space-xs);
+}
+
+.additional {
+  margin-left: var(--space-xxs);
 }
 
 @media (--desktop-m) {
@@ -43,19 +46,22 @@
   .title {
     font-size: var(--size-l);
   }
-
-  .arrows {
-    margin-left: var(--space-xxs);
-  }
 }
 
 @media (--mobile) {
-  .title {
-    font-size: var(--size-l);
+  .section.additionalBreakup {
+    .head {
+      flex-direction: column;
+    }
+
+    .additional {
+      margin-top: var(--space-n);
+      margin-left: 0;
+    }
   }
 
-  .titleWrapper {
-    display: block;
+  .title {
+    font-size: var(--size-l);
   }
 
   .priceMin {

@@ -1,0 +1,41 @@
+.paginator {
+  display: inline-flex;
+}
+
+.item {
+  margin-right: var(--space-xs);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.arrow.left {
+  background-image: url('./arrowLeft.svg');
+}
+.arrow.right {
+  background-image: url('./arrowRight.svg');
+}
+
+@media (--mobile) {
+  .arrow {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 434px) {
+  .arrow {
+    display: none;
+  }
+}

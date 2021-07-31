@@ -1,0 +1,13 @@
+.post {
+}
+
+.image {
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.author {
+  margin-top: var(--space-xs);
+
+  color: var(--color-dark-gray);
+}

@@ -36,7 +36,6 @@ const Review: FC<ReviewProps> = (props) => {
         </div>
 
         <div className={styles.content}>
-          <div className={styles.title}>Заголовок отзыва</div>
           <div className={styles.text}>{review.text}</div>
 
           {review?.photos.length > 0 && (

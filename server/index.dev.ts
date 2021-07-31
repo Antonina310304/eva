@@ -24,6 +24,8 @@ const webCompiler = multiCompiler.compilers.find((compiler) => compiler.name ===
 const nodeCompiler = multiCompiler.compilers.find((compiler) => compiler.name === nodeConfig.name);
 
 const start = async () => {
+  app.disable('x-powered-by');
+
   app.use(publicPath, express.static(paths.dist.web));
   app.use('/react/static', express.static(paths.static));
   app.use(proxyRoutes);

@@ -1,11 +1,17 @@
 .link {
-  composes: n from 'sizes';
-
   display: inline-block;
 
   text-decoration: none;
 
   cursor: pointer;
+}
+
+.sizeN {
+  composes: n from 'sizes';
+}
+
+.sizeS {
+  composes: s from 'sizes';
 }
 
 .link.primary {
@@ -24,4 +30,14 @@
   background-repeat: no-repeat;
   background-position: left 0 bottom calc(16% - 3px);
   background-size: 100% 1px;
+}
+
+.link.native {
+  color: var(--color-blue);
+
+  transition: color 0.2s ease-in-out;
+}
+
+.link.native:hover {
+  color: var(--color-black);
 }

@@ -1,9 +1,23 @@
 .section {
+  composes: main from 'containers';
+
   overflow: hidden;
 }
 
-.wrapperTitle {
+.head {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headMain {
+  display: flex;
+}
+
+.headAdditional {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
 }
 
 .title {
@@ -19,18 +33,20 @@
 }
 
 .wrapperGallery {
-  composes: main from 'containers';
-
   margin-top: var(--space-xxl);
 }
 
 .gallery {
-  margin: var(--space-xxl) 0 var(--space-xxl);
+  margin-top: var(--space-xxl);
   overflow: hidden;
 }
 
 .galleryViewport {
   margin: 0 var(--space-xs-neg);
+}
+
+.progressBar {
+  margin-top: var(--space-xxl);
 }
 
 .item {
@@ -83,8 +99,30 @@
 }
 
 @media (--mobile) {
-  .wrapperTitle {
+  .section.hasArrows {
+    .head {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .headMain {
+      display: block;
+    }
+
+    .headAdditional {
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+  }
+
+  .head,
+  .headMain {
     display: block;
+  }
+
+  .headAdditional {
+    justify-content: center;
+    margin-top: var(--space-xxl);
   }
 
   .title {

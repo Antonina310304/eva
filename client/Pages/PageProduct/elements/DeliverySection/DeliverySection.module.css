@@ -1,0 +1,16 @@
+.deliverySection {
+}
+
+.content {
+  composes: main from 'containers';
+
+  margin-top: var(--space-m);
+}
+
+.table {
+  margin-top: var(--space-xb);
+}
+
+.hint {
+  margin-top: var(--space-xb);
+}
