@@ -2,7 +2,6 @@ import React, {
   FC,
   HTMLAttributes,
   ReactElement,
-  MouseEvent,
   memo,
   useCallback,
   useState,
@@ -12,7 +11,6 @@ import cn from 'classnames';
 
 import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
-import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import { ProductData } from '@Types/Product';
@@ -26,23 +24,12 @@ export interface CrossSaleSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
   products: ProductData[];
-  defaultCheckedTab?: string;
-  tabs?: Tab[];
+  tabs?: ReactElement;
   renderItem?: (props: RenderItem) => ReactElement;
-  onChangeTab?: (e: MouseEvent, tab: Tab) => void;
 }
 
 const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
-  const {
-    className,
-    title,
-    products,
-    defaultCheckedTab,
-    tabs = [],
-    renderItem,
-    onChangeTab,
-    ...restProps
-  } = props;
+  const { className, title, products, tabs, renderItem, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -81,14 +68,7 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
       title={title}
       additional={track?.width < 100 && <NavArrows onPrev={handlePrev} onNext={handleNext} />}
     >
-      {tabs.length > 0 && (
-        <ButtonTabs
-          className={styles.tabs}
-          defaultValue={defaultCheckedTab}
-          tabs={tabs}
-          onChangeTab={onChangeTab}
-        />
-      )}
+      {tabs && <div className={styles.tabs}>{tabs}</div>}
 
       <div className={styles.wrapperGallery}>
         <Gallery

@@ -11,7 +11,7 @@ import NanoProductCard from '@Components/NanoProductCard';
 import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
-import { Tab } from '@UI/ButtonTabs';
+import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
@@ -216,15 +216,21 @@ const PageProduct: FC<PageProductProps> = (props) => {
             className={styles.sectionCrossSale}
             title='С этим обычно покупают'
             products={filteredCrossSalesProducts}
-            defaultCheckedTab={selectedCrossSaleTab}
-            tabs={crossSalesTabs.length > 1 && crossSalesTabs}
+            tabs={
+              crossSalesTabs.length > 1 && (
+                <ButtonTabs
+                  defaultValue={selectedCrossSaleTab}
+                  tabs={crossSalesTabs}
+                  onChangeTab={handleChangeCrossSaleTab}
+                />
+              )
+            }
             key={`cross-sale-${product.id}`}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>
                 <CrossSaleProductCard {...productCardProps} />
               </div>
             )}
-            onChangeTab={handleChangeCrossSaleTab}
           />
         )}
 
