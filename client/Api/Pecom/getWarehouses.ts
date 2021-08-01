@@ -16,7 +16,7 @@ const getWarehouses = async ({ city }: Params): Promise<any> => {
     body: JSON.stringify({ name: city }),
   });
 
-  if (!response.ok) return Promise.reject(response);
+  if (!response.data) return Promise.reject(response);
 
   return response.data || [];
 };

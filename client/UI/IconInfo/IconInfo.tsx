@@ -13,7 +13,7 @@ export interface State {
 
 export interface IconInfoProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  active: boolean;
+  active?: boolean;
   onClickIcon?: (e: MouseEvent, state: State) => void;
 }
 
