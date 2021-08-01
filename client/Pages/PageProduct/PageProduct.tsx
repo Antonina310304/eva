@@ -219,6 +219,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             tabs={
               crossSalesTabs.length > 1 && (
                 <ButtonTabs
+                  scrollable
                   defaultValue={selectedCrossSaleTab}
                   tabs={crossSalesTabs}
                   onChangeTab={handleChangeCrossSaleTab}
