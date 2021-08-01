@@ -1,12 +1,11 @@
 .arrows {
-  display: inline-grid;
-  grid-auto-flow: column;
-  grid-gap: var(--space-xs);
+  display: flex;
 }
 
 .arrow {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+  margin-right: var(--space-xs);
 
   background-repeat: no-repeat;
   background-size: contain;
@@ -17,6 +16,10 @@
 
   &:hover {
     opacity: 1;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }
 
