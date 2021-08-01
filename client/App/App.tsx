@@ -15,7 +15,7 @@ export interface Data {
 }
 
 const PageIndex = loadable(() => import('@Pages/PageIndex'));
-const PageCategory = loadable(() => import('@Pages/PageCategory'));
+const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const TemplateMain = loadable(() => import('@Templates/TemplateMain'));
 
@@ -35,7 +35,7 @@ const App: FC = () => {
 
         <Route exact path='/category/:slug'>
           <TemplateMain>
-            <PageCategory />
+            <RouteCategory />
           </TemplateMain>
         </Route>
 
