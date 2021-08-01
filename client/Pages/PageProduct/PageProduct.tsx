@@ -244,10 +244,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionDelivery)}>
-          <DeliverySection
-            title='Стоимость доставки'
-            needCalculator={page.deliveryPage.needCalculator}
-          />
+          <DeliverySection title='Стоимость доставки' delivery={page.deliveryPage} />
         </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (
