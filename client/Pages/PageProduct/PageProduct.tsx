@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 
@@ -11,8 +11,10 @@ import NanoProductCard from '@Components/NanoProductCard';
 import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
+import { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import { ReviewData } from '@Types/Review';
+import { ProductData } from '@Types/Product';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -39,6 +41,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const [, { openModal }] = useModals();
   const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
+  const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
 
   const siteReviews = useMemo(() => {
     if (!page.isSuccess) return [];
@@ -47,6 +50,33 @@ const PageProduct: FC<PageProductProps> = (props) => {
       return review.source === 'site';
     });
   }, [page.data, page.isSuccess]);
+
+  const crossSalesTabs = useMemo(() => {
+    if (!page.data?.crossSalesProducts) return [];
+
+    const tabs = [{ id: 'all', label: 'Все категории' }];
+
+    page.data.crossSalesProducts.products.forEach((product: ProductData) => {
+      const tab = tabs.find((t) => t.id === product.type);
+
+      if (tab) return;
+
+      tabs.push({ id: product.type, label: product.type });
+    });
+
+    return tabs;
+  }, [page.data]);
+
+  const filteredCrossSalesProducts = useMemo(() => {
+    const cross = page.data?.crossSalesProducts;
+
+    if (!cross) return [];
+    if (selectedCrossSaleTab === 'all') return cross.products;
+
+    return cross.products.filter((product: ProductData) => {
+      return product.type === selectedCrossSaleTab;
+    });
+  }, [page.data, selectedCrossSaleTab]);
 
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
@@ -57,6 +87,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
     openModal('SendReview', { product: page.data.product });
   }, [openModal, page.data, page.isSuccess]);
+
+  const handleChangeCrossSaleTab = useCallback((_e, tab: Tab) => {
+    setSelectedCrossSaleTab(tab.id);
+  }, []);
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
@@ -181,19 +215,16 @@ const PageProduct: FC<PageProductProps> = (props) => {
           <CrossSaleSection
             className={styles.sectionCrossSale}
             title='С этим обычно покупают'
-            products={crossSalesProducts.products}
-            tabs={[
-              { id: '0', label: 'Все категории' },
-              { id: '1', label: 'Диваны' },
-              { id: '2', label: 'Кресла' },
-              { id: '3', label: 'Пуфы' },
-            ]}
+            products={filteredCrossSalesProducts}
+            defaultCheckedTab={selectedCrossSaleTab}
+            tabs={crossSalesTabs.length > 1 && crossSalesTabs}
             key={`cross-sale-${product.id}`}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>
                 <CrossSaleProductCard {...productCardProps} />
               </div>
             )}
+            onChangeTab={handleChangeCrossSaleTab}
           />
         )}
 

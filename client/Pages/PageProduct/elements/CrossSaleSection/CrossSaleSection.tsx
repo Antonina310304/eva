@@ -2,6 +2,7 @@ import React, {
   FC,
   HTMLAttributes,
   ReactElement,
+  MouseEvent,
   memo,
   useCallback,
   useState,
@@ -25,12 +26,23 @@ export interface CrossSaleSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
   products: ProductData[];
+  defaultCheckedTab?: string;
   tabs?: Tab[];
   renderItem?: (props: RenderItem) => ReactElement;
+  onChangeTab?: (e: MouseEvent, tab: Tab) => void;
 }
 
 const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
-  const { className, title, products, tabs = [], renderItem, ...restProps } = props;
+  const {
+    className,
+    title,
+    products,
+    defaultCheckedTab,
+    tabs = [],
+    renderItem,
+    onChangeTab,
+    ...restProps
+  } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -69,13 +81,21 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
       title={title}
       additional={track?.width < 100 && <NavArrows onPrev={handlePrev} onNext={handleNext} />}
     >
-      {tabs.length > 0 && <ButtonTabs className={styles.tabs} defaultValue='0' tabs={tabs} />}
+      {tabs.length > 0 && (
+        <ButtonTabs
+          className={styles.tabs}
+          defaultValue={defaultCheckedTab}
+          tabs={tabs}
+          onChangeTab={onChangeTab}
+        />
+      )}
 
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
           cnViewport={styles.galleryViewport}
           slideIndex={slide}
+          key={products.length}
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >
