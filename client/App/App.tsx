@@ -14,10 +14,9 @@ export interface Data {
   productId: number;
 }
 
-const PageIndex = loadable(() => import('@Pages/PageIndex'));
+const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
-const TemplateMain = loadable(() => import('@Templates/TemplateMain'));
 
 const App: FC = () => {
   const request = useRequest();
@@ -28,15 +27,11 @@ const App: FC = () => {
     <ModalsProvider>
       <Switch>
         <Route exact path='/'>
-          <TemplateMain>
-            <PageIndex />
-          </TemplateMain>
+          <RouteIndex />
         </Route>
 
         <Route exact path='/category/:slug'>
-          <TemplateMain>
-            <RouteCategory />
-          </TemplateMain>
+          <RouteCategory />
         </Route>
 
         <Route exact path='/product/:slug'>
