@@ -17,6 +17,6 @@
   transform: translateX(-50%);
 
   &.visible {
-    display: block;
+    display: inline-block;
   }
 }
