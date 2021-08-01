@@ -1,56 +1,45 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Section from '@Components/Section';
+import ShippingCostCalculator from '@Components/ShippingCostCalculator';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
-import DeliveryTable from '../DeliveryTable';
 import styles from './DeliverySection.module.css';
+import DeliveryTabContent from '../DeliveryTabContent';
 
 export interface DeliverySectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title?: string;
+  needCalculator?: boolean;
 }
 
 const tabs: Tab[] = [
-  { id: '0', label: 'Доставка' },
-  { id: '1', label: 'Сборка' },
+  { id: 'delivery', label: 'Доставка' },
+  { id: 'assembling', label: 'Сборка' },
 ];
 
 const DeliverySection: FC<DeliverySectionProps> = (props) => {
-  const { className, title, ...restProps } = props;
+  const { className, title, needCalculator, ...restProps } = props;
+  const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0]);
+
+  const handleChangeTab = useCallback((_e, tab: Tab) => {
+    setSelectedTab(tab);
+  }, []);
 
   return (
     <Section
       {...restProps}
       className={cn(styles.deliverySection, className)}
       title={title}
-      additional={<ButtonTabs defaultValue={tabs[0].id} tabs={tabs} />}
+      additional={
+        <ButtonTabs defaultValue={selectedTab.id} tabs={tabs} onChangeTab={handleChangeTab} />
+      }
       additionalBreakup
     >
       <div className={styles.content}>
-        <div className={styles.text}>
-          <div>
-            Доставка на следующий день только при наличии товара на складе и заказе до 12:00.
-          </div>
-          <div>
-            Внутри МКАД возможна доставка в указанный вами двухчасовой интервал 10:00-21:00.
-          </div>
-          <div>Стоимость: + 1000 ₽ к стандартному тарифу.</div>
-          <div>
-            Важно! Мы ежедневно проверяем участников рейса на состояние здоровья перед выездом.
-          </div>
-          <div>
-            У каждой команды доставки есть средства индивидуальной защиты: перчатки, маски и бахилы.
-          </div>
-        </div>
+        {selectedTab.id === 'delivery' && !needCalculator && <DeliveryTabContent />}
 
-        <div className={styles.table}>
-          <DeliveryTable />
-        </div>
-
-        <div className={styles.hint}>
-          Занос на 1-й этаж (для клиентов, проживающих на первом этаже и в частных домах) 500 ₽
-        </div>
+        {selectedTab.id === 'delivery' && needCalculator && <ShippingCostCalculator />}
       </div>
     </Section>
   );

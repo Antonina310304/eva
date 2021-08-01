@@ -25,10 +25,6 @@ import Characteristics from './elements/Characteristics';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
-export interface RouteParams {
-  slug: string;
-}
-
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
@@ -104,7 +100,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     <div {...restProps} className={cn(styles.page, [className])}>
       <MainGrid
         className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={<Sidebar page={page} />}
+        sidebar={<Sidebar page={page} meta={meta} />}
       >
         <PhotoGallery
           images={mediaGallery}
@@ -248,7 +244,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionDelivery)}>
-          <DeliverySection title='Стоимость доставки' />
+          <DeliverySection
+            title='Стоимость доставки'
+            needCalculator={page.deliveryPage.needCalculator}
+          />
         </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (

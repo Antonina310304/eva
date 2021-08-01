@@ -11,6 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   view?: 'main' | 'rounded' | 'circle';
   size?: 'l' | 'm' | 's';
   color?: string;
+  waiting?: boolean;
 }
 
 const Button: FC<ButtonProps> = (props) => {
@@ -24,6 +25,7 @@ const Button: FC<ButtonProps> = (props) => {
     view = 'main',
     size,
     color,
+    waiting,
     ...restProps
   } = props;
   const isText =

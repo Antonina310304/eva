@@ -2,9 +2,8 @@ import React, { FC } from 'react';
 import loadable from '@loadable/component';
 import { Switch, Route } from 'react-router-dom';
 
-import { Api } from '@Api/index';
-import useRequest from '@Hooks/useRequest';
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
+import ApiSetup from '@Components/ApiSetup';
 import '@UI/fonts.module.css';
 import '@UI/vars.module.css';
 import './App.css';
@@ -19,10 +18,6 @@ const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 
 const App: FC = () => {
-  const request = useRequest();
-
-  Api.setRequest(request);
-
   return (
     <ModalsProvider>
       <Switch>
@@ -31,11 +26,27 @@ const App: FC = () => {
         </Route>
 
         <Route exact path='/category/:slug'>
-          <RouteCategory />
+          <ApiSetup>
+            <RouteCategory />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/:region/category/:slug'>
+          <ApiSetup>
+            <RouteCategory />
+          </ApiSetup>
         </Route>
 
         <Route exact path='/product/:slug'>
-          <RouteProduct />
+          <ApiSetup>
+            <RouteProduct />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/:region/product/:slug'>
+          <ApiSetup>
+            <RouteProduct />
+          </ApiSetup>
         </Route>
       </Switch>
     </ModalsProvider>
