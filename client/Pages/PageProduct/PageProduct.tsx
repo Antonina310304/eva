@@ -220,7 +220,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionDelivery)}>
-          <DeliverySection title='Стоимость доставки' />
+          <DeliverySection
+            title='Стоимость доставки'
+            needCalculator={page.data.deliveryPage.needCalculator}
+          />
         </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (
