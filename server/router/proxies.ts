@@ -49,11 +49,14 @@ routes.forEach((route) => {
   router.use(route, proxy(backend, proxyOptions));
 });
 
-router.use(
-  '/proxy',
-  proxy(backend, {
-    proxyReqPathResolver: (req) => `${req.url}`,
-  }),
-);
+router.use('/proxy', (req, res, next) => {
+  const { path } = req.query as { path: string };
+  const isAbsolute = path.match(/^https?:\/\//);
+  const url = isAbsolute ? path : `${backend}${path}`;
+
+  proxy(url, {
+    proxyReqPathResolver: (proxyReq) => `${proxyReq.query.path}`,
+  })(req, res, next);
+});
 
 export default router;
