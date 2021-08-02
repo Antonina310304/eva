@@ -3,6 +3,9 @@
 
   height: 100%;
 
+  font-size: 0;
+  line-height: 0;
+
   &.canDrag {
     .layer {
       cursor: grab;
@@ -27,6 +30,9 @@
 .child {
   display: inline-block;
   height: 100%;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 
   white-space: normal;
 }

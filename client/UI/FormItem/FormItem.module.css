@@ -1,0 +1,27 @@
+.formItem {
+  margin-bottom: var(--space-n);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.top {
+  composes: s from 'sizes';
+
+  margin-bottom: var(--space-xs);
+
+  color: var(--color-text-primary);
+}
+
+.bottom {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-xs);
+
+  color: var(--color-text-psevdo-main);
+}

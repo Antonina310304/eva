@@ -1,0 +1,67 @@
+.calculator {
+  width: 100%;
+  max-width: 791px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: var(--space-m);
+}
+
+.label {
+  margin-right: var(--space-xxl);
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.price {
+  composes: m from 'sizes';
+
+  font-weight: 600;
+}
+
+.hint {
+  composes: xs from 'sizes';
+
+  margin-top: var(--space-xs);
+
+  color: var(--color-dark-gray);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  font-size: var(--size-n);
+}
+
+.action {
+  max-width: 240px;
+  margin-left: var(--space-m);
+}
+
+@media (--mobile) {
+  .calculator {
+    max-width: 100%;
+  }
+
+  .form {
+    display: block;
+  }
+
+  .input {
+    margin-top: var(--space-xs);
+  }
+
+  .action {
+    max-width: 100%;
+    margin-top: var(--space-m);
+    margin-left: 0;
+  }
+}

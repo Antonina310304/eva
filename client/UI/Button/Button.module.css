@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  height: 50px;
 
   font-family: var(--font-main);
 
@@ -24,8 +25,23 @@
   border-radius: 45px;
 }
 
-.button.themePrimary {
+.button.viewCircle {
+  border-radius: 100%;
+}
+
+.button.sizeL {
   height: 50px;
+}
+
+.button.sizeM {
+  height: 42px;
+}
+
+.button.sizeS {
+  height: 35px;
+}
+
+.button.themePrimary {
   padding: 0 var(--space-n);
 
   color: var(--color-white);
@@ -54,7 +70,6 @@
 }
 
 .button.themeSecondary {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-black);
@@ -81,7 +96,6 @@
 }
 
 .button.themeBlank {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-black);
@@ -93,7 +107,6 @@
 }
 
 .button.themeDirty {
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-white);
@@ -201,14 +214,21 @@
   margin-right: var(--space-xs);
 }
 
+.text {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: hidden;
+}
+
 @media (--desktop-m) {
-  .button.themeBlank {
+  .button {
     height: 42px;
   }
 }
 
 @media (--mobile-m) {
-  .button.themeBlank {
+  .button {
     height: 35px;
 
     font-size: var(--size-s);

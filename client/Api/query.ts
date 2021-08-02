@@ -1,13 +1,24 @@
 import fetch from 'cross-fetch';
 
-const domain = process.env.DOMAIN;
+import { Api } from '@Api/index';
 
-export default async <T>(url: string, opts?: RequestInit): Promise<T> => {
-  const queryUrl = new URL(`${domain}${url}`);
+const isClient = typeof window !== 'undefined';
+
+export default async <T>(path: string, opts?: RequestInit): Promise<T> => {
+  const request = Api.getRequest();
+  const isAbsolute = path.match(/^https?:\/\//);
+  const url = isAbsolute ? path : `${request.origin}${path}`;
+  const queryUrl = new URL(url);
   const options = opts || {};
   const headers = options.headers || {};
-  const fullOpts = {
+
+  if (!isClient) {
+    (headers as any).cookie = request.cookie;
+  }
+
+  const fullOpts: RequestInit = {
     ...options,
+    credentials: 'same-origin',
     headers: {
       ...headers,
       Development: 'yes',

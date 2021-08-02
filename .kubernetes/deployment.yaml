@@ -28,8 +28,6 @@ spec:
               value: production
             - name: NODE_OPTIONS
               value: --max-http-header-size=65536
-            - name: DOMAIN
-              value: https://test:test@<CI_COMMIT_REF_SLUG>.eva.hhw.ru
           resources:
             limits:
               memory: 384Mi

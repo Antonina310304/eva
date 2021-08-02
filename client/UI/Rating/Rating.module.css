@@ -26,6 +26,10 @@
       line-height: var(--lh-l);
     }
   }
+
+  &.editable {
+    cursor: pointer;
+  }
 }
 
 .list {
@@ -41,4 +45,8 @@
   &.selected {
     background-image: url('./starSelected.svg');
   }
+}
+
+.score {
+  font-weight: 500;
 }

@@ -20,6 +20,7 @@ const commonConfig: Configuration = {
       '@App': path.resolve(paths.context, './App'),
       '@Components': path.resolve(paths.context, './Components'),
       '@Contexts': path.resolve(paths.context, './Contexts'),
+      '@Forms': path.resolve(paths.context, './Forms'),
       '@Hooks': path.resolve(paths.context, './Hooks'),
       '@Mattresses': path.resolve(paths.context, './Mattresses'),
       '@Modals': path.resolve(paths.context, './Modals'),

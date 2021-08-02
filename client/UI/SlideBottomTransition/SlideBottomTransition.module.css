@@ -1,0 +1,27 @@
+.enter {
+  transform: translate3d(0, 100%, 0);
+}
+
+.enterActive {
+  transform: translate3d(0, 0, 0);
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.enterDone {
+  transform: translate3d(0, 0, 0);
+}
+
+.exit {
+  transform: translate3d(0, 0, 0);
+}
+
+.exitActive {
+  transform: translate3d(0, 100%, 0);
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.exitDone {
+  display: none;
+}

@@ -11,7 +11,6 @@ export const envs = {
   isDev,
   isProd,
   port: process.env.PORT || 4444,
-  domain: process.env.DOMAIN,
   backendOrigin: process.env.BACKEND_ORIGIN,
 };
 export default null;

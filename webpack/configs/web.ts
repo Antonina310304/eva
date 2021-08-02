@@ -88,7 +88,6 @@ const webConfig: Configuration = merge(commonConfig, {
       }),
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(envs.mode),
-      'process.env.DOMAIN': JSON.stringify(envs.domain),
     }),
     new CleanWebpackPlugin(),
     new LoadablePlugin() as any,

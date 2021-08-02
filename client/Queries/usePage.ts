@@ -1,17 +1,43 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
+import { ProductData } from '@Types/Product';
 
 export interface Params {
   path: string;
   ssr?: boolean;
 }
 
-const usePage = (params: Params): UseQueryResult<any> => {
-  const { path, ssr } = params;
-  const keys = ['page', path];
+export interface UsePageResult {
+  ar: any;
+  breadcrumbs: any[];
+  title: string;
+  rubrics: any[];
+  popularLinks: any[];
+  description: string;
+  layers: any[];
+  priorityParameter: any;
+  categoryTranslite: string;
+  reviewsSubgallery: any[];
+  product: ProductData;
+  products: ProductData[];
+  mediaGallery: any;
+  cylindo: any;
+  crossSalesProducts: any;
+  sameProducts: any;
+  historyProducts: any;
+  instagram: any;
+  productsModel: any;
+  parameters: any;
+  importantInfo: any;
+  documents: any;
+  modules: any[];
+  deliveryPage: any;
+}
 
-  if (ssr) keys.push('ssr');
+const usePage = (params: Params): UseQueryResult<UsePageResult> => {
+  const { path, ssr } = params;
+  const keys = ['page', ssr && 'ssr', path];
 
   const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
     keepPreviousData: true,

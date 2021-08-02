@@ -1,0 +1,22 @@
+.popup {
+  composes: s from 'sizes';
+
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  left: 0;
+  z-index: 100;
+
+  display: none;
+  padding: var(--space-s);
+
+  font-weight: 400;
+
+  background: var(--color-white);
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  transform: translateX(-50%);
+
+  &.visible {
+    display: inline-block;
+  }
+}
