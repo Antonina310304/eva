@@ -3,14 +3,11 @@ import cn from 'classnames';
 
 import { ApiOrder } from '@Api/Order';
 import { Modal as IModal } from '@Contexts/Modals';
-import Modal from '@Components/Modal';
+import ModalSidebar from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
-import useMedias from '@Hooks/useMedias';
-import IconClose from '@UI/IconClose';
 import Price from '@UI/Price';
 import Button from '@UI/Button';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
-import Scroller from '@UI/Scroller';
 import { InstallmentBank, InstallmentVariant } from '@Types/InstallmentBank';
 import { NetworkStatus } from '@Types/Base';
 import Variants from './elems/Variants';
@@ -21,23 +18,13 @@ import styles from './BuyInCreditModal.module.css';
 export interface BuyInCreditModalProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   modal: IModal;
+  onClose?: () => void;
 }
 
-const Container: FC<any> = ({ children, ...restContainerProps }) => {
-  const { isMobile } = useMedias();
-
-  return isMobile ? (
-    <div {...restContainerProps}>{children}</div>
-  ) : (
-    <Scroller {...restContainerProps}>{children}</Scroller>
-  );
-};
-
 const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
-  const { className, modal } = props;
+  const { className, modal, onClose } = props;
   const { productId } = modal.data;
   const [, { closeModal }] = useModals();
-  const { isMobile } = useMedias();
   const [status, setStatus] = useState<NetworkStatus>('pending');
   const [banks, setBanks] = useState<InstallmentBank[]>([]);
   const [selectedBank, setSelectedBank] = useState<InstallmentBank>(null);
@@ -77,10 +64,6 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
     closeModal(modal.id);
   }, [closeModal, modal.id, productId, selectedVariant]);
 
-  const handleClose = useCallback(() => {
-    closeModal(modal.id);
-  }, [closeModal, modal.id]);
-
   useEffect(() => {
     async function load() {
       setStatus('loading');
@@ -104,73 +87,56 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
   if (status !== 'success') return null;
 
   return (
-    <Modal
+    <ModalSidebar
       className={cn(styles.modal, className)}
       id={modal.id}
       visible={modal.visible}
-      onClose={handleClose}
+      title='Кредит без переплаты'
+      onClose={onClose}
     >
-      <div className={cn(styles.container, className)}>
-        <div className={styles.head}>
-          <h3 className={styles.title}>Кредит без переплаты</h3>
-          <IconClose
-            className={styles.iconClose}
-            view={isMobile ? 'default' : 'circle'}
-            onClick={handleClose}
+      {banks.length > 1 && (
+        <ButtonTabs
+          className={styles.tabs}
+          defaultValue={selectedBank.id}
+          tabs={tabs}
+          onChangeTab={handleChangeBank}
+        />
+      )}
+
+      <img src={images[selectedBank.id]} alt={`Logo of bank ${selectedBank.id}`} />
+
+      <Numbers
+        className={styles.numbers}
+        variant={selectedVariant}
+        style={{ color: selectedBank.brandColor }}
+      />
+
+      {selectedBank.variants.length > 1 && (
+        <div className={styles.variants}>
+          <Variants
+            selectedVariant={selectedVariant}
+            variants={selectedBank.variants}
+            color={selectedBank.brandColor}
+            onChange={handleChangeVariant}
           />
         </div>
+      )}
 
-        <Container className={styles.content} invisible={isMobile}>
-          {banks.length > 1 && (
-            <ButtonTabs
-              className={styles.tabs}
-              defaultValue={selectedBank.id}
-              tabs={tabs}
-              onChangeTab={handleChangeBank}
-            />
-          )}
+      <div className={styles.description}>{selectedVariant.description}</div>
+      {selectedVariant.hint && <div className={styles.hint}>{selectedVariant.hint}</div>}
 
-          <img src={images[selectedBank.id]} alt={`Logo of bank ${selectedBank.id}`} />
-
-          <Numbers
-            className={styles.numbers}
-            variant={selectedVariant}
-            style={{ color: selectedBank.brandColor }}
-          />
-
-          {selectedBank.variants.length > 1 && (
-            <div className={styles.variants}>
-              <Variants
-                selectedVariant={selectedVariant}
-                variants={selectedBank.variants}
-                color={selectedBank.brandColor}
-                onChange={handleChangeVariant}
-              />
-            </div>
-          )}
-
-          <div className={styles.description}>{selectedVariant.description}</div>
-          {selectedVariant.hint && <div className={styles.hint}>{selectedVariant.hint}</div>}
-
-          <Button
-            className={styles.button}
-            wide
-            color={selectedBank.brandColor}
-            onClick={handleBuy}
-          >
-            {selectedVariant.price ? (
-              <>
-                {`Купить за `}
-                <Price className={styles.price} price={selectedVariant.price} />
-                /мес
-              </>
-            ) : (
-              'Купить'
-            )}
-          </Button>
-        </Container>
-      </div>
-    </Modal>
+      <Button className={styles.button} wide color={selectedBank.brandColor} onClick={handleBuy}>
+        {selectedVariant.price ? (
+          <>
+            {`Купить за `}
+            <Price className={styles.price} price={selectedVariant.price} />
+            /мес
+          </>
+        ) : (
+          'Купить'
+        )}
+      </Button>
+    </ModalSidebar>
   );
 };
 

@@ -1,19 +1,19 @@
 import React, { useState, useCallback, useEffect, FC, createContext, useMemo, useRef } from 'react';
 
 import ErrorBoundary from '@Components/ErrorBoundary';
+import FadeTransition from '@UI/FadeTransition';
 import initialState from './initialState';
 import AsyncModal from './AsyncModal';
 import { ModalsState, ModalsMethods, ModalsMap, ModalId } from './typings';
+import styles from './ModalsProvider.module.css';
 
 const ModalsStateContext = createContext<ModalsState>(initialState);
 const ModalsMethodsContext = createContext<ModalsMethods>(null);
 
-const timing = 300;
 const ModalsProvider: FC = (props) => {
   const { children } = props;
   const [modals, setModals] = useState<ModalsMap>();
   const [stack, setStack] = useState([]);
-  const [animatings, setAnimatings] = useState([]);
   const [key, setKey] = useState(1);
   const refTop = useRef(0);
 
@@ -57,43 +57,30 @@ const ModalsProvider: FC = (props) => {
   }, []);
 
   const closeModal = useCallback((id: ModalId) => {
-    setAnimatings((prev) => prev.concat([id]));
+    setStack((prev) => {
+      const newStack = prev.filter((modal) => modal !== id);
 
-    setTimeout(() => {
-      setStack((prev) => {
-        const newStack = prev.filter((modal) => modal !== id);
+      setModals((prevModals) => {
+        if (!prevModals || !prevModals[id]) return prevModals;
 
-        setModals((prevModals) => {
-          if (!prevModals || !prevModals[id]) return prevModals;
-
-          Object.values(prevModals).map((modal) => {
-            return Object.assign(modal, { visible: modal.id === newStack[newStack.length - 1] });
-          });
-
-          return {
-            ...prevModals,
-            [id]: Object.assign(prevModals[id], { visible: false }),
-          };
+        Object.values(prevModals).map((modal) => {
+          return Object.assign(modal, { visible: modal.id === newStack[newStack.length - 1] });
         });
 
-        return newStack;
+        return {
+          ...prevModals,
+          [id]: Object.assign(prevModals[id], { visible: false }),
+        };
       });
 
-      setAnimatings((prev) => prev.filter((_id) => id !== _id));
-    }, timing);
+      return newStack;
+    });
   }, []);
 
   const closeAllModals = useCallback(async () => {
-    setAnimatings([stack[stack.length - 1]]);
-
-    setTimeout(() => {
-      setModals(null);
-      setStack([]);
-      setAnimatings([]);
-
-      return Promise.resolve();
-    }, timing);
-  }, [stack]);
+    setModals(null);
+    setStack([]);
+  }, []);
 
   const getData = useCallback(
     (id: ModalId) => {
@@ -111,12 +98,9 @@ const ModalsProvider: FC = (props) => {
     [modals],
   );
 
-  const isAnimating = useCallback((id) => animatings.includes(id), [animatings]);
-
   const handleError = useCallback(() => {
     setModals(null);
     setStack([]);
-    setAnimatings([]);
     setKey((prev) => prev + 1);
 
     openModal('Info', {
@@ -125,18 +109,9 @@ const ModalsProvider: FC = (props) => {
     });
   }, [openModal]);
 
-  // Блокируем скролл на странице
-  useEffect(() => {
-    function cleanup() {
-      document.documentElement.style.overflow = 'initial';
-    }
-
-    if (stack.length > 0) {
-      document.documentElement.style.overflow = 'hidden';
-    }
-
-    return cleanup;
-  }, [stack.length]);
+  const handleClose = useCallback(() => {
+    closeModal(currentModal.id);
+  }, [closeModal, currentModal]);
 
   // Блокируем скролл на странице
   useEffect(() => {
@@ -164,7 +139,6 @@ const ModalsProvider: FC = (props) => {
     <ModalsStateContext.Provider
       value={{
         modals,
-        animatings,
         currentModal,
       }}
     >
@@ -175,12 +149,19 @@ const ModalsProvider: FC = (props) => {
           closeAllModals,
           getData,
           isVisible,
-          isAnimating,
         }}
       >
         {children}
+
         <ErrorBoundary key={key} onError={handleError}>
-          {currentModal ? <AsyncModal modal={currentModal} /> : null}
+          <FadeTransition in={!!currentModal} unmountOnExit>
+            <div className={styles.wrapper}>
+              <div className={styles.backdrop} />
+              {currentModal && (
+                <AsyncModal className={styles.modal} modal={currentModal} onClose={handleClose} />
+              )}
+            </div>
+          </FadeTransition>
         </ErrorBoundary>
       </ModalsMethodsContext.Provider>
     </ModalsStateContext.Provider>

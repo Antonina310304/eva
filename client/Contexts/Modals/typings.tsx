@@ -27,5 +27,4 @@ export interface ModalsMethods {
   closeAllModals: () => void;
   getData: (id: ModalId) => unknown;
   isVisible: (id: ModalId) => boolean;
-  isAnimating: (id: ModalId) => boolean;
 }

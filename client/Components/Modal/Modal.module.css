@@ -20,10 +20,6 @@
   animation-fill-mode: forwards;
 }
 
-.modal.closes {
-  animation-name: ModalFadeOut;
-}
-
 .modal.viewSlideRight {
   overflow: hidden;
 
