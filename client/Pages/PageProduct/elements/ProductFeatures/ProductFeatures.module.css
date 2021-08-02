@@ -4,7 +4,6 @@
   grid-template-rows: 1fr;
   margin-top: 100px;
   margin-bottom: 100px;
-  margin-left: var(--space-xxb);
 }
 
 @media (--desktop-m) {
@@ -14,7 +13,6 @@
     align-items: start;
     margin-top: 80px;
     margin-bottom: 80px;
-    margin-left: var(--space-xxl);
   }
 }
 
@@ -31,8 +29,6 @@
   .wrapper {
     grid-template-columns: 1fr 1fr;
     max-width: none;
-    margin-left: 0;
-    padding: 0 var(--space-s);
   }
 }
 

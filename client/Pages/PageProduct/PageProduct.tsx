@@ -147,7 +147,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
       </MainGrid>
 
-      <MainGrid>
+      <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
         {page.data.features?.length > 0 && <ProductFeatures features={page.data.features} />}
       </MainGrid>
 
