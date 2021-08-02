@@ -4,110 +4,52 @@ import cn from 'classnames';
 import Rating from '@UI/Rating';
 import Gallery from '@UI/Gallery';
 import Image from '@UI/Image';
-import Scroller from '@UI/Scroller';
 import { ReviewData } from '@Types/Review';
-import useMedias from '@Hooks/useMedias';
 import styles from './Review.module.css';
 
 export interface ReviewProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   review: ReviewData;
-  modalView?: boolean;
 }
 
 const Review: FC<ReviewProps> = (props) => {
-  const { className, review, modalView = false, ...restProps } = props;
-  const { isDesktop, isMobile } = useMedias();
+  const { className, review, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.review, className)}>
-      {modalView ? (
-        <Scroller className={styles.reviewScroller} space={isMobile ? 0 : 30} invisible={isMobile}>
-          <div className={styles.modalWrapper}>
-            <Image className={styles.photo} src={review.photos[0].image} />
+      <div className={styles.head}>
+        <div className={styles.name}>{review.author}</div>
+        <div className={styles.date}>{review.created_at}</div>
+      </div>
 
-            {isDesktop ? (
-              <div>
-                <div className={styles.head}>
-                  <div className={styles.name}>{review.author}</div>
-                  <div className={styles.date}>{review.created_at}</div>
-                </div>
-
-                <div className={styles.criterias}>
-                  <div className={styles.criteria}>
-                    <div className={styles.criteriaName}>Товар</div>
-                    <Rating className={styles.criteriaRating} value={review.rating} />
-                  </div>
-
-                  <div className={styles.criteria}>
-                    <div className={styles.criteriaName}>Сервис</div>
-                    <Rating className={styles.criteriaRating} value={review.rating} />
-                  </div>
-                </div>
-
-                <div className={styles.text}>{review.text}</div>
-              </div>
-            ) : (
-              <Scroller className={styles.infoScroller} space={30} invisible={isMobile}>
-                <div className={styles.head}>
-                  <div className={styles.name}>{review.author}</div>
-                  <div className={styles.date}>{review.created_at}</div>
-                </div>
-
-                <div className={styles.criterias}>
-                  <div className={styles.criteria}>
-                    <div className={styles.criteriaName}>Товар</div>
-                    <Rating className={styles.criteriaRating} value={review.rating} />
-                  </div>
-
-                  <div className={styles.criteria}>
-                    <div className={styles.criteriaName}>Сервис</div>
-                    <Rating className={styles.criteriaRating} value={review.rating} />
-                  </div>
-                </div>
-
-                <div className={styles.text}>{review.text}</div>
-              </Scroller>
-            )}
-          </div>
-        </Scroller>
-      ) : (
-        <div>
-          <div className={styles.head}>
-            <div className={styles.name}>{review.author}</div>
-            <div className={styles.date}>{review.created_at}</div>
+      <div className={styles.wrapperMain}>
+        <div className={styles.criterias}>
+          <div className={styles.criteria}>
+            <div className={styles.criteriaName}>Сервис</div>
+            <Rating className={styles.criteriaRating} value={review.rating} />
           </div>
 
-          <div className={styles.wrapperMain}>
-            <div className={styles.criterias}>
-              <div className={styles.criteria}>
-                <div className={styles.criteriaName}>Сервис</div>
-                <Rating className={styles.criteriaRating} value={review.rating} />
-              </div>
-
-              <div className={styles.criteria}>
-                <div className={styles.criteriaName}>Товар</div>
-                <Rating className={styles.criteriaRating} value={review.rating} />
-              </div>
-            </div>
-
-            <div className={styles.content}>
-              <div className={styles.title}>Заголовок отзыва</div>
-              <div className={styles.text}>{review.text}</div>
-
-              {review?.photos.length > 0 && (
-                <Gallery className={styles.photoGallery}>
-                  {review.photos.map((photo) => (
-                    <div className={styles.photoItem} key={photo.id}>
-                      <Image className={styles.photo} src={photo.image} />
-                    </div>
-                  ))}
-                </Gallery>
-              )}
-            </div>
+          <div className={styles.criteria}>
+            <div className={styles.criteriaName}>Товар</div>
+            <Rating className={styles.criteriaRating} value={review.rating} />
           </div>
         </div>
-      )}
+
+        <div className={styles.content}>
+          <div className={styles.title}>Заголовок отзыва</div>
+          <div className={styles.text}>{review.text}</div>
+
+          {review?.photos.length > 0 && (
+            <Gallery className={styles.photoGallery}>
+              {review.photos.map((photo) => (
+                <div className={styles.photoItem} key={photo.id}>
+                  <Image className={styles.photo} src={photo.image} />
+                </div>
+              ))}
+            </Gallery>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
