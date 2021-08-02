@@ -92,8 +92,12 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
   }, [category, images, isMobileM, maxItemsCountInGallery]);
 
   const handleOpen = useCallback(() => {
-    openModal('ProductSlider', { images });
-  }, [images, openModal]);
+    openModal('Info', {
+      title: 'Упс',
+      text: 'Ещё не готово, заходите позже…',
+    });
+    // openModal('ProductSlider', { images });
+  }, [openModal]);
 
   return (
     <div {...restProps} className={cn(styles.photogallery)}>
