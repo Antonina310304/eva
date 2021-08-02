@@ -78,20 +78,24 @@ const Rating: FC<RatingProps> = (props) => {
       )}
     >
       <input hidden type='text' name={name} value={selectedStar} readOnly />
-      <List
-        className={styles.list}
-        items={stars}
-        renderChild={(star: number) => {
-          const selected = star <= selectedStar;
-
-          return (
+      <div className={styles.wrapperList}>
+        <List
+          className={styles.backgroundList}
+          items={stars}
+          renderChild={() => <div className={cn(styles.star)} />}
+        />
+        <List
+          className={styles.mainList}
+          style={{ width: `${((selectedStar * 100) / countStars).toFixed(2)}%` }}
+          items={stars}
+          renderChild={(star: number) => (
             <div
-              className={cn(styles.star, { [styles.selected]: selected })}
+              className={cn(styles.star, { [styles.selected]: true })}
               onClick={(e: MouseEvent) => handleClickStar(e, star)}
             />
-          );
-        }}
-      />
+          )}
+        />
+      </div>
       {scored && <div className={styles.score}>{`${value}/${countStars}`}</div>}
     </div>
   );

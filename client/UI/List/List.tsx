@@ -1,6 +1,6 @@
-import { cloneElement, createElement, memo, ReactElement } from 'react';
+import { HTMLAttributes, cloneElement, createElement, memo, ReactElement } from 'react';
 
-export interface Props<T> {
+export interface Props<T> extends HTMLAttributes<HTMLElement> {
   className?: string;
   tagName?: string;
   items?: T[];
