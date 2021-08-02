@@ -1,0 +1,17 @@
+.hintItem {
+  composes: s from 'sizes';
+
+  padding: var(--space-s);
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease-in;
+
+  &.selected {
+    background: var(--color-light-gray);
+  }
+}

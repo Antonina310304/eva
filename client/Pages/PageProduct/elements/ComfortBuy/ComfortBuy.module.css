@@ -1,7 +1,4 @@
 .comfortBuy {
-  margin-top: var(--space-xxe);
-  margin-bottom: var(--space-xxe);
-
   background-color: var(--color-light-gray);
 }
 
@@ -49,11 +46,6 @@
 }
 
 @media (--desktop-m) {
-  .comfortBuy {
-    margin-top: var(--space-e);
-    margin-bottom: var(--space-e);
-  }
-
   .advantagesList {
     padding: 0 var(--space-xxl) var(--space-xxb) var(--space-xxl);
   }
@@ -64,11 +56,6 @@
 }
 
 @media (--desktop) {
-  .comfortBuy {
-    margin-top: var(--space-xb);
-    margin-bottom: var(--space-xb);
-  }
-
   .heading {
     padding-top: var(--space-xxl);
 

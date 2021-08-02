@@ -1,9 +1,6 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState } from 'react';
 import cn from 'classnames';
-import { useLocation } from 'react-router-dom';
 
-import usePage from '@Queries/usePage';
-import useMeta from '@Queries/useMeta';
 import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
 import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
@@ -11,8 +8,11 @@ import NanoProductCard from '@Components/NanoProductCard';
 import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
+import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import { ReviewData } from '@Types/Review';
+import { ProductData } from '@Types/Product';
+import { MetaData } from '@Types/Meta';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
@@ -25,40 +25,61 @@ import Characteristics from './elements/Characteristics';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
-export interface RouteParams {
-  slug: string;
-}
-
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  page: any;
+  meta: MetaData;
 }
 
 const PageProduct: FC<PageProductProps> = (props) => {
-  const { className, ...restProps } = props;
-  const { pathname } = useLocation();
+  const { className, page, meta, ...restProps } = props;
   const [, { openModal }] = useModals();
-  const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
 
   const siteReviews = useMemo(() => {
-    if (!page.isSuccess) return [];
-
-    return (page.data.reviewsSubgallery || []).filter((review: ReviewData) => {
+    return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
       return review.source === 'site';
     });
-  }, [page.data, page.isSuccess]);
+  }, [page]);
+
+  const crossSalesTabs = useMemo(() => {
+    if (!page?.crossSalesProducts) return [];
+
+    const tabs = [{ id: 'all', label: 'Все категории' }];
+
+    page.crossSalesProducts.products.forEach((product: ProductData) => {
+      const tab = tabs.find((t) => t.id === product.type);
+
+      if (tab) return;
+
+      tabs.push({ id: product.type, label: product.type });
+    });
+
+    return tabs;
+  }, [page]);
+
+  const filteredCrossSalesProducts = useMemo(() => {
+    const cross = page?.crossSalesProducts;
+
+    if (!cross) return [];
+    if (selectedCrossSaleTab === 'all') return cross.products;
+
+    return cross.products.filter((product: ProductData) => {
+      return product.type === selectedCrossSaleTab;
+    });
+  }, [page, selectedCrossSaleTab]);
 
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
   }, []);
 
   const handleAddReview = useCallback(() => {
-    if (!page.isSuccess) return;
+    openModal('SendReview', { product: page.product });
+  }, [openModal, page]);
 
-    openModal('SendReview', { product: page.data.product });
-  }, [openModal, page.data, page.isSuccess]);
-
-  if (!page.isSuccess || !meta.isSuccess) return null;
+  const handleChangeCrossSaleTab = useCallback((_e, tab: Tab) => {
+    setSelectedCrossSaleTab(tab.id);
+  }, []);
 
   const {
     product,
@@ -73,13 +94,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
     importantInfo,
     documents,
     modules,
-  } = page.data;
+  } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <MainGrid
         className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={<Sidebar page={page.data} />}
+        sidebar={<Sidebar page={page} meta={meta} />}
       >
         <PhotoGallery
           images={mediaGallery}
@@ -90,22 +111,19 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        {page.data.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
+        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
 
-        {page.data.description && (
+        {page.description && (
           <div
             className={styles.description}
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: page.data.description }}
+            dangerouslySetInnerHTML={{ __html: page.description }}
           />
         )}
 
-        {page.data.layers?.length > 0 && (
+        {page.layers?.length > 0 && (
           <div className={styles.layers}>
-            <MattressesLayers
-              layers={page.data.layers}
-              priorityParameter={page.data.priorityParameter}
-            />
+            <MattressesLayers layers={page.layers} priorityParameter={page.priorityParameter} />
           </div>
         )}
 
@@ -156,8 +174,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
       </MainGrid>
 
-      {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
+      {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (
         <ChooseMattressBanner
+          className={styles.mattressesBanner}
           categoryColor={product.categoryColor}
           title='Подбери лучший!'
           action={{
@@ -170,23 +189,26 @@ const PageProduct: FC<PageProductProps> = (props) => {
           <br />
           {` какие матрасы подойдут именно для тебя.`}
         </ChooseMattressBanner>
+      ) : (
+        <div className={styles.separator} />
       )}
-
-      <div className={styles.separator} />
 
       <div className={styles.wrapperAdditional}>
         {crossSalesProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionCrossSale}
             title='С этим обычно покупают'
-            products={crossSalesProducts.products}
-            tabs={[
-              { id: '0', label: 'Все категории' },
-              { id: '1', label: 'Диваны' },
-              { id: '2', label: 'Кресла' },
-              { id: '3', label: 'Пуфы' },
-            ]}
-            key={`cross-sale-${product.id}`}
+            products={filteredCrossSalesProducts}
+            tabs={
+              crossSalesTabs.length > 1 && (
+                <ButtonTabs
+                  scrollable
+                  defaultValue={selectedCrossSaleTab}
+                  tabs={crossSalesTabs}
+                  onChangeTab={handleChangeCrossSaleTab}
+                />
+              )
+            }
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>
                 <CrossSaleProductCard {...productCardProps} />
@@ -196,13 +218,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionReviews)}>
-          <ReviewsSection reviews={page.data.reviewsSubgallery} onAddReview={handleAddReview} />
+          <ReviewsSection reviews={page.reviewsSubgallery} onAddReview={handleAddReview} />
           <div className={styles.wrapperListReviews}>
             <ListReviews className={styles.listReviews} reviews={siteReviews} />
           </div>
         </div>
 
-        {page.data.instagram?.length > 0 && (
+        {page.instagram?.length > 0 && (
           <InstagramSection
             className={styles.sectionInstagram}
             hasPromoPlaceholder
@@ -217,16 +239,20 @@ const PageProduct: FC<PageProductProps> = (props) => {
                 лучшие кадры.`}
               </div>
             }
-            posts={page.data.instagram}
+            posts={page.instagram}
           />
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionDelivery)}>
-          <DeliverySection title='Стоимость доставки' />
+          <DeliverySection title='Стоимость доставки' delivery={page.deliveryPage} />
         </div>
 
         {fakeData.heading && fakeData.advantages?.length > 0 && (
-          <ComfortBuy heading={fakeData.heading} items={fakeData.advantages} />
+          <ComfortBuy
+            className={styles.comfortBuy}
+            heading={fakeData.heading}
+            items={fakeData.advantages}
+          />
         )}
 
         {sameProducts.products?.length > 0 && (
@@ -234,7 +260,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
             className={styles.sectionSimilar}
             title='Похожие модели'
             products={sameProducts.products}
-            key={`similar-${product.id}`}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>
                 <CrossSaleProductCard {...productCardProps} />
@@ -248,7 +273,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
             className={styles.sectionHistory}
             title='Вы недавно смотрели'
             products={historyProducts.products}
-            key={`history-${product.id}`}
             renderItem={(productCardProps) => (
               <div className={styles.nanoProductItem}>
                 <NanoProductCard {...productCardProps} />

@@ -16,7 +16,6 @@ export interface Matches {
   isMobileL?: boolean;
   isMobileM?: boolean;
   isMobile?: boolean;
-  isMobileS?: boolean;
   isOnlyDesktop?: boolean;
   isOnlyMobile?: boolean;
 }

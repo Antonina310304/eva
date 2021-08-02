@@ -53,10 +53,18 @@ const SampleOption: FC<SampleOptionProps> = (props) => {
   const content = useMemo(() => {
     return (
       <>
-        {image && <Image className={styles.sample} src={image} />}
-        <div className={styles.name}>{name}</div>
-        {price && <Price price={price} className={styles.price} />}
-        <Image src={checkIcon} className={cn(styles.checkIcon, { [styles.selected]: selected })} />
+        <div className={styles.left}>
+          {image && <Image className={styles.sample} src={image} />}
+          <div className={styles.name}>{name}</div>
+        </div>
+
+        <div className={styles.right}>
+          {price && <Price price={price} className={styles.price} />}
+          <Image
+            src={checkIcon}
+            className={cn(styles.checkIcon, { [styles.selected]: selected })}
+          />
+        </div>
       </>
     );
   }, [image, name, price, selected]);
