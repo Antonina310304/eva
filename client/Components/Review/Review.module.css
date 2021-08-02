@@ -58,7 +58,79 @@
   padding-bottom: 73.333%;
 }
 
+.reviewScroller {
+  height: 387px;
+
+  .modalWrapper {
+    display: flex;
+  }
+
+  .photo {
+    width: 52.65%;
+    padding-bottom: 31.26%;
+
+    background-position: center;
+  }
+
+  .infoScroller {
+    flex-grow: 1;
+    width: 40%;
+    height: 387px;
+    margin-left: var(--space-xxl);
+  }
+
+  .criterias {
+    display: flex;
+    margin-top: var(--space-l);
+  }
+
+  .criteria {
+    margin-right: var(--space-l);
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .criteriaName {
+    min-width: unset;
+  }
+
+  .text {
+    margin-top: var(--space-n);
+  }
+}
+
+@media (--desktop) {
+  .reviewScroller {
+    height: 615px;
+
+    .modalWrapper {
+      flex-direction: column;
+    }
+
+    .photo {
+      width: 100%;
+      padding-bottom: 62.5%;
+    }
+
+    .head {
+      margin-top: var(--space-xxl);
+    }
+  }
+}
+
 @media (--mobile) {
+  .reviewScroller {
+    height: 100%;
+
+    .head,
+    .criterias,
+    .text {
+      padding: 0 var(--space-s);
+    }
+  }
+
   .wrapperMain {
     display: block;
     margin-top: var(--space-n);

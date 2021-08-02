@@ -45,6 +45,10 @@
   margin: 0 var(--space-xs-neg);
 }
 
+.linkWrapper {
+  padding: 0 var(--space-xs);
+}
+
 .progressBar {
   margin-top: var(--space-xxl);
 }
@@ -52,12 +56,13 @@
 .item {
   width: 28.142%;
   min-width: 300px;
-  padding: 0 var(--space-xs);
 }
 
 .photo {
   width: 100%;
   padding-bottom: 73.333%;
+
+  cursor: pointer;
 }
 
 .wrapperButton {

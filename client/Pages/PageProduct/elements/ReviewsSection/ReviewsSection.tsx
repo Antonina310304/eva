@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo, useEffect } from 'react';
 import cn from 'classnames';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';
@@ -6,6 +6,8 @@ import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import Rating from '@UI/Rating';
 import Button from '@UI/Button';
+import Link from '@UI/Link';
+import useModals from '@Hooks/useModals';
 import { ReviewData, ReviewPhotoData } from '@Types/Review';
 import Arrows from './elements/Arrows';
 import styles from './ReviewsSection.module.css';
@@ -20,6 +22,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const { className, reviews, title, onAddReview, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const [, { openModal }] = useModals();
 
   const photos = useMemo((): ReviewPhotoData[] => {
     return reviews.reduce((prevReviews, review) => [...prevReviews, ...review.photos], []);
@@ -62,6 +65,24 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
 
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
+
+  const handleClickReviewImage = useCallback(
+    (selectedPhoto) => {
+      openModal('Review', {
+        selectedPhoto,
+        reviews,
+      });
+    },
+    [openModal, reviews],
+  );
+
+  useEffect(() => {
+    if (window.location.hash) {
+      handleClickReviewImage(
+        reviews.find((item: ReviewData) => item.id === Number(window.location.hash.split('-')[1])),
+      );
+    }
+  }, [handleClickReviewImage, reviews]);
 
   const addReviewButton = (
     <Button className={styles.button} wide theme='blank' onClick={onAddReview}>
@@ -112,8 +133,14 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
               onChangeProgress={handleChangeProgress}
             >
               {photos.map((photo) => (
-                <div className={styles.item} key={photo.id}>
-                  <Image className={styles.photo} src={photo.image} />
+                <div className={styles.linkWrapper} key={photo.id}>
+                  <Link to={`#review-${photo.id}`} className={styles.item} view='simple'>
+                    <Image
+                      className={styles.photo}
+                      src={photo.image}
+                      onClick={() => handleClickReviewImage(photo)}
+                    />
+                  </Link>
                 </div>
               ))}
             </Gallery>
