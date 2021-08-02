@@ -96,6 +96,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
     modules,
   } = page;
 
+  const handleA = useCallback(() => {
+    openModal('ClientsPhotos', { reviews: siteReviews });
+  }, [openModal, siteReviews]);
+
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <MainGrid
@@ -107,6 +111,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           tags={product.tags}
           ar={ar}
           category={breadcrumbs[1].text}
+          onClick={handleA}
         />
       </MainGrid>
 

@@ -6,7 +6,7 @@
   margin: 0 auto;
 
   font-size: var(--size-n);
-  line-height: var(--size-xl);
+  line-height: var(--lh-n);
 }
 
 .container {
@@ -28,11 +28,6 @@
 .iconClose {
   width: 20px;
   height: 20px;
-
-  background-image: url('./close.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
 }
 
 .content {
@@ -45,10 +40,13 @@
   flex-wrap: wrap;
 }
 
-.photo {
-  width: 350px;
+.link {
   margin-bottom: var(--space-n);
   margin-left: var(--space-n);
+}
+
+.photo {
+  width: 350px;
   padding-top: 59.2%;
 }
 
@@ -63,10 +61,13 @@
     padding-left: var(--space-s);
   }
 
-  .photo {
-    width: 261px;
+  .link {
     margin-bottom: var(--space-s);
     margin-left: var(--space-s);
+  }
+
+  .photo {
+    width: 261px;
     padding-top: 59.06%;
   }
 }
@@ -74,14 +75,14 @@
 @media (--mobile) {
   .modalView {
     max-width: 100%;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     padding: 0;
   }
 
   .container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 0;
   }
 
@@ -96,11 +97,15 @@
 
   .link {
     width: 100%;
+    margin-left: 0;
+  }
+
+  .photosWrapper {
+    width: calc(100% + var(--space-s));
   }
 
   .photo {
     width: 100%;
-    margin-left: 0;
     padding-top: 62.6%;
   }
 }

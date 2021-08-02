@@ -5,11 +5,11 @@ import Modal from '@Components/Modal';
 import { Modal as IModal } from '@Contexts/Modals';
 import Link from '@UI/Link';
 import Image from '@UI/Image';
+import IconClose from '@UI/IconClose';
 import Scroller from '@UI/Scroller';
 import useModals from '@Hooks/useModals';
 import { ReviewData, ReviewPhotoData } from '@Types/Review';
 import useMedias from '@Hooks/useMedias';
-
 import styles from './ClientsPhotosModal.module.css';
 
 export interface ClientsPhotosModalProps {
@@ -21,20 +21,21 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
   const { className, modal } = props;
   const [, { closeAllModals }] = useModals();
   const { reviews } = modal.data;
-  const { isDesktop, isMobile } = useMedias();
+  const { isMobile } = useMedias();
 
   const photos = useMemo((): ReviewPhotoData[] => {
     return reviews.reduce(
-      (prevReviews: ReviewPhotoData[], review: ReviewData) => [...prevReviews, ...review.photos],
+      (prevPhotos: ReviewPhotoData[], review: ReviewData) => [...prevPhotos, ...review.photos],
       [],
     );
   }, [reviews]);
 
-  const scrollPadding = useMemo(() => {
-    if (isMobile) return 0;
-    if (isDesktop) return 20;
-    return 30;
-  }, [isDesktop, isMobile]);
+  // TODO функционал для оступа от полосы прокрутки
+  // const scrollPadding = useMemo(() => {
+  //   if (isMobile) return 0;
+  //   if (isDesktop) return 20;
+  //   return 30;
+  // }, [isDesktop, isMobile]);
 
   const handleClose = useCallback(() => {
     closeAllModals();
@@ -47,30 +48,23 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
       visible={modal.visible}
       onClose={handleClose}
     >
-      {modal.data && (
-        <div className={styles.modalView}>
-          <div className={styles.container}>
-            <div className={styles.header}>
-              <div className={styles.iconClose} onClick={handleClose} />
-            </div>
-
-            <Scroller className={styles.content} space={scrollPadding} invisible={isMobile}>
-              <div className={styles.photosWrapper}>
-                {photos.map((photo, index) => (
-                  <Link
-                    className={styles.link}
-                    to={`#review-${photo.id}`}
-                    view='simple'
-                    key={index}
-                  >
-                    <Image className={styles.photo} src={photo.image} />
-                  </Link>
-                ))}
-              </div>
-            </Scroller>
+      <div className={styles.modalView}>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <IconClose className={styles.iconClose} onClick={handleClose} />
           </div>
+
+          <Scroller className={styles.content} invisible={isMobile}>
+            <div className={styles.photosWrapper}>
+              {photos.map((photo, index) => (
+                <Link className={styles.link} to={`#review-${photo.id}`} view='simple' key={index}>
+                  <Image className={styles.photo} src={photo.image} />
+                </Link>
+              ))}
+            </div>
+          </Scroller>
         </div>
-      )}
+      </div>
     </Modal>
   );
 };
