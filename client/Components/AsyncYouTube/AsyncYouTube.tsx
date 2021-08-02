@@ -7,6 +7,7 @@ import cn from 'classnames';
 import useModals from '@Hooks/useModals';
 import KeyboardHandler from '@Components/KeyboardHandler';
 import '../Modal/Modal.module.css';
+import { ModalsState } from '@Contexts/Modals';
 
 const b = cn('Modal');
 
@@ -22,7 +23,7 @@ const Modal = ({
   theme,
   title,
 }) => {
-  const { animatings } = useModals();
+  const { animatings } = useModals<ModalsState>();
 
   //
   const handleClose = useCallback(

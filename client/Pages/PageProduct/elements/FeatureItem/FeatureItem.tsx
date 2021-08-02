@@ -16,11 +16,11 @@ export interface FeatureItemProps extends HTMLAttributes<HTMLDivElement> {
 
 const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => {
   const [, { openModal }] = useModals();
-  const isMobile = useMedias('--mobile');
+  const isMobile = useMedias();
 
   const onClick = useCallback(() => {
     if (feature.youtubeVideo !== '') {
-      openModal('video', { videoId: feature.youtubeVideo });
+      openModal('Video', { videoId: feature.youtubeVideo });
     }
   }, [openModal, feature]);
 

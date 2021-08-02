@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, memo } from 'react';
+import React, { useCallback, useState, useEffect, memo, FC, HTMLAttributes } from 'react';
 
 import cn from 'classnames';
 import useMedia from '@divanru/ts-utils/useMedia';
@@ -6,20 +6,24 @@ import useMedia from '@divanru/ts-utils/useMedia';
 import Modal from '@Components/Modal';
 import AsyncYouTube from '@Components/AsyncYouTube';
 import useModals from '@Hooks/useModals';
-import './VideoModal.css';
+import { ModalsMethods } from '@Contexts/Modals';
 
-const b = cn('VideoModal');
+import styles from './VideoModal.module.css';
 
-const VideoModal = ({ className }) => {
-  const id = 'video';
+export interface VideoModalProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
+  const id = 'Video';
   const isMobileL = useMedia('--mobile-l');
   const isMobile = useMedia('--mobile');
 
-  const { isVisible, getData, closeModal } = useModals();
+  const [, { isVisible, getData, closeModal }] = useModals<ModalsMethods>();
   const modalData = getData(id);
   const [player, setPlayer] = useState();
   const [sizes, setSizes] = useState({ width: 0, height: 0 });
-
+  console.log(modalData);
   if (!modalData.width) modalData.width = 854;
   if (!modalData.height) modalData.height = 480;
 
@@ -59,13 +63,13 @@ const VideoModal = ({ className }) => {
 
   return (
     <Modal
-      className={b({}, [className])}
+      className={cn({}, [className])}
       view='default-outside'
       id={id}
       visible={isVisible(id)}
       onClose={onClose}
     >
-      <div className={b('Container')}>
+      <div className={styles.container}>
         {modalData && (
           <AsyncYouTube
             videoId={modalData.videoId}

@@ -30,7 +30,7 @@ const Video: FC<VideoProps> = (props) => {
     ...restProps
   } = props;
   const video = useRef(null);
-  const isMobile = useMedias('--mobile');
+  const isMobile = useMedias();
 
   const [ref, inView] = useInView({
     triggerOnce: true,

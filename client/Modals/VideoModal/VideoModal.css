@@ -17,3 +17,19 @@
     }
   }
 }
+
+.container {
+  font-size: 0;
+}
+
+.content {
+  background: transparent;
+}
+
+@media (--mobile-l) {
+  .Modal-Close {
+    position: fixed;
+    top: var(--space-m);
+    right: var(--space-s);
+  }
+}
