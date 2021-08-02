@@ -20,6 +20,7 @@
 .container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   color: var(--color-black);
   text-decoration: none;
@@ -64,10 +65,18 @@
   padding: calc(var(--space-s) / 2) 0;
 }
 
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
 .price {
   composes: s from 'sizes';
-
-  margin-left: auto;
 
   font-weight: 500;
 }
@@ -75,7 +84,7 @@
 .checkIcon {
   width: 13px;
   height: 9px;
-  margin-left: auto;
+  margin-left: var(--space-s);
 
   background-position: center;
   background-size: contain;

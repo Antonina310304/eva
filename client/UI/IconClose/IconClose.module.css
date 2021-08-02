@@ -1,7 +1,4 @@
 .iconClose {
-  width: 20px;
-  height: 20px;
-
   background-image: url('./close.svg');
   background-repeat: no-repeat;
   background-size: contain;
@@ -12,5 +9,19 @@
   &:hover {
     transform: rotate(1turn);
     cursor: pointer;
+  }
+
+  &.viewDefault {
+    width: 20px;
+    height: 20px;
+
+    background-image: url('./close.svg');
+  }
+
+  &.viewCircle {
+    width: 30px;
+    height: 30px;
+
+    background-image: url('./circle.svg');
   }
 }

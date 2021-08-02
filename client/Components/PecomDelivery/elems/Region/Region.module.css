@@ -1,0 +1,25 @@
+.region {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: var(--space-xxs);
+
+  background-image: url('./location.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.label {
+  background-image: linear-gradient(var(--color-black), var(--color-black));
+  background-repeat: no-repeat;
+  background-position: left 0 bottom calc(16% - 3px);
+  background-size: 100% 1px;
+}

@@ -1,0 +1,65 @@
+.variant {
+  composes: m from 'sizes';
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+
+  font-weight: 600;
+}
+
+.title {
+  overflow: hidden;
+
+  font-size: var(--size-n);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.wrapperIcon {
+  position: relative;
+
+  margin-left: var(--space-xs);
+}
+
+.icon {
+  color: var(--color-text-secondary);
+
+  cursor: pointer;
+
+  transition: color var(--animation-duration-fast);
+
+  &:hover,
+  &.opened {
+    color: var(--color-text-primary);
+  }
+}
+
+.popup {
+  width: 267px;
+}
+
+.parameter {
+  margin-bottom: var(--space-2xs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (--mobile) {
+  .variant {
+    margin-right: 0;
+    margin-bottom: var(--space-xs);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .popup {
+    transform: translateX(-80%);
+  }
+}

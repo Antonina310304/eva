@@ -56,7 +56,7 @@
 
   width: 100%;
 
-  padding: 8px var(--space-s);
+  padding: 16px var(--space-s);
 
   font-size: inherit;
   font-family: inherit;
@@ -78,4 +78,18 @@
   margin-top: var(--space-xs);
 
   color: var(--color-red);
+}
+
+@media (--desktop-m) {
+  .control {
+    padding: 12px var(--space-s);
+  }
+}
+
+@media (--mobile-m) {
+  .control {
+    box-sizing: border-box;
+    height: 35px;
+    padding: 8px var(--space-xs);
+  }
 }

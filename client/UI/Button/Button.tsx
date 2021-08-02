@@ -1,18 +1,20 @@
-import React, { ButtonHTMLAttributes, FC, memo, ReactChild, isValidElement } from 'react';
+import React, { ButtonHTMLAttributes, FC, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
 import styles from './Button.module.css';
 
-export interface SizesProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   wide?: boolean;
   before?: ReactChild;
   theme?: 'primary' | 'secondary' | 'blank' | 'dirty' | 'linkSecondary' | 'linkPrimary' | 'circle';
   view?: 'main' | 'rounded' | 'circle';
   size?: 'l' | 'm' | 's';
+  color?: string;
+  waiting?: boolean;
 }
 
-const Button: FC<SizesProps> = (props) => {
+const Button: FC<ButtonProps> = (props) => {
   const {
     className,
     wide,
@@ -22,6 +24,8 @@ const Button: FC<SizesProps> = (props) => {
     theme = 'primary',
     view = 'main',
     size,
+    color,
+    waiting,
     ...restProps
   } = props;
   const isText =
@@ -53,6 +57,7 @@ const Button: FC<SizesProps> = (props) => {
       )}
       // eslint-disable-next-line react/button-has-type
       type={type}
+      style={color ? { backgroundColor: color, borderColor: color } : undefined}
     >
       {before && <span className={styles.before}>{before}</span>}
       {isText ? <span className={styles.text}>{children}</span> : children}

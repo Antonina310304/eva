@@ -11,6 +11,10 @@ export interface PriceProps extends HTMLAttributes<HTMLSpanElement> {
   price: number;
 }
 
+export interface RouteParams {
+  region?: string;
+}
+
 const symbols = {
   RUB: '₽',
   BYN: 'руб.',
