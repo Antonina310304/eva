@@ -17,6 +17,7 @@ export interface FiltersModalProps {
   className?: string;
   modal: IModal;
   onClose?: () => void;
+  onLoad?: () => void;
 }
 
 const colors = [
@@ -52,7 +53,7 @@ const types = [
 ];
 
 const FiltersModal: FC<FiltersModalProps> = (props) => {
-  const { className, modal, onClose } = props;
+  const { className, modal, onClose, onLoad } = props;
 
   return (
     <ModalSidebar
@@ -61,6 +62,7 @@ const FiltersModal: FC<FiltersModalProps> = (props) => {
       visible={modal.visible}
       title='Фильтр'
       onClose={onClose}
+      onLoad={onLoad}
     >
       <div className={styles.content}>
         <Group className={styles.group} title='Цена'>

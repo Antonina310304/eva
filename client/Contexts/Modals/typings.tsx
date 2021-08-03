@@ -11,13 +11,11 @@ export interface Modal {
   id: ModalId;
   data: any;
   visible?: boolean;
+  selected?: boolean;
 }
 
-export type ModalsMap = Record<ModalId, Modal>;
-
 export interface ModalsState {
-  modals?: ModalsMap;
-  animatings?: ModalId[];
+  stack?: Modal[];
   currentModal?: Modal;
 }
 

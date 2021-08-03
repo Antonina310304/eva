@@ -1,105 +1,73 @@
-import React, { useState, useCallback, useEffect, FC, createContext, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, FC, createContext } from 'react';
 
 import ErrorBoundary from '@Components/ErrorBoundary';
-import FadeTransition from '@UI/FadeTransition';
-import initialState from './initialState';
 import AsyncModal from './AsyncModal';
-import { ModalsState, ModalsMethods, ModalsMap, ModalId } from './typings';
-import styles from './ModalsProvider.module.css';
+import { ModalsState, ModalsMethods, ModalId } from './typings';
 
-const ModalsStateContext = createContext<ModalsState>(initialState);
+const ModalsStateContext = createContext<ModalsState>({ stack: [] });
 const ModalsMethodsContext = createContext<ModalsMethods>(null);
 
 const ModalsProvider: FC = (props) => {
   const { children } = props;
-  const [modals, setModals] = useState<ModalsMap>();
   const [stack, setStack] = useState([]);
   const [key, setKey] = useState(1);
   const refTop = useRef(0);
 
-  const currentModal = useMemo(() => {
-    return Object.values(modals || {}).find((modal) => modal.visible);
-  }, [modals]);
+  const currentModal = stack.find((modal) => modal.opened);
+
+  const getModalById = useCallback(
+    (id: ModalId) => {
+      return stack.find((modal) => modal.id === id);
+    },
+    [stack],
+  );
 
   const openModal = useCallback((id: ModalId, data) => {
     refTop.current = refTop.current || window.scrollY;
 
-    setStack((prev) => {
-      const newStack = [].concat(prev, [id]);
-
-      setModals((prevModals: any) => {
-        if (!prevModals) {
-          return {
-            [id]: {
-              id,
-              data,
-              visible: true,
-            },
-          };
-        }
-
-        Object.values(prevModals).map((modal: any) => {
-          return { ...modal, visible: modal.id === newStack[newStack.length - 1] };
-        });
-
-        return {
-          ...prevModals,
-          [id]: {
-            id,
-            data,
-            visible: true,
-          },
-        };
-      });
-
-      return newStack;
+    setStack((prevStack) => {
+      return [...prevStack, { id, data, visible: false, opened: true }];
     });
   }, []);
 
   const closeModal = useCallback((id: ModalId) => {
-    setStack((prev) => {
-      const newStack = prev.filter((modal) => modal !== id);
-
-      setModals((prevModals) => {
-        if (!prevModals || !prevModals[id]) return prevModals;
-
-        Object.values(prevModals).map((modal) => {
-          return Object.assign(modal, { visible: modal.id === newStack[newStack.length - 1] });
-        });
-
-        return {
-          ...prevModals,
-          [id]: Object.assign(prevModals[id], { visible: false }),
-        };
-      });
-
-      return newStack;
+    setStack((prevStack) => {
+      return prevStack.map((modal) => ({
+        ...modal,
+        visible: modal.id === id ? false : modal.id,
+      }));
     });
+
+    setTimeout(() => {
+      setStack((prevStack) => {
+        return prevStack.filter((modal) => modal.id !== id);
+      });
+    }, 400);
   }, []);
 
   const closeAllModals = useCallback(async () => {
-    setModals(null);
     setStack([]);
   }, []);
 
   const getData = useCallback(
     (id: ModalId) => {
-      if (!modals) return false;
+      const modal = getModalById(id);
 
-      return modals[id] && modals[id].data;
+      return modal && modal.data;
     },
-    [modals],
+    [getModalById],
   );
 
   const isVisible = useCallback(
     (id: ModalId) => {
-      return modals && modals[id] ? modals[id].visible : false;
+      const modal = getModalById(id);
+
+      return modal && modal.visible;
     },
-    [modals],
+    [getModalById],
   );
 
   const handleError = useCallback(() => {
-    setModals(null);
     setStack([]);
     setKey((prev) => prev + 1);
 
@@ -110,8 +78,21 @@ const ModalsProvider: FC = (props) => {
   }, [openModal]);
 
   const handleClose = useCallback(() => {
+    if (!currentModal) return;
+
     closeModal(currentModal.id);
   }, [closeModal, currentModal]);
+
+  const handleLoad = useCallback(() => {
+    setTimeout(() => {
+      setStack((prevStack) => {
+        return prevStack.map((modal) => ({
+          ...modal,
+          visible: modal.id === currentModal.id,
+        }));
+      });
+    }, 400);
+  }, [currentModal]);
 
   // Блокируем скролл на странице
   useEffect(() => {
@@ -136,12 +117,7 @@ const ModalsProvider: FC = (props) => {
   }, [stack.length]);
 
   return (
-    <ModalsStateContext.Provider
-      value={{
-        modals,
-        currentModal,
-      }}
-    >
+    <ModalsStateContext.Provider value={{ stack }}>
       <ModalsMethodsContext.Provider
         value={{
           openModal,
@@ -152,16 +128,10 @@ const ModalsProvider: FC = (props) => {
         }}
       >
         {children}
-
         <ErrorBoundary key={key} onError={handleError}>
-          <FadeTransition in={!!currentModal} unmountOnExit>
-            <div className={styles.wrapper}>
-              <div className={styles.backdrop} />
-              {currentModal && (
-                <AsyncModal className={styles.modal} modal={currentModal} onClose={handleClose} />
-              )}
-            </div>
-          </FadeTransition>
+          {currentModal ? (
+            <AsyncModal modal={currentModal} onClose={handleClose} onLoad={handleLoad} />
+          ) : null}
         </ErrorBoundary>
       </ModalsMethodsContext.Provider>
     </ModalsStateContext.Provider>
