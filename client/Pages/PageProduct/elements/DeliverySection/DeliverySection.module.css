@@ -1,0 +1,8 @@
+.deliverySection {
+}
+
+.content {
+  composes: main from 'containers';
+
+  margin-top: var(--space-m);
+}

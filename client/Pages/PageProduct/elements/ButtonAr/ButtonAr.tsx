@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, MouseEvent } from 'react';
+import React, { FC, HTMLAttributes, memo, MouseEvent, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
@@ -20,21 +20,21 @@ export interface ButtonArProps extends HTMLAttributes<HTMLDivElement> {
 
 const ButtonAr: FC<ButtonArProps> = (props) => {
   const { className, ar, actived, expanded, onLoading, hiddenPopup, ...restProps } = props;
+  const [visibled, setVisibled] = useState(false);
   const { isDesktop } = useMedias();
 
+  useEffect(() => setVisibled(true), []);
+
   return (
-    <div {...restProps} className={cn(styles.buttonAr, [className])}>
+    <div
+      {...restProps}
+      className={cn(styles.buttonAr, { [styles.visibled]: visibled }, [className])}
+    >
       <ModelViewer ar={ar} className={styles.modelViewer} onLoading={onLoading}>
-        {isDesktop ? (
-          <Button className={styles.button} theme='dirty' view='rounded'>
-            <div className={styles.icon} />
-          </Button>
-        ) : (
-          <Button className={styles.button} theme='dirty'>
-            <div className={styles.icon} />
-            <div className={styles.buttonText}>Примерить в комнате</div>
-          </Button>
-        )}
+        <Button className={styles.button} theme='dirty' view={isDesktop ? 'circle' : 'main'}>
+          <div className={styles.icon} />
+          {!isDesktop && <div className={styles.buttonText}>Примерить в комнате</div>}
+        </Button>
       </ModelViewer>
     </div>
   );

@@ -26,14 +26,34 @@
       line-height: var(--lh-l);
     }
   }
+
+  &.editable {
+    cursor: pointer;
+  }
 }
 
-.list {
+.wrapperList {
+  position: relative;
+}
+
+.backgroundList,
+.mainList {
   display: flex;
   align-items: center;
 }
 
+.mainList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  overflow: hidden;
+}
+
 .star {
+  flex-shrink: 0;
+
   background-image: url('./starDefault.svg');
   background-repeat: no-repeat;
   background-size: contain;

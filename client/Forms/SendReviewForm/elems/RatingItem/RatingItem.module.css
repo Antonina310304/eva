@@ -1,0 +1,22 @@
+.ratingItem {
+  display: flex;
+  box-sizing: border-box;
+
+  white-space: nowrap;
+}
+
+.label {
+  composes: n from 'sizes';
+
+  display: inline-block;
+  box-sizing: border-box;
+  margin-right: var(--space-m);
+
+  vertical-align: middle;
+}
+
+@media (--mobile) {
+  .label {
+    min-width: 125px;
+  }
+}

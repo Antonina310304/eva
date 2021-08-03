@@ -1,0 +1,32 @@
+.arrows {
+  display: flex;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  margin-right: var(--space-xs);
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  opacity: 0.4;
+
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.arrow.prev {
+  background-image: url('./icon-prev.svg');
+}
+
+.arrow.next {
+  background-image: url('./icon-next.svg');
+}

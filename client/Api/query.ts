@@ -4,9 +4,11 @@ import { Api } from '@Api/index';
 
 const isClient = typeof window !== 'undefined';
 
-export default async <T>(url: string, opts?: RequestInit): Promise<T> => {
+export default async <T>(path: string, opts?: RequestInit): Promise<T> => {
   const request = Api.getRequest();
-  const queryUrl = new URL(`${request.origin}${url}`);
+  const isAbsolute = path.match(/^https?:\/\//);
+  const url = isAbsolute ? path : `${request.origin}${path}`;
+  const queryUrl = new URL(url);
   const options = opts || {};
   const headers = options.headers || {};
 

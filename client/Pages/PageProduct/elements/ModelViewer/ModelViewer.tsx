@@ -89,7 +89,7 @@ const ModelViewer: FC<ModelViewerProps> = (props) => {
           openModal('Info', { title: 'Упс...', text: 'Ваш телефон не поддерживает AR-технологию' });
         }
       } else {
-        openModal('QrCode', { qrcode: ar.qrcode });
+        openModal('TryInRoom', { qrcode: ar.qrcode });
       }
 
       (window.dataLayer = window.dataLayer || []).push({ event: 'augmented_reality' });

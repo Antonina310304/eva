@@ -2,9 +2,12 @@ import dotenv from 'dotenv';
 import express from 'express';
 import proxy, { ProxyOptions } from 'express-http-proxy';
 
+import { envs } from '../../utils/envs';
+import { paths } from '../../utils/paths';
+
 dotenv.config();
 
-const backend = process.env.BACKEND_ORIGIN;
+const backend = envs.backendOrigin;
 const router = express.Router();
 const proxyOptions: ProxyOptions = { proxyReqPathResolver: (req) => `${req.originalUrl}` };
 const routes = [
@@ -32,13 +35,28 @@ const routes = [
   '/sitemap.xml',
 ];
 
-routes.map((route) => router.use(route, proxy(backend, proxyOptions)));
+routes.forEach((route) => {
+  router.use(`/:regionSlug${route}`, (req, res, next) => {
+    const { regionSlug } = req.params;
 
-router.use(
-  '/proxy',
-  proxy(backend, {
-    proxyReqPathResolver: (req) => `${req.url}`,
-  }),
-);
+    // Путь /react/assets/* это не файл с регионом react, это отдельная директория!
+    if (regionSlug === 'react') {
+      express.static(paths.dist.web)(req, res, next);
+    } else {
+      proxy(backend, proxyOptions)(req, res, next);
+    }
+  });
+  router.use(route, proxy(backend, proxyOptions));
+});
+
+router.use('/proxy', (req, res, next) => {
+  const { path } = req.query as { path: string };
+  const isAbsolute = path.match(/^https?:\/\//);
+  const url = isAbsolute ? path : `${backend}${path}`;
+
+  proxy(url, {
+    proxyReqPathResolver: (proxyReq) => `${proxyReq.query.path}`,
+  })(req, res, next);
+});
 
 export default router;

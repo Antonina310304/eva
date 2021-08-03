@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: var(--space-xs-neg);
+  margin: 0 var(--space-xxs-neg) var(--space-xs-neg);
 
   &.inversed {
     .button.selected {
@@ -10,15 +10,29 @@
       border-color: var(--color-white);
     }
   }
+
+  &.scrollable {
+    display: block;
+
+    white-space: nowrap;
+
+    .item {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.item {
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+  padding: 0 var(--space-xxs);
 }
 
 .button {
   position: relative;
 
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  margin-right: var(--space-xs);
-  margin-bottom: var(--space-xs);
   padding: var(--space-xs) var(--space-n);
 
   font-family: var(--font-main);
@@ -53,4 +67,8 @@
 
 .text {
   position: absolute;
+}
+
+.galleryViewport {
+  overflow: visible;
 }

@@ -1,0 +1,30 @@
+.parameter {
+  composes: n from 'sizes';
+}
+
+.name {
+  display: inline-block;
+
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.image {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-left: var(--space-xs);
+  overflow: hidden;
+
+  vertical-align: middle;
+
+  background-position: center;
+  border-radius: 50%;
+}
+
+.title {
+  display: inline-block;
+  margin-left: var(--space-xs);
+
+  vertical-align: middle;
+}

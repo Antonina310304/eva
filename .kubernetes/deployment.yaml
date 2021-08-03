@@ -23,6 +23,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: env-configmap
+            - configMapRef:
+                name: env-local-configmap
           env:
             - name: NODE_ENV
               value: production

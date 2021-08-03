@@ -13,10 +13,11 @@ import styles from './ReviewsSection.module.css';
 export interface ReviewsSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   reviews: ReviewData[];
+  onAddReview?: () => void;
 }
 
 const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
-  const { className, reviews, title, ...restProps } = props;
+  const { className, reviews, title, onAddReview, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -63,13 +64,20 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   }, [normalizeSlide, track]);
 
   const addReviewButton = (
-    <Button className={styles.button} wide theme='blank'>
+    <Button className={styles.button} wide theme='blank' onClick={onAddReview}>
       Оставить отзыв
     </Button>
   );
 
   return (
-    <div {...restProps} className={cn(styles.section, className)}>
+    <div
+      {...restProps}
+      className={cn(
+        styles.section,
+        { [styles.hasArrows]: hasPhotos && track?.width < 100 },
+        className,
+      )}
+    >
       <div className={styles.head}>
         <div className={styles.headMain}>
           <h2 className={styles.title}>{`Отзывы (${reviews.length})`}</h2>

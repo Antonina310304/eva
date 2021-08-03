@@ -20,6 +20,7 @@
       "@App": ["./client/App"],
       "@Components/*": ["./client/Components/*"],
       "@Contexts/*": ["./client/Contexts/*"],
+      "@Forms/*": ["./client/Forms/*"],
       "@Hooks/*": ["./client/Hooks/*"],
       "@Mattresses/*": ["./client/Mattresses/*"],
       "@Modals/*": ["./client/Modals/*"],
