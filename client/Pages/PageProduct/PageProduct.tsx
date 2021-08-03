@@ -175,7 +175,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         </div>
 
-        {page.data.features?.length > 0 && <ProductFeatures features={page.data.features} />}
+        {page.features?.length > 0 && <ProductFeatures features={page.features} />}
       </MainGrid>
 
       {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (
