@@ -2,7 +2,6 @@ import React, { FC, memo, useCallback, useState, useEffect, useMemo } from 'reac
 import cn from 'classnames';
 
 import { ApiOrder } from '@Api/Order';
-import { Modal as IModal } from '@Contexts/Modals';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
 import Price from '@UI/Price';
@@ -15,12 +14,7 @@ import Numbers from './elems/Numbers';
 import images from './images';
 import styles from './BuyInCreditModal.module.css';
 
-export interface BuyInCreditModalProps extends ModalSidebarProps {
-  className?: string;
-  modal: IModal;
-}
-
-const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
+const BuyInCreditModal: FC<ModalSidebarProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const { productId } = modal.data;
   const [, { closeModal }] = useModals();

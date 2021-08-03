@@ -1,24 +1,16 @@
 import React, { memo, FC } from 'react';
 import cn from 'classnames';
 
-import ModalSidebar from '@Components/ModalSidebar';
+import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import InputsRange from '@UI/InputsRange';
 import CheckboxList from '@UI/CheckboxList';
-import { Modal as IModal } from '@Contexts/Modals';
 
 import Group from './elements/Group';
 import GroupItem from './elements/GroupItem';
 
 import styles from './FiltersModal.module.css';
-
-export interface FiltersModalProps {
-  className?: string;
-  modal: IModal;
-  onClose?: () => void;
-  onLoad?: () => void;
-}
 
 const colors = [
   {
@@ -52,18 +44,11 @@ const types = [
   },
 ];
 
-const FiltersModal: FC<FiltersModalProps> = (props) => {
-  const { className, modal, onClose, onLoad } = props;
+const FiltersModal: FC<ModalSidebarProps> = (props) => {
+  const { className, modal } = props;
 
   return (
-    <ModalSidebar
-      className={cn(styles.FiltersModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
-      title='Фильтр'
-      onClose={onClose}
-      onLoad={onLoad}
-    >
+    <ModalSidebar className={cn(styles.FiltersModal, [className])} modal={modal} title='Фильтр'>
       <div className={styles.content}>
         <Group className={styles.group} title='Цена'>
           <InputsRange min={1000} max={30000} valueMin={1500} valueMax={25000} />
