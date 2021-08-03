@@ -1,122 +1,75 @@
-import React, { useState, useCallback, useEffect, FC, createContext, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, FC, createContext } from 'react';
 
 import ErrorBoundary from '@Components/ErrorBoundary';
-import initialState from './initialState';
+import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 import AsyncModal from './AsyncModal';
-import { ModalsState, ModalsMethods, ModalsMap, ModalId } from './typings';
+import { ModalsState, ModalsMethods, ModalId } from './typings';
 
-const ModalsStateContext = createContext<ModalsState>(initialState);
+const ModalsStateContext = createContext<ModalsState>({ stack: [] });
 const ModalsMethodsContext = createContext<ModalsMethods>(null);
 
-const timing = 300;
 const ModalsProvider: FC = (props) => {
   const { children } = props;
-  const [modals, setModals] = useState<ModalsMap>();
   const [stack, setStack] = useState([]);
-  const [animatings, setAnimatings] = useState([]);
   const [key, setKey] = useState(1);
   const refTop = useRef(0);
 
-  const currentModal = useMemo(() => {
-    return Object.values(modals || {}).find((modal) => modal.visible);
-  }, [modals]);
+  const currentModal = stack.find((modal) => modal.opened);
+
+  const getModalById = useCallback(
+    (id: ModalId) => {
+      return stack.find((modal) => modal.id === id);
+    },
+    [stack],
+  );
 
   const openModal = useCallback((id: ModalId, data) => {
     refTop.current = refTop.current || window.scrollY;
 
-    setStack((prev) => {
-      const newStack = [].concat(prev, [id]);
-
-      setModals((prevModals: any) => {
-        if (!prevModals) {
-          return {
-            [id]: {
-              id,
-              data,
-              visible: true,
-            },
-          };
-        }
-
-        Object.values(prevModals).map((modal: any) => {
-          return { ...modal, visible: modal.id === newStack[newStack.length - 1] };
-        });
-
-        return {
-          ...prevModals,
-          [id]: {
-            id,
-            data,
-            visible: true,
-          },
-        };
-      });
-
-      return newStack;
+    setStack((prevStack) => {
+      return [...prevStack, { id, data, visible: false, opened: true }];
     });
   }, []);
 
   const closeModal = useCallback((id: ModalId) => {
-    setAnimatings((prev) => prev.concat([id]));
+    setStack((prevStack) => {
+      return prevStack.map((modal) => ({
+        ...modal,
+        visible: modal.id === id ? false : modal.id,
+      }));
+    });
 
     setTimeout(() => {
-      setStack((prev) => {
-        const newStack = prev.filter((modal) => modal !== id);
-
-        setModals((prevModals) => {
-          if (!prevModals || !prevModals[id]) return prevModals;
-
-          Object.values(prevModals).map((modal) => {
-            return Object.assign(modal, { visible: modal.id === newStack[newStack.length - 1] });
-          });
-
-          return {
-            ...prevModals,
-            [id]: Object.assign(prevModals[id], { visible: false }),
-          };
-        });
-
-        return newStack;
+      setStack((prevStack) => {
+        return prevStack.filter((modal) => modal.id !== id);
       });
-
-      setAnimatings((prev) => prev.filter((_id) => id !== _id));
-    }, timing);
+    }, 400);
   }, []);
 
   const closeAllModals = useCallback(async () => {
-    setAnimatings([stack[stack.length - 1]]);
-
-    setTimeout(() => {
-      setModals(null);
-      setStack([]);
-      setAnimatings([]);
-
-      return Promise.resolve();
-    }, timing);
-  }, [stack]);
+    setStack([]);
+  }, []);
 
   const getData = useCallback(
     (id: ModalId) => {
-      if (!modals) return false;
+      const modal = getModalById(id);
 
-      return modals[id] && modals[id].data;
+      return modal && modal.data;
     },
-    [modals],
+    [getModalById],
   );
 
   const isVisible = useCallback(
     (id: ModalId) => {
-      return modals && modals[id] ? modals[id].visible : false;
+      const modal = getModalById(id);
+
+      return modal && modal.visible;
     },
-    [modals],
+    [getModalById],
   );
 
-  const isAnimating = useCallback((id) => animatings.includes(id), [animatings]);
-
   const handleError = useCallback(() => {
-    setModals(null);
     setStack([]);
-    setAnimatings([]);
     setKey((prev) => prev + 1);
 
     openModal('Info', {
@@ -125,18 +78,22 @@ const ModalsProvider: FC = (props) => {
     });
   }, [openModal]);
 
-  // Блокируем скролл на странице
-  useEffect(() => {
-    function cleanup() {
-      document.documentElement.style.overflow = 'initial';
-    }
+  const handleClose = useCallback(() => {
+    if (!currentModal) return;
 
-    if (stack.length > 0) {
-      document.documentElement.style.overflow = 'hidden';
-    }
+    closeModal(currentModal.id);
+  }, [closeModal, currentModal]);
 
-    return cleanup;
-  }, [stack.length]);
+  const handleLoad = useCallback(() => {
+    setTimeout(() => {
+      setStack((prevStack) => {
+        return prevStack.map((modal) => ({
+          ...modal,
+          visible: modal.id === currentModal.id,
+        }));
+      });
+    }, 400);
+  }, [currentModal]);
 
   // Блокируем скролл на странице
   useEffect(() => {
@@ -160,14 +117,12 @@ const ModalsProvider: FC = (props) => {
     return cleanup;
   }, [stack.length]);
 
+  useKeyboardEvents({
+    onEscape: handleClose,
+  });
+
   return (
-    <ModalsStateContext.Provider
-      value={{
-        modals,
-        animatings,
-        currentModal,
-      }}
-    >
+    <ModalsStateContext.Provider value={{ stack }}>
       <ModalsMethodsContext.Provider
         value={{
           openModal,
@@ -175,12 +130,13 @@ const ModalsProvider: FC = (props) => {
           closeAllModals,
           getData,
           isVisible,
-          isAnimating,
         }}
       >
         {children}
         <ErrorBoundary key={key} onError={handleError}>
-          {currentModal ? <AsyncModal modal={currentModal} /> : null}
+          {currentModal ? (
+            <AsyncModal modal={currentModal} onClose={handleClose} onLoad={handleLoad} />
+          ) : null}
         </ErrorBoundary>
       </ModalsMethodsContext.Provider>
     </ModalsStateContext.Provider>
