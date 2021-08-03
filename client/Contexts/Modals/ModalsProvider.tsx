@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef, FC, createContext } from 'react';
 
 import ErrorBoundary from '@Components/ErrorBoundary';
+import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 import AsyncModal from './AsyncModal';
 import { ModalsState, ModalsMethods, ModalId } from './typings';
 
@@ -115,6 +116,10 @@ const ModalsProvider: FC = (props) => {
 
     return cleanup;
   }, [stack.length]);
+
+  useKeyboardEvents({
+    onEscape: handleClose,
+  });
 
   return (
     <ModalsStateContext.Provider value={{ stack }}>
