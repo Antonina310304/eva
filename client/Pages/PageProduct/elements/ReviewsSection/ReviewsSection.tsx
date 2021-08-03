@@ -77,7 +77,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   );
 
   useEffect(() => {
-    if (window.location.hash) {
+    if (window.location.hash.match(/review-\d+/)) {
       handleClickReviewImage(
         reviews.find((item: ReviewData) => item.id === Number(window.location.hash.split('-')[1])),
       );

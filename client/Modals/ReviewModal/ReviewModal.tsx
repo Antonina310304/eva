@@ -26,7 +26,7 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   const [currentRewiewIndex, setCurrentRewiewIndex] = useState(0);
   const [, { closeAllModals, closeModal }] = useModals();
 
-  const photos = useMemo((): ReviewData[] => {
+  const reviewsWithPhotos = useMemo((): ReviewData[] => {
     return reviews.reduce((prevReviews: ReviewData[], reviewItem: ReviewData) => {
       if (reviewItem.photos.length > 0) {
         prevReviews.push(reviewItem);
@@ -36,29 +36,32 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   }, [reviews]);
 
   useEffect(
-    () => setCurrentRewiewIndex(photos.findIndex((item: ReviewData) => item.id === review.id)),
-    [photos, review.id],
+    () =>
+      setCurrentRewiewIndex(
+        reviewsWithPhotos.findIndex((item: ReviewData) => item.id === review.id),
+      ),
+    [reviewsWithPhotos, review.id],
   );
 
   const nextId = useMemo(() => {
     let res;
-    if (currentRewiewIndex !== photos.length - 1) {
-      res = photos[currentRewiewIndex + 1].id;
+    if (currentRewiewIndex !== reviewsWithPhotos.length - 1) {
+      res = reviewsWithPhotos[currentRewiewIndex + 1].id;
     } else {
-      res = photos[0].id;
+      res = reviewsWithPhotos[0].id;
     }
     return res;
-  }, [currentRewiewIndex, photos]);
+  }, [currentRewiewIndex, reviewsWithPhotos]);
 
   const prevId = useMemo(() => {
     let res;
     if (currentRewiewIndex === 0) {
-      res = photos[photos.length - 1].id;
+      res = reviewsWithPhotos[reviewsWithPhotos.length - 1].id;
     } else {
-      res = photos[currentRewiewIndex - 1].id;
+      res = reviewsWithPhotos[currentRewiewIndex - 1].id;
     }
     return res;
-  }, [currentRewiewIndex, photos]);
+  }, [currentRewiewIndex, reviewsWithPhotos]);
 
   const handleClose = useCallback(() => {
     window.history.pushState('', '', window.location.pathname);
@@ -67,19 +70,19 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
 
   const handlePrev = useCallback(() => {
     if (currentRewiewIndex === 0) {
-      setReview(photos[photos.length - 1]);
+      setReview(reviewsWithPhotos[reviewsWithPhotos.length - 1]);
     } else {
-      setReview(photos[currentRewiewIndex - 1]);
+      setReview(reviewsWithPhotos[currentRewiewIndex - 1]);
     }
-  }, [currentRewiewIndex, photos]);
+  }, [currentRewiewIndex, reviewsWithPhotos]);
 
   const handleNext = useCallback(() => {
-    if (currentRewiewIndex !== photos.length - 1) {
-      setReview(photos[currentRewiewIndex + 1]);
+    if (currentRewiewIndex !== reviewsWithPhotos.length - 1) {
+      setReview(reviewsWithPhotos[currentRewiewIndex + 1]);
     } else {
-      setReview(photos[0]);
+      setReview(reviewsWithPhotos[0]);
     }
-  }, [currentRewiewIndex, photos]);
+  }, [currentRewiewIndex, reviewsWithPhotos]);
 
   const handleBackClick = useCallback(() => {
     closeModal('Review');
