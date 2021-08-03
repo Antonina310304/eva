@@ -23,7 +23,7 @@ const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
   const modalData = getData(id);
   const [player, setPlayer] = useState();
   const [sizes, setSizes] = useState({ width: 0, height: 0 });
-  console.log(modalData);
+
   if (!modalData.width) modalData.width = 854;
   if (!modalData.height) modalData.height = 480;
 
