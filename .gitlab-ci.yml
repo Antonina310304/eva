@@ -138,6 +138,7 @@ review:
     - sed -i "s/<CI_COMMIT_REF_SLUG>/${CI_COMMIT_REF_SLUG}/g" ./.kubernetes/*.yaml
     - sed -i "s/<COMMIT_SHORT_SHA>/${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}/g" ./.kubernetes/*.yaml
     - kubectl create configmap env-configmap --from-env-file=./.env --dry-run=client --output="yaml" | kubectl apply -n $CI_COMMIT_REF_SLUG -f -
+    - kubectl create configmap env-local-configmap --from-literal=BACKEND_ORIGIN="${BACKEND_ORIGIN}" --dry-run=client --output="yaml" | kubectl apply -n $CI_COMMIT_REF_SLUG -f -
     - kubectl apply -n $CI_COMMIT_REF_SLUG -f ./.kubernetes/
   only:
     - master
