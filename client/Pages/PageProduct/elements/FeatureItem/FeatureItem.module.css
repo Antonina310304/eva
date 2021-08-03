@@ -121,7 +121,7 @@
     line-height: var(--lh-n);
   }
 
-  .iconPlay {
+  .videoContainer .iconPlay {
     opacity: 0;
   }
 }
