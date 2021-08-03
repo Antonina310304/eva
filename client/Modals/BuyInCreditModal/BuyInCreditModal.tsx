@@ -1,16 +1,12 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
+import React, { FC, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
 import { ApiOrder } from '@Api/Order';
-import { Modal as IModal } from '@Contexts/Modals';
-import Modal from '@Components/Modal';
+import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
-import useMedias from '@Hooks/useMedias';
-import IconClose from '@UI/IconClose';
 import Price from '@UI/Price';
 import Button from '@UI/Button';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
-import Scroller from '@UI/Scroller';
 import { InstallmentBank, InstallmentVariant } from '@Types/InstallmentBank';
 import { NetworkStatus } from '@Types/Base';
 import Variants from './elems/Variants';
@@ -18,26 +14,10 @@ import Numbers from './elems/Numbers';
 import images from './images';
 import styles from './BuyInCreditModal.module.css';
 
-export interface BuyInCreditModalProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  modal: IModal;
-}
-
-const Container: FC<any> = ({ children, ...restContainerProps }) => {
-  const { isMobile } = useMedias();
-
-  return isMobile ? (
-    <div {...restContainerProps}>{children}</div>
-  ) : (
-    <Scroller {...restContainerProps}>{children}</Scroller>
-  );
-};
-
-const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
-  const { className, modal } = props;
+const BuyInCreditModal: FC<ModalSidebarProps> = (props) => {
+  const { className, modal, ...restProps } = props;
   const { productId } = modal.data;
   const [, { closeModal }] = useModals();
-  const { isMobile } = useMedias();
   const [status, setStatus] = useState<NetworkStatus>('pending');
   const [banks, setBanks] = useState<InstallmentBank[]>([]);
   const [selectedBank, setSelectedBank] = useState<InstallmentBank>(null);
@@ -77,10 +57,6 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
     closeModal(modal.id);
   }, [closeModal, modal.id, productId, selectedVariant]);
 
-  const handleClose = useCallback(() => {
-    closeModal(modal.id);
-  }, [closeModal, modal.id]);
-
   useEffect(() => {
     async function load() {
       setStatus('loading');
@@ -101,26 +77,17 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
     load();
   }, [productId]);
 
-  if (status !== 'success') return null;
-
   return (
-    <Modal
+    <ModalSidebar
+      {...restProps}
       className={cn(styles.modal, className)}
-      id={modal.id}
-      visible={modal.visible}
-      onClose={handleClose}
+      title='Кредит без переплаты'
+      loading={status !== 'success'}
+      view='default'
+      modal={modal}
     >
-      <div className={cn(styles.container, className)}>
-        <div className={styles.head}>
-          <h3 className={styles.title}>Кредит без переплаты</h3>
-          <IconClose
-            className={styles.iconClose}
-            view={isMobile ? 'default' : 'circle'}
-            onClick={handleClose}
-          />
-        </div>
-
-        <Container className={styles.content} invisible={isMobile}>
+      {status === 'success' && (
+        <>
           {banks.length > 1 && (
             <ButtonTabs
               className={styles.tabs}
@@ -168,9 +135,9 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
               'Купить'
             )}
           </Button>
-        </Container>
-      </div>
-    </Modal>
+        </>
+      )}
+    </ModalSidebar>
   );
 };
 
