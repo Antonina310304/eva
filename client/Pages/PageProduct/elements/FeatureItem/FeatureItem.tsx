@@ -9,9 +9,16 @@ import useMedias from '@Hooks/useMedias';
 
 import styles from './FeatureItem.module.css';
 
+export interface Feature {
+  description: string;
+  fileVideo: string;
+  image: string;
+  name: string;
+  youtubeVideo: string;
+}
 export interface FeatureItemProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  feature: any;
+  feature: Feature;
 }
 
 const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => {
