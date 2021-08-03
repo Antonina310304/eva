@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, FC, createContext, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, FC, createContext, useMemo, useRef } from 'react';
 
 import ErrorBoundary from '@Components/ErrorBoundary';
 import initialState from './initialState';
@@ -15,12 +15,15 @@ const ModalsProvider: FC = (props) => {
   const [stack, setStack] = useState([]);
   const [animatings, setAnimatings] = useState([]);
   const [key, setKey] = useState(1);
+  const refTop = useRef(0);
 
   const currentModal = useMemo(() => {
     return Object.values(modals || {}).find((modal) => modal.visible);
   }, [modals]);
 
   const openModal = useCallback((id: ModalId, data) => {
+    refTop.current = refTop.current || window.scrollY;
+
     setStack((prev) => {
       const newStack = [].concat(prev, [id]);
 
@@ -130,6 +133,28 @@ const ModalsProvider: FC = (props) => {
 
     if (stack.length > 0) {
       document.documentElement.style.overflow = 'hidden';
+    }
+
+    return cleanup;
+  }, [stack.length]);
+
+  // Блокируем скролл на странице
+  useEffect(() => {
+    function cleanup() {
+      document.documentElement.style.position = '';
+      document.documentElement.style.top = '';
+      document.documentElement.style.width = '';
+      window.scrollTo(0, refTop.current);
+    }
+
+    if (stack.length > 0) {
+      document.documentElement.style.top = `-${refTop.current}px`;
+      document.documentElement.style.position = 'fixed';
+      document.documentElement.style.width = '100%';
+    }
+
+    if (stack.length === 0) {
+      refTop.current = 0;
     }
 
     return cleanup;

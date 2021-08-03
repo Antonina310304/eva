@@ -4,4 +4,5 @@ interface Window {
   draggableTarget: any;
   cylindo: any;
   dataLayer: any;
+  ymaps?: any;
 }

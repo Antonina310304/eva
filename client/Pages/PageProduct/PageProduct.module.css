@@ -41,6 +41,7 @@
   composes: main from 'containers';
 
   margin-top: var(--space-xxe);
+  margin-bottom: var(--space-xxl);
 
   &:before {
     display: block;
@@ -67,21 +68,22 @@
   max-width: 875px;
 }
 
-.sectionCrossSale {
-  padding-top: var(--space-xxl);
-}
-
 .sectionReviews {
   margin-top: var(--space-e);
 }
 
 .sectionSimilar,
-.sectionHistory {
+.sectionHistory,
+.sectionDelivery {
   margin-top: var(--space-xxe);
 }
 
 .layers {
-  padding: 50px 0;
+  margin-top: var(--space-b);
+}
+
+.mattressesBanner {
+  margin: var(--space-xxe) 0;
 }
 
 .productItem {
@@ -107,12 +109,16 @@
 }
 
 .listReviews {
-  padding-top: var(--space-xxl);
+  margin-top: var(--space-xxl);
 
   border-top: 1px solid var(--color-medium-gray);
 }
 
 .characteristics {
+  margin-top: var(--space-xxe);
+}
+
+.comfortBuy {
   margin-top: var(--space-xxe);
 }
 
@@ -122,7 +128,16 @@
   }
 
   .sectionSimilar,
-  .sectionHistory {
+  .sectionHistory,
+  .sectionDelivery {
+    margin-top: var(--space-e);
+  }
+
+  .mattressesBanner {
+    margin: var(--space-e) 0;
+  }
+
+  .comfortBuy {
     margin-top: var(--space-e);
   }
 
@@ -143,11 +158,17 @@
   }
 
   .sectionSimilar,
-  .sectionHistory {
+  .sectionHistory,
+  .sectionDelivery,
+  .sectionReviews {
     margin-top: var(--space-xb);
   }
 
-  .sectionReviews {
+  .mattressesBanner {
+    margin: var(--space-xb) 0;
+  }
+
+  .comfortBuy {
     margin-top: var(--space-xb);
   }
 

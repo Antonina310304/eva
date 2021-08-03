@@ -99,6 +99,22 @@
 }
 
 @media (--mobile) {
+  .section.hasArrows {
+    .head {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .headMain {
+      display: block;
+    }
+
+    .headAdditional {
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+  }
+
   .head,
   .headMain {
     display: block;

@@ -3,19 +3,25 @@ import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
-import Select from '@UI/Select';
+import Select, { SelectItemData } from '@UI/Select';
 import Dimension from './elements/Dimension';
 import Document from './elements/Document';
+import Hardness from './elements/Hardness';
 import SynchronousSchemes from './elements/SynchronousSchemes';
 import StringParameter from './elements/StringParameter';
 import ImportantInfo from './elements/ImportantInfo';
 import SampleOption from './elements/SampleOption';
+import ModuleCounter from './elements/ModuleCounter';
+import SampleParameter from './elements/SampleParameter';
 import styles from './Characteristics.module.css';
 
 export interface SchemeImage {
   url: string;
   width: number;
   height: number;
+}
+export interface ModuleImage {
+  src: string;
 }
 
 export interface Scheme {
@@ -29,20 +35,28 @@ export interface Value {
 }
 
 export interface Variant {
-  id: number;
+  id?: number;
+  productId?: number;
   name: string;
+  title?: string;
   image: string;
+  detailImage?: string;
   theme: string;
   selected: boolean;
+  url?: string;
+  price?: number;
 }
 
 export interface Parameter {
-  theme: 'default' | 'dropdown' | 'dimension';
+  theme: 'default' | 'dropdown' | 'dimension' | 'circle' | 'hardness';
   name?: string;
   variant?: string;
   groupId?: number;
   values?: Value[];
   variants?: Variant[];
+  value?: string;
+  icon?: string;
+  description?: string[];
 }
 
 export interface Document {
@@ -50,6 +64,19 @@ export interface Document {
   name: string;
   sizeInfo: string;
   url: string;
+}
+
+export interface Module {
+  categoryColor: string;
+  count: number;
+  extraBonus: boolean;
+  id: number;
+  images: ModuleImage[];
+  link: string;
+  maxQuantity: number;
+  minQuantity: number;
+  modelId: number;
+  name: string;
 }
 
 export interface Documents {
@@ -68,6 +95,7 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
     title: string;
   };
   documents: Documents;
+  modules: Module[];
 }
 
 const Characteristics: FC<CharacteristicsProps> = (props) => {
@@ -79,6 +107,7 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
     parameters,
     importantInfo,
     documents,
+    modules,
     ...restProps
   } = props;
   const [currentTab, setCurrentTab] = useState('0');
@@ -97,6 +126,14 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
 
   const parametersDropdown = useMemo(() => {
     return parameters.filter((parameter) => parameter.theme === 'dropdown');
+  }, [parameters]);
+
+  const parametersCircle = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'circle');
+  }, [parameters]);
+
+  const parametersHardness = useMemo(() => {
+    return parameters.filter((parameter) => parameter.theme === 'hardness');
   }, [parameters]);
 
   return (
@@ -127,77 +164,133 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
       )}
       <div className={cn(styles.row, { [styles.columns]: true })}>
         <div className={styles.col}>
-          <List
-            className={styles.dimensions}
-            items={parametersDimension}
-            renderChild={(dimension: Parameter) => (
-              <Dimension
-                className={styles.dimension}
-                name={dimension.name}
-                value={dimension.values}
-              />
-            )}
-          />
-          {/* <List */}
-          {/*  className={styles.selects} */}
-          {/*  items={parametersDropdown} */}
-          {/*  renderChild={(dropdown: Parameter) => { */}
-          {/*    const variants = dropdown.variants.map((variant) => { */}
-          {/*      return { ...variant, title: variant.name }; */}
-          {/*    }); */}
+          {parametersDimension.length > 0 && (
+            <List
+              className={styles.dimensions}
+              items={parametersDimension}
+              renderChild={(dimension: Parameter) => (
+                <Dimension
+                  className={styles.dimension}
+                  name={dimension.name}
+                  value={dimension.values}
+                />
+              )}
+            />
+          )}
+          {parametersDropdown.length > 0 && (
+            <List
+              className={styles.selects}
+              items={parametersDropdown}
+              renderChild={(dropdown: Parameter) => {
+                const options: SelectItemData[] = [];
+                dropdown.variants.forEach((variant) => {
+                  const id = variant.id ? variant.id : variant.productId;
 
-          {/*    return ( */}
-          {/*      <Select */}
-          {/*        className={styles.select} */}
-          {/*        title={dropdown.name} */}
-          {/*        checked={variants.find((variant) => variant.selected)} */}
-          {/*        items={variants} */}
-          {/*        renderItem={(option) => ( */}
-          {/*          <div className={styles.select}> */}
-          {/*            <SampleOption {...option} /> */}
-          {/*          </div> */}
-          {/*        )} */}
-          {/*      /> */}
-          {/*    ); */}
-          {/*  }} */}
-          {/* /> */}
+                  options.push({
+                    id: id.toString(),
+                    title: variant.name,
+                    name: variant.name,
+                    image: variant.image,
+                    href: variant.url,
+                    price: variant.price,
+                    selected: variant.selected,
+                  });
+                });
+
+                return (
+                  <Select
+                    className={styles.select}
+                    title={dropdown.name}
+                    defaultChecked={options.find((option) => option.selected)}
+                    items={options}
+                    wide
+                    renderItem={(itemProps: SelectItemData) => {
+                      return <SampleOption {...itemProps} className={cn(styles.option)} />;
+                    }}
+                  />
+                );
+              }}
+            />
+          )}
+
+          {parametersHardness.length > 0 && (
+            <List
+              className={styles.hardness}
+              items={parametersHardness}
+              renderChild={(hardness: Parameter) => (
+                <Hardness
+                  name={hardness.name}
+                  value={hardness.value}
+                  icon={hardness.icon}
+                  description={hardness.description}
+                />
+              )}
+            />
+          )}
         </div>
-        <List
-          className={styles.col}
-          items={parametersDefault}
-          renderChild={(parameter: Parameter) => {
+        <div className={styles.col}>
+          {parametersDefault.map((parameter, index) => {
             // TODO: поменять формат
             const name = parameter.variant.split(':')[0];
             const value = parameter.variant.split(':')[1];
 
-            return <StringParameter className={styles.parameter} name={name} value={value} />;
-          }}
-        />
-      </div>
-      <div className={styles.row}>
-        {importantInfo && (
-          <ImportantInfo
-            className={styles.ImportantInfo}
-            title={importantInfo.title}
-            text={importantInfo.text}
-          />
-        )}
-        {documents && (
-          <List
-            className={styles.documents}
-            items={documents.items}
-            renderChild={(document: Document) => (
-              <Document
-                className={styles.document}
-                icon={document.icon}
-                name={document.name}
-                sizeInfo={document.sizeInfo}
-                url={document.url}
+            return (
+              <StringParameter key={index} className={styles.parameter} name={name} value={value} />
+            );
+          })}
+          {parametersCircle.map((parameter) =>
+            parameter.variants.map((variant: Variant, index) => (
+              <SampleParameter
+                key={index}
+                className={styles.parameter}
+                name={variant.name}
+                title={variant.title}
+                image={variant.image}
               />
-            )}
-          />
-        )}
+            )),
+          )}
+        </div>
       </div>
+      {modules.length > 0 && (
+        <div className={cn(styles.row, { [styles.columns]: true })}>
+          <h2 className={styles.title}>Состав комплекта</h2>
+          <div className={styles.col}>
+            <List
+              className={styles.modules}
+              items={modules}
+              renderChild={(module: Module) => (
+                <ModuleCounter className={styles.module} name={module.name} count={module.count} />
+              )}
+            />
+          </div>
+        </div>
+      )}
+      {importantInfo && documents && (
+        <div className={styles.row}>
+          {importantInfo && (
+            <ImportantInfo
+              className={styles.ImportantInfo}
+              title={importantInfo.title}
+              text={importantInfo.text}
+            />
+          )}
+          {documents && (
+            <List
+              className={styles.documents}
+              items={documents.items}
+              renderChild={(document: Document) => (
+                <Document
+                  className={styles.document}
+                  icon={document.icon}
+                  name={document.name}
+                  sizeInfo={document.sizeInfo}
+                  url={document.url}
+                />
+              )}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };

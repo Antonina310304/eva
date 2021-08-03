@@ -1,37 +1,34 @@
-import React, { FC, HTMLAttributes, memo, MouseEvent, ReactChild } from 'react';
+import React, { FC, HTMLAttributes, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';
-import Arrows from './elements/Arrows';
 import styles from './Section.module.css';
 
 export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   className?: string;
   title: ReactChild;
-  hasArrows?: boolean;
+  additional?: ReactChild | ReactChild[];
+  additionalBreakup?: boolean;
   priceMin?: number;
   description?: ReactChild | ReactChild[];
-  onPrev?: (e: MouseEvent) => void;
-  onNext?: (e: MouseEvent) => void;
 }
 
 const Section: FC<SectionProps> = (props) => {
   const {
     className,
     title,
-    hasArrows = true,
+    additional,
+    additionalBreakup,
     priceMin,
     description,
     children,
-    onPrev,
-    onNext,
     ...restProps
   } = props;
 
   return (
     <div
       {...restProps}
-      className={cn(styles.section, { [styles.hasDescription]: !!description }, className)}
+      className={cn(styles.section, { [styles.additionalBreakup]: additionalBreakup }, className)}
     >
       <div className={styles.head}>
         <div className={styles.headContent}>
@@ -48,11 +45,7 @@ const Section: FC<SectionProps> = (props) => {
           {description && <div className={styles.description}>{description}</div>}
         </div>
 
-        {hasArrows && (
-          <div className={styles.arrows}>
-            <Arrows onPrev={onPrev} onNext={onNext} />
-          </div>
-        )}
+        {additional && <div className={styles.additional}>{additional}</div>}
       </div>
 
       <div className={styles.contentn}>{children}</div>

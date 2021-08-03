@@ -1,0 +1,90 @@
+.field {
+  position: relative;
+
+  margin-bottom: var(--space-l);
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+}
+
+.action:not(:last-child) {
+  margin-right: var(--space-xxl);
+}
+
+.ratings {
+  display: flex;
+  margin-top: var(--space-l);
+}
+
+.ratingItem {
+  width: 50%;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+}
+
+.inputs {
+  flex: 1 1 100%;
+}
+
+.text {
+  min-height: 140px;
+}
+
+.files {
+  min-width: 160px;
+  margin-left: var(--space-l);
+}
+
+.actions {
+  margin-top: var(--space-l);
+}
+
+@media (--mobile) {
+  .main {
+    flex-direction: column;
+  }
+
+  .inputs {
+    flex: 0 0 100%;
+    margin: 0 0 var(--space-xl);
+  }
+
+  .files {
+    flex: 0 0 100%;
+    margin: 0;
+  }
+
+  .ratings {
+    flex-direction: column;
+  }
+
+  .actions {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .action {
+    &:not(&:last-child) {
+      margin-right: 0;
+      margin-bottom: var(--space-s);
+    }
+  }
+
+  .buy {
+    width: 100%;
+  }
+
+  .ratingItem {
+    width: 100%;
+
+    &:not(&:last-child) {
+      margin-bottom: var(--space-xs);
+    }
+  }
+}

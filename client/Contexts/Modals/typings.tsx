@@ -1,4 +1,13 @@
-export type ModalId = 'Info' | 'Filters' | 'QrCode' | 'ProductSlider' | 'Fullscreen360' | 'Video';
+export type ModalId =
+  | 'Info'
+  | 'Filters'
+  | 'QrCode'
+  | 'TryInRoom'
+  | 'ProductSlider'
+  | 'Fullscreen360'
+  | 'SendReview'
+  | 'BuyInCredit'
+  | 'Video';
 
 export interface Modal {
   id: ModalId;

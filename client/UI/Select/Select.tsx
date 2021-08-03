@@ -9,27 +9,36 @@ import React, {
   ReactElement,
   useMemo,
 } from 'react';
-// import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
-// import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
+import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
+import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
 
 import cn from 'classnames';
 import useMedias from '@Hooks/useMedias';
 
+import FadeTransition from '@UI/FadeTransition';
+import SlideBottomTransition from '@UI/SlideBottomTransition';
+import UniversalPortal from '@UI/UniversalPortal';
+import Image from '@UI/Image';
 import styles from './Select.module.css';
+import Popup from './elements/Popup';
+
+import IconArrow from './icons/arrow.svg';
 
 export type SelectCallback = (e: MouseEvent, item: SelectItemData) => void;
 
 export interface SelectItemData {
   id: string;
   title: string;
-  data?: unknown;
-  icon?: ReactElement;
   href?: string;
+  image?: string;
+  name: string;
   price?: number;
-  currency?: 'RUB' | 'BYN';
+  data?: unknown;
+  active?: boolean;
+  selected?: boolean;
 }
 
-export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
+export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultChecked'> {
   className?: string;
   mode?: 'single' | 'single-required' | 'multiple';
   disabled?: boolean;
@@ -37,10 +46,10 @@ export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
   wide?: boolean;
   name?: string;
   title?: string;
-  countVisible?: number;
-  checked?: SelectItemData | SelectItemData[];
+  defaultChecked?: SelectItemData | SelectItemData[];
   items?: SelectItemData[];
   waiting?: boolean;
+  renderItem?: (props: SelectItemData) => ReactElement;
   onClick?: (e: MouseEvent) => void;
   onOpen?: (e: MouseEvent) => void;
   onClose?: (e: MouseEvent) => void;
@@ -51,15 +60,16 @@ export interface SelectProps extends HTMLAttributes<HTMLInputElement> {
 
 const Select: FC<SelectProps> = (props: SelectProps) => {
   const {
-    mode,
+    mode = 'single',
     disabled,
     portal,
     title,
     wide,
-    checked: propsChecked,
+    defaultChecked,
     items,
     className,
     waiting,
+    renderItem,
     onClick,
     onOpen,
     onClose,
@@ -67,17 +77,17 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     onUncheck,
     ...restProps
   } = props;
-  const { isOnlyMobile } = useMedias();
+  const { isMobile } = useMedias();
   const refField = useRef<HTMLDivElement>();
-  const refOptions = useRef<HTMLDivElement>();
   const [checked, setChecked] = useState<SelectItemData[]>(() => {
-    return Array.isArray(propsChecked) ? propsChecked : [propsChecked];
+    return Array.isArray(defaultChecked) ? defaultChecked : [defaultChecked];
   });
   const [opened, setOpened] = useState(false);
-  const [heightWrapper, setHeightWrapper] = useState<string | number>('100%');
   const [initialized, setInitialized] = useState(false);
   const [positionPortal, setPositionPortal] = useState({ width: '100%' });
   const [focusedItemIndex, setFocusedItemIndex] = useState<number>(null);
+
+  const refTop = useRef(0);
 
   const faked = useMemo(() => {
     const [firstItem] = items;
@@ -100,15 +110,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     }
     return result;
   }, [checked, items, title]);
-
-  // Формируем иконку для выбранной опции
-  const FieldImg = useMemo(() => {
-    if (mode === 'multiple') return null;
-    if (checked.find((item) => item.icon)) {
-      return checked.find((item) => item.icon).icon;
-    }
-    return null;
-  }, [checked, mode]);
 
   // Формируем value выбранных опций
   const inputValue = useMemo(() => {
@@ -174,23 +175,41 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     [mode],
   );
 
+  const handleUnblockScroll = useCallback(() => {
+    document.documentElement.style.position = '';
+    document.documentElement.style.top = '';
+    document.documentElement.style.width = '';
+    window.scrollTo(0, refTop.current);
+  }, []);
+
   const handleClose = useCallback(
     (e?: MouseEvent) => {
       setOpened(false);
       changeFocusedItemIndex(null);
 
       if (onClose) onClose(e);
+
+      if (isMobile) handleUnblockScroll();
     },
-    [changeFocusedItemIndex, onClose],
+    [changeFocusedItemIndex, isMobile, handleUnblockScroll, onClose],
   );
+
+  const handleBlockScroll = useCallback(() => {
+    document.documentElement.style.top = `-${refTop.current}px`;
+    document.documentElement.style.position = 'fixed';
+    document.documentElement.style.width = '100%';
+  }, []);
 
   const handleOpen = useCallback(
     (e: MouseEvent) => {
+      refTop.current = refTop.current || window.scrollY;
       setOpened(true);
 
       if (onOpen) onOpen(e);
+
+      if (isMobile) handleBlockScroll();
     },
-    [onOpen],
+    [isMobile, onOpen, handleBlockScroll],
   );
 
   const handleClick = useCallback(
@@ -226,19 +245,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     },
     [onUncheck, uncheckItem],
   );
-
-  const handleMouseEnterItem = useCallback(
-    (_e, eventItem: SelectItemData) => {
-      const index = items.findIndex((item) => item.id === eventItem.id);
-
-      setFocusedItemIndex(index);
-    },
-    [items],
-  );
-
-  const handleMouseLeaveItem = useCallback(() => {
-    setFocusedItemIndex(null);
-  }, []);
 
   const handleArrowDown = useCallback(
     (e) => {
@@ -316,14 +322,8 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   //
   useEffect(() => {
     setTimeout(() => {
-      setHeightWrapper((prev) => {
-        if (!refOptions || !refOptions.current) return prev;
-
-        return refOptions.current.offsetHeight;
-      });
-
       setPositionPortal((prev) => {
-        if (isOnlyMobile || !portal || !refField) return prev;
+        if (isMobile || !portal || !refField) return prev;
 
         const rect = refField.current.getBoundingClientRect();
 
@@ -334,26 +334,38 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         };
       });
     }, 10);
-  }, [initialized, isOnlyMobile, opened, portal]);
+  }, [initialized, isMobile, opened, portal]);
 
   // Изменяем внутреннее состояние при изменении пропсов
   useEffect(() => {
     setChecked(() => {
-      return Array.isArray(propsChecked) ? propsChecked : [propsChecked];
+      return Array.isArray(defaultChecked) ? defaultChecked : [defaultChecked];
     });
-  }, [propsChecked]);
+  }, [defaultChecked]);
+
   //
-  // const mainRef = useOnClickOutside(handleClose, !opened || isOnlyMobile, []);
-  //
-  // useKeyboardEvents({
-  //   onArrowDown: handleArrowDown,
-  //   onArrowUp: handleArrowUp,
-  //   onSpace: handleSpace,
-  //   onEscape: handleEscape,
-  // });
+  useEffect(() => {
+    if (isMobile && opened) {
+      handleBlockScroll();
+    } else {
+      document.documentElement.style.position = '';
+      document.documentElement.style.top = '';
+      document.documentElement.style.width = '';
+    }
+  }, [isMobile, opened, handleBlockScroll]);
+
+  const mainRef = useOnClickOutside(handleClose, !opened);
+
+  useKeyboardEvents({
+    onArrowDown: handleArrowDown,
+    onArrowUp: handleArrowUp,
+    onSpace: handleSpace,
+    onEscape: handleEscape,
+  });
 
   return (
     <div
+      ref={mainRef}
       className={cn(
         styles.select,
         {
@@ -367,32 +379,71 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     >
       <div className={styles.wrapper}>
         <input {...restProps} className={styles.control} value={inputValue} readOnly />
-        <div className={styles.field} onClick={handleClick} ref={refField}>
+        <div
+          className={cn(styles.field, {
+            [styles.placeholder]: true,
+          })}
+          onClick={handleClick}
+          ref={refField}
+        >
           <div className={styles.fieldValue}>
-            {FieldImg && <div className={styles.fieldImg}>{FieldImg}</div>}
-            <div className={styles.fieldText}>{fieldText}</div>
+            <div className={styles.fieldText}>
+              <span className={styles.fieldTitle}>{`${title}: `}</span>
+              {fieldText}
+            </div>
           </div>
-          {waiting ? <div className={styles.fieldLoader} /> : <div className={styles.fieldIcon} />}
+          <Image className={styles.iconArrow} src={IconArrow} />
         </div>
 
         {items.length > 0 && (
-          <>
-            <div className={styles.backdrop} onClick={handleClose} />
-
-            <div className={styles.popup} style={{ ...positionPortal }}>
-              {isOnlyMobile && (
-                <div className={styles.head}>
-                  <div className={styles.title}>{title}</div>
-                  <div className={styles.close} />
-                </div>
+          <UniversalPortal condition={portal || (isMobile && initialized)}>
+            <>
+              {isMobile ? (
+                <>
+                  <FadeTransition in={opened} unmountOnExit>
+                    <div className={styles.backdrop} onClick={handleClose} />
+                  </FadeTransition>
+                  <SlideBottomTransition in={opened} unmountOnExit>
+                    <div className={styles.popup} style={{ ...positionPortal }}>
+                      <Popup
+                        items={items}
+                        checked={checked}
+                        opened={opened}
+                        wide={wide}
+                        disabled={disabled}
+                        faked={faked}
+                        title={title}
+                        fieldText={fieldText}
+                        isMobile={isMobile}
+                        renderItem={renderItem}
+                        onClickField={handleClick}
+                        onCheckItem={handleCheckItem}
+                        onUncheckItem={handleUncheckItem}
+                      />
+                    </div>
+                  </SlideBottomTransition>
+                </>
+              ) : (
+                <Popup
+                  className={styles.popup}
+                  style={{ ...positionPortal }}
+                  items={items}
+                  checked={checked}
+                  opened={opened}
+                  wide={wide}
+                  disabled={disabled}
+                  faked={faked}
+                  title={title}
+                  fieldText={fieldText}
+                  isMobile={isMobile}
+                  renderItem={renderItem}
+                  onClickField={handleClick}
+                  onCheckItem={handleCheckItem}
+                  onUncheckItem={handleUncheckItem}
+                />
               )}
-              <div className={styles.wrapperOptions} style={{ height: heightWrapper }}>
-                <div className={styles.options} ref={refOptions}>
-                  renderItem
-                </div>
-              </div>
-            </div>
-          </>
+            </>
+          </UniversalPortal>
         )}
       </div>
     </div>
@@ -402,7 +453,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 Select.defaultProps = {
   mode: 'single-required',
   wide: false,
-  checked: [],
+  defaultChecked: [],
   items: [],
 };
 

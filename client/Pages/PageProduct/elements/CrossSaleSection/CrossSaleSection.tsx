@@ -11,7 +11,7 @@ import cn from 'classnames';
 
 import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
-import ButtonTabs, { Tab } from '@UI/ButtonTabs';
+import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import { ProductData } from '@Types/Product';
 import styles from './CrossSaleSection.module.css';
@@ -24,12 +24,12 @@ export interface CrossSaleSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
   products: ProductData[];
-  tabs?: Tab[];
+  tabs?: ReactElement;
   renderItem?: (props: RenderItem) => ReactElement;
 }
 
 const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
-  const { className, title, products, tabs = [], renderItem, ...restProps } = props;
+  const { className, title, products, tabs, renderItem, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -66,17 +66,22 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
       {...restProps}
       className={cn(styles.section, className)}
       title={title}
-      hasArrows={track && track.width < 100}
-      onPrev={handlePrev}
-      onNext={handleNext}
+      additional={
+        <NavArrows
+          className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      }
     >
-      {tabs.length > 0 && <ButtonTabs className={styles.tabs} defaultValue='0' tabs={tabs} />}
+      {tabs && <div className={styles.tabs}>{tabs}</div>}
 
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
           cnViewport={styles.galleryViewport}
           slideIndex={slide}
+          key={products.length}
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >

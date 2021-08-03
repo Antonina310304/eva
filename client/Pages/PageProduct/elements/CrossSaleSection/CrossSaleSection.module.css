@@ -8,6 +8,18 @@
   margin-top: var(--space-n);
 }
 
+.arrows {
+  opacity: 0;
+
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+
+    pointer-events: all;
+  }
+}
+
 .wrapperGallery {
   composes: main from 'containers';
 
