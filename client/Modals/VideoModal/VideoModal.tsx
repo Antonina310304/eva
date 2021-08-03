@@ -6,12 +6,16 @@ import useMedia from '@divanru/ts-utils/useMedia';
 import Modal from '@Components/Modal';
 import AsyncYouTube from '@Components/AsyncYouTube';
 import useModals from '@Hooks/useModals';
-import { ModalsMethods } from '@Contexts/Modals';
-
 import styles from './VideoModal.module.css';
 
+export interface ModalData {
+  width?: number;
+  height?: number;
+  videoId?: string;
+}
 export interface VideoModalProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  modalData: ModalData;
 }
 
 const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
@@ -19,9 +23,9 @@ const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
   const isMobileL = useMedia('--mobile-l');
   const isMobile = useMedia('--mobile');
 
-  const [, { isVisible, getData, closeModal }] = useModals<ModalsMethods>();
-  const modalData = getData(id);
-  const [player, setPlayer] = useState();
+  const [, { isVisible, getData, closeModal }] = useModals();
+  const modalData: ModalData = getData(id);
+  const [player, setPlayer] = useState(null);
   const [sizes, setSizes] = useState({ width: 0, height: 0 });
 
   if (!modalData.width) modalData.width = 854;

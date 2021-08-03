@@ -19,7 +19,7 @@
 
 .imgWrapper:before {
   display: block;
-  padding: 0 0 66.6666666666667%;
+  padding: 0 0 66.6666%;
 
   content: '';
 }
@@ -77,7 +77,7 @@
   font-weight: 500;
 
   font-size: var(--size-xxl);
-  line-height: var(--space-xxl);
+  line-height: var(--lh-xxl);
 }
 
 .description {
@@ -113,18 +113,18 @@
 @media (--desktop) {
   .name {
     font-size: var(--size-xl);
-    line-height: 37.5px;
+    line-height: var(--lh-xxl);
   }
 
   .description {
     font-size: var(--size-s);
-    line-height: var(--size-l);
+    line-height: var(--lh-n);
   }
 }
 
 @media (--mobile) {
   .name {
     font-size: var(--size-l);
-    line-height: var(--size-xl);
+    line-height: var(--lh-n);
   }
 }

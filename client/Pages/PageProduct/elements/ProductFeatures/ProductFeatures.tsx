@@ -14,7 +14,7 @@ export interface Features {
 }
 export interface ProductFeaturesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  features: Features;
+  features: Features[];
 }
 
 const ProductFeatures: FC<ProductFeaturesProps> = (props) => {

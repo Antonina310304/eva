@@ -2,8 +2,6 @@
   display: grid;
   grid-row-gap: var(--space-xxb);
   grid-template-rows: 1fr;
-  margin-top: 100px;
-  margin-bottom: 100px;
 }
 
 @media (--desktop-m) {
@@ -11,8 +9,6 @@
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xb);
     align-items: start;
-    margin-top: 80px;
-    margin-bottom: 80px;
   }
 }
 
@@ -20,8 +16,6 @@
   .wrapper {
     grid-template-columns: 1fr;
     gap: var(--space-xxl);
-    margin-top: var(--space-xb);
-    margin-bottom: var(--space-xb);
   }
 }
 

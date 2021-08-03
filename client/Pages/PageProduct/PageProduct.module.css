@@ -9,6 +9,11 @@
   margin-bottom: var(--space-e);
 }
 
+.wrapperFeatures {
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-xxe);
+}
+
 .cylindo {
   margin-bottom: var(--space-xxl);
   padding: var(--space-n);
@@ -120,6 +125,11 @@
   .sectionHistory {
     margin-top: var(--space-e);
   }
+
+  .wrapperFeatures {
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-e);
+  }
 }
 
 @media (--desktop) {
@@ -139,6 +149,11 @@
 
   .sectionReviews {
     margin-top: var(--space-xb);
+  }
+
+  .wrapperFeatures {
+    margin-top: var(--space-xb);
+    margin-bottom: var(--space-xb);
   }
 }
 

@@ -9,6 +9,8 @@ import useMedias from '@Hooks/useMedias';
 
 import styles from './FeatureItem.module.css';
 
+import iconPlay from './play.svg';
+
 export interface Feature {
   description: string;
   fileVideo: string;
@@ -42,12 +44,12 @@ const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => 
           />
         )}
         {feature.youtubeVideo !== '' && (
-          <Image src='/react/static/video/play.svg' className={styles.iconPlay} onClick={onClick} />
+          <Image src={iconPlay} className={styles.iconPlay} onClick={onClick} />
         )}
         {feature.fileVideo !== '' && (
           <div className={styles.videoContainer}>
             <Video src={feature.fileVideo} className={styles.video} loop stopOnScroll playOnHover />
-            {!isMobile && <Image src='/react/static/video/play.svg' className={styles.iconPlay} />}
+            {!isMobile && <Image src={iconPlay} className={styles.iconPlay} />}
           </div>
         )}
       </div>
