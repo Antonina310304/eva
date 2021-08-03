@@ -48,8 +48,8 @@ const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => 
         )}
         {feature.fileVideo !== '' && (
           <div className={styles.videoContainer}>
-            <Video src={feature.fileVideo} className={styles.video} loop stopOnScroll playOnHover />
-            {!isMobile && <Image src={iconPlay} className={styles.iconPlay} />}
+            <Video src={feature.fileVideo} className={styles.video} playOnHover />
+            {isMobile && <Image src={iconPlay} className={styles.iconPlay} />}
           </div>
         )}
       </div>

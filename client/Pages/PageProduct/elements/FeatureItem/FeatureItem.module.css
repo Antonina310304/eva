@@ -51,7 +51,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 1;
+  z-index: 999;
 
   display: block;
 
@@ -93,7 +93,7 @@
   left: 0;
 }
 
-.video:hover .video + .iconPlay {
+.video:hover + .iconPlay {
   visibility: hidden;
   opacity: 0;
 }
@@ -119,6 +119,10 @@
   .description {
     font-size: var(--size-s);
     line-height: var(--lh-n);
+  }
+
+  .iconPlay {
+    opacity: 0;
   }
 }
 
