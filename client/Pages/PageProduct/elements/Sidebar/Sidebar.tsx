@@ -45,6 +45,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('BuyInCredit', { productId: page.product.id });
   }, [openModal, page]);
 
+  const handleClickShowroom = useCallback(() => {
+    openModal('Showrooms', { showrooms: page.sellPoints });
+  }, [openModal, page.sellPoints]);
+
   const { product, isAvailable } = page;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
@@ -132,6 +136,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             },
             {
               label: 'Эта модель в шоурумах',
+              onClick: handleClickShowroom,
             },
             {
               label: 'Характеристики',
