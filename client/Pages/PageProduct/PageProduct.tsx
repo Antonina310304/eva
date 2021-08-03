@@ -147,11 +147,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
       </MainGrid>
 
-      <MainGrid className={cn(styles.mainContainer, styles.wrapperFeatures)}>
-        {page.data.features?.length > 0 && <ProductFeatures features={page.data.features} />}
+      <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
+        {page.features?.length > 0 && <ProductFeatures features={page.features} />}
       </MainGrid>
 
-      {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.data.country === 'RUS' && (
+      {['matrasy', 'krovati'].includes(page.data.categoryTranslite) && meta.country === 'RUS' && (
         <ChooseMattressBanner
           categoryColor={product.categoryColor}
           title='Подбери лучший!'
