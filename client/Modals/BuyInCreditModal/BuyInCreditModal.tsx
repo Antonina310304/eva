@@ -89,6 +89,7 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
       className={cn(styles.modal, className)}
       title='Кредит без переплаты'
       loading={status !== 'success'}
+      view='default'
       modal={modal}
     >
       {status === 'success' && (

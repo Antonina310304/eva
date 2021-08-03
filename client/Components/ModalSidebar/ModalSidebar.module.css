@@ -63,7 +63,6 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 522px;
-  min-height: 100%;
   padding: var(--space-xxl);
 
   background-color: var(--color-white);
@@ -115,6 +114,14 @@
   .enterDone {
     .wrapperContent {
       transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .modal {
+    &.viewDefault {
+      .wrapperContent {
+        top: var(--space-e);
+      }
     }
   }
 
