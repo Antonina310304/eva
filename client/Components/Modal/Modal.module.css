@@ -7,7 +7,6 @@
   z-index: var(--z-index-modal);
 
   width: 100%;
-  margin: auto;
 
   overflow: auto;
 
@@ -66,6 +65,8 @@
   position: relative;
 
   width: 100%;
+
+  text-align: center;
 
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
