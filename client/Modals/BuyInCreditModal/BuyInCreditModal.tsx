@@ -1,9 +1,9 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
+import React, { FC, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
 import { ApiOrder } from '@Api/Order';
 import { Modal as IModal } from '@Contexts/Modals';
-import ModalSidebar from '@Components/ModalSidebar';
+import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
 import Price from '@UI/Price';
 import Button from '@UI/Button';
@@ -15,15 +15,13 @@ import Numbers from './elems/Numbers';
 import images from './images';
 import styles from './BuyInCreditModal.module.css';
 
-export interface BuyInCreditModalProps extends HTMLAttributes<HTMLDivElement> {
+export interface BuyInCreditModalProps extends ModalSidebarProps {
   className?: string;
   modal: IModal;
-  onClose?: () => void;
-  onLoad?: () => void;
 }
 
 const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
-  const { className, modal, onClose, onLoad } = props;
+  const { className, modal, ...restProps } = props;
   const { productId } = modal.data;
   const [, { closeModal }] = useModals();
   const [status, setStatus] = useState<NetworkStatus>('pending');
@@ -87,13 +85,11 @@ const BuyInCreditModal: FC<BuyInCreditModalProps> = (props) => {
 
   return (
     <ModalSidebar
+      {...restProps}
       className={cn(styles.modal, className)}
-      id={modal.id}
-      visible={modal.visible}
       title='Кредит без переплаты'
       loading={status !== 'success'}
-      onClose={onClose}
-      onLoad={onLoad}
+      modal={modal}
     >
       {status === 'success' && (
         <>

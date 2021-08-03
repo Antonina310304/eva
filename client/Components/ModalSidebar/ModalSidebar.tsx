@@ -2,7 +2,7 @@ import React, { memo, HTMLAttributes, FC, MouseEvent, useCallback, useRef, useEf
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 
-import { ModalId } from '@Contexts/Modals';
+import { Modal } from '@Contexts/Modals';
 import Scroller from '@UI/Scroller';
 import IconClose from '@UI/IconClose';
 import Loader from '@UI/Loader';
@@ -11,8 +11,7 @@ import styles from './ModalSidebar.module.css';
 
 export interface ModalSidebarProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  id: ModalId;
-  visible?: boolean;
+  modal: Modal;
   loading?: boolean;
   title?: string;
   view?: 'default' | 'fullscreen';
@@ -21,7 +20,7 @@ export interface ModalSidebarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ModalSidebar: FC<ModalSidebarProps> = (props) => {
-  const { className, children, title, loading, visible, view = 'default', onClose, onLoad } = props;
+  const { className, children, title, modal, loading, view = 'default', onClose, onLoad } = props;
   const { isMobile } = useMedias();
   const refBackdrop = useRef<HTMLDivElement>();
 
@@ -49,7 +48,7 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
         className,
       )}
     >
-      <CSSTransition classNames={{ ...styles }} in={visible} timeout={400}>
+      <CSSTransition classNames={{ ...styles }} in={modal.visible} timeout={400}>
         <div className={styles.wrapper}>
           <div className={styles.backdrop} ref={refBackdrop} onClick={handleClickBackdrop} />
           <div className={styles.wrapperContent}>
