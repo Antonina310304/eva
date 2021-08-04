@@ -97,6 +97,10 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
     [hints, meta.data],
   );
 
+  const handleFocus = useCallback(() => {
+    setError(null);
+  }, []);
+
   return (
     <div {...restProps} className={cn(styles.calculator, [className])}>
       <div className={styles.form}>
@@ -106,7 +110,9 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
           placeholder='Поиск адреса'
           loading={loadingHints}
           hints={hints}
+          error={error}
           onChange={handleChangeAddress}
+          onFocus={handleFocus}
           onSelectHint={handleCalculate}
         />
         <Button
@@ -132,8 +138,6 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
           </div>
         </>
       )}
-
-      {error && <div className={styles.error}>{error}</div>}
     </div>
   );
 };
