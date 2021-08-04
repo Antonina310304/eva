@@ -63,7 +63,10 @@
   width: 52.65%;
   padding-bottom: 31.26%;
 
+  background-repeat: no-repeat;
+
   background-position: center;
+  background-size: cover;
 }
 
 .reviewScroller {

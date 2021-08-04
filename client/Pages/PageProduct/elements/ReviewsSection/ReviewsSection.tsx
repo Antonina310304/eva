@@ -69,7 +69,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const handleClickReviewImage = useCallback(
     (selectedPhoto) => {
       openModal('Review', {
-        selectedPhoto,
+        reviewIndex: reviews.findIndex((item: ReviewData) => item.id === selectedPhoto.id),
         reviews,
       });
     },

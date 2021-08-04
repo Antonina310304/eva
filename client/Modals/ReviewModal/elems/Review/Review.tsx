@@ -21,7 +21,9 @@ const Review: FC<ReviewProps> = (props) => {
     <div {...restProps} className={cn(styles.review, className)}>
       <Scroller className={styles.reviewScroller} invisible={isMobile}>
         <div className={styles.modalWrapper}>
-          <Image className={styles.photo} src={review.photos[0].image} />
+          {review.photos && review.photos.length > 0 && (
+            <Image className={styles.photo} src={review.photos[0].image} />
+          )}
 
           {isDesktop ? (
             <div>

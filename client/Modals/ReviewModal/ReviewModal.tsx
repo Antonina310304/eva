@@ -1,4 +1,4 @@
-import React, { memo, FC, useState, useCallback, useMemo, useEffect } from 'react';
+import React, { memo, FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import Modal from '@Components/Modal';
@@ -6,7 +6,6 @@ import { Modal as IModal } from '@Contexts/Modals';
 import Link from '@UI/Link';
 import IconClose from '@UI/IconClose';
 import useModals from '@Hooks/useModals';
-import { ReviewData } from '@Types/Review';
 
 import Review from './elems/Review';
 
@@ -19,72 +18,43 @@ export interface ReviewModalProps {
 
 const ReviewModal: FC<ReviewModalProps> = (props) => {
   const { className, modal } = props;
-  const { reviews, selectedPhoto } = modal.data;
-  const [review, setReview] = useState<ReviewData>(
-    reviews.find((item: ReviewData) => item.id === selectedPhoto.id),
-  );
-  const [currentRewiewIndex, setCurrentRewiewIndex] = useState(0);
+  const { reviews, reviewIndex } = modal.data;
+  const [currentReviewIndex, setCurrentRewiewIndex] = useState<number>(reviewIndex);
   const [, { closeAllModals, closeModal }] = useModals();
 
-  const reviewsWithPhotos = useMemo((): ReviewData[] => {
-    return reviews.reduce((prevReviews: ReviewData[], reviewItem: ReviewData) => {
-      if (reviewItem.photos.length > 0) {
-        prevReviews.push(reviewItem);
-      }
-      return prevReviews;
-    }, []);
-  }, [reviews]);
+  const normalizeIndex = useCallback(
+    (value: number) => {
+      if (value < 0) return reviews.length - 1;
+      if (value > reviews.length - 1) return 0;
 
-  useEffect(
-    () =>
-      setCurrentRewiewIndex(
-        reviewsWithPhotos.findIndex((item: ReviewData) => item.id === review.id),
-      ),
-    [reviewsWithPhotos, review.id],
+      return value;
+    },
+    [reviews.length],
   );
 
   const nextId = useMemo(() => {
-    let res;
-    if (currentRewiewIndex !== reviewsWithPhotos.length - 1) {
-      res = reviewsWithPhotos[currentRewiewIndex + 1].id;
-    } else {
-      res = reviewsWithPhotos[0].id;
-    }
-    return res;
-  }, [currentRewiewIndex, reviewsWithPhotos]);
+    return reviews[normalizeIndex(currentReviewIndex + 1)].id;
+  }, [currentReviewIndex, normalizeIndex, reviews]);
 
   const prevId = useMemo(() => {
-    let res;
-    if (currentRewiewIndex === 0) {
-      res = reviewsWithPhotos[reviewsWithPhotos.length - 1].id;
-    } else {
-      res = reviewsWithPhotos[currentRewiewIndex - 1].id;
-    }
-    return res;
-  }, [currentRewiewIndex, reviewsWithPhotos]);
+    return reviews[normalizeIndex(currentReviewIndex - 1)].id;
+  }, [currentReviewIndex, normalizeIndex, reviews]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentRewiewIndex((prev) => normalizeIndex(prev - 1));
+  }, [normalizeIndex]);
+
+  const handleNext = useCallback(() => {
+    setCurrentRewiewIndex((prev) => normalizeIndex(prev + 1));
+  }, [normalizeIndex]);
 
   const handleClose = useCallback(() => {
     window.history.pushState('', '', window.location.pathname);
     closeAllModals();
   }, [closeAllModals]);
 
-  const handlePrev = useCallback(() => {
-    if (currentRewiewIndex === 0) {
-      setReview(reviewsWithPhotos[reviewsWithPhotos.length - 1]);
-    } else {
-      setReview(reviewsWithPhotos[currentRewiewIndex - 1]);
-    }
-  }, [currentRewiewIndex, reviewsWithPhotos]);
-
-  const handleNext = useCallback(() => {
-    if (currentRewiewIndex !== reviewsWithPhotos.length - 1) {
-      setReview(reviewsWithPhotos[currentRewiewIndex + 1]);
-    } else {
-      setReview(reviewsWithPhotos[0]);
-    }
-  }, [currentRewiewIndex, reviewsWithPhotos]);
-
   const handleBackClick = useCallback(() => {
+    window.history.pushState('', '', window.location.pathname);
     closeModal('Review');
   }, [closeModal]);
 
@@ -112,7 +82,7 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
             <IconClose onClick={handleClose} />
           </div>
 
-          <Review className={styles.review} review={review} />
+          <Review className={styles.review} review={reviews[currentReviewIndex]} />
         </div>
 
         <Link to={`#review-${nextId}`} className={styles.next} view='simple'>
