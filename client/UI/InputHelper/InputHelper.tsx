@@ -1,18 +1,7 @@
-import React, {
-  memo,
-  useRef,
-  useState,
-  useCallback,
-  FC,
-  InputHTMLAttributes,
-  FocusEvent,
-  ChangeEvent,
-  cloneElement,
-  ReactElement,
-} from 'react';
+import React, { memo, useRef, useState, useCallback, FC, cloneElement, ReactElement } from 'react';
 import cn from 'classnames';
 
-import Input from '@UI/Input';
+import Input, { InputProps } from '@UI/Input';
 import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 import HintItem from './elems/HintItem';
 import styles from './InputHelper.module.css';
@@ -23,15 +12,11 @@ export interface InputHelperHint {
   data: any;
 }
 
-export interface InputHelperProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
+export interface InputHelperProps extends InputProps {
   hints: InputHelperHint[];
   loading?: boolean;
   value?: string;
   slotInput?: ReactElement;
-  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-  onChange?: (e: ChangeEvent) => void;
   onSelectHint?: (e: MouseEvent | KeyboardEvent, hint: InputHelperHint) => void;
 }
 
@@ -201,13 +186,6 @@ const InputHelper: FC<InputHelperProps> = (props) => {
     setSelectedHintIndex(null);
   }, []);
 
-  useKeyboardEvents({
-    onEscape: handleEscape,
-    onArrowDown: handleArrowDown,
-    onArrowUp: handleArrowUp,
-    onSpace: handleSpace,
-  });
-
   const inputProps = {
     ...restProps,
     value: innerValue,
@@ -220,19 +198,28 @@ const InputHelper: FC<InputHelperProps> = (props) => {
     onKeyUp: handleKeyUp,
   };
 
+  useKeyboardEvents({
+    onEscape: handleEscape,
+    onArrowDown: handleArrowDown,
+    onArrowUp: handleArrowUp,
+    onSpace: handleSpace,
+  });
+
   return (
-    <div className={cn(styles.inputHelper, className)}>
+    <div
+      className={cn(
+        styles.inputHelper,
+        { [styles.opened]: !loading && opened && innerValue.length > 2 },
+        className,
+      )}
+    >
       {slotInput ? (
         cloneElement(slotInput, { ...inputProps, ...slotInput.props })
       ) : (
         <Input {...inputProps} />
       )}
 
-      <div
-        className={cn(styles.wrapperOptions, {
-          [styles.visible]: !loading && opened && innerValue.length > 2,
-        })}
-      >
+      <div className={styles.wrapperOptions}>
         <div ref={refOptions}>
           {hints.length > 0 ? (
             <div className={styles.options}>
