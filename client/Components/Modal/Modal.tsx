@@ -16,7 +16,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 
 const Modal: FC<ModalProps> = (props) => {
   const { className, id, children, view = 'default', onClose } = props;
-  const [{ animatings }, { closeModal }] = useModals();
+  const [, { closeModal }] = useModals();
   const refWrapper = useRef();
 
   const handleClose = useCallback(
@@ -35,7 +35,6 @@ const Modal: FC<ModalProps> = (props) => {
         className={cn(
           styles.modal,
           {
-            [styles.closes]: animatings.includes(id),
             [styles.viewDefault]: view === 'default',
             [styles.viewSlideRight]: view === 'slide-right',
           },
