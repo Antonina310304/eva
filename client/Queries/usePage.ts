@@ -41,7 +41,6 @@ const usePage = (params: Params): UseQueryResult<UsePageResult> => {
   const keys = ['page', ssr && 'ssr', path];
 
   const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
-    keepPreviousData: true,
     retryOnMount: false,
     refetchOnMount: false,
   });

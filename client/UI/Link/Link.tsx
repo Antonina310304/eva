@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, MouseEvent } from 'react';
 import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
+import { useQueryClient, useIsFetching } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
 import styles from './Link.module.css';
@@ -27,14 +27,15 @@ const Link: FC<LinkProps> = (props) => {
     ...restProps
   } = props;
   const queryClient = useQueryClient();
+  const isFetchingPages = useIsFetching(['page']);
   const history = useHistory();
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
       e.preventDefault();
       if (window.cancelClick) return;
-      if (needFetch) {
-        await queryClient.prefetchQuery(['page', to, 'ssr'], () =>
+      if (needFetch && isFetchingPages < 1) {
+        await queryClient.prefetchQuery(['page', 'ssr', to], () =>
           ApiPages.fetchPage({ path: to }),
         );
         history.push(to);
@@ -42,7 +43,7 @@ const Link: FC<LinkProps> = (props) => {
       }
       if (onClick) onClick(e);
     },
-    [history, needFetch, onClick, queryClient, to],
+    [history, isFetchingPages, needFetch, onClick, queryClient, to],
   );
 
   return (
