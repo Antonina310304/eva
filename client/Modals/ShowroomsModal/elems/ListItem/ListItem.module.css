@@ -1,0 +1,87 @@
+.listItem {
+  --width-icon: 30px;
+  box-sizing: border-box;
+  padding: var(--space-n);
+
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--color-light-gray);
+  }
+
+  &.opened {
+    cursor: default;
+
+    .icon {
+      background-image: url('./mark_active.svg');
+    }
+
+    .address {
+      color: var(--color-black);
+    }
+  }
+}
+
+.head {
+  display: flex;
+  padding-right: var(--space-s);
+
+  cursor: pointer;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: var(--width-icon);
+  height: var(--width-icon);
+  margin-right: var(--space-s);
+
+  background-image: url('./mark.svg');
+  background-repeat: no-repeat;
+}
+
+.address {
+  composes: s from 'sizes';
+
+  color: var(--color-dark-gray);
+}
+
+.contentInfo {
+  padding-left: calc(var(--width-icon) + var(--space-s));
+}
+
+.more {
+  margin-top: var(--space-xxs);
+
+  color: var(--color-dark-gray);
+}
+
+.phone {
+  margin-top: var(--space-m);
+
+  font-weight: 500;
+}
+
+.worktime {
+  margin-top: var(--space-xxs);
+
+  font-weight: 500;
+}
+
+.images {
+  margin-top: var(--space-l);
+}
+
+.image {
+  width: 100%;
+  margin-bottom: var(--space-xs);
+
+  padding-bottom: 42.56%;
+
+  background-size: contain;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
