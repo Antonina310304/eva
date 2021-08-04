@@ -1,0 +1,15 @@
+.asyncVimeo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.asyncVimeo > div {
+  width: 100%;
+  height: 100%;
+}
+
+.asyncVimeo iframe {
+  width: 100%;
+  height: 100%;
+}
