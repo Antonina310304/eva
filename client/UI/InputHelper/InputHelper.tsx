@@ -221,18 +221,20 @@ const InputHelper: FC<InputHelperProps> = (props) => {
   };
 
   return (
-    <div className={cn(styles.inputHelper, className)}>
+    <div
+      className={cn(
+        styles.inputHelper,
+        { [styles.opened]: !loading && opened && innerValue.length > 2 },
+        className,
+      )}
+    >
       {slotInput ? (
         cloneElement(slotInput, { ...inputProps, ...slotInput.props })
       ) : (
         <Input {...inputProps} />
       )}
 
-      <div
-        className={cn(styles.wrapperOptions, {
-          [styles.visible]: !loading && opened && innerValue.length > 2,
-        })}
-      >
+      <div className={styles.wrapperOptions}>
         <div ref={refOptions}>
           {hints.length > 0 ? (
             <div className={styles.options}>
