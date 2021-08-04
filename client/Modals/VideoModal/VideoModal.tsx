@@ -78,8 +78,8 @@ const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
           <AsyncYouTube
             videoId={modalData.videoId}
             opts={{
-              height: isMobileL ? sizes.height : modalData.height,
-              width: isMobileL ? sizes.width : modalData.width,
+              height: isMobileL ? sizes.height.toString() : modalData.height.toString(),
+              width: isMobileL ? sizes.width.toString() : modalData.width.toString(),
               playerVars: {
                 autoplay: 1,
               },
