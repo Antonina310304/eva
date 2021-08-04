@@ -45,6 +45,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('BuyInCredit', { productId: page.product.id });
   }, [openModal, page]);
 
+  const handleClickQualityGuarantee = useCallback(() => {
+    openModal('QualityGuarantee');
+  }, [openModal]);
+
   const { product, isAvailable } = page;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
@@ -129,6 +133,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               label: 'Гарантируем качество',
+              onClick: handleClickQualityGuarantee,
             },
             {
               label: 'Эта модель в шоурумах',

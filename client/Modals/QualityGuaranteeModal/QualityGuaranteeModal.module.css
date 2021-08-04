@@ -1,0 +1,59 @@
+.videoContent {
+  min-height: 292px;
+}
+
+.poster {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.posterImage {
+  width: 100%;
+  padding-top: 55.94%;
+}
+
+.posterIcon {
+  position: absolute;
+
+  width: 50px;
+  height: 50px;
+
+  background-image: url('./play.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.text {
+  margin-top: var(--space-xxl);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.nuance {
+  margin-top: var(--space-s);
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-xs);
+  line-height: var(--lh-xs);
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  margin-top: var(--space-xxl);
+
+  font-size: var(--size-s);
+  line-height: 21px;
+}
