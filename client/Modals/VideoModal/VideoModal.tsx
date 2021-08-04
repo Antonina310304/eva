@@ -19,8 +19,7 @@ export interface VideoModalProps extends HTMLAttributes<HTMLDivElement> {
 
 const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
   const id = 'Video';
-  const isMobileL = useMedias();
-  const isMobile = useMedias();
+  const { isMobileL, isMobile } = useMedias();
 
   const [, { isVisible, getData, closeModal }] = useModals();
   const modalData: ModalData = getData(id);
