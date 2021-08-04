@@ -33,6 +33,7 @@
 }
 
 .link {
+  display: inline-block;
   margin-top: var(--space-s);
 }
 
