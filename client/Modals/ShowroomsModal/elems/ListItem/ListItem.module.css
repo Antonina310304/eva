@@ -79,6 +79,8 @@
 
   padding-bottom: 42.56%;
 
+  background-size: contain;
+
   &:last-child {
     margin-bottom: 0;
   }
