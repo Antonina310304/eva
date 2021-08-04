@@ -40,7 +40,6 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
     ...restProps
   } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [focused, setFocused] = useState(false);
 
   const handleClick = useCallback((e) => {
@@ -115,6 +114,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
           onBlur={handleBlur}
         />
         {after && <span className={styles.after}>{after}</span>}
+        {error && <div className={styles.iconError} />}
       </div>
       {error && <div className={styles.error}>{error}</div>}
     </>
