@@ -89,7 +89,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
         <div className={styles.headAdditional}>
           {hasPhotos ? (
             <>
-              {track && track.width < 100 && (
+              {track?.width < 100 && (
                 <div className={styles.arrows}>
                   <Arrows onPrev={handlePrev} onNext={handleNext} />
                 </div>
