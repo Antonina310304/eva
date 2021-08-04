@@ -1,0 +1,137 @@
+.featuresItem {
+  display: grid;
+  grid-row-gap: var(--space-xb);
+  grid-column-gap: 80px;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.featuresItem:nth-child(odd) .imgWrapper {
+  order: 1;
+}
+
+.imgWrapper {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.imgWrapper:before {
+  display: block;
+  padding: 0 0 66.6666%;
+
+  content: '';
+}
+
+.videoContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: block;
+  width: 100%;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.iconPlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+
+  display: block;
+
+  width: 70px;
+  height: 70px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  transform: translate(-50%, -50%);
+  visibility: visible;
+
+  cursor: pointer;
+  opacity: 1;
+
+  transition: opacity var(--animation-duration-fast);
+}
+
+.name {
+  margin-bottom: var(--space-m);
+
+  font-weight: 500;
+
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.description {
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.imgWrapper:hover + .iconPlay {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.video:hover + .iconPlay {
+  opacity: 0;
+}
+
+@media (--desktop-m) {
+  .featuresItem {
+    grid-row-gap: var(--space-xxl);
+    grid-column-gap: var(--space-xb);
+    grid-template-columns: 1fr;
+  }
+
+  .featuresItem:nth-child(odd) .imgWrapper {
+    order: 0;
+  }
+}
+
+@media (--desktop) {
+  .name {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
+
+  .description {
+    font-size: var(--size-s);
+  }
+
+  .videoContainer .iconPlay {
+    opacity: 0;
+  }
+}
+
+@media (--mobile) {
+  .name {
+    font-size: var(--size-l);
+    line-height: var(--lh-n);
+  }
+}

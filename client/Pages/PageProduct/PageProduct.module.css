@@ -9,6 +9,10 @@
   margin-bottom: var(--space-e);
 }
 
+.wrapperFeatures {
+  margin-top: var(--space-xxe);
+}
+
 .cylindo {
   margin-bottom: var(--space-xxl);
   padding: var(--space-n);
@@ -135,6 +139,11 @@
   .comfortBuy {
     margin-top: var(--space-e);
   }
+
+  .wrapperFeatures {
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-e);
+  }
 }
 
 @media (--desktop) {
@@ -160,6 +169,11 @@
 
   .comfortBuy {
     margin-top: var(--space-xb);
+  }
+
+  .wrapperFeatures {
+    margin-top: var(--space-xb);
+    margin-bottom: var(--space-xb);
   }
 }
 
