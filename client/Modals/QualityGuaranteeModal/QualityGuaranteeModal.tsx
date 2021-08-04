@@ -2,11 +2,11 @@ import React, { FC, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
-import useModals from '@Hooks/useModals';
+import VideoPreview from '@Components/VideoPreview';
 import Link from '@UI/Link';
+import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import AsyncVimeo from './elems/AsyncVimeo';
-import VideoPreview from './elems/VideoPreview';
 import styles from './QualityGuaranteeModal.module.css';
 
 const QualityGuaranteeModal: FC<ModalSidebarProps> = (props) => {
