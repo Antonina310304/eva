@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect, memo, FC, HTMLAttributes } from 'react';
 
 import cn from 'classnames';
-import useMedia from '@divanru/ts-utils/useMedia';
+import useMedias from '@Hooks/useMedias';
 
 import Modal from '@Components/Modal';
 import AsyncYouTube from '@Components/AsyncYouTube';
@@ -15,13 +15,12 @@ export interface ModalData {
 }
 export interface VideoModalProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  modalData: ModalData;
 }
 
 const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
   const id = 'Video';
-  const isMobileL = useMedia('--mobile-l');
-  const isMobile = useMedia('--mobile');
+  const isMobileL = useMedias();
+  const isMobile = useMedias();
 
   const [, { isVisible, getData, closeModal }] = useModals();
   const modalData: ModalData = getData(id);
@@ -68,7 +67,7 @@ const VideoModal: FC<VideoModalProps> = ({ className, ...props }) => {
   return (
     <Modal
       className={cn({}, [className])}
-      view='default-outside'
+      view='default'
       id={id}
       visible={isVisible(id)}
       onClose={onClose}

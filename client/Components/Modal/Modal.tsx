@@ -10,7 +10,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   id: ModalId;
   visible?: boolean;
-  view?: 'default' | 'slide-right' | 'default-outside';
+  view?: 'default' | 'slide-right';
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
 }
 

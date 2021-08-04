@@ -82,7 +82,7 @@
 
 .description {
   font-size: var(--size-n);
-  line-height: var(--size-xl);
+  line-height: var(--lh-n);
 }
 
 .video {
@@ -118,7 +118,6 @@
 
   .description {
     font-size: var(--size-s);
-    line-height: var(--lh-n);
   }
 
   .videoContainer .iconPlay {

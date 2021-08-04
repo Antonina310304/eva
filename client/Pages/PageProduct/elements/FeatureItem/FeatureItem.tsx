@@ -6,9 +6,7 @@ import Image from '@UI/Image';
 import Video from '@UI/Video';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
-
 import styles from './FeatureItem.module.css';
-
 import iconPlay from './play.svg';
 
 export interface Feature {
@@ -18,33 +16,35 @@ export interface Feature {
   name: string;
   youtubeVideo: string;
 }
+
 export interface FeatureItemProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   feature: Feature;
 }
 
-const FeatureItem: FC<FeatureItemProps> = ({ feature, className, ...props }) => {
+const FeatureItem: FC<FeatureItemProps> = (props) => {
+  const { className, feature, ...restProps } = props;
   const [, { openModal }] = useModals();
   const isMobile = useMedias();
 
-  const onClick = useCallback(() => {
+  const handleClick = useCallback(() => {
     if (feature.youtubeVideo !== '') {
       openModal('Video', { videoId: feature.youtubeVideo });
     }
   }, [openModal, feature]);
 
   return (
-    <div {...props} className={cn(styles.featuresItem, [className])}>
+    <div {...restProps} className={cn(styles.featuresItem, [className])}>
       <div className={cn(styles.imgWrapper, { [styles.viewVideo]: !!feature.fileVideo })}>
         {feature.image && (
           <Image
             src={feature.image}
             className={cn(styles.image, { [styles.video]: !!feature.youtubeVideo })}
-            onClick={onClick}
+            onClick={handleClick}
           />
         )}
         {feature.youtubeVideo !== '' && (
-          <Image src={iconPlay} className={styles.iconPlay} onClick={onClick} />
+          <Image src={iconPlay} className={styles.iconPlay} onClick={handleClick} />
         )}
         {feature.fileVideo !== '' && (
           <div className={styles.videoContainer}>
