@@ -54,6 +54,8 @@
   position: relative;
   z-index: 3;
 
+  display: flex;
+  align-items: center;
   width: 100%;
 
   padding: 16px var(--space-s);
@@ -74,7 +76,20 @@
   }
 }
 
+.iconError {
+  position: absolute;
+  right: var(--space-s);
+
+  width: 22px;
+  height: 22px;
+
+  background-image: url('./iconError.svg');
+  background-repeat: no-repeat;
+}
+
 .error {
+  composes: s from 'sizes';
+
   margin-top: var(--space-xs);
 
   color: var(--color-red);

@@ -6,7 +6,8 @@ export type ModalId =
   | 'Fullscreen360'
   | 'SendReview'
   | 'BuyInCredit'
-  | 'Review';
+  | 'Review'
+  | 'Showrooms';
 
 export interface Modal {
   id: ModalId;

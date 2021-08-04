@@ -56,6 +56,8 @@
 .photo {
   width: 225px;
   padding-bottom: 73.333%;
+
+  background-size: contain;
 }
 
 @media (--mobile) {
