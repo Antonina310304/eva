@@ -37,11 +37,7 @@ const FeatureItem: FC<FeatureItemProps> = (props) => {
     <div {...restProps} className={cn(styles.featuresItem, [className])}>
       <div className={cn(styles.imgWrapper, { [styles.viewVideo]: !!feature.fileVideo })}>
         {feature.image && (
-          <Image
-            src={feature.image}
-            className={cn(styles.image, { [styles.video]: !!feature.youtubeVideo })}
-            onClick={handleClick}
-          />
+          <Image src={feature.image} className={styles.image} onClick={handleClick} />
         )}
         {feature.youtubeVideo !== '' && (
           <Image src={iconPlay} className={styles.iconPlay} onClick={handleClick} />

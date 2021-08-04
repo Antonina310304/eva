@@ -93,8 +93,12 @@
   left: 0;
 }
 
+.imgWrapper:hover + .iconPlay {
+  cursor: pointer;
+  opacity: 1;
+}
+
 .video:hover + .iconPlay {
-  visibility: hidden;
   opacity: 0;
 }
 
