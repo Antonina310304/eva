@@ -39,24 +39,27 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
+
+  const { product, isAvailable } = page;
+  const shortName = product.name.split(' ')[0];
+  const hasExpired = product.price.expired > 0;
+  const hasDiscount = product.price.discount > 0;
+  const labels = ['отзыв', 'отзыва', 'отзывов'];
+  const label = declOfNum(page.reviewsPhotoCount, labels);
+  const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
   const [, { openModal }] = useModals();
 
   const handleClickCredit = useCallback(() => {
     openModal('BuyInCredit', { productId: page.product.id });
   }, [openModal, page]);
 
+  const handleClickShowroom = useCallback(() => {
+    openModal('Showrooms', { showrooms: page.sellPoints });
+  }, [openModal, page.sellPoints]);
+
   const handleClickQualityGuarantee = useCallback(() => {
     openModal('QualityGuarantee');
   }, [openModal]);
-
-  const { product, isAvailable } = page;
-  const shortName = product.name.split(' ')[0];
-  const hasExpired = product.price.expired > 0;
-  const hasDiscount = product.price.discount > 0;
-
-  const labels = ['отзыв', 'отзыва', 'отзывов'];
-  const label = declOfNum(page.reviewsPhotoCount, labels);
-  const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
 
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
@@ -135,8 +138,9 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Гарантируем качество',
               onClick: handleClickQualityGuarantee,
             },
-            {
+            page.sellPoints?.length > 0 && {
               label: 'Эта модель в шоурумах',
+              onClick: handleClickShowroom,
             },
             {
               label: 'Характеристики',
@@ -150,7 +154,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             {
               label: 'Способы оплаты',
             },
-          ]}
+          ].filter(Boolean)}
         />
       </div>
     </div>
