@@ -24,7 +24,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 100;
 
   height: 100%;
 }
@@ -68,7 +68,7 @@
   background-color: var(--color-white);
   transform: translate3d(100%, 0, 0);
 
-  transition: all 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 }
 
 .wrapperPreloader {
@@ -131,7 +131,17 @@
 
   .wrapperContent {
     max-width: 100%;
+    padding: var(--space-n) var(--space-s) var(--space-l);
 
     transform: translate3d(0, 100%, 0);
+  }
+
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+
+  .containerContent {
+    margin-top: var(--space-l);
   }
 }

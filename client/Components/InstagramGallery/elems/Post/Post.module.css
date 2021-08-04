@@ -4,6 +4,8 @@
 .image {
   width: 100%;
   padding-bottom: 100%;
+
+  background-size: cover;
 }
 
 .author {

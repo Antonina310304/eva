@@ -15,12 +15,23 @@ export interface ModalSidebarProps extends HTMLAttributes<HTMLDivElement> {
   loading?: boolean;
   title?: string;
   view?: 'default' | 'fullscreen';
+  cnContent?: string;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
   onLoad?: () => void;
 }
 
 const ModalSidebar: FC<ModalSidebarProps> = (props) => {
-  const { className, children, title, modal, loading, view = 'default', onClose, onLoad } = props;
+  const {
+    className,
+    children,
+    title,
+    modal,
+    loading,
+    view = 'default',
+    cnContent,
+    onClose,
+    onLoad,
+  } = props;
   const { isMobile } = useMedias();
   const refBackdrop = useRef<HTMLDivElement>();
 
@@ -60,10 +71,14 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
               <>
                 <div className={styles.head}>
                   <h3 className={styles.title}>{title}</h3>
-                  <IconClose className={styles.iconClose} onClick={onClose} />
+                  <IconClose
+                    className={styles.iconClose}
+                    view={isMobile ? 'default' : 'circle'}
+                    onClick={onClose}
+                  />
                 </div>
 
-                <Scroller className={styles.containerContent} invisible={isMobile}>
+                <Scroller className={cn(styles.containerContent, cnContent)} invisible={isMobile}>
                   {children}
                 </Scroller>
               </>
