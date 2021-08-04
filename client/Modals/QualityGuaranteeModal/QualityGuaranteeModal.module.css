@@ -17,6 +17,8 @@
 .posterImage {
   width: 100%;
   padding-top: 55.94%;
+
+  background-size: cover;
 }
 
 .posterIcon {
@@ -29,6 +31,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+
+.infoWrapper {
+  padding: 0 var(--space-xxl);
 }
 
 .text {
@@ -56,4 +62,26 @@
 
   font-size: var(--size-s);
   line-height: 21px;
+}
+
+.scrollStyle {
+  width: calc(100% + var(--space-xxl) + 55px);
+  margin-right: -55px;
+  margin-left: var(--space-xxl-neg);
+}
+
+@media (--mobile) {
+  .videoContent {
+    min-height: 202px;
+  }
+
+  .infoWrapper {
+    padding: 0 var(--space-s);
+  }
+
+  .scrollStyle {
+    width: calc(100% + var(--space-s) * 2);
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
+  }
 }

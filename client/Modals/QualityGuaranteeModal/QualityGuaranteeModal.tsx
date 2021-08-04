@@ -31,6 +31,7 @@ const QualityGuaranteeModal: FC<ModalSidebarProps> = (props) => {
       title='Гарантируем качество'
       view='default'
       modal={modal}
+      cnContent={styles.scrollStyle}
     >
       <div className={styles.videoContent}>
         {isPlaying ? (
@@ -46,20 +47,23 @@ const QualityGuaranteeModal: FC<ModalSidebarProps> = (props) => {
         )}
       </div>
 
-      <div className={styles.text}>
-        Мы – трендсеттеры на мебельном рынке, зачастую наши модели копируют конкуренты. Посмотрим,
-        как они это делают. Мы подготовили обзор, в котором рассказываем на что стоит обратить
-        внимание при выборе дивана, чтобы не ошибиться!
-      </div>
+      <div className={styles.infoWrapper}>
+        <div className={styles.text}>
+          Мы – трендсеттеры на мебельном рынке, зачастую наши модели копируют конкуренты. Посмотрим,
+          как они это делают. Мы подготовили обзор, в котором рассказываем на что стоит обратить
+          внимание при выборе дивана, чтобы не ошибиться!
+        </div>
 
-      <div className={styles.nuance}>
-        * при оформлении заказа в кредит без переплаты условия других акций на покупку не действуют.
-      </div>
+        <div className={styles.nuance}>
+          * при оформлении заказа в кредит без переплаты условия других акций на покупку не
+          действуют.
+        </div>
 
-      <div className={styles.linkWrapper}>
-        <Link className={styles.link} to='/scandinavian-collection' onClick={handleClickLink}>
-          Подробнее о производстве
-        </Link>
+        <div className={styles.linkWrapper}>
+          <Link className={styles.link} to='/scandinavian-collection' onClick={handleClickLink}>
+            Подробнее о производстве
+          </Link>
+        </div>
       </div>
     </ModalSidebar>
   );
