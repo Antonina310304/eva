@@ -1,12 +1,12 @@
-import React, { FC, memo, useCallback, useState, useEffect, useMemo } from 'react';
+import React, { FC, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
-import Image from '@UI/Image';
 import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
 import AsyncVimeo from './elems/AsyncVimeo';
+import VideoPreview from './elems/VideoPreview';
 import styles from './QualityGuaranteeModal.module.css';
 
 const QualityGuaranteeModal: FC<ModalSidebarProps> = (props) => {
@@ -37,13 +37,11 @@ const QualityGuaranteeModal: FC<ModalSidebarProps> = (props) => {
         {isPlaying ? (
           <AsyncVimeo className={styles.video} video='458955708' autoplay muted={isMobile} />
         ) : (
-          <div className={styles.poster} onClick={handleClickPlay}>
-            <Image
-              className={styles.posterImage}
-              src='/react/static/QualityGuaranteeModal/video-poster.jpg'
-            />
-            <div className={styles.posterIcon} />
-          </div>
+          <VideoPreview
+            src='/react/static/QualityGuaranteeModal/video-poster.jpg'
+            cnPreviewHeight={styles.preview}
+            onClick={handleClickPlay}
+          />
         )}
       </div>
 
