@@ -58,6 +58,8 @@
 .photo {
   width: 100%;
   padding-bottom: 73.333%;
+
+  background-size: cover;
 }
 
 .wrapperButton {
