@@ -39,6 +39,13 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
+  const { product, isAvailable } = page;
+  const shortName = product.name.split(' ')[0];
+  const hasExpired = product.price.expired > 0;
+  const hasDiscount = product.price.discount > 0;
+  const labels = ['отзыв', 'отзыва', 'отзывов'];
+  const label = declOfNum(page.reviewsPhotoCount, labels);
+  const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
   const [, { openModal }] = useModals();
 
   const handleClickCredit = useCallback(() => {
@@ -48,15 +55,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
   const handleClickShowroom = useCallback(() => {
     openModal('Showrooms', { showrooms: page.sellPoints });
   }, [openModal, page.sellPoints]);
-
-  const { product, isAvailable } = page;
-  const shortName = product.name.split(' ')[0];
-  const hasExpired = product.price.expired > 0;
-  const hasDiscount = product.price.discount > 0;
-
-  const labels = ['отзыв', 'отзыва', 'отзывов'];
-  const label = declOfNum(page.reviewsPhotoCount, labels);
-  const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
 
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
@@ -134,7 +132,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               label: 'Гарантируем качество',
             },
-            {
+            page.sellPoints?.length > 0 && {
               label: 'Эта модель в шоурумах',
               onClick: handleClickShowroom,
             },
@@ -150,7 +148,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             {
               label: 'Способы оплаты',
             },
-          ]}
+          ].filter(Boolean)}
         />
       </div>
     </div>
