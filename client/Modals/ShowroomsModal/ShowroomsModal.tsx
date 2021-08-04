@@ -30,6 +30,7 @@ const ShowroomsModal: FC<ModalSidebarProps> = (props) => {
     <ModalSidebar
       {...restProps}
       className={cn(styles.modal, className)}
+      cnContent={styles.modalContent}
       title='Этот товар есть в шоуруме'
       view='default'
       modal={modal}

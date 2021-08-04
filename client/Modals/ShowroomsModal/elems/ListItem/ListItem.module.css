@@ -1,6 +1,9 @@
 .listItem {
   --width-icon: 30px;
+  box-sizing: border-box;
   padding: var(--space-n);
+
+  cursor: pointer;
 
   transition: background-color 0.2s;
 
@@ -9,6 +12,8 @@
   }
 
   &.opened {
+    cursor: default;
+
     .icon {
       background-image: url('./mark_active.svg');
     }

@@ -1,2 +1,8 @@
 .modal {
 }
+
+@media (--mobile) {
+  .modalContent {
+    margin-top: var(--space-xs);
+  }
+}
