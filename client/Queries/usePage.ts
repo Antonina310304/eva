@@ -27,6 +27,7 @@ export interface UsePageResult {
   sameProducts: any;
   historyProducts: any;
   instagram: any;
+  features: any[];
   productsModel: any;
   parameters: any;
   importantInfo: any;
@@ -40,7 +41,6 @@ const usePage = (params: Params): UseQueryResult<UsePageResult> => {
   const keys = ['page', ssr && 'ssr', path];
 
   const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
-    keepPreviousData: true,
     retryOnMount: false,
     refetchOnMount: false,
   });

@@ -12,7 +12,6 @@ export interface InstagramGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   slideIndex?: number;
   posts: InstagramPostData[];
-  cnViewport?: string;
   hasPromoPlaceholder?: boolean;
   onChangeProgress?(opts: ProgressOptions): void;
   onChangeCurrent?(state: any): void;
@@ -22,7 +21,6 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
   const {
     className,
     slideIndex,
-    cnViewport,
     posts,
     hasPromoPlaceholder,
     onChangeProgress,
@@ -44,7 +42,6 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
     <div {...restProps} className={cn(styles.instagram, className)}>
       <Gallery
         className={styles.gallery}
-        cnViewport={cnViewport}
         slideIndex={slideIndex}
         onChangeProgress={handleChangeProgress}
         onChangeCurrent={onChangeCurrent}

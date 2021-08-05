@@ -1,24 +1,27 @@
 export type ModalId =
   | 'Info'
   | 'Filters'
+  | 'QrCode'
   | 'TryInRoom'
   | 'ProductSlider'
   | 'Fullscreen360'
   | 'SendReview'
   | 'BuyInCredit'
-  | 'ClientsPhotos';
+  | 'ClientsPhotos'
+  | 'Review'
+  | 'QualityGuarantee'
+  | 'Video'
+  | 'Showrooms';
 
 export interface Modal {
   id: ModalId;
   data: any;
   visible?: boolean;
+  selected?: boolean;
 }
 
-export type ModalsMap = Record<ModalId, Modal>;
-
 export interface ModalsState {
-  modals?: ModalsMap;
-  animatings?: ModalId[];
+  stack?: Modal[];
   currentModal?: Modal;
 }
 
@@ -28,5 +31,4 @@ export interface ModalsMethods {
   closeAllModals: () => void;
   getData: (id: ModalId) => unknown;
   isVisible: (id: ModalId) => boolean;
-  isAnimating: (id: ModalId) => boolean;
 }

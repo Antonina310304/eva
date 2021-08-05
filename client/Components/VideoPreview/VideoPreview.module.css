@@ -1,0 +1,30 @@
+.videoPreview {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.posterImage {
+  width: 100%;
+  padding-top: 50%;
+
+  background-size: cover;
+}
+
+.posterIcon {
+  position: absolute;
+
+  width: 50px;
+  height: 50px;
+
+  background-image: url('play.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}

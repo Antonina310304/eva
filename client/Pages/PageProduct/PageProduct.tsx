@@ -22,6 +22,7 @@ import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
 import Characteristics from './elements/Characteristics';
+import ProductFeatures from './elements/ProductFeatures';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
@@ -94,11 +95,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
     importantInfo,
     documents,
     modules,
+    features,
   } = page;
-
-  const handleA = useCallback(() => {
-    openModal('ClientsPhotos', { reviews: siteReviews });
-  }, [openModal, siteReviews]);
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -111,7 +109,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
           tags={product.tags}
           ar={ar}
           category={breadcrumbs[1].text}
-          onClick={handleA}
         />
       </MainGrid>
 
@@ -177,6 +174,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
             modules={modules}
           />
         </div>
+
+        {features?.length > 0 && (
+          <ProductFeatures className={styles.wrapperFeatures} features={features} />
+        )}
       </MainGrid>
 
       {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (

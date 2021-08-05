@@ -1,7 +1,7 @@
 .hintItem {
   composes: s from 'sizes';
 
-  padding: var(--space-s);
+  padding: var(--space-xxs);
   overflow: hidden;
 
   white-space: nowrap;

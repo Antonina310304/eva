@@ -19,7 +19,6 @@
 .scrollerContainer {
   position: absolute;
 
-  margin-right: -15px;
   overflow: hidden scroll;
   inset: 0px;
 }

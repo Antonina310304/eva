@@ -29,7 +29,3 @@
 .gallery {
   margin: 0 var(--space-xs-neg) var(--space-xxl);
 }
-
-.galleryViewport {
-  overflow: visible;
-}

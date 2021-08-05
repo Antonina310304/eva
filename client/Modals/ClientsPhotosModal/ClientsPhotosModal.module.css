@@ -48,6 +48,8 @@
 .photo {
   width: 350px;
   padding-top: 59.2%;
+
+  background-size: cover;
 }
 
 @media (--desktop) {
