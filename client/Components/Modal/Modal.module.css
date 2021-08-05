@@ -124,3 +124,10 @@
     transform: translateX(100%);
   }
 }
+
+@media (--mobile) {
+  .wrapper {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
