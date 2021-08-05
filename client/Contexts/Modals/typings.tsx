@@ -1,12 +1,15 @@
 export type ModalId =
   | 'Info'
   | 'Filters'
+  | 'QrCode'
   | 'TryInRoom'
   | 'ProductSlider'
   | 'Fullscreen360'
   | 'SendReview'
   | 'BuyInCredit'
   | 'Review'
+  | 'QualityGuarantee'
+  | 'Video'
   | 'Showrooms';
 
 export interface Modal {
