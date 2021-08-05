@@ -106,7 +106,6 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
           <div className={styles.wrapperGallery}>
             <Gallery
               className={styles.gallery}
-              cnViewport={styles.galleryViewport}
               slideIndex={slide}
               onChangeCurrent={handleChangeCurrent}
               onChangeProgress={handleChangeProgress}
