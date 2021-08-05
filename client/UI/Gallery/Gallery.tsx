@@ -486,7 +486,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       ref={refContainer}
     >
       <Touch
-        className={cn(styles.viewport, cnViewport)}
+        className={cn(cnViewport, styles.viewport)}
         ref={refViewport}
         onStartX={handleStartX}
         onMoveX={handleMoveX}
