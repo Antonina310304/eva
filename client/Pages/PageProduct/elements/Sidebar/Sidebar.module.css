@@ -58,15 +58,16 @@
 }
 
 .wrapperFabrics {
-  margin-top: var(--space-xxl);
+  margin-top: var(--space-xl);
 }
 
 .orderFabrics {
-  margin-top: var(--space-s);
+  height: auto;
+  margin-top: var(--space-xs);
 }
 
 .relatedProducts {
-  margin-top: var(--space-s);
+  margin-top: var(--space-xl);
 }
 
 .actions {
