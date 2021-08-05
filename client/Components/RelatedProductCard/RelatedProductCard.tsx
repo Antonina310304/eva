@@ -1,6 +1,7 @@
-import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
 import cn from 'classnames';
 
+import { useRelatedProducts } from '@Stores/relatedProducts';
 import { ProductData } from '@Types/Product';
 import styles from './RelatedProductCard.module.css';
 import Sizes, { SizeData } from './elems/Sizes';
@@ -9,11 +10,13 @@ import Footer from './elems/Footer';
 
 export interface RelatedProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  listId: number;
   product: ProductData;
 }
 
 const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
-  const { className, product, ...restProps } = props;
+  const { className, listId, product, ...restProps } = props;
+  const relatedProducts = useRelatedProducts();
 
   const sizes: SizeData[] = useMemo(() => {
     const result: SizeData[] = [];
@@ -41,6 +44,13 @@ const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
     return result;
   }, [product]);
 
+  const handleChangeQuantity = useCallback(
+    (_e, { quantity }) => {
+      relatedProducts.changeQuantityProduct({ listId, productId: product.id, quantity });
+    },
+    [listId, product.id, relatedProducts],
+  );
+
   return (
     <div {...restProps} className={cn(styles.card, className)}>
       <div className={styles.wrapper}>
@@ -50,13 +60,21 @@ const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
           <div className={styles.name}>{product.name}</div>
           {sizes.length > 0 && <Sizes className={styles.sizes} label='Размеры:' sizes={sizes} />}
           <div className={styles.contentFooter}>
-            <Footer className={styles.footer} product={product} />
+            <Footer
+              className={styles.footer}
+              product={product}
+              onChangeQuantity={handleChangeQuantity}
+            />
           </div>
         </div>
       </div>
 
       <div className={styles.mainFooter}>
-        <Footer className={styles.footer} product={product} />
+        <Footer
+          className={styles.footer}
+          product={product}
+          onChangeQuantity={handleChangeQuantity}
+        />
       </div>
     </div>
   );

@@ -118,7 +118,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
         <RelatedProducts
           className={styles.relatedProducts}
           label='Добавьте сопутствующие товары:'
-          groups={relatedProducts.selectedLists}
+          lists={relatedProducts.selectedLists}
         />
       )}
 
