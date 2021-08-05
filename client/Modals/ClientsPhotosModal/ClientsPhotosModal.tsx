@@ -19,7 +19,7 @@ export interface ClientsPhotosModalProps {
 
 const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
   const { className, modal } = props;
-  const [, { closeAllModals }] = useModals();
+  const [, { closeAllModals, openModal }] = useModals();
   const { reviews } = modal.data;
   const { isMobile } = useMedias();
 
@@ -41,6 +41,37 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
     closeAllModals();
   }, [closeAllModals]);
 
+  const getReviewIndex = useCallback(
+    (photoId) => {
+      const reviewIndex = reviews.findIndex((item: ReviewData) => {
+        const ass = item.photos.findIndex((photo) => photo.id === photoId);
+        if (ass !== -1) return true;
+        return false;
+      });
+
+      return reviewIndex;
+    },
+    [reviews],
+  );
+
+  const getLinkIndex = useCallback(
+    (photoId) => {
+      const reviewIndex = getReviewIndex(photoId);
+      return reviews[reviewIndex].id;
+    },
+    [getReviewIndex, reviews],
+  );
+
+  const handleClickLinkToReview = useCallback(
+    (_e, photoId) => {
+      const reviewIndex = getReviewIndex(photoId);
+
+      closeAllModals();
+      openModal('Review', { reviewIndex, reviews });
+    },
+    [closeAllModals, getReviewIndex, openModal, reviews],
+  );
+
   return (
     <Modal
       className={cn(styles.clientsPhotosModal, [className])}
@@ -57,7 +88,13 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
           <Scroller className={styles.content} invisible={isMobile}>
             <div className={styles.photosWrapper}>
               {photos.map((photo, index) => (
-                <Link className={styles.link} to={`#review-${photo.id}`} view='simple' key={index}>
+                <Link
+                  className={styles.link}
+                  to={`#review-${getLinkIndex(photo.id)}`}
+                  view='simple'
+                  onClick={(e) => handleClickLinkToReview(e, photo.id)}
+                  key={index}
+                >
                   <Image className={styles.photo} src={photo.image} />
                 </Link>
               ))}
