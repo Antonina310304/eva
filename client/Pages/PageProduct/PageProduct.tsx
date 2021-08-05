@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState } from 'react';
+import React, { FC, HTMLAttributes, useCallback, useEffect, memo, useMemo, useState } from 'react';
 import cn from 'classnames';
 
 import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
@@ -42,6 +42,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
       return review.source === 'site';
     });
   }, [page]);
+
+  useEffect(() => {
+    openModal('YandexMarket');
+  }, [openModal]);
 
   const crossSalesTabs = useMemo(() => {
     if (!page?.crossSalesProducts) return [];
