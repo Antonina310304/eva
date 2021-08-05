@@ -94,7 +94,6 @@ const Section: FC<SectionProps> = (props) => {
         <Gallery
           className={styles.items}
           slideIndex={slide}
-          cnViewport={styles.galleryViewport}
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >
