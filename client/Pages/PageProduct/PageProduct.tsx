@@ -96,7 +96,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     setSelectedCrossSaleTab(tab.id);
   }, []);
 
-  useRelatedProducts(page.relatedProducts);
+  useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>

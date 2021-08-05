@@ -7,28 +7,29 @@ export interface ChangeQuantityProductParams {
   quantity: number;
 }
 
-export type RelatedProductsStore = any[];
+export interface RelatedProductsStore {
+  productId: number;
+  lists: any[];
+}
+
 export type UseRelatedProducts = (initialValue?: RelatedProductsStore) => RelatedProductsStore;
 export type ChangeQuantityProduct = (params: ChangeQuantityProductParams) => void;
 
-const allLists = createStore<any[]>();
+const store = createStore<RelatedProductsStore>();
 
-const selectedLists = createDerived(allLists, (list) => {
-  return list.map((item) => ({
+const selectedLists = createDerived(store, ({ lists }) => {
+  return lists.map((item) => ({
     ...item,
     products: item.products.filter((product: any) => product.quantity > 0),
   }));
 });
 
-const addProduct = (product: any) => {
-  allLists.set([...getValue(allLists), product]);
-};
-
 const changeQuantityProduct: ChangeQuantityProduct = ({ listId, productId, quantity }) => {
-  const prevLists = getValue(allLists);
+  const prevValue = getValue(store);
 
-  allLists.set(
-    prevLists.map((list) => {
+  store.set({
+    ...prevValue,
+    lists: prevValue.lists.map((list) => {
       if (list.id !== listId) return list;
 
       const newProducts = list.products.map((product: any) => {
@@ -42,16 +43,19 @@ const changeQuantityProduct: ChangeQuantityProduct = ({ listId, productId, quant
         products: newProducts,
       };
     }),
-  );
+  });
 };
 
-export const useRelatedProducts = (initialValue?: any) => {
-  if (initialValue && !getValue(allLists)) allLists.set(initialValue);
+export const useRelatedProducts = (initialValue?: RelatedProductsStore): any => {
+  const value = getValue(store);
+
+  if (initialValue && value?.productId !== initialValue?.productId) {
+    store.set(initialValue);
+  }
 
   return {
-    addProduct,
     changeQuantityProduct,
-    allLists: useStore(allLists),
+    allLists: useStore(store).lists,
     selectedLists: useStore(selectedLists),
   };
 };
