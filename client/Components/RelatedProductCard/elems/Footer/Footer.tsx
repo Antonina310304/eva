@@ -26,7 +26,9 @@ const Footer: FC<FooterProps> = (props) => {
       />
 
       <div className={styles.prices}>
-        <Price className={styles.expiredPrice} expired price={product.price.expired} />
+        {product.price.expired > 0 && (
+          <Price className={styles.expiredPrice} expired price={product.price.expired} />
+        )}
         <Price className={styles.actualPrice} price={product.price.actual} />
       </div>
     </div>
