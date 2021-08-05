@@ -10,10 +10,6 @@
   margin-top: var(--space-l);
 }
 
-.galleryViewport {
-  overflow: visible;
-}
-
 @media (--mobile) {
   .navArrows {
     display: flex;
