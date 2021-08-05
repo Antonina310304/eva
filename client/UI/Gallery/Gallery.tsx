@@ -21,7 +21,6 @@ type GetSlideRef = (index: number) => RefCallback<HTMLElement>;
 export interface GalleryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onDragStart' | 'onDragEnd'> {
   className?: string;
-  cnViewport?: string;
   slideIndex?: number;
   gap?: number;
   onDragStart?: TouchEventHandler;
@@ -42,7 +41,6 @@ export interface GalleryState {
   min: number;
   max: number;
   viewportWidth: number;
-  containerWidth: number;
   layerWidth: number;
   initialized: boolean;
   shiftX: number;
@@ -62,7 +60,6 @@ export interface ProgressOptions {
 
 export interface CalcMinParams {
   viewportWidth: number;
-  containerWidth: number;
   layerWidth: number;
 }
 
@@ -71,7 +68,6 @@ const initialState: GalleryState = {
   min: 0,
   max: 0,
   viewportWidth: 0,
-  containerWidth: 0,
   layerWidth: 0,
   initialized: false,
   shiftX: 0,
@@ -86,14 +82,13 @@ const initialState: GalleryState = {
 /**
  * Рассчитать минимальную позицию галереи
  */
-function calcMin({ viewportWidth, containerWidth, layerWidth }: CalcMinParams) {
-  return viewportWidth - (containerWidth - viewportWidth) / 2 - layerWidth;
+function calcMin({ viewportWidth, layerWidth }: CalcMinParams) {
+  return viewportWidth - layerWidth;
 }
 
 const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const {
     className,
-    cnViewport,
     slideIndex,
     gap = 0,
     children,
@@ -105,7 +100,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     onChangeProgress,
     ...restProps
   } = props;
-  const refContainer = useRef<HTMLDivElement>();
   const refViewport = useRef<HTMLDivElement>();
   const startT = useRef<Date>();
   const storeSlides = useRef<any>({});
@@ -190,7 +184,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           shiftX: getIndent(state.current),
           min: calcMin(data),
           max: calcMax(),
-          canDrag: data.layerWidth > data.containerWidth,
+          canDrag: data.layerWidth > data.viewportWidth,
           initialized: true,
         };
       },
@@ -319,7 +313,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       return {
         slides: [],
         viewportWidth: 0,
-        containerWidth: 0,
         layerWidth: 0,
       };
     }
@@ -336,7 +329,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       },
     );
     const viewportWidth = refViewport.current.offsetWidth;
-    const containerWidth = refContainer.current.offsetWidth;
     const summGap = gap * (slides.length - 1);
     const layerWidth = slides.reduce(
       (val: number, slide: GallerySlidesState) => slide.width + val,
@@ -346,7 +338,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     return {
       slides,
       viewportWidth,
-      containerWidth,
       layerWidth,
     };
   }, [children, gap, state.initialized]);
@@ -372,7 +363,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    */
   const handleStartX = useCallback((e: TouchEvent) => {
     startT.current = e.startT;
-    window.draggableTarget = window.draggableTarget || refContainer.current;
+    window.draggableTarget = window.draggableTarget || refViewport.current;
 
     dispatch('disableAnimation');
   }, []);
@@ -386,7 +377,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
 
       if (!state.canDrag) return;
       if (!e.isSlideX) return;
-      if (window.draggableTarget && window.draggableTarget !== refContainer.current) return;
+      if (window.draggableTarget && window.draggableTarget !== refViewport.current) return;
 
       dispatch({
         type: 'setDelta',
@@ -456,14 +447,14 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       return v;
     };
 
-    const pureWidth = (state.containerWidth * 100) / state.layerWidth;
+    const pureWidth = (state.viewportWidth * 100) / state.layerWidth;
     const pureOffset = Math.abs(state.shiftX * 100) / state.layerWidth;
     const width = Math.round(normalize(pureWidth));
     const offset = Math.round(normalize(pureOffset));
     const finished = width + offset >= 100;
 
     onChangeProgress({ width, offset, finished });
-  }, [onChangeProgress, state.containerWidth, state.shiftX, state.layerWidth, state.initialized]);
+  }, [onChangeProgress, state.shiftX, state.layerWidth, state.initialized, state.viewportWidth]);
 
   /** Програмное изменение слайда */
   useEffect(() => {
@@ -480,35 +471,30 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   }, [getSizes, state.initialized]);
 
   return (
-    <div
+    <Touch
       {...restProps}
       className={cn(styles.gallery, { [styles.canDrag]: state.canDrag }, className)}
-      ref={refContainer}
+      ref={refViewport}
+      onStartX={handleStartX}
+      onMoveX={handleMoveX}
+      onEnd={handleEnd}
     >
-      <Touch
-        className={cn(styles.viewport, cnViewport)}
-        ref={refViewport}
-        onStartX={handleStartX}
-        onMoveX={handleMoveX}
-        onEnd={handleEnd}
-      >
-        <div className={styles.layer} style={styleLayer}>
-          {Children.map(children, (child: ReactElement, index: number) => {
-            const isFirst = index === 0;
+      <div className={styles.layer} style={styleLayer}>
+        {Children.map(children, (child: ReactElement, index: number) => {
+          const isFirst = index === 0;
 
-            if (!child) return null;
+          if (!child) return null;
 
-            return cloneElement(child, {
-              ...child.props,
-              key: index,
-              ref: addSlideToStore(index),
-              style: isFirst || !gap ? {} : { marginLeft: `${gap}px` },
-              className: cn(styles.child, child.props.className),
-            });
-          })}
-        </div>
-      </Touch>
-    </div>
+          return cloneElement(child, {
+            ...child.props,
+            key: index,
+            ref: addSlideToStore(index),
+            style: isFirst || !gap ? {} : { marginLeft: `${gap}px` },
+            className: cn(styles.child, child.props.className),
+          });
+        })}
+      </div>
+    </Touch>
   );
 };
 

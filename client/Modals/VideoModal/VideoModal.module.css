@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: calc(100% - var(--space-2xl) * 2);
+
+  margin: var(--space-2xl) 0;
+
+  font-size: 0;
+}
+
+.content {
+  background: transparent;
+}
+
+@media (--mobile-l) {
+  .Modal-Close {
+    position: fixed;
+    top: var(--space-m);
+    right: var(--space-s);
+  }
+}

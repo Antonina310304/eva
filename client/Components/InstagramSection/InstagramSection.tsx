@@ -67,7 +67,6 @@ const InstragramSection: FC<InstagramSectionProps> = (props) => {
       <div className={styles.wrapperGallery}>
         <InstagramGallery
           className={styles.gallery}
-          cnViewport={styles.galleryViewport}
           slideIndex={slideIndex}
           posts={posts}
           hasPromoPlaceholder={hasPromoPlaceholder}

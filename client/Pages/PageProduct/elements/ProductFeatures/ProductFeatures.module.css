@@ -1,0 +1,33 @@
+.wrapper {
+  display: grid;
+  grid-row-gap: var(--space-xxb);
+  grid-template-rows: 1fr;
+}
+
+@media (--desktop-m) {
+  .wrapper {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xb);
+    align-items: start;
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    gap: var(--space-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    grid-template-columns: 1fr 1fr;
+    max-width: none;
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}

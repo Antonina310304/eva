@@ -23,6 +23,7 @@ import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
 import Characteristics from './elements/Characteristics';
+import ProductFeatures from './elements/ProductFeatures';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
@@ -47,6 +48,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     importantInfo,
     documents,
     modules,
+    features,
   } = page;
   const [, { openModal }] = useModals();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
@@ -174,6 +176,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
             modules={modules}
           />
         </div>
+
+        {features?.length > 0 && (
+          <ProductFeatures className={styles.wrapperFeatures} features={features} />
+        )}
       </MainGrid>
 
       {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (

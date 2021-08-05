@@ -1,0 +1,24 @@
+.Video {
+  position: relative;
+
+  display: flex;
+  width: 100%;
+}
+
+.helper {
+  display: flex;
+  width: 100%;
+}
+
+.player {
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.player:focus {
+  outline: none;
+}

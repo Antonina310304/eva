@@ -21,7 +21,6 @@ export interface Tab {
 
 export interface ContainerProps {
   className?: string;
-  cnViewport?: string;
   scrollable?: boolean;
 }
 
@@ -34,12 +33,10 @@ export interface ButtonTabsProps extends HTMLAttributes<HTMLDivElement>, Contain
 }
 
 const Container: FC<ContainerProps> = (props) => {
-  const { scrollable, cnViewport, children, ...restProps } = props;
+  const { scrollable, children, ...restProps } = props;
 
   return scrollable ? (
-    <Gallery {...restProps} cnViewport={cnViewport}>
-      {children}
-    </Gallery>
+    <Gallery {...restProps}>{children}</Gallery>
   ) : (
     <div {...restProps}>{children}</div>
   );
@@ -85,7 +82,6 @@ const ButtonTabs: FC<ButtonTabsProps> = (props) => {
         { [styles.inversed]: inversed, [styles.scrollable]: scrollable },
         className,
       )}
-      cnViewport={styles.galleryViewport}
       scrollable={scrollable}
     >
       {tabs.map((tab) => {

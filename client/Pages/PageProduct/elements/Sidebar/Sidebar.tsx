@@ -41,6 +41,7 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
+
   const { product, isAvailable } = page;
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
@@ -58,6 +59,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
   const handleClickShowroom = useCallback(() => {
     openModal('Showrooms', { showrooms: page.sellPoints });
   }, [openModal, page.sellPoints]);
+
+  const handleClickQualityGuarantee = useCallback(() => {
+    openModal('QualityGuarantee');
+  }, [openModal]);
+
+  const handleClickDeliveryInformation = useCallback(() => {
+    openModal('DeliveryInformation');
+  }, [openModal]);
 
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
@@ -135,6 +144,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
         <LinksList
           items={[
             {
+              icon: <div className={cn(styles.icon, styles.delivery)} />,
+              label: 'Информация о доставке',
+              onClick: handleClickDeliveryInformation,
+            },
+            {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
@@ -142,6 +156,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
             {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               label: 'Гарантируем качество',
+              onClick: handleClickQualityGuarantee,
             },
             page.sellPoints?.length > 0 && {
               label: 'Эта модель в шоурумах',
