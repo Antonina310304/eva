@@ -61,6 +61,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('QualityGuarantee');
   }, [openModal]);
 
+  const handleClickDeliveryInformation = useCallback(() => {
+    openModal('DeliveryInformation');
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
       <div className={styles.shortName}>
@@ -128,6 +132,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
       <div className={styles.linksList}>
         <LinksList
           items={[
+            {
+              icon: <div className={cn(styles.icon, styles.delivery)} />,
+              label: 'Информация о доставке',
+              onClick: handleClickDeliveryInformation,
+            },
             {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
               label: 'Купить в кредит без переплаты',
