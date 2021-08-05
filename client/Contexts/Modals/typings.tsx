@@ -7,6 +7,7 @@ export type ModalId =
   | 'Fullscreen360'
   | 'SendReview'
   | 'BuyInCredit'
+  | 'Review'
   | 'QualityGuarantee'
   | 'Video'
   | 'Showrooms';

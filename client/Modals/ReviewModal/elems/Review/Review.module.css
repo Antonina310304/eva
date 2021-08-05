@@ -1,0 +1,153 @@
+.review {
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  composes: darkGray from 'colors';
+}
+
+.date {
+  composes: darkGray from 'colors';
+}
+
+.criterias {
+  display: flex;
+  margin-top: var(--space-l);
+}
+
+.criteria {
+  display: flex;
+  align-items: center;
+
+  margin-right: var(--space-l);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.criteriaName {
+  margin-right: var(--space-s);
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.wrapperMain {
+  display: flex;
+  align-items: flex-start;
+  margin-top: var(--space-l);
+}
+
+.content {
+  padding-right: var(--space-xe);
+}
+
+.photoGallery {
+  width: 100%;
+  margin: var(--space-n) var(--space-xs-neg) 0;
+  overflow: hidden;
+}
+
+.photoItem {
+  padding: 0 var(--space-xs);
+}
+
+.photo {
+  width: 52.65%;
+  padding-bottom: 31.26%;
+
+  background-repeat: no-repeat;
+
+  background-position: center;
+  background-size: cover;
+}
+
+.reviewScroller {
+  height: 387px;
+}
+
+.modalWrapper {
+  display: flex;
+}
+
+.infoScroller {
+  flex-grow: 1;
+  width: 40%;
+  height: 387px;
+  margin-left: var(--space-xxl);
+}
+
+.infoScrollerContent {
+  margin-right: var(--space-s);
+}
+
+.rewiewText {
+  margin-top: var(--space-n);
+}
+
+@media (--desktop) {
+  .reviewScroller {
+    height: 615px;
+  }
+
+  .modalWrapper {
+    flex-direction: column;
+    margin-right: var(--space-s);
+  }
+
+  .photo {
+    width: 100%;
+    padding-bottom: 62.5%;
+  }
+
+  .head {
+    margin-top: var(--space-xxl);
+  }
+}
+
+@media (--mobile) {
+  .reviewScroller {
+    height: 100vh;
+  }
+
+  .modalWrapper {
+    margin-right: 0;
+  }
+
+  .head,
+  .rewiewText {
+    padding: 0 var(--space-s);
+  }
+
+  .rewiewText {
+    margin-bottom: var(--space-l);
+  }
+
+  .criterias {
+    justify-content: flex-start;
+  }
+
+  .wrapperMain {
+    display: block;
+    margin-top: var(--space-n);
+  }
+
+  .criterias {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--space-s);
+  }
+
+  .content {
+    margin-top: var(--space-n);
+    padding-right: 0;
+  }
+}
