@@ -1,36 +1,48 @@
-import React, { FC, FormEvent, memo, useCallback, useState } from 'react';
+import React, { FC, FormEvent, memo, useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import { InputProps } from '@UI/Input';
 import styles from './InputQuantity.module.css';
 
 export interface OnChangeData {
-  count: number;
+  quantity: number;
 }
+
+export type OnChangeCallback = (e: FormEvent, data: OnChangeData) => void;
 
 export interface InputQuantityProps extends Omit<InputProps, 'onChange'> {
   defaultValue?: number;
   value?: number;
   min?: number;
   max?: number;
-  onChange?: (e: FormEvent, data: OnChangeData) => void;
+  onChange?: OnChangeCallback;
 }
 
 const InputQuantity: FC<InputQuantityProps> = (props) => {
   const { className, defaultValue, value, min, max, onChange, ...restProps } = props;
   const [count, setCount] = useState(defaultValue || value || 0);
 
+  const normalizeCount = useCallback(
+    (newCount: number) => {
+      let quantity = newCount;
+
+      if (min !== undefined && newCount < min) quantity = min;
+      if (max !== undefined && newCount > max) quantity = max;
+
+      return quantity;
+    },
+    [max, min],
+  );
+
   const changeCount = useCallback(
     (e, newCount: number) => {
-      let r = newCount;
+      const quantity = normalizeCount(newCount);
 
-      if (min !== undefined && newCount < min) r = min;
-      if (max !== undefined && newCount > max) r = max;
-      if (onChange) onChange(e, { count: r });
+      if (onChange) onChange(e, { quantity });
 
-      setCount(r);
+      setCount(quantity);
     },
-    [max, min, onChange],
+    [normalizeCount, onChange],
   );
 
   const handleChange = useCallback(
@@ -59,6 +71,12 @@ const InputQuantity: FC<InputQuantityProps> = (props) => {
     },
     [changeCount, count],
   );
+
+  useEffect(() => {
+    if (typeof value !== 'number') return;
+
+    setCount(normalizeCount(value));
+  }, [normalizeCount, value]);
 
   return (
     <div className={cn(styles.inputQuantity, className)}>
