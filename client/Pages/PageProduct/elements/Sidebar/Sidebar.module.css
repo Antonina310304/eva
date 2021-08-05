@@ -69,6 +69,10 @@
   margin-top: var(--space-s);
 }
 
+.relatedProducts {
+  margin-top: var(--space-s);
+}
+
 .actions {
   margin-top: var(--space-xxl);
 }

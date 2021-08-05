@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.preview {
+  flex-shrink: 0;
+  width: 160px;
+  margin-right: var(--space-s);
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.sizes {
+  margin-top: var(--space-xxs);
+}
+
+.footer {
+  margin-top: var(--space-s);
+}
+
+.mainFooter {
+  display: none;
+}
+
+@media (--desktop) {
+  .contentFooter {
+    display: none;
+  }
+
+  .mainFooter {
+    display: flex;
+  }
+}
