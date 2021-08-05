@@ -67,26 +67,26 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   }, [normalizeSlide, track]);
 
   const handleClickReviewImage = useCallback(
-    (selectedPhoto) => {
-      openModal('Review', {
-        reviewIndex: reviews.findIndex((item: ReviewData) => item.id === selectedPhoto.id),
-        reviews,
-      });
+    (_e, selectedPhoto) => {
+      if (window.cancelClick) return;
+
+      const reviewIndex = reviews.findIndex((item: ReviewData) => item.id === selectedPhoto.id);
+
+      openModal('Review', { reviewIndex, reviews });
     },
     [openModal, reviews],
   );
 
   useEffect(() => {
-    if (window.location.hash.match(/^#review-\d+/)) {
-      const reviewId = window.location.hash.split('-')[1];
+    if (!window.location.hash.match(/^#review-\d+$/)) return;
 
-      const findedReview = reviews.find((item) => String(item.id) === reviewId);
+    const reviewId = window.location.hash.split('-')[1];
+    const reviewIndex = reviews.findIndex((item) => String(item.id) === reviewId);
 
-      if (findedReview) {
-        handleClickReviewImage(findedReview);
-      }
-    }
-  }, [handleClickReviewImage, reviews]);
+    if (reviewIndex < 0) return;
+
+    openModal('Review', { reviewIndex, reviews });
+  }, [openModal, reviews]);
 
   const addReviewButton = (
     <Button className={styles.button} wide theme='blank' onClick={onAddReview}>
@@ -141,7 +141,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
                     <Image
                       className={styles.photo}
                       src={photo.image}
-                      onClick={() => handleClickReviewImage(photo)}
+                      onClick={(e) => handleClickReviewImage(e, photo)}
                     />
                   </Link>
                 </div>

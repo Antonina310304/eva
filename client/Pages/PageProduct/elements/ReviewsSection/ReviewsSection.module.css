@@ -58,6 +58,7 @@
 }
 
 .item {
+  display: block;
   width: 28.142%;
   min-width: 300px;
 }
