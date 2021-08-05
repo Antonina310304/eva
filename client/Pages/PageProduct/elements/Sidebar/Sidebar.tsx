@@ -88,7 +88,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
       {isAvailable ? (
         <>
           <div className={styles.wrapperPrice}>
-            <div className={styles.labelPrice}>Цена</div>
             <div className={styles.containerPrices}>
               <Price className={styles.actualPrice} price={product.price.actual} />
               {hasExpired && (

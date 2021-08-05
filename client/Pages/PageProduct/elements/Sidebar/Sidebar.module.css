@@ -30,10 +30,6 @@
   margin-top: var(--space-l);
 }
 
-.labelPrice {
-  composes: s from 'sizes';
-}
-
 .containerPrices {
   display: flex;
   align-items: center;
