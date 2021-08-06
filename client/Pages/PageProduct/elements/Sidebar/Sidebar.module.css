@@ -30,10 +30,6 @@
   margin-top: var(--space-l);
 }
 
-.labelPrice {
-  composes: s from 'sizes';
-}
-
 .containerPrices {
   display: flex;
   align-items: center;
@@ -62,11 +58,16 @@
 }
 
 .wrapperFabrics {
-  margin-top: var(--space-xxl);
+  margin-top: var(--space-xl);
 }
 
 .orderFabrics {
-  margin-top: var(--space-s);
+  height: auto;
+  margin-top: var(--space-xs);
+}
+
+.relatedProducts {
+  margin-top: var(--space-xl);
 }
 
 .actions {
@@ -92,6 +93,11 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.icon.delivery {
+  background-image: url('./icons/delivery.svg');
+}
+
 .icon.perzent {
   background-image: url('./icons/perzent.svg');
 }
