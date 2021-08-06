@@ -30,10 +30,6 @@
   margin-top: var(--space-l);
 }
 
-.labelPrice {
-  composes: s from 'sizes';
-}
-
 .containerPrices {
   display: flex;
   align-items: center;
@@ -62,11 +58,16 @@
 }
 
 .wrapperFabrics {
-  margin-top: var(--space-xxl);
+  margin-top: var(--space-xl);
 }
 
 .orderFabrics {
-  margin-top: var(--space-s);
+  height: auto;
+  margin-top: var(--space-xs);
+}
+
+.relatedProducts {
+  margin-top: var(--space-xl);
 }
 
 .actions {

@@ -27,6 +27,7 @@
       "@Pages/*": ["./client/Pages/*"],
       "@Queries/*": ["./client/Queries/*"],
       "@Routes/*": ["./client/Routes/*"],
+      "@Stores/*": ["./client/Stores/*"],
       "@Templates/*": ["./client/Templates/*"],
       "@Types/*": ["./client/Types/*"],
       "@UI/*": ["./client/UI/*"],

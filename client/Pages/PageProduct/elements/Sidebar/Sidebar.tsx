@@ -11,6 +11,7 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
+import { useRelatedProducts } from '@Stores/relatedProducts';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
@@ -35,6 +36,7 @@ const fabrics = [
 ];
 
 const OrderBonuses = loadable(() => import('@Components/OrderBonuses'));
+const RelatedProducts = loadable(() => import('../RelatedProducts'));
 const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
@@ -48,6 +50,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
   const label = declOfNum(page.reviewsPhotoCount, labels);
   const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
   const [, { openModal }] = useModals();
+  const relatedProducts = useRelatedProducts();
 
   const handleClickCredit = useCallback(() => {
     openModal('BuyInCredit', { productId: page.product.id });
@@ -85,7 +88,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
       {isAvailable ? (
         <>
           <div className={styles.wrapperPrice}>
-            <div className={styles.labelPrice}>Цена</div>
             <div className={styles.containerPrices}>
               <Price className={styles.actualPrice} price={product.price.actual} />
               {hasExpired && (
@@ -119,6 +121,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
           Заказать образцы тканей
         </Button>
       </div>
+
+      {relatedProducts.selectedLists.length > 0 && (
+        <RelatedProducts
+          className={styles.relatedProducts}
+          label='Добавьте сопутствующие товары:'
+          lists={relatedProducts.selectedLists}
+        />
+      )}
 
       <div className={styles.actions}>
         <Button className={styles.action} wide theme='secondary'>
