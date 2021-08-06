@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState, useRef } from 'react';
 import cn from 'classnames';
 
 import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
@@ -52,6 +52,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
   } = page;
   const [, { openModal }] = useModals();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
+  const refCharacteristics = useRef<HTMLDivElement>();
+  const refReviews = useRef<HTMLDivElement>();
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -98,13 +100,32 @@ const PageProduct: FC<PageProductProps> = (props) => {
     setSelectedCrossSaleTab(tab.id);
   }, []);
 
+  const handleClickCharacteristics = useCallback(() => {
+    if (!refCharacteristics.current) return;
+
+    refCharacteristics.current.scrollIntoView();
+  }, []);
+
+  const handleClickReviews = useCallback(() => {
+    if (!refReviews.current) return;
+
+    refReviews.current.scrollIntoView();
+  }, []);
+
   useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <MainGrid
         className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={<Sidebar page={page} meta={meta} />}
+        sidebar={
+          <Sidebar
+            page={page}
+            meta={meta}
+            onClickCharacteristics={handleClickCharacteristics}
+            onClickReviews={handleClickReviews}
+          />
+        }
       >
         <PhotoGallery
           images={mediaGallery}
@@ -131,7 +152,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           </div>
         )}
 
-        <div className={styles.characteristics}>
+        <div className={styles.characteristics} ref={refCharacteristics}>
           <Characteristics
             title='Характеристики'
             tabs={[
@@ -225,7 +246,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
-        <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+        <div className={cn(styles.littleContainer, styles.sectionReviews)} ref={refReviews}>
           <ReviewsSection reviews={page.reviewsSubgallery} onAddReview={handleAddReview} />
           <div className={styles.wrapperListReviews}>
             <ListReviews className={styles.listReviews} reviews={siteReviews} />

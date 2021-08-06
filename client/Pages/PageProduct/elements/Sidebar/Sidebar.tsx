@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react';
 import loadable from '@loadable/component';
 import cn from 'classnames';
 
@@ -21,6 +21,8 @@ export interface SidebarProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
   meta: MetaData;
+  onClickCharacteristics?: (e: MouseEvent) => void;
+  onClickReviews?: (e: MouseEvent) => void;
 }
 
 const fabrics = [
@@ -40,7 +42,7 @@ const RelatedProducts = loadable(() => import('../RelatedProducts'));
 const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, meta, onClickCharacteristics, onClickReviews, ...restProps } = props;
 
   const { product, isAvailable } = page;
   const shortName = product.name.split(' ')[0];
@@ -79,7 +81,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
       {page.reviewsPhotoCount > 0 && (
         <div className={styles.wrapperRating}>
           <Rating className={styles.rating} defaultValue={product.rating} />
-          <Button className={styles.countReviews} theme='linkSecondary'>
+          <Button className={styles.countReviews} theme='linkSecondary' onClick={onClickReviews}>
             {countReviewsText}
           </Button>
         </div>
@@ -144,34 +146,34 @@ const Sidebar: FC<SidebarProps> = (props) => {
           items={[
             {
               icon: <div className={cn(styles.icon, styles.delivery)} />,
+              hasArrow: true,
               label: 'Информация о доставке',
               onClick: handleClickDeliveryInformation,
             },
             {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
+              hasArrow: true,
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
             },
             {
               icon: <div className={cn(styles.icon, styles.attention)} />,
+              hasArrow: true,
               label: 'Гарантируем качество',
               onClick: handleClickQualityGuarantee,
             },
             page.sellPoints?.length > 0 && {
               label: 'Эта модель в шоурумах',
+              hasArrow: true,
               onClick: handleClickShowroom,
             },
             {
               label: 'Характеристики',
-            },
-            {
-              label: 'Сопутствующие товары',
+              onClick: onClickCharacteristics,
             },
             {
               label: 'Фото и отзывы',
-            },
-            {
-              label: 'Способы оплаты',
+              onClick: onClickReviews,
             },
           ].filter(Boolean)}
         />
