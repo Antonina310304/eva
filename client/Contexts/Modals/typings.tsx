@@ -13,6 +13,7 @@ export type ModalId =
   | 'QualityGuarantee'
   | 'Video'
   | 'Showrooms'
+  | 'FinalPrice'
   | 'DeliveryInformation';
 
 export interface Modal {
