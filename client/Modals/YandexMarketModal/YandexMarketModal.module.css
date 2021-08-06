@@ -39,6 +39,11 @@
   width: 100%;
 }
 
+.modalMobile {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
 @media (--mobile) {
   .container {
     width: 100%;
