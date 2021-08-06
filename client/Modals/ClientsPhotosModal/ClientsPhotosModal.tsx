@@ -1,4 +1,4 @@
-import React, { memo, FC, useCallback, useMemo } from 'react';
+import React, { memo, FC, useCallback } from 'react';
 import cn from 'classnames';
 
 import Modal from '@Components/Modal';
@@ -8,7 +8,7 @@ import Image from '@UI/Image';
 import IconClose from '@UI/IconClose';
 import Scroller from '@UI/Scroller';
 import useModals from '@Hooks/useModals';
-import { ReviewData, ReviewPhotoData } from '@Types/Review';
+import { ReviewData } from '@Types/Review';
 import useMedias from '@Hooks/useMedias';
 import styles from './ClientsPhotosModal.module.css';
 
@@ -19,16 +19,9 @@ export interface ClientsPhotosModalProps {
 
 const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
   const { className, modal } = props;
-  const [, { closeAllModals, openModal }] = useModals();
-  const { reviews } = modal.data;
+  const [, { openModal, closeModal }] = useModals();
+  const { reviews, currentReviewIndex } = modal.data;
   const { isMobile } = useMedias();
-
-  const photos = useMemo((): ReviewPhotoData[] => {
-    return reviews.reduce(
-      (prevPhotos: ReviewPhotoData[], review: ReviewData) => [...prevPhotos, ...review.photos],
-      [],
-    );
-  }, [reviews]);
 
   // TODO функционал для оступа от полосы прокрутки
   // const scrollPadding = useMemo(() => {
@@ -38,38 +31,17 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
   // }, [isDesktop, isMobile]);
 
   const handleClose = useCallback(() => {
-    closeAllModals();
-  }, [closeAllModals]);
-
-  const getReviewIndex = useCallback(
-    (photoId) => {
-      const reviewIndex = reviews.findIndex((item: ReviewData) => {
-        const ass = item.photos.findIndex((photo) => photo.id === photoId);
-        if (ass !== -1) return true;
-        return false;
-      });
-
-      return reviewIndex;
-    },
-    [reviews],
-  );
-
-  const getLinkIndex = useCallback(
-    (photoId) => {
-      const reviewIndex = getReviewIndex(photoId);
-      return reviews[reviewIndex].id;
-    },
-    [getReviewIndex, reviews],
-  );
+    closeModal('ClientsPhotos');
+    window.history.back();
+    openModal('Review', { reviewIndex: currentReviewIndex, reviews });
+  }, [closeModal, currentReviewIndex, openModal, reviews]);
 
   const handleClickLinkToReview = useCallback(
-    (_e, photoId) => {
-      const reviewIndex = getReviewIndex(photoId);
-
-      closeAllModals();
+    (_e, reviewIndex) => {
+      closeModal('ClientsPhotos');
       openModal('Review', { reviewIndex, reviews });
     },
-    [closeAllModals, getReviewIndex, openModal, reviews],
+    [closeModal, openModal, reviews],
   );
 
   return (
@@ -87,17 +59,22 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
 
           <Scroller className={styles.content} invisible={isMobile}>
             <div className={styles.photosWrapper}>
-              {photos.map((photo, index) => (
-                <Link
-                  className={styles.link}
-                  to={`#review-${getLinkIndex(photo.id)}`}
-                  view='simple'
-                  onClick={(e) => handleClickLinkToReview(e, photo.id)}
-                  key={index}
-                >
-                  <Image className={styles.photo} src={photo.image} />
-                </Link>
-              ))}
+              {reviews.map((review: ReviewData, reviewIndex: number) => {
+                return (
+                  review.photos.length > 0 &&
+                  review.photos.map((photo, index: number) => (
+                    <Link
+                      className={styles.link}
+                      to={`#review-${review.id}`}
+                      view='simple'
+                      onClick={(e) => handleClickLinkToReview(e, reviewIndex)}
+                      key={index}
+                    >
+                      <Image className={styles.photo} src={photo.image} />
+                    </Link>
+                  ))
+                );
+              })}
             </div>
           </Scroller>
         </div>

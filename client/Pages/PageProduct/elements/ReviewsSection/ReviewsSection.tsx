@@ -69,8 +69,8 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
   const getReviewIndex = useCallback(
     (photoId) => {
       const reviewIndex = reviews.findIndex((item: ReviewData) => {
-        const ass = item.photos.findIndex((photo) => photo.id === photoId);
-        if (ass !== -1) return true;
+        const photoIndex = item.photos.findIndex((photo) => photo.id === photoId);
+        if (photoIndex !== -1) return true;
         return false;
       });
 

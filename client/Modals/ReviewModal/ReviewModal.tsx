@@ -6,9 +6,7 @@ import { Modal as IModal } from '@Contexts/Modals';
 import Link from '@UI/Link';
 import IconClose from '@UI/IconClose';
 import useModals from '@Hooks/useModals';
-
 import Review from './elems/Review';
-
 import styles from './ReviewModal.module.css';
 
 export interface ReviewModalProps {
@@ -56,8 +54,9 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   const handleBackClick = useCallback(() => {
     window.history.pushState('', '', window.location.pathname);
     closeModal('Review');
-    openModal('ClientsPhotos', { reviews });
-  }, [closeModal, openModal, reviews]);
+
+    openModal('ClientsPhotos', { reviews, currentReviewIndex });
+  }, [closeModal, currentReviewIndex, openModal, reviews]);
 
   return (
     <Modal
