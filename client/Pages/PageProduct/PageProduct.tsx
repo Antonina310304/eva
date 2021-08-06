@@ -10,6 +10,7 @@ import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
+import { useRelatedProducts } from '@Stores/relatedProducts';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
@@ -34,6 +35,21 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
+  const {
+    product,
+    ar,
+    breadcrumbs,
+    mediaGallery,
+    cylindo,
+    crossSalesProducts,
+    sameProducts,
+    historyProducts,
+    parameters,
+    importantInfo,
+    documents,
+    modules,
+    features,
+  } = page;
   const [, { openModal }] = useModals();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
 
@@ -52,12 +68,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
     const tabs = [{ id: 'all', label: 'Все категории' }];
 
-    page.crossSalesProducts.products.forEach((product: ProductData) => {
-      const tab = tabs.find((t) => t.id === product.type);
+    page.crossSalesProducts.products.forEach((p: ProductData) => {
+      const tab = tabs.find((t) => t.id === p.type);
 
       if (tab) return;
 
-      tabs.push({ id: product.type, label: product.type });
+      tabs.push({ id: p.type, label: p.type });
     });
 
     return tabs;
@@ -69,8 +85,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
     if (!cross) return [];
     if (selectedCrossSaleTab === 'all') return cross.products;
 
-    return cross.products.filter((product: ProductData) => {
-      return product.type === selectedCrossSaleTab;
+    return cross.products.filter((p: ProductData) => {
+      return p.type === selectedCrossSaleTab;
     });
   }, [page, selectedCrossSaleTab]);
 
@@ -86,21 +102,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     setSelectedCrossSaleTab(tab.id);
   }, []);
 
-  const {
-    product,
-    ar,
-    breadcrumbs,
-    mediaGallery,
-    cylindo,
-    crossSalesProducts,
-    sameProducts,
-    historyProducts,
-    parameters,
-    importantInfo,
-    documents,
-    modules,
-    features,
-  } = page;
+  useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
