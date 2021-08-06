@@ -10,7 +10,8 @@ export type ModalId =
   | 'Review'
   | 'QualityGuarantee'
   | 'Video'
-  | 'Showrooms';
+  | 'Showrooms'
+  | 'FinalPrice';
 
 export interface Modal {
   id: ModalId;

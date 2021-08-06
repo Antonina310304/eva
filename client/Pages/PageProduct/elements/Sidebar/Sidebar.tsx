@@ -61,6 +61,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('QualityGuarantee');
   }, [openModal]);
 
+  const handleClickFinalPrice = useCallback(() => {
+    openModal('FinalPrice');
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
       <div className={styles.shortName}>
@@ -137,6 +141,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               label: 'Гарантируем качество',
               onClick: handleClickQualityGuarantee,
+            },
+            {
+              icon: <div className={cn(styles.icon, styles.attention)} />,
+              label: 'Финальная цена',
+              onClick: handleClickFinalPrice,
             },
             page.sellPoints?.length > 0 && {
               label: 'Эта модель в шоурумах',
