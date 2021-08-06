@@ -3,7 +3,8 @@ import cn from 'classnames';
 
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
-import Preview, { InstagramProductData } from '../Preview';
+import { InstagramProductData } from '@Modals/InstagramPostModal';
+import Preview from '../Preview';
 import styles from './ProductCard.module.css';
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
