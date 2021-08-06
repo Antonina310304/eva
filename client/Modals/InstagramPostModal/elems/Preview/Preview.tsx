@@ -3,13 +3,8 @@ import cn from 'classnames';
 
 import ImageComponent from '@UI/Image';
 import Link from '@UI/Link';
-import { ProductData } from '@Types/Product';
+import { InstagramProductData } from '@Modals/InstagramPostModal';
 import styles from './Preview.module.css';
-
-export interface InstagramProductData extends ProductData {
-  img: string;
-  orientation: 'portrait' | 'landscape';
-}
 
 export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

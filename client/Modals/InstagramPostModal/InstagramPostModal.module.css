@@ -79,6 +79,10 @@
   height: 500px;
 }
 
+.mobileScroller {
+  height: 730px;
+}
+
 .productsWrapper {
   display: flex;
   flex-wrap: wrap;
@@ -158,7 +162,12 @@
   }
 
   .productsScroller {
+    min-width: 210px;
     height: 335px;
+  }
+
+  .mobileScroller {
+    height: 540px;
   }
 
   .productsWrapper {
@@ -214,17 +223,18 @@
   }
 
   .gallery {
-    margin: 0 var(--space-s-neg);
+    width: 100%;
   }
 
   .item {
+    width: 210px;
     padding: 0 var(--space-s);
 
-    vertical-align: top;
+    vertical-align: bottom;
   }
 
   .productCard {
-    width: 210px;
+    width: 100%;
     margin: 0;
   }
 
