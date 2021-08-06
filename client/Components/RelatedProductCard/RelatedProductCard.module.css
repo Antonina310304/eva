@@ -1,3 +1,15 @@
+.card {
+  &.compact {
+    .contentFooter {
+      display: block;
+    }
+
+    .mainFooter {
+      display: none;
+    }
+  }
+}
+
 .wrapper {
   display: flex;
   align-items: flex-start;
@@ -25,16 +37,30 @@
   margin-top: var(--space-s);
 }
 
-.mainFooter {
+.contentFooter {
   display: none;
 }
 
+.mainFooter {
+  display: block;
+}
+
 @media (--desktop) {
+  .card.compact {
+    .contentFooter {
+      display: none;
+    }
+
+    .mainFooter {
+      display: block;
+    }
+  }
+
   .contentFooter {
     display: none;
   }
 
   .mainFooter {
-    display: flex;
+    display: block;
   }
 }

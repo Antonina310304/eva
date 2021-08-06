@@ -48,6 +48,7 @@ const RelatedProducts: FC<RelatedProductsProps> = (props) => {
                     className={styles.product}
                     listId={list.id}
                     product={product}
+                    compact
                   />
                 )}
               />

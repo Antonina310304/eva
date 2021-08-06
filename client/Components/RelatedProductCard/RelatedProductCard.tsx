@@ -12,10 +12,11 @@ export interface RelatedProductCardProps extends HTMLAttributes<HTMLDivElement> 
   className?: string;
   listId: number;
   product: ProductData;
+  compact?: boolean;
 }
 
 const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
-  const { className, listId, product, ...restProps } = props;
+  const { className, listId, product, compact, ...restProps } = props;
   const relatedProducts = useRelatedProducts();
 
   const sizes: SizeData[] = useMemo(() => {
@@ -52,7 +53,7 @@ const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
   );
 
   return (
-    <div {...restProps} className={cn(styles.card, className)}>
+    <div {...restProps} className={cn(styles.card, { [styles.compact]: compact }, className)}>
       <div className={styles.wrapper}>
         <Preview className={styles.preview} product={product} />
 
