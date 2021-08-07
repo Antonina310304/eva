@@ -1,6 +1,6 @@
 import { FC, memo, ReactElement } from 'react';
 
-import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
+import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 
 export type Handler = (e: KeyboardEvent) => void;
 

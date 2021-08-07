@@ -2,8 +2,7 @@ import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react'
 import loadable from '@loadable/component';
 import cn from 'classnames';
 
-import declOfNum from '@divanru/ts-utils/declOfNum';
-
+import declOfNum from '@Utils/declOfNum';
 import Like from '@Components/Like';
 import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';

@@ -1,7 +1,7 @@
 import React, { memo, FC, HTMLAttributes } from 'react';
 import cn from 'classnames';
-import formatPrice from '@divanru/ts-utils/formatPrice';
 
+import formatPrice from '@Utils/formatPrice';
 import useMeta from '@Queries/useMeta';
 import styles from './Price.module.css';
 
