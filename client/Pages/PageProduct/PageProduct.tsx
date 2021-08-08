@@ -1,11 +1,9 @@
 import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState, useRef } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 
-import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
-import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
-import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
@@ -18,15 +16,11 @@ import { MetaData } from '@Types/Meta';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
-import CrossSaleSection from './elements/CrossSaleSection';
 import DeliverySection from './elements/DeliverySection';
 import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
 import Characteristics from './elements/Characteristics';
-import ProductFeatures from './elements/ProductFeatures';
-import ModulesList from './elements/ModulesList';
-import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
@@ -34,6 +28,13 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   page: any;
   meta: MetaData;
 }
+
+const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
+const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
+const ProductModel = loadable(() => import('@Components/ProductModel'));
+const ModulesList = loadable(() => import('./elements/ModulesList'));
+const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
+const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
@@ -146,7 +147,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
         )}
 
         {product.modules.length > 0 && (
-          <ModulesList className={styles.modules} modules={product.modules} />
+          <div className={styles.modules}>
+            <ModulesList modules={product.modules} />
+          </div>
         )}
 
         {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
@@ -281,13 +284,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           <DeliverySection title='Стоимость доставки' delivery={page.deliveryPage} />
         </div>
 
-        {fakeData.heading && fakeData.advantages?.length > 0 && (
-          <ComfortBuy
-            className={styles.comfortBuy}
-            heading={fakeData.heading}
-            items={fakeData.advantages}
-          />
-        )}
+        <ComfortBuy className={styles.comfortBuy} />
 
         {sameProducts.products?.length > 0 && (
           <CrossSaleSection
