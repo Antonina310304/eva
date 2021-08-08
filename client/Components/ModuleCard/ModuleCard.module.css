@@ -1,0 +1,40 @@
+.card {
+}
+
+.name {
+  margin-top: var(--space-n);
+}
+
+.prices {
+  display: flex;
+  align-items: center;
+}
+
+.actualPrice {
+  composes: m from 'sizes';
+
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-xs);
+}
+
+.discount {
+  margin-left: var(--space-xs);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-m);
+}
+
+.wrapperButton {
+  flex-grow: 1;
+}
+
+.quantity {
+  max-width: 102px;
+  margin-left: var(--space-n);
+}
