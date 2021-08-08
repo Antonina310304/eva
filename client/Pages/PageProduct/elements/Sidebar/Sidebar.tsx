@@ -11,6 +11,7 @@ import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
 import { useRelatedProducts } from '@Stores/relatedProducts';
+import { useProduct } from '@Stores/product';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
@@ -42,7 +43,8 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, onClickCharacteristics, onClickReviews, ...restProps } = props;
-  const { product, isAvailable, credit } = page;
+  const { isAvailable, credit } = page;
+  const product = useProduct();
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;

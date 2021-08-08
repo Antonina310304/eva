@@ -1,7 +1,9 @@
 .parameter {
-  composes: n from 'sizes';
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.name {
+.count {
   font-weight: 500;
 }

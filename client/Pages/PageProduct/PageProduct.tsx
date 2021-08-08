@@ -11,6 +11,7 @@ import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import { useRelatedProducts } from '@Stores/relatedProducts';
+import { useProduct } from '@Stores/product';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
@@ -24,6 +25,7 @@ import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
 import Characteristics from './elements/Characteristics';
 import ProductFeatures from './elements/ProductFeatures';
+import ModulesList from './elements/ModulesList';
 import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
@@ -36,7 +38,6 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const {
-    product,
     ar,
     breadcrumbs,
     mediaGallery,
@@ -47,9 +48,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
     parameters,
     importantInfo,
     documents,
-    modules,
     features,
   } = page;
+  const product = useProduct({ ...page.product, modules: page.modules });
   const [, { openModal }] = useModals();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
   const refCharacteristics = useRef<HTMLDivElement>();
@@ -112,7 +113,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     refReviews.current.scrollIntoView();
   }, []);
 
-  useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
+  useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -136,8 +137,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
-
         {page.description && (
           <div
             className={styles.description}
@@ -145,6 +144,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
             dangerouslySetInnerHTML={{ __html: page.description }}
           />
         )}
+
+        {product.modules.length > 0 && (
+          <ModulesList className={styles.modules} modules={product.modules} />
+        )}
+
+        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
 
         {page.layers?.length > 0 && (
           <div className={styles.layers}>
@@ -194,7 +199,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             parameters={parameters}
             importantInfo={importantInfo}
             documents={documents}
-            modules={modules}
+            modules={product.modules}
           />
         </div>
 
