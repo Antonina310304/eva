@@ -1,5 +1,4 @@
-import declOfNum from '@divanru/ts-utils/declOfNum';
-
+import declOfNum from '@Utils/declOfNum';
 import { InstallmentVariant } from '@Types/InstallmentBank';
 import { NumberItem } from './typings';
 

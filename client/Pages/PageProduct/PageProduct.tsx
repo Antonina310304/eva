@@ -1,30 +1,26 @@
-import React, { FC, HTMLAttributes, useCallback, useEffect, memo, useMemo, useState } from 'react';
+import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState, useRef } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 
-import ChooseMattressBanner from '@Mattresses/ChooseMattressBanner';
-import MattressesLayers from '@Mattresses/MattressesLayers';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
-import ProductModel from '@Components/ProductModel';
 import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import { useRelatedProducts } from '@Stores/relatedProducts';
+import { useProduct } from '@Stores/product';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
 import PhotoGallery from './elements/PhotoGallery';
 import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
-import CrossSaleSection from './elements/CrossSaleSection';
 import DeliverySection from './elements/DeliverySection';
 import ComfortBuy from './elements/ComfortBuy';
 import ReviewsSection from './elements/ReviewsSection';
 import ListReviews from './elements/ListReviews';
 import Characteristics from './elements/Characteristics';
-import ProductFeatures from './elements/ProductFeatures';
-import fakeData from './fakeData.json';
 import styles from './PageProduct.module.css';
 
 export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,10 +29,16 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   meta: MetaData;
 }
 
+const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
+const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
+const ProductModel = loadable(() => import('@Components/ProductModel'));
+const ModulesList = loadable(() => import('./elements/ModulesList'));
+const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
+const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
+
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const {
-    product,
     ar,
     breadcrumbs,
     mediaGallery,
@@ -47,21 +49,19 @@ const PageProduct: FC<PageProductProps> = (props) => {
     parameters,
     importantInfo,
     documents,
-    modules,
     features,
   } = page;
+  const product = useProduct({ ...page.product, modules: page.modules });
   const [, { openModal }] = useModals();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
+  const refCharacteristics = useRef<HTMLDivElement>();
+  const refReviews = useRef<HTMLDivElement>();
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
       return review.source === 'site';
     });
   }, [page]);
-
-  useEffect(() => {
-    openModal('YandexMarket');
-  }, [openModal]);
 
   const crossSalesTabs = useMemo(() => {
     if (!page?.crossSalesProducts) return [];
@@ -102,13 +102,32 @@ const PageProduct: FC<PageProductProps> = (props) => {
     setSelectedCrossSaleTab(tab.id);
   }, []);
 
-  useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
+  const handleClickCharacteristics = useCallback(() => {
+    if (!refCharacteristics.current) return;
+
+    refCharacteristics.current.scrollIntoView();
+  }, []);
+
+  const handleClickReviews = useCallback(() => {
+    if (!refReviews.current) return;
+
+    refReviews.current.scrollIntoView();
+  }, []);
+
+  useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <MainGrid
         className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={<Sidebar page={page} meta={meta} />}
+        sidebar={
+          <Sidebar
+            page={page}
+            meta={meta}
+            onClickCharacteristics={handleClickCharacteristics}
+            onClickReviews={handleClickReviews}
+          />
+        }
       >
         <PhotoGallery
           images={mediaGallery}
@@ -119,8 +138,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
       </MainGrid>
 
       <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
-
         {page.description && (
           <div
             className={styles.description}
@@ -129,13 +146,21 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
+        {product.modules.length > 0 && (
+          <div className={styles.modules}>
+            <ModulesList modules={product.modules} />
+          </div>
+        )}
+
+        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
+
         {page.layers?.length > 0 && (
           <div className={styles.layers}>
             <MattressesLayers layers={page.layers} priorityParameter={page.priorityParameter} />
           </div>
         )}
 
-        <div className={styles.characteristics}>
+        <div className={styles.characteristics} ref={refCharacteristics}>
           <Characteristics
             title='Характеристики'
             tabs={[
@@ -177,7 +202,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             parameters={parameters}
             importantInfo={importantInfo}
             documents={documents}
-            modules={modules}
+            modules={product.modules}
           />
         </div>
 
@@ -229,7 +254,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
-        <div className={cn(styles.littleContainer, styles.sectionReviews)}>
+        <div className={cn(styles.littleContainer, styles.sectionReviews)} ref={refReviews}>
           <ReviewsSection reviews={page.reviewsSubgallery} onAddReview={handleAddReview} />
           <div className={styles.wrapperListReviews}>
             <ListReviews className={styles.listReviews} reviews={siteReviews} />
@@ -259,13 +284,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
           <DeliverySection title='Стоимость доставки' delivery={page.deliveryPage} />
         </div>
 
-        {fakeData.heading && fakeData.advantages?.length > 0 && (
-          <ComfortBuy
-            className={styles.comfortBuy}
-            heading={fakeData.heading}
-            items={fakeData.advantages}
-          />
-        )}
+        <ComfortBuy className={styles.comfortBuy} />
 
         {sameProducts.products?.length > 0 && (
           <CrossSaleSection

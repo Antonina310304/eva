@@ -12,8 +12,7 @@ import cn from 'classnames';
 
 import Input from '@UI/Input';
 import RangeSlider from '@UI/RangeSlider';
-import formatNumberWithSpaces from '@divanru/ts-utils/formatNumberWithSpaces';
-
+import formatPrice from '@Utils/formatPrice';
 import styles from './InputsRange.module.css';
 
 export interface OnChangeOptions {
@@ -34,9 +33,7 @@ export interface InputsRangeProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   onChangeEnd?: (e: MouseEvent) => void;
 }
 
-const formatNumber = (val: number) => {
-  return formatNumberWithSpaces(Number(val.toFixed(0)));
-};
+const formatNumber = (val: number) => formatPrice(Number(val.toFixed(0)));
 
 const InputsRange: FC<InputsRangeProps> = (props) => {
   const {

@@ -8,6 +8,7 @@ export interface LinksListItem {
   icon?: ReactElement;
   label: string;
   link?: string;
+  hasArrow?: boolean;
   onClick?: (e: MouseEvent) => void;
 }
 
@@ -35,7 +36,7 @@ const LinksList: FC<LinksListProps> = (props) => {
             <div className={styles.itemLabel}>{item.label}</div>
           </div>
 
-          <div className={styles.arrow} />
+          {item.hasArrow && <div className={styles.arrow} />}
         </div>
       )}
     />

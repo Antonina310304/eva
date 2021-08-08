@@ -1,9 +1,8 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react';
 import loadable from '@loadable/component';
 import cn from 'classnames';
 
-import declOfNum from '@divanru/ts-utils/declOfNum';
-
+import declOfNum from '@Utils/declOfNum';
 import Like from '@Components/Like';
 import Fabrics from '@Components/Fabrics';
 import Price from '@UI/Price';
@@ -12,6 +11,7 @@ import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
 import { useRelatedProducts } from '@Stores/relatedProducts';
+import { useProduct } from '@Stores/product';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
@@ -21,6 +21,8 @@ export interface SidebarProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
   meta: MetaData;
+  onClickCharacteristics?: (e: MouseEvent) => void;
+  onClickReviews?: (e: MouseEvent) => void;
 }
 
 const fabrics = [
@@ -40,9 +42,9 @@ const RelatedProducts = loadable(() => import('../RelatedProducts'));
 const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
-
-  const { product, isAvailable } = page;
+  const { className, page, meta, onClickCharacteristics, onClickReviews, ...restProps } = props;
+  const { isAvailable, credit } = page;
+  const product = useProduct();
   const shortName = product.name.split(' ')[0];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
@@ -64,6 +66,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('QualityGuarantee');
   }, [openModal]);
 
+  const handleClickFinalPrice = useCallback(() => {
+    openModal('FinalPrice');
+  }, [openModal]);
+
   const handleClickDeliveryInformation = useCallback(() => {
     openModal('DeliveryInformation');
   }, [openModal]);
@@ -79,7 +85,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
       {page.reviewsPhotoCount > 0 && (
         <div className={styles.wrapperRating}>
           <Rating className={styles.rating} defaultValue={product.rating} />
-          <Button className={styles.countReviews} theme='linkSecondary'>
+          <Button className={styles.countReviews} theme='linkSecondary' onClick={onClickReviews}>
             {countReviewsText}
           </Button>
         </div>
@@ -144,34 +150,40 @@ const Sidebar: FC<SidebarProps> = (props) => {
           items={[
             {
               icon: <div className={cn(styles.icon, styles.delivery)} />,
+              hasArrow: true,
               label: 'Информация о доставке',
               onClick: handleClickDeliveryInformation,
             },
-            {
+            credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
+              hasArrow: true,
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
             },
             {
               icon: <div className={cn(styles.icon, styles.attention)} />,
+              hasArrow: true,
               label: 'Гарантируем качество',
               onClick: handleClickQualityGuarantee,
             },
+            !credit?.creditAvailable && {
+              icon: <div className={cn(styles.icon, styles.attention)} />,
+              hasArrow: true,
+              label: 'Финальная цена',
+              onClick: handleClickFinalPrice,
+            },
             page.sellPoints?.length > 0 && {
               label: 'Эта модель в шоурумах',
+              hasArrow: true,
               onClick: handleClickShowroom,
             },
             {
               label: 'Характеристики',
-            },
-            {
-              label: 'Сопутствующие товары',
+              onClick: onClickCharacteristics,
             },
             {
               label: 'Фото и отзывы',
-            },
-            {
-              label: 'Способы оплаты',
+              onClick: onClickReviews,
             },
           ].filter(Boolean)}
         />

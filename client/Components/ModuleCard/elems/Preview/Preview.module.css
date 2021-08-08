@@ -1,0 +1,43 @@
+.preview {
+  position: relative;
+
+  &:after {
+    display: block;
+    width: 100%;
+    padding-bottom: var(--proportion);
+
+    content: '';
+  }
+}
+
+.preview.landscape {
+  --proportion: 70%;
+}
+.preview.portrait {
+  --proportion: 100%;
+}
+
+.link {
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.image {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+
+  border-radius: 5px;
+  filter: brightness(0.94);
+}
