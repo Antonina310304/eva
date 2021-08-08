@@ -87,7 +87,7 @@ const ModuleCard: FC<ModuleCardProps> = (props) => {
 
         <InputQuantity
           className={styles.quantity}
-          min={0}
+          min={module.minQuantity}
           max={module.maxQuantity}
           value={module.count}
           onChange={handleChangeQuantity}
