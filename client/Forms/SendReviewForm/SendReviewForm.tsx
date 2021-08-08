@@ -51,11 +51,11 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
   }, []);
 
   const handleError = useCallback(() => {
-    // openModal('info', {
-    //   title: 'Произошла ошибка',
-    //   text: 'Пожалуйста, повторите попытку позже.',
-    // });
-  }, []);
+    openModal('Info', {
+      title: 'Произошла ошибка',
+      text: 'Пожалуйста, повторите попытку позже.',
+    });
+  }, [openModal]);
 
   const handleResponse = useCallback(
     (response) => {
@@ -71,20 +71,22 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
           textAreaRef.current.select();
           document.execCommand('copy');
 
-          // openModal('ya-market', {
-          //   title: 'Ура, мы очень рады!',
-          //   message: [
-          //     'Также можно поделиться отзывом на Яндекс.Маркет.',
-          //     'Мы уже скопировали текст вашего отзыва, после перехода его можно будет просто вставить.',
-          //   ],
-          //   cta: 'Оставить отзыв',
-          //   url: 'https://market.yandex.ru/shop/309964/reviews/add',
-          // });
+          openModal('YandexMarket', {
+            title: 'Ура, мы очень рады!',
+            message: [
+              'Также можно поделиться отзывом на Яндекс.Маркет.',
+              'Мы уже скопировали текст вашего отзыва, после перехода его можно будет просто вставить.',
+            ],
+            cta: {
+              text: 'Оставить отзыв',
+              link: 'https://market.yandex.ru/shop/309964/reviews/add',
+            },
+          });
         } else {
-          // openModal('success-message', {
-          //   title: 'Спасибо!',
-          //   message: 'Ваше сообщение отправлено.',
-          // });
+          openModal('Info', {
+            title: 'Спасибо!',
+            message: 'Ваше сообщение отправлено.',
+          });
         }
 
         if (!onSuccess) return;
@@ -95,7 +97,7 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
         handleError();
       }
     },
-    [handleError, onSuccess],
+    [handleError, onSuccess, openModal],
   );
 
   const handleChangeUploadError = useCallback((e, err) => {
@@ -172,7 +174,7 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
       </div>
 
       <div className={styles.actions}>
-        <Button className={cn(styles.action, styles.buy)} type='submit'>
+        <Button className={cn(styles.action, styles.buy)} type='submit' waiting={loading}>
           Оставить отзыв
         </Button>
         <Button className={styles.action} type='button' theme='linkSecondary' onClick={onCancel}>
