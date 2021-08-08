@@ -1,19 +1,13 @@
 import React, { useCallback, memo, FC } from 'react';
 import cn from 'classnames';
 
-import Modal from '@Components/Modal';
-import { Modal as IModal } from '@Contexts/Modals';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import IconClose from '@UI/IconClose';
 import styles from './InfoModal.module.css';
 
-export interface InfoModalProps {
-  className?: string;
-  modal: IModal;
-}
-
-const InfoModal: FC<InfoModalProps> = (props) => {
-  const { className, modal } = props;
+const InfoModal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
   const [, { closeAllModals }] = useModals();
 
   const handleClose = useCallback(() => {
@@ -21,10 +15,10 @@ const InfoModal: FC<InfoModalProps> = (props) => {
   }, [closeAllModals]);
 
   return (
-    <Modal
-      className={cn(styles.infoModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
+    <ModalMain
+      {...restProps}
+      className={cn(styles.infoModal, className)}
+      modal={modal}
       onClose={handleClose}
     >
       <div className={cn(styles.container, { [styles.neutral]: !modal.data.view })}>
@@ -38,7 +32,7 @@ const InfoModal: FC<InfoModalProps> = (props) => {
         <div className={styles.title}>{modal.data.title}</div>
         <div className={styles.text}>{modal.data.text}</div>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 
