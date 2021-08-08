@@ -16,13 +16,6 @@ const ModalsProvider: FC = (props) => {
 
   const currentModal = stack.find((modal) => modal.opened);
 
-  const getModalById = useCallback(
-    (id: ModalId) => {
-      return stack.find((modal) => modal.id === id);
-    },
-    [stack],
-  );
-
   const openModal = useCallback((id: ModalId, data) => {
     refTop.current = refTop.current || window.scrollY;
 
@@ -51,26 +44,15 @@ const ModalsProvider: FC = (props) => {
   }, []);
 
   const closeAllModals = useCallback(async () => {
-    setStack([]);
+    setStack((prevStack) => {
+      return prevStack.map((modal) => ({
+        ...modal,
+        visible: false,
+      }));
+    });
+
+    setTimeout(() => setStack([]), 400);
   }, []);
-
-  const getData = useCallback(
-    (id: ModalId) => {
-      const modal = getModalById(id);
-
-      return modal && modal.data;
-    },
-    [getModalById],
-  );
-
-  const isVisible = useCallback(
-    (id: ModalId) => {
-      const modal = getModalById(id);
-
-      return modal && modal.visible;
-    },
-    [getModalById],
-  );
 
   const handleError = useCallback(() => {
     setStack([]);
@@ -132,8 +114,6 @@ const ModalsProvider: FC = (props) => {
           openModal,
           closeModal,
           closeAllModals,
-          getData,
-          isVisible,
         }}
       >
         {children}

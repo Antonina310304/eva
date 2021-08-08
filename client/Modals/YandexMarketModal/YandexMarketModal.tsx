@@ -2,7 +2,7 @@ import React, { useCallback, memo, FC } from 'react';
 import cn from 'classnames';
 
 import { Modal as IModal } from '@Contexts/Modals';
-import Modal from '@Components/Modal';
+import ModalMain from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import IconClose from '@UI/IconClose';
 import Image from '@UI/Image';
@@ -27,7 +27,7 @@ export interface YandexMarketModalProps {
 }
 
 const YandexMarketModal: FC<YandexMarketModalProps> = (props) => {
-  const { className, modal } = props;
+  const { className, modal, ...restProps } = props;
   const { title, message, cta } = modal.data;
   const [, { closeAllModals }] = useModals();
 
@@ -36,7 +36,12 @@ const YandexMarketModal: FC<YandexMarketModalProps> = (props) => {
   }, [closeAllModals]);
 
   return (
-    <Modal className={cn(styles.modal, [className])} id={modal.id} onClose={handleClose}>
+    <ModalMain
+      {...restProps}
+      className={cn(styles.modal, className)}
+      modal={modal}
+      onClose={handleClose}
+    >
       <div className={styles.container}>
         <div className={styles.headingWrapper}>
           <h3 className={styles.heading}>{title}</h3>
@@ -50,7 +55,7 @@ const YandexMarketModal: FC<YandexMarketModalProps> = (props) => {
         <Image className={styles.logo} src={iconLogo} />
         <Button className={styles.button}>{cta.text}</Button>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 
