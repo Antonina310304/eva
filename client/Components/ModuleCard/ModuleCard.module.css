@@ -24,6 +24,10 @@
   margin-left: var(--space-xs);
 }
 
+.sizes {
+  margin-top: var(--space-m);
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
