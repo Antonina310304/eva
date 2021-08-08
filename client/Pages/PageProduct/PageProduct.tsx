@@ -48,7 +48,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
     parameters,
     importantInfo,
     documents,
-    modules,
     features,
   } = page;
   const product = useProduct({ ...page.product, modules: page.modules });
@@ -200,7 +199,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             parameters={parameters}
             importantInfo={importantInfo}
             documents={documents}
-            modules={modules}
+            modules={product.modules}
           />
         </div>
 
