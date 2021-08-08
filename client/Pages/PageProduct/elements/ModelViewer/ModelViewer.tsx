@@ -1,9 +1,9 @@
 import React, { useCallback, memo, useEffect, useRef, FC, MouseEvent, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
-import useMedia from '@divanru/ts-utils/useMedia';
 import { AR } from '@Types/AR';
 import useModals from '@Hooks/useModals';
+import useMedias from '@Hooks/useMedias';
 
 export interface ModelViewerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -14,8 +14,7 @@ export interface ModelViewerProps extends HTMLAttributes<HTMLDivElement> {
 const ModelViewer: FC<ModelViewerProps> = (props) => {
   const { className, ar, children, onLoading, ...restProps } = props;
   const [, { openModal }] = useModals();
-
-  const isMobile = useMedia('--mobile');
+  const { isMobile } = useMedias();
   const isAndroid = useRef(null);
   const isIOS = useRef(null);
 

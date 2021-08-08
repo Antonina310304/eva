@@ -27,7 +27,11 @@ const ModalsProvider: FC = (props) => {
     refTop.current = refTop.current || window.scrollY;
 
     setStack((prevStack) => {
-      return [...prevStack, { id, data, visible: false, opened: true }];
+      const newStack = prevStack.map((modal) => ({ ...modal, visible: false, opened: false }));
+
+      newStack.push({ id, data, visible: false, opened: true });
+
+      return newStack;
     });
   }, []);
 

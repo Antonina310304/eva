@@ -25,6 +25,9 @@ export interface ProductParameterData {
   id: number;
   groupId: number;
   title: string;
+  count: number;
+  isModules: boolean;
+  parameterId: number;
 }
 
 export interface ProductTagData {
@@ -56,4 +59,5 @@ export interface ProductData {
   miniature?: string;
   variants: any;
   units?: UnitData[];
+  rating?: number;
 }

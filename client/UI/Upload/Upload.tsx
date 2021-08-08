@@ -11,9 +11,9 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
-import declOfNum from '@divanru/ts-utils/declOfNum';
 import Icon12CloseBold from '@divanru/icons/dist/12/close_bold';
 
+import declOfNum from '@Utils/declOfNum';
 import styles from './Upload.module.css';
 
 export interface EpicUploadProps extends InputHTMLAttributes<HTMLInputElement> {

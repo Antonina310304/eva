@@ -11,7 +11,7 @@ import React, {
 import { nanoid } from 'nanoid';
 import cns from 'classnames';
 
-import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
+import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 import { Cylindo360ViewerOpts } from '@Types/Cylindo360Viewer';
 
 import styles from './Cylindo360Viewer.module.css';

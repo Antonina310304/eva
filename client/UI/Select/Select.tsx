@@ -9,12 +9,11 @@ import React, {
   ReactElement,
   useMemo,
 } from 'react';
-import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
-import useKeyboardEvents from '@divanru/ts-utils/useKeyboardEvents';
-
 import cn from 'classnames';
-import useMedias from '@Hooks/useMedias';
 
+import useMedias from '@Hooks/useMedias';
+import useOnClickOutside from '@Hooks/useOnClickOutside';
+import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 import FadeTransition from '@UI/FadeTransition';
 import SlideBottomTransition from '@UI/SlideBottomTransition';
 import UniversalPortal from '@UI/UniversalPortal';

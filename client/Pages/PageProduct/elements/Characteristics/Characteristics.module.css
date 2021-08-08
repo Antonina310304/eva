@@ -116,6 +116,18 @@
   }
 }
 
+.modules {
+  margin-top: var(--space-xxl);
+}
+
+.module {
+  margin-bottom: var(--space-s);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 @media (--desktop-m) {
   .scheme {
     grid-template-columns: calc(50% - 40px) calc(50% - 40px);
@@ -149,6 +161,10 @@
   .title {
     font-size: var(--size-xl);
     line-height: var(--lh-xl);
+  }
+
+  .modules {
+    margin-top: var(--space-l);
   }
 }
 

@@ -10,8 +10,9 @@ import React, {
   useRef,
   FC,
 } from 'react';
-import isFile from '@divanru/ts-utils/isFile';
 import { Ajv } from 'ajv';
+
+import isFile from '@Utils/isFile';
 
 export type CallbackData = unknown;
 
