@@ -12,7 +12,7 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const { reviews, reviewIndex } = modal.data;
   const [currentReviewIndex, setCurrentRewiewIndex] = useState<number>(reviewIndex);
-  const [, { closeAllModals, openModal, closeModal }] = useModals();
+  const [, { closeAllModals, openModal }] = useModals();
 
   const normalizeIndex = useCallback(
     (value: number) => {
@@ -47,10 +47,8 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
 
   const handleBackClick = useCallback(() => {
     window.history.pushState('', '', window.location.pathname);
-    closeModal('Review');
-
     openModal('ClientsPhotos', { reviews, currentReviewIndex });
-  }, [closeModal, currentReviewIndex, openModal, reviews]);
+  }, [currentReviewIndex, openModal, reviews]);
 
   return (
     <ModalMain

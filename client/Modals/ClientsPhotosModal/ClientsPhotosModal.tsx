@@ -13,22 +13,20 @@ import styles from './ClientsPhotosModal.module.css';
 
 const ClientsPhotosModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const [, { openModal, closeModal }] = useModals();
+  const [, { openModal }] = useModals();
   const { reviews, currentReviewIndex } = modal.data;
   const { isMobile } = useMedias();
 
   const handleClose = useCallback(() => {
-    closeModal('ClientsPhotos');
     window.history.back();
     openModal('Review', { reviewIndex: currentReviewIndex, reviews });
-  }, [closeModal, currentReviewIndex, openModal, reviews]);
+  }, [currentReviewIndex, openModal, reviews]);
 
   const handleClickLinkToReview = useCallback(
     (_e, reviewIndex) => {
-      closeModal('ClientsPhotos');
       openModal('Review', { reviewIndex, reviews });
     },
-    [closeModal, openModal, reviews],
+    [openModal, reviews],
   );
 
   return (
