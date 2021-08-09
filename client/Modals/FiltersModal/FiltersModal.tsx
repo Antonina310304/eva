@@ -53,6 +53,20 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
       className={cn(styles.FiltersModal, [className])}
       modal={modal}
       title='Фильтр'
+      view='fullscreen'
+      footer={
+        <div className={styles.footer}>
+          <Button className={styles.apply} wide>
+            Применить
+          </Button>
+          <div className={styles.footerAdditional}>
+            <div className={styles.count}>Найдено 154 модели</div>
+            <Link className={styles.reset} to='#'>
+              Сбросить фильтр
+            </Link>
+          </div>
+        </div>
+      }
     >
       <div className={styles.content}>
         <Group className={styles.group} title='Цена'>
@@ -78,18 +92,6 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
         <Group className={styles.group} title='Тип обивки' selectedText='Натуральная кожа'>
           <CheckboxList items={types} />
         </Group>
-      </div>
-
-      <div className={styles.footer}>
-        <Button className={styles.apply} wide>
-          Применить
-        </Button>
-        <div className={styles.footerAdditional}>
-          <div className={styles.count}>Найдено 154 модели</div>
-          <Link className={styles.reset} to='#'>
-            Сбросить фильтр
-          </Link>
-        </div>
       </div>
     </ModalSidebar>
   );
