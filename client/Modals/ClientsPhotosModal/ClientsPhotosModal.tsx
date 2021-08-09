@@ -1,34 +1,21 @@
 import React, { memo, FC, useCallback } from 'react';
 import cn from 'classnames';
 
-import Modal from '@Components/Modal';
-import { Modal as IModal } from '@Contexts/Modals';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import Link from '@UI/Link';
 import Image from '@UI/Image';
 import IconClose from '@UI/IconClose';
 import Scroller from '@UI/Scroller';
 import useModals from '@Hooks/useModals';
-import { ReviewData } from '@Types/Review';
 import useMedias from '@Hooks/useMedias';
+import { ReviewData } from '@Types/Review';
 import styles from './ClientsPhotosModal.module.css';
 
-export interface ClientsPhotosModalProps {
-  className?: string;
-  modal: IModal;
-}
-
-const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
-  const { className, modal } = props;
+const ClientsPhotosModal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
   const { reviews, currentReviewIndex } = modal.data;
   const { isMobile } = useMedias();
-
-  // TODO функционал для оступа от полосы прокрутки
-  // const scrollPadding = useMemo(() => {
-  //   if (isMobile) return 0;
-  //   if (isDesktop) return 20;
-  //   return 30;
-  // }, [isDesktop, isMobile]);
 
   const handleClose = useCallback(() => {
     closeModal('ClientsPhotos');
@@ -45,10 +32,10 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
   );
 
   return (
-    <Modal
+    <ModalMain
+      {...restProps}
       className={cn(styles.clientsPhotosModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
+      modal={modal}
       onClose={handleClose}
     >
       <div className={styles.modalView}>
@@ -79,7 +66,7 @@ const ClientsPhotosModal: FC<ClientsPhotosModalProps> = (props) => {
           </Scroller>
         </div>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 

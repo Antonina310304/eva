@@ -3,27 +3,28 @@ import cn from 'classnames';
 import { useQueryClient } from 'react-query';
 
 import IconClose from '@UI/IconClose';
-import Modal from '@Components/Modal';
+import ModalMain from '@Components/ModalMain';
 import { Modal as IModal } from '@Contexts/Modals';
 import useModals from '@Hooks/useModals';
 import SendReviewForm from '@Forms/SendReviewForm';
 import { ProductData } from '@Types/Product';
 import styles from './SendReviewModal.module.css';
 
+export interface ModalData extends IModal {
+  data: {
+    product: ProductData;
+  };
+}
 export interface SendReviewModalProps {
   className?: string;
-  modal: IModal;
-}
-
-export interface ModalData {
-  product: ProductData;
+  modal: ModalData;
 }
 
 const SendReviewModal: FC<SendReviewModalProps> = (props) => {
-  const { className, modal } = props;
+  const { className, modal, ...restProps } = props;
+  const { product } = modal.data;
   const queryClient = useQueryClient();
   const [, { closeAllModals }] = useModals();
-  const { product } = modal.data as ModalData;
 
   const handleClose = useCallback(() => {
     closeAllModals();
@@ -31,14 +32,13 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
 
   const handleSuccess = useCallback(() => {
     queryClient.invalidateQueries('page');
-    closeAllModals();
-  }, [closeAllModals, queryClient]);
+  }, [queryClient]);
 
   return (
-    <Modal
+    <ModalMain
+      {...restProps}
       className={cn(styles.modal, [className])}
-      id={modal.id}
-      visible={modal.visible}
+      modal={modal}
       onClose={handleClose}
     >
       <div className={styles.container}>
@@ -52,7 +52,7 @@ const SendReviewModal: FC<SendReviewModalProps> = (props) => {
           <SendReviewForm product={product} onCancel={handleClose} onSuccess={handleSuccess} />
         </div>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 

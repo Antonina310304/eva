@@ -19,6 +19,7 @@
 }
 
 .countReviews {
+  height: auto;
   margin-left: var(--space-xs);
 }
 
@@ -28,10 +29,6 @@
 
 .wrapperOutOfStock {
   margin-top: var(--space-l);
-}
-
-.labelPrice {
-  composes: s from 'sizes';
 }
 
 .containerPrices {
@@ -62,11 +59,16 @@
 }
 
 .wrapperFabrics {
-  margin-top: var(--space-xxl);
+  margin-top: var(--space-xl);
 }
 
 .orderFabrics {
-  margin-top: var(--space-s);
+  height: auto;
+  margin-top: var(--space-xs);
+}
+
+.relatedProducts {
+  margin-top: var(--space-xl);
 }
 
 .actions {

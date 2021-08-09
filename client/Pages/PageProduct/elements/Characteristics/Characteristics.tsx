@@ -4,6 +4,7 @@ import cn from 'classnames';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
 import Select, { SelectItemData } from '@UI/Select';
+import { ModuleProductData } from '@Types/ModuleProduct';
 import Dimension from './elements/Dimension';
 import Document from './elements/Document';
 import Hardness from './elements/Hardness';
@@ -19,9 +20,6 @@ export interface SchemeImage {
   url: string;
   width: number;
   height: number;
-}
-export interface ModuleImage {
-  src: string;
 }
 
 export interface Scheme {
@@ -66,19 +64,6 @@ export interface Document {
   url: string;
 }
 
-export interface Module {
-  categoryColor: string;
-  count: number;
-  extraBonus: boolean;
-  id: number;
-  images: ModuleImage[];
-  link: string;
-  maxQuantity: number;
-  minQuantity: number;
-  modelId: number;
-  name: string;
-}
-
 export interface Documents {
   title: string;
   items: Document[];
@@ -95,7 +80,7 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
     title: string;
   };
   documents: Documents;
-  modules: Module[];
+  modules: ModuleProductData[];
 }
 
 const Characteristics: FC<CharacteristicsProps> = (props) => {
@@ -253,12 +238,12 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
       </div>
       {modules.length > 0 && (
         <div className={cn(styles.row, { [styles.columns]: true })}>
-          <h2 className={styles.title}>Состав комплекта</h2>
-          <div className={styles.col}>
+          <div>
+            <h2 className={styles.title}>Состав комплекта</h2>
             <List
               className={styles.modules}
               items={modules}
-              renderChild={(module: Module) => (
+              renderChild={(module: ModuleProductData) => (
                 <ModuleCounter className={styles.module} name={module.name} count={module.count} />
               )}
             />
