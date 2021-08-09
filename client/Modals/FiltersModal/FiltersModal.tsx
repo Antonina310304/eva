@@ -45,10 +45,15 @@ const types = [
 ];
 
 const FiltersModal: FC<ModalSidebarProps> = (props) => {
-  const { className, modal } = props;
+  const { className, modal, ...restProps } = props;
 
   return (
-    <ModalSidebar className={cn(styles.FiltersModal, [className])} modal={modal} title='Фильтр'>
+    <ModalSidebar
+      {...restProps}
+      className={cn(styles.FiltersModal, [className])}
+      modal={modal}
+      title='Фильтр'
+    >
       <div className={styles.content}>
         <Group className={styles.group} title='Цена'>
           <InputsRange min={1000} max={30000} valueMin={1500} valueMax={25000} />
