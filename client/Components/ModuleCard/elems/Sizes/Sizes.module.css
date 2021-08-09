@@ -1,0 +1,72 @@
+.sizes {
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  padding-left: 125px;
+}
+
+.headLabel {
+  composes: xs from 'sizes';
+
+  width: 46px;
+  margin-right: 17px;
+
+  color: var(--color-dark-gray);
+  text-align: center;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.groups {
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs) 0;
+
+  border-bottom: 1px solid var(--color-medium-gray);
+
+  &:last-child {
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
+.groupTitle {
+  composes: s from 'sizes';
+
+  flex-shrink: 0;
+  width: 110px;
+  margin-right: var(--space-s);
+
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.groupValues {
+  display: flex;
+  align-items: center;
+}
+
+.size {
+  composes: s from 'sizes';
+
+  display: inline-flex;
+}
+
+.sizeValue {
+  display: inline-block;
+  width: 46px;
+
+  text-align: center;
+}
+
+.sizeSeparator {
+  margin: 0 var(--space-xxs);
+}

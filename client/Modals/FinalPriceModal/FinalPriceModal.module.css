@@ -1,0 +1,10 @@
+.wrapper {
+  display: block;
+}
+
+.description {
+  padding-bottom: var(--space-xl);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}

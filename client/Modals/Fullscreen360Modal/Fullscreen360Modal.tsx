@@ -1,22 +1,16 @@
 import React, { FC, useCallback, memo } from 'react';
 import cn from 'classnames';
 
-import Modal from '@Components/Modal';
-import { Modal as IModal } from '@Contexts/Modals';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import Fullscreen360 from '@Components/Fullscreen360';
 import useModals from '@Hooks/useModals';
 import Icon18Close from '@divanru/icons/dist/18/close';
 
 import styles from './Fullscreen360Modal.module.css';
 
-export interface Fullscreen360ModalProps {
-  className?: string;
-  modal: IModal;
-}
-
-const Fullscreen360Modal: FC<Fullscreen360ModalProps> = (props) => {
-  const { className, modal } = props;
-  const [, { closeModal, isVisible }] = useModals();
+const Fullscreen360Modal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
+  const [, { closeModal }] = useModals();
   const { opts } = modal.data;
 
   const handleClose = useCallback(() => {
@@ -24,11 +18,7 @@ const Fullscreen360Modal: FC<Fullscreen360ModalProps> = (props) => {
   }, [closeModal, modal.id]);
 
   return (
-    <Modal
-      className={cn(styles.fullscreen360Modal, className)}
-      id={modal.id}
-      visible={isVisible(modal.id)}
-    >
+    <ModalMain {...restProps} className={cn(styles.fullscreen360Modal, className)} modal={modal}>
       <div className={styles.fullCover} />
 
       <div className={styles.topPanel} onClick={handleClose}>
@@ -38,7 +28,7 @@ const Fullscreen360Modal: FC<Fullscreen360ModalProps> = (props) => {
       <div className={styles.container}>
         <Fullscreen360 isFullscreen opts={opts} onFullscreen={handleClose} />
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 

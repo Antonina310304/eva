@@ -1,8 +1,7 @@
 import React, { FC, useCallback, memo, useState } from 'react';
 import cn from 'classnames';
 
-import Modal from '@Components/Modal';
-import { Modal as IModal } from '@Contexts/Modals';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import Scroller from '@UI/Scroller';
@@ -10,17 +9,11 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import IconClose from '@UI/IconClose';
-
 import styles from './ProductPhotosModal.module.css';
 
-export interface ProductPhotosModalProps {
-  className?: string;
-  modal: IModal;
-}
-
-const ProductPhotosModal: FC<ProductPhotosModalProps> = (props) => {
-  const { className, modal } = props;
-  const { images } = modal.data;
+const ProductPhotosModal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
+  const { images } = modal.data as { images: any[] };
   const [, { closeModal }] = useModals();
   const { isDesktop } = useMedias();
   const [slide, setSlide] = useState(0);
@@ -39,11 +32,7 @@ const ProductPhotosModal: FC<ProductPhotosModalProps> = (props) => {
   }, []);
 
   return (
-    <Modal
-      className={cn(styles.productPhotosModal, className)}
-      id={modal.id}
-      visible={modal.visible}
-    >
+    <ModalMain {...restProps} className={cn(styles.productPhotosModal, className)} modal={modal}>
       <div className={styles.closePanel} onClick={handleClose}>
         <IconClose className={styles.iconClose} />
       </div>
@@ -90,7 +79,7 @@ const ProductPhotosModal: FC<ProductPhotosModalProps> = (props) => {
           </div>
         )}
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 

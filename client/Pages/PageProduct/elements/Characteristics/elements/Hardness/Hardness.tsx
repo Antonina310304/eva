@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
-import useOnClickOutside from '@divanru/ts-utils/useOnClickOutside';
 
+import useOnClickOutside from '@Hooks/useOnClickOutside';
 import Image from '@UI/Image';
 import IconInfo from '@UI/IconInfo';
 import PopoverInfo from '@Components/PopoverInfo';

@@ -1,0 +1,19 @@
+.added {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+.iconCheck {
+  width: 22px;
+  height: 22px;
+  margin-right: var(--space-xs);
+
+  background-image: url('./check.svg');
+  background-repeat: no-repeat;
+}
+
+.text {
+  composes: s from 'sizes';
+}

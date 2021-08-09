@@ -38,9 +38,11 @@ const InputQuantity: FC<InputQuantityProps> = (props) => {
     (e, newCount: number) => {
       const quantity = normalizeCount(newCount);
 
-      if (onChange) onChange(e, { quantity });
-
-      setCount(quantity);
+      if (onChange) {
+        onChange(e, { quantity });
+      } else {
+        setCount(quantity);
+      }
     },
     [normalizeCount, onChange],
   );
@@ -80,11 +82,11 @@ const InputQuantity: FC<InputQuantityProps> = (props) => {
 
   return (
     <div className={cn(styles.inputQuantity, className)}>
-      <div className={cn(styles.icon, { [styles.minus]: true })} onClick={handleMinus}>
+      <div className={styles.icon} onClick={handleMinus}>
         -
       </div>
       <input {...restProps} className={styles.input} value={count} onChange={handleChange} />
-      <div className={cn(styles.icon, { [styles.plus]: true })} onClick={handlePlus}>
+      <div className={styles.icon} onClick={handlePlus}>
         +
       </div>
     </div>
