@@ -3,19 +3,13 @@ import QRCode from 'qrcode.react';
 import cn from 'classnames';
 
 import IconClose from '@UI/IconClose';
-import Modal from '@Components/Modal';
-import { Modal as IModal } from '@Contexts/Modals';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 
 import styles from './TryInRoomModal.module.css';
 
-export interface TryInRoomModalProps {
-  className?: string;
-  modal: IModal;
-}
-
-const TryInRoomModal: FC<TryInRoomModalProps> = (props) => {
-  const { className, modal } = props;
+const TryInRoomModal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
   const [, { closeAllModals }] = useModals();
 
   const handleClose = useCallback(() => {
@@ -23,10 +17,10 @@ const TryInRoomModal: FC<TryInRoomModalProps> = (props) => {
   }, [closeAllModals]);
 
   return (
-    <Modal
+    <ModalMain
+      {...restProps}
       className={cn(styles.infoModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
+      modal={modal}
       onClose={handleClose}
     >
       <div className={styles.container}>
@@ -45,7 +39,7 @@ const TryInRoomModal: FC<TryInRoomModalProps> = (props) => {
           *Для смартфонов и планшетов с поддержкой дополненной реальности.
         </div>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 

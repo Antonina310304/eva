@@ -1,23 +1,15 @@
 import React, { memo, FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
-import Modal from '@Components/Modal';
-import { Modal as IModal } from '@Contexts/Modals';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import Link from '@UI/Link';
 import IconClose from '@UI/IconClose';
 import useModals from '@Hooks/useModals';
-
 import Review from './elems/Review';
-
 import styles from './ReviewModal.module.css';
 
-export interface ReviewModalProps {
-  className?: string;
-  modal: IModal;
-}
-
-const ReviewModal: FC<ReviewModalProps> = (props) => {
-  const { className, modal } = props;
+const ReviewModal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
   const { reviews, reviewIndex } = modal.data;
   const [currentReviewIndex, setCurrentRewiewIndex] = useState<number>(reviewIndex);
   const [, { closeAllModals, closeModal }] = useModals();
@@ -59,10 +51,10 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
   }, [closeModal]);
 
   return (
-    <Modal
+    <ModalMain
+      {...restProps}
       className={cn(styles.reviewModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
+      modal={modal}
       onClose={handleClose}
     >
       <div className={styles.modalView}>
@@ -91,7 +83,7 @@ const ReviewModal: FC<ReviewModalProps> = (props) => {
           </div>
         </Link>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 

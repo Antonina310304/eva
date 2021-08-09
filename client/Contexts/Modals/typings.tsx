@@ -22,7 +22,7 @@ export interface Modal {
   id: ModalId;
   data: any;
   visible?: boolean;
-  selected?: boolean;
+  opened?: boolean;
 }
 
 export interface ModalsState {
@@ -34,6 +34,4 @@ export interface ModalsMethods {
   openModal: (id: ModalId, data?: unknown) => void;
   closeModal: (id: ModalId) => void;
   closeAllModals: () => void;
-  getData: (id: ModalId) => unknown;
-  isVisible: (id: ModalId) => boolean;
 }

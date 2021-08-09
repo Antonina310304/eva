@@ -23,12 +23,10 @@ const networkStore = createStore<NetworkStatus>();
 const getParameterValues = () => {
   const product = getValue(productStore);
 
-  return product.modules
-    .filter((module) => module.count > 0)
-    .map((module) => ({
-      id: module.parameterId,
-      count: module.count,
-    }));
+  return product.modules.map((module) => ({
+    id: module.parameterId,
+    count: module.count,
+  }));
 };
 
 const updateProduct = async () => {
