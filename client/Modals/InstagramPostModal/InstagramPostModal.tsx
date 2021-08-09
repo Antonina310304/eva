@@ -1,7 +1,7 @@
 import React, { memo, FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
-import Modal from '@Components/Modal';
+import ModalMain from '@Components/ModalMain';
 import Share from '@Components/Share';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
@@ -72,10 +72,9 @@ const InstagramPostModal: FC<InstagramPostModalProps> = (props) => {
   if (!meta.isSuccess) return null;
 
   return (
-    <Modal
+    <ModalMain
       className={cn(styles.instagramPostModal, [className])}
-      id={modal.id}
-      visible={modal.visible}
+      modal={modal}
       onClose={handleClose}
     >
       <div className={styles.modalView}>
@@ -143,7 +142,7 @@ const InstagramPostModal: FC<InstagramPostModalProps> = (props) => {
           <div className={styles.arrow} />
         </div>
       </div>
-    </Modal>
+    </ModalMain>
   );
 };
 
