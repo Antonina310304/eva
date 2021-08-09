@@ -134,6 +134,10 @@
   margin-top: var(--space-xxe);
 }
 
+.wrapperSidebar {
+  position: relative;
+}
+
 @media (--desktop-m) {
   .page {
     --sidebar-width: 25.66%;
@@ -243,7 +247,7 @@
     display: block;
   }
 
-  .sidebar {
+  .wrapperSidebar {
     max-width: 486px;
     margin: var(--space-n) auto 0;
   }

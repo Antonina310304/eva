@@ -1,4 +1,13 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState, useRef } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  useCallback,
+  memo,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
@@ -55,9 +64,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const [, { openModal }] = useModals();
   const { isMobileM } = useMedias();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
+  const [positionSidebar, setPositionSidebar] = useState(null);
   const refCharacteristics = useRef<HTMLDivElement>();
   const refReviews = useRef<HTMLDivElement>();
-  const refContainerSidebar = useRef<HTMLDivElement>();
+  const refWrapperSidebar = useRef<HTMLDivElement>();
+  const refSidebar = useRef<HTMLDivElement>();
+  const refMainContent = useRef<HTMLDivElement>();
+  const refStartPosition = useRef(null);
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -116,13 +129,57 @@ const PageProduct: FC<PageProductProps> = (props) => {
     refReviews.current.scrollIntoView();
   }, []);
 
+  const handleChangePositionSidebar = useCallback(() => {
+    if (!refMainContent.current) return;
+    if (!refSidebar.current) return;
+
+    const rectContent = refMainContent.current.getBoundingClientRect();
+    const rectWrapperSidebar = refWrapperSidebar.current.getBoundingClientRect();
+    const rectSidebar = refSidebar.current.getBoundingClientRect();
+    const fixed = rectContent.bottom > rectSidebar.bottom || rectSidebar.top > 0;
+    const position = fixed
+      ? {
+          position: 'fixed',
+          top: `${refStartPosition.current.top}px`,
+          right: `${document.documentElement.offsetWidth - rectWrapperSidebar.right}px`,
+          left: `${rectWrapperSidebar.left}px`,
+        }
+      : {
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        };
+
+    setPositionSidebar(position);
+  }, []);
+
   useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
+
+  useEffect(() => {
+    if (!refWrapperSidebar.current) return;
+
+    const rect = refWrapperSidebar.current.getBoundingClientRect();
+
+    refStartPosition.current = { top: rect.top };
+  }, []);
+
+  useEffect(() => {
+    handleChangePositionSidebar();
+    window.addEventListener('scroll', handleChangePositionSidebar);
+    window.addEventListener('resize', handleChangePositionSidebar);
+
+    return () => {
+      window.removeEventListener('scroll', handleChangePositionSidebar);
+      window.removeEventListener('resize', handleChangePositionSidebar);
+    };
+  }, [handleChangePositionSidebar]);
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={cn(styles.mainContainer, styles.wrapperMain)}>
         <div className={styles.grid}>
-          <div>
+          <div ref={refMainContent}>
             <PhotoGallery
               images={mediaGallery}
               tags={product.tags}
@@ -131,7 +188,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
             />
 
             {isMobileM && (
-              <div className={styles.sidebar}>
+              <div className={styles.wrapperSidebar}>
                 <Sidebar
                   page={page}
                   meta={meta}
@@ -215,13 +272,15 @@ const PageProduct: FC<PageProductProps> = (props) => {
           </div>
 
           {!isMobileM && (
-            <div className={styles.sidebar}>
-              <Sidebar
-                page={page}
-                meta={meta}
-                onClickCharacteristics={handleClickCharacteristics}
-                onClickReviews={handleClickReviews}
-              />
+            <div className={styles.wrapperSidebar} ref={refWrapperSidebar}>
+              <div style={positionSidebar} ref={refSidebar}>
+                <Sidebar
+                  page={page}
+                  meta={meta}
+                  onClickCharacteristics={handleClickCharacteristics}
+                  onClickReviews={handleClickReviews}
+                />
+              </div>
             </div>
           )}
         </div>
