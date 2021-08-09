@@ -1,4 +1,13 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState, useRef } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  useCallback,
+  memo,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
@@ -8,13 +17,13 @@ import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
+import useMedias from '@Hooks/useMedias';
 import { useRelatedProducts } from '@Stores/relatedProducts';
 import { useProduct } from '@Stores/product';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
 import PhotoGallery from './elements/PhotoGallery';
-import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import DeliverySection from './elements/DeliverySection';
 import ComfortBuy from './elements/ComfortBuy';
@@ -53,9 +62,15 @@ const PageProduct: FC<PageProductProps> = (props) => {
   } = page;
   const product = useProduct({ ...page.product, modules: page.modules });
   const [, { openModal }] = useModals();
+  const { isMobileM } = useMedias();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
+  const [positionSidebar, setPositionSidebar] = useState(null);
   const refCharacteristics = useRef<HTMLDivElement>();
   const refReviews = useRef<HTMLDivElement>();
+  const refWrapperSidebar = useRef<HTMLDivElement>();
+  const refSidebar = useRef<HTMLDivElement>();
+  const refMainContent = useRef<HTMLDivElement>();
+  const refStartPosition = useRef(null);
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -114,102 +129,162 @@ const PageProduct: FC<PageProductProps> = (props) => {
     refReviews.current.scrollIntoView();
   }, []);
 
+  const handleChangePositionSidebar = useCallback(() => {
+    if (!refMainContent.current) return;
+    if (!refSidebar.current) return;
+
+    const rectContent = refMainContent.current.getBoundingClientRect();
+    const rectWrapperSidebar = refWrapperSidebar.current.getBoundingClientRect();
+    const rectSidebar = refSidebar.current.getBoundingClientRect();
+    const fixed = rectContent.bottom > rectSidebar.bottom || rectSidebar.top > 0;
+    const position = fixed
+      ? {
+          position: 'fixed',
+          top: `${refStartPosition.current.top}px`,
+          right: `${document.documentElement.offsetWidth - rectWrapperSidebar.right}px`,
+          left: `${rectWrapperSidebar.left}px`,
+        }
+      : {
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        };
+
+    setPositionSidebar(position);
+  }, []);
+
   useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
+
+  useEffect(() => {
+    if (!refWrapperSidebar.current) return;
+
+    const rect = refWrapperSidebar.current.getBoundingClientRect();
+
+    refStartPosition.current = { top: rect.top };
+  }, []);
+
+  useEffect(() => {
+    handleChangePositionSidebar();
+    window.addEventListener('scroll', handleChangePositionSidebar);
+    window.addEventListener('resize', handleChangePositionSidebar);
+
+    return () => {
+      window.removeEventListener('scroll', handleChangePositionSidebar);
+      window.removeEventListener('resize', handleChangePositionSidebar);
+    };
+  }, [handleChangePositionSidebar]);
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
-      <MainGrid
-        className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={
-          <Sidebar
-            page={page}
-            meta={meta}
-            onClickCharacteristics={handleClickCharacteristics}
-            onClickReviews={handleClickReviews}
-          />
-        }
-      >
-        <PhotoGallery
-          images={mediaGallery}
-          tags={product.tags}
-          ar={ar}
-          category={breadcrumbs[1].text}
-        />
-      </MainGrid>
+      <div className={cn(styles.mainContainer, styles.wrapperMain)}>
+        <div className={styles.grid}>
+          <div ref={refMainContent}>
+            <PhotoGallery
+              images={mediaGallery}
+              tags={product.tags}
+              ar={ar}
+              category={breadcrumbs[1].text}
+            />
 
-      <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        {page.description && (
-          <div
-            className={styles.description}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: page.description }}
-          />
-        )}
+            {isMobileM && (
+              <div className={styles.wrapperSidebar}>
+                <Sidebar
+                  page={page}
+                  meta={meta}
+                  onClickCharacteristics={handleClickCharacteristics}
+                  onClickReviews={handleClickReviews}
+                />
+              </div>
+            )}
 
-        {product.modules.length > 0 && (
-          <div className={styles.modules}>
-            <ModulesList modules={product.modules} />
+            {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
+
+            {page.description && (
+              <div
+                className={styles.description}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: page.description }}
+              />
+            )}
+
+            {product.modules.length > 0 && (
+              <div className={styles.modules}>
+                <ModulesList modules={product.modules} />
+              </div>
+            )}
+
+            {page.layers?.length > 0 && (
+              <div className={styles.layers}>
+                <MattressesLayers layers={page.layers} priorityParameter={page.priorityParameter} />
+              </div>
+            )}
+
+            <div className={styles.characteristics} ref={refCharacteristics}>
+              <Characteristics
+                title='Характеристики'
+                tabs={[
+                  { id: '0', label: 'Собранный' },
+                  { id: '1', label: 'Разобранный' },
+                ]}
+                schemes={[
+                  {
+                    id: '0',
+                    images: [
+                      {
+                        url: '/react/static/img/scheme1.jpg',
+                        width: 511,
+                        height: 236,
+                      },
+                      {
+                        url: '/react/static/img/scheme2.jpg',
+                        width: 269,
+                        height: 235,
+                      },
+                    ],
+                  },
+                  {
+                    id: '1',
+                    images: [
+                      {
+                        url: '/react/static/img/scheme3.jpg',
+                        width: 232,
+                        height: 389,
+                      },
+                      {
+                        url: '/react/static/img/scheme4.jpg',
+                        width: 81,
+                        height: 388,
+                      },
+                    ],
+                  },
+                ]}
+                parameters={parameters}
+                importantInfo={importantInfo}
+                documents={documents}
+                modules={product.modules}
+              />
+            </div>
+
+            {features?.length > 0 && (
+              <ProductFeatures className={styles.wrapperFeatures} features={features} />
+            )}
           </div>
-        )}
 
-        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
-
-        {page.layers?.length > 0 && (
-          <div className={styles.layers}>
-            <MattressesLayers layers={page.layers} priorityParameter={page.priorityParameter} />
-          </div>
-        )}
-
-        <div className={styles.characteristics} ref={refCharacteristics}>
-          <Characteristics
-            title='Характеристики'
-            tabs={[
-              { id: '0', label: 'Собранный' },
-              { id: '1', label: 'Разобранный' },
-            ]}
-            schemes={[
-              {
-                id: '0',
-                images: [
-                  {
-                    url: '/react/static/img/scheme1.jpg',
-                    width: 511,
-                    height: 236,
-                  },
-                  {
-                    url: '/react/static/img/scheme2.jpg',
-                    width: 269,
-                    height: 235,
-                  },
-                ],
-              },
-              {
-                id: '1',
-                images: [
-                  {
-                    url: '/react/static/img/scheme3.jpg',
-                    width: 232,
-                    height: 389,
-                  },
-                  {
-                    url: '/react/static/img/scheme4.jpg',
-                    width: 81,
-                    height: 388,
-                  },
-                ],
-              },
-            ]}
-            parameters={parameters}
-            importantInfo={importantInfo}
-            documents={documents}
-            modules={product.modules}
-          />
+          {!isMobileM && (
+            <div className={styles.wrapperSidebar} ref={refWrapperSidebar}>
+              <div style={positionSidebar} ref={refSidebar}>
+                <Sidebar
+                  page={page}
+                  meta={meta}
+                  onClickCharacteristics={handleClickCharacteristics}
+                  onClickReviews={handleClickReviews}
+                />
+              </div>
+            </div>
+          )}
         </div>
-
-        {features?.length > 0 && (
-          <ProductFeatures className={styles.wrapperFeatures} features={features} />
-        )}
-      </MainGrid>
+      </div>
 
       {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (
         <ChooseMattressBanner
