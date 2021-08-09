@@ -77,61 +77,59 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
           <div className={styles.arrow} />
         </div>
 
-        <Scroller className={styles.mobileScroller} invisible={isMobile}>
-          <div className={styles.container}>
-            <div className={styles.header}>
-              <IconClose onClick={handleClose} />
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <IconClose onClick={handleClose} />
+          </div>
+
+          <div className={styles.content}>
+            <div className={styles.post}>
+              <Image className={styles.photo} src={currentPost.img} />
             </div>
 
-            <div className={styles.content}>
-              <div className={styles.post}>
-                <Image className={styles.photo} src={currentPost.img} />
-              </div>
-
-              {isMobile ? (
-                <div className={styles.caruselWrapper}>
-                  <Gallery
-                    className={styles.gallery}
-                    slideIndex={slideIndex}
-                    onChangeProgress={handleChangeProgress}
-                    onChangeCurrent={handleChangeCurrent}
-                  >
-                    {currentPost.products.map((product: InstagramProductData, index: number) => (
-                      <div className={styles.item}>
-                        <ProductCard className={styles.productCard} product={product} key={index} />
-                      </div>
-                    ))}
-                  </Gallery>
-
-                  <ProgressBar className={styles.track} track={track} />
-                </div>
-              ) : (
-                <Scroller className={styles.productsScroller}>
-                  <div className={styles.productsWrapper}>
-                    {currentPost.products.map((product: InstagramProductData, index: number) => (
+            {isMobile ? (
+              <div className={styles.caruselWrapper}>
+                <Gallery
+                  className={styles.gallery}
+                  slideIndex={slideIndex}
+                  onChangeProgress={handleChangeProgress}
+                  onChangeCurrent={handleChangeCurrent}
+                >
+                  {currentPost.products.map((product: InstagramProductData, index: number) => (
+                    <div className={styles.item}>
                       <ProductCard className={styles.productCard} product={product} key={index} />
-                    ))}
-                  </div>
-                </Scroller>
-              )}
+                    </div>
+                  ))}
+                </Gallery>
+
+                {track?.width < 100 && <ProgressBar className={styles.track} track={track} />}
+              </div>
+            ) : (
+              <Scroller className={styles.productsScroller}>
+                <div className={styles.productsWrapper}>
+                  {currentPost.products.map((product: InstagramProductData, index: number) => (
+                    <ProductCard className={styles.productCard} product={product} key={index} />
+                  ))}
+                </div>
+              </Scroller>
+            )}
+          </div>
+
+          <div className={styles.postInfo}>
+            <div className={styles.author}>
+              <div className={styles.postText}>Автор фотографии</div>
+              <Link className={styles.linkToInstagram} to={currentPost.link} view='simple'>
+                <div className={styles.instagramIcon} />
+                <div className={styles.authorNikname}>{`@${currentPost.author}`}</div>
+              </Link>
             </div>
 
-            <div className={styles.postInfo}>
-              <div className={styles.author}>
-                <div className={styles.postText}>Автор фотографии</div>
-                <Link className={styles.linkToInstagram} to={currentPost.link} view='simple'>
-                  <div className={styles.instagramIcon} />
-                  <div className={styles.authorNikname}>{`@${currentPost.author}`}</div>
-                </Link>
-              </div>
-
-              <div className={styles.share}>
-                <div className={styles.postText}>Поделиться в соц. сетях</div>
-                <Share className={styles.shareIcons} socials={meta.data.socials} />
-              </div>
+            <div className={styles.share}>
+              <div className={styles.postText}>Поделиться в соц. сетях</div>
+              <Share className={styles.shareIcons} socials={meta.data.socials} />
             </div>
           </div>
-        </Scroller>
+        </div>
 
         <div className={cn(styles.arrowBackground, { [styles.next]: true })} onClick={handleNext}>
           <div className={styles.arrow} />

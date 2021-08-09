@@ -1,5 +1,5 @@
 .preview {
-  --proportion: 68%;
+  --proportion: 62.64%;
 
   position: relative;
 
@@ -42,4 +42,10 @@
 
   border-radius: 5px;
   filter: brightness(0.94);
+}
+
+@media (--desktop) {
+  .preview {
+    --proportion: 55.9%;
+  }
 }

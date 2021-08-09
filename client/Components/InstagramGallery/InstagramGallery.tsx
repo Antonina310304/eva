@@ -42,6 +42,8 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
 
   const handleClickInstagramPost = useCallback(
     (_e, selectedPost) => {
+      if (window.cancelClick) return;
+
       openModal('InstagramPost', {
         posts,
         selectedPost,
