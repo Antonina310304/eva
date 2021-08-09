@@ -70,7 +70,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const refWrapperSidebar = useRef<HTMLDivElement>();
   const refSidebar = useRef<HTMLDivElement>();
   const refMainContent = useRef<HTMLDivElement>();
-  const refStartPosition = useRef(null);
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -140,7 +139,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     const position = fixed
       ? {
           position: 'fixed',
-          top: `${refStartPosition.current.top}px`,
+          top: 0,
           right: `${document.documentElement.offsetWidth - rectWrapperSidebar.right}px`,
           left: `${rectWrapperSidebar.left}px`,
         }
@@ -155,14 +154,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
   }, []);
 
   useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
-
-  useEffect(() => {
-    if (!refWrapperSidebar.current) return;
-
-    const rect = refWrapperSidebar.current.getBoundingClientRect();
-
-    refStartPosition.current = { top: rect.top };
-  }, []);
 
   useEffect(() => {
     handleChangePositionSidebar();
