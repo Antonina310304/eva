@@ -1,12 +1,11 @@
 import React, { memo, FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
-import ModalMain from '@Components/ModalMain';
+import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import Share from '@Components/Share';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import Scroller from '@UI/Scroller';
-import { Modal as IModal } from '@Contexts/Modals';
 import Link from '@UI/Link';
 import Image from '@UI/Image';
 import IconClose from '@UI/IconClose';
@@ -18,18 +17,13 @@ import { InstagramPostData } from '@Types/InstagramPost';
 import ProductCard from './elems/ProductCard';
 import styles from './InstagramPostModal.module.css';
 
-export interface InstagramPostModalProps {
-  className?: string;
-  modal: IModal;
-}
-
 export interface InstagramProductData extends ProductData {
   img: string;
   orientation: 'portrait' | 'landscape';
 }
 
-const InstagramPostModal: FC<InstagramPostModalProps> = (props) => {
-  const { className, modal } = props;
+const InstagramPostModal: FC<ModalMainProps> = (props) => {
+  const { className, modal, ...restProps } = props;
   const { posts, selectedPost } = modal.data;
   const [, { closeModal }] = useModals();
   const { isMobile } = useMedias();
@@ -73,6 +67,7 @@ const InstagramPostModal: FC<InstagramPostModalProps> = (props) => {
 
   return (
     <ModalMain
+      {...restProps}
       className={cn(styles.instagramPostModal, [className])}
       modal={modal}
       onClose={handleClose}
