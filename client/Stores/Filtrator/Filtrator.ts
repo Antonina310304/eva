@@ -218,7 +218,7 @@ const formatFiltersToObject = () => {
     const parameterName = Number.isNaN(parseInt(parameterId, 10)) ? parameterId : `parameters`;
 
     if (isRange) {
-      let values = null;
+      let values: any = null;
 
       if (value[0] !== defaultValues[0]) {
         values = { ...values, from: defaultValues[0] };
