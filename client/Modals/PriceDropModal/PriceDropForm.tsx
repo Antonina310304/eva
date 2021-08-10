@@ -13,12 +13,12 @@ import styles from './PriceDropModal.module.css';
 export interface PriceDropFormProps {
   className?: string;
   id: string;
+  price: string;
 }
 
 const PriceDropForm: FC<PriceDropFormProps> = (props) => {
   const { className, id, price, ...restProps } = props;
   const [loading, setLoading] = useState(false);
-  const [serverErrors, setServerErrors] = useState([]);
   const [, { openModal }] = useModals();
 
   const handleSubmit = useCallback(
@@ -47,7 +47,7 @@ const PriceDropForm: FC<PriceDropFormProps> = (props) => {
         },
         onSuccess() {
           setLoading(false);
-          openModal('success-message', {
+          openModal('Info', {
             title: 'Отлично!',
             message: 'Как только цена станет ниже, мы пришлем вам письмо.',
           });
@@ -78,7 +78,6 @@ const PriceDropForm: FC<PriceDropFormProps> = (props) => {
       className={cn(styles.form, [className])}
       action='/'
       validationSchemaUrl='/json-schema/price-reduction-subscription-form.json'
-      serverErrors={serverErrors}
       onSubmit={handleSubmit}
     >
       <FormItem>
