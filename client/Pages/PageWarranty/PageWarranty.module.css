@@ -1,2 +1,61 @@
 .page {
 }
+
+.pageTitle {
+  max-width: 1780px;
+  margin: 0 auto;
+  padding: 35px 0px;
+
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 58px;
+  text-align: center;
+
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.wrapper {
+  max-width: 1176px;
+  margin: 0 auto;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.navigationItem {
+  padding: 0px 20px;
+}
+
+.navigationLink {
+  padding: 5px 0;
+
+  color: #989898;
+  font-size: 22px;
+  line-height: 33px;
+}
+
+.navigationLink.active {
+  color: #000000;
+
+  border-bottom: 1px solid #000000;
+}
+
+.qualityDepartment {
+  margin-top: 85px;
+}
+
+.garanties {
+  margin-top: 80px;
+}
+
+.contactWithQualityDep {
+  margin-top: 80px;
+}
+
+.exchangeAndRefund {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}

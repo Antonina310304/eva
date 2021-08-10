@@ -1,0 +1,34 @@
+.exchangeAndRefund {
+}
+
+.title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.wrapper {
+  margin-top: 40px;
+}
+
+.item {
+  margin-top: 30px;
+
+  font-size: 14px;
+  line-height: 21px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.information {
+  margin-top: 40px;
+  padding: 20px;
+
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+
+  border: 1px solid #c4c4c4;
+}

@@ -1,0 +1,35 @@
+.garanties {
+}
+
+.title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 45px;
+}
+
+.item {
+  display: flex;
+  max-width: 352px;
+}
+
+.imageWrapper {
+  width: 60px;
+}
+
+.icon {
+  width: 60px;
+  height: 50px;
+}
+
+.text {
+  margin-left: 30px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
