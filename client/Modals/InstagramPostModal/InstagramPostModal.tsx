@@ -88,7 +88,7 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
             </div>
 
             {isMobile ? (
-              <div className={styles.caruselWrapper}>
+              <div className={styles.wrapperGallery}>
                 <Gallery
                   className={styles.gallery}
                   slideIndex={slideIndex}
@@ -102,7 +102,7 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
                   ))}
                 </Gallery>
 
-                {track?.width < 100 && <ProgressBar className={styles.track} track={track} />}
+                {track?.width < 100 && <ProgressBar className={styles.progressBar} track={track} />}
               </div>
             ) : (
               <Scroller className={styles.productsScroller}>

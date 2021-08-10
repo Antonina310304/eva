@@ -199,6 +199,7 @@
 @media (--mobile) {
   .modalView {
     width: 100%;
+    max-width: unset;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -229,7 +230,7 @@
     padding-top: 100%;
   }
 
-  .caruselWrapper {
+  .wrapperGallery {
     margin-top: var(--space-l);
     padding: 0 var(--space-s);
   }
@@ -250,7 +251,7 @@
     margin: 0;
   }
 
-  .track {
+  .progressBar {
     margin-top: var(--space-l);
   }
 
