@@ -28,7 +28,7 @@
 
 .photo {
   width: 500px;
-  padding-top: 100%;
+  padding-bottom: 100%;
 
   background-size: cover;
 }
@@ -159,7 +159,6 @@
 
   .photo {
     width: 337px;
-    padding-top: 108.9%;
   }
 
   .productsScroller {
@@ -227,7 +226,6 @@
 
   .photo {
     width: 100%;
-    padding-top: 100%;
   }
 
   .wrapperGallery {
