@@ -74,6 +74,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('DeliveryInformation');
   }, [openModal]);
 
+  const handleClickPriceDrop = useCallback(() => {
+    openModal('PriceDrop');
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
       <div className={styles.shortName}>
@@ -109,7 +113,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <>
               <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
 
-              <Button className={styles.priceReduction} theme='linkSecondary'>
+              <Button
+                className={styles.priceReduction}
+                theme='linkSecondary'
+                onClick={handleClickPriceDrop}
+              >
                 Подписаться на изменение цены
               </Button>
             </>
