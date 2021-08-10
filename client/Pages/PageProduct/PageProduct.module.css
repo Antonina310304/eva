@@ -1,4 +1,5 @@
 .page {
+  --sidebar-width: 25.764%;
 }
 
 .mainContainer {
@@ -7,6 +8,12 @@
 
 .wrapperMain {
   margin-bottom: var(--space-e);
+}
+
+.grid {
+  display: grid;
+  grid-gap: var(--space-xe);
+  grid-template-columns: 1fr var(--sidebar-width);
 }
 
 .wrapperFeatures {
@@ -26,6 +33,8 @@
 }
 
 .description {
+  margin-top: var(--space-xxe);
+
   p {
     &:first-child {
       margin-top: 0;
@@ -125,7 +134,27 @@
   margin-top: var(--space-xxe);
 }
 
+.wrapperSidebar {
+  position: relative;
+}
+
 @media (--desktop-m) {
+  .page {
+    --sidebar-width: 25.66%;
+  }
+
+  .grid {
+    grid-gap: var(--space-xb);
+  }
+
+  .description {
+    margin-top: var(--space-e);
+  }
+
+  .characteristics {
+    margin-top: var(--space-e);
+  }
+
   .separator {
     margin-top: var(--space-e);
   }
@@ -159,9 +188,21 @@
 }
 
 @media (--desktop) {
+  .page {
+    --sidebar-width: 31.78%;
+  }
+
   .cylindo {
     padding: var(--space-xs);
     padding-bottom: var(--space-n);
+  }
+
+  .description {
+    margin-top: var(--space-xb);
+  }
+
+  .characteristics {
+    margin-top: var(--space-xb);
   }
 
   .separator {
@@ -198,6 +239,27 @@
 }
 
 @media (--mobile-m) {
+  .page {
+    --sidebar-width: 100%;
+  }
+
+  .grid {
+    display: block;
+  }
+
+  .wrapperSidebar {
+    max-width: 486px;
+    margin: var(--space-n) auto 0;
+  }
+
+  .description {
+    margin-top: var(--space-xxl);
+  }
+
+  .characteristics {
+    margin-top: var(--space-xxl);
+  }
+
   .wrapperMain {
     margin-bottom: var(--space-xb);
   }
