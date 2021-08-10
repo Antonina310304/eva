@@ -10,6 +10,17 @@
   padding-left: var(--gap);
 }
 
+.content {
+  --gap: var(--space-xxl);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1256px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--gap);
+  padding-left: var(--gap);
+}
+
 @media (--desktop-m) {
   .main {
     --gap: var(--space-xxl);
@@ -18,6 +29,10 @@
 
 @media (--mobile-m) {
   .main {
+    --gap: var(--space-s);
+  }
+
+  .content {
     --gap: var(--space-s);
   }
 }

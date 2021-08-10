@@ -16,6 +16,7 @@ export interface Data {
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
+const RouteDelivery = loadable(() => import('@Routes/RouteDelivery'));
 
 const App: FC = () => {
   return (
@@ -46,6 +47,18 @@ const App: FC = () => {
         <Route exact path='/:region/product/:slug'>
           <ApiSetup>
             <RouteProduct />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/site/delivery'>
+          <ApiSetup>
+            <RouteDelivery />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/:region/site/delivery'>
+          <ApiSetup>
+            <RouteDelivery />
           </ApiSetup>
         </Route>
       </Switch>

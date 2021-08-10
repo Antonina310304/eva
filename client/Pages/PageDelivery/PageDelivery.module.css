@@ -1,0 +1,30 @@
+.page {
+}
+
+.mainContainer {
+  composes: main from 'containers';
+
+  margin-bottom: var(--space-e);
+}
+
+.contentContainer {
+  composes: content from 'containers';
+}
+
+.breadcrumbs {
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--size-xb);
+  line-height: var(--lh-xb);
+  text-align: center;
+}
+
+.wrapperTop {
+  margin-bottom: var(--space-m);
+  padding-bottom: var(--space-xl);
+
+  border-bottom: 1px solid var(--color-medium-gray);
+}
