@@ -1,9 +1,9 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useEffect } from 'react';
 import cn from 'classnames';
 
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
-import { useFiltrator } from '@Stores/filtrator';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import Filters from './elements/Filters';
 import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
@@ -12,12 +12,17 @@ import PopularLinks from './elements/PopularLinks';
 export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
+  slug: string;
 }
 
 const PageCategory: FC<PageCategoryProps> = (props) => {
-  const { className, page, ...restProps } = props;
+  const { className, page, slug, ...restProps } = props;
   const isModels = page.productsModel?.length > 0;
   const filtrator = useFiltrator(page.filters);
+
+  useEffect(() => {
+    Filtrator.updateTotalCount({ category: slug });
+  }, [filtrator.selected, slug]);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

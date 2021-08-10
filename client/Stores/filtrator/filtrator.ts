@@ -1,11 +1,13 @@
 import { createDerived, createStore, getValue } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
+import { ApiCategory } from '@Api/Category';
 import { FiltersData } from '@Types/Filters';
 
-const store = createStore<FiltersData>();
+const filtratorStore = createStore<FiltersData>();
+const totalCountStore = createStore<number>();
 
-const tabs = createDerived(store, (filtrator) => {
+const tabs = createDerived(filtratorStore, (filtrator) => {
   if (!filtrator.filters) return [];
 
   return filtrator.filters.map((filter) => ({
@@ -15,7 +17,7 @@ const tabs = createDerived(store, (filtrator) => {
   }));
 });
 
-const selected = createDerived(store, (filtrator) => {
+const selected = createDerived(filtratorStore, (filtrator) => {
   const parameters: any = {};
   const filters: any = [];
 
@@ -59,7 +61,7 @@ const selected = createDerived(store, (filtrator) => {
 });
 
 const changeRange = ({ id, from, to }: any) => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
   const formatedFrom = from ? Number(from.toFixed()) : null;
   const formatedTo = to ? Number(to.toFixed()) : null;
   const newValue = {
@@ -76,11 +78,11 @@ const changeRange = ({ id, from, to }: any) => {
     },
   };
 
-  store.set(newValue);
+  filtratorStore.set(newValue);
 };
 
 const addCheckbox = ({ id, value }: any) => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
   const newValue = {
     ...filtrator,
     parameters: {
@@ -92,11 +94,11 @@ const addCheckbox = ({ id, value }: any) => {
     },
   };
 
-  store.set(newValue);
+  filtratorStore.set(newValue);
 };
 
 const removeCheckbox = ({ id, value }: any) => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
   const newValue = {
     ...filtrator,
     parameters: {
@@ -108,11 +110,11 @@ const removeCheckbox = ({ id, value }: any) => {
     },
   };
 
-  store.set(newValue);
+  filtratorStore.set(newValue);
 };
 
 const resetAll = () => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
   const parameters: any = {};
 
   Object.entries(filtrator.parameters).forEach(([key, parameter]) => {
@@ -124,14 +126,14 @@ const resetAll = () => {
     };
   });
 
-  store.set({
+  filtratorStore.set({
     ...filtrator,
     parameters,
   });
 };
 
 const resetOne = ({ value }: any) => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
   const parameter = filtrator.parameters[value.parameterId];
   const parameters = { ...filtrator.parameters };
 
@@ -154,11 +156,11 @@ const resetOne = ({ value }: any) => {
     default: newDefault,
   };
 
-  store.set({ ...filtrator, parameters });
+  filtratorStore.set({ ...filtrator, parameters });
 };
 
 const resetGroup = ({ group }: any) => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
   const parameters = { ...filtrator.parameters };
 
   group.items.forEach(({ parameterId }: any) => {
@@ -187,13 +189,13 @@ const resetGroup = ({ group }: any) => {
     };
   });
 
-  store.set({ ...filtrator, parameters });
+  filtratorStore.set({ ...filtrator, parameters });
 };
 
 const changeSort = ({ targetId }: any) => {
-  const filtrator = getValue(store);
+  const filtrator = getValue(filtratorStore);
 
-  store.set({
+  filtratorStore.set({
     ...filtrator,
     sort: filtrator.sort.map((item) => ({
       ...item,
@@ -202,23 +204,100 @@ const changeSort = ({ targetId }: any) => {
   });
 };
 
+const formatFiltersToObject = () => {
+  const filtrator = getValue(filtratorStore);
+  let items: any = {};
+
+  // Выбранные фильтры
+  Object.entries(filtrator.parameters || {}).forEach(([parameterId, parameter]) => {
+    const { value, type } = filtrator.parameterValues.find((pv) => pv.parameterId === parameterId);
+    const isRange = type === 'range';
+    const isVariant = type === 'variant';
+    const isSwitch = type === 'switch';
+    const defaultValues = parameter.default;
+    const parameterName = Number.isNaN(parseInt(parameterId, 10)) ? parameterId : `parameters`;
+
+    if (isRange) {
+      let values = null;
+
+      if (value[0] !== defaultValues[0]) {
+        values = { ...values, from: defaultValues[0] };
+      }
+
+      if (value[1] !== defaultValues[1]) {
+        values = { ...values, to: defaultValues[1] };
+      }
+
+      if (values) {
+        if (parameterName !== parameterId) {
+          values = { ...items[parameterName], [parameterId]: { ...values } };
+        }
+
+        items = {
+          ...items,
+          [parameterName]: values,
+        };
+      }
+    }
+
+    if (isVariant) {
+      if (defaultValues.length > 0) {
+        let values = defaultValues;
+        if (parameterName !== parameterId) {
+          values = { ...items[parameterName], [parameterId]: [...defaultValues] };
+        }
+
+        items = { ...items, [parameterName]: values };
+      }
+    }
+
+    if (isSwitch) {
+      items = { ...items, [parameterName]: defaultValues };
+    }
+  });
+
+  // Сортировка
+  filtrator.sort
+    ?.filter((sortItem) => sortItem.selected)
+    .map((sortItem) => {
+      if (+sortItem.id === 0) return;
+      items = { ...items, sort: sortItem.id };
+    });
+
+  return items;
+};
+
+const updateTotalCount = async ({ category }: any) => {
+  try {
+    const body = formatFiltersToObject();
+    const count = await ApiCategory.getProductsCount({ category, body });
+
+    totalCountStore.set(count);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const useFiltrator = (initial?: FiltersData) => {
-  if (initial && !store.value) {
-    store.set(initial);
+  if (initial && !filtratorStore.value) {
+    filtratorStore.set(initial);
   }
 
   return {
-    ...useStore(store),
+    ...useStore(filtratorStore),
+    totalCount: useStore(totalCountStore),
     tabs: useStore(tabs),
     selected: useStore(selected),
-    changeRange,
-    addCheckbox,
-    removeCheckbox,
-    resetAll,
-    resetOne,
-    resetGroup,
-    changeSort,
   };
 };
 
-export default null;
+export default {
+  changeRange,
+  addCheckbox,
+  removeCheckbox,
+  resetAll,
+  resetOne,
+  resetGroup,
+  changeSort,
+  updateTotalCount,
+};

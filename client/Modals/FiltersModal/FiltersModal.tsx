@@ -1,4 +1,4 @@
-import React, { memo, FC, Fragment, useCallback } from 'react';
+import React, { memo, FC, Fragment, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
@@ -6,7 +6,8 @@ import Button from '@UI/Button';
 import Link from '@UI/Link';
 import InputsRange from '@UI/InputsRange';
 import CheckboxList, { CheckboxItemData } from '@UI/CheckboxList';
-import { useFiltrator } from '@Stores/filtrator';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import declOfNum from '@Utils/declOfNum';
 import Group from './elements/Group';
 import GroupItem from './elements/GroupItem';
 import styles from './FiltersModal.module.css';
@@ -15,29 +16,32 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const filtrator = useFiltrator();
 
-  const handleChangeRange = useCallback(
-    (_e, params) => {
-      const from = params.type === 'min' ? params.value : null;
-      const to = params.type === 'max' ? params.value : null;
-      const opts = { id: params.parameterId, from, to };
+  const totalCountText = useMemo(() => {
+    const { totalCount } = filtrator;
+    const titles = ['товар', 'товара', 'товаров'];
 
-      filtrator.changeRange(opts);
-    },
-    [filtrator],
-  );
+    if (typeof totalCount !== 'number') return null;
 
-  const handleToggleCheckbox = useCallback(
-    (_e, item: CheckboxItemData) => {
-      const opts = { id: item.data.parameterId, value: item.data.value[0] };
+    return `(${totalCount} ${declOfNum(totalCount, titles)})`;
+  }, [filtrator]);
 
-      if (item.checked) {
-        filtrator.removeCheckbox(opts);
-      } else {
-        filtrator.addCheckbox(opts);
-      }
-    },
-    [filtrator],
-  );
+  const handleChangeRange = useCallback((_e, params) => {
+    const from = params.type === 'min' ? params.value : null;
+    const to = params.type === 'max' ? params.value : null;
+    const opts = { id: params.parameterId, from, to };
+
+    Filtrator.changeRange(opts);
+  }, []);
+
+  const handleToggleCheckbox = useCallback((_e, item: CheckboxItemData) => {
+    const opts = { id: item.data.parameterId, value: item.data.value[0] };
+
+    if (item.checked) {
+      Filtrator.removeCheckbox(opts);
+    } else {
+      Filtrator.addCheckbox(opts);
+    }
+  }, []);
 
   return (
     <ModalSidebar
@@ -48,8 +52,9 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
       view='fullscreen'
       footer={
         <div className={styles.footer}>
-          <Button className={styles.apply} wide>
-            Применить
+          <Button className={styles.buttonApply} wide>
+            <span className={styles.textApply}>Применить</span>
+            {totalCountText && <span className={styles.textTotalCount}>{totalCountText}</span>}
           </Button>
           <div className={styles.footerAdditional}>
             <div className={styles.count}>Найдено 154 модели</div>
