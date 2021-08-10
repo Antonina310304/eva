@@ -43,6 +43,10 @@
 .link {
   margin-bottom: var(--space-n);
   margin-left: var(--space-n);
+
+  &:nth-last-child(-n + 3) {
+    margin-bottom: 0;
+  }
 }
 
 .photo {
@@ -66,6 +70,14 @@
   .link {
     margin-bottom: var(--space-s);
     margin-left: var(--space-s);
+
+    &:nth-last-child(-n + 3) {
+      margin-bottom: var(--space-s);
+    }
+
+    &:nth-last-child(-n + 2) {
+      margin-bottom: 0;
+    }
   }
 
   .photo {
@@ -100,6 +112,10 @@
   .link {
     width: 100%;
     margin-left: 0;
+
+    &:nth-last-child(-n + 2) {
+      margin-bottom: var(--space-s);
+    }
   }
 
   .photosWrapper {
