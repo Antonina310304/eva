@@ -1,44 +1,56 @@
-import React, { useCallback, useState, memo, FC } from 'react';
+import React, { useCallback, useEffect, memo, FC } from 'react';
 import cn from 'classnames';
 
+import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import IconClose from '@UI/IconClose';
-import Button from '@UI/Button';
-import Input from '@UI/Input';
-import Form from '@UI/Form';
-import FormItem from '@UI/FormItem';
 import Link from '@UI/Link';
 
 import styles from './PriceDropModal.module.css';
+import PriceDropForm from './PriceDropForm';
 
+export interface ModalData extends IModal {
+  data: {
+    title: string;
+    message: string[];
+    cta: {
+      text: string;
+      link: string;
+    };
+  };
+}
 export interface PriceDropModalProps {
   className?: string;
+  modal: ModalData;
 }
 
 const PriceDropModal: FC<PriceDropModalProps> = (props) => {
-  const { className, ...restProps } = props;
-  const [loading, setLoading] = useState(false);
-  const [, { closeModal, openModal }] = useModals();
+  const { className, modal, ...restProps } = props;
+  const [, { closeModal }] = useModals();
   const id = 'PriceDrop';
 
   const handleClose = useCallback(() => {
     closeModal('PriceDrop');
   }, [closeModal]);
 
-  const handleSubmit = useCallback(() => {
-    setLoading(true);
-  }, []);
-
-  const handleError = useCallback(() => {
-    openModal('Info', {
-      title: 'Произошла ошибка',
-      text: 'Пожалуйста, повторите попытку позже.',
+  useEffect(() => {
+    (window.dataLayer = window.dataLayer || []).push({
+      eCategory: 'priceDropForm',
+      eAction: 'open',
+      eLabel: `${modal.id}`,
+      eNI: false,
+      event: 'GAEvent',
     });
-  }, [openModal]);
+  }, [modal.id]);
 
   return (
-    <ModalMain {...restProps} className={cn(styles.modal, className)} onClose={handleClose}>
+    <ModalMain
+      {...restProps}
+      className={cn(styles.modal, className)}
+      modal={modal}
+      onClose={handleClose}
+    >
       <div className={styles.container}>
         <div className={styles.headingWrapper}>
           <h3 className={styles.heading}>Снижение цены</h3>
@@ -47,20 +59,7 @@ const PriceDropModal: FC<PriceDropModalProps> = (props) => {
         <div className={styles.description}>
           Как только цена на товар снизится, мы сразу сообщим вам об этом по почте.
         </div>
-        <Form
-          className={styles.form}
-          action=''
-          validationSchemaUrl=''
-          onSubmit={handleSubmit}
-          onError={handleError}
-        >
-          <FormItem>
-            <Input type='text' placeholder='E-mail' name='[email]' />
-          </FormItem>
-          <Button className={styles.button} type='button'>
-            Подписаться
-          </Button>
-        </Form>
+        <PriceDropForm id={modal.id} price={modal.price} />
         <div className={styles.info}>
           *Подписываясь, вы соглашаетесь с
           <Link
