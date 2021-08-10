@@ -3,8 +3,8 @@
 
 .title {
   font-weight: 500;
-  font-size: 30px;
-  line-height: 40px;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
 }
 
 .container {
@@ -15,7 +15,7 @@
 
 .item {
   display: flex;
-  max-width: 352px;
+  max-width: 30.5%;
 }
 
 .imageWrapper {
@@ -28,8 +28,53 @@
 }
 
 .text {
-  margin-left: 30px;
+  margin-left: var(--space-l);
 
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-xl);
+    line-height: 37px;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text {
+    margin-top: var(--space-l);
+    margin-left: 0;
+
+    text-align: center;
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-m);
+  }
+
+  .item {
+    max-width: 29.7%;
+  }
+}
+
+@media (--mobile) {
+  .container {
+    flex-direction: column;
+  }
+
+  .item {
+    max-width: 100%;
+    margin-top: 45px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 }

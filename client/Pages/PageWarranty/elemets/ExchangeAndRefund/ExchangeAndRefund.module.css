@@ -3,18 +3,18 @@
 
 .title {
   font-weight: 500;
-  font-size: 30px;
-  line-height: 40px;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
 }
 
 .wrapper {
-  margin-top: 40px;
+  margin-top: var(--space-xxl);
 }
 
 .item {
-  margin-top: 30px;
+  margin-top: var(--space-l);
 
-  font-size: 14px;
+  font-size: var(--size-s);
   line-height: 21px;
 
   &:first-child {
@@ -23,12 +23,26 @@
 }
 
 .information {
-  margin-top: 40px;
-  padding: 20px;
+  margin-top: var(--space-xxl);
+  padding: var(--space-n);
 
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
   text-align: center;
 
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--color-medium-gray);
+}
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-xl);
+    line-height: 37px;
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-m);
+  }
 }

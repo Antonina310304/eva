@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 import Link from '@UI/Link';
+import useMedias from '@Hooks/useMedias';
 import styles from './ContactWithQualityDep.module.css';
 
 export interface ContactWithQualityDepProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,6 +12,17 @@ export interface ContactWithQualityDepProps extends HTMLAttributes<HTMLDivElemen
 
 const ContactWithQualityDep: FC<ContactWithQualityDepProps> = (props) => {
   const { className, feedbackLink, ...restProps } = props;
+  const { isDesktop, isMobileM } = useMedias();
+
+  const buttonSize = useMemo(() => {
+    if (isMobileM) {
+      return 's';
+    }
+    if (isDesktop) {
+      return 'm';
+    }
+    return 'l';
+  }, [isDesktop, isMobileM]);
 
   return (
     <div {...restProps} className={cn(styles.contactWithQualityDep, className)}>
@@ -24,7 +36,7 @@ const ContactWithQualityDep: FC<ContactWithQualityDepProps> = (props) => {
           </div>
 
           <Link className={styles.link} to={feedbackLink} view='simple'>
-            <Button className={styles.button} size='l' theme='primary' view='main'>
+            <Button className={styles.button} size={buttonSize} theme='primary' view='main'>
               Написать нам
             </Button>
           </Link>

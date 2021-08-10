@@ -1,17 +1,18 @@
 .page {
+  --gap: var(--space-e);
 }
 
 .pageTitle {
   max-width: 1780px;
   margin: 0 auto;
-  padding: 35px 0px;
+  padding: var(--space-xl) 0px;
 
   font-weight: 500;
-  font-size: 44px;
-  line-height: 58px;
+  font-size: var(--size-xb);
+  line-height: var(--lh-xb);
   text-align: center;
 
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid var(--color-medium-gray);
 }
 
 .wrapper {
@@ -19,43 +20,69 @@
   margin: 0 auto;
 }
 
-.navigation {
-  display: flex;
-  justify-content: center;
-  margin-top: 25px;
-}
-
-.navigationItem {
-  padding: 0px 20px;
-}
-
-.navigationLink {
-  padding: 5px 0;
-
-  color: #989898;
-  font-size: 22px;
-  line-height: 33px;
-}
-
-.navigationLink.active {
-  color: #000000;
-
-  border-bottom: 1px solid #000000;
-}
-
 .qualityDepartment {
-  margin-top: 85px;
+  margin-top: calc(var(--gap) + 5px);
 }
 
 .garanties {
-  margin-top: 80px;
+  margin-top: var(--gap);
 }
 
 .contactWithQualityDep {
-  margin-top: 80px;
+  margin-top: var(--gap);
 }
 
 .exchangeAndRefund {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+@media (--desktop-m) {
+  .pageTitle {
+    max-width: 1900px;
+    margin: 0 var(--space-xxl);
+
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+
+  .wrapper {
+    max-width: 1066px;
+  }
+}
+
+@media (--desktop) {
+  .page {
+    --gap: var(--space-xb);
+  }
+
+  .pageTitle {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+
+  .wrapper {
+    max-width: 944px;
+  }
+}
+
+@media (--mobile-m) {
+  .pageTitle {
+    margin: 0 var(--space-s);
+    padding: var(--space-n) 0px;
+
+    font-size: var(--size-xl);
+    line-height: 37px;
+  }
+
+  .wrapper {
+    max-width: 738px;
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    max-width: 100%;
+    margin: 0 var(--space-s);
+  }
 }

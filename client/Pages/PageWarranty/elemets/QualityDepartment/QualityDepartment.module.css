@@ -2,15 +2,15 @@
 }
 
 .mainText {
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
 }
 
 .container {
-  margin-top: 40px;
-  padding: 40px 90px;
+  margin-top: var(--space-xxl);
+  padding: var(--space-xxl) var(--space-xe);
 
-  background: #f5f3f1;
+  background: var(--color-light-gray);
 }
 
 .head {
@@ -20,8 +20,8 @@
 
 .mainTitle {
   font-weight: 500;
-  font-size: 22px;
-  line-height: 26px;
+  font-size: var(--size-l);
+  line-height: var(--lh-m);
 }
 
 .ofertaLink {
@@ -33,7 +33,7 @@
   display: inline-block;
   width: 20px;
   height: 25px;
-  margin-right: 11px;
+  margin-right: var(--space-xs);
 
   background-image: url('./contract.svg');
   background-repeat: no-repeat;
@@ -45,14 +45,14 @@
   display: flex;
   justify-content: space-between;
   max-width: 80%;
-  margin-top: 25px;
+  margin-top: var(--space-m);
 }
 
 .item {
   display: flex;
 
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 }
 
 .icon {
@@ -77,7 +77,7 @@
 }
 
 .info {
-  margin-left: 16px;
+  margin-left: var(--space-s);
 }
 
 .itemTitle {
@@ -85,14 +85,14 @@
 }
 
 .description {
-  margin-top: 40px;
+  margin-top: var(--space-xxl);
 
-  font-size: 14px;
+  font-size: var(--size-s);
   line-height: 21px;
 }
 
 .descriptionItem {
-  margin-top: 40px;
+  margin-top: var(--space-xxl);
 
   &:first-child {
     margin-top: 0;
@@ -100,12 +100,64 @@
 }
 
 .footer {
-  margin-top: 40px;
-  padding: 20px;
+  margin-top: var(--space-xxl);
+  padding: var(--space-n);
 
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
   text-align: center;
 
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--color-medium-gray);
+}
+
+@media (--desktop-m) {
+  .body {
+    max-width: 90%;
+  }
+}
+
+@media (--desktop) {
+  .container {
+    padding: var(--space-xxl) var(--space-xb);
+  }
+}
+
+@media (--mobile-m) {
+  .container {
+    padding: var(--space-xxl) var(--space-s);
+  }
+
+  .body {
+    max-width: 97%;
+  }
+}
+
+@media (--mobile) {
+  .container {
+    padding: var(--space-xxl);
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .oferta {
+    margin-top: var(--space-m);
+  }
+
+  .body {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: var(--space-m);
+  }
+
+  .item {
+    margin-top: var(--space-n);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 }

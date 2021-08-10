@@ -1,8 +1,8 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import Link from '@UI/Link';
 import { MetaData } from '@Types/Meta';
+import Navigation from './elemets/Navigation';
 import QualityDepartment from './elemets/QualityDepartment';
 import Garanties from './elemets/Garanties/Garanties';
 import ContactWithQualityDep from './elemets/ContactWithQualityDep';
@@ -28,26 +28,13 @@ const PageWarranty: FC<PageWarrantyProps> = (props) => {
     conditions,
     refund,
   } = page;
-  console.log('page', page);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      <div className={styles.pageTitle}>Гарантия</div>
+      <div className={styles.pageTitle}>{breadcrumbs[1].text}</div>
 
       <div className={styles.wrapper}>
-        <nav className={styles.navigation}>
-          {pageList.map((item, index: number) => (
-            <div className={styles.navigationItem} key={index}>
-              <Link
-                to={item.href}
-                className={cn(styles.navigationLink, { [styles.active]: item.active })}
-                view='simple'
-              >
-                {item.name}
-              </Link>
-            </div>
-          ))}
-        </nav>
+        <Navigation navigation={pageList} />
 
         <QualityDepartment
           className={styles.qualityDepartment}
