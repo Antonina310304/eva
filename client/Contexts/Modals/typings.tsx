@@ -14,6 +14,7 @@ export type ModalId =
   | 'QualityGuarantee'
   | 'Video'
   | 'Showrooms'
+  | 'InstagramPost'
   | 'YandexMarket'
   | 'FinalPrice'
   | 'DeliveryInformation';
