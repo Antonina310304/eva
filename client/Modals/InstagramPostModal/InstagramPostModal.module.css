@@ -76,7 +76,7 @@
 }
 
 .productsScroller {
-  height: 500px;
+  height: inherit;
 }
 
 .productsWrapper {
@@ -87,7 +87,7 @@
 }
 
 .productCard {
-  width: 190px;
+  width: calc(50% - var(--space-l) / 2);
   margin-right: var(--space-l);
   margin-bottom: var(--space-l);
 
@@ -161,17 +161,13 @@
     width: 337px;
   }
 
-  .productsScroller {
-    height: 367px;
-  }
-
   .productsWrapper {
     flex-direction: column;
     align-items: flex-start;
   }
 
   .productCard {
-    width: 170px;
+    width: 100%;
     margin: 0;
     margin-bottom: var(--space-n);
 
@@ -235,6 +231,7 @@
 
   .gallery {
     width: 100%;
+    margin: 0 var(--space-s-neg);
   }
 
   .item {
