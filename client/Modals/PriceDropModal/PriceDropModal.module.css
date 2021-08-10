@@ -45,6 +45,16 @@
   justify-content: flex-end;
 }
 
+.info {
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
+}
+
+.link {
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
+}
+
 @media (--mobile) {
   .container {
     width: 100%;
