@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
+import { useFiltrator } from '@Stores/filtrator';
 import Filters from './elements/Filters';
 import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
@@ -16,6 +17,7 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, ...restProps } = props;
   const isModels = page.productsModel?.length > 0;
+  const filtrator = useFiltrator(page.filters);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

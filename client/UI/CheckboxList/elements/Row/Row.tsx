@@ -1,34 +1,48 @@
-import React, { memo, FC, HTMLAttributes } from 'react';
+import React, { memo, FC, HTMLAttributes, useState, useCallback } from 'react';
 import cn from 'classnames';
 
-import { CheckboxItem } from '../../typings';
+import { CheckboxItemData } from '../../typings';
 import styles from './Row.module.css';
 
 export interface CheckboxRowProps extends HTMLAttributes<HTMLElement> {
   className?: string;
-  item: CheckboxItem;
+  item: CheckboxItemData;
+  onToggle?: (e: MouseEvent, item: CheckboxItemData) => void;
 }
 
 const CheckboxRow: FC<CheckboxRowProps> = (props) => {
-  const { className, item, ...restProps } = props;
+  const { className, item, onToggle, ...restProps } = props;
+  const isWhite = ['#ffffff', '#fff', 'white'].includes(item.color?.toLowerCase());
+  const [checked, setChecked] = useState(item.checked);
+
+  const handleClick = useCallback(
+    (e) => {
+      setChecked((prev) => !prev);
+
+      if (onToggle) onToggle(e, item);
+    },
+    [item, onToggle],
+  );
 
   return (
-    <label className={cn(styles.row, { [styles.colored]: !!item.color }, className)}>
-      <input
-        className={styles.control}
-        type='checkbox'
-        defaultChecked={item.defaultChecked}
-        {...restProps}
-      />
+    <div
+      {...restProps}
+      className={cn(styles.row, { [styles.colored]: !!item.color }, className)}
+      onClick={handleClick}
+    >
+      <input readOnly className={styles.control} type='checkbox' checked={checked} />
 
       <div className={styles.container}>
-        <div className={styles.box} style={item.color && { backgroundColor: item.color }}>
+        <div
+          className={cn(styles.box, { [styles.isWhite]: isWhite })}
+          style={item.color ? { backgroundColor: item.color } : undefined}
+        >
           <div className={styles.check} />
         </div>
 
         <span className={styles.text}>{item.text}</span>
       </div>
-    </label>
+    </div>
   );
 };
 
