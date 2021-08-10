@@ -179,6 +179,8 @@
 
     background-position: center;
     background-size: contain;
+    cursor: default;
+    opacity: 1;
   }
 
   .image.landscape {
@@ -199,10 +201,5 @@
 
   .iconClose {
     margin: var(--space-s);
-  }
-
-  .image {
-    cursor: default;
-    opacity: 1;
   }
 }
