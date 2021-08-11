@@ -7,7 +7,7 @@ import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
 import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
-import { ProductData } from '@Types/Product';
+import { CatalogData } from '@Types/Catalog';
 import Filters from './elements/Filters';
 import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
@@ -22,8 +22,13 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, slug, ...restProps } = props;
   const isModels = page.productsModel?.length > 0;
-  const [products, setProducts] = useState<ProductData[]>(page.products);
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [catalog, setCatalog] = useState<CatalogData>({
+    page: page.page,
+    products: page.products,
+    productsCountLeft: page.productsCountLeft,
+    productsPerPage: page.productsPerPage,
+    productsTotalCount: page.productsTotalCount,
+  });
   const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator(page.filters);
 
@@ -42,19 +47,34 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const handleApplyFilters = useCallback(async () => {
     try {
       const filters = Filtrator.formatFiltersToObject();
-      const category = await ApiCategory.getProducts({ slug, page: pageNumber, filters });
+      const newCatalog = await ApiCategory.getProducts({ slug, page: 1, filters });
 
-      setProducts(category.products);
+      setCatalog({ ...newCatalog });
       closeModal('Filters');
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
     }
-  }, [closeModal, pageNumber, slug]);
+  }, [closeModal, slug]);
 
   const hanleOpenAllFilters = useCallback(() => {
     openModal('Filters', { onApply: handleApplyFilters });
   }, [handleApplyFilters, openModal]);
+
+  const handleMore = useCallback(async () => {
+    try {
+      const filters = Filtrator.formatFiltersToObject();
+      const newCatalog = await ApiCategory.getProducts({ slug, page: catalog.page + 1, filters });
+
+      setCatalog((prev) => ({
+        ...newCatalog,
+        products: [...prev.products, ...newCatalog.products],
+      }));
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  }, [catalog.page, slug]);
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
 
@@ -70,7 +90,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
       <div className={styles.catalogWrapper}>
         <div className={styles.filtersWrapper}>
-          <Filters onOpenAll={hanleOpenAllFilters} />
+          <Filters count={catalog.productsTotalCount} onOpenAll={hanleOpenAllFilters} />
 
           {page.popularLinks?.length > 0 && (
             <div className={styles.popularLinksWrapper}>
@@ -83,10 +103,11 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
           <ProductSectionsCatalog
             className={styles.catalog}
             sections={page.productsModel}
-            products={products}
+            catalog={catalog}
+            onMore={handleMore}
           />
         ) : (
-          <ProductMixedCatalog className={styles.catalog} products={products} />
+          <ProductMixedCatalog className={styles.catalog} catalog={catalog} onMore={handleMore} />
         )}
       </div>
     </div>

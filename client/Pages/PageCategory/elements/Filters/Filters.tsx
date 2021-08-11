@@ -7,11 +7,12 @@ import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  count?: number;
   onOpenAll?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, onOpenAll, ...restProps } = props;
+  const { className, count, onOpenAll, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
@@ -36,7 +37,7 @@ const Filters: FC<FiltersProps> = (props) => {
           </Button>
         </div>
 
-        <div className={styles.count}>Найдено 1440</div>
+        {typeof count === 'number' && <div className={styles.count}>{`Найдено ${count}`}</div>}
       </div>
 
       <div className={styles.labels}>
