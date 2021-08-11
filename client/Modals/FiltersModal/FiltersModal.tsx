@@ -57,8 +57,7 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
             {totalCountText && <span className={styles.textTotalCount}>{totalCountText}</span>}
           </Button>
           <div className={styles.footerAdditional}>
-            <div className={styles.count}>Найдено 154 модели</div>
-            <Link className={styles.reset} to='#'>
+            <Link className={styles.reset} to='#' view='secondary'>
               Сбросить фильтр
             </Link>
           </div>
