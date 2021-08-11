@@ -6,13 +6,14 @@
 .form {
   display: flex;
   align-items: flex-start;
-
-  margin-bottom: var(--space-m);
 }
 
 .label {
-  margin-top: var(--space-xs);
-  margin-right: var(--space-xxl);
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-s);
+
+  font-weight: 500;
 }
 
 .input {
@@ -21,6 +22,8 @@
 
 .price {
   composes: m from 'sizes';
+
+  margin-top: var(--space-m);
 
   font-weight: 600;
 }

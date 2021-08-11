@@ -12,7 +12,6 @@ export type ModalId =
   | 'Review'
   | 'QualityGuarantee'
   | 'Video'
-  | 'Showrooms'
   | 'YandexMarket'
   | 'FinalPrice'
   | 'DeliveryInformation';

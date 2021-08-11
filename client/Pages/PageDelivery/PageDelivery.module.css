@@ -28,3 +28,53 @@
 
   border-bottom: 1px solid var(--color-medium-gray);
 }
+
+.teaser {
+  composes: m from 'sizes';
+
+  margin-top: var(--space-xb);
+}
+
+.freeDelivery {
+  margin-top: var(--space-xb);
+}
+
+.contrastRow {
+  margin: var(--space-e) 0;
+  padding: var(--space-xb) 0 var(--space-xxb);
+
+  background: var(--color-light-gray);
+}
+
+.header {
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.tabsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xb);
+}
+
+.tableWrapper {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.additionalCost {
+  margin-top: var(--space-xb);
+}
+
+.paragraph {
+  margin-top: var(--space-m);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}

@@ -33,6 +33,18 @@
   &.errored {
     border-color: var(--color-red);
   }
+
+  &.sizeL {
+    .control {
+      padding: var(--space-s);
+    }
+  }
+
+  &.sizeM {
+    .control {
+      padding: 16px var(--space-s);
+    }
+  }
 }
 
 .before,
@@ -57,8 +69,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-
-  padding: 16px var(--space-s);
+  padding: var(--space-s);
 
   font-size: inherit;
   font-family: inherit;
@@ -97,7 +108,7 @@
 
 @media (--desktop-m) {
   .control {
-    padding: 12px var(--space-s);
+    padding: 11px var(--space-s);
   }
 }
 
@@ -105,6 +116,6 @@
   .control {
     box-sizing: border-box;
     height: 35px;
-    padding: 8px var(--space-xs);
+    padding: 7px var(--space-xs);
   }
 }

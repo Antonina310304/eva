@@ -103,11 +103,11 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.calculator, [className])}>
+      <div className={styles.label}>Узнать стоимость доставки</div>
       <div className={styles.form}>
-        <span className={styles.label}>Адрес</span>
         <InputHelper
           className={styles.input}
-          placeholder='Поиск адреса'
+          placeholder='город, улица, дом, этаж, квартира'
           loading={loadingHints}
           hints={hints}
           error={error}

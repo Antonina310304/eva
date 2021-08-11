@@ -1,7 +1,7 @@
 .importantInfo {
   composes: n from 'sizes';
 
-  padding: var(--space-n);
+  padding: var(--space-l);
 
   border: 1px dashed var(--color-medium-gray);
 }

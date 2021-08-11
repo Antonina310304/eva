@@ -1,0 +1,123 @@
+/* Это стили со старого сайта, которые нужны для корректного отображения таблиц */
+
+.DeliveryTable table {
+
+  composes: n from 'sizes';
+
+  width: 100%;
+
+  border: 1px solid var(--color-medium-gray);
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.DeliveryTable thead {
+  color: var(--color-dark-gray);
+}
+
+.SingleRow thead {
+  color: var(--color-black);
+}
+
+.DeliveryTable td {
+  padding: var(--space-m);
+
+  border: 1px solid var(--color-medium-gray);
+}
+
+.DeliveryTable td.UnionCell {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .DeliveryTable table {
+    border: none;
+  }
+
+  .DeliveryTable thead {
+    display: none;
+  }
+
+  .DeliveryTable tr {
+    display: block;
+    margin-bottom: var(--space-m);
+
+    border-bottom: 1px solid var(--color-medium-gray);
+  }
+
+  .DeliveryTable tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .DeliveryTable td {
+    display: block;
+    width: auto;
+
+    border: 1px solid var(--color-medium-gray);
+    border-bottom: 0;
+  }
+
+  .DeliveryTable td:before {
+    display: block;
+    margin-bottom: var(--space-s);
+
+    content: attr(data-label);
+  }
+
+  .DeliveryTable .ProductName:before,
+  .SingleRow td:before {
+    display: none;
+  }
+
+  .DeliveryTable td:after {
+    display: table;
+    clear: both;
+
+    content: '';
+  }
+
+  .DeliveryTable td.UnionCell {
+    display: block;
+  }
+
+  .DeliveryTable td.ProductName {
+    background-color: #efefef;
+  }
+}
+
+@media (min-width: 768px) {
+  .DeliveryTable td {
+    box-sizing: border-box;
+    width: 20%;
+
+    vertical-align: middle;
+  }
+
+  .SingleRow td {
+    width: 60%;
+  }
+
+  .SingleRow thead td,
+  .DeliveryTable .ServiceType {
+    height: 60px;
+  }
+
+  .SingleRow .ProductName,
+  .DeliveryTable .ProductName {
+    width: 40%;
+  }
+
+  .SingleRow thead {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .SingleRow thead {
+    display: table-header-group;
+  }
+
+  .SingleRow .ProductName {
+    display: none;
+  }
+}
