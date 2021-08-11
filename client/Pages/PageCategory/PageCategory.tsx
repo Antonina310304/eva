@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { ApiCategory } from '@Api/Category';
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
@@ -26,6 +27,18 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator(page.filters);
 
+  const [debouceChangeFilters] = useDebouncedCallback(async () => {
+    try {
+      const filters = Filtrator.formatFiltersToObject();
+      const count = await ApiCategory.getProductsCount({ slug, body: filters });
+
+      Filtrator.updateTotalCount(count);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  }, 300);
+
   const handleApplyFilters = useCallback(async () => {
     try {
       const filters = Filtrator.formatFiltersToObject();
@@ -43,9 +56,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     openModal('Filters', { onApply: handleApplyFilters });
   }, [handleApplyFilters, openModal]);
 
-  useEffect(() => {
-    Filtrator.updateTotalCount({ category: slug });
-  }, [filtrator.selected, slug]);
+  useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

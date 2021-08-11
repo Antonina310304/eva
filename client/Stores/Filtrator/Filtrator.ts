@@ -267,15 +267,8 @@ const formatFiltersToObject = () => {
   return items;
 };
 
-const updateTotalCount = async ({ category }: any) => {
-  try {
-    const body = formatFiltersToObject();
-    const count = await ApiCategory.getProductsCount({ category, body });
-
-    totalCountStore.set(count);
-  } catch (err) {
-    console.log(err);
-  }
+const updateTotalCount = (count: number) => {
+  totalCountStore.set(count);
 };
 
 export const useFiltrator = (initial?: FiltersData) => {

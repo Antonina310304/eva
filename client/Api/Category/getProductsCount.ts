@@ -1,13 +1,13 @@
 import { Api } from '@Api/index';
 
 export interface Params {
-  category: string;
+  slug: string;
   categories?: any[];
   body: any;
 }
 
-export default async ({ category, body }: Params): Promise<number> => {
-  const url = `/category/${category}/get-products-count?page=1`;
+export default async ({ slug, body }: Params): Promise<number> => {
+  const url = `/category/${slug}/get-products-count?page=1`;
   const res = await Api.queryProxi<any>(url, {
     method: 'POST',
     body: JSON.stringify(body),
