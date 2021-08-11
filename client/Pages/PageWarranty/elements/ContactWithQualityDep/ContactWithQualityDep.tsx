@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
@@ -8,6 +8,7 @@ import styles from './ContactWithQualityDep.module.css';
 
 export interface ContactWithQualityDepProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  feedbackLink: string;
 }
 
 const ContactWithQualityDep: FC<ContactWithQualityDepProps> = (props) => {

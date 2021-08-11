@@ -2,11 +2,11 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import Navigation from './elemets/Navigation';
-import QualityDepartment from './elemets/QualityDepartment';
-import Garanties from './elemets/Garanties/Garanties';
-import ContactWithQualityDep from './elemets/ContactWithQualityDep';
-import ExchangeAndRefund from './elemets/ExchangeAndRefund';
+import Navigation from './elements/Navigation';
+import QualityDepartment from './elements/QualityDepartment';
+import Garanties from './elements/Garanties/Garanties';
+import ContactWithQualityDep from './elements/ContactWithQualityDep';
+import ExchangeAndRefund from './elements/ExchangeAndRefund';
 import styles from './PageWarranty.module.css';
 
 export interface PageWarrantyProps extends HTMLAttributes<HTMLDivElement> {

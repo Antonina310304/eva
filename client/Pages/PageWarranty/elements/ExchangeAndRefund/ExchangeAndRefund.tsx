@@ -1,12 +1,12 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import Button from '@UI/Button';
-import Link from '@UI/Link';
 import styles from './ExchangeAndRefund.module.css';
 
 export interface ExchangeAndRefundProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  conditions: string[];
+  refund: string[];
 }
 
 const ExchangeAndRefund: FC<ExchangeAndRefundProps> = (props) => {

@@ -1,11 +1,18 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
 import styles from './Garanties.module.css';
 
+export interface Warranty {
+  id: string;
+  src: string;
+  text: string;
+}
+
 export interface GarantiesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  warranty: Warranty[];
 }
 
 const Garanties: FC<GarantiesProps> = (props) => {

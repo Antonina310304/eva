@@ -1,17 +1,24 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback, ReactElement } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-// import useMedias from '@Hooks/useMedias';
 import Link from '@UI/Link';
 import styles from './QualityDepartment.module.css';
 
+export interface Schedule {
+  name: string;
+  type: string;
+  value: string;
+}
+
 export interface QualityDepartmentProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  oferta: string;
+  description: string[];
+  schedule: Schedule[];
 }
 
 const QualityDepartment: FC<QualityDepartmentProps> = (props) => {
   const { className, schedule, oferta, description, ...restProps } = props;
-  // const { isMobileM } = useMedias();
 
   // TODO удалить после исправления данных, приходящих от бэка
   schedule[2].value = '+7 (495) 710-99-99';

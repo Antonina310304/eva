@@ -1,11 +1,18 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';
 import styles from './Navigation.module.css';
 
+export interface NavigationItem {
+  name: string;
+  href: string;
+  active?: boolean;
+}
+
 export interface NavigationProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  navigation: NavigationItem[];
 }
 
 const Navigation: FC<NavigationProps> = (props) => {
