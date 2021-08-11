@@ -21,7 +21,7 @@
 }
 
 .qualityDepartment {
-  margin-top: calc(var(--gap) + 5px);
+  margin-top: var(--gap);
 }
 
 .garanties {
