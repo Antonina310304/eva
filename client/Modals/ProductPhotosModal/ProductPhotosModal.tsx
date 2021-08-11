@@ -1,10 +1,11 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import React, { FC, memo, useCallback, useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import useKeyboardEvents from '@Hooks/useKeyboardEvents';
+import animate from '@Utils/animate';
 import Scroller from '@UI/Scroller';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
@@ -19,6 +20,8 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [scrollTop, setScrollTop] = useState(0);
+  const refScroll = useRef(null);
 
   const handleClose = useCallback(() => {
     closeModal(modal.id);
@@ -60,6 +63,30 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
 
   useKeyboardEvents({ onArrowLeft: handleClickPrev, onArrowRight: handleClickNext });
 
+  const scrollTo = useCallback((index) => {
+    const previews = refScroll.current.children;
+
+    if (previews.length) {
+      const preview = previews[index] as HTMLDivElement;
+
+      animate({
+        timing: 'linear',
+        duration: 400,
+        draw: (progress) => {
+          setScrollTop((prev) => {
+            const diff = preview.offsetTop - prev;
+
+            return prev + diff * progress;
+          });
+        },
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    scrollTo(mainImageIndex);
+  }, [mainImageIndex, scrollTo]);
+
   return (
     <ModalMain
       {...restProps}
@@ -74,8 +101,8 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
 
         <div className={styles.container}>
           <div className={styles.leftScroll}>
-            <Scroller>
-              <div className={styles.leftScrollContainer}>
+            <Scroller scrollTop={scrollTop} onScroll={(values) => setScrollTop(values.scrollTop)}>
+              <div className={styles.leftScrollContainer} ref={refScroll}>
                 {images.map((image, index) => (
                   <div className={styles.imageWrapper} key={index}>
                     <img
