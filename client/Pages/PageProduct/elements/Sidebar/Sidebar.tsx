@@ -10,7 +10,7 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
-import { useRelatedProducts } from '@Stores/relatedProducts';
+import { useRelatedProducts } from '@Stores/RelatedProducts';
 import { useProduct } from '@Stores/Product';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
