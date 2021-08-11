@@ -9,20 +9,8 @@ const formatName = (name: string) => name.replace(/ /g, '');
 const FiltersModal: FC<ModalSidebarProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const { selectedFilterId } = modal.data;
-  const [waiting, setWaiting] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const refContent = useRef<HTMLDivElement>();
-
-  const handleApply = useCallback(
-    async (e) => {
-      if (typeof modal.data.onApply !== 'function') return;
-
-      setWaiting(true);
-      await modal.data.onApply(e);
-      setWaiting(false);
-    },
-    [modal.data],
-  );
 
   useEffect(() => {
     if (!refContent.current) return;
@@ -43,7 +31,7 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
       title='Фильтр'
       view='fullscreen'
       scrollTop={scrollTop}
-      footer={<Footer waiting={waiting} onApply={handleApply} />}
+      footer={<Footer onApply={modal.data.onApply} />}
     >
       <div ref={refContent}>
         <Content />

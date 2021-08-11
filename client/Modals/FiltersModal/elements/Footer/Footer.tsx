@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useMemo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
@@ -9,13 +9,13 @@ import styles from './Footer.module.css';
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  waiting?: boolean;
-  onApply?: (e: MouseEvent) => void;
+  onApply?: unknown;
 }
 
 const Footer: FC<FooterProps> = (props) => {
-  const { className, waiting, onApply, ...restProps } = props;
+  const { className, onApply, ...restProps } = props;
   const filtrator = useFiltrator();
+  const [waiting, setWaiting] = useState(false);
 
   const totalCountText = useMemo(() => {
     const { totalCount } = filtrator;
@@ -26,9 +26,20 @@ const Footer: FC<FooterProps> = (props) => {
     return `(${totalCount} ${declOfNum(totalCount, titles)})`;
   }, [filtrator]);
 
+  const handleApply = useCallback(
+    async (e) => {
+      if (typeof onApply !== 'function') return;
+
+      setWaiting(true);
+      await onApply(e);
+      setWaiting(false);
+    },
+    [onApply],
+  );
+
   return (
     <div {...restProps} className={cn(styles.footer, className)}>
-      <Button className={styles.buttonApply} wide waiting={waiting} onClick={onApply}>
+      <Button className={styles.buttonApply} wide waiting={waiting} onClick={handleApply}>
         <span className={styles.textApply}>Применить</span>
         {totalCountText && <span className={styles.textTotalCount}>{totalCountText}</span>}
       </Button>
