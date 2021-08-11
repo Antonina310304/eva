@@ -1,4 +1,4 @@
-import React, { memo, FC, HTMLAttributes, useState, useCallback } from 'react';
+import React, { memo, FC, HTMLAttributes, useState, useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import { CheckboxItemData } from '../../typings';
@@ -23,6 +23,10 @@ const CheckboxRow: FC<CheckboxRowProps> = (props) => {
     },
     [item, onToggle],
   );
+
+  useEffect(() => {
+    setChecked(item.checked);
+  }, [item.checked]);
 
   return (
     <div

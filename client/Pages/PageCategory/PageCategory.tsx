@@ -59,8 +59,6 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
   const hanleOpenFilters = useCallback(
     (_e, selectedFilterId: string) => {
-      console.log(selectedFilterId);
-
       openModal('Filters', { selectedFilterId, onApply: handleApplyFilters });
     },
     [handleApplyFilters, openModal],

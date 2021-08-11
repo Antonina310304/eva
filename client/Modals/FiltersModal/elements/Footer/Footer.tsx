@@ -1,9 +1,9 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, memo, useMemo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
 import Link from '@UI/Link';
-import { useFiltrator } from '@Stores/Filtrator';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import declOfNum from '@Utils/declOfNum';
 import styles from './Footer.module.css';
 
@@ -37,6 +37,11 @@ const Footer: FC<FooterProps> = (props) => {
     [onApply],
   );
 
+  const handleReset = useCallback((e: MouseEvent) => {
+    e.preventDefault();
+    Filtrator.resetAll();
+  }, []);
+
   return (
     <div {...restProps} className={cn(styles.footer, className)}>
       <Button className={styles.buttonApply} wide waiting={waiting} onClick={handleApply}>
@@ -44,7 +49,13 @@ const Footer: FC<FooterProps> = (props) => {
         {totalCountText && <span className={styles.textTotalCount}>{totalCountText}</span>}
       </Button>
       <div className={styles.footerAdditional}>
-        <Link className={styles.reset} to='#' view='secondary'>
+        <Link
+          className={styles.reset}
+          to='#'
+          view='secondary'
+          needFetch={false}
+          onClick={handleReset}
+        >
           Сбросить фильтр
         </Link>
       </div>

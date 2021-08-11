@@ -157,7 +157,9 @@ const InputsRange: FC<InputsRangeProps> = (props) => {
   useEffect(() => {
     setInputValueMin(valueMin);
     setInputValueMax(valueMax);
-  }, [valueMin, valueMax]);
+    setMinPercent((valueMin - min) * one);
+    setMaxPercent((valueMax - min) * one);
+  }, [valueMin, valueMax, min, one]);
 
   return (
     <div {...restProps} className={cn(styles.inputsRange, className)}>
