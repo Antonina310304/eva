@@ -27,7 +27,6 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
           <div className={styles.name}>{product.name}</div>
 
           <div className={styles.price}>
-            <span className={styles.labelPrice}>{`Цена `}</span>
             <Price className={styles.actualPrice} price={product.price.actual} />
             {hasExpired && (
               <Price expired className={styles.expiredPrice} price={product.price.expired} />

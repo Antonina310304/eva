@@ -22,8 +22,6 @@
 .actualPrice {
   composes: m from 'sizes';
 
-  margin-left: var(--space-xxs);
-
   font-weight: 500;
 }
 

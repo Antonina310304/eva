@@ -70,7 +70,6 @@ const ProductCard: FC<ProductCardProps> = (props) => {
             {product.name}
           </Link>
           <div className={styles.price}>
-            <span className={styles.labelPrice}>{`Цена `}</span>
             <Price className={styles.actualPrice} price={product.price.actual} />
             {hasExpired && (
               <Price expired className={styles.expiredPrice} price={product.price.expired} />

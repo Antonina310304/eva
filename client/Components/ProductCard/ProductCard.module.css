@@ -140,8 +140,6 @@
 .actualPrice {
   composes: m from 'sizes';
 
-  margin-left: var(--space-xxs);
-
   font-weight: 500;
 }
 
@@ -249,14 +247,6 @@
   .productCard.viewMini {
     .info {
       padding: 0 var(--space-s);
-    }
-
-    .labelPrice {
-      display: none;
-    }
-
-    .actualPrice {
-      margin-left: 0;
     }
 
     .fabricsWrapper {
