@@ -75,8 +75,8 @@ const Sidebar: FC<SidebarProps> = (props) => {
   }, [openModal]);
 
   const handleClickPriceDrop = useCallback(() => {
-    openModal('PriceDrop');
-  }, [openModal]);
+    openModal('PriceDrop', { product });
+  }, [openModal, product]);
 
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
