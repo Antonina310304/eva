@@ -66,15 +66,36 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
+  const getReviewIndex = useCallback(
+    (photoId) => {
+      const reviewIndex = reviews.findIndex((item: ReviewData) => {
+        const photoIndex = item.photos.findIndex((photo) => photo.id === photoId);
+        if (photoIndex !== -1) return true;
+        return false;
+      });
+
+      return reviewIndex;
+    },
+    [reviews],
+  );
+
+  const getLinkIndex = useCallback(
+    (photoId) => {
+      const reviewIndex = getReviewIndex(photoId);
+      return reviews[reviewIndex].id;
+    },
+    [getReviewIndex, reviews],
+  );
+
   const handleClickReviewImage = useCallback(
-    (_e, selectedPhoto) => {
+    (_e, photoId) => {
       if (window.cancelClick) return;
 
-      const reviewIndex = reviews.findIndex((item: ReviewData) => item.id === selectedPhoto.id);
+      const reviewIndex = getReviewIndex(photoId);
 
       openModal('Review', { reviewIndex, reviews });
     },
-    [openModal, reviews],
+    [getReviewIndex, openModal, reviews],
   );
 
   useEffect(() => {
@@ -137,11 +158,15 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
             >
               {photos.map((photo) => (
                 <div className={styles.linkWrapper} key={photo.id}>
-                  <Link to={`#review-${photo.id}`} className={styles.item} view='simple'>
+                  <Link
+                    to={`#review-${getLinkIndex(photo.id)}`}
+                    className={styles.item}
+                    view='simple'
+                  >
                     <Image
                       className={styles.photo}
                       src={photo.image}
-                      onClick={(e) => handleClickReviewImage(e, photo)}
+                      onClick={(e) => handleClickReviewImage(e, photo.id)}
                     />
                   </Link>
                 </div>

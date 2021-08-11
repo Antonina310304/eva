@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
+import useModals from '@Hooks/useModals';
 import { InstagramPostData } from '@Types/InstagramPost';
 import Post from './elems/Post';
 import PromoPlaceholder from './elems/PromoPlaceholder';
@@ -28,6 +29,7 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
     ...restProps
   } = props;
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const [, { openModal }] = useModals();
 
   const handleChangeProgress = useCallback(
     (opts: ProgressOptions) => {
@@ -36,6 +38,18 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
       if (onChangeProgress) onChangeProgress(opts);
     },
     [onChangeProgress],
+  );
+
+  const handleClickInstagramPost = useCallback(
+    (_e, selectedPost) => {
+      if (window.cancelClick) return;
+
+      openModal('InstagramPost', {
+        posts,
+        selectedPost,
+      });
+    },
+    [openModal, posts],
   );
 
   return (
@@ -53,7 +67,11 @@ const InstagramGallery: FC<InstagramGalleryProps> = (props) => {
         )}
         {posts.map((post) => (
           <div className={styles.item} key={post.id}>
-            <Post className={styles.post} post={post} />
+            <Post
+              className={styles.post}
+              post={post}
+              onClick={(e) => handleClickInstagramPost(e, post)}
+            />
           </div>
         ))}
       </Gallery>
