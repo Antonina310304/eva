@@ -9,7 +9,7 @@ function pushDataLayer(data: unknown): void {
 }
 
 // Отправка формы «Подписка по email»
-function formEmailSubscriptionSend({ email }): void {
+function formEmailSubscriptionSend(email: string): void {
   directCrm('identify', {
     operation: 'SubscribeFour',
     identificator: {
