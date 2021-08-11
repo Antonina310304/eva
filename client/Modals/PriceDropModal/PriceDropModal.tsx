@@ -4,11 +4,11 @@ import cn from 'classnames';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
+import PriceDropForm from '@Forms/PriceDropForm/PriceDropForm';
 import IconClose from '@UI/IconClose';
 import Link from '@UI/Link';
 import { ProductData } from '@Types/Product';
 import styles from './PriceDropModal.module.css';
-import PriceDropForm from '../../Forms/PriceDropForm/PriceDropForm';
 
 export interface ModalData extends IModal {
   data: {
