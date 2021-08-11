@@ -343,6 +343,8 @@ const Form: FC<FormProps> = (props) => {
 
   // Обновляем внутрений массив ошибок при изменении серверных ошибок
   useEffect(() => {
+    if (!serverErrors.length) return;
+
     setErrors((prevErrors) => {
       const clientErrors = prevErrors.filter((error) => !error.isServer);
       const newErrors = [...clientErrors];

@@ -17,6 +17,7 @@ export type ModalId =
   | 'InstagramPost'
   | 'YandexMarket'
   | 'FinalPrice'
+  | 'PriceDrop'
   | 'DeliveryInformation';
 
 export interface Modal {
