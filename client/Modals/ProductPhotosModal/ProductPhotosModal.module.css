@@ -1,8 +1,9 @@
-.productPhotosModal {
-  width: unset;
-  padding: 100px 70px 80px 70px;
+.wrapper {
+  box-sizing: border-box;
+  height: 100%;
+  padding: var(--space-xxe) var(--space-xxl) var(--space-e) var(--space-xxb);
 
-  background-color: #fff;
+  background-color: var(--color-white);
 }
 
 .closePanel {
@@ -34,27 +35,25 @@
 
 .container {
   display: flex;
-  max-width: 1810px;
-
-  border: 1px solid rebeccapurple;
+  height: 100%;
 }
 
 .leftScroll {
-  width: 180px;
-  padding-top: 50.62%;
-  padding-right: 214px;
+  flex-shrink: 0;
+  width: 214px;
 }
 
 .imageWrapper {
-  margin: var(--space-xs) 0;
+  margin-bottom: var(--space-n);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .image {
   width: 180px;
-  padding-top: 67.5%;
 
-  background-position: center;
-  background-size: contain;
   cursor: pointer;
   opacity: 0.4;
 }
@@ -80,11 +79,9 @@
 }
 
 .mainImage {
-  width: 100%;
-  padding-top: 66.27%;
-
-  background-position: center;
-  background-size: contain;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .arrow {
@@ -148,7 +145,6 @@
 
   .image {
     width: 105px;
-    padding-top: 75.24%;
   }
 }
 
@@ -177,18 +173,8 @@
   .image {
     width: 100%;
 
-    background-position: center;
-    background-size: contain;
     cursor: default;
     opacity: 1;
-  }
-
-  .image.landscape {
-    padding-top: 66.24%;
-  }
-
-  .image.portrait {
-    padding-top: 100%;
   }
 }
 
