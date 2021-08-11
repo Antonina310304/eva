@@ -1,4 +1,4 @@
-import React, { memo, FC, Fragment, useCallback, useMemo } from 'react';
+import React, { memo, FC, Fragment, useCallback, useMemo, useState } from 'react';
 import cn from 'classnames';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
@@ -14,6 +14,7 @@ import styles from './FiltersModal.module.css';
 
 const FiltersModal: FC<ModalSidebarProps> = (props) => {
   const { className, modal, ...restProps } = props;
+  const [waiting, setWaiting] = useState(false);
   const filtrator = useFiltrator();
 
   const totalCountText = useMemo(() => {
@@ -43,6 +44,17 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
     }
   }, []);
 
+  const handleApply = useCallback(
+    async (e) => {
+      if (typeof modal.data.onApply !== 'function') return;
+
+      setWaiting(true);
+      await modal.data.onApply(e);
+      setWaiting(false);
+    },
+    [modal.data],
+  );
+
   return (
     <ModalSidebar
       {...restProps}
@@ -52,7 +64,7 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
       view='fullscreen'
       footer={
         <div className={styles.footer}>
-          <Button className={styles.buttonApply} wide>
+          <Button className={styles.buttonApply} wide waiting={waiting} onClick={handleApply}>
             <span className={styles.textApply}>Применить</span>
             {totalCountText && <span className={styles.textTotalCount}>{totalCountText}</span>}
           </Button>

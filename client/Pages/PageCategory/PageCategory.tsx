@@ -1,9 +1,12 @@
-import React, { FC, HTMLAttributes, memo, useEffect } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 
+import { ApiCategory } from '@Api/Category';
 import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
 import ProductMixedCatalog from '@Components/ProductMixedCatalog';
+import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { ProductData } from '@Types/Product';
 import Filters from './elements/Filters';
 import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
@@ -18,7 +21,27 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, slug, ...restProps } = props;
   const isModels = page.productsModel?.length > 0;
+  const [products, setProducts] = useState<ProductData[]>(page.products);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator(page.filters);
+
+  const handleApplyFilters = useCallback(async () => {
+    try {
+      const filters = Filtrator.formatFiltersToObject();
+      const category = await ApiCategory.getProducts({ slug, page: pageNumber, filters });
+
+      setProducts(category.products);
+      closeModal('Filters');
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  }, [closeModal, pageNumber, slug]);
+
+  const hanleOpenAllFilters = useCallback(() => {
+    openModal('Filters', { onApply: handleApplyFilters });
+  }, [handleApplyFilters, openModal]);
 
   useEffect(() => {
     Filtrator.updateTotalCount({ category: slug });
@@ -36,7 +59,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
       <div className={styles.catalogWrapper}>
         <div className={styles.filtersWrapper}>
-          <Filters />
+          <Filters onOpenAll={hanleOpenAllFilters} />
 
           {page.popularLinks?.length > 0 && (
             <div className={styles.popularLinksWrapper}>
@@ -49,10 +72,10 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
           <ProductSectionsCatalog
             className={styles.catalog}
             sections={page.productsModel}
-            products={page.products}
+            products={products}
           />
         ) : (
-          <ProductMixedCatalog className={styles.catalog} products={page.products} />
+          <ProductMixedCatalog className={styles.catalog} products={products} />
         )}
       </div>
     </div>

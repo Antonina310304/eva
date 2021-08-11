@@ -1,22 +1,17 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, memo } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import useModals from '@Hooks/useModals';
 import Dropdown from '../Dropdown';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  onOpenAll?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, ...restProps } = props;
-  const [, { openModal }] = useModals();
-
-  const handleClickAll = useCallback(() => {
-    openModal('Filters');
-  }, [openModal]);
+  const { className, onOpenAll, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
@@ -26,7 +21,7 @@ const Filters: FC<FiltersProps> = (props) => {
             className={cn(styles.button, styles.main)}
             view='rounded'
             before={<div className={styles.iconFilters} />}
-            onClick={handleClickAll}
+            onClick={onOpenAll}
           >
             Все фильтры
           </Button>

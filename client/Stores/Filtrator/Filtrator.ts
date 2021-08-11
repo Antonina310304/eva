@@ -300,4 +300,5 @@ export default {
   resetGroup,
   changeSort,
   updateTotalCount,
+  formatFiltersToObject,
 };
