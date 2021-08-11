@@ -19,7 +19,7 @@ import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import { useRelatedProducts } from '@Stores/relatedProducts';
-import { useProduct } from '@Stores/product';
+import { useProduct } from '@Stores/Product';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';

@@ -11,11 +11,7 @@ export interface Value extends ProductData {
   modules: ModuleProductData[];
 }
 
-export interface Result extends Value {
-  editModule: any;
-}
-
-export type UseProduct = (initialValue?: Value) => Result;
+export type UseProduct = (initialValue?: Value) => Value;
 
 const productStore = createStore<Value>();
 const networkStore = createStore<NetworkStatus>();
@@ -91,6 +87,9 @@ export const useProduct: UseProduct = (initialValue) => {
   return {
     ...useStore(productStore),
     networkStatus: useStore(networkStore),
-    editModule,
   };
+};
+
+export default {
+  editModule,
 };

@@ -5,7 +5,7 @@ import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import InputQuantity from '@UI/InputQuantity';
-import { useProduct } from '@Stores/product';
+import ProductStore, { useProduct } from '@Stores/Product';
 import { ModuleProductData } from '@Types/ModuleProduct';
 import Preview from './elems/Preview';
 import Added from './elems/Added';
@@ -54,9 +54,9 @@ const ModuleCard: FC<ModuleCardProps> = (props) => {
 
   const handleChangeQuantity = useCallback(
     (_e, { quantity }) => {
-      product.editModule({ ...module, count: quantity });
+      ProductStore.editModule({ ...module, count: quantity });
     },
-    [module, product],
+    [module],
   );
 
   return (
