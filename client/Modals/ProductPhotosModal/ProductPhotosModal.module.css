@@ -106,8 +106,8 @@
 }
 
 @media (--desktop) {
-  .productPhotosModal {
-    padding: 100px 40px 60px 40px;
+  .wrapper {
+    padding: var(--space-xxe) var(--space-xxl) var(--space-xb) var(--space-xxl);
   }
 
   .container {
@@ -120,35 +120,42 @@
   }
 
   .mainWrapper {
+    height: 66%;
     margin: 0;
-    margin-top: 45px;
-  }
-
-  .mainImage {
-    padding-top: 100%;
+    padding: 0;
   }
 
   .wrapperGallery {
     max-width: 785px;
+    height: 100%;
     margin: 0 auto;
     margin-top: var(--space-e);
     overflow: hidden;
   }
 
   .progressBar {
+    bottom: var(--space-xb);
+
     margin-top: var(--space-l);
   }
 
   .imageWrapper {
+    height: unset;
+    margin: 0;
     padding: 0 var(--space-xxs);
   }
 
   .image {
-    width: 105px;
+    width: 50px;
   }
 }
 
 @media (--mobile-m) {
+  .wrapper {
+    padding: 0;
+    padding-bottom: var(--space-n);
+  }
+
   .mainWrapper {
     display: none;
   }
@@ -160,7 +167,8 @@
   .leftScroll {
     display: block;
     width: 100%;
-    padding-top: 100%;
+    height: calc(100% - var(--space-b));
+    margin-top: var(--space-b);
   }
 
   .imageWrapper {
@@ -176,13 +184,13 @@
     cursor: default;
     opacity: 1;
   }
-}
 
-@media (--mobile) {
   .closePanel {
     justify-content: flex-end;
     width: 100%;
     height: 50px;
+
+    background-color: var(--color-white);
   }
 
   .iconClose {

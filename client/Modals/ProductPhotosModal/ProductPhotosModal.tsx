@@ -8,7 +8,6 @@ import useKeyboardEvents from '@Hooks/useKeyboardEvents';
 import Scroller from '@UI/Scroller';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
-import Image from '@UI/Image';
 import IconClose from '@UI/IconClose';
 import styles from './ProductPhotosModal.module.css';
 
@@ -111,7 +110,7 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
               >
                 {images.map((image, index) => (
                   <div className={styles.imageWrapper} key={index}>
-                    <Image
+                    <img
                       className={cn(styles.image, { [styles.active]: index === mainImageIndex })}
                       src={image.image}
                       onClick={(e) => handleClickPreviewImage(e, index)}

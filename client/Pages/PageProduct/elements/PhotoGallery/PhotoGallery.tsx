@@ -106,6 +106,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
               <div
                 className={cn(styles.containerImage, { [styles.firstImage]: index === 0 })}
                 key={index}
+                onClick={isMobileM ? handleOpen : () => {}}
               >
                 {Array.isArray(item) ? (
                   <div
