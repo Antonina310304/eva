@@ -8,7 +8,7 @@ import Form from '@UI/Form';
 import FormItem from '@UI/FormItem';
 import analytics from '@Utils/analytics';
 import { ProductData } from '@Types/Product';
-import styles from './PriceDropModal.module.css';
+import styles from '../../Modals/PriceDropModal/PriceDropModal.module.css';
 
 export interface PriceDropFormProps {
   className?: string;
