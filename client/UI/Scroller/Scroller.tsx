@@ -7,6 +7,7 @@ import styles from './Scroller.module.css';
 export interface ScrollerProps {
   className?: string;
   invisible?: boolean;
+  scrollTop?: number;
   children: ReactNode | ReactNode[];
 }
 

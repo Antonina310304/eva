@@ -26,6 +26,7 @@ export interface ModalSidebarProps extends HTMLAttributes<HTMLDivElement> {
   view?: 'default' | 'fullscreen';
   cnContent?: string;
   footer: ReactChild;
+  scrollTop?: number;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
   onLoad?: () => void;
 }
@@ -40,6 +41,7 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
     view = 'default',
     cnContent,
     footer,
+    scrollTop,
     onClose,
     onLoad,
   } = props;
@@ -89,7 +91,11 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
                   />
                 </div>
 
-                <Scroller className={cn(styles.containerContent, cnContent)} invisible={isMobile}>
+                <Scroller
+                  className={cn(styles.containerContent, cnContent)}
+                  invisible={isMobile}
+                  scrollTop={scrollTop}
+                >
                   {children}
                 </Scroller>
 

@@ -57,9 +57,14 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     }
   }, [closeModal, slug]);
 
-  const hanleOpenAllFilters = useCallback(() => {
-    openModal('Filters', { onApply: handleApplyFilters });
-  }, [handleApplyFilters, openModal]);
+  const hanleOpenFilters = useCallback(
+    (_e, selectedFilterId: string) => {
+      console.log(selectedFilterId);
+
+      openModal('Filters', { selectedFilterId, onApply: handleApplyFilters });
+    },
+    [handleApplyFilters, openModal],
+  );
 
   const handleMore = useCallback(async () => {
     try {
@@ -90,7 +95,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
       <div className={styles.catalogWrapper}>
         <div className={styles.filtersWrapper}>
-          <Filters count={catalog.productsTotalCount} onOpenAll={hanleOpenAllFilters} />
+          <Filters count={catalog.productsTotalCount} onOpen={hanleOpenFilters} />
 
           {page.popularLinks?.length > 0 && (
             <div className={styles.popularLinksWrapper}>
