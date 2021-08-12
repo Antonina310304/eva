@@ -3,8 +3,6 @@
   --gap-half: calc(var(--gap) / 2);
   --gap-half-neg: calc(var(--gap-half) * -1);
 
-  display: flex;
-  justify-content: center;
   margin: 0 var(--gap-half-neg);
 }
 

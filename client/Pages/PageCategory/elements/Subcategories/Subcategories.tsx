@@ -15,7 +15,7 @@ const Subcategories: FC<SubcategoriesProps> = (props) => {
   const { className, subcategories, ...restProps } = props;
 
   return (
-    <Gallery {...restProps} className={cn(styles.subcategories, className)}>
+    <Gallery {...restProps} className={cn(styles.subcategories, className)} centered>
       {subcategories.map((subcategory, index) => (
         <div className={styles.subcategory} key={index}>
           <Link className={styles.link} to={subcategory.link} view='simple'>

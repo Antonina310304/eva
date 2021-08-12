@@ -87,7 +87,9 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
       {page.rubrics?.length > 0 && (
         <div className={styles.rubricsWrapper}>
-          <Subcategories className={styles.rubrics} subcategories={page.rubrics[0]} />
+          <div className={styles.rubricsContainer}>
+            <Subcategories className={styles.rubrics} subcategories={page.rubrics[0]} />
+          </div>
         </div>
       )}
 
