@@ -9,7 +9,6 @@ export interface ScrollerProps {
   invisible?: boolean;
   scrollTop?: number;
   children: ReactNode | ReactNode[];
-  scrollTop?: number;
   onScroll?: (...args: any[]) => any;
 }
 
