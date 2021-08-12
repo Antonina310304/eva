@@ -7,7 +7,12 @@ export interface Params {
 }
 
 export default async ({ slug, filters, categories }: Params): Promise<number> => {
-  const url = `/category/${slug}/get-products-count?page=1&categories[]=${categories}`;
+  const searchParams = new URLSearchParams();
+
+  searchParams.set('page', '1');
+  if (categories.length > 0) searchParams.set('categories[]', categories.join());
+
+  const url = `/category/${slug}/get-products-count?${searchParams.toString()}`;
   const res = await Api.queryProxi<any>(url, {
     method: 'POST',
     body: JSON.stringify(filters),
