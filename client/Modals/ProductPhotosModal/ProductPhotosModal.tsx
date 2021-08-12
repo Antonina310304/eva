@@ -23,18 +23,6 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const [scrollTop, setScrollTop] = useState(0);
   const refScroll = useRef(null);
 
-  const handleClose = useCallback(() => {
-    closeModal(modal.id);
-  }, [closeModal, modal.id]);
-
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlide(current);
-  }, []);
-
-  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
-    setTrack(opts);
-  }, []);
-
   const normalizeIndex = useCallback(
     (value: number) => {
       if (value < 0) return images.length - 1;
@@ -44,24 +32,6 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     },
     [images.length],
   );
-
-  const handleClickNext = useCallback(() => {
-    setMainImageIndex((prev) => normalizeIndex(prev + 1));
-  }, [normalizeIndex]);
-
-  const handleClickPrev = useCallback(() => {
-    setMainImageIndex((prev) => normalizeIndex(prev - 1));
-  }, [normalizeIndex]);
-
-  const handleClickPreviewImage = useCallback(
-    (_e, index) => {
-      if (isMobile) return;
-      setMainImageIndex(index);
-    },
-    [isMobile],
-  );
-
-  useKeyboardEvents({ onArrowLeft: handleClickPrev, onArrowRight: handleClickNext });
 
   const scrollTo = useCallback((index) => {
     const previews = refScroll.current.children;
@@ -82,6 +52,36 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
       });
     }
   }, []);
+
+  const handleClose = useCallback(() => {
+    closeModal(modal.id);
+  }, [closeModal, modal.id]);
+
+  const handleChangeCurrent = useCallback(({ current }) => {
+    setSlide(current);
+  }, []);
+
+  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
+    setTrack(opts);
+  }, []);
+
+  const handleClickNext = useCallback(() => {
+    setMainImageIndex((prev) => normalizeIndex(prev + 1));
+  }, [normalizeIndex]);
+
+  const handleClickPrev = useCallback(() => {
+    setMainImageIndex((prev) => normalizeIndex(prev - 1));
+  }, [normalizeIndex]);
+
+  const handleClickPreviewImage = useCallback(
+    (_e, index) => {
+      if (isMobile) return;
+      setMainImageIndex(index);
+    },
+    [isMobile],
+  );
+
+  useKeyboardEvents({ onArrowLeft: handleClickPrev, onArrowRight: handleClickNext });
 
   useEffect(() => {
     scrollTo(mainImageIndex);

@@ -91,11 +91,18 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
     return result;
   }, [category, images, isMobileM, maxItemsCountInGallery]);
 
-  const handleOpen = useCallback(() => {
-    openModal('ProductPhotos', {
-      images,
-    });
-  }, [images, openModal]);
+  const handleOpen = useCallback(
+    (e) => {
+      if (window.cancelClick) return;
+
+      if (!isMobileM && e.target.tagName === 'DIV') return;
+
+      openModal('ProductPhotos', {
+        images,
+      });
+    },
+    [images, isMobileM, openModal],
+  );
 
   return (
     <div {...restProps} className={cn(styles.photogallery)}>
@@ -106,7 +113,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
               <div
                 className={cn(styles.containerImage, { [styles.firstImage]: index === 0 })}
                 key={index}
-                onClick={isMobileM ? handleOpen : () => {}}
+                onClick={(e) => handleOpen(e)}
               >
                 {Array.isArray(item) ? (
                   <div
@@ -133,7 +140,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
 
         <div className={styles.openGallery}>
           {images.length > maxItemsCountInGallery && (
-            <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
+            <Button className={styles.btnOpenGallery} theme='blank' onClick={(e) => handleOpen(e)}>
               Открыть фотогалерею
             </Button>
           )}
