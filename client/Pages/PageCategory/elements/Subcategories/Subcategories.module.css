@@ -9,10 +9,15 @@
 .subcategory {
   padding: 0 var(--gap-half);
 
-  &:hover,
+  &:hover {
+    svg :global(.bg) {
+      fill: var(--color-light-gray);
+    }
+  }
+
   &.actived {
     svg :global(.bg) {
-      fill: #f1e67f;
+      fill: var(--color-medium-gray);
     }
   }
 }
