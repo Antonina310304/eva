@@ -8,6 +8,8 @@ export interface ScrollerProps {
   className?: string;
   invisible?: boolean;
   children: ReactNode | ReactNode[];
+  scrollTop?: number;
+  onScroll?: (...args: any[]) => any;
 }
 
 const Scroller: FC<ScrollerProps> = (props) => {
