@@ -17,6 +17,7 @@ export interface SubcategoryData {
   link: string;
   icon: string;
   title: string;
+  actived?: boolean;
 }
 
 export interface PopularLinkData {

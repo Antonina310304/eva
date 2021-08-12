@@ -8,6 +8,13 @@
 
 .subcategory {
   padding: 0 var(--gap-half);
+
+  &:hover,
+  &.actived {
+    svg :global(.bg) {
+      fill: #f1e67f;
+    }
+  }
 }
 
 .link {

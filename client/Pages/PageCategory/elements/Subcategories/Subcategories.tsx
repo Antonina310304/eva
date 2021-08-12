@@ -17,7 +17,10 @@ const Subcategories: FC<SubcategoriesProps> = (props) => {
   return (
     <Gallery {...restProps} className={cn(styles.subcategories, className)} centered>
       {subcategories.map((subcategory, index) => (
-        <div className={styles.subcategory} key={index}>
+        <div
+          className={cn(styles.subcategory, { [styles.actived]: subcategory.actived })}
+          key={index}
+        >
           <Link className={styles.link} to={subcategory.link} view='simple'>
             <div
               className={styles.subcategoryIcon}
