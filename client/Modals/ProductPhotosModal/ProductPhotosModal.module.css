@@ -125,7 +125,6 @@
   }
 
   .mainWrapper {
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,7 +148,7 @@
   }
 
   .progressBar {
-    margin-top: var(--space-l);
+    margin-top: var(--space-s);
   }
 
   .imageWrapper {

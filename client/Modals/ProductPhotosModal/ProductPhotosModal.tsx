@@ -60,6 +60,8 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   }, [closeModal, modal.id]);
 
   const handleChangeCurrent = useCallback(({ current }) => {
+    if (window.cancelClick) return;
+
     setSlide(current);
   }, []);
 
@@ -78,6 +80,7 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const handleClickPreviewImage = useCallback(
     (_e, index) => {
       if (isMobile) return;
+      if (window.cancelClick) return;
       setMainImageIndex(index);
     },
     [isMobile],

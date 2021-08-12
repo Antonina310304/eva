@@ -113,7 +113,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
               <div
                 className={cn(styles.containerImage, { [styles.firstImage]: index === 0 })}
                 key={index}
-                onClick={(e) => handleOpen(e)}
+                onClick={handleOpen}
               >
                 {Array.isArray(item) ? (
                   <div
@@ -140,7 +140,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
 
         <div className={styles.openGallery}>
           {images.length > maxItemsCountInGallery && (
-            <Button className={styles.btnOpenGallery} theme='blank' onClick={(e) => handleOpen(e)}>
+            <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
               Открыть фотогалерею
             </Button>
           )}
