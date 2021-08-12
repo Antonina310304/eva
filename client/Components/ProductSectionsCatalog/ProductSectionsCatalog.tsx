@@ -10,28 +10,28 @@ import styles from './ProductSectionsCatalog.module.css';
 
 export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  sections?: ProductModel[];
   catalog?: CatalogData;
   onMore?: (e: MouseEvent) => void;
 }
 
 const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
-  const { className, sections = [], catalog, onMore, ...restProps } = props;
+  const { className, catalog, onMore, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.catalog, className)}>
       <List
         className={styles.sections}
-        items={sections}
-        renderChild={(section: ProductModel) => {
+        items={catalog.productsModel}
+        renderChild={(productModel: ProductModel) => {
           const sectionProducts = catalog.products.filter((product) => {
-            return product.modelId === section.id;
+            return product.modelId === productModel.id;
           });
           const items: SectionItem[] = [...sectionProducts];
 
-          if (section.constructor) items.push({ id: 'stub', ...section.constructor });
+          if (items.length < 1) return null;
+          if (productModel.constructor) items.push({ id: 'stub', ...productModel.constructor });
 
-          return <Section className={styles.section} section={section} items={items} />;
+          return <Section className={styles.section} productModel={productModel} items={items} />;
         }}
       />
 

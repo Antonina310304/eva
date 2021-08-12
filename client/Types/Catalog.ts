@@ -1,3 +1,4 @@
+import { ProductModel } from './Category';
 import { ProductData } from './Product';
 
 export interface CatalogData {
@@ -6,4 +7,5 @@ export interface CatalogData {
   productsCountLeft: number;
   productsPerPage: number;
   productsTotalCount: number;
+  productsModel?: ProductModel[];
 }

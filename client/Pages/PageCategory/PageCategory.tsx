@@ -28,6 +28,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     productsCountLeft: page.productsCountLeft,
     productsPerPage: page.productsPerPage,
     productsTotalCount: page.productsTotalCount,
+    productsModel: page.productsModel,
   });
   const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator({ id: slug, ...page.filters });
@@ -100,6 +101,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       setCatalog((prev) => ({
         ...newCatalog,
         products: [...prev.products, ...newCatalog.products],
+        productsModel: [...prev.productsModel, ...newCatalog.productsModel],
       }));
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -135,7 +137,6 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
         {isModels ? (
           <ProductSectionsCatalog
             className={styles.catalog}
-            sections={page.productsModel}
             catalog={catalog}
             onMore={handleMore}
           />
