@@ -35,7 +35,7 @@ const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
         }}
       />
 
-      {catalog.productsCountLeft > 0 && (
+      {catalog.sectionCountLeft > 0 && (
         <div className={styles.moreWrapper}>
           <Button className={styles.moreButton} theme='dirty' onClick={onMore}>
             Смотреть еще

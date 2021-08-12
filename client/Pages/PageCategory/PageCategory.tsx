@@ -29,6 +29,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     productsPerPage: page.productsPerPage,
     productsTotalCount: page.productsTotalCount,
     productsModel: page.productsModel,
+    sectionCountLeft: page.sectionCountLeft,
   });
   const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator({ id: slug, ...page.filters });

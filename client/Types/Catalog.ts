@@ -8,4 +8,5 @@ export interface CatalogData {
   productsPerPage: number;
   productsTotalCount: number;
   productsModel?: ProductModel[];
+  sectionCountLeft?: number;
 }
