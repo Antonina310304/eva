@@ -39,7 +39,7 @@ const CheckboxRow: FC<CheckboxRowProps> = (props) => {
       <div className={styles.container}>
         <div
           className={cn(styles.box, { [styles.isWhite]: isWhite })}
-          style={item.color ? { backgroundColor: item.color } : undefined}
+          style={item.color ? { backgroundColor: item.color } : null}
         >
           <div className={styles.check} />
         </div>
