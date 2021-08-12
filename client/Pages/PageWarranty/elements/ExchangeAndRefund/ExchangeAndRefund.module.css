@@ -15,7 +15,7 @@
   margin-top: var(--space-l);
 
   font-size: var(--size-s);
-  line-height: 21px;
+  line-height: var(--lh-s);
 
   &:first-child {
     margin-top: 0;
@@ -36,7 +36,7 @@
 @media (--desktop) {
   .title {
     font-size: var(--size-xl);
-    line-height: 37px;
+    line-height: var(--lh-xxl);
   }
 }
 

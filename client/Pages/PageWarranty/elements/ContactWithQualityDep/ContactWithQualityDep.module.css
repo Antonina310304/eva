@@ -42,7 +42,7 @@
 
   color: var(--color-dark-gray);
   font-size: var(--size-s);
-  line-height: 21px;
+  line-height: var(--lh-s);
 }
 
 @media (--desktop-m) {

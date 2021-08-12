@@ -1,7 +1,4 @@
 .navigation {
-}
-
-.navigation {
   display: flex;
   justify-content: center;
   margin-top: var(--space-m);

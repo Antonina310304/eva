@@ -10,7 +10,7 @@
 .container {
   display: flex;
   justify-content: space-between;
-  margin-top: 45px;
+  margin-top: var(--space-xxl);
 }
 
 .item {
@@ -37,7 +37,7 @@
 @media (--desktop) {
   .title {
     font-size: var(--size-xl);
-    line-height: 37px;
+    line-height: var(--lh-xxl);
   }
 
   .item {
@@ -71,7 +71,7 @@
 
   .item {
     max-width: 100%;
-    margin-top: 45px;
+    margin-top: var(--space-xxl);
 
     &:first-child {
       margin-top: 0;

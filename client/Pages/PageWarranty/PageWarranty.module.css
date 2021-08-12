@@ -72,7 +72,7 @@
     padding: var(--space-n) 0px;
 
     font-size: var(--size-xl);
-    line-height: 37px;
+    line-height: var(--lh-xxl);
   }
 
   .wrapper {

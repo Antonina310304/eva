@@ -88,7 +88,7 @@
   margin-top: var(--space-xxl);
 
   font-size: var(--size-s);
-  line-height: 21px;
+  line-height: var(--lh-s);
 }
 
 .descriptionItem {
