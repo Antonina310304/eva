@@ -22,8 +22,6 @@
 .actualPrice {
   composes: m from 'sizes';
 
-  margin-left: var(--space-xxs);
-
   font-weight: 500;
 }
 
@@ -33,19 +31,6 @@
 
 .discount {
   margin-left: var(--space-xs);
-}
-
-.action {
-  margin-right: var(--space-s);
-}
-
-.iconCart {
-  width: 30px;
-  height: 30px;
-
-  background-image: url('./cart.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 @media (--desktop) {

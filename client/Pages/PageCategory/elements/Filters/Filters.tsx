@@ -1,22 +1,31 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import useModals from '@Hooks/useModals';
+import { useFiltrator } from '@Stores/Filtrator';
 import Dropdown from '../Dropdown';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  count?: number;
+  onOpen?: (e: MouseEvent, id: string) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, ...restProps } = props;
-  const [, { openModal }] = useModals();
+  const { className, count, onOpen, ...restProps } = props;
+  const filtrator = useFiltrator();
 
-  const handleClickAll = useCallback(() => {
-    openModal('Filters');
-  }, [openModal]);
+  const secondaryFilters = useMemo(() => {
+    return filtrator.filters.slice(0, 3);
+  }, [filtrator.filters]);
+
+  const handleOpen = useCallback(
+    (e, id) => {
+      if (onOpen) onOpen(e, id);
+    },
+    [onOpen],
+  );
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
@@ -26,22 +35,25 @@ const Filters: FC<FiltersProps> = (props) => {
             className={cn(styles.button, styles.main)}
             view='rounded'
             before={<div className={styles.iconFilters} />}
-            onClick={handleClickAll}
+            onClick={(e) => handleOpen(e, 'all')}
           >
             Все фильтры
           </Button>
-          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
-            Цена
-          </Button>
-          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
-            Цвет
-          </Button>
-          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
-            Стиль
-          </Button>
+
+          {secondaryFilters.map((filter) => (
+            <Button
+              className={cn(styles.button, styles.secondary)}
+              view='rounded'
+              theme='blank'
+              key={filter.name}
+              onClick={(e) => handleOpen(e, filter.name)}
+            >
+              {filter.name}
+            </Button>
+          ))}
         </div>
 
-        <div className={styles.count}>Найдено 1440</div>
+        {typeof count === 'number' && <div className={styles.count}>{`Найдено ${count}`}</div>}
       </div>
 
       <div className={styles.labels}>

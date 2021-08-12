@@ -15,11 +15,17 @@
 }
 
 .rubricsWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.rubricsContainer {
+  composes: main from 'containers';
+
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 0 0 var(--space-xxl);
-  overflow: hidden;
+  margin-bottom: var(--space-xxl);
 }
 
 .rubrics {

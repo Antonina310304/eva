@@ -55,7 +55,9 @@ router.use('/proxy', (req, res, next) => {
   const url = isAbsolute ? path : `${backend}${path}`;
 
   proxy(url, {
-    proxyReqPathResolver: (proxyReq) => `${proxyReq.query.path}`,
+    proxyReqPathResolver: (proxyReq) => {
+      return `${decodeURIComponent(proxyReq.query.path as string)}`;
+    },
   })(req, res, next);
 });
 
