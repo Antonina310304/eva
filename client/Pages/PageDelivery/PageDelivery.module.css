@@ -9,6 +9,10 @@
 
 .contentContainer {
   composes: content from 'containers';
+
+  &.row {
+    margin-top: var(--space-e);
+  }
 }
 
 .breadcrumbs {
@@ -40,13 +44,13 @@
 }
 
 .contrastRow {
-  margin: var(--space-e) 0;
+  margin-top: var(--space-e);
   padding: var(--space-xb) 0 var(--space-xxb);
 
   background: var(--color-light-gray);
 }
 
-.header {
+.heading {
   font-weight: 500;
   font-size: var(--size-xxl);
   line-height: var(--lh-xxl);
@@ -76,5 +80,117 @@
 
   &:first-child {
     margin-top: 0;
+  }
+}
+
+.rules {
+  margin-top: var(--space-xb);
+}
+
+.rulesText {
+  margin-top: var(--space-m);
+}
+
+.wrapperList {
+  margin-top: var(--space-m);
+}
+
+.attention {
+  margin-top: var(--space-m);
+}
+
+.bottomInfo {
+  composes: main from 'containers';
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: var(--space-e);
+
+  background: var(--color-light-gray);
+}
+
+.subtitle {
+  margin-bottom: var(--space-xs);
+
+  font-weight: 500;
+  font-size: var(--size-xl);
+  line-height: var(--lh-xl);
+}
+
+.textBlock {
+  margin-bottom: var(--space-xs);
+}
+
+.moreLink {
+  composes: n from 'sizes';
+
+  display: inline-block;
+
+  vertical-align: baseline;
+}
+
+.carImage {
+  width: 269px;
+
+  &:before {
+    display: block;
+    padding: 0 0 38.2899628252788%;
+
+    content: '';
+  }
+}
+
+.bottomInfoContainer {
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
+}
+
+.importantInfo {
+  margin-top: var(--space-xb);
+}
+
+.upliftFirstFloor {
+  composes: m from 'sizes';
+
+  margin-top: var(--space-xb);
+}
+
+@media (--desktop-m) {
+  .title {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+}
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+
+  .bottomInfoContainer {
+    max-width: 470px;
+  }
+
+  .mainContainer {
+    margin-bottom: var(--space-xb);
+  }
+
+  .heading {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
+  }
+
+  .heading {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
   }
 }

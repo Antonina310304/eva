@@ -50,12 +50,6 @@
   margin-left: var(--space-m);
 }
 
-@media (--desktop-m) {
-  .label {
-    margin-top: var(--space-xxs);
-  }
-}
-
 @media (--mobile) {
   .calculator {
     max-width: 100%;
@@ -67,10 +61,6 @@
 
   .input {
     margin-top: var(--space-xs);
-  }
-
-  .label {
-    margin-top: 0;
   }
 
   .action {

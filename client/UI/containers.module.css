@@ -12,9 +12,10 @@
 
 .content {
   --gap: var(--space-xxl);
+  --width: 1256px;
   box-sizing: border-box;
   width: 100%;
-  max-width: 1256px;
+  max-width: var(--width);
   margin-right: auto;
   margin-left: auto;
   padding-right: var(--gap);
@@ -24,6 +25,16 @@
 @media (--desktop-m) {
   .main {
     --gap: var(--space-xxl);
+  }
+
+  .content {
+    --width: 1146px;
+  }
+}
+
+@media (--desktop) {
+  .content {
+    --width: 100%;
   }
 }
 

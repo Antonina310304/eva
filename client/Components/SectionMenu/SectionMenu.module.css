@@ -30,3 +30,17 @@
     border-color: var(--color-black);
   }
 }
+
+@media (--desktop-m) {
+  .link {
+    font-size: var(--size-m);
+    line-height: var(--lh-m);
+  }
+}
+
+@media (--mobile-m) {
+  .link {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
+  }
+}
