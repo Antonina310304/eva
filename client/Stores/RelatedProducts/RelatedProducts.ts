@@ -17,7 +17,6 @@ export interface RelatedProductsValue {
 export type UseRelatedProducts = (
   initialValue?: RelatedProductsValue,
 ) => {
-  changeQuantityProduct: ChangeQuantityProduct;
   allLists: RelatedProductsListData[];
   selectedLists: RelatedProductsListData[];
 };
@@ -63,8 +62,11 @@ export const useRelatedProducts: UseRelatedProducts = (initialValue) => {
   }
 
   return {
-    changeQuantityProduct,
     allLists: useStore(store).lists,
     selectedLists: useStore(selectedLists),
   };
+};
+
+export default {
+  changeQuantityProduct,
 };

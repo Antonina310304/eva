@@ -1,25 +1,27 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, memo } from 'react';
 import cn from 'classnames';
 
 import List from '@UI/List';
 import Button from '@UI/Button';
-import { ProductData } from '@Types/Product';
 import ProductCard from '@Components/ProductCard';
+import { CatalogData } from '@Types/Catalog';
+import { ProductData } from '@Types/Product';
 import styles from './ProductMixedCatalog.module.css';
 
 export interface ProductMixedCatalogProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  products: ProductData[];
+  catalog: CatalogData;
+  onMore?: (e: MouseEvent) => void;
 }
 
 const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
-  const { className, products, ...restProps } = props;
+  const { className, catalog, onMore, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.catalog, className)}>
       <List
         className={styles.list}
-        items={products}
+        items={catalog.products}
         renderChild={(product: ProductData) => (
           <div className={cn(styles.item)}>
             <ProductCard product={product} view='mini' />
@@ -27,11 +29,13 @@ const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
         )}
       />
 
-      <div className={styles.moreWrapper}>
-        <Button className={styles.moreButton} theme='dirty'>
-          Смотреть еще
-        </Button>
-      </div>
+      {catalog.productsCountLeft > 0 && (
+        <div className={styles.moreWrapper}>
+          <Button className={styles.moreButton} theme='dirty' onClick={onMore}>
+            Смотреть еще
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

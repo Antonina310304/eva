@@ -3,13 +3,23 @@
   --gap-half: calc(var(--gap) / 2);
   --gap-half-neg: calc(var(--gap-half) * -1);
 
-  display: flex;
-  justify-content: center;
   margin: 0 var(--gap-half-neg);
 }
 
 .subcategory {
   padding: 0 var(--gap-half);
+
+  &:hover {
+    svg :global(.bg) {
+      fill: var(--color-light-gray);
+    }
+  }
+
+  &.actived {
+    svg :global(.bg) {
+      fill: var(--color-medium-gray);
+    }
+  }
 }
 
 .link {

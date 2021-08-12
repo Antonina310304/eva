@@ -1,0 +1,28 @@
+.footer {
+  margin-top: var(--space-xxl);
+}
+
+.textApply {
+  font-weight: 500;
+}
+
+.textTotalCount {
+  margin-left: var(--space-xxs);
+}
+
+.footerAdditional {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-l);
+}
+
+.reset {
+  white-space: nowrap;
+}
+
+@media (--mobile) {
+  .footer {
+    margin-top: var(--space-l);
+  }
+}
