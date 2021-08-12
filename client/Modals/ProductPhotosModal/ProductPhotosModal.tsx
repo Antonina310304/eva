@@ -36,21 +36,23 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const scrollTo = useCallback((index) => {
     const previews = refScroll.current.children;
 
-    if (previews.length) {
-      const preview = previews[index] as HTMLDivElement;
+    if (!previews.length) return;
 
-      animate({
-        timing: 'linear',
-        duration: 400,
-        draw: (progress) => {
-          setScrollTop((prev) => {
-            const diff = preview.offsetTop - prev;
+    if (index >= previews.length) return;
 
-            return prev + diff * progress;
-          });
-        },
-      });
-    }
+    const preview = previews[index] as HTMLDivElement;
+
+    animate({
+      timing: 'linear',
+      duration: 400,
+      draw: (progress) => {
+        setScrollTop((prev) => {
+          const diff = preview.offsetTop - prev;
+
+          return prev + diff * progress;
+        });
+      },
+    });
   }, []);
 
   const handleClose = useCallback(() => {
@@ -81,7 +83,12 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     [isMobile],
   );
 
-  useKeyboardEvents({ onArrowLeft: handleClickPrev, onArrowRight: handleClickNext });
+  useKeyboardEvents({
+    onArrowLeft: handleClickPrev,
+    onArrowRight: handleClickNext,
+    onArrowDown: handleClickNext,
+    onArrowUp: handleClickPrev,
+  });
 
   useEffect(() => {
     scrollTo(mainImageIndex);
@@ -96,12 +103,16 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     >
       <div className={styles.wrapper}>
         <div className={styles.closePanel} onClick={handleClose}>
-          <IconClose className={styles.iconClose} />
+          <IconClose className={styles.iconClose} view='circle' />
         </div>
 
         <div className={styles.container}>
           <div className={styles.leftScroll}>
-            <Scroller scrollTop={scrollTop} onScroll={(values) => setScrollTop(values.scrollTop)}>
+            <Scroller
+              className={styles.scroller}
+              scrollTop={scrollTop}
+              onScroll={(values) => setScrollTop(values.scrollTop)}
+            >
               <div className={styles.leftScrollContainer} ref={refScroll}>
                 {images.map((image, index) => (
                   <div className={styles.imageWrapper} key={index}>

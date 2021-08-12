@@ -44,6 +44,10 @@
   height: inherit;
 }
 
+.scroller {
+  height: inherit;
+}
+
 .imageWrapper {
   margin-bottom: var(--space-n);
 
@@ -121,33 +125,45 @@
   }
 
   .mainWrapper {
-    height: 66%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 240px);
     margin: 0;
     padding: 0;
   }
 
   .wrapperGallery {
     max-width: 785px;
-    height: 100%;
     margin: 0 auto;
-    margin-top: var(--space-e);
+    margin-top: var(--space-xl);
+  }
+
+  .mainImageWrapper {
+    height: 90.25%;
+  }
+
+  .gallery {
     overflow: hidden;
   }
 
   .progressBar {
-    bottom: var(--space-xb);
-
     margin-top: var(--space-l);
   }
 
   .imageWrapper {
+    width: 105px;
     height: unset;
+    height: 105px;
     margin: 0;
     padding: 0 var(--space-xxs);
   }
 
   .image {
-    width: 50px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
@@ -168,11 +184,17 @@
   .leftScroll {
     display: block;
     width: 100%;
-    height: calc(100% - var(--space-b));
+    height: 100%;
     margin-top: var(--space-b);
   }
 
+  .scroller {
+    height: calc(100% - var(--space-m));
+  }
+
   .imageWrapper {
+    width: calc(100% + var(--space-s));
+    height: 100%;
     margin: 0;
     margin-right: var(--space-s-neg);
     margin-bottom: var(--space-n);
