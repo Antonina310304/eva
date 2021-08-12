@@ -7,16 +7,17 @@ export type ModalId =
   | 'Fullscreen360'
   | 'SendReview'
   | 'BuyInCredit'
-  | 'Showrooms'
+  | 'ClientsPhotos'
   | 'RelatedProducts'
   | 'Review'
   | 'QualityGuarantee'
   | 'Video'
   | 'Showrooms'
-  | 'DeliveryInformation'
   | 'ProductPhotos'
+  | 'InstagramPost'
   | 'YandexMarket'
   | 'FinalPrice'
+  | 'PriceDrop'
   | 'DeliveryInformation';
 
 export interface Modal {

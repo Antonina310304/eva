@@ -23,6 +23,7 @@ const Link: FC<LinkProps> = (props) => {
     needFetch = true,
     children,
     size = 'n',
+    target,
     onClick,
     ...restProps
   } = props;
@@ -32,7 +33,10 @@ const Link: FC<LinkProps> = (props) => {
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
+      if (target === '_blank') return;
+
       e.preventDefault();
+
       if (window.cancelClick) return;
       if (needFetch && isFetchingPages < 1) {
         await queryClient.prefetchQuery(['page', 'ssr', to], () =>
@@ -43,13 +47,14 @@ const Link: FC<LinkProps> = (props) => {
       }
       if (onClick) onClick(e);
     },
-    [history, isFetchingPages, needFetch, onClick, queryClient, to],
+    [history, isFetchingPages, needFetch, onClick, queryClient, target, to],
   );
 
   return (
     <a
       {...restProps}
       href={to}
+      target={target}
       className={cn(
         styles.link,
         {
