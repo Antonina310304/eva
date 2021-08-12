@@ -1,4 +1,4 @@
-import { createDerived, createStore, getValue } from '@kundinos/nanostores';
+import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
 import { FiltersData } from '@Types/Filters';
@@ -59,11 +59,11 @@ const selected = createDerived(filtratorStore, (filtrator) => {
   return { filters, parameterValues, parameters, sort: filtrator.sort };
 });
 
-const changeRange = ({ id, from, to }: any) => {
-  const filtrator = getValue(filtratorStore);
+const changeRange = ({ id, from, to }: any): void => {
   const formatedFrom = from ? Number(from.toFixed()) : null;
   const formatedTo = to ? Number(to.toFixed()) : null;
-  const newValue = {
+
+  update(filtratorStore, (filtrator) => ({
     ...filtrator,
     parameters: {
       ...filtrator.parameters,
@@ -75,14 +75,11 @@ const changeRange = ({ id, from, to }: any) => {
         ],
       },
     },
-  };
-
-  filtratorStore.set(newValue);
+  }));
 };
 
-const addCheckbox = ({ id, value }: any) => {
-  const filtrator = getValue(filtratorStore);
-  const newValue = {
+const addCheckbox = ({ id, value }: any): void => {
+  update(filtratorStore, (filtrator) => ({
     ...filtrator,
     parameters: {
       ...filtrator.parameters,
@@ -91,14 +88,11 @@ const addCheckbox = ({ id, value }: any) => {
         default: [...filtrator.parameters[id].default, value],
       },
     },
-  };
-
-  filtratorStore.set(newValue);
+  }));
 };
 
-const removeCheckbox = ({ id, value }: any) => {
-  const filtrator = getValue(filtratorStore);
-  const newValue = {
+const removeCheckbox = ({ id, value }: any): void => {
+  update(filtratorStore, (filtrator) => ({
     ...filtrator,
     parameters: {
       ...filtrator.parameters,
@@ -107,12 +101,10 @@ const removeCheckbox = ({ id, value }: any) => {
         default: filtrator.parameters[id].default.filter((v) => v !== value),
       },
     },
-  };
-
-  filtratorStore.set(newValue);
+  }));
 };
 
-const resetAll = () => {
+const resetAll = (): void => {
   const filtrator = getValue(filtratorStore);
   const parameters: any = {};
 
@@ -131,7 +123,7 @@ const resetAll = () => {
   });
 };
 
-const resetOne = ({ value }: any) => {
+const resetOne = ({ value }: any): void => {
   const filtrator = getValue(filtratorStore);
   const parameter = filtrator.parameters[value.parameterId];
   const parameters = { ...filtrator.parameters };
@@ -158,7 +150,7 @@ const resetOne = ({ value }: any) => {
   filtratorStore.set({ ...filtrator, parameters });
 };
 
-const resetGroup = ({ group }: any) => {
+const resetGroup = ({ group }: any): void => {
   const filtrator = getValue(filtratorStore);
   const parameters = { ...filtrator.parameters };
 
@@ -191,16 +183,14 @@ const resetGroup = ({ group }: any) => {
   filtratorStore.set({ ...filtrator, parameters });
 };
 
-const changeSort = ({ targetId }: any) => {
-  const filtrator = getValue(filtratorStore);
-
-  filtratorStore.set({
-    ...filtrator,
-    sort: filtrator.sort.map((item) => ({
+const changeSort = ({ targetId }: any): void => {
+  update(filtratorStore, (value) => ({
+    ...value,
+    sort: value.sort.map((item) => ({
       ...item,
       selected: item.id === targetId,
     })),
-  });
+  }));
 };
 
 const formatFiltersToObject = () => {
@@ -266,7 +256,7 @@ const formatFiltersToObject = () => {
   return items;
 };
 
-const updateTotalCount = (count: number) => {
+const updateTotalCount = (count: number): void => {
   totalCountStore.set(count);
 };
 

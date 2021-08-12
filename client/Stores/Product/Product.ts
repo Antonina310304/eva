@@ -1,4 +1,4 @@
-import { createStore, getValue } from '@kundinos/nanostores';
+import { createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
 import { ApiProduct } from '@Api/Product';
@@ -36,10 +36,10 @@ const updateProduct = async () => {
     const res = await ApiProduct.getInfoByParams(params);
 
     if (product.modules?.length > 0) {
-      productStore.set({
-        ...product,
-        price: { ...product.price, actual: res.price.value },
-      });
+      update(productStore, (prev) => ({
+        ...prev,
+        price: { ...prev.price, actual: res.price.value },
+      }));
     } else {
       const oldPrice = product.price;
       const oldPriceCoefficient =
@@ -49,10 +49,10 @@ const updateProduct = async () => {
         : 0;
       const discount = oldPriceCoefficient ? Math.round((1 - res.price.value / expired) * 100) : 0;
 
-      productStore.set({
-        ...product,
-        price: { ...product.price, expired, actual: res.price.value, discount },
-      });
+      update(productStore, (prev) => ({
+        ...prev,
+        price: { ...prev.price, expired, actual: res.price.value, discount },
+      }));
     }
 
     networkStore.set('success');
@@ -61,18 +61,17 @@ const updateProduct = async () => {
   }
 };
 
-const editModule = (module: ModuleProductData) => {
-  const product = getValue(productStore);
+const editModule = (module: ModuleProductData): void => {
   const network = getValue(networkStore);
 
   if (network === 'loading') return;
 
-  productStore.set({
+  update(productStore, (product) => ({
     ...product,
     modules: product.modules.map((prevModule) => {
       return prevModule.id === module.id ? module : prevModule;
     }),
-  });
+  }));
 
   updateProduct();
 };
