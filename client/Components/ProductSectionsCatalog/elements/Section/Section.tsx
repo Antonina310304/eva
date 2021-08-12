@@ -71,7 +71,7 @@ const Section: FC<SectionProps> = (props) => {
   }, []);
 
   return (
-    <div {...restProps} className={cn(styles.Section, className)}>
+    <div {...restProps} className={cn(styles.section, className)}>
       <div className={styles.head}>
         <div className={styles.titleWrapper}>
           <h2 className={styles.title}>{section.name}</h2>

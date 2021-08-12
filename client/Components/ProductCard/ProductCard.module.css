@@ -124,6 +124,7 @@
 .name {
   composes: black from 'colors';
 
+  display: inline-block;
   max-width: 100%;
 
   overflow: hidden;
