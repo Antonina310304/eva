@@ -17,8 +17,10 @@ const PaymentOptions: FC<PaymentOptionsProps> = (props) => {
           <div className={styles.headingWrapper}>
             <img className={styles.paymentImage} src='/react/static/paymentRus/card.svg' />
             <h2 className={styles.paymentHeading}>Банковская карта</h2>
-            <img className={styles.paymentImage} src='/react/static/paymentRus/mastercard.svg' />
-            <img className={styles.paymentImage} src='/react/static/paymentRus/visa.svg' />
+            <div className={styles.cardsLogo}>
+              <img className={styles.paymentImage} src='/react/static/paymentRus/mastercard.svg' />
+              <img className={styles.paymentImage} src='/react/static/paymentRus/visa.svg' />
+            </div>
           </div>
           <div className={styles.paymentDescription}>
             Для удобной оплаты банковской картой используется система электронных платежей. При

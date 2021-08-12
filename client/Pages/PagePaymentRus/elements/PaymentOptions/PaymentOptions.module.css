@@ -1,8 +1,6 @@
-.wrapper {
-}
-
 .headingWrapper {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: var(--space-m);
 }
 
@@ -23,6 +21,8 @@
 
 .paymentItem:first-child .paymentHeading {
   padding-right: var(--space-s);
+
+  white-space: nowrap;
 }
 
 .paymentItem {
@@ -36,4 +36,10 @@
 .paymentDescription {
   font-size: var(--size-n);
   line-height: var(--lh-n);
+}
+
+@media (--mobile) {
+  .cardsLogo {
+    padding-left: var(--space-xb);
+  }
 }

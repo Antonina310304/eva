@@ -13,11 +13,6 @@ export interface PagePaymentRusProps extends HTMLAttributes<HTMLDivElement> {
   meta: MetaData;
 }
 
-export interface Item {
-  text: string;
-  link: string;
-}
-
 const PagePaymentRus: FC<PagePaymentRusProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const { teaserText, title, pageMenu, finalText } = page;
@@ -25,8 +20,8 @@ const PagePaymentRus: FC<PagePaymentRusProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>{title}</h1>
+      <Anchors anchors={pageMenu} />
       <div className={styles.wrapper}>
-        <Anchors anchors={pageMenu} />
         <div className={styles.introduction}>{teaserText}</div>
         <PaymentOptions />
         <div className={styles.info}>
