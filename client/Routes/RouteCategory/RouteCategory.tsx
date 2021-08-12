@@ -10,15 +10,16 @@ export interface RouteParams {
 }
 
 const RouteCategory: FC = () => {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const path = `${pathname}${search}`;
   const { slug } = useParams<RouteParams>();
-  const page = usePage({ path: pathname, ssr: true });
+  const page = usePage({ path, ssr: true });
 
   if (!page.isSuccess) return null;
 
   return (
     <TemplateMain>
-      <PageCategory page={page.data} slug={slug} key={pathname} />
+      <PageCategory page={page.data} slug={slug} key={path} />
     </TemplateMain>
   );
 };
