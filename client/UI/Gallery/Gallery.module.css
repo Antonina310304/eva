@@ -11,6 +11,14 @@
       cursor: grab;
     }
   }
+
+  &.centered {
+    text-align: center;
+
+    .child {
+      text-align: left;
+    }
+  }
 }
 
 .layer {
