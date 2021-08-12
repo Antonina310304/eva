@@ -135,7 +135,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
     const rectContent = refMainContent.current.getBoundingClientRect();
     const rectWrapperSidebar = refWrapperSidebar.current.getBoundingClientRect();
     const rectSidebar = refSidebar.current.getBoundingClientRect();
-    const fixed = rectContent.bottom > rectSidebar.bottom || rectSidebar.top > 0;
+    const fixed =
+      Math.round(rectContent.bottom) > Math.round(rectSidebar.bottom) || rectSidebar.top > 0;
     const position = fixed
       ? {
           position: 'fixed',
