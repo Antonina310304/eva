@@ -1,7 +1,6 @@
 import { createDerived, createStore, getValue } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
-import { ApiCategory } from '@Api/Category';
 import { FiltersData } from '@Types/Filters';
 
 const filtratorStore = createStore<FiltersData>();
@@ -272,7 +271,7 @@ const updateTotalCount = (count: number) => {
 };
 
 export const useFiltrator = (initial?: FiltersData) => {
-  if (initial && !filtratorStore.value) {
+  if (initial && filtratorStore.value?.id !== initial.id) {
     filtratorStore.set(initial);
   }
 

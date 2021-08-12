@@ -54,6 +54,7 @@ export interface FiltersSortItemData {
 }
 
 export interface FiltersData {
+  id?: string;
   inited: boolean;
   filters: FiltersGroup[];
   parameterValues: FiltersValue[];

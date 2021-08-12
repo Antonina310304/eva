@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState, useMemo } from 'react';
 import cn from 'classnames';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -30,12 +30,22 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     productsTotalCount: page.productsTotalCount,
   });
   const [, { openModal, closeModal }] = useModals();
-  const filtrator = useFiltrator(page.filters);
+  const filtrator = useFiltrator({ id: slug, ...page.filters });
+
+  const activeSubcategoryIds = useMemo(() => {
+    const rubrics: any[] = page.rubrics[0] || [];
+
+    return rubrics.filter((rubric) => rubric.actived).map((rubric) => rubric.id);
+  }, [page.rubrics]);
 
   const [debouceChangeFilters] = useDebouncedCallback(async () => {
     try {
       const filters = Filtrator.formatFiltersToObject();
-      const count = await ApiCategory.getProductsCount({ slug, body: filters });
+      const count = await ApiCategory.getProductsCount({
+        slug,
+        filters,
+        categories: activeSubcategoryIds,
+      });
 
       Filtrator.updateTotalCount(count);
     } catch (err) {
@@ -67,7 +77,12 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const handleMore = useCallback(async () => {
     try {
       const filters = Filtrator.formatFiltersToObject();
-      const newCatalog = await ApiCategory.getProducts({ slug, page: catalog.page + 1, filters });
+      const newCatalog = await ApiCategory.getProducts({
+        slug,
+        page: catalog.page + 1,
+        filters,
+        categories: activeSubcategoryIds,
+      });
 
       setCatalog((prev) => ({
         ...newCatalog,
@@ -77,7 +92,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       // eslint-disable-next-line no-console
       console.log(err);
     }
-  }, [catalog.page, slug]);
+  }, [activeSubcategoryIds, catalog.page, slug]);
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
 
