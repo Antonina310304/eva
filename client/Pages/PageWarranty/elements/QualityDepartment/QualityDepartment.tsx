@@ -2,13 +2,8 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';
+import { Schedule } from '@Pages/PageWarranty/typings';
 import styles from './QualityDepartment.module.css';
-
-export interface Schedule {
-  name: string;
-  type: string;
-  value: string;
-}
 
 export interface QualityDepartmentProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

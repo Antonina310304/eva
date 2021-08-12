@@ -7,11 +7,12 @@ import QualityDepartment from './elements/QualityDepartment';
 import Garanties from './elements/Garanties/Garanties';
 import ContactWithQualityDep from './elements/ContactWithQualityDep';
 import ExchangeAndRefund from './elements/ExchangeAndRefund';
+import { PageWarrantyData } from './typings';
 import styles from './PageWarranty.module.css';
 
 export interface PageWarrantyProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  page: any;
+  page: PageWarrantyData;
   meta: MetaData;
 }
 

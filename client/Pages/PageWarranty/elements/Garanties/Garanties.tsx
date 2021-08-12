@@ -2,13 +2,8 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
+import { Warranty } from '@Pages/PageWarranty/typings';
 import styles from './Garanties.module.css';
-
-export interface Warranty {
-  id: string;
-  src: string;
-  text: string;
-}
 
 export interface GarantiesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

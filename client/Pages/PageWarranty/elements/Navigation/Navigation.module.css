@@ -1,7 +1,15 @@
 .navigation {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-m);
+  margin-top: var(--space-n);
+}
+
+.galleryWrapper {
+  margin-left: var(--space-xs-neg);
+  padding: var(--space-xxs) 0;
+  overflow: hidden;
+}
+
+.gallery {
+  margin: 0 var(--space-xs-neg);
 }
 
 .navigationItem {
@@ -33,11 +41,5 @@
   .navigationLink {
     font-size: var(--size-n);
     line-height: var(--lh-n);
-  }
-}
-
-@media (--mobile) {
-  .navigation {
-    flex-wrap: wrap;
   }
 }
