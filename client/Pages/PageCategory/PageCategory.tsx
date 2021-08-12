@@ -38,6 +38,20 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     return rubrics.filter((rubric) => rubric.actived).map((rubric) => rubric.id);
   }, [page.rubrics]);
 
+  const fetchProducts = useCallback(
+    (params: { page: number }) => {
+      const filters = Filtrator.formatFiltersToObject();
+
+      return ApiCategory.getProducts({
+        ...params,
+        slug,
+        filters,
+        categories: activeSubcategoryIds,
+      });
+    },
+    [activeSubcategoryIds, slug],
+  );
+
   const [debouceChangeFilters] = useDebouncedCallback(async () => {
     try {
       const filters = Filtrator.formatFiltersToObject();
@@ -56,8 +70,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
   const handleApplyFilters = useCallback(async () => {
     try {
-      const filters = Filtrator.formatFiltersToObject();
-      const newCatalog = await ApiCategory.getProducts({ slug, page: 1, filters });
+      const newCatalog = await fetchProducts({ page: 1 });
 
       setCatalog({ ...newCatalog });
       closeModal('Filters');
@@ -65,7 +78,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       // eslint-disable-next-line no-console
       console.log(err);
     }
-  }, [closeModal, slug]);
+  }, [closeModal, fetchProducts]);
 
   const hanleOpenFilters = useCallback(
     (_e, selectedFilterId: string) => {
