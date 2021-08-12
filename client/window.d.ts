@@ -5,4 +5,5 @@ interface Window {
   cylindo: any;
   dataLayer: any;
   ymaps?: any;
+  directCrm?: any;
 }
