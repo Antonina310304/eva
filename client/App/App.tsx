@@ -16,6 +16,7 @@ export interface Data {
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
+const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 
 const App: FC = () => {
   return (
@@ -46,6 +47,18 @@ const App: FC = () => {
         <Route exact path='/:region/product/:slug'>
           <ApiSetup>
             <RouteProduct />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/site/credit'>
+          <ApiSetup>
+            <RouteCredit />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/:region/site/credit'>
+          <ApiSetup>
+            <RouteCredit />
           </ApiSetup>
         </Route>
       </Switch>
