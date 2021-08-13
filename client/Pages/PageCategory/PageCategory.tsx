@@ -91,24 +91,22 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
   const handleMore = useCallback(async () => {
     try {
-      const filters = Filtrator.formatFiltersToObject();
-      const newCatalog = await ApiCategory.getProducts({
-        slug,
-        page: catalog.page + 1,
-        filters,
-        categories: activeSubcategoryIds,
-      });
+      const newCatalog = await fetchProducts({ page: catalog.page + 1 });
 
-      setCatalog((prev) => ({
-        ...newCatalog,
-        products: [...prev.products, ...newCatalog.products],
-        productsModel: [...prev.productsModel, ...newCatalog.productsModel],
-      }));
+      setCatalog((prev) => {
+        const newState = { ...newCatalog, products: [...prev.products, ...newCatalog.products] };
+
+        if (newCatalog.productsModel) {
+          newState.productsModel = [...prev.productsModel, ...newCatalog.productsModel];
+        }
+
+        return newState;
+      });
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
     }
-  }, [activeSubcategoryIds, catalog.page, slug]);
+  }, [catalog.page, fetchProducts]);
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
 
