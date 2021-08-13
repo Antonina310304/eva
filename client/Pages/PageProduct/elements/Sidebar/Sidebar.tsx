@@ -168,12 +168,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
             },
-            {
-              icon: <div className={cn(styles.icon, styles.attention)} />,
-              hasArrow: true,
-              label: 'Гарантируем качество',
-              onClick: handleClickQualityGuarantee,
-            },
             !credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               hasArrow: true,
@@ -184,6 +178,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Эта модель в шоурумах',
               hasArrow: true,
               onClick: handleClickShowroom,
+            },
+            {
+              hasArrow: true,
+              label: 'Гарантируем качество',
+              onClick: handleClickQualityGuarantee,
             },
             {
               label: 'Характеристики',
