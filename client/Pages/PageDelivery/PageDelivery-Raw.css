@@ -1,7 +1,6 @@
 /* Это стили со старого сайта, которые нужны для корректного отображения таблиц */
 
 .DeliveryTable table {
-
   composes: n from 'sizes';
 
   width: 100%;
@@ -119,5 +118,11 @@
 
   .SingleRow .ProductName {
     display: none;
+  }
+}
+
+@media (--mobile-m) {
+  .DeliveryTable td {
+    padding: var(--space-s);
   }
 }

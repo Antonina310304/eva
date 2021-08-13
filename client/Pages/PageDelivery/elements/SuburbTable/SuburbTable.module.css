@@ -37,6 +37,12 @@
   }
 }
 
+@media (--mobile-m) {
+  .td {
+    padding: var(--space-s);
+  }
+}
+
 @media (--mobile) {
   .table {
     width: 100%;

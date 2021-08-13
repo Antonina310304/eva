@@ -164,21 +164,23 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
 
         {acceptanceProduct && <Attention className={styles.attention} text={acceptanceProduct} />}
       </div>
-      <div className={styles.bottomInfo}>
-        <div className={styles.bottomInfoContainer}>
-          <div className={styles.subtitle}>Доставка по всей России</div>
-          <div className={styles.textBlock}>
-            <div className={styles.text}>
-              Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону 7
-              (495) 266-71-47.
+      <div className={styles.bottomInfoWrapper}>
+        <div className={styles.bottomInfo}>
+          <div className={styles.bottomInfoContainer}>
+            <div className={styles.subtitle}>Доставка по всей России</div>
+            <div className={styles.textBlock}>
+              <div className={styles.text}>
+                Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону 7
+                (495) 266-71-47.
+              </div>
+              <div className={styles.text}>Доставка по городу Москва и области – от 3 дней.</div>
             </div>
-            <div className={styles.text}>Доставка по городу Москва и области – от 3 дней.</div>
+            <Link to='/' className={styles.moreLink} view='primary'>
+              Подробнее
+            </Link>
           </div>
-          <Link to='/' className={styles.moreLink} view='primary'>
-            Подробнее
-          </Link>
+          <Image className={styles.carImage} src={carImage} />
         </div>
-        <Image className={styles.carImage} src={carImage} />
       </div>
     </div>
   );
