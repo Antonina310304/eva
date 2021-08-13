@@ -30,9 +30,12 @@ const ExchangeAndRefund: FC<ExchangeAndRefundProps> = (props) => {
 
       <div className={styles.wrapper}>
         {refund.map((item, index) => (
-          <div className={styles.item} key={index}>
-            {item}
-          </div>
+          <div
+            className={styles.item}
+            key={index}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: item }}
+          />
         ))}
       </div>
     </div>
