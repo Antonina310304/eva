@@ -1,2 +1,70 @@
 .page {
+  --gap: 60px;
+}
+
+.pageTitle {
+  max-width: 1780px;
+  margin: 0 auto;
+  padding: var(--space-xl) 0px;
+
+  font-weight: 500;
+  font-size: var(--size-xb);
+  line-height: var(--lh-xb);
+  text-align: center;
+
+  border-bottom: 1px solid var(--color-medium-gray);
+}
+
+.topText {
+  margin-top: calc(var(--gap) + 20px);
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.bankBanner {
+  margin-top: var(--gap);
+}
+
+.creditWithoutOverpayment {
+  margin-top: var(--gap);
+}
+
+.conditionsToBuyInCredit {
+  margin-top: var(--gap);
+}
+
+.howBuyInCredit {
+  margin-top: var(--gap);
+}
+
+@media (--desktop-m) {
+  .pageTitle {
+    max-width: 1900px;
+    margin: 0 var(--space-xxl);
+
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+}
+
+@media (--desktop) {
+  .page {
+    --gap: var(--space-xb);
+  }
+
+  .pageTitle {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .pageTitle {
+    margin: 0 var(--space-s);
+    padding: var(--space-n) 0px;
+
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
 }

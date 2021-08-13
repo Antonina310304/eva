@@ -1,0 +1,80 @@
+.bankBanner {
+}
+
+.color {
+  padding: 60px 0;
+
+  color: white;
+
+  background: #21a038;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  width: 50%;
+}
+
+.logo {
+  width: 212px;
+  height: 34px;
+
+  background-size: contain;
+}
+
+.text {
+  margin-top: 40px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.nuance {
+  margin-top: 20px;
+
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.item {
+  margin-right: 25px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.digit {
+  display: inline-block;
+
+  font-size: 130px;
+  line-height: 159px;
+  vertical-align: baseline;
+}
+
+.symbol {
+  display: inline-block;
+
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 90px;
+  vertical-align: baseline;
+}
+
+.symbol.rur {
+  &:before {
+    content: '\20BD';
+  }
+}
