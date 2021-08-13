@@ -15,7 +15,7 @@ const RouteWarranty: FC = () => {
 
   return (
     <TemplateMain>
-      <PageWarranty page={page.data} meta={meta.data} />
+      <PageWarranty page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );
 };
