@@ -1,4 +1,4 @@
-import { createStore, getValue, createDerived } from '@kundinos/nanostores';
+import { createStore, getValue, createDerived, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
 import { RelatedProductsListData } from '@Types/RelatedProducts';
@@ -17,7 +17,6 @@ export interface RelatedProductsValue {
 export type UseRelatedProducts = (
   initialValue?: RelatedProductsValue,
 ) => {
-  changeQuantityProduct: ChangeQuantityProduct;
   allLists: RelatedProductsListData[];
   selectedLists: RelatedProductsListData[];
 };
@@ -34,11 +33,9 @@ const selectedLists = createDerived(store, ({ lists }) => {
 });
 
 const changeQuantityProduct: ChangeQuantityProduct = ({ listId, productId, quantity }) => {
-  const prevValue = getValue(store);
-
-  store.set({
-    ...prevValue,
-    lists: prevValue.lists.map((list) => {
+  update(store, (value) => ({
+    ...value,
+    lists: value.lists.map((list) => {
       if (list.id !== listId) return list;
 
       const newProducts = list.products.map((product) => {
@@ -52,7 +49,7 @@ const changeQuantityProduct: ChangeQuantityProduct = ({ listId, productId, quant
         products: newProducts,
       };
     }),
-  });
+  }));
 };
 
 export const useRelatedProducts: UseRelatedProducts = (initialValue) => {
@@ -63,8 +60,11 @@ export const useRelatedProducts: UseRelatedProducts = (initialValue) => {
   }
 
   return {
-    changeQuantityProduct,
     allLists: useStore(store).lists,
     selectedLists: useStore(selectedLists),
   };
+};
+
+export default {
+  changeQuantityProduct,
 };

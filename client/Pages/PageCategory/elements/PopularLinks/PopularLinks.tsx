@@ -18,7 +18,7 @@ const PopularLinks: FC<PopularLinksProps> = (props) => {
     <div {...restProps} className={cn(styles.popularLinks, className)}>
       {label && <span className={styles.label}>{label}</span>}
       {popularLinks.map((popularLink) => (
-        <Link key={popularLink.name} className={styles.link} to={popularLink.link}>
+        <Link key={popularLink.name} className={styles.link} to={popularLink.link} view='primary'>
           {popularLink.name}
         </Link>
       ))}

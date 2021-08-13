@@ -16,12 +16,12 @@ export type SectionItem = ProductData | ConstructorStubData;
 
 export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  section: ProductModel;
+  productModel: ProductModel;
   items: SectionItem[];
 }
 
 const Section: FC<SectionProps> = (props) => {
-  const { className, section, items, ...restProps } = props;
+  const { className, productModel, items, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
@@ -71,14 +71,14 @@ const Section: FC<SectionProps> = (props) => {
   }, []);
 
   return (
-    <div {...restProps} className={cn(styles.Section, className)}>
+    <div {...restProps} className={cn(styles.section, className)}>
       <div className={styles.head}>
         <div className={styles.titleWrapper}>
-          <h2 className={styles.title}>{section.name}</h2>
-          {section.priceMin && (
+          <h2 className={styles.title}>{productModel.name}</h2>
+          {productModel.priceMin && (
             <div className={styles.priceMin}>
               {`от `}
-              <Price price={section.priceMin} />
+              <Price price={productModel.priceMin} />
             </div>
           )}
         </div>

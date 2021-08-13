@@ -5,7 +5,7 @@ import List from '@UI/List';
 import Button from '@UI/Button';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import RelatedProductCard from '@Components/RelatedProductCard';
-import { useRelatedProducts } from '@Stores/relatedProducts';
+import { useRelatedProducts } from '@Stores/RelatedProducts';
 import { ProductData } from '@Types/Product';
 import styles from './RelatedProductsModal.module.css';
 
