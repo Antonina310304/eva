@@ -26,13 +26,9 @@ const webConfig: Configuration = merge(commonConfig, {
         test: /\.css$/,
         exclude: /\.module\.css$/,
         use: [
-          envs.isProd
-            ? {
-                loader: MiniCssExtractPlugin.loader,
-              }
-            : {
-                loader: 'style-loader',
-              },
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           cssLoader,
           postcssLoader,
         ],
@@ -40,13 +36,9 @@ const webConfig: Configuration = merge(commonConfig, {
       {
         test: /\.module\.css$/,
         use: [
-          envs.isProd
-            ? {
-                loader: MiniCssExtractPlugin.loader,
-              }
-            : {
-                loader: 'style-loader',
-              },
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           cssModulesLoader,
           postcssLoader,
         ],
@@ -80,12 +72,11 @@ const webConfig: Configuration = merge(commonConfig, {
   },
   plugins: [
     envs.isDev && new HotModuleReplacementPlugin(),
-    envs.isProd &&
-      new MiniCssExtractPlugin({
-        ignoreOrder: true,
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[name].[contenthash].css',
-      }),
+    new MiniCssExtractPlugin({
+      ignoreOrder: true,
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[name].[contenthash].css',
+    }),
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(envs.mode),
     }),
