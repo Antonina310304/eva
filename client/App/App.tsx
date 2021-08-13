@@ -17,6 +17,7 @@ const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
+const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
 
 const App: FC = () => {
   return (
@@ -59,6 +60,18 @@ const App: FC = () => {
         <Route exact path='/:region/site/credit'>
           <ApiSetup>
             <RouteCredit />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/site/warranty'>
+          <ApiSetup>
+            <RouteWarranty />
+          </ApiSetup>
+        </Route>
+
+        <Route exact path='/:region/site/warranty'>
+          <ApiSetup>
+            <RouteWarranty />
           </ApiSetup>
         </Route>
       </Switch>

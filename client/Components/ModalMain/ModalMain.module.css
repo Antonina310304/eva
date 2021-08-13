@@ -12,6 +12,19 @@
   }
 }
 
+.modal {
+  &.fullscreen {
+    .wrapper {
+      height: 100%;
+      margin: 0;
+    }
+
+    .content {
+      height: 100%;
+    }
+  }
+}
+
 .container {
   position: fixed;
   top: 0;

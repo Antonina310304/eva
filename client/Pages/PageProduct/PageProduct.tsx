@@ -18,8 +18,8 @@ import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
-import { useRelatedProducts } from '@Stores/relatedProducts';
-import { useProduct } from '@Stores/product';
+import { useRelatedProducts } from '@Stores/RelatedProducts';
+import { useProduct } from '@Stores/Product';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
@@ -135,7 +135,8 @@ const PageProduct: FC<PageProductProps> = (props) => {
     const rectContent = refMainContent.current.getBoundingClientRect();
     const rectWrapperSidebar = refWrapperSidebar.current.getBoundingClientRect();
     const rectSidebar = refSidebar.current.getBoundingClientRect();
-    const fixed = rectContent.bottom > rectSidebar.bottom || rectSidebar.top > 0;
+    const fixed =
+      Math.round(rectContent.bottom) > Math.round(rectSidebar.bottom) || rectSidebar.top > 0;
     const position = fixed
       ? {
           position: 'fixed',

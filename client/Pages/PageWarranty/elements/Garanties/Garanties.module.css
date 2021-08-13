@@ -1,0 +1,80 @@
+.garanties {
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-xxl);
+}
+
+.item {
+  display: flex;
+  max-width: 30.5%;
+}
+
+.imageWrapper {
+  width: 60px;
+}
+
+.icon {
+  width: 60px;
+  height: 50px;
+}
+
+.text {
+  margin-left: var(--space-l);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text {
+    margin-top: var(--space-l);
+    margin-left: 0;
+
+    text-align: center;
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-m);
+  }
+
+  .item {
+    max-width: 29.7%;
+  }
+}
+
+@media (--mobile) {
+  .container {
+    flex-direction: column;
+  }
+
+  .item {
+    max-width: 100%;
+    margin-top: var(--space-xxl);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

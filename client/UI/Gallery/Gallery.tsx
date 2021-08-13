@@ -23,6 +23,7 @@ export interface GalleryProps
   className?: string;
   slideIndex?: number;
   gap?: number;
+  centered?: boolean;
   onDragStart?: TouchEventHandler;
   onDragEnd?: TouchEventHandler;
   onChangeCurrent?(state: any): void;
@@ -91,6 +92,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     className,
     slideIndex,
     gap = 0,
+    centered,
     children,
     onDragStart,
     onDragEnd,
@@ -473,7 +475,11 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   return (
     <Touch
       {...restProps}
-      className={cn(styles.gallery, { [styles.canDrag]: state.canDrag }, className)}
+      className={cn(
+        styles.gallery,
+        { [styles.canDrag]: state.canDrag, [styles.centered]: centered },
+        className,
+      )}
       ref={refViewport}
       onStartX={handleStartX}
       onMoveX={handleMoveX}

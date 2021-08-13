@@ -10,8 +10,8 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
-import { useRelatedProducts } from '@Stores/relatedProducts';
-import { useProduct } from '@Stores/product';
+import { useRelatedProducts } from '@Stores/RelatedProducts';
+import { useProduct } from '@Stores/Product';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
@@ -168,12 +168,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
             },
-            {
-              icon: <div className={cn(styles.icon, styles.attention)} />,
-              hasArrow: true,
-              label: 'Гарантируем качество',
-              onClick: handleClickQualityGuarantee,
-            },
             !credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               hasArrow: true,
@@ -184,6 +178,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Эта модель в шоурумах',
               hasArrow: true,
               onClick: handleClickShowroom,
+            },
+            {
+              hasArrow: true,
+              label: 'Гарантируем качество',
+              onClick: handleClickQualityGuarantee,
             },
             {
               label: 'Характеристики',

@@ -103,6 +103,8 @@
     width: 100%;
     margin-bottom: 0;
     padding: 0;
+
+    cursor: pointer;
   }
 
   .image {

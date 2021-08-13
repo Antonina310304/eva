@@ -1,0 +1,88 @@
+.page {
+  --gap: var(--space-e);
+}
+
+.pageTitle {
+  max-width: 1780px;
+  margin: 0 auto;
+  padding: var(--space-xl) 0px;
+
+  font-weight: 500;
+  font-size: var(--size-xb);
+  line-height: var(--lh-xb);
+  text-align: center;
+
+  border-bottom: 1px solid var(--color-medium-gray);
+}
+
+.wrapper {
+  max-width: 1176px;
+  margin: 0 auto;
+}
+
+.qualityDepartment {
+  margin-top: var(--gap);
+}
+
+.garanties {
+  margin-top: var(--gap);
+}
+
+.contactWithQualityDep {
+  margin-top: var(--gap);
+}
+
+.exchangeAndRefund {
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+@media (--desktop-m) {
+  .pageTitle {
+    max-width: 1900px;
+    margin: 0 var(--space-xxl);
+
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+
+  .wrapper {
+    max-width: 1066px;
+  }
+}
+
+@media (--desktop) {
+  .page {
+    --gap: var(--space-xb);
+  }
+
+  .pageTitle {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+
+  .wrapper {
+    max-width: 944px;
+  }
+}
+
+@media (--mobile-m) {
+  .pageTitle {
+    margin: 0 var(--space-s);
+    padding: var(--space-n) 0px;
+
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
+
+  .wrapper {
+    max-width: 738px;
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    max-width: 100%;
+    margin: 0 var(--space-s);
+  }
+}
