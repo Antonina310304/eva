@@ -76,6 +76,7 @@
 }
 
 .productsScroller {
+  width: 100%;
   height: inherit;
 }
 

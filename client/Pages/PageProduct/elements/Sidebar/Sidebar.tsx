@@ -11,7 +11,6 @@ import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
 import { useRelatedProducts } from '@Stores/RelatedProducts';
-import { useProduct } from '@Stores/Product';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
@@ -44,10 +43,9 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, onClickCharacteristics, onClickReviews, ...restProps } = props;
   const { isAvailable, credit } = page;
-  const product = useProduct();
-  const shortName = product.name.split(' ')[0];
-  const hasExpired = product.price.expired > 0;
-  const hasDiscount = product.price.discount > 0;
+  const shortName = page.product.name.split(' ')[0];
+  const hasExpired = page.product.price.expired > 0;
+  const hasDiscount = page.product.price.discount > 0;
   const labels = ['отзыв', 'отзыва', 'отзывов'];
   const label = declOfNum(page.reviewsPhotoCount, labels);
   const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
@@ -75,8 +73,8 @@ const Sidebar: FC<SidebarProps> = (props) => {
   }, [openModal]);
 
   const handleClickPriceDrop = useCallback(() => {
-    openModal('PriceDrop', { product });
-  }, [openModal, product]);
+    openModal('PriceDrop', { product: page.product });
+  }, [openModal, page.product]);
 
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
@@ -84,11 +82,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
         {shortName}
         <Like className={styles.like} />
       </div>
-      <div className={styles.fullName}>{product.name}</div>
+      <div className={styles.fullName}>{page.product.name}</div>
 
       {page.reviewsPhotoCount > 0 && (
         <div className={styles.wrapperRating}>
-          <Rating className={styles.rating} defaultValue={product.rating} />
+          <Rating className={styles.rating} defaultValue={page.product.rating} />
           <Button className={styles.countReviews} theme='linkSecondary' onClick={onClickReviews}>
             {countReviewsText}
           </Button>
@@ -99,19 +97,19 @@ const Sidebar: FC<SidebarProps> = (props) => {
         <>
           <div className={styles.wrapperPrice}>
             <div className={styles.containerPrices}>
-              <Price className={styles.actualPrice} price={product.price.actual} />
+              <Price className={styles.actualPrice} price={page.product.price.actual} />
               {hasExpired && (
-                <Price expired className={styles.expiredPrice} price={product.price.expired} />
+                <Price expired className={styles.expiredPrice} price={page.product.price.expired} />
               )}
               {hasDiscount && (
-                <Discount className={styles.discount}>{product.price.discount}</Discount>
+                <Discount className={styles.discount}>{page.product.price.discount}</Discount>
               )}
             </div>
           </div>
 
           {meta.country === 'RUS' && (
             <>
-              <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+              <OrderBonuses className={styles.bonuses} productIds={[page.product.id]} />
 
               <Button
                 className={styles.priceReduction}
