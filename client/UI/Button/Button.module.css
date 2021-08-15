@@ -10,6 +10,7 @@
   font-family: var(--font-main);
 
   border: 0;
+  outline: 0;
   cursor: pointer;
 }
 
@@ -57,10 +58,6 @@
     border-color: var(--color-dark-gray);
   }
 
-  &:focus {
-    border-color: var(--color-black);
-  }
-
   &:active {
     color: var(--color-black);
 
@@ -83,10 +80,6 @@
   &:hover {
     background: var(--color-medium-gray);
     border-color: var(--color-medium-gray);
-  }
-
-  &:focus {
-    border-color: var(--color-black);
   }
 
   &:active {
@@ -115,6 +108,7 @@
 }
 
 .button.themeLinkSecondary {
+  height: auto;
   padding: 0;
 
   color: var(--color-dark-gray);
@@ -129,10 +123,10 @@
 
   transition: all 0.2s;
 
-  &:focus {
-    color: var(--color-dark-gray);
+  &:active {
+    color: var(--color-black);
 
-    background-image: none;
+    background-image: linear-gradient(var(--color-black), var(--color-black));
   }
 
   &:hover {
@@ -140,15 +134,10 @@
 
     background-image: none;
   }
-
-  &:active {
-    color: var(--color-black);
-
-    background-image: linear-gradient(var(--color-black), var(--color-black));
-  }
 }
 
 .button.themeLinkPrimary {
+  height: auto;
   padding: 0;
 
   color: var(--color-black);
@@ -162,12 +151,6 @@
   outline: none;
 
   transition: all 0.2s;
-
-  &:focus {
-    color: var(--color-black);
-
-    background-image: none;
-  }
 
   &:hover {
     color: var(--color-dark-gray);
@@ -199,15 +182,6 @@
   outline: none;
 
   transition: all 0.2s;
-
-  &:focus {
-  }
-
-  &:hover {
-  }
-
-  &:active {
-  }
 }
 
 .before {
@@ -218,7 +192,7 @@
   overflow: hidden;
 
   white-space: nowrap;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (--desktop-m) {
