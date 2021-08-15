@@ -104,13 +104,13 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const handleClickCharacteristics = useCallback(() => {
     if (!refCharacteristics.current) return;
 
-    refCharacteristics.current.scrollIntoView();
+    refCharacteristics.current.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   const handleClickReviews = useCallback(() => {
     if (!refReviews.current) return;
 
-    refReviews.current.scrollIntoView();
+    refReviews.current.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   const handleChangePositionSidebar = useCallback(() => {
