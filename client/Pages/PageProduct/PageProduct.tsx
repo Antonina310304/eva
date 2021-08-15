@@ -57,6 +57,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     historyProducts,
     parameters,
     importantInfo,
+    importantParameters,
     documents,
     features,
   } = page;
@@ -253,6 +254,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
                 ]}
                 parameters={parameters}
                 importantInfo={importantInfo}
+                importantParameters={importantParameters}
                 documents={documents}
                 modules={product.modules}
               />

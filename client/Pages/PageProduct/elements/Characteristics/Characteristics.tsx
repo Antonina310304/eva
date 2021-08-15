@@ -1,73 +1,21 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
+import loadable from '@loadable/component';
 import cn from 'classnames';
 
-import ButtonTabs, { Tab } from '@UI/ButtonTabs';
+import { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
-import Select, { SelectItemData } from '@UI/Select';
+import { SelectItemData } from '@UI/Select';
 import { ModuleProductData } from '@Types/ModuleProduct';
-import Dimension from './elements/Dimension';
-import Document from './elements/Document';
-import Hardness from './elements/Hardness';
-import SynchronousSchemes from './elements/SynchronousSchemes';
-import StringParameter from './elements/StringParameter';
-import ImportantInfo from './elements/ImportantInfo';
-import SampleOption from './elements/SampleOption';
-import ModuleCounter from './elements/ModuleCounter';
-import SampleParameter from './elements/SampleParameter';
+import {
+  Scheme,
+  Parameter,
+  ImportantInfoData,
+  ImportantParameter,
+  Documents,
+  DocumentData,
+  Variant,
+} from '@Pages/PageProduct/typings';
 import styles from './Characteristics.module.css';
-
-export interface SchemeImage {
-  url: string;
-  width: number;
-  height: number;
-}
-
-export interface Scheme {
-  id: string;
-  images: SchemeImage[];
-}
-
-export interface Value {
-  name: string;
-  value: string;
-}
-
-export interface Variant {
-  id?: number;
-  productId?: number;
-  name: string;
-  title?: string;
-  image: string;
-  detailImage?: string;
-  theme: string;
-  selected: boolean;
-  url?: string;
-  price?: number;
-}
-
-export interface Parameter {
-  theme: 'default' | 'dropdown' | 'dimension' | 'circle' | 'hardness';
-  name?: string;
-  variant?: string;
-  groupId?: number;
-  values?: Value[];
-  variants?: Variant[];
-  value?: string;
-  icon?: string;
-  description?: string[];
-}
-
-export interface Document {
-  icon: string;
-  name: string;
-  sizeInfo: string;
-  url: string;
-}
-
-export interface Documents {
-  title: string;
-  items: Document[];
-}
 
 export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -75,13 +23,23 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
   tabs?: Tab[];
   schemes?: Scheme[];
   parameters: Parameter[];
-  importantInfo?: {
-    text: string;
-    title: string;
-  };
+  importantInfo?: ImportantInfoData;
+  importantParameters?: ImportantParameter[];
   documents: Documents;
   modules: ModuleProductData[];
 }
+
+const ButtonTabs = loadable(() => import('@UI/ButtonTabs'));
+const Select = loadable(() => import('@UI/Select'));
+const Dimension = loadable(() => import('./elements/Dimension'));
+const Document = loadable(() => import('./elements/Document'));
+const Hardness = loadable(() => import('./elements/Hardness'));
+const SynchronousSchemes = loadable(() => import('./elements/SynchronousSchemes'));
+const StringParameter = loadable(() => import('./elements/StringParameter'));
+const ImportantInfo = loadable(() => import('./elements/ImportantInfo'));
+const SampleOption = loadable(() => import('./elements/SampleOption'));
+const ModuleCounter = loadable(() => import('./elements/ModuleCounter'));
+const SampleParameter = loadable(() => import('./elements/SampleParameter'));
 
 const Characteristics: FC<CharacteristicsProps> = (props) => {
   const {
@@ -91,6 +49,7 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
     schemes,
     parameters,
     importantInfo,
+    importantParameters = [],
     documents,
     modules,
     ...restProps
@@ -215,12 +174,17 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
         </div>
         <div className={styles.col}>
           {parametersDefault.map((parameter, index) => {
-            // TODO: поменять формат
-            const name = parameter.variant.split(':')[0];
-            const value = parameter.variant.split(':')[1];
+            const importantParameter = importantParameters.find((p) => {
+              return p.title === parameter.variant;
+            });
 
             return (
-              <StringParameter key={index} className={styles.parameter} name={name} value={value} />
+              <StringParameter
+                key={index}
+                className={styles.parameter}
+                parameter={parameter}
+                importantParameter={importantParameter}
+              />
             );
           })}
           {parametersCircle.map((parameter) =>
@@ -263,7 +227,7 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
             <List
               className={styles.documents}
               items={documents.items}
-              renderChild={(document: Document) => (
+              renderChild={(document: DocumentData) => (
                 <Document
                   className={styles.document}
                   icon={document.icon}
