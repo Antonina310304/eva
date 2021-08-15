@@ -9,7 +9,7 @@ import { usePageProduct } from '@Stores/PageProduct';
 
 const RouteProduct: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage({ path: pathname, ssr: true });
+  const page: any = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
   const pageProduct = usePageProduct(page.data);
 
