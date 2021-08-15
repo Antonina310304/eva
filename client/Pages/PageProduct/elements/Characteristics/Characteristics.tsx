@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
 import { SelectItemData } from '@UI/Select';
+import PageProductStore from '@Stores/PageProduct';
 import { ModuleProductData } from '@Types/ModuleProduct';
 import {
   Scheme,
@@ -58,6 +59,12 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
 
   const handleChangeTab = useCallback((e, tab) => {
     setCurrentTab(tab.id);
+  }, []);
+
+  const handleChangeParameter = useCallback((_e, items) => {
+    items.forEach((item: any) => {
+      PageProductStore.selectParameter({ ...item.data });
+    });
   }, []);
 
   const parametersDimension = useMemo(() => {
@@ -127,6 +134,7 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
               items={parametersDropdown}
               renderChild={(dropdown: Parameter) => {
                 const options: SelectItemData[] = [];
+
                 dropdown.variants.forEach((variant) => {
                   const id = variant.id ? variant.id : variant.productId;
 
@@ -138,6 +146,10 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
                     href: variant.url,
                     price: variant.price,
                     selected: variant.selected,
+                    data: {
+                      groupId: dropdown.groupId,
+                      variantId: id,
+                    },
                   });
                 });
 
@@ -149,8 +161,9 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
                     items={options}
                     wide
                     renderItem={(itemProps: SelectItemData) => {
-                      return <SampleOption {...itemProps} className={cn(styles.option)} />;
+                      return <SampleOption item={itemProps} className={cn(styles.option)} />;
                     }}
+                    onChangeSelected={handleChangeParameter}
                   />
                 );
               }}
@@ -173,18 +186,25 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
           )}
         </div>
         <div className={styles.col}>
-          {parametersDefault.map((parameter, index) => {
-            const importantParameter = importantParameters.find((p) => {
-              return p.title === parameter.variant;
-            });
+          {importantParameters.map((importantParameter, index) => {
+            const [name, value] = importantParameter.title.split(':');
 
             return (
               <StringParameter
                 key={index}
                 className={styles.parameter}
-                parameter={parameter}
+                name={name}
+                value={value}
                 importantParameter={importantParameter}
               />
+            );
+          })}
+
+          {parametersDefault.map((parameter, index) => {
+            const [name, value] = parameter.variant.split(':');
+
+            return (
+              <StringParameter key={index} className={styles.parameter} name={name} value={value} />
             );
           })}
           {parametersCircle.map((parameter) =>

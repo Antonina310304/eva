@@ -7,21 +7,17 @@ import useMedias from '@Hooks/useMedias';
 import { ImportantParameter } from '@Pages/PageProduct/typings';
 import styles from './StringParameter.module.css';
 
-export interface Parameter {
-  variant: string;
-}
-
 export interface StringParameterProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  parameter: Parameter;
-  importantParameter: ImportantParameter;
+  name: string;
+  value: string;
+  importantParameter?: ImportantParameter;
 }
 
 const MechanismPopup = loadable(() => import('../MechanismPopup'));
 
 const StringParameter: FC<StringParameterProps> = (props) => {
-  const { className, parameter, importantParameter, ...restProps } = props;
-  const [name, value] = parameter.variant.split(':');
+  const { className, name, value, importantParameter, ...restProps } = props;
   const [visible, setVisible] = useState(false);
   const [positionPopup, setPositionPopup] = useState({ transform: 'none' });
   const { isDesktop } = useMedias();
