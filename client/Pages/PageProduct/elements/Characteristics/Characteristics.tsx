@@ -16,6 +16,7 @@ import {
   DocumentData,
   Variant,
 } from '@Pages/PageProduct/typings';
+import SampleOption from './elements/SampleOption';
 import styles from './Characteristics.module.css';
 
 export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
@@ -38,7 +39,6 @@ const Hardness = loadable(() => import('./elements/Hardness'));
 const SynchronousSchemes = loadable(() => import('./elements/SynchronousSchemes'));
 const StringParameter = loadable(() => import('./elements/StringParameter'));
 const ImportantInfo = loadable(() => import('./elements/ImportantInfo'));
-const SampleOption = loadable(() => import('./elements/SampleOption'));
 const ModuleCounter = loadable(() => import('./elements/ModuleCounter'));
 const SampleParameter = loadable(() => import('./elements/SampleParameter'));
 
