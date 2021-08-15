@@ -12,16 +12,30 @@
   }
 
   &.viewDefault {
-    width: 20px;
-    height: 20px;
-
     background-image: url('./close.svg');
   }
 
   &.viewCircle {
+    background-image: url('./circle.svg');
+  }
+
+  &.sizeS.viewDefault {
+    width: 12px;
+    height: 12px;
+  }
+
+  &.sizeM.viewDefault {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.sizeS.viewCircle {
+    width: 15px;
+    height: 15px;
+  }
+
+  &.sizeM.viewCircle {
     width: 30px;
     height: 30px;
-
-    background-image: url('./circle.svg');
   }
 }
