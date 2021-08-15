@@ -19,7 +19,6 @@ import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import { useRelatedProducts } from '@Stores/RelatedProducts';
-import { useProduct } from '@Stores/Product';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
@@ -47,21 +46,6 @@ const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
-  const {
-    ar,
-    breadcrumbs,
-    mediaGallery,
-    cylindo,
-    crossSalesProducts,
-    sameProducts,
-    historyProducts,
-    parameters,
-    importantInfo,
-    importantParameters,
-    documents,
-    features,
-  } = page;
-  const product = useProduct({ ...page.product, modules: page.modules });
   const [, { openModal }] = useModals();
   const { isMobileM } = useMedias();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
@@ -155,7 +139,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     setPositionSidebar(position);
   }, []);
 
-  useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
+  useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 
   useEffect(() => {
     handleChangePositionSidebar();
@@ -174,10 +158,10 @@ const PageProduct: FC<PageProductProps> = (props) => {
         <div className={styles.grid}>
           <div ref={refMainContent}>
             <PhotoGallery
-              images={mediaGallery}
-              tags={product.tags}
-              ar={ar}
-              category={breadcrumbs[1].text}
+              images={page.mediaGallery}
+              tags={page.product.tags}
+              ar={page.ar}
+              category={page.breadcrumbs[1].text}
             />
 
             {isMobileM && (
@@ -191,7 +175,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
               </div>
             )}
 
-            {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
+            {page.cylindo && <ProductModel className={styles.cylindo} medias={page.cylindo} />}
 
             {page.description && (
               <div
@@ -201,9 +185,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
               />
             )}
 
-            {product.modules.length > 0 && (
+            {page.modules.length > 0 && (
               <div className={styles.modules}>
-                <ModulesList modules={product.modules} />
+                <ModulesList modules={page.modules} />
               </div>
             )}
 
@@ -252,16 +236,16 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     ],
                   },
                 ]}
-                parameters={parameters}
-                importantInfo={importantInfo}
-                importantParameters={importantParameters}
-                documents={documents}
-                modules={product.modules}
+                parameters={page.parameters}
+                importantInfo={page.importantInfo}
+                importantParameters={page.importantParameters}
+                documents={page.documents}
+                modules={page.modules}
               />
             </div>
 
-            {features?.length > 0 && (
-              <ProductFeatures className={styles.wrapperFeatures} features={features} />
+            {page.features?.length > 0 && (
+              <ProductFeatures className={styles.wrapperFeatures} features={page.features} />
             )}
           </div>
 
@@ -283,7 +267,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (
         <ChooseMattressBanner
           className={styles.mattressesBanner}
-          categoryColor={product.categoryColor}
+          categoryColor={page.product.categoryColor}
           title='Подбери лучший!'
           action={{
             title: 'Подобрать матрас',
@@ -300,7 +284,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       )}
 
       <div className={styles.wrapperAdditional}>
-        {crossSalesProducts.products?.length > 0 && (
+        {page.crossSalesProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionCrossSale}
             title='С этим обычно покупают'
@@ -355,11 +339,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
         <ComfortBuy className={styles.comfortBuy} />
 
-        {sameProducts.products?.length > 0 && (
+        {page.sameProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionSimilar}
             title='Похожие модели'
-            products={sameProducts.products}
+            products={page.sameProducts.products}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>
                 <CrossSaleProductCard {...productCardProps} />
@@ -368,11 +352,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
-        {historyProducts.products?.length > 0 && (
+        {page.historyProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionHistory}
             title='Вы недавно смотрели'
-            products={historyProducts.products}
+            products={page.historyProducts.products}
             renderItem={(productCardProps) => (
               <div className={styles.nanoProductItem}>
                 <NanoProductCard {...productCardProps} />

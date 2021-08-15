@@ -6,18 +6,19 @@ import { ModuleProductData } from '@Types/ModuleProduct';
 import { ProductData } from '@Types/Product';
 import { NetworkStatus } from '@Types/Base';
 
-export interface Value extends ProductData {
-  networkStatus: NetworkStatus;
+export interface Value {
+  networkStatus?: NetworkStatus;
   modules: ModuleProductData[];
+  product: ProductData;
 }
 
-export type UseProduct = (initialValue?: Value) => Value;
+export type UsePageProduct = (initialValue?: Value) => Value;
 
-const productStore = createStore<Value>();
+const pageStore = createStore<Value>();
 const networkStore = createStore<NetworkStatus>();
 
 const getParameterValues = () => {
-  const product = getValue(productStore);
+  const product = getValue(pageStore);
 
   return product.modules.map((module) => ({
     id: module.parameterId,
@@ -25,23 +26,26 @@ const getParameterValues = () => {
   }));
 };
 
-const updateProduct = async () => {
-  const product = getValue(productStore);
+const updatePageProduct = async () => {
+  const page = getValue(pageStore);
   const parameterValues = getParameterValues();
-  const params = { shopProductId: product.id, parameterValues };
+  const params = { shopProductId: page.product.id, parameterValues };
 
   try {
     networkStore.set('loading');
 
     const res = await ApiProduct.getInfoByParams(params);
 
-    if (product.modules?.length > 0) {
-      update(productStore, (prev) => ({
+    if (page.modules?.length > 0) {
+      update(pageStore, (prev) => ({
         ...prev,
-        price: { ...prev.price, actual: res.price.value },
+        product: {
+          ...prev.product,
+          price: { ...prev.product.price, actual: res.price.value },
+        },
       }));
     } else {
-      const oldPrice = product.price;
+      const oldPrice = page.product.price;
       const oldPriceCoefficient =
         oldPrice.actual && oldPrice.expired ? oldPrice.actual / oldPrice.expired : null;
       const expired = oldPriceCoefficient
@@ -49,9 +53,12 @@ const updateProduct = async () => {
         : 0;
       const discount = oldPriceCoefficient ? Math.round((1 - res.price.value / expired) * 100) : 0;
 
-      update(productStore, (prev) => ({
+      update(pageStore, (prev) => ({
         ...prev,
-        price: { ...prev.price, expired, actual: res.price.value, discount },
+        product: {
+          ...page.product,
+          price: { ...prev.product.price, expired, actual: res.price.value, discount },
+        },
       }));
     }
 
@@ -66,25 +73,25 @@ const editModule = (module: ModuleProductData): void => {
 
   if (network === 'loading') return;
 
-  update(productStore, (product) => ({
+  update(pageStore, (product) => ({
     ...product,
     modules: product.modules.map((prevModule) => {
       return prevModule.id === module.id ? module : prevModule;
     }),
   }));
 
-  updateProduct();
+  updatePageProduct();
 };
 
-export const useProduct: UseProduct = (initialValue) => {
-  const product = getValue(productStore);
+export const usePageProduct: UsePageProduct = (initialValue) => {
+  const page = getValue(pageStore);
 
-  if (initialValue && product?.id !== initialValue?.id) {
-    productStore.set(initialValue);
+  if (initialValue && page?.product.id !== initialValue?.product.id) {
+    pageStore.set(initialValue);
   }
 
   return {
-    ...useStore(productStore),
+    ...useStore(pageStore),
     networkStatus: useStore(networkStore),
   };
 };
