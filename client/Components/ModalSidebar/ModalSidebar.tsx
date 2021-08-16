@@ -1,4 +1,13 @@
-import React, { memo, HTMLAttributes, FC, MouseEvent, useCallback, useRef, useEffect } from 'react';
+import React, {
+  memo,
+  HTMLAttributes,
+  FC,
+  MouseEvent,
+  ReactChild,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 
@@ -16,6 +25,8 @@ export interface ModalSidebarProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   view?: 'default' | 'fullscreen';
   cnContent?: string;
+  footer: ReactChild;
+  scrollTop?: number;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
   onLoad?: () => void;
 }
@@ -29,6 +40,8 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
     loading,
     view = 'default',
     cnContent,
+    footer,
+    scrollTop,
     onClose,
     onLoad,
   } = props;
@@ -78,9 +91,15 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
                   />
                 </div>
 
-                <Scroller className={cn(styles.containerContent, cnContent)} invisible={isMobile}>
+                <Scroller
+                  className={cn(styles.containerContent, cnContent)}
+                  invisible={isMobile}
+                  scrollTop={scrollTop}
+                >
                   {children}
                 </Scroller>
+
+                {footer && <div className={styles.footer}>{footer}</div>}
               </>
             )}
           </div>

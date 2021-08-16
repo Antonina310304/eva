@@ -1,4 +1,13 @@
-import React, { FC, HTMLAttributes, useCallback, memo, useMemo, useState, useRef } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  useCallback,
+  memo,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
@@ -8,13 +17,12 @@ import InstagramSection from '@Components/InstagramSection';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
-import { useRelatedProducts } from '@Stores/relatedProducts';
-import { useProduct } from '@Stores/product';
+import useMedias from '@Hooks/useMedias';
+import { useRelatedProducts } from '@Stores/RelatedProducts';
 import { ReviewData } from '@Types/Review';
 import { ProductData } from '@Types/Product';
 import { MetaData } from '@Types/Meta';
 import PhotoGallery from './elements/PhotoGallery';
-import MainGrid from './elements/MainGrid';
 import Sidebar from './elements/Sidebar';
 import DeliverySection from './elements/DeliverySection';
 import ComfortBuy from './elements/ComfortBuy';
@@ -38,24 +46,15 @@ const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
-  const {
-    ar,
-    breadcrumbs,
-    mediaGallery,
-    cylindo,
-    crossSalesProducts,
-    sameProducts,
-    historyProducts,
-    parameters,
-    importantInfo,
-    documents,
-    features,
-  } = page;
-  const product = useProduct({ ...page.product, modules: page.modules });
   const [, { openModal }] = useModals();
+  const { isMobileM } = useMedias();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
+  const [positionSidebar, setPositionSidebar] = useState(null);
   const refCharacteristics = useRef<HTMLDivElement>();
   const refReviews = useRef<HTMLDivElement>();
+  const refWrapperSidebar = useRef<HTMLDivElement>();
+  const refSidebar = useRef<HTMLDivElement>();
+  const refMainContent = useRef<HTMLDivElement>();
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -105,116 +104,170 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const handleClickCharacteristics = useCallback(() => {
     if (!refCharacteristics.current) return;
 
-    refCharacteristics.current.scrollIntoView();
+    refCharacteristics.current.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   const handleClickReviews = useCallback(() => {
     if (!refReviews.current) return;
 
-    refReviews.current.scrollIntoView();
+    refReviews.current.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  useRelatedProducts({ productId: product.id, lists: page.relatedProducts });
+  const handleChangePositionSidebar = useCallback(() => {
+    if (!refMainContent.current) return;
+    if (!refSidebar.current) return;
+
+    const rectContent = refMainContent.current.getBoundingClientRect();
+    const rectWrapperSidebar = refWrapperSidebar.current.getBoundingClientRect();
+    const rectSidebar = refSidebar.current.getBoundingClientRect();
+    const fixed =
+      Math.round(rectContent.bottom) > Math.round(rectSidebar.bottom) || rectSidebar.top > 0;
+    const position = fixed
+      ? {
+          position: 'fixed',
+          top: 0,
+          right: `${document.documentElement.offsetWidth - rectWrapperSidebar.right}px`,
+          left: `${rectWrapperSidebar.left}px`,
+        }
+      : {
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        };
+
+    setPositionSidebar(position);
+  }, []);
+
+  useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
+
+  useEffect(() => {
+    handleChangePositionSidebar();
+    window.addEventListener('scroll', handleChangePositionSidebar);
+    window.addEventListener('resize', handleChangePositionSidebar);
+
+    return () => {
+      window.removeEventListener('scroll', handleChangePositionSidebar);
+      window.removeEventListener('resize', handleChangePositionSidebar);
+    };
+  }, [handleChangePositionSidebar]);
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
-      <MainGrid
-        className={cn(styles.mainContainer, styles.wrapperMain)}
-        sidebar={
-          <Sidebar
-            page={page}
-            meta={meta}
-            onClickCharacteristics={handleClickCharacteristics}
-            onClickReviews={handleClickReviews}
-          />
-        }
-      >
-        <PhotoGallery
-          images={mediaGallery}
-          tags={product.tags}
-          ar={ar}
-          category={breadcrumbs[1].text}
-        />
-      </MainGrid>
+      <div className={cn(styles.mainContainer, styles.wrapperMain)}>
+        <div className={styles.grid}>
+          <div ref={refMainContent}>
+            <PhotoGallery
+              images={page.mediaGallery}
+              tags={page.product.tags}
+              ar={page.ar}
+              category={page.breadcrumbs[1].text}
+            />
 
-      <MainGrid className={cn(styles.mainContainer, styles.wrapperParams)}>
-        {page.description && (
-          <div
-            className={styles.description}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: page.description }}
-          />
-        )}
+            {isMobileM && (
+              <div className={styles.wrapperSidebar}>
+                <Sidebar
+                  page={page}
+                  meta={meta}
+                  onClickCharacteristics={handleClickCharacteristics}
+                  onClickReviews={handleClickReviews}
+                />
+              </div>
+            )}
 
-        {product.modules.length > 0 && (
-          <div className={styles.modules}>
-            <ModulesList modules={product.modules} />
+            {page.cylindo && <ProductModel className={styles.cylindo} medias={page.cylindo} />}
+
+            {page.description && (
+              <div
+                className={styles.description}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: page.description }}
+              />
+            )}
+
+            {page.modules.length > 0 && (
+              <div className={styles.modules}>
+                <ModulesList modules={page.modules} />
+              </div>
+            )}
+
+            {page.layers?.length > 0 && (
+              <div className={styles.layers}>
+                <MattressesLayers layers={page.layers} priorityParameter={page.priorityParameter} />
+              </div>
+            )}
+
+            <div className={styles.characteristics} ref={refCharacteristics}>
+              <Characteristics
+                title='Характеристики'
+                tabs={[
+                  { id: '0', label: 'Собранный' },
+                  { id: '1', label: 'Разобранный' },
+                ]}
+                schemes={[
+                  {
+                    id: '0',
+                    images: [
+                      {
+                        url: '/react/static/img/scheme1.jpg',
+                        width: 511,
+                        height: 236,
+                      },
+                      {
+                        url: '/react/static/img/scheme2.jpg',
+                        width: 269,
+                        height: 235,
+                      },
+                    ],
+                  },
+                  {
+                    id: '1',
+                    images: [
+                      {
+                        url: '/react/static/img/scheme3.jpg',
+                        width: 232,
+                        height: 389,
+                      },
+                      {
+                        url: '/react/static/img/scheme4.jpg',
+                        width: 81,
+                        height: 388,
+                      },
+                    ],
+                  },
+                ]}
+                parameters={page.parameters}
+                importantInfo={page.importantInfo}
+                importantParameters={page.importantParameters}
+                documents={page.documents}
+                modules={page.modules}
+              />
+            </div>
+
+            {page.features?.length > 0 && (
+              <ProductFeatures className={styles.wrapperFeatures} features={page.features} />
+            )}
           </div>
-        )}
 
-        {page.cylindo && <ProductModel className={styles.cylindo} medias={cylindo} />}
-
-        {page.layers?.length > 0 && (
-          <div className={styles.layers}>
-            <MattressesLayers layers={page.layers} priorityParameter={page.priorityParameter} />
-          </div>
-        )}
-
-        <div className={styles.characteristics} ref={refCharacteristics}>
-          <Characteristics
-            title='Характеристики'
-            tabs={[
-              { id: '0', label: 'Собранный' },
-              { id: '1', label: 'Разобранный' },
-            ]}
-            schemes={[
-              {
-                id: '0',
-                images: [
-                  {
-                    url: '/react/static/img/scheme1.jpg',
-                    width: 511,
-                    height: 236,
-                  },
-                  {
-                    url: '/react/static/img/scheme2.jpg',
-                    width: 269,
-                    height: 235,
-                  },
-                ],
-              },
-              {
-                id: '1',
-                images: [
-                  {
-                    url: '/react/static/img/scheme3.jpg',
-                    width: 232,
-                    height: 389,
-                  },
-                  {
-                    url: '/react/static/img/scheme4.jpg',
-                    width: 81,
-                    height: 388,
-                  },
-                ],
-              },
-            ]}
-            parameters={parameters}
-            importantInfo={importantInfo}
-            documents={documents}
-            modules={product.modules}
-          />
+          {!isMobileM && (
+            <div className={styles.wrapperSidebar} ref={refWrapperSidebar}>
+              <div style={positionSidebar} ref={refSidebar}>
+                <Sidebar
+                  page={page}
+                  meta={meta}
+                  onClickCharacteristics={handleClickCharacteristics}
+                  onClickReviews={handleClickReviews}
+                />
+              </div>
+            </div>
+          )}
         </div>
-
-        {features?.length > 0 && (
-          <ProductFeatures className={styles.wrapperFeatures} features={features} />
-        )}
-      </MainGrid>
+      </div>
 
       {['matrasy', 'krovati'].includes(page.categoryTranslite) && meta.country === 'RUS' ? (
         <ChooseMattressBanner
           className={styles.mattressesBanner}
-          categoryColor={product.categoryColor}
+          categoryColor={page.product.categoryColor}
           title='Подбери лучший!'
           action={{
             title: 'Подобрать матрас',
@@ -231,7 +284,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       )}
 
       <div className={styles.wrapperAdditional}>
-        {crossSalesProducts.products?.length > 0 && (
+        {page.crossSalesProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionCrossSale}
             title='С этим обычно покупают'
@@ -286,11 +339,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
         <ComfortBuy className={styles.comfortBuy} />
 
-        {sameProducts.products?.length > 0 && (
+        {page.sameProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionSimilar}
             title='Похожие модели'
-            products={sameProducts.products}
+            products={page.sameProducts.products}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>
                 <CrossSaleProductCard {...productCardProps} />
@@ -299,11 +352,11 @@ const PageProduct: FC<PageProductProps> = (props) => {
           />
         )}
 
-        {historyProducts.products?.length > 0 && (
+        {page.historyProducts.products?.length > 0 && (
           <CrossSaleSection
             className={styles.sectionHistory}
             title='Вы недавно смотрели'
-            products={historyProducts.products}
+            products={page.historyProducts.products}
             renderItem={(productCardProps) => (
               <div className={styles.nanoProductItem}>
                 <NanoProductCard {...productCardProps} />

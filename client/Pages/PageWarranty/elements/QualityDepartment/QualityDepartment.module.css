@@ -1,0 +1,164 @@
+.qualityDepartment {
+}
+
+.mainText {
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+}
+
+.container {
+  margin-top: var(--space-xxl);
+  padding: var(--space-xxl) var(--space-xe);
+
+  background: var(--color-light-gray);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainTitle {
+  font-weight: 500;
+  font-size: var(--size-l);
+  line-height: var(--lh-m);
+}
+
+.ofertaLink {
+  display: flex;
+  align-items: center;
+}
+
+.iconOferta {
+  display: inline-block;
+  width: 20px;
+  height: 25px;
+  margin-right: var(--space-xs);
+
+  background-image: url('./contract.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80%;
+  margin-top: var(--space-m);
+}
+
+.item {
+  display: flex;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.icon.telephone {
+  background-image: url('./tel.svg');
+}
+
+.icon.clock {
+  background-image: url('./clock.svg');
+}
+
+.icon.mail {
+  background-image: url('./mail.svg');
+}
+
+.info {
+  margin-left: var(--space-s);
+}
+
+.itemTitle {
+  font-weight: 500;
+}
+
+.description {
+  margin-top: var(--space-xxl);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+.descriptionItem {
+  margin-top: var(--space-xxl);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.footer {
+  margin-top: var(--space-xxl);
+  padding: var(--space-n);
+
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+  text-align: center;
+
+  border: 1px solid var(--color-medium-gray);
+}
+
+@media (--desktop-m) {
+  .body {
+    max-width: 90%;
+  }
+}
+
+@media (--desktop) {
+  .container {
+    padding: var(--space-xxl) var(--space-xb);
+  }
+}
+
+@media (--mobile-m) {
+  .container {
+    padding: var(--space-xxl) var(--space-s);
+  }
+
+  .body {
+    max-width: 97%;
+  }
+}
+
+@media (--mobile) {
+  .container {
+    padding: var(--space-xxl);
+  }
+
+  .head {
+    flex-direction: column;
+    width: 250px;
+    margin: 0 auto;
+  }
+
+  .oferta {
+    margin-top: var(--space-m);
+  }
+
+  .body {
+    flex-direction: column;
+    width: 250px;
+    margin: 0 auto;
+    margin-top: var(--space-m);
+  }
+
+  .item {
+    margin-top: var(--space-n);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

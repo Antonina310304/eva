@@ -10,8 +10,7 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
-import { useRelatedProducts } from '@Stores/relatedProducts';
-import { useProduct } from '@Stores/product';
+import { useRelatedProducts } from '@Stores/RelatedProducts';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
 import LinksList from '../LinksList';
@@ -43,11 +42,9 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, onClickCharacteristics, onClickReviews, ...restProps } = props;
-  const { isAvailable, credit } = page;
-  const product = useProduct();
-  const shortName = product.name.split(' ')[0];
-  const hasExpired = product.price.expired > 0;
-  const hasDiscount = product.price.discount > 0;
+  const shortName = page.product.name.split(' ')[0];
+  const hasExpired = page.product.price.expired > 0;
+  const hasDiscount = page.product.price.discount > 0;
   const labels = ['отзыв', 'отзыва', 'отзывов'];
   const label = declOfNum(page.reviewsPhotoCount, labels);
   const countReviewsText = `${page.reviewsPhotoCount} ${label}`;
@@ -74,42 +71,68 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('DeliveryInformation');
   }, [openModal]);
 
+  const handleClickPriceDrop = useCallback(() => {
+    openModal('PriceDrop', { product: page.product });
+  }, [openModal, page.product]);
+
+  const handleClickConstructor = useCallback(() => {
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
+
+  const handleAddToCart = useCallback(() => {
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
+
+  const handleClickNotifyAboutReceipt = useCallback(() => {
+    openModal('NotifyAboutReceipt', { product: page.product });
+  }, [openModal, page.product]);
+
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
       <div className={styles.shortName}>
         {shortName}
         <Like className={styles.like} />
       </div>
-      <div className={styles.fullName}>{product.name}</div>
+      <div className={styles.fullName}>{page.product.name}</div>
 
       {page.reviewsPhotoCount > 0 && (
         <div className={styles.wrapperRating}>
-          <Rating className={styles.rating} defaultValue={product.rating} />
+          <Rating className={styles.rating} defaultValue={page.product.rating} />
           <Button className={styles.countReviews} theme='linkSecondary' onClick={onClickReviews}>
             {countReviewsText}
           </Button>
         </div>
       )}
 
-      {isAvailable ? (
+      {page.isAvailable ? (
         <>
           <div className={styles.wrapperPrice}>
             <div className={styles.containerPrices}>
-              <Price className={styles.actualPrice} price={product.price.actual} />
+              <Price className={styles.actualPrice} price={page.product.price.actual} />
               {hasExpired && (
-                <Price expired className={styles.expiredPrice} price={product.price.expired} />
+                <Price expired className={styles.expiredPrice} price={page.product.price.expired} />
               )}
               {hasDiscount && (
-                <Discount className={styles.discount}>{product.price.discount}</Discount>
+                <Discount className={styles.discount}>{page.product.price.discount}</Discount>
               )}
             </div>
           </div>
 
           {meta.country === 'RUS' && (
             <>
-              <OrderBonuses className={styles.bonuses} productIds={[product.id]} />
+              <OrderBonuses className={styles.bonuses} productIds={[page.product.id]} />
 
-              <Button className={styles.priceReduction} theme='linkSecondary'>
+              <Button
+                className={styles.priceReduction}
+                theme='linkSecondary'
+                onClick={handleClickPriceDrop}
+              >
                 Подписаться на изменение цены
               </Button>
             </>
@@ -137,12 +160,32 @@ const Sidebar: FC<SidebarProps> = (props) => {
       )}
 
       <div className={styles.actions}>
-        <Button className={styles.action} wide theme='secondary'>
-          Изменить конфигурацию
-        </Button>
-        <Button className={styles.action} wide>
-          В корзину
-        </Button>
+        {page.isAvailable ? (
+          <>
+            {page.isConfigurator && (
+              <Button
+                className={styles.action}
+                wide
+                theme='secondary'
+                onClick={handleClickConstructor}
+              >
+                Изменить конфигурацию
+              </Button>
+            )}
+            <Button className={styles.action} wide onClick={handleAddToCart}>
+              В корзину
+            </Button>
+          </>
+        ) : (
+          <Button
+            className={styles.action}
+            wide
+            theme='secondary'
+            onClick={handleClickNotifyAboutReceipt}
+          >
+            Уведомить о поступлении
+          </Button>
+        )}
       </div>
 
       <div className={styles.linksList}>
@@ -154,19 +197,13 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Информация о доставке',
               onClick: handleClickDeliveryInformation,
             },
-            credit?.creditAvailable && {
+            page.credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
               hasArrow: true,
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
             },
-            {
-              icon: <div className={cn(styles.icon, styles.attention)} />,
-              hasArrow: true,
-              label: 'Гарантируем качество',
-              onClick: handleClickQualityGuarantee,
-            },
-            !credit?.creditAvailable && {
+            !page.credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               hasArrow: true,
               label: 'Финальная цена',
@@ -176,6 +213,11 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Эта модель в шоурумах',
               hasArrow: true,
               onClick: handleClickShowroom,
+            },
+            {
+              hasArrow: true,
+              label: 'Гарантируем качество',
+              onClick: handleClickQualityGuarantee,
             },
             {
               label: 'Характеристики',
