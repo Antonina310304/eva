@@ -1,4 +1,7 @@
 .section {
+  --columns: 4;
+  --gap-h: var(--space-l);
+  --gap-v: var(--space-xxb);
 }
 
 .head {
@@ -31,9 +34,16 @@
 }
 
 .items {
-  display: grid;
-  grid-gap: var(--gap-v) var(--gap-h);
-  grid-template-columns: repeat(var(--columns), 1fr);
+  display: block;
+  margin-right: calc(var(--gap-h) / -2);
+  margin-bottom: calc(var(--gap-v) * -1);
+  margin-left: calc(var(--gap-h) / -2);
+}
+
+.item {
+  display: inline-block;
+  width: calc((100% / var(--columns)) - var(--gap-h));
+  padding: 0 calc(var(--gap-h) / 2) var(--gap-v);
 }
 
 .stub {
@@ -47,6 +57,10 @@
 }
 
 @media (--desktop) {
+  .section {
+    --columns: 3;
+  }
+
   .title {
     font-size: var(--size-xl);
   }

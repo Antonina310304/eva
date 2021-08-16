@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
 import cn from 'classnames';
 
-import { useRelatedProducts } from '@Stores/relatedProducts';
+import RelatedProductsStore from '@Stores/RelatedProducts';
 import { ProductData } from '@Types/Product';
 import styles from './RelatedProductCard.module.css';
 import Sizes, { SizeData } from './elems/Sizes';
@@ -17,7 +17,6 @@ export interface RelatedProductCardProps extends HTMLAttributes<HTMLDivElement> 
 
 const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
   const { className, listId, product, compact, ...restProps } = props;
-  const relatedProducts = useRelatedProducts();
 
   const sizes: SizeData[] = useMemo(() => {
     const result: SizeData[] = [];
@@ -47,9 +46,9 @@ const RelatedProductCard: FC<RelatedProductCardProps> = (props) => {
 
   const handleChangeQuantity = useCallback(
     (_e, { quantity }) => {
-      relatedProducts.changeQuantityProduct({ listId, productId: product.id, quantity });
+      RelatedProductsStore.changeQuantityProduct({ listId, productId: product.id, quantity });
     },
-    [listId, product.id, relatedProducts],
+    [listId, product.id],
   );
 
   return (

@@ -37,7 +37,7 @@ export interface SelectItemData {
   selected?: boolean;
 }
 
-export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultChecked'> {
+export interface SelectProps {
   className?: string;
   mode?: 'single' | 'single-required' | 'multiple';
   disabled?: boolean;
@@ -53,7 +53,7 @@ export interface SelectProps extends Omit<HTMLAttributes<HTMLInputElement>, 'def
   onOpen?: (e: MouseEvent) => void;
   onClose?: (e: MouseEvent) => void;
   onCheck?: SelectCallback;
-  onUncheck?: SelectCallback;
+  onChangeSelected?: (e: MouseEvent, items: SelectItemData[]) => void;
   onClickItem?: SelectCallback;
 }
 
@@ -72,8 +72,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     onClick,
     onOpen,
     onClose,
-    onCheck,
-    onUncheck,
+    onChangeSelected,
     ...restProps
   } = props;
   const { isMobile } = useMedias();
@@ -85,7 +84,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   const [initialized, setInitialized] = useState(false);
   const [positionPortal, setPositionPortal] = useState({ width: '100%' });
   const [focusedItemIndex, setFocusedItemIndex] = useState<number>(null);
-
   const refTop = useRef(0);
 
   const faked = useMemo(() => {
@@ -146,32 +144,37 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   const checkItem = useCallback(
     (item: SelectItemData) => {
       setChecked((prev) => {
+        let newItems = [item];
+
         if (mode === 'multiple') {
-          return [...prev, item];
+          newItems = [...prev, item];
         }
 
-        return [item];
+        if (onChangeSelected) onChangeSelected(null, newItems);
+
+        return newItems;
       });
     },
-    [mode],
+    [mode, onChangeSelected],
   );
 
   const uncheckItem = useCallback(
     (item: SelectItemData) => {
       setChecked((prev) => {
-        if (mode === 'single-required' && prev[0].id === item.id) {
-          return prev;
-        }
-
-        const itemIndex = prev.findIndex(({ id }) => item.id === id);
         const newItems = [...prev];
 
-        newItems.splice(itemIndex, 1);
+        if (mode !== 'single-required' && prev[0].id === item.id) {
+          const itemIndex = prev.findIndex(({ id }) => item.id === id);
+
+          newItems.splice(itemIndex, 1);
+        }
+
+        if (onChangeSelected) onChangeSelected(null, newItems);
 
         return newItems;
       });
     },
-    [mode],
+    [mode, onChangeSelected],
   );
 
   const handleUnblockScroll = useCallback(() => {
@@ -226,23 +229,19 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     [disabled, faked, opened, onClick, handleClose, handleOpen],
   );
 
-  const handleCheckItem = useCallback(
+  const handleClickItem = useCallback(
     (e: MouseEvent, item: SelectItemData) => {
-      checkItem(item);
+      const hasInChecked = checked.includes(item);
 
-      if (mode !== 'multiple') handleClose(e);
-      if (onCheck) onCheck(e, item);
+      if (hasInChecked) {
+        uncheckItem(item);
+      } else {
+        checkItem(item);
+
+        if (mode !== 'multiple') handleClose(e);
+      }
     },
-    [checkItem, handleClose, mode, onCheck],
-  );
-
-  const handleUncheckItem = useCallback(
-    (e: MouseEvent, item: SelectItemData) => {
-      uncheckItem(item);
-
-      if (onUncheck) onUncheck(e, item);
-    },
-    [onUncheck, uncheckItem],
+    [checkItem, checked, handleClose, mode, uncheckItem],
   );
 
   const handleArrowDown = useCallback(
@@ -287,7 +286,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         changeFocusedItemIndex(null);
         handleClose(e);
       }
-      if (onCheck) onCheck(e, item);
     },
     [
       changeFocusedItemIndex,
@@ -297,7 +295,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
       handleClose,
       items,
       mode,
-      onCheck,
       opened,
       uncheckItem,
     ],
@@ -315,10 +312,8 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     [changeFocusedItemIndex, focusedItemIndex, handleClose],
   );
 
-  //
   useEffect(() => setInitialized(true), []);
 
-  //
   useEffect(() => {
     setTimeout(() => {
       setPositionPortal((prev) => {
@@ -342,7 +337,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     });
   }, [defaultChecked]);
 
-  //
   useEffect(() => {
     if (isMobile && opened) {
       handleBlockScroll();
@@ -416,8 +410,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
                         isMobile={isMobile}
                         renderItem={renderItem}
                         onClickField={handleClick}
-                        onCheckItem={handleCheckItem}
-                        onUncheckItem={handleUncheckItem}
+                        onClickItem={handleClickItem}
                       />
                     </div>
                   </SlideBottomTransition>
@@ -437,8 +430,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
                   isMobile={isMobile}
                   renderItem={renderItem}
                   onClickField={handleClick}
-                  onCheckItem={handleCheckItem}
-                  onUncheckItem={handleUncheckItem}
+                  onClickItem={handleClickItem}
                 />
               )}
             </>

@@ -91,13 +91,18 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
     return result;
   }, [category, images, isMobileM, maxItemsCountInGallery]);
 
-  const handleOpen = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс',
-      text: 'Ещё не готово, заходите позже…',
-    });
-    // openModal('ProductSlider', { images });
-  }, [openModal]);
+  const handleOpen = useCallback(
+    (e) => {
+      if (window.cancelClick) return;
+
+      if (!isMobileM && e.target.tagName === 'DIV') return;
+
+      openModal('ProductPhotos', {
+        images,
+      });
+    },
+    [images, isMobileM, openModal],
+  );
 
   return (
     <div {...restProps} className={cn(styles.photogallery)}>
@@ -108,6 +113,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
               <div
                 className={cn(styles.containerImage, { [styles.firstImage]: index === 0 })}
                 key={index}
+                onClick={handleOpen}
               >
                 {Array.isArray(item) ? (
                   <div

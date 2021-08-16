@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, MouseEvent } from 'react';
 import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
-import { useQueryClient, useIsFetching } from 'react-query';
+import { useQueryClient } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
 import styles from './Link.module.css';
@@ -23,18 +23,27 @@ const Link: FC<LinkProps> = (props) => {
     needFetch = true,
     children,
     size = 'n',
+    target,
     onClick,
     ...restProps
   } = props;
   const queryClient = useQueryClient();
-  const isFetchingPages = useIsFetching(['page']);
   const history = useHistory();
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
+      if (target === '_blank') return;
+
       e.preventDefault();
+
       if (window.cancelClick) return;
-      if (needFetch && isFetchingPages < 1) {
+
+      if (to.substr(0, 1) === '#') {
+        history.push(to);
+        return;
+      }
+
+      if (needFetch) {
         await queryClient.prefetchQuery(['page', 'ssr', to], () =>
           ApiPages.fetchPage({ path: to }),
         );
@@ -43,13 +52,14 @@ const Link: FC<LinkProps> = (props) => {
       }
       if (onClick) onClick(e);
     },
-    [history, isFetchingPages, needFetch, onClick, queryClient, to],
+    [history, needFetch, onClick, queryClient, target, to],
   );
 
   return (
     <a
       {...restProps}
       href={to}
+      target={target}
       className={cn(
         styles.link,
         {

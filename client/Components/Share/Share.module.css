@@ -1,0 +1,31 @@
+.shareButton {
+  margin-right: 10px;
+}
+
+.instaIcon {
+  width: 31px;
+  height: 30px;
+
+  background-image: url('./insta.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.faceBookIcon {
+  width: 31px;
+  height: 30px;
+
+  background-image: url('./Facebook.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.VKIcon {
+  width: 31px;
+  height: 30px;
+
+  background-image: url('./VK.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
