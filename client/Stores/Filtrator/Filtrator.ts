@@ -260,6 +260,68 @@ const updateTotalCount = (count: number): void => {
   totalCountStore.set(count);
 };
 
+const getParameterName = (parameterId: string): string => {
+  return Number.isNaN(parseInt(parameterId, 10)) ? parameterId : `parameters[${parameterId}]`;
+};
+
+const toUrl = ({ categories }: { categories?: string[] }): string => {
+  const state = getValue(filtratorStore);
+  let items: any[] = [];
+
+  if (!state) return '';
+
+  function toggleItem(targetItem: any, flag: boolean) {
+    if (flag) {
+      items.push(targetItem);
+    } else {
+      items = items.filter((item) => item !== targetItem);
+    }
+  }
+
+  // Выбранные категории
+  (categories || []).forEach((category) => {
+    items.push(`categories[]=${category}`);
+  });
+
+  // Выбранные фильтры
+  Object.entries(state.parameters || {}).forEach(([parameterId, parameter]) => {
+    const { value, type } = state.parameterValues.find((pv) => pv.parameterId === parameterId);
+    const isRange = type === 'range';
+    const isVariant = type === 'variant';
+    const isSwitch = type === 'switch';
+    const defaultValues = parameter.default;
+    const parameterName = getParameterName(parameterId);
+
+    if (isRange) {
+      const valueFrom = `${parameterName}[from]=${defaultValues[0]}`;
+      const valueTo = `${parameterName}[to]=${defaultValues[1]}`;
+
+      toggleItem(valueFrom, value[0] !== defaultValues[0]);
+      toggleItem(valueTo, value[1] !== defaultValues[1]);
+    }
+
+    if (isVariant) {
+      defaultValues.forEach((defaultValue) => {
+        items.push(`${parameterName}[]=${defaultValue}`);
+      });
+    }
+
+    if (isSwitch) {
+      items.push(`${parameterName}=${defaultValues}`);
+    }
+  });
+
+  // Сортировка
+  state.sort
+    ?.filter((sortItem) => sortItem.selected)
+    .map((sortItem) => {
+      if (sortItem.id === '0') return;
+      items.push(`sort=${sortItem.id}`);
+    });
+
+  return `?${items.join('&')}`;
+};
+
 export const useFiltrator = (initial?: FiltersData) => {
   if (initial && filtratorStore.value?.id !== initial.id) {
     filtratorStore.set(initial);
@@ -283,4 +345,5 @@ export default {
   changeSort,
   updateTotalCount,
   formatFiltersToObject,
+  toUrl,
 };
