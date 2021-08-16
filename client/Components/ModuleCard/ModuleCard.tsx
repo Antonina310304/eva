@@ -5,7 +5,7 @@ import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import InputQuantity from '@UI/InputQuantity';
-import ProductStore, { useProduct } from '@Stores/Product';
+import PageProductStore, { usePageProduct } from '@Stores/PageProduct';
 import { ModuleProductData } from '@Types/ModuleProduct';
 import Preview from './elems/Preview';
 import Added from './elems/Added';
@@ -21,22 +21,22 @@ const ModuleCard: FC<ModuleCardProps> = (props) => {
   const { className, module, ...restProps } = props;
   const hasExpired = module.price.expired > 0;
   const hasDiscount = module.price.discount > 0;
-  const product = useProduct();
+  const page = usePageProduct();
 
   const sizeGroups = useMemo(() => {
     const result: SizeGroupData[] = [];
 
-    product.parameterGroups.forEach((parameterGroup) => {
+    page.product.parameterGroups.forEach((parameterGroup) => {
       if (parameterGroup.theme !== 'sizes') return;
 
       const group: SizeGroupData = { ...parameterGroup, values: [] };
 
-      const parameters = product.parameters.filter((targetParameter) => {
+      const parameters = page.product.parameters.filter((targetParameter) => {
         return targetParameter.groupId === parameterGroup.id;
       });
 
       parameters.forEach((parameter) => {
-        const parameterValue = product.parameterValues.find((pv) => {
+        const parameterValue = page.product.parameterValues.find((pv) => {
           return pv.parameterId === parameter.id;
         });
 
@@ -50,11 +50,11 @@ const ModuleCard: FC<ModuleCardProps> = (props) => {
     });
 
     return result;
-  }, [product]);
+  }, [page.product]);
 
   const handleChangeQuantity = useCallback(
     (_e, { quantity }) => {
-      ProductStore.editModule({ ...module, count: quantity });
+      PageProductStore.editModule({ ...module, count: quantity });
     },
     [module],
   );

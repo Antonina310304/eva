@@ -11,7 +11,7 @@ export default async (params: Params): Promise<any> => {
   searchParams.set('ids', productIds.toString());
 
   const url = `/order/get-bonus-earned-amount?${searchParams.toString()}`;
-  const res = await Api.query<any>(url);
+  const res = await Api.queryProxi<any>(url);
 
   if (!res.ok) return Promise.reject(res);
 

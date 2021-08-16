@@ -15,20 +15,10 @@ const routes = [
   '/fonts',
   '/marketing-event',
   '/images',
-  '/compare/v2',
-  '/history/v2',
-  '/cart-2',
-  '/cabinet/api',
   '/assets',
-  '/order/get-bonus-earned-amount',
-  '/shop-product/operator-delivery',
-  '/promo/get-products',
-  '/category/*/get-products',
   '/site/send-review',
   '/site/press-send-message',
   '/site/quality-department-send-message',
-  '/product/configurator',
-  '/shop-product/info-by-params',
   '/cabinet/formes',
   '/json-schema',
   '/robots.txt',
@@ -49,14 +39,14 @@ routes.forEach((route) => {
   router.use(route, proxy(backend, proxyOptions));
 });
 
-router.use('/proxy', (req, res, next) => {
-  const { path } = req.query as { path: string };
+router.use('/p/:path', (req, res, next) => {
+  const { path } = req.params;
   const isAbsolute = path.match(/^https?:\/\//);
   const url = isAbsolute ? path : `${backend}${path}`;
 
   proxy(url, {
     proxyReqPathResolver: (proxyReq) => {
-      return `${decodeURIComponent(proxyReq.query.path as string)}`;
+      return `${decodeURIComponent(proxyReq.params.path)}`;
     },
   })(req, res, next);
 });

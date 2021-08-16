@@ -37,6 +37,12 @@ const Link: FC<LinkProps> = (props) => {
       e.preventDefault();
 
       if (window.cancelClick) return;
+
+      if (to.substr(0, 1) === '#') {
+        history.push(to);
+        return;
+      }
+
       if (needFetch) {
         await queryClient.prefetchQuery(['page', 'ssr', to], () =>
           ApiPages.fetchPage({ path: to }),

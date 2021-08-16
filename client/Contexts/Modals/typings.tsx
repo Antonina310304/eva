@@ -18,6 +18,7 @@ export type ModalId =
   | 'YandexMarket'
   | 'FinalPrice'
   | 'PriceDrop'
+  | 'NotifyAboutReceipt'
   | 'DeliveryInformation';
 
 export interface Modal {
