@@ -17,6 +17,10 @@
   margin-top: var(--gap);
 }
 
+.devider {
+  margin-top: var(--gap);
+}
+
 .conditionsToBuyInCredit {
   margin-top: var(--gap);
 }
@@ -28,6 +32,10 @@
 .halva {
   margin-top: var(--gap);
   margin-bottom: var(--space-e);
+}
+
+.cardsPartners {
+  margin-top: var(--gap);
 }
 
 @media (--desktop-m) {

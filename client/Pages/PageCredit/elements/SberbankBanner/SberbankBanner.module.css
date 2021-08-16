@@ -1,4 +1,4 @@
-.bankBanner {
+.sberbankBanner {
 }
 
 .color {
@@ -27,12 +27,6 @@
   background-size: contain;
 }
 
-.right {
-  display: flex;
-  justify-content: flex-end;
-  width: 50%;
-}
-
 .text {
   margin-top: var(--space-xxl);
 
@@ -48,6 +42,41 @@
   line-height: var(--lh-s);
 }
 
+.right {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.item {
+  margin-right: var(--space-m);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.digit {
+  display: inline-block;
+
+  font-size: 130px;
+  line-height: 159px;
+}
+
+.symbol {
+  display: inline-block;
+
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 90px;
+}
+
+.symbol.rur {
+  &:before {
+    content: '\20BD';
+  }
+}
+
 @media (--desktop) {
   .color {
     padding: var(--space-xxl) 0;
@@ -59,6 +88,17 @@
 
   .right {
     width: 60%;
+  }
+
+  .digit {
+    font-size: 80px;
+    line-height: 130px;
+  }
+
+  .symbol {
+    font-weight: 400;
+    font-size: 37px;
+    line-height: 73px;
   }
 }
 
@@ -78,17 +118,27 @@
     max-width: unset;
   }
 
-  .right {
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: var(--space-l);
-  }
-
   .text {
     margin-top: var(--space-l);
   }
 
   .nuance {
     margin-top: var(--space-s);
+  }
+
+  .right {
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: var(--space-l);
+  }
+
+  .digit {
+    font-size: 61px;
+    line-height: 63px;
+  }
+
+  .symbol {
+    font-size: 30px;
+    line-height: 29px;
   }
 }

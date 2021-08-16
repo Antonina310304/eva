@@ -1,0 +1,177 @@
+.VTBBanner {
+}
+
+.color {
+  padding: var(--space-xb) 0;
+
+  color: var(--color-white);
+
+  background: #002f77;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  width: 50%;
+  max-width: 405px;
+}
+
+.logo {
+  width: 98px;
+  height: 35px;
+
+  background-size: contain;
+}
+
+.list {
+  margin: 0;
+  margin-top: var(--space-m);
+  padding: 0;
+}
+
+.listItem {
+  position: relative;
+
+  margin-top: var(--space-n);
+  padding-left: var(--space-l);
+
+  font-size: 16px;
+  line-height: 24px;
+
+  list-style: none;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 7px;
+    height: 7px;
+
+    background-color: var(--color-white);
+    border-radius: 50%;
+    transform: translateY(-50%);
+
+    content: '';
+  }
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.digitsWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item {
+  margin-right: var(--space-m);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.digit {
+  display: inline-block;
+
+  font-size: 153px;
+  line-height: 114px;
+}
+
+.symbol {
+  display: inline-block;
+
+  font-size: 52px;
+  line-height: 56px;
+}
+
+.symbol.rur {
+  &:before {
+    content: '\20BD';
+  }
+}
+
+.nuance {
+  max-width: 448px;
+  margin-top: 50px;
+
+  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
+  text-align: right;
+}
+
+@media (--desktop) {
+  .color {
+    padding: var(--space-xxl) 0;
+  }
+
+  .left {
+    width: 40%;
+  }
+
+  .right {
+    width: 60%;
+  }
+
+  .digit {
+    font-size: 80px;
+    line-height: 130px;
+  }
+
+  .symbol {
+    font-weight: 400;
+    font-size: 37px;
+    line-height: 73px;
+  }
+}
+
+@media (--mobile-m) {
+  .left {
+    max-width: 303px;
+  }
+}
+
+@media (--mobile) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    max-width: unset;
+  }
+
+  .nuance {
+    margin-top: var(--space-s);
+  }
+
+  .right {
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: var(--space-l);
+  }
+
+  .digit {
+    font-size: 61px;
+    line-height: 63px;
+  }
+
+  .symbol {
+    font-size: 30px;
+    line-height: 29px;
+  }
+}

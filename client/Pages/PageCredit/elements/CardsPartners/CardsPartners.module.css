@@ -1,0 +1,46 @@
+.cardsPartners {
+}
+
+.wrapperGallery {
+  margin-top: var(--space-l);
+  /* padding: 0 calc(var(--space-s) / 2); */
+  overflow: hidden;
+}
+
+.gallery {
+  width: 100%;
+  margin: 0 calc(var(--space-s-neg) / 2);
+}
+
+.item {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.card {
+  padding: 10px 20px;
+
+  font-size: 16px;
+  line-height: 24px;
+
+  border: 1px solid #c4c4c4;
+  border-radius: 45px;
+}
+
+.card.selected {
+  background: #f5f3f1;
+  border: 1px solid #f5f3f1;
+}
+
+@media (--mobile) {
+  .item {
+    margin: 0;
+    padding: 0 calc(15px / 2);
+  }
+}

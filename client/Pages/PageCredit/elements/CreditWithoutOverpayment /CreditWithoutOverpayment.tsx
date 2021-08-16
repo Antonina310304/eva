@@ -20,9 +20,12 @@ const CreditWithoutOverpayment: FC<CreditWithoutOverpaymentProps> = (props) => {
 
       <ul className={styles.list}>
         {list.map((item, index) => (
-          <li className={styles.listItem} key={index}>
-            {item}
-          </li>
+          <li
+            className={styles.listItem}
+            key={index}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: item }}
+          />
         ))}
       </ul>
 

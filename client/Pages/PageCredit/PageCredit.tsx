@@ -5,11 +5,15 @@ import { MetaData } from '@Types/Meta';
 import Navigation from '@Pages/PageWarranty/elements/Navigation';
 import PageTitle from './elements/PageTitle';
 import Wrapper from './elements/Wrapper';
-import BankBanner from './elements/BankBanner';
+import SberbankBanner from './elements/SberbankBanner';
+import VTBBanner from './elements/VTBBanner';
+import ListBlock from './elements/ListBlock';
+import Devider from './elements/Devider';
 import CreditWithoutOverpayment from './elements/CreditWithoutOverpayment ';
 import ConditionsToBuyInCredit from './elements/ConditionsToBuyInCredit';
 import HowBuyInCredit from './elements/HowBuyInCredit';
 import Halva from './elements/Halva';
+import CardsPartners from './elements/CardsPartners';
 import { PageCreditData } from './typings';
 import styles from './PageCredit.module.css';
 
@@ -26,7 +30,10 @@ const PageCredit: FC<PageCreditProps> = (props) => {
     pageList,
     topText, // TODO с бека приходит top_text нужно соответствие camelCase topText
     installment,
+    partners,
   } = page;
+
+  console.log('page', page);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -37,20 +44,34 @@ const PageCredit: FC<PageCreditProps> = (props) => {
         <div className={styles.topText}>{topText}</div>
       </Wrapper>
 
-      <BankBanner className={styles.bankBanner} banners={banners} />
+      {meta.country === 'RUS' ? (
+        <SberbankBanner className={styles.bankBanner} banners={banners} />
+      ) : (
+        <VTBBanner className={styles.bankBanner} banners={banners} />
+      )}
 
       <Wrapper>
-        <CreditWithoutOverpayment
+        <ListBlock
           className={styles.creditWithoutOverpayment}
-          installment={installment}
+          title={installment.title}
+          list={installment.list}
+          nuance={installment.note}
         />
 
-        <ConditionsToBuyInCredit className={styles.conditionsToBuyInCredit} />
+        <Devider className={styles.devider} />
 
-        <HowBuyInCredit className={styles.howBuyInCredit} />
+        {meta.country === 'RUS' && (
+          <>
+            <ConditionsToBuyInCredit className={styles.conditionsToBuyInCredit} />
 
-        <Halva className={styles.halva} />
+            <HowBuyInCredit className={styles.howBuyInCredit} />
+
+            <Halva className={styles.halva} />
+          </>
+        )}
       </Wrapper>
+
+      <CardsPartners className={styles.cardsPartners} partners={partners} />
     </div>
   );
 };
