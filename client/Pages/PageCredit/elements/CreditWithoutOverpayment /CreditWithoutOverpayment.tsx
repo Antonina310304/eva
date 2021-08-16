@@ -1,12 +1,13 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import ParagraphTitle from '../ParagraphTitle';
+import { Installment } from '../../typings';
 import styles from './CreditWithoutOverpayment.module.css';
 
 export interface CreditWithoutOverpaymentProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  conditions: string[];
-  refund: string[];
+  installment: Installment;
 }
 
 const CreditWithoutOverpayment: FC<CreditWithoutOverpaymentProps> = (props) => {
@@ -15,7 +16,7 @@ const CreditWithoutOverpayment: FC<CreditWithoutOverpaymentProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.creditWithoutOverpayment, className)}>
-      <div className={styles.title}>{title}</div>
+      <ParagraphTitle title={title} />
 
       <ul className={styles.list}>
         {list.map((item, index) => (

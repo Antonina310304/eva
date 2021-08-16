@@ -1,18 +1,12 @@
 .conditionsToBuyInCredit {
-  font-size: 18px;
-  line-height: 27px;
-}
-
-.title {
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 40px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
 }
 
 .wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: 45px;
+  margin-top: var(--space-xxl);
 }
 
 .condition {
@@ -49,5 +43,34 @@
 }
 
 .text {
-  margin-left: 25px;
+  margin-left: var(--space-m);
+}
+
+@media (--mobile-m) {
+  .condition {
+    flex-direction: column;
+  }
+
+  .text {
+    margin-top: var(--space-m);
+    margin-left: 0;
+
+    text-align: center;
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .condition {
+    width: 100%;
+    max-width: unset;
+    margin-bottom: var(--space-l);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }

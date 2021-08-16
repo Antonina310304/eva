@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import ParagraphTitle from '../ParagraphTitle';
 import styles from './HowBuyInCredit.module.css';
 
 export interface HowBuyInCreditProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,7 +13,7 @@ const HowBuyInCredit: FC<HowBuyInCreditProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.howBuyInCredit, className)}>
-      <div className={styles.title}>Как совершить покупку в кредит без переплаты?</div>
+      <ParagraphTitle title='Как совершить покупку в кредит без переплаты?' />
 
       <ul className={styles.list}>
         <li className={styles.listItem}>Выберите товары на сайте и положите их в корзину;</li>

@@ -3,15 +3,17 @@ import cn from 'classnames';
 
 import Image from '@UI/Image';
 import Wrapper from '../Wrapper';
+import { Banner } from '../../typings';
 import styles from './BankBanner.module.css';
 
 export interface BankBannerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  banners: Banner[];
 }
 
 const BankBanner: FC<BankBannerProps> = (props) => {
   const { className, banners, ...restProps } = props;
-  const { conditions, logo, note, text, id } = banners[0];
+  const { conditions, logo, note, text } = banners[0];
 
   return (
     <div {...restProps} className={cn(styles.bankBanner, className)}>

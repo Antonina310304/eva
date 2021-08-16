@@ -1,7 +1,25 @@
-.howBuyInCredit {
-  padding-bottom: var(--space-xb);
+.halva {
+}
 
-  border-bottom: 1px solid var(--color-medium-gray);
+.logo {
+  width: 191px;
+  height: 35px;
+
+  background-image: url('/static/img/credit/halva.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.text {
+  margin-top: var(--space-l);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.title {
+  margin-top: var(--space-xb);
 }
 
 .list {
