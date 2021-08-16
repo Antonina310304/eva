@@ -90,11 +90,8 @@ const Sidebar: FC<SidebarProps> = (props) => {
   }, [openModal]);
 
   const handleClickNotifyAboutReceipt = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс!',
-      text: 'Ещё не готово, заходите позже…',
-    });
-  }, [openModal]);
+    openModal('NotifyAboutReceipt', { product: page.product });
+  }, [openModal, page.product]);
 
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
