@@ -7,7 +7,7 @@ export interface Params {
 
 export default async (params: Params): Promise<any> => {
   const url = '/shop-product/info-by-params?price=1';
-  const res = await Api.query<any>(url, { method: 'POST', body: JSON.stringify(params) });
+  const res = await Api.queryProxi<any>(url, { method: 'POST', body: JSON.stringify(params) });
 
   return res;
 };

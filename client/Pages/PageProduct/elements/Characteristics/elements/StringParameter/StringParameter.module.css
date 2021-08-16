@@ -1,5 +1,19 @@
 .parameter {
   composes: n from 'sizes';
+
+  position: relative;
+
+  &.clickable {
+    .value {
+      display: inline-block;
+
+      background-image: linear-gradient(var(--color-black), var(--color-black));
+      background-repeat: no-repeat;
+      background-position: left 0 bottom calc(16% - 3px);
+      background-size: 100% 1px;
+      cursor: pointer;
+    }
+  }
 }
 
 .name {

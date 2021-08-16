@@ -4,79 +4,46 @@ import cn from 'classnames';
 import Image from '@UI/Image';
 import Price from '@UI/Price';
 import Link from '@UI/Link';
+import { SelectItemData } from '@UI/Select';
 import styles from './SampleOption.module.css';
-
 import checkIcon from './check.svg';
-
-export type SelectCallback = (e: MouseEvent, item: SampleOptionProps) => void;
 
 export interface SampleOptionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  id: string;
-  image?: string;
-  name: string;
-  selected?: boolean;
-  price?: number;
-  href?: string;
-  onClickOption?: SelectCallback;
-  onCheck?: SelectCallback;
-  onUncheck?: SelectCallback;
+  item: SelectItemData;
+  onClick?: (e: MouseEvent) => void;
 }
 
 const SampleOption: FC<SampleOptionProps> = (props) => {
-  const {
-    className,
-    image,
-    name,
-    price,
-    selected,
-    id,
-    href,
-    onClickOption,
-    onCheck,
-    onUncheck,
-    ...restProps
-  } = props;
-  const item = useRef({ image, name, price, id, selected, href });
-
-  const handleClick = useCallback(
-    (e: MouseEvent) => {
-      if (!item.current) return;
-
-      if (onClickOption) onClickOption(e, item.current);
-      if (onCheck && !selected) onCheck(e, item.current);
-      if (onUncheck && selected) onUncheck(e, item.current);
-    },
-    [onCheck, onClickOption, onUncheck, selected],
-  );
+  const { className, item, onClick, ...restProps } = props;
 
   const content = useMemo(() => {
     return (
       <>
         <div className={styles.left}>
-          {image && <Image className={styles.sample} src={image} />}
-          <div className={styles.name}>{name}</div>
+          {item.image && <Image className={styles.sample} src={item.image} />}
+          <div className={styles.name}>{item.name}</div>
         </div>
 
         <div className={styles.right}>
-          {price && <Price price={price} className={styles.price} />}
+          {item.price && <Price price={item.price} className={styles.price} />}
           <Image
             src={checkIcon}
-            className={cn(styles.checkIcon, { [styles.selected]: selected })}
+            className={cn(styles.checkIcon, { [styles.selected]: item.selected })}
           />
         </div>
       </>
     );
-  }, [image, name, price, selected]);
+  }, [item]);
 
   return (
     <div
       {...restProps}
-      className={cn(styles.option, { [styles.selected]: selected }, className)}
-      onClick={handleClick}
+      className={cn(styles.option, { [styles.selected]: item.selected }, className)}
+      onClick={onClick}
     >
-      {href ? (
-        <Link className={styles.container} to={href} view='simple'>
+      {item.href ? (
+        <Link className={styles.container} to={item.href} view='simple'>
           {content}
         </Link>
       ) : (

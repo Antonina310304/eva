@@ -4,23 +4,23 @@ import cn from 'classnames';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
-import PriceDropForm from '@Forms/PriceDropForm';
+import NotifyAboutReceiptForm from '@Forms/NotifyAboutReceiptForm';
 import IconClose from '@UI/IconClose';
 import Link from '@UI/Link';
 import { ProductData } from '@Types/Product';
-import styles from './PriceDropModal.module.css';
+import styles from './NotifyAboutReceiptModal.module.css';
 
 export interface ModalData extends IModal {
   data: {
     product: ProductData;
   };
 }
-export interface PriceDropModalProps {
+export interface NotifyAboutReceiptModalProps {
   className?: string;
   modal: ModalData;
 }
 
-const PriceDropModal: FC<PriceDropModalProps> = (props) => {
+const NotifyAboutReceiptModal: FC<NotifyAboutReceiptModalProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const [, { closeModal }] = useModals();
 
@@ -37,13 +37,13 @@ const PriceDropModal: FC<PriceDropModalProps> = (props) => {
     >
       <div className={styles.container}>
         <div className={styles.headingWrapper}>
-          <h3 className={styles.heading}>Снижение цены</h3>
+          <h3 className={styles.heading}>Уведомить о поступлении</h3>
           <IconClose className={styles.iconClose} onClick={handleClose} />
         </div>
         <div className={styles.description}>
-          Как только цена на товар снизится, мы сразу сообщим вам об этом по почте.
+          Как только товар появится, мы сразу сообщим вам об этом по почте.
         </div>
-        <PriceDropForm product={modal.data.product} />
+        <NotifyAboutReceiptForm product={modal.data.product} />
         <div className={styles.info}>
           *Подписываясь, вы соглашаетесь с
           <Link
@@ -61,4 +61,4 @@ const PriceDropModal: FC<PriceDropModalProps> = (props) => {
   );
 };
 
-export default memo(PriceDropModal);
+export default memo(NotifyAboutReceiptModal);
