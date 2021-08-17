@@ -1,4 +1,4 @@
-import React, { useCallback, memo, FC } from 'react';
+import React, { useCallback, memo, FC, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import { Modal as IModal } from '@Contexts/Modals';
