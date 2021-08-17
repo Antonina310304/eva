@@ -83,11 +83,8 @@ const Sidebar: FC<SidebarProps> = (props) => {
   }, [openModal]);
 
   const handleAddToCart = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс!',
-      text: 'Ещё не готово, заходите позже…',
-    });
-  }, [openModal]);
+    openModal('Cart', { productId: page.product.id });
+  }, [openModal, page.product.id]);
 
   const handleClickNotifyAboutReceipt = useCallback(() => {
     openModal('NotifyAboutReceipt', { product: page.product });
