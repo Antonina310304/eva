@@ -109,6 +109,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   }, [catalog.page, fetchProducts]);
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
+  useEffect(() => handleApplyFilters, [filtrator.sort, handleApplyFilters]);
 
   useEffect(() => {
     setCatalog(page);

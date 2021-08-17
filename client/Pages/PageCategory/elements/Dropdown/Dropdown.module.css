@@ -1,7 +1,31 @@
 .dropdown {
+  position: relative;
+
+  &.visible {
+    .containerLabel {
+      z-index: 2;
+    }
+
+    .arrow {
+      transform: rotate(-180deg);
+    }
+  }
+
+  & .popup {
+    top: var(--space-xs-neg);
+    right: var(--space-s-neg);
+    left: auto;
+    z-index: 1;
+
+    padding-top: calc(24px + var(--space-xs));
+
+    transform: none;
+  }
 }
 
 .containerLabel {
+  position: relative;
+
   display: flex;
   align-items: center;
 
@@ -20,4 +44,12 @@
   background-image: url('./arrow.svg');
   background-repeat: no-repeat;
   background-size: contain;
+
+  transition: transform 0.2s;
+}
+
+@media (--mobile) {
+  .dropdown {
+    position: static;
+  }
 }

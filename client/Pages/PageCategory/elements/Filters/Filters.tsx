@@ -2,8 +2,9 @@ import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } fro
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import { useFiltrator } from '@Stores/Filtrator';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import Dropdown from '../Dropdown';
+import OptionsPopup from '../OptionsPopup';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
@@ -25,6 +26,13 @@ const Filters: FC<FiltersProps> = (props) => {
       if (onOpen) onOpen(e, id);
     },
     [onOpen],
+  );
+
+  const handleChangeSort = useCallback(
+    (_e, option: typeof filtrator.sort[0]) => {
+      Filtrator.setSort(option);
+    },
+    [filtrator],
   );
 
   return (
@@ -57,8 +65,15 @@ const Filters: FC<FiltersProps> = (props) => {
       </div>
 
       <div className={styles.labels}>
-        <Dropdown className={styles.label} label='По группам' />
-        <Dropdown className={styles.label} label='Выводить сначала' />
+        {/* <Dropdown className={styles.label} label='По группам' /> */}
+
+        <Dropdown className={styles.label} label='Выводить сначала'>
+          <OptionsPopup
+            label='Выводить сначала'
+            options={filtrator.sort}
+            onCheckOption={handleChangeSort}
+          />
+        </Dropdown>
       </div>
     </div>
   );

@@ -1,0 +1,36 @@
+.popup {
+  min-width: 150px;
+}
+
+.options {
+  margin: var(--space-xs) var(--space-s-neg) 0;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-xxs) var(--space-s);
+
+  cursor: pointer;
+  allign-items: center;
+
+  &:hover {
+    background-color: var(--color-light-gray);
+  }
+
+  &.selected {
+    font-weight: 500;
+
+    &:after {
+      display: block;
+      width: 13px;
+      height: 16px;
+
+      background-image: url('./iconCheck.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      content: '';
+    }
+  }
+}

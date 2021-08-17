@@ -183,12 +183,12 @@ const resetGroup = ({ group }: any): void => {
   filtratorStore.set({ ...filtrator, parameters });
 };
 
-const changeSort = ({ targetId }: any): void => {
+const setSort = (option: FiltersData['sort'][0]): void => {
   update(filtratorStore, (value) => ({
     ...value,
     sort: value.sort.map((item) => ({
       ...item,
-      selected: item.id === targetId,
+      selected: item.id === option.id,
     })),
   }));
 };
@@ -342,7 +342,7 @@ export default {
   resetAll,
   resetOne,
   resetGroup,
-  changeSort,
+  setSort,
   updateTotalCount,
   formatFiltersToObject,
   toUrl,
