@@ -8,12 +8,13 @@ import styles from './VTBBanner.module.css';
 
 export interface VTBBannerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  banners: Banner[];
+  banner: Banner;
 }
 
 const VTBBanner: FC<VTBBannerProps> = (props) => {
-  const { className, banners, ...restProps } = props;
-  const { conditions, anchorSrc, note, list } = banners[0]; // TODO от бэка приходит anchor_src переделать в anchorSrc
+  const { className, banner, ...restProps } = props;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { conditions, anchor_src, note, list } = banner; // TODO от бэка приходит anchor_src переделать в anchorSrc
 
   return (
     <div {...restProps} className={cn(styles.VTBBanner, className)}>
@@ -21,7 +22,7 @@ const VTBBanner: FC<VTBBannerProps> = (props) => {
         <Wrapper>
           <div className={styles.container}>
             <div className={styles.left}>
-              <Image className={styles.logo} src={anchorSrc} />
+              <Image className={styles.logo} src={anchor_src} />
               <ul className={styles.list}>
                 {list.map((item, index) => (
                   <li className={styles.listItem} key={index}>

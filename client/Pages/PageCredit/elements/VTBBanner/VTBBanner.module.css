@@ -16,8 +16,7 @@
 }
 
 .left {
-  width: 50%;
-  max-width: 405px;
+  max-width: 435px;
 }
 
 .logo {
@@ -36,11 +35,11 @@
 .listItem {
   position: relative;
 
-  margin-top: var(--space-n);
+  margin-top: var(--space-xs);
   padding-left: var(--space-l);
 
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 
   list-style: none;
 
@@ -68,7 +67,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 50%;
 }
 
 .digitsWrapper {
@@ -106,7 +104,7 @@
 
 .nuance {
   max-width: 448px;
-  margin-top: 50px;
+  margin-top: var(--space-b);
 
   color: rgba(255, 255, 255, 0.5);
   font-size: var(--size-xs);
@@ -119,33 +117,55 @@
     padding: var(--space-xxl) 0;
   }
 
-  .left {
-    width: 40%;
-  }
-
-  .right {
-    width: 60%;
-  }
-
   .digit {
-    font-size: 80px;
-    line-height: 130px;
+    font-size: 121px;
+    line-height: 94px;
   }
 
   .symbol {
-    font-weight: 400;
     font-size: 37px;
-    line-height: 73px;
+    line-height: 38px;
+  }
+
+  .nuance {
+    margin-top: var(--space-xxl);
+
+    font-size: var(--size-xxs);
+    line-height: var(--lh-xxs);
   }
 }
 
 @media (--mobile-m) {
+  .color {
+    padding-right: var(--space-s);
+    padding-left: var(--space-n);
+  }
+
   .left {
-    max-width: 303px;
+    max-width: 341px;
+  }
+
+  .digit {
+    font-size: 92px;
+    line-height: 70px;
+  }
+
+  .symbol {
+    font-size: 33px;
+    line-height: 38px;
+  }
+
+  .item {
+    margin-right: var(--space-n);
   }
 }
 
 @media (--mobile) {
+  .color {
+    padding-top: var(--space-b);
+    padding-left: var(--space-m);
+  }
+
   .container {
     flex-direction: column;
   }
@@ -157,12 +177,18 @@
 
   .nuance {
     margin-top: var(--space-s);
+
+    text-align: left;
   }
 
   .right {
-    justify-content: flex-start;
+    align-items: unset;
     width: 100%;
-    margin-top: var(--space-l);
+    margin-top: var(--space-b);
+  }
+
+  .digitsWrapper {
+    justify-content: unset;
   }
 
   .digit {
@@ -171,7 +197,7 @@
   }
 
   .symbol {
-    font-size: 30px;
+    font-size: 27px;
     line-height: 29px;
   }
 }

@@ -3,7 +3,7 @@
 }
 
 .topText {
-  margin-top: calc(var(--gap) + 20px);
+  margin-top: calc(var(--gap) + var(--space-n));
 
   font-size: var(--size-n);
   line-height: var(--lh-n);

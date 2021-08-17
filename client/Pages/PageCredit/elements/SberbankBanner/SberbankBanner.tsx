@@ -8,12 +8,12 @@ import styles from './SberbankBanner.module.css';
 
 export interface SberbankBannerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  banners: Banner[];
+  banner: Banner;
 }
 
 const SberbankBanner: FC<SberbankBannerProps> = (props) => {
-  const { className, banners, ...restProps } = props;
-  const { conditions, logo, note, text } = banners[0];
+  const { className, banner, ...restProps } = props;
+  const { conditions, logo, note, text } = banner;
 
   return (
     <div {...restProps} className={cn(styles.sberbankBanner, className)}>

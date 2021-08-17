@@ -9,7 +9,6 @@ import SberbankBanner from './elements/SberbankBanner';
 import VTBBanner from './elements/VTBBanner';
 import ListBlock from './elements/ListBlock';
 import Devider from './elements/Devider';
-import CreditWithoutOverpayment from './elements/CreditWithoutOverpayment ';
 import ConditionsToBuyInCredit from './elements/ConditionsToBuyInCredit';
 import HowBuyInCredit from './elements/HowBuyInCredit';
 import Halva from './elements/Halva';
@@ -28,12 +27,11 @@ const PageCredit: FC<PageCreditProps> = (props) => {
   const {
     banners,
     pageList,
-    topText, // TODO с бека приходит top_text нужно соответствие camelCase topText
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    top_text, // TODO с бека приходит top_text нужно соответствие camelCase topText
     installment,
     partners,
   } = page;
-
-  console.log('page', page);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -41,13 +39,19 @@ const PageCredit: FC<PageCreditProps> = (props) => {
       <Wrapper>
         <Navigation navigation={pageList} />
 
-        <div className={styles.topText}>{topText}</div>
+        <div className={styles.topText}>{top_text}</div>
       </Wrapper>
 
       {meta.country === 'RUS' ? (
-        <SberbankBanner className={styles.bankBanner} banners={banners} />
+        <SberbankBanner
+          className={styles.bankBanner}
+          banner={banners.find((banner) => banner.id === 'sber')}
+        />
       ) : (
-        <VTBBanner className={styles.bankBanner} banners={banners} />
+        <VTBBanner
+          className={styles.bankBanner}
+          banner={banners.find((banner) => banner.id === 'vtb')}
+        />
       )}
 
       <Wrapper>
@@ -71,7 +75,9 @@ const PageCredit: FC<PageCreditProps> = (props) => {
         )}
       </Wrapper>
 
-      <CardsPartners className={styles.cardsPartners} partners={partners} />
+      {meta.country === 'BLR' && (
+        <CardsPartners className={styles.cardsPartners} partners={partners} />
+      )}
     </div>
   );
 };

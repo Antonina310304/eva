@@ -7,11 +7,12 @@ import Wrapper from '../Wrapper';
 import BankBanner from '../BankBanner';
 import ParagraphTitle from '../ParagraphTitle';
 import ListBlock from '../ListBlock';
+import { Partner } from '../../typings';
 import styles from './CardsPartners.module.css';
 
 export interface CardsPartnersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  title: string;
+  partners: Partner[];
 }
 
 const CardsPartners: FC<CardsPartnersProps> = (props) => {
@@ -64,12 +65,6 @@ const CardsPartners: FC<CardsPartnersProps> = (props) => {
 
   const handleClickCard = useCallback(
     (index) => {
-      // partners.find((partner) => partner.id === id);
-      // const newSelectedCard = cardsPartners.map((card) => {
-      //   const newCard = { ...card };
-      //   newCard.selected = false;
-      //   return newCard;
-      // });
       const newSelectedCard = [...cardsPartners];
       newSelectedCard[slideIndex].selected = false;
       newSelectedCard[index].selected = true;
@@ -115,7 +110,7 @@ const CardsPartners: FC<CardsPartnersProps> = (props) => {
         )}
       </Wrapper>
 
-      <BankBanner cardPartner={selectedPartner} />
+      <BankBanner className={styles.bankBanner} cardPartner={selectedPartner} />
 
       <Wrapper>
         <ListBlock
