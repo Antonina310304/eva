@@ -34,8 +34,8 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const isModels = page.productsModel?.length > 0;
   const [catalog, setCatalog] = useState<CatalogData>(page);
   const [, { openModal, closeModal }] = useModals();
-  const refInit = useRef(false);
   const filtrator = useFiltrator({ id: path, ...page.filters });
+  const refInit = useRef(false);
 
   const activeSubcategoryIds = useMemo(() => {
     const rubrics: any[] = page.rubrics[0] || [];
@@ -81,11 +81,6 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   }, 300);
 
   const handleApplyFilters = useCallback(async () => {
-    if (!refInit.current) {
-      refInit.current = true;
-      return;
-    }
-
     try {
       const newCatalog = await fetchProducts({ page: 1 });
 
@@ -125,9 +120,12 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
 
-  useEffect(() => handleApplyFilters, [filtrator.sort, handleApplyFilters]);
-
   useEffect(() => {
+    if (!refInit.current) {
+      refInit.current = true;
+      return;
+    }
+
     setCatalog(page);
   }, [page]);
 
@@ -145,7 +143,11 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
       <div className={styles.catalogWrapper}>
         <div className={styles.filtersWrapper}>
-          <Filters count={catalog.productsTotalCount} onOpen={hanleOpenFilters} />
+          <Filters
+            count={catalog.productsTotalCount}
+            onOpen={hanleOpenFilters}
+            onChangeSort={handleApplyFilters}
+          />
 
           {page.popularLinks?.length > 0 && (
             <div className={styles.popularLinksWrapper}>

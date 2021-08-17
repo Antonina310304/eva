@@ -11,10 +11,11 @@ export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   count?: number;
   onOpen?: (e: MouseEvent, id: string) => void;
+  onChangeSort?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, count, onOpen, ...restProps } = props;
+  const { className, count, onOpen, onChangeSort, ...restProps } = props;
   const filtrator = useFiltrator();
 
   const labelSort = useMemo(() => {
@@ -35,10 +36,12 @@ const Filters: FC<FiltersProps> = (props) => {
   );
 
   const handleChangeSort = useCallback(
-    (_e, option: typeof filtrator.sort[0]) => {
+    (e: MouseEvent, option: typeof filtrator.sort[0]) => {
       Filtrator.setSort(option);
+
+      if (onChangeSort) onChangeSort(e);
     },
-    [filtrator],
+    [filtrator, onChangeSort],
   );
 
   return (
