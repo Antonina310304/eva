@@ -1,4 +1,13 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState, useMemo } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+} from 'react';
 import cn from 'classnames';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -25,6 +34,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const isModels = page.productsModel?.length > 0;
   const [catalog, setCatalog] = useState<CatalogData>(page);
   const [, { openModal, closeModal }] = useModals();
+  const refInit = useRef(false);
   const filtrator = useFiltrator({ id: path, ...page.filters });
 
   const activeSubcategoryIds = useMemo(() => {
@@ -71,6 +81,11 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   }, 300);
 
   const handleApplyFilters = useCallback(async () => {
+    if (!refInit.current) {
+      refInit.current = true;
+      return;
+    }
+
     try {
       const newCatalog = await fetchProducts({ page: 1 });
 
@@ -109,6 +124,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   }, [catalog.page, fetchProducts]);
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
+
   useEffect(() => handleApplyFilters, [filtrator.sort, handleApplyFilters]);
 
   useEffect(() => {
