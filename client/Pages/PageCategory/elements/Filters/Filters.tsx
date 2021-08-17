@@ -2,19 +2,27 @@ import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } fro
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import { useFiltrator } from '@Stores/Filtrator';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import Dropdown from '../Dropdown';
+import OptionsPopup from '../OptionsPopup';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   count?: number;
   onOpen?: (e: MouseEvent, id: string) => void;
+  onChangeSort?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, count, onOpen, ...restProps } = props;
+  const { className, count, onOpen, onChangeSort, ...restProps } = props;
   const filtrator = useFiltrator();
+
+  const labelSort = useMemo(() => {
+    const { name } = filtrator.sort.find((item) => item.selected);
+
+    return `${name.substr(0, 1).toUpperCase()}${name.substr(1)}`;
+  }, [filtrator.sort]);
 
   const secondaryFilters = useMemo(() => {
     return filtrator.filters.slice(0, 3);
@@ -25,6 +33,15 @@ const Filters: FC<FiltersProps> = (props) => {
       if (onOpen) onOpen(e, id);
     },
     [onOpen],
+  );
+
+  const handleChangeSort = useCallback(
+    (e: MouseEvent, option: typeof filtrator.sort[0]) => {
+      Filtrator.setSort(option);
+
+      if (onChangeSort) onChangeSort(e);
+    },
+    [filtrator, onChangeSort],
   );
 
   return (
@@ -57,8 +74,15 @@ const Filters: FC<FiltersProps> = (props) => {
       </div>
 
       <div className={styles.labels}>
-        <Dropdown className={styles.label} label='По группам' />
-        <Dropdown className={styles.label} label='Выводить сначала' />
+        {/* <Dropdown className={styles.label} label='По группам' /> */}
+
+        <Dropdown className={styles.label} label={labelSort}>
+          <OptionsPopup
+            label={labelSort}
+            options={filtrator.sort}
+            onCheckOption={handleChangeSort}
+          />
+        </Dropdown>
       </div>
     </div>
   );

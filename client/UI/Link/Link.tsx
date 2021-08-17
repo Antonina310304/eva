@@ -37,6 +37,7 @@ const Link: FC<LinkProps> = (props) => {
       e.preventDefault();
 
       if (window.cancelClick) return;
+      if (onClick) onClick(e);
 
       if (to.substr(0, 1) === '#') {
         history.push(to);
@@ -50,7 +51,6 @@ const Link: FC<LinkProps> = (props) => {
         history.push(to);
         window.scrollTo({ top: 0 });
       }
-      if (onClick) onClick(e);
     },
     [history, needFetch, onClick, queryClient, target, to],
   );
