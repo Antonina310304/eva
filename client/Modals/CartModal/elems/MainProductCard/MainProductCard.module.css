@@ -1,0 +1,35 @@
+.card {
+  display: flex;
+  align-items: center;
+}
+
+.preview {
+  flex-shrink: 0;
+  width: 210px;
+}
+
+.content {
+  flex-grow: 1;
+  margin-left: var(--space-l);
+}
+
+.name {
+  font-weight: 500;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-l);
+}
+
+.quantity {
+  width: 100px;
+}
+
+.price {
+  composes: l from 'sizes';
+
+  font-weight: 500;
+}

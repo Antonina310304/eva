@@ -10,6 +10,7 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
+import PageProductStore from '@Stores/PageProduct';
 import { useRelatedProducts } from '@Stores/RelatedProducts';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
@@ -83,8 +84,16 @@ const Sidebar: FC<SidebarProps> = (props) => {
   }, [openModal]);
 
   const handleAddToCart = useCallback(() => {
-    openModal('Cart', { productId: page.product.id });
-  }, [openModal, page.product.id]);
+    openModal('Cart', {
+      products: [
+        {
+          isModular: page.product.modules?.length > 0,
+          shopProductId: page.product.id,
+          parameterValues: PageProductStore.getParameterValues(),
+        },
+      ],
+    });
+  }, [openModal, page.product]);
 
   const handleClickNotifyAboutReceipt = useCallback(() => {
     openModal('NotifyAboutReceipt', { product: page.product });

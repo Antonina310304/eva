@@ -2,6 +2,10 @@
   display: block;
 }
 
+.wrapperContent {
+  max-width: 643px;
+}
+
 .description {
   padding-bottom: var(--space-xl);
 
