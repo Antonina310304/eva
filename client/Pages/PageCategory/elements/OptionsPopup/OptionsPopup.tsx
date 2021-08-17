@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Popup from '@UI/Popup';
 import useMedias from '@Hooks/useMedias';
 import useModals from '@Hooks/useModals';
+import useOnClickOutside from '@Hooks/useOnClickOutside';
 import styles from './OptionsPopup.module.css';
 
 export interface OptionData {
@@ -26,6 +27,7 @@ const OptionsPopup: FC<OptionsPopupProps> = (props) => {
   const { className, label, options, visible, onCheckOption, onClose, ...restProps } = props;
   const { isMobile } = useMedias();
   const [, { openModal, closeModal }] = useModals();
+  const ref = useOnClickOutside(onClose, !visible);
 
   const handleCheckOption = useCallback(
     (e: MouseEvent, option: OptionData) => {
@@ -49,6 +51,7 @@ const OptionsPopup: FC<OptionsPopupProps> = (props) => {
       {...restProps}
       className={cn(styles.popup, { [styles.visible]: visible }, className)}
       visible={visible}
+      ref={ref}
     >
       <div className={styles.containerLabel} onClick={onClose}>
         <span className={styles.label}>{label}</span>
