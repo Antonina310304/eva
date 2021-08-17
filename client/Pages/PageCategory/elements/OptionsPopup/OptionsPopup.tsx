@@ -45,7 +45,16 @@ const OptionsPopup: FC<OptionsPopupProps> = (props) => {
   }, [closeModal, isMobile, label, onCheckOption, onClose, openModal, options, visible]);
 
   return !isMobile ? (
-    <Popup {...restProps} className={cn(styles.popup, className)} visible={visible}>
+    <Popup
+      {...restProps}
+      className={cn(styles.popup, { [styles.visible]: visible }, className)}
+      visible={visible}
+    >
+      <div className={styles.containerLabel} onClick={onClose}>
+        <span className={styles.label}>{label}</span>
+        <div className={styles.arrow} />
+      </div>
+
       <div className={styles.options}>
         {options.map((option) => (
           <div

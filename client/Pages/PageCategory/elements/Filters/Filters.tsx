@@ -17,6 +17,12 @@ const Filters: FC<FiltersProps> = (props) => {
   const { className, count, onOpen, ...restProps } = props;
   const filtrator = useFiltrator();
 
+  const labelSort = useMemo(() => {
+    const { name } = filtrator.sort.find((item) => item.selected);
+
+    return `${name.substr(0, 1).toUpperCase()}${name.substr(1)}`;
+  }, [filtrator.sort]);
+
   const secondaryFilters = useMemo(() => {
     return filtrator.filters.slice(0, 3);
   }, [filtrator.filters]);
@@ -67,9 +73,9 @@ const Filters: FC<FiltersProps> = (props) => {
       <div className={styles.labels}>
         {/* <Dropdown className={styles.label} label='По группам' /> */}
 
-        <Dropdown className={styles.label} label='Выводить сначала'>
+        <Dropdown className={styles.label} label={labelSort}>
           <OptionsPopup
-            label='Выводить сначала'
+            label={labelSort}
             options={filtrator.sort}
             onCheckOption={handleChangeSort}
           />

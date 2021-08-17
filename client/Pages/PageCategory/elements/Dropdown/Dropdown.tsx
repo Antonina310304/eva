@@ -14,7 +14,7 @@ import styles from './Dropdown.module.css';
 export interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   label: string;
-  children: ReactElement;
+  children?: ReactElement;
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
@@ -36,12 +36,13 @@ const Dropdown: FC<DropdownProps> = (props) => {
         <div className={styles.arrow} />
       </div>
 
-      {cloneElement(children, {
-        ...children.props,
-        visible,
-        className: cn(children.props.className, styles.popup),
-        onClose: handleClose,
-      })}
+      {children &&
+        cloneElement(children, {
+          ...children.props,
+          visible,
+          className: cn(children.props.className, styles.popup),
+          onClose: handleClose,
+        })}
     </div>
   );
 };

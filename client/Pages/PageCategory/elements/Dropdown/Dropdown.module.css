@@ -2,10 +2,6 @@
   position: relative;
 
   &.visible {
-    .containerLabel {
-      z-index: 110;
-    }
-
     .arrow {
       transform: rotate(-180deg);
     }
@@ -16,7 +12,7 @@
     right: var(--space-s-neg);
     left: auto;
 
-    padding-top: calc(24px + var(--space-xs));
+    padding-top: var(--space-xs);
 
     transform: none;
   }

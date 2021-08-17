@@ -1,5 +1,40 @@
 .popup {
-  min-width: 150px;
+  box-sizing: border-box;
+  min-width: 192px;
+
+  &.visible {
+    .arrow {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.containerLabel {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.label {
+  composes: n from 'sizes';
+
+  white-space: nowrap;
+}
+
+.arrow {
+  width: 10px;
+  height: 6px;
+  margin-left: var(--space-xxs);
+
+  background-image: url('./iconArrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transition: transform 0.2s;
 }
 
 .options {
