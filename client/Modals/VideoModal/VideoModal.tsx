@@ -10,7 +10,7 @@ import styles from './VideoModal.module.css';
 const VideoModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const { isMobileL, isMobile } = useMedias();
-  const [, { closeModal }] = useModals();
+  const [, { closeModal, openModal }] = useModals();
   const [player, setPlayer] = useState(null);
   const [sizes, setSizes] = useState({ width: 0, height: 0 });
 
@@ -21,7 +21,14 @@ const VideoModal: FC<ModalMainProps> = (props) => {
     if (player) player.stopVideo();
 
     closeModal(modal.id);
-  }, [player, closeModal, modal.id]);
+
+    if (modal.data.previousModal) {
+      openModal('ProductPhotos', {
+        images: modal.data.previousModal.images,
+        startSlideIndex: modal.data.previousModal.startSlideIndex,
+      });
+    }
+  }, [player, modal.data.previousModal, modal.id, closeModal, openModal]);
 
   const handleReady = useCallback((e) => {
     setPlayer(e.target);
@@ -30,7 +37,6 @@ const VideoModal: FC<ModalMainProps> = (props) => {
   // Изменяем пропорции видео во время ресайза страницы
   useEffect(() => {
     function resize() {
-      if (!isMobileL || !modal.data) return;
       const scale = isMobile ? 1 : 0.84;
 
       const coef = modal.data.height / modal.data.width;
@@ -62,8 +68,8 @@ const VideoModal: FC<ModalMainProps> = (props) => {
         <AsyncYouTube
           videoId={modal.data.videoId}
           opts={{
-            height: isMobileL ? sizes.height.toString() : modal.data.height.toString(),
-            width: isMobileL ? sizes.width.toString() : modal.data.width.toString(),
+            height: sizes.height.toString(),
+            width: sizes.width.toString(),
             playerVars: {
               autoplay: 1,
             },

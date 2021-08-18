@@ -16,15 +16,19 @@ import styles from './ProductPhotosModal.module.css';
 
 const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { images: medias } = modal.data as { images: any[] };
+  const { images: medias, startSlideIndex } = modal.data as {
+    images: any[];
+    startSlideIndex: number;
+  };
   const [, { closeModal, openModal }] = useModals();
-  const { isDesktop, isMobile, isMobileM } = useMedias();
+  const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [mainMediaIndex, setMainMediaIndex] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
   const refScroll = useRef(null);
-  const [player, setPlayer] = useState(null);
+
+  const selectedMedia = medias[mainMediaIndex];
 
   const normalizeIndex = useCallback(
     (value: number) => {
@@ -59,10 +63,8 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   }, []);
 
   const handleClose = useCallback(() => {
-    if (player) player.stopVideo();
-
     closeModal(modal.id);
-  }, [closeModal, modal.id, player]);
+  }, [closeModal, modal.id]);
 
   const handleChangeCurrent = useCallback(({ current }) => {
     if (window.cancelClick) return;
@@ -86,16 +88,15 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     (_e, index) => {
       if (window.cancelClick) return;
 
-      if (isMobileM) openModal('Video', { videoId: medias[index].video });
-
-      setMainMediaIndex(index);
+      if (isMobileM && medias[index].video) {
+        openModal('Video', {
+          videoId: medias[index].video,
+          previousModal: { images: medias, startSlideIndex: index },
+        });
+      }
     },
     [isMobileM, medias, openModal],
   );
-
-  const handleReady = useCallback((e) => {
-    setPlayer(e.target);
-  }, []);
 
   useKeyboardEvents({
     onArrowLeft: handleClickPrev,
@@ -105,8 +106,9 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   });
 
   useEffect(() => {
-    scrollTo(mainMediaIndex);
-  }, [mainMediaIndex, scrollTo]);
+    const scrollPosition = startSlideIndex || mainMediaIndex;
+    scrollTo(scrollPosition);
+  }, [mainMediaIndex, startSlideIndex, scrollTo]);
 
   return (
     <ModalMain
@@ -160,21 +162,20 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
 
           <div className={styles.mainWrapper}>
             <div className={styles.mainMediaWrapper}>
-              {!medias[mainMediaIndex].video && (
-                <img className={styles.mainMedia} src={medias[mainMediaIndex].image} alt='' />
+              {!selectedMedia.video && (
+                <img className={styles.mainMedia} src={selectedMedia.image} alt='' />
               )}
 
-              {medias[mainMediaIndex].video && (
+              {selectedMedia.video && (
                 <div className={styles.videoContainer}>
                   <AsyncYouTube
                     className={styles.video}
-                    videoId={medias[mainMediaIndex].video}
+                    videoId={selectedMedia.video}
                     opts={{
                       playerVars: {
                         autoplay: 0,
                       },
                     }}
-                    onReady={handleReady}
                   />
                 </div>
               )}
