@@ -1,0 +1,48 @@
+.wrapper {
+}
+
+.headingWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-m);
+}
+
+.paymentsList {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.paymentHeading {
+  margin: 0;
+
+  font-weight: 400;
+  font-size: var(--size-l);
+  line-height: var(--lh-xl);
+}
+
+.paymentItem:first-child .paymentHeading {
+  padding-right: var(--space-s);
+
+  white-space: nowrap;
+}
+
+.paymentItem:not(:last-child) {
+  margin-bottom: var(--space-xb);
+}
+
+.paymentImage {
+  margin-right: var(--space-s);
+}
+
+.paymentDescription {
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+@media (--mobile) {
+  .cardsLogo {
+    padding-left: var(--space-xb);
+  }
+}
