@@ -1,4 +1,4 @@
-.card {
+.main {
   display: flex;
   align-items: center;
 }
@@ -17,19 +17,16 @@
   font-weight: 500;
 }
 
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.wrapperFooter {
   margin-top: var(--space-l);
 }
 
-.quantity {
-  width: 100px;
-}
+@media (--desktop) {
+  .preview {
+    width: 160px;
+  }
 
-.price {
-  composes: l from 'sizes';
-
-  font-weight: 500;
+  .content {
+    margin-left: var(--space-n);
+  }
 }
