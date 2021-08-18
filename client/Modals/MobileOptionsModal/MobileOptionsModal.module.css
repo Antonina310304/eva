@@ -1,0 +1,66 @@
+.content {
+  padding: var(--space-m) 0 var(--space-l);
+
+  background: var(--color-white);
+}
+
+.containerLabel {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-s);
+
+  cursor: pointer;
+}
+
+.label {
+  composes: n from 'sizes';
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 11px;
+  height: 8px;
+  margin-left: var(--space-xxs);
+
+  background-image: url('./iconArrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transition: transform 0.2s;
+}
+
+.options {
+  margin-top: var(--space-xs);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xxs) var(--space-s);
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-light-gray);
+  }
+
+  &.selected {
+    font-weight: 500;
+
+    &:after {
+      display: block;
+      width: 13px;
+      height: 16px;
+
+      background-image: url('./iconCheck.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      content: '';
+    }
+  }
+}
