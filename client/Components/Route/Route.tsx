@@ -11,7 +11,7 @@ export interface RouteProps extends BaseRouteProps {
 
 const Route: FC<RouteProps> = (props) => {
   const { path, exact = true, regional = true, ...restProps } = props;
-  const paths = [path, regional && `/:region${path}`].filter(Boolean) as string[];
+  const paths = [path, regional && path !== '/' && `/:region${path}`].filter(Boolean) as string[];
   const request = useRequest();
   const meta = useMeta({ ssr: true });
 

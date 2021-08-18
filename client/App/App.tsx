@@ -16,6 +16,7 @@ const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
+const RouteB2b = loadable(() => import('@Routes/RouteB2b'));
 
 const App: FC = () => {
   return (
@@ -34,6 +35,10 @@ const App: FC = () => {
 
       <Route path='/site/warranty'>
         <RouteWarranty />
+      </Route>
+
+      <Route path='/b2b'>
+        <RouteB2b />
       </Route>
     </ModalsProvider>
   );
