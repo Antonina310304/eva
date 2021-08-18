@@ -1,4 +1,4 @@
-import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
+import { createStore, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
 import { ApiCart } from '@Api/Cart';
@@ -37,6 +37,7 @@ const addProduct = async (inputsParams: any[], options: any = {}) => {
 
     update(cartStore, (prevCart) => ({
       ...prevCart,
+      ...res.cart,
       newPositions: options.isRelated ? prevCart.newPositions : res.cart.newPositions,
     }));
     networkStore.set('success');
@@ -48,11 +49,7 @@ const addProduct = async (inputsParams: any[], options: any = {}) => {
   }
 };
 
-export const useCart = (initial?: CartData) => {
-  if (initial && !cartStore.value) {
-    cartStore.set(initial);
-  }
-
+export const useCart = () => {
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),
