@@ -40,3 +40,9 @@
     line-height: var(--lh-xxl);
   }
 }
+
+@media (--mobile) {
+  .title {
+    margin: 0;
+  }
+}

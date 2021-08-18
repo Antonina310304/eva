@@ -2,13 +2,13 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import Navigation from '@Pages/PageWarranty/elements/Navigation';
+import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import PageTitle from './elements/PageTitle';
 import Wrapper from './elements/Wrapper';
 import SberbankBanner from './elements/SberbankBanner';
 import VTBBanner from './elements/VTBBanner';
 import ListBlock from './elements/ListBlock';
-import Devider from './elements/Devider';
+import Divider from './elements/Divider';
 import ConditionsToBuyInCredit from './elements/ConditionsToBuyInCredit';
 import HowBuyInCredit from './elements/HowBuyInCredit';
 import Halva from './elements/Halva';
@@ -37,7 +37,7 @@ const PageCredit: FC<PageCreditProps> = (props) => {
     <div {...restProps} className={cn(styles.page, className)}>
       <PageTitle className={styles.pageTitle} title='Рассрочка и кредит' />
       <Wrapper>
-        <Navigation navigation={pageList} />
+        <InformationTabsNavigation className={styles.navigation} navigation={pageList} />
 
         <div className={styles.topText}>{top_text}</div>
       </Wrapper>
@@ -62,7 +62,7 @@ const PageCredit: FC<PageCreditProps> = (props) => {
           nuance={installment.note}
         />
 
-        <Devider className={styles.devider} />
+        <Divider className={styles.divider} />
 
         {meta.country === 'RUS' && (
           <>

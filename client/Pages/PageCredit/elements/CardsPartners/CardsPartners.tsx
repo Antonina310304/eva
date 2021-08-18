@@ -1,7 +1,7 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState, useRef } from 'react';
 import cn from 'classnames';
 
-import Gallery from '@UI/Gallery';
+import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useMedias from '@Hooks/useMedias';
 import Wrapper from '../Wrapper';
 import BankBanner from '../BankBanner';
@@ -18,60 +18,50 @@ export interface CardsPartnersProps extends HTMLAttributes<HTMLDivElement> {
 const CardsPartners: FC<CardsPartnersProps> = (props) => {
   const { className, partners, ...restProps } = props;
   const { isMobile } = useMedias();
-  const [slideIndex, setSlideIndex] = useState(0);
-  const [cardsPartners, setCardsPartners] = useState([
+  const cardsPartners = useRef([
     {
       id: 'halva',
-      name: 'Халва',
-      selected: true,
+      label: 'Халва',
     },
     {
       id: 'smart',
-      name: 'Смарт карта',
-      selected: false,
+      label: 'Смарт карта',
     },
     {
       id: 'cherepaha',
-      name: 'Черепаха',
-      selected: false,
+      label: 'Черепаха',
     },
     {
       id: 'pokupok',
-      name: 'Карта покупок',
-      selected: false,
+      label: 'Карта покупок',
     },
     {
       id: 'fun',
-      name: 'Карта FUN',
-      selected: false,
+      label: 'Карта FUN',
     },
     {
       id: 'fun-platinum',
-      name: 'FUN Platinum',
-      selected: false,
+      label: 'FUN Platinum',
     },
     {
       id: 'magnit',
-      name: 'Магнит',
-      selected: false,
+      label: 'Магнит',
     },
     {
       id: 'priorbank',
-      name: 'Priorbank',
-      selected: false,
+      label: 'Priorbank',
     },
   ]);
-  const selectedPartner = useMemo(() => partners[slideIndex], [partners, slideIndex]);
+  const [selectedTab, setSelectedTab] = useState(cardsPartners.current[0].id);
+  const [selectedPartner, setSelectedPartner] = useState(partners[0]);
 
-  const handleClickCard = useCallback(
-    (index) => {
-      const newSelectedCard = [...cardsPartners];
-      newSelectedCard[slideIndex].selected = false;
-      newSelectedCard[index].selected = true;
-      setCardsPartners(newSelectedCard);
-      setSlideIndex(index);
+  const handleChangeTab = useCallback(
+    (_e, tab: Tab) => {
+      setSelectedTab(tab.id);
+      const partnerCard = partners.find((partner) => partner.id === tab.id);
+      setSelectedPartner(partnerCard);
     },
-    [cardsPartners, slideIndex],
+    [partners],
   );
 
   return (
@@ -79,35 +69,13 @@ const CardsPartners: FC<CardsPartnersProps> = (props) => {
       <Wrapper>
         <ParagraphTitle title='Карты рассрочки' />
 
-        {isMobile ? (
-          <div className={styles.wrapperGallery}>
-            <Gallery className={styles.gallery} slideIndex={slideIndex} centered>
-              {cardsPartners.map((card, index) => (
-                <div className={styles.item} key={card.id}>
-                  <div
-                    className={cn(styles.card, { [styles.selected]: card.selected })}
-                    onClick={() => handleClickCard(index)}
-                  >
-                    {card.name}
-                  </div>
-                </div>
-              ))}
-            </Gallery>
-          </div>
-        ) : (
-          <div className={styles.cardsWrapper}>
-            {cardsPartners.map((card, index) => (
-              <div className={styles.item} key={card.id}>
-                <div
-                  className={cn(styles.card, { [styles.selected]: card.selected })}
-                  onClick={() => handleClickCard(index)}
-                >
-                  {card.name}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        <ButtonTabs
+          className={styles.buttonTabs}
+          scrollable={isMobile}
+          defaultValue={selectedTab}
+          tabs={cardsPartners.current}
+          onChangeTab={handleChangeTab}
+        />
       </Wrapper>
 
       <BankBanner className={styles.bankBanner} cardPartner={selectedPartner} />

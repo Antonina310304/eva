@@ -2,6 +2,10 @@
   --gap: var(--space-xb);
 }
 
+.navigation {
+  margin-top: var(--space-n);
+}
+
 .topText {
   margin-top: calc(var(--gap) + var(--space-n));
 
@@ -17,7 +21,7 @@
   margin-top: var(--gap);
 }
 
-.devider {
+.divider {
   margin-top: var(--gap);
 }
 

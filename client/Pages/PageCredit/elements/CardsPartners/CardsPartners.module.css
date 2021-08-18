@@ -41,6 +41,11 @@
   border: 1px solid var(--color-light-gray);
 }
 
+.buttonTabs {
+  margin-top: var(--space-l);
+  overflow: hidden;
+}
+
 .bankBanner {
   margin-top: var(--space-xb);
 }
