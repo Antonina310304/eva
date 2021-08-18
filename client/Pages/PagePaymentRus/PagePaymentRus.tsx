@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import Anchors from '@UI/Anchors';
+import Anchors from '@Components/Anchors';
 import styles from './PagePaymentRus.module.css';
 import PaymentOptions from './elements/PaymentOptions';
 
