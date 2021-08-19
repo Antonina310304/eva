@@ -1,0 +1,76 @@
+.conditionsToBuyInCredit {
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-xxl);
+}
+
+.condition {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  max-width: 305px;
+}
+
+.icon {
+  height: 50px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.icon.card {
+  width: 60px;
+
+  background-image: url('./sberCard.svg');
+}
+
+.icon.online {
+  width: 74px;
+
+  background-image: url('./sberOnline.svg');
+}
+
+.icon.passport {
+  width: 39px;
+
+  background-image: url('./passport.svg');
+}
+
+.text {
+  margin-left: var(--space-m);
+}
+
+@media (--mobile-m) {
+  .condition {
+    flex-direction: column;
+  }
+
+  .text {
+    margin-top: var(--space-m);
+    margin-left: 0;
+
+    text-align: center;
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .condition {
+    width: 100%;
+    max-width: unset;
+    margin-bottom: var(--space-l);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
