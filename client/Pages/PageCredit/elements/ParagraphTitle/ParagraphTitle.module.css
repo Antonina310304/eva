@@ -1,0 +1,22 @@
+.paragraphTitle {
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+@media (--desktop) {
+  .title {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-m);
+  }
+}

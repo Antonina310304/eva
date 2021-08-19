@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
 
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@
   height: inherit;
 }
 
-.imageWrapper {
+.mediaWrapper {
   margin-bottom: var(--space-n);
 
   &:last-child {
@@ -56,15 +56,19 @@
   }
 }
 
-.image {
+.media {
   width: 180px;
 
   cursor: pointer;
   opacity: 0.4;
 }
 
-.image.active {
+.media.active {
   opacity: 1;
+}
+
+.videoHeight {
+  padding-top: 66.7%;
 }
 
 .mainWrapper {
@@ -74,16 +78,17 @@
   padding: 0 var(--space-l);
 }
 
-.mainImageWrapper {
+.mainMediaWrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 1358px;
   height: 100%;
   margin: 0 auto;
 }
 
-.mainImage {
+.mainMedia {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -108,6 +113,27 @@
 
   transform: rotate(180deg);
   cursor: url(./next.svg), pointer;
+}
+
+.videoContainer {
+  position: relative;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+
+  width: 100%;
+  height: 100%;
 }
 
 @media (--desktop) {
@@ -139,7 +165,7 @@
     margin-top: var(--space-xl);
   }
 
-  .mainImageWrapper {
+  .mainMediaWrapper {
     height: 90.25%;
   }
 
@@ -151,7 +177,7 @@
     margin-top: var(--space-s);
   }
 
-  .imageWrapper {
+  .mediaWrapper {
     width: 105px;
     height: unset;
     height: 105px;
@@ -159,10 +185,19 @@
     padding: 0 var(--space-xxs);
   }
 
-  .image {
+  .media {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .videoHeight {
+    padding-top: 100%;
+  }
+
+  .video {
+    width: 90%;
+    margin: 0 auto;
   }
 }
 
@@ -191,7 +226,7 @@
     height: calc(100% - var(--space-m));
   }
 
-  .imageWrapper {
+  .mediaWrapper {
     width: calc(100% + var(--space-s));
     height: 100%;
     margin: 0;
@@ -200,17 +235,21 @@
     padding: 0;
   }
 
-  .image {
+  .media {
     width: 100%;
 
     cursor: default;
     opacity: 1;
   }
 
+  .videoHeight {
+    padding-top: 66.7%;
+  }
+
   .closePanel {
     justify-content: flex-end;
     width: 100%;
-    height: 50px;
+    height: 60px;
 
     background-color: var(--color-white);
   }

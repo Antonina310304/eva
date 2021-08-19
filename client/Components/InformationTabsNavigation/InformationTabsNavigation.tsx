@@ -4,14 +4,14 @@ import cn from 'classnames';
 import Link from '@UI/Link';
 import Gallery from '@UI/Gallery';
 import { NavigationItem } from '@Pages/PageWarranty/typings';
-import styles from './Navigation.module.css';
+import styles from './InformationTabsNavigation.module.css';
 
-export interface NavigationProps extends HTMLAttributes<HTMLDivElement> {
+export interface InformationTabsNavigationProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   navigation: NavigationItem[];
 }
 
-const Navigation: FC<NavigationProps> = (props) => {
+const InformationTabsNavigation: FC<InformationTabsNavigationProps> = (props) => {
   const { className, navigation, ...restProps } = props;
 
   const slideIndex = useMemo(() => {
@@ -39,4 +39,4 @@ const Navigation: FC<NavigationProps> = (props) => {
   );
 };
 
-export default memo(Navigation);
+export default memo(InformationTabsNavigation);

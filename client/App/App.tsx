@@ -15,6 +15,7 @@ export interface Data {
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
+const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
 const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
 
@@ -31,6 +32,10 @@ const App: FC = () => {
 
       <Route path='/product/:slug'>
         <RouteProduct />
+      </Route>
+
+      <Route exact path='/site/credit'>
+        <RouteCredit />
       </Route>
 
       <Route path='/site/warranty'>

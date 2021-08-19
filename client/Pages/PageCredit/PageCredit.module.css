@@ -1,0 +1,56 @@
+.page {
+  --gap: var(--space-xb);
+}
+
+.navigation {
+  margin-top: var(--space-n);
+}
+
+.topText {
+  margin-top: calc(var(--gap) + var(--space-n));
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.bankBanner {
+  margin-top: var(--gap);
+}
+
+.creditWithoutOverpayment {
+  margin-top: var(--gap);
+}
+
+.divider {
+  margin-top: var(--gap);
+}
+
+.conditionsToBuyInCredit {
+  margin-top: var(--gap);
+}
+
+.howBuyInCredit {
+  margin-top: var(--gap);
+}
+
+.halva {
+  margin-top: var(--gap);
+  margin-bottom: var(--space-e);
+}
+
+.cardsPartners {
+  margin-top: var(--gap);
+}
+
+@media (--desktop-m) {
+  .topText {
+    margin-top: var(--gap);
+  }
+}
+
+@media (--desktop) {
+  .halva {
+    margin-top: var(--gap);
+    margin-bottom: var(--gap);
+  }
+}
