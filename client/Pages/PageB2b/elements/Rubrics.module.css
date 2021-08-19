@@ -1,0 +1,94 @@
+.wrapper {
+  display: grid;
+  grid-gap: var(--space-xxl);
+  grid-template-columns: 1fr 1fr;
+}
+
+.picWrapper {
+  max-width: 720px;
+}
+
+.rubricsTitle {
+  padding-top: var(--space-l);
+  padding-bottom: var(--space-s);
+
+  color: var(--color-black);
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.rubricsContent {
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.rubricsItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rubricsPic {
+  width: 100%;
+  min-width: 720px;
+  height: 100%;
+  min-height: 476px;
+}
+
+@media (--desktop-m) {
+  .rubricsPic {
+    min-width: 513px;
+    min-height: 340px;
+  }
+}
+
+@media (--desktop) {
+  .rubricsPic {
+    min-width: 452px;
+    min-height: 300px;
+  }
+
+  .rubricsTitle {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .rubricsPic {
+    min-width: 354px;
+    min-height: 240px;
+    max-height: 240px;
+  }
+
+  .rubricsTitle {
+    padding-top: var(--space-n);
+    padding-bottom: var(--space-xs);
+
+    font-size: var(--size-l);
+    line-height: var(--lh-xm);
+  }
+
+  .rubricsContent {
+    font-size: var(--size-s);
+    line-height: var(--lh-s);
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    display: grid;
+    grid-gap: var(--space-xxl);
+    grid-template-columns: 1fr;
+  }
+
+  .rubricsPic {
+    min-width: 330px;
+    min-height: 220px;
+    max-height: 240px;
+  }
+
+  .rubricsTitle {
+    padding-bottom: var(--space-xs);
+  }
+}

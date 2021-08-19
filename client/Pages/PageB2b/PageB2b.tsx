@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { PageB2bData } from './typings';
 import styles from './PageB2b.module.css';
+import Rubrics from './elements';
 
 export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -11,10 +12,22 @@ export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2b: FC<PageB2bProps> = (props) => {
   const { className, page, ...restProps } = props;
+  const { banner, texts, rubrics } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      PageB2b
+      <h1 className={styles.pageTitle}>Мебель для бизнеса</h1>
+      <img className={styles.bannerImage} src={banner} />
+      <div className={styles.wrapper}>
+        <div className={styles.introduction}>
+          {texts.descriptions.map((text, index: number) => (
+            <div className={styles.text} key={index}>
+              {text}
+            </div>
+          ))}
+        </div>
+        <Rubrics rubrics={rubrics} />
+      </div>
     </div>
   );
 };
