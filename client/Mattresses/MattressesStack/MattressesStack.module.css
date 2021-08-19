@@ -37,15 +37,6 @@
     stroke: var(--color-black);
   }
 
-  svg g.actived path.aside {
-    fill: var(--color-medium-gray);
-  }
-
-  svg g.actived path.grafit,
-  svg g.actived path.upper {
-    fill: var(--color-dark-gray);
-  }
-
   svg g.raised {
     transform: translate3d(0, -20px, 0);
   }

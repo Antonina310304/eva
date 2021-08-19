@@ -1,12 +1,31 @@
-import React, { FC, HTMLAttributes, memo, useRef, useEffect, useCallback } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, memo, useRef, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 
+import hexToHsl from '@Utils/hexToHsl';
 import content from './content';
 import styles from './MattressesStack.module.css';
 
 export interface Sizes {
   width: number;
   height: number;
+}
+
+export interface LayerColors {
+  aside: string;
+  upper: string;
+  pattern: string;
+}
+
+export interface Layer {
+  elem: SVGGElement;
+  colors: Partial<LayerColors>;
+}
+
+export interface Stack {
+  width?: number;
+  height?: number;
+  svg?: SVGSVGElement;
+  layers?: Layer[];
 }
 
 export interface MattressesStackProps extends HTMLAttributes<HTMLDivElement> {
@@ -17,101 +36,135 @@ export interface MattressesStackProps extends HTMLAttributes<HTMLDivElement> {
 
 const MattressesStack: FC<MattressesStackProps> = (props) => {
   const { className, activeLayer = 0, onToggleLayer, ...restProps } = props;
+  const stack = useRef<Stack>(null);
   const refContainer = useRef<HTMLDivElement>();
-  const schema = useRef<SVGSVGElement>(null);
-  const layers = useRef<SVGGElement[]>([]);
-  const sizes = useRef<Sizes>(null);
   const selectedLayer = useRef<number>(null);
 
   const resetSelection = useCallback(() => {
-    schema.current.setAttribute('height', `${sizes.current.height}px`);
-    schema.current.classList.remove(styles.opened);
+    stack.current.svg?.setAttribute('height', `${stack.current.height}px`);
+    stack.current.svg?.classList.remove(styles.opened);
+
     selectedLayer.current = null;
 
-    layers.current.forEach((layer) => {
-      layer.classList.remove(styles.raised);
-      layer.classList.remove(styles.actived);
-      layer.classList.remove(styles.lowered);
+    stack.current.layers.forEach((layer) => {
+      layer.elem.classList.remove(styles.raised);
+      layer.elem.classList.remove(styles.actived);
+      layer.elem.classList.remove(styles.lowered);
     });
   }, []);
 
   const selectLayer = useCallback((target: SVGGElement) => {
-    const targetIndex = layers.current.findIndex((layer) => layer === target);
+    const targetIndex = stack.current.layers.findIndex((layer) => layer.elem === target);
     const isFirst = targetIndex === 0;
-    const isLast = layers.current.length - 1 === targetIndex;
+    const isLast = stack.current.layers.length - 1 === targetIndex;
     const diffHeight = isFirst || isLast ? 20 : 40;
 
-    const bigHeight = schema.current.height.baseVal.value + diffHeight;
+    const bigHeight = stack.current.height + diffHeight;
 
-    schema.current.setAttribute('height', `${bigHeight}px`);
-    schema.current.classList.add(styles.opened);
+    stack.current.svg?.setAttribute('height', `${bigHeight}px`);
+    stack.current.svg?.classList.add(styles.opened);
+
     selectedLayer.current = targetIndex;
 
-    layers.current.forEach((layer, index) => {
-      if (index < targetIndex) layer.classList.toggle(styles.raised);
-      if (index === targetIndex) layer.classList.toggle(styles.actived);
-      if (index > targetIndex) layer.classList.toggle(styles.lowered);
+    stack.current.layers.forEach((layer, index) => {
+      if (index < targetIndex) layer.elem.classList.toggle(styles.raised);
+      if (index === targetIndex) layer.elem.classList.toggle(styles.actived);
+      if (index > targetIndex) layer.elem.classList.toggle(styles.lowered);
     });
   }, []);
 
-  const transformPaths = useCallback((paths: SVGPathElement[]) => {
-    paths.forEach((path) => {
-      if (path.classList.contains('Aside')) path.classList.add(styles.aside);
-      if (path.classList.contains('Upper')) path.classList.add(styles.upper);
-      if (path.classList.contains('Pattern')) path.classList.add(styles.pattern);
+  const parseSvg = useCallback((svg: SVGSVGElement) => {
+    const width = svg.width.baseVal.value;
+    const height = svg.height.baseVal.value;
+    const groups = Array.from(svg.querySelectorAll('g'));
+    const layers = groups.reverse().map((elem) => {
+      const colors: any = {};
+      const pathElems = Array.from(elem.querySelectorAll('path'));
+
+      pathElems.forEach((pathElem) => {
+        const id = pathElem.getAttribute('id');
+        const fill = pathElem.getAttribute('fill');
+        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase();
+
+        colors[key] = fill;
+      });
+
+      return { elem, colors };
     });
+
+    stack.current = { svg, width, height, layers };
+  }, []);
+
+  const transformSvg = useCallback((svg: SVGSVGElement) => {
+    svg.setAttribute('height', `${stack.current.height}px`);
+    svg.setAttribute('width', `${stack.current.width}px`);
+
+    const groups = Array.from(svg.querySelectorAll('g'));
+
+    groups.forEach((group) => {
+      const paths = Array.from(group.querySelectorAll('path'));
+
+      paths.forEach((path) => {
+        const id = path.getAttribute('id');
+        const fill = path.getAttribute('fill');
+        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase();
+
+        if (key === 'upper') {
+          const { h, s, l } = hexToHsl(fill);
+          const newColor = `hsl(${h}, ${s}%, ${l - 10}%)`;
+
+          path.setAttribute('fill', newColor);
+        }
+
+        path.removeAttribute('id');
+        path.classList.add(styles[key]);
+      });
+
+      group.removeAttribute('id');
+    });
+
+    svg.removeAttribute('id');
   }, []);
 
   const handleClickSvg = useCallback(
     (e: MouseEvent) => {
-      let target = e.target as SVGElement;
+      let target = e.target as SVGSVGElement;
 
       try {
         while (target.tagName !== 'svg' && target.tagName !== 'g') {
-          target = (target.parentElement as unknown) as SVGElement;
+          target = (target.parentElement as unknown) as SVGSVGElement;
         }
 
-        const index = layers.current.findIndex((layer) => layer === target);
-        const targetLayer = layers.current[index];
-        const isAlreadyActive = targetLayer.classList.contains(styles.actived);
+        const index = stack.current.layers.findIndex((layer) => layer.elem === target);
+        const targetLayer = stack.current.layers[index];
+        const isAlreadyActive = targetLayer.elem.classList.contains(styles.actived);
 
         resetSelection();
-        selectLayer(targetLayer);
+        selectLayer(targetLayer.elem);
 
         if (onToggleLayer) onToggleLayer(e, isAlreadyActive ? null : index);
         // eslint-disable-next-line no-empty
       } catch {}
     },
-    [onToggleLayer, resetSelection, selectLayer],
+    [onToggleLayer, resetSelection, selectLayer, stack],
   );
 
   useEffect(() => {
     if (!refContainer.current) return;
 
     const svg = refContainer.current.querySelector('svg');
-    const groups = Array.from(svg.querySelectorAll('g'));
-    const paths = Array.from(svg.querySelectorAll('path'));
-    const height = svg.height.baseVal.value;
-    const width = svg.width.baseVal.value;
 
-    schema.current = svg;
-    sizes.current = { width, height };
-    layers.current = groups.reverse();
-
-    transformPaths(paths);
-    svg.setAttribute('height', `${height}px`);
-    svg.setAttribute('width', `${width}px`);
-    svg.addEventListener('click', handleClickSvg);
-  }, [handleClickSvg, transformPaths]);
+    parseSvg(svg);
+    transformSvg(svg);
+  }, [handleClickSvg, parseSvg, transformSvg]);
 
   useEffect(() => {
-    if (!layers.current) return;
     if (selectedLayer.current === activeLayer) return;
 
-    const target = layers.current[activeLayer];
+    const target = stack.current.layers[activeLayer];
 
     if (target) {
-      selectLayer(target);
+      selectLayer(target.elem);
     } else {
       resetSelection();
     }
@@ -124,6 +177,7 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: content }}
       ref={refContainer}
+      onClick={handleClickSvg}
     />
   );
 };
