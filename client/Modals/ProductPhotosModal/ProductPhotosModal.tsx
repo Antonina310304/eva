@@ -14,12 +14,14 @@ import ProgressBar from '@UI/ProgressBar';
 import IconClose from '@UI/IconClose';
 import styles from './ProductPhotosModal.module.css';
 
+export interface ModalData {
+  images: any[];
+  startSlideIndex?: number;
+}
+
 const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { images: medias, startSlideIndex } = modal.data as {
-    images: any[];
-    startSlideIndex: number;
-  };
+  const { images: medias, startSlideIndex } = modal.data as ModalData;
   const [, { closeModal, openModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
@@ -88,6 +90,8 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     (_e, index) => {
       if (window.cancelClick) return;
 
+      if (!isMobileM) setMainMediaIndex(index);
+
       if (isMobileM && medias[index].video) {
         openModal('Video', {
           videoId: medias[index].video,
@@ -106,9 +110,11 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   });
 
   useEffect(() => {
-    const scrollPosition = startSlideIndex || mainMediaIndex;
-    scrollTo(scrollPosition);
-  }, [mainMediaIndex, startSlideIndex, scrollTo]);
+    if (isMobileM) {
+      const scrollPosition = startSlideIndex || mainMediaIndex;
+      scrollTo(scrollPosition);
+    } else scrollTo(mainMediaIndex);
+  }, [mainMediaIndex, startSlideIndex, scrollTo, isMobileM]);
 
   return (
     <ModalMain

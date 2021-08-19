@@ -124,7 +124,7 @@
   overflow: hidden;
 }
 
-iframe.video {
+.video {
   position: absolute;
   top: 0;
   right: 0;
@@ -193,6 +193,11 @@ iframe.video {
 
   .videoHeight {
     padding-top: 100%;
+  }
+
+  .video {
+    width: 90%;
+    margin: 0 auto;
   }
 }
 

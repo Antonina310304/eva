@@ -66,6 +66,7 @@ const VideoModal: FC<ModalMainProps> = (props) => {
     >
       <div className={styles.container}>
         <AsyncYouTube
+          className={styles.video}
           videoId={modal.data.videoId}
           opts={{
             height: sizes.height.toString(),
