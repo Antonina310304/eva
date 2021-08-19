@@ -15,7 +15,7 @@ const RouteCredit: FC = () => {
 
   return (
     <TemplateMain>
-      <PageCredit page={page.data as any} meta={meta.data} key={pathname} />
+      <PageCredit page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );
 };
