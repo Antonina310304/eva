@@ -1,0 +1,22 @@
+.requisites {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.organizationName {
+  margin-top: 20px;
+}
+
+.legalAddress {
+  margin-top: 15px;
+}
+
+.innkpp {
+  margin-top: 15px;
+}

@@ -1,2 +1,49 @@
 .page {
 }
+
+.pageTitle {
+  margin-top: 35px;
+}
+
+.hotLineWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 80px;
+
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.callIcon {
+  width: 44px;
+  height: 42px;
+
+  background-image: url('./image/hotCall.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.hotLine {
+  margin-left: 20px;
+}
+
+.hotNumber {
+  margin-left: 20px;
+}
+
+.hotInfo {
+  margin-top: 20px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.requisites {
+  margin-top: 40px;
+}
+
+.buttonsContactForms {
+  margin-top: 100px;
+}
