@@ -15,51 +15,18 @@ export interface CardsPartnersProps extends HTMLAttributes<HTMLDivElement> {
   partners: Partner[];
 }
 
-const tabs = [
-  {
-    id: 'halva',
-    label: 'Халва',
-  },
-  {
-    id: 'smart',
-    label: 'Смарт карта',
-  },
-  {
-    id: 'cherepaha',
-    label: 'Черепаха',
-  },
-  {
-    id: 'pokupok',
-    label: 'Карта покупок',
-  },
-  {
-    id: 'fun',
-    label: 'Карта FUN',
-  },
-  {
-    id: 'fun-platinum',
-    label: 'FUN Platinum',
-  },
-  {
-    id: 'magnit',
-    label: 'Магнит',
-  },
-  {
-    id: 'priorbank',
-    label: 'Priorbank',
-  },
-];
-
 const CardsPartners: FC<CardsPartnersProps> = (props) => {
   const { className, partners, ...restProps } = props;
   const { isMobile } = useMedias();
+  const [selectedTab, setSelectedTab] = useState(partners[0].id);
 
-  const [selectedTab, setSelectedTab] = useState(tabs[0].id);
+  const tabs = useMemo(() => {
+    return partners.map((partner) => ({ id: partner.id, label: partner.name }));
+  }, [partners]);
 
-  const selectedPartner = useMemo(() => partners.find((partner) => partner.id === selectedTab), [
-    partners,
-    selectedTab,
-  ]);
+  const selectedPartner = useMemo(() => {
+    return partners.find((partner) => partner.id === selectedTab);
+  }, [partners, selectedTab]);
 
   const handleChangeTab = useCallback((_e, tab: Tab) => {
     setSelectedTab(tab.id);
