@@ -16,7 +16,7 @@ const VideoPreview: FC<VideoPreviewProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.videoPreview, className)}>
       <Image className={cn(styles.posterImage, cnPreviewHeight)} src={src} />
-      <div className={styles.posterIcon} />
+      <div className={styles.playIcon} />
     </div>
   );
 };
