@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, MouseEvent, memo, useRef, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 
+import isValidHexColor from '@Utils/isValidHexColor';
 import hexToHsl from '@Utils/hexToHsl';
 import content from './content';
 import styles from './MattressesStack.module.css';
@@ -10,16 +11,30 @@ export interface Sizes {
   height: number;
 }
 
+export interface LayerColor {
+  main: string;
+  hover: string;
+}
+
 export interface LayerColors {
-  aside: string;
-  upper: string;
-  pattern: string;
+  aside: LayerColor;
+  upper: LayerColor;
+  pattern: LayerColor;
+}
+
+export interface LayerPaths {
+  aside: SVGPathElement;
+  upper: SVGPathElement;
+  pattern: SVGPathElement;
 }
 
 export interface Layer {
   elem: SVGGElement;
   colors: Partial<LayerColors>;
+  paths: Partial<LayerPaths>;
 }
+
+export type PathIds = 'aside' | 'upper' | 'pattern';
 
 export interface Stack {
   width?: number;
@@ -47,6 +62,10 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
     selectedLayer.current = null;
 
     stack.current.layers.forEach((layer) => {
+      Object.entries(layer.paths).forEach(([key, path]) => {
+        path.setAttribute('fill', layer.colors[key as PathIds].main);
+      });
+
       layer.elem.classList.remove(styles.raised);
       layer.elem.classList.remove(styles.actived);
       layer.elem.classList.remove(styles.lowered);
@@ -67,8 +86,16 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
     selectedLayer.current = targetIndex;
 
     stack.current.layers.forEach((layer, index) => {
+      const actived = index === targetIndex;
+
+      if (!actived) {
+        Object.entries(layer.paths).forEach(([key, path]) => {
+          path.setAttribute('fill', layer.colors[key as PathIds].hover);
+        });
+      }
+
+      if (actived) layer.elem.classList.toggle(styles.actived);
       if (index < targetIndex) layer.elem.classList.toggle(styles.raised);
-      if (index === targetIndex) layer.elem.classList.toggle(styles.actived);
       if (index > targetIndex) layer.elem.classList.toggle(styles.lowered);
     });
   }, []);
@@ -78,18 +105,32 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
     const height = svg.height.baseVal.value;
     const groups = Array.from(svg.querySelectorAll('g'));
     const layers = groups.reverse().map((elem) => {
-      const colors: any = {};
+      const colors: Layer['colors'] = {};
+      const paths: Layer['paths'] = {};
       const pathElems = Array.from(elem.querySelectorAll('path'));
 
       pathElems.forEach((pathElem) => {
         const id = pathElem.getAttribute('id');
         const fill = pathElem.getAttribute('fill');
-        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase();
+        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase() as PathIds;
 
-        colors[key] = fill;
+        paths[key] = pathElem;
+        colors[key] = { main: fill, hover: fill };
+
+        if (isValidHexColor(fill)) {
+          const { h, s, l } = hexToHsl(fill);
+          const color = { main: fill, hover: `hsl(${h}, ${s}%, ${l + 10}%)` };
+
+          colors[key] = color;
+
+          if (key === 'upper') {
+            colors.upper.main = `hsl(${h}, ${s}%, ${l - 10}%)`;
+            colors.upper.hover = `hsl(${h}, ${s}%, ${l}%)`;
+          }
+        }
       });
 
-      return { elem, colors };
+      return { elem, colors, paths };
     });
 
     stack.current = { svg, width, height, layers };
@@ -101,22 +142,17 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
 
     const groups = Array.from(svg.querySelectorAll('g'));
 
-    groups.forEach((group) => {
+    groups.forEach((group, indexGroup) => {
       const paths = Array.from(group.querySelectorAll('path'));
 
       paths.forEach((path) => {
         const id = path.getAttribute('id');
-        const fill = path.getAttribute('fill');
-        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase();
-
-        if (key === 'upper') {
-          const { h, s, l } = hexToHsl(fill);
-          const newColor = `hsl(${h}, ${s}%, ${l - 10}%)`;
-
-          path.setAttribute('fill', newColor);
-        }
+        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase() as PathIds;
+        const index = groups.length - indexGroup - 1;
+        const layer = stack.current.layers[index];
 
         path.removeAttribute('id');
+        path.setAttribute('fill', layer.colors[key].main);
         path.classList.add(styles[key]);
       });
 

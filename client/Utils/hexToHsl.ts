@@ -5,7 +5,7 @@ export interface HSL {
 }
 
 export default function hexToHsl(hex: string): HSL {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex.toLowerCase());
 
   let r = parseInt(result[1], 16);
   let g = parseInt(result[2], 16);
