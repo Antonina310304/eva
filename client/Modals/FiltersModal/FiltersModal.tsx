@@ -9,10 +9,10 @@ const formatName = (name: string) => name.replace(/ /g, '');
 const FiltersModal: FC<ModalSidebarProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const { selectedFilterId } = modal.data;
-  const [scrollTop, setScrollTop] = useState(0);
+  const [scrollTop, setScrollTop] = useState(null);
   const refContent = useRef<HTMLDivElement>();
 
-  useEffect(() => {
+  const handleOpen = useCallback(() => {
     if (!refContent.current) return;
     if (!selectedFilterId) return;
 
@@ -22,7 +22,11 @@ const FiltersModal: FC<ModalSidebarProps> = (props) => {
     if (!groupElem) return;
 
     setScrollTop(groupElem.offsetTop);
+    setTimeout(() => setScrollTop(undefined));
   }, [selectedFilterId]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => handleOpen(), []);
 
   return (
     <ModalSidebar
