@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useRef } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
 import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
@@ -15,67 +15,70 @@ export interface CardsPartnersProps extends HTMLAttributes<HTMLDivElement> {
   partners: Partner[];
 }
 
+const tabs = [
+  {
+    id: 'halva',
+    label: 'Халва',
+  },
+  {
+    id: 'smart',
+    label: 'Смарт карта',
+  },
+  {
+    id: 'cherepaha',
+    label: 'Черепаха',
+  },
+  {
+    id: 'pokupok',
+    label: 'Карта покупок',
+  },
+  {
+    id: 'fun',
+    label: 'Карта FUN',
+  },
+  {
+    id: 'fun-platinum',
+    label: 'FUN Platinum',
+  },
+  {
+    id: 'magnit',
+    label: 'Магнит',
+  },
+  {
+    id: 'priorbank',
+    label: 'Priorbank',
+  },
+];
+
 const CardsPartners: FC<CardsPartnersProps> = (props) => {
   const { className, partners, ...restProps } = props;
   const { isMobile } = useMedias();
-  const cardsPartners = useRef([
-    {
-      id: 'halva',
-      label: 'Халва',
-    },
-    {
-      id: 'smart',
-      label: 'Смарт карта',
-    },
-    {
-      id: 'cherepaha',
-      label: 'Черепаха',
-    },
-    {
-      id: 'pokupok',
-      label: 'Карта покупок',
-    },
-    {
-      id: 'fun',
-      label: 'Карта FUN',
-    },
-    {
-      id: 'fun-platinum',
-      label: 'FUN Platinum',
-    },
-    {
-      id: 'magnit',
-      label: 'Магнит',
-    },
-    {
-      id: 'priorbank',
-      label: 'Priorbank',
-    },
-  ]);
-  const [selectedTab, setSelectedTab] = useState(cardsPartners.current[0].id);
-  const [selectedPartner, setSelectedPartner] = useState(partners[0]);
 
-  const handleChangeTab = useCallback(
-    (_e, tab: Tab) => {
-      setSelectedTab(tab.id);
-      const partnerCard = partners.find((partner) => partner.id === tab.id);
-      setSelectedPartner(partnerCard);
-    },
-    [partners],
-  );
+  const [selectedTab, setSelectedTab] = useState(tabs[0].id);
+
+  const selectedPartner = useMemo(() => partners.find((partner) => partner.id === selectedTab), [
+    partners,
+    selectedTab,
+  ]);
+
+  const handleChangeTab = useCallback((_e, tab: Tab) => {
+    setSelectedTab(tab.id);
+  }, []);
 
   return (
     <div {...restProps} className={cn(styles.cardsPartners, className)}>
       <Wrapper>
         <ParagraphTitle title='Карты рассрочки' />
 
-        <ButtonTabs
-          className={styles.buttonTabs}
-          scrollable={isMobile}
-          defaultValue={selectedTab}
-          tabs={cardsPartners.current}
-          onChangeTab={handleChangeTab}
-        />
+        <div className={styles.buttonTabsWrapper}>
+          <ButtonTabs
+            className={styles.buttonTabs}
+            scrollable={isMobile}
+            defaultValue={selectedTab}
+            tabs={tabs}
+            onChangeTab={handleChangeTab}
+          />
+        </div>
       </Wrapper>
 
       <BankBanner className={styles.bankBanner} cardPartner={selectedPartner} />

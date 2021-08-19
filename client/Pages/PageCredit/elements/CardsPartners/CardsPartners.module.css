@@ -41,7 +41,7 @@
   border: 1px solid var(--color-light-gray);
 }
 
-.buttonTabs {
+.buttonTabsWrapper {
   margin-top: var(--space-l);
   overflow: hidden;
 }
@@ -65,5 +65,13 @@
   .item {
     margin: 0;
     padding: 0 calc(var(--space-s) / 2);
+  }
+
+  .buttonTabsWrapper {
+    height: 40px;
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
   }
 }

@@ -1,13 +1,22 @@
 import { BreadcrumbData } from '@Types/Breadcrumbs';
 import { NavigationItem } from '@Pages/PageWarranty/typings';
 
+export interface Condition {
+  digit: number;
+  symbol: string;
+}
+
 export interface Banner {
-  conditions: Array<{ digit: number; symbol: string }>;
+  conditions: Condition[];
   id: string;
-  logo?: string; // для логотипа Сбера
-  anchor_src?: string; // для логотипа ВТБ
-  text?: string; // описание для Сбера
-  list?: string[]; // описание для ВТБ
+  /** для логотипа Сбера */
+  logo?: string;
+  /** для логотипа ВТБ */
+  anchor_src?: string;
+  /** описание для Сбера */
+  text?: string;
+  /** описание для ВТБ */
+  list?: string[];
   note: string;
 }
 
