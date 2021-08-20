@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import Anchors from '@Components/Anchors';
+import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import styles from './PagePaymentBlr.module.css';
 import PaymentOptions from './elements/PaymentOptionsBlr';
 import PayOnline from './elements/PayOnline';
@@ -22,7 +22,7 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>Способы оплаты</h1>
-      <Anchors anchors={pageMenu} />
+      <InformationTabsNavigation navigation={pageMenu} />
       <div className={styles.wrapper}>
         <div className={styles.introduction}>{teaserText}</div>
         <PaymentOptions />
@@ -100,10 +100,7 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
           </li>
           <li className={styles.step}>
             <span className={styles.number}>4</span>
-            <p className={styles.description}>
-              Далее Вы попадаете на страницу вашего заказа, где необходимо выбрать «Перейти к
-              оплате»;
-            </p>
+            <p className={styles.description}>Совершить платеж;</p>
           </li>
         </ul>
         <p className={styles.text}>

@@ -15,23 +15,31 @@ const PayOnline: FC<PayOnlineProps> = (props) => {
       <h3 className={styles.heading}>Что необходимо для оплаты заказа онлайн?</h3>
       <ul className={styles.list}>
         <li className={styles.item}>
-          <span className={styles.number}>1</span>
+          <div>
+            <span className={styles.number}>1</span>
+          </div>
           <p className={styles.description}>
             Выберите товар на сайте divan.by и нажмите «Добавить в корзину»
           </p>
         </li>
         <li className={styles.item}>
-          <span className={styles.number}>2</span>
+          <div>
+            <span className={styles.number}>2</span>
+          </div>
           <p className={styles.description}>
             В корзине нажмите «Оформить заказ» и заполните все необходимые данные;
           </p>
         </li>
         <li className={styles.item}>
-          <span className={styles.number}>3</span>
+          <div>
+            <span className={styles.number}>3</span>
+          </div>
           <p className={styles.description}>В способе оплаты выберите пункт «Банковская карта»</p>
         </li>
         <li className={styles.item}>
-          <span className={styles.number}>4</span>
+          <div>
+            <span className={styles.number}>4</span>
+          </div>
           <p className={styles.description}>
             Далее Вы попадаете на страницу вашего заказа, где необходимо выбрать «Перейти к оплате»;
           </p>

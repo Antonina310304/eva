@@ -203,14 +203,14 @@
 }
 
 @media (--mobile) {
-  .introduction {
-    max-width: 300px;
-  }
-
   .inner {
     padding: 0;
 
     list-style: none;
+  }
+
+  .headingWrapper {
+    flex-wrap: nowrap;
   }
 
   .pic {

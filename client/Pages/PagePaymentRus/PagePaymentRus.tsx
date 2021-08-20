@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import Anchors from '@Components/Anchors';
+import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import styles from './PagePaymentRus.module.css';
 import PaymentOptions from './elements/PaymentOptions';
 
@@ -19,7 +19,7 @@ const PagePaymentRus: FC<PagePaymentRusProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>{title}</h1>
-      <Anchors anchors={pageMenu} />
+      <InformationTabsNavigation navigation={pageMenu} />
       <div className={styles.wrapper}>
         <div className={styles.introduction}>{teaserText}</div>
         <PaymentOptions />
