@@ -146,6 +146,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
           <Filters
             count={catalog.productsTotalCount}
             groups={page.groups}
+            isMatrasyCategory={page.isMatrasyCategory}
             key={page.categoryTranslite}
             onOpen={hanleOpenFilters}
             onChangeSort={handleApplyFilters}

@@ -30,6 +30,11 @@
   background-size: contain;
 }
 
+.wrapperLabels {
+  display: flex;
+  align-items: center;
+}
+
 .labels {
   display: flex;
   align-items: center;
@@ -41,6 +46,20 @@
   &:last-child {
     margin-right: 0;
   }
+}
+
+.buttonMattresses {
+  margin-right: var(--space-xl);
+}
+
+.iconMattresses {
+  width: 30px;
+  height: 30px;
+  margin-right: var(--space-xs);
+
+  background-image: url('./iconMattresses.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 @media (--desktop) {
@@ -56,6 +75,16 @@
 
   .groups {
     margin-top: var(--space-n);
+  }
+
+  .wrapperLabels {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: var(--space-n);
+  }
+
+  .buttonMattresses {
+    margin-right: 0;
   }
 
   .labels {
