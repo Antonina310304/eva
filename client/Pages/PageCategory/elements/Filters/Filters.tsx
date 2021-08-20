@@ -3,19 +3,22 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { GroupData } from '@Pages/PageCategory/typings';
 import Dropdown from '../Dropdown';
+import GroupsPopup from '../GroupsPopup';
 import OptionsPopup from '../OptionsPopup';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   count?: number;
+  groups?: GroupData[];
   onOpen?: (e: MouseEvent, id: string) => void;
   onChangeSort?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, count, onOpen, onChangeSort, ...restProps } = props;
+  const { className, count, groups, onOpen, onChangeSort, ...restProps } = props;
   const filtrator = useFiltrator();
 
   const labelSort = useMemo(() => {
@@ -74,7 +77,9 @@ const Filters: FC<FiltersProps> = (props) => {
       </div>
 
       <div className={styles.labels}>
-        {/* <Dropdown className={styles.label} label='По группам' /> */}
+        <Dropdown className={styles.label} label='По группам'>
+          <GroupsPopup label='По группам' groups={groups} />
+        </Dropdown>
 
         <Dropdown className={styles.label} label={labelSort}>
           <OptionsPopup
