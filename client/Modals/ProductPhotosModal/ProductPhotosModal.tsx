@@ -2,6 +2,8 @@ import React, { FC, memo, useCallback, useState, useEffect, useRef } from 'react
 import cn from 'classnames';
 
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
+import AsyncYouTube from '@Components/AsyncYouTube';
+import VideoPreview from '@Components/VideoPreview';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import useKeyboardEvents from '@Hooks/useKeyboardEvents';
@@ -12,25 +14,32 @@ import ProgressBar from '@UI/ProgressBar';
 import IconClose from '@UI/IconClose';
 import styles from './ProductPhotosModal.module.css';
 
+export interface ModalData {
+  images: any[];
+  startSlideIndex?: number;
+}
+
 const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { images } = modal.data as { images: any[] };
-  const [, { closeModal }] = useModals();
-  const { isDesktop, isMobile } = useMedias();
+  const { images: medias, startSlideIndex } = modal.data as ModalData;
+  const [, { closeModal, openModal }] = useModals();
+  const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
-  const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [mainMediaIndex, setMainMediaIndex] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
   const refScroll = useRef(null);
 
+  const selectedMedia = medias[mainMediaIndex];
+
   const normalizeIndex = useCallback(
     (value: number) => {
-      if (value < 0) return images.length - 1;
-      if (value > images.length - 1) return 0;
+      if (value < 0) return medias.length - 1;
+      if (value > medias.length - 1) return 0;
 
       return value;
     },
-    [images.length],
+    [medias.length],
   );
 
   const scrollTo = useCallback((index) => {
@@ -70,20 +79,27 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   }, []);
 
   const handleClickNext = useCallback(() => {
-    setMainImageIndex((prev) => normalizeIndex(prev + 1));
+    setMainMediaIndex((prev) => normalizeIndex(prev + 1));
   }, [normalizeIndex]);
 
   const handleClickPrev = useCallback(() => {
-    setMainImageIndex((prev) => normalizeIndex(prev - 1));
+    setMainMediaIndex((prev) => normalizeIndex(prev - 1));
   }, [normalizeIndex]);
 
-  const handleClickPreviewImage = useCallback(
+  const handleClickPreviewMedia = useCallback(
     (_e, index) => {
-      if (isMobile) return;
       if (window.cancelClick) return;
-      setMainImageIndex(index);
+
+      if (!isMobileM) setMainMediaIndex(index);
+
+      if (isMobileM && medias[index].video) {
+        openModal('Video', {
+          videoId: medias[index].video,
+          previousModal: { images: medias, startSlideIndex: index },
+        });
+      }
     },
-    [isMobile],
+    [isMobileM, medias, openModal],
   );
 
   useKeyboardEvents({
@@ -94,8 +110,11 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   });
 
   useEffect(() => {
-    scrollTo(mainImageIndex);
-  }, [mainImageIndex, scrollTo]);
+    if (isMobileM) {
+      const scrollPosition = startSlideIndex || mainMediaIndex;
+      scrollTo(scrollPosition);
+    } else scrollTo(mainMediaIndex);
+  }, [mainMediaIndex, startSlideIndex, scrollTo, isMobileM]);
 
   return (
     <ModalMain
@@ -117,15 +136,30 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
               onScroll={(values) => setScrollTop(values.scrollTop)}
             >
               <div className={styles.leftScrollContainer} ref={refScroll}>
-                {images.map((image, index) => (
-                  <div className={styles.imageWrapper} key={index}>
-                    <img
-                      className={cn(styles.image, {
-                        [styles.active]: index === mainImageIndex,
-                      })}
-                      src={image.image}
-                      onClick={(e) => handleClickPreviewImage(e, index)}
-                    />
+                {medias.map((media, index) => (
+                  <div
+                    className={styles.mediaWrapper}
+                    key={index}
+                    onClick={(e) => handleClickPreviewMedia(e, index)}
+                  >
+                    {!media.video && (
+                      <img
+                        className={cn(styles.media, {
+                          [styles.active]: index === mainMediaIndex,
+                        })}
+                        src={media.image}
+                      />
+                    )}
+
+                    {media.video && (
+                      <VideoPreview
+                        className={cn(styles.media, {
+                          [styles.active]: index === mainMediaIndex,
+                        })}
+                        src={media.image}
+                        cnPreviewHeight={styles.videoHeight}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -133,12 +167,32 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
           </div>
 
           <div className={styles.mainWrapper}>
-            <div className={styles.mainImageWrapper}>
-              <img className={styles.mainImage} src={images[mainImageIndex].image} alt='' />
+            <div className={styles.mainMediaWrapper}>
+              {!selectedMedia.video && (
+                <img className={styles.mainMedia} src={selectedMedia.image} alt='' />
+              )}
+
+              {selectedMedia.video && (
+                <div className={styles.videoContainer}>
+                  <AsyncYouTube
+                    className={styles.video}
+                    videoId={selectedMedia.video}
+                    opts={{
+                      playerVars: {
+                        autoplay: 0,
+                      },
+                    }}
+                  />
+                </div>
+              )}
             </div>
 
-            <div className={cn(styles.arrow, styles.prev)} onClick={handleClickPrev} />
-            <div className={cn(styles.arrow, styles.next)} onClick={handleClickNext} />
+            {!medias[mainMediaIndex].video && (
+              <>
+                <div className={cn(styles.arrow, styles.prev)} onClick={handleClickPrev} />
+                <div className={cn(styles.arrow, styles.next)} onClick={handleClickNext} />
+              </>
+            )}
           </div>
 
           {isDesktop && (
@@ -149,13 +203,30 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
                 onChangeCurrent={handleChangeCurrent}
                 onChangeProgress={handleChangeProgress}
               >
-                {images.map((image, index) => (
-                  <div className={styles.imageWrapper} key={index}>
-                    <img
-                      className={cn(styles.image, { [styles.active]: index === mainImageIndex })}
-                      src={image.image}
-                      onClick={(e) => handleClickPreviewImage(e, index)}
-                    />
+                {medias.map((media, index) => (
+                  <div
+                    className={styles.mediaWrapper}
+                    key={index}
+                    onClick={(e) => handleClickPreviewMedia(e, index)}
+                  >
+                    {!media.video && (
+                      <img
+                        className={cn(styles.media, {
+                          [styles.active]: index === mainMediaIndex,
+                        })}
+                        src={media.image}
+                      />
+                    )}
+
+                    {media.video && (
+                      <VideoPreview
+                        className={cn(styles.media, {
+                          [styles.active]: index === mainMediaIndex,
+                        })}
+                        src={media.image}
+                        cnPreviewHeight={styles.videoHeight}
+                      />
+                    )}
                   </div>
                 ))}
               </Gallery>
