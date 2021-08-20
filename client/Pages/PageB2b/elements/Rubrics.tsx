@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';
+import Image from '@UI/Image';
 import styles from './Rubrics.module.css';
 import { RubricsItem } from '../typings';
 
@@ -18,7 +19,7 @@ const Rubrics: FC<RubricsProps> = (props) => {
       {rubrics.map((item, index) => (
         <div className={styles.rubricsItem} key={index}>
           <div className={styles.picWrapper}>
-            <img className={styles.rubricsPic} src={item.src} />
+            <Image className={styles.rubricsPic} src={item.src} />
           </div>
           <Link className={styles.rubricsTitle} view='simple' to={item.link}>
             {item.title}
