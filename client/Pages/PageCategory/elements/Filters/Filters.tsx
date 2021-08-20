@@ -1,13 +1,11 @@
 import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 
 import Button from '@UI/Button';
-import Link from '@UI/Link';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import { GroupData } from '@Pages/PageCategory/typings';
 import Dropdown from '../Dropdown';
-import GroupsPopup from '../GroupsPopup';
-import OptionsPopup from '../OptionsPopup';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
@@ -18,6 +16,10 @@ export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   onOpen?: (e: MouseEvent, id: string) => void;
   onChangeSort?: (e: MouseEvent) => void;
 }
+
+const Link = loadable(() => import('@UI/Link'));
+const GroupsPopup = loadable(() => import('../GroupsPopup'));
+const OptionsPopup = loadable(() => import('../OptionsPopup'));
 
 const Filters: FC<FiltersProps> = (props) => {
   const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;

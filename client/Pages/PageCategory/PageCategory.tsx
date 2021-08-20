@@ -9,18 +9,14 @@ import React, {
   useRef,
 } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { ApiCategory } from '@Api/Category';
-import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
-import ProductMixedCatalog from '@Components/ProductMixedCatalog';
 import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import { CatalogData } from '@Types/Catalog';
-import Filters from './elements/Filters';
-import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
-import PopularLinks from './elements/PopularLinks';
 
 export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -28,6 +24,12 @@ export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
   slug: string;
   path: string;
 }
+
+const ProductSectionsCatalog = loadable(() => import('@Components/ProductSectionsCatalog'));
+const ProductMixedCatalog = loadable(() => import('@Components/ProductMixedCatalog'));
+const Filters = loadable(() => import('./elements/Filters'));
+const Subcategories = loadable(() => import('./elements/Subcategories'));
+const PopularLinks = loadable(() => import('./elements/PopularLinks'));
 
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, slug, path, ...restProps } = props;
