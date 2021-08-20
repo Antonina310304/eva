@@ -2,17 +2,17 @@
 }
 
 .pageTitle {
-  margin-top: 35px;
+  margin-top: var(--space-xl);
 }
 
 .hotLineWrapper {
   display: flex;
   align-items: center;
-  margin-top: 80px;
+  margin-top: var(--space-e);
 
   font-weight: 500;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: var(--size-l);
+  line-height: var(--lh-xm);
 }
 
 .callIcon {
@@ -25,25 +25,79 @@
   background-size: contain;
 }
 
-.hotLine {
-  margin-left: 20px;
+.hotContainer {
+  display: flex;
+  margin-left: var(--space-n);
 }
 
 .hotNumber {
-  margin-left: 20px;
+  margin-left: var(--space-n);
 }
 
 .hotInfo {
-  margin-top: 20px;
+  margin-top: var(--space-n);
 
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 }
 
 .requisites {
-  margin-top: 40px;
+  margin-top: var(--space-xxl);
 }
 
 .buttonsContactForms {
-  margin-top: 100px;
+  margin-top: var(--space-xxe);
+}
+
+.divider {
+  margin-top: var(--space-xxl);
+}
+
+.seeUs {
+  margin-top: var(--space-xxl);
+  margin-bottom: var(--space-e);
+}
+
+@media (--desktop-m) {
+  .buttonsContactForms {
+    margin-top: var(--space-e);
+  }
+
+  .divider {
+    margin-top: var(--space-n);
+  }
+}
+
+@media (--desktop) {
+  .hotLineWrapper {
+    margin-top: var(--space-xb);
+  }
+
+  .buttonsContactForms {
+    margin-top: var(--space-xb);
+  }
+
+  .divider {
+    margin-top: 0;
+  }
+
+  .seeUs {
+    margin-bottom: var(--space-xb);
+  }
+}
+
+@media (--mobile-m) {
+  .divider {
+    margin-top: var(--space-n);
+  }
+}
+
+@media (--mobile) {
+  .hotContainer {
+    flex-direction: column;
+  }
+
+  .hotNumber {
+    margin-left: 0;
+  }
 }

@@ -1,11 +1,6 @@
 .qualityDepartment {
 }
 
-.mainText {
-  font-size: var(--size-m);
-  line-height: var(--lh-xm);
-}
-
 .container {
   margin-top: var(--space-xxl);
   padding: var(--space-xxl) var(--space-xe);
@@ -22,23 +17,6 @@
   font-weight: 500;
   font-size: var(--size-l);
   line-height: var(--lh-m);
-}
-
-.ofertaLink {
-  display: flex;
-  align-items: center;
-}
-
-.iconOferta {
-  display: inline-block;
-  width: 20px;
-  height: 25px;
-  margin-right: var(--space-xs);
-
-  background-image: url('./contract.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
 }
 
 .body {
@@ -82,32 +60,6 @@
 
 .itemTitle {
   font-weight: 500;
-}
-
-.description {
-  margin-top: var(--space-xxl);
-
-  font-size: var(--size-s);
-  line-height: var(--lh-s);
-}
-
-.descriptionItem {
-  margin-top: var(--space-xxl);
-
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
-.footer {
-  margin-top: var(--space-xxl);
-  padding: var(--space-n);
-
-  font-size: var(--size-m);
-  line-height: var(--lh-xm);
-  text-align: center;
-
-  border: 1px solid var(--color-medium-gray);
 }
 
 @media (--desktop-m) {

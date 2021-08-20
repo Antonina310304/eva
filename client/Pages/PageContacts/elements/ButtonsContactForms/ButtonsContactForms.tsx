@@ -1,16 +1,43 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
+import useModals from '@Hooks/useModals';
+import { Forms } from '@Pages/PageContacts/typings';
 import styles from './ButtonsContactForms.module.css';
 
 export interface ButtonsContactFormsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  data: Forms;
 }
 
 const ButtonsContactForms: FC<ButtonsContactFormsProps> = (props) => {
   const { className, data, ...restProps } = props;
   const { items, text, title } = data;
+  const [, { openModal }] = useModals();
+
+  const handleButtonClick = useCallback(
+    (item) => {
+      if (item.href) {
+        window.location.assign(item.href);
+      }
+
+      if (item.data.action === 'contacts') {
+        openModal('Info', {
+          title: item.data.title,
+          text: 'Ещё не готово, заходите позже…',
+        });
+      }
+
+      if (item.data.action === 'contacts-accounting') {
+        openModal('Info', {
+          title: item.data.title,
+          text: 'Ещё не готово, заходите позже…',
+        });
+      }
+    },
+    [openModal],
+  );
 
   return (
     <div {...restProps} className={cn(styles.buttonsContactForms, className)}>
@@ -28,7 +55,7 @@ const ButtonsContactForms: FC<ButtonsContactFormsProps> = (props) => {
         {items.map((item, index) => (
           <div className={styles.item} key={index}>
             <div className={styles.itemTitle}>{item.title}</div>
-            <Button className={styles.button} theme='blank'>
+            <Button className={styles.button} theme='blank' onClick={() => handleButtonClick(item)}>
               {item.text}
             </Button>
           </div>

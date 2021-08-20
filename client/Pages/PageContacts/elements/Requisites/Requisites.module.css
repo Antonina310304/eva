@@ -1,22 +1,22 @@
 .requisites {
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 }
 
 .title {
   font-weight: 500;
-  font-size: 22px;
-  line-height: 26px;
+  font-size: var(--size-l);
+  line-height: var(--lh-m);
 }
 
 .organizationName {
-  margin-top: 20px;
+  margin-top: var(--space-n);
 }
 
 .legalAddress {
-  margin-top: 15px;
+  margin-top: var(--space-s);
 }
 
 .innkpp {
-  margin-top: 15px;
+  margin-top: var(--space-s);
 }

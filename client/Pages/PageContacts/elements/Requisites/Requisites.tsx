@@ -1,10 +1,12 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import { Organization } from '@Pages/PageContacts/typings';
 import styles from './Requisites.module.css';
 
 export interface RequisitesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  requisites: Organization;
 }
 
 const Requisites: FC<RequisitesProps> = (props) => {
@@ -18,7 +20,7 @@ const Requisites: FC<RequisitesProps> = (props) => {
       <div className={styles.organizationName}>{`${name.label} ${name.value}`}</div>
 
       <div className={styles.legalAddress}>
-        {`${address.label} ${address.postCode}, ${address.addressLocality},${address.streetAddress} ${address.additional}`}
+        {`${address.label} ${address.postalCode}, ${address.addressLocality},${address.streetAddress} ${address.additional}`}
       </div>
 
       <div className={styles.innkpp}>

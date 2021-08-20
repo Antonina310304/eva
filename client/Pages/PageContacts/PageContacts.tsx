@@ -2,11 +2,13 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import PageTitle from './elements/PageTitle';
+import Divider from '@Pages/PageCredit/elements/Divider';
+import Wrapper from '@Pages/PageCredit/elements/Wrapper';
+import PageTitle from '@Pages/PageCredit/elements/PageTitle';
 import QualityDepartment from './elements/QualityDepartment';
-import Wrapper from './elements/Wrapper';
 import Requisites from './elements/Requisites';
 import ButtonsContactForms from './elements/ButtonsContactForms';
+import SeeUs from './elements/SeeUs';
 import { PageContactsData } from './typings';
 import styles from './PageContacts.module.css';
 
@@ -18,7 +20,7 @@ export interface PageContactsProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageContacts: FC<PageContactsProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
-  const { title, organization, forms } = page;
+  const { title, organization, forms, map, sellPoints } = page;
 
   const schedule = [
     {
@@ -43,11 +45,14 @@ const PageContacts: FC<PageContactsProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <PageTitle className={styles.pageTitle} title={title} />
+
       <Wrapper>
         <div className={styles.hotLineWrapper}>
           <div className={styles.callIcon} />
-          <div className={styles.hotLine}>{organization.phones.label}</div>
-          <div className={styles.hotNumber}>{organization.phones.values[0]}</div>
+          <div className={styles.hotContainer}>
+            <div className={styles.hotLine}>{organization.phones.label}</div>
+            <div className={styles.hotNumber}>{organization.phones.values[0]}</div>
+          </div>
         </div>
 
         <div className={styles.hotInfo}>
@@ -61,7 +66,12 @@ const PageContacts: FC<PageContactsProps> = (props) => {
 
         <ButtonsContactForms className={styles.buttonsContactForms} data={forms} />
       </Wrapper>
-      PageContacts
+
+      <Wrapper type='wide'>
+        <Divider className={styles.divider} />
+
+        <SeeUs className={styles.seeUs} data={map} pickupPoints={sellPoints} />
+      </Wrapper>
     </div>
   );
 };
