@@ -1,8 +1,8 @@
-import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo, lazy } from 'react';
 import cn from 'classnames';
-import loadable from '@loadable/component';
 
 import Button from '@UI/Button';
+import Link from '@UI/Link';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import { GroupData } from '@Pages/PageCategory/typings';
 import Dropdown from '../Dropdown';
@@ -17,9 +17,8 @@ export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   onChangeSort?: (e: MouseEvent) => void;
 }
 
-const Link = loadable(() => import('@UI/Link'));
-const GroupsPopup = loadable(() => import('../GroupsPopup'));
-const OptionsPopup = loadable(() => import('../OptionsPopup'));
+const GroupsPopup = lazy(() => import('../GroupsPopup'));
+const OptionsPopup = lazy(() => import('../OptionsPopup'));
 
 const Filters: FC<FiltersProps> = (props) => {
   const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
