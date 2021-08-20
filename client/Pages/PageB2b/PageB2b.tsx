@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import Image from '@UI/Image';
 import { PageB2bData } from './typings';
 import styles from './PageB2b.module.css';
 import Rubrics from './elements';
@@ -17,7 +18,9 @@ const PageB2b: FC<PageB2bProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.pageTitle}>Мебель для бизнеса</h1>
-      <img className={styles.bannerImage} src={banner} />
+      <div className={styles.imageWrapper}>
+        <Image className={styles.bannerImage} src={banner} />
+      </div>
       <div className={styles.wrapper}>
         <div className={styles.introduction}>
           {texts.descriptions.map((text, index: number) => (

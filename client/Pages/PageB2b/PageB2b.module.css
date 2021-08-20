@@ -26,8 +26,19 @@
   line-height: var(--lh-xm);
 }
 
+.imageWrapper {
+  height: 850px;
+}
+
 .bannerImage {
+  display: inline-block;
   width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
 }
 
 .qualityDepartment {
@@ -60,6 +71,10 @@
     max-width: 1066px;
   }
 
+  .imageWrapper {
+    height: 605px;
+  }
+
   .introduction {
     margin-top: var(--space-e);
     margin-bottom: var(--space-e);
@@ -88,6 +103,10 @@
     font-size: var(--size-n);
     line-height: var(--lh-n);
   }
+
+  .imageWrapper {
+    height: 453px;
+  }
 }
 
 @media (--mobile-m) {
@@ -103,6 +122,10 @@
     padding: 0 var(--space-s);
   }
 
+  .imageWrapper {
+    height: 340px;
+  }
+
   .introduction {
     font-size: var(--size-s);
     line-height: var(--lh-s);
@@ -112,5 +135,9 @@
 @media (--mobile) {
   .bannerImage {
     min-height: 360px;
+  }
+
+  .imageWrapper {
+    height: 360px;
   }
 }
