@@ -1,0 +1,50 @@
+.productCard {
+}
+
+.name {
+  composes: s from 'sizes';
+
+  height: calc(var(--lh-s) * 2);
+  margin-top: var(--space-xs);
+  overflow: hidden;
+}
+
+.prices {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-xxs);
+}
+
+.actualPrice {
+  composes: m from 'sizes';
+
+  font-weight: bold;
+}
+
+.expiredPrice {
+  margin-left: var(--space-xs);
+}
+
+.button {
+  margin-top: var(--space-xs);
+
+  &.added {
+    border-color: transparent;
+  }
+}
+
+.buttonContent {
+  display: inline-flex;
+  align-items: center;
+}
+
+.iconCheck {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: var(--space-xs);
+
+  background-image: url('./iconCheck.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

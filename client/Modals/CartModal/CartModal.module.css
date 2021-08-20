@@ -1,9 +1,15 @@
 .wrapper {
   display: block;
+
+  .wrapperContent {
+    max-width: 643px;
+    padding: var(--space-xxl) 0;
+  }
 }
 
-.wrapperContent {
-  max-width: 643px;
+.mainContent,
+.head {
+  padding: 0 var(--space-xxl);
 }
 
 .description {
@@ -53,7 +59,22 @@
   margin-top: var(--space-n);
 }
 
+.sectionRelated {
+  margin-top: var(--space-xb);
+}
+
 @media (--mobile) {
+  .wrapper {
+    .wrapperContent {
+      padding: var(--space-n) 0 var(--space-l);
+    }
+  }
+
+  .mainContent,
+  .head {
+    padding: 0 var(--space-s);
+  }
+
   .sectionTotal {
     flex-direction: column;
     align-items: flex-start;

@@ -1,4 +1,4 @@
-import { createStore, update } from '@kundinos/nanostores';
+import { createMap, createStore, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
 import { ApiCart } from '@Api/Cart';
@@ -49,6 +49,42 @@ const addProduct = async (inputsParams: any[], options: any = {}) => {
   }
 };
 
+// Загрузить сопутствующие товары
+const loadRelatedProducts = async ({ productIds }: any) => {
+  try {
+    const response = await ApiCart.loadRelatedProducts({ productIds });
+    const relatedProducts = (response.relatedProducts as any[]).map(
+      ({ price, title, image, ...product }) => {
+        const actual = Array.isArray(price) ? price[0] : price;
+        const expired = Array.isArray(price) ? price[1] : price;
+        const diff = expired - actual;
+        const discount = Math.floor((diff * 100) / expired);
+
+        return {
+          ...product,
+          images: [{ src: image }],
+          name: title,
+          price: { actual, expired, discount },
+        };
+      },
+    );
+
+    update(cartStore, (prevCart) => ({
+      ...prevCart,
+      relatedProducts,
+      relatedTitle: response.title,
+    }));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+
+    // updateData({
+    //   processing: false,
+    //   error,
+    // });
+  }
+};
+
 export const useCart = () => {
   return {
     ...useStore(cartStore),
@@ -58,4 +94,5 @@ export const useCart = () => {
 
 export default {
   addProduct,
+  loadRelatedProducts,
 };
