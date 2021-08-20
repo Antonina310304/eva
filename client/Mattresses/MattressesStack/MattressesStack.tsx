@@ -130,13 +130,16 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
 
           if (isValidHexColor(fill)) {
             const { h, s, l } = hexToHsl(fill);
-            const color = { main: fill, hover: `hsl(${h}, ${s}%, ${l + 10}%)` };
+            const color = {
+              main: fill,
+              hover: `hsl(${h}, ${s}%, ${Math.min(l + 0.75 * (100 - l), 100)}%)`,
+            };
 
             colors[key] = color;
 
             if (key === 'upper') {
-              colors.upper.main = `hsl(${h}, ${s}%, ${l - 10}%)`;
-              colors.upper.hover = `hsl(${h}, ${s}%, ${l}%)`;
+              colors.upper.main = `hsl(${h}, ${s}%, ${Math.max(l - 10, 0)}%)`;
+              colors.upper.hover = `hsl(${h}, ${s}%, ${Math.min(l + 0.55 * (100 - l), 100)}%)`;
             }
           }
         });
