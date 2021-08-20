@@ -1,0 +1,63 @@
+.halva {
+}
+
+.logo {
+  width: 191px;
+  height: 35px;
+
+  background-image: url('/static/img/credit/halva.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.text {
+  margin-top: var(--space-l);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.title {
+  margin-top: var(--space-xb);
+}
+
+.list {
+  margin: 0;
+  margin-top: var(--space-m);
+  padding: 0;
+}
+
+.listItem {
+  position: relative;
+
+  margin-top: var(--space-n);
+  padding-left: var(--space-l);
+
+  list-style: none;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 7px;
+    height: 7px;
+
+    background-color: var(--color-black);
+    border-radius: 50%;
+    transform: translateY(-50%);
+
+    content: '';
+  }
+}
+
+.nuance {
+  margin-top: var(--space-m);
+
+  color: var(--color-dark-gray);
+}

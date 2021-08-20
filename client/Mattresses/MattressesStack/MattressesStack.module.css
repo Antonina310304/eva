@@ -27,25 +27,6 @@
     transition: all 0.2s;
   }
 
-  svg g:hover {
-    path {
-      stroke: var(--color-grafit);
-    }
-  }
-
-  svg g.actived path {
-    stroke: var(--color-black);
-  }
-
-  svg g.actived path.aside {
-    fill: var(--color-medium-gray);
-  }
-
-  svg g.actived path.grafit,
-  svg g.actived path.upper {
-    fill: var(--color-dark-gray);
-  }
-
   svg g.raised {
     transform: translate3d(0, -20px, 0);
   }

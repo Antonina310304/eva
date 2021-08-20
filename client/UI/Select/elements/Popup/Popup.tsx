@@ -32,8 +32,7 @@ export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
   checked: SelectItemData[];
   renderItem?: (props: SelectItemData) => ReactElement;
   onClickField?: (e: MouseEvent) => void;
-  onCheckItem?: (e: MouseEvent, item: any) => void;
-  onUncheckItem?: (e: MouseEvent, item: any) => void;
+  onClickItem?: (e: MouseEvent, item: SelectItemData) => void;
 }
 
 const Popup: FC<PopupProps> = (props) => {
@@ -49,8 +48,7 @@ const Popup: FC<PopupProps> = (props) => {
     items,
     checked,
     renderItem,
-    onCheckItem,
-    onUncheckItem,
+    onClickItem,
     onClickField,
     ...restProps
   } = props;
@@ -64,7 +62,6 @@ const Popup: FC<PopupProps> = (props) => {
     [onClickField],
   );
 
-  //
   useEffect(() => {
     setTimeout(() => {
       setHeightWrapper((prev) => {
@@ -109,8 +106,7 @@ const Popup: FC<PopupProps> = (props) => {
                 return cloneElement(option, {
                   ...option.props,
                   key: item.id,
-                  onCheck: onCheckItem,
-                  onUncheck: onUncheckItem,
+                  onClick: (e: MouseEvent) => onClickItem(e, item),
                 });
               })}
             </div>

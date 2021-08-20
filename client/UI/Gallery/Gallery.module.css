@@ -11,10 +11,17 @@
       cursor: grab;
     }
   }
+
+  &.centered {
+    text-align: center;
+
+    .child {
+      text-align: left;
+    }
+  }
 }
 
 .layer {
-  width: 100%;
   height: 100%;
 
   white-space: nowrap;

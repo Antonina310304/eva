@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import loadable from '@loadable/component';
-import { Switch, Route } from 'react-router-dom';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
-import ApiSetup from '@Components/ApiSetup';
+import Route from '@Components/Route';
 import '@UI/fonts.module.css';
 import '@UI/vars.module.css';
 import './App.css';
@@ -16,52 +15,36 @@ export interface Data {
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
+const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
+const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
 const RouteDelivery = loadable(() => import('@Routes/RouteDelivery'));
 
 const App: FC = () => {
   return (
     <ModalsProvider>
-      <Switch>
-        <Route exact path='/'>
-          <RouteIndex />
-        </Route>
+      <Route path='/'>
+        <RouteIndex />
+      </Route>
 
-        <Route exact path='/category/:slug'>
-          <ApiSetup>
-            <RouteCategory />
-          </ApiSetup>
-        </Route>
+      <Route path='/category/:slug'>
+        <RouteCategory />
+      </Route>
 
-        <Route exact path='/:region/category/:slug'>
-          <ApiSetup>
-            <RouteCategory />
-          </ApiSetup>
-        </Route>
+      <Route path='/product/:slug'>
+        <RouteProduct />
+      </Route>
 
-        <Route exact path='/product/:slug'>
-          <ApiSetup>
-            <RouteProduct />
-          </ApiSetup>
-        </Route>
+      <Route exact path='/site/credit'>
+        <RouteCredit />
+      </Route>
 
-        <Route exact path='/:region/product/:slug'>
-          <ApiSetup>
-            <RouteProduct />
-          </ApiSetup>
-        </Route>
+      <Route path='/site/warranty'>
+        <RouteWarranty />
+      </Route>
 
-        <Route exact path='/site/delivery'>
-          <ApiSetup>
-            <RouteDelivery />
-          </ApiSetup>
-        </Route>
-
-        <Route exact path='/:region/site/delivery'>
-          <ApiSetup>
-            <RouteDelivery />
-          </ApiSetup>
-        </Route>
-      </Switch>
+      <Route path='/site/delivery'>
+        <RouteDelivery />
+      </Route>
     </ModalsProvider>
   );
 };

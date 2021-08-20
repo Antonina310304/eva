@@ -1,0 +1,45 @@
+.howBuyInCredit {
+  padding-bottom: var(--space-xb);
+
+  border-bottom: 1px solid var(--color-medium-gray);
+}
+
+.list {
+  margin: 0;
+  margin-top: var(--space-m);
+  padding: 0;
+}
+
+.listItem {
+  position: relative;
+
+  margin-top: var(--space-n);
+  padding-left: var(--space-l);
+
+  list-style: none;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 7px;
+    height: 7px;
+
+    background-color: var(--color-black);
+    border-radius: 50%;
+    transform: translateY(-50%);
+
+    content: '';
+  }
+}
+
+.nuance {
+  margin-top: var(--space-m);
+
+  color: var(--color-dark-gray);
+}

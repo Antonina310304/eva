@@ -1,22 +1,53 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import useModals from '@Hooks/useModals';
+import Link from '@UI/Link';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { GroupData } from '@Pages/PageCategory/typings';
 import Dropdown from '../Dropdown';
+import GroupsPopup from '../GroupsPopup';
+import OptionsPopup from '../OptionsPopup';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  count?: number;
+  groups?: GroupData[];
+  isMatrasyCategory?: boolean;
+  onOpen?: (e: MouseEvent, id: string) => void;
+  onChangeSort?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, ...restProps } = props;
-  const [, { openModal }] = useModals();
+  const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
+  const filtrator = useFiltrator();
 
-  const handleClickAll = useCallback(() => {
-    openModal('Filters');
-  }, [openModal]);
+  const labelSort = useMemo(() => {
+    const { name } = filtrator.sort.find((item) => item.selected);
+
+    return `${name.substr(0, 1).toUpperCase()}${name.substr(1)}`;
+  }, [filtrator.sort]);
+
+  const secondaryFilters = useMemo(() => {
+    return filtrator.filters.slice(0, 3);
+  }, [filtrator.filters]);
+
+  const handleOpen = useCallback(
+    (e, id) => {
+      if (onOpen) onOpen(e, id);
+    },
+    [onOpen],
+  );
+
+  const handleChangeSort = useCallback(
+    (e: MouseEvent, option: typeof filtrator.sort[0]) => {
+      Filtrator.setSort(option);
+
+      if (onChangeSort) onChangeSort(e);
+    },
+    [filtrator, onChangeSort],
+  );
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
@@ -26,27 +57,55 @@ const Filters: FC<FiltersProps> = (props) => {
             className={cn(styles.button, styles.main)}
             view='rounded'
             before={<div className={styles.iconFilters} />}
-            onClick={handleClickAll}
+            onClick={(e) => handleOpen(e, 'all')}
           >
             Все фильтры
           </Button>
-          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
-            Цена
-          </Button>
-          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
-            Цвет
-          </Button>
-          <Button className={cn(styles.button, styles.secondary)} view='rounded' theme='blank'>
-            Стиль
-          </Button>
+
+          {secondaryFilters.map((filter) => (
+            <Button
+              className={cn(styles.button, styles.secondary)}
+              view='rounded'
+              theme='blank'
+              key={filter.name}
+              onClick={(e) => handleOpen(e, filter.name)}
+            >
+              {filter.name}
+            </Button>
+          ))}
         </div>
 
-        <div className={styles.count}>Найдено 1440</div>
+        {typeof count === 'number' && <div className={styles.count}>{`Найдено ${count}`}</div>}
       </div>
 
-      <div className={styles.labels}>
-        <Dropdown className={styles.label} label='По группам' />
-        <Dropdown className={styles.label} label='Выводить сначала' />
+      <div className={styles.wrapperLabels}>
+        {isMatrasyCategory && (
+          <Link
+            className={styles.buttonMattresses}
+            to='/promo/mattrasses'
+            target='_blank'
+            view='native'
+          >
+            <Button wide theme='secondary'>
+              <div className={styles.iconMattresses} />
+              Подобрать матрас
+            </Button>
+          </Link>
+        )}
+
+        <div className={styles.labels}>
+          <Dropdown className={styles.label} label='По группам'>
+            <GroupsPopup label='По группам' groups={groups} />
+          </Dropdown>
+
+          <Dropdown className={styles.label} label={labelSort}>
+            <OptionsPopup
+              label={labelSort}
+              options={filtrator.sort}
+              onCheckOption={handleChangeSort}
+            />
+          </Dropdown>
+        </div>
       </div>
     </div>
   );

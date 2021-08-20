@@ -32,8 +32,8 @@ const Range: FC<RangeProps> = (props) => {
     onChangeEnd,
     ...restProps
   } = props;
-  const trueMin = min || defaultMin;
-  const trueMax = max || defaultMax;
+  const trueMin = min || defaultMin || 0;
+  const trueMax = max || defaultMax || 100;
   const gap = Math.abs(trueMax - trueMin);
   const [from, setFrom] = useState(trueMin);
   const [to, setTo] = useState(trueMax);

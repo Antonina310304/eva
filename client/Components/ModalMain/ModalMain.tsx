@@ -9,12 +9,13 @@ import styles from './ModalMain.module.css';
 export interface ModalMainProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   modal: IModal;
+  fullscreen?: boolean;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
   onLoad?: () => void;
 }
 
 const ModalMain: FC<ModalMainProps> = (props) => {
-  const { className, modal, children, onClose, onLoad } = props;
+  const { className, modal, fullscreen, children, onClose, onLoad } = props;
   const refWrapper = useRef();
 
   const handleClickWrapper = useCallback(
@@ -42,7 +43,7 @@ const ModalMain: FC<ModalMainProps> = (props) => {
 
   return (
     <CSSTransition classNames={{ ...styles }} in={modal.visible} timeout={400}>
-      <div className={cn(styles.modal, className)}>
+      <div className={cn(styles.modal, { [styles.fullscreen]: fullscreen }, className)}>
         <div className={styles.container}>
           <div className={styles.wrapper} ref={refWrapper} onClick={handleClickWrapper}>
             <div className={styles.content}>{children}</div>

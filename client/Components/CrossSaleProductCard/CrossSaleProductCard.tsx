@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
-import Button from '@UI/Button';
 import { ProductData } from '@Types/Product';
 import Preview from './elements/Preview';
 import styles from './CrossSaleProductCard.module.css';
@@ -27,7 +26,6 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
           <div className={styles.name}>{product.name}</div>
 
           <div className={styles.price}>
-            <span className={styles.labelPrice}>{`Цена `}</span>
             <Price className={styles.actualPrice} price={product.price.actual} />
             {hasExpired && (
               <Price expired className={styles.expiredPrice} price={product.price.expired} />
@@ -37,10 +35,6 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
             )}
           </div>
         </div>
-
-        <Button className={styles.action} theme='circle' aria-label='Добавить в корзину'>
-          <div className={styles.iconCart} />
-        </Button>
       </div>
     </div>
   );

@@ -25,8 +25,6 @@ export default async <T>(path: string, opts?: RequestInit): Promise<T> => {
     },
   };
 
-  queryUrl.searchParams.set('mode', 'desktop');
-
   const fullUrl = queryUrl.toString();
   const res = await (await fetch(fullUrl, fullOpts)).json();
 
