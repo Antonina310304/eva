@@ -21,6 +21,7 @@ export type ModalId =
   | 'NotifyAboutReceipt'
   | 'MobileGroups'
   | 'MobileOptions'
+  | 'Cart'
   | 'DeliveryInformation';
 
 export interface Modal {
