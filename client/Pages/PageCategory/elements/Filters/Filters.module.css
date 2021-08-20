@@ -43,7 +43,7 @@
   }
 }
 
-@media (--mobile-m) {
+@media (--desktop) {
   .button.secondary {
     display: none;
   }
