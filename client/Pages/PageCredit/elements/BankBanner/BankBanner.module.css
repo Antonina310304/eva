@@ -1,0 +1,144 @@
+.bankBanner {
+}
+
+.wrapper {
+  max-width: 1083px;
+}
+
+.color {
+  padding: var(--space-xl) 0;
+
+  color: var(--color-white);
+
+  background: #21a038;
+}
+
+.color.halva {
+  background: #ff7d37;
+
+  .logo {
+    width: 245px;
+    height: 160px;
+  }
+}
+
+.color.smart {
+  background: #2fa050;
+}
+
+.color.cherepaha {
+  background: #675758;
+}
+
+.color.pokupok {
+  background: #0070b5;
+}
+
+.color.fun {
+  background: #4f9751;
+}
+
+.color.funPlatinum {
+  background: #323851;
+}
+
+.color.magnit {
+  background: linear-gradient(90.21deg, #b0354a 6.85%, #a93950 38.67%, #3384c4 91.46%);
+}
+
+.color.priorbank {
+  color: black;
+
+  background: #ffed00;
+
+  .logo {
+    width: 245px;
+    height: 160px;
+  }
+
+  .nuance {
+    color: rgba(64, 64, 64, 0.6);
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  margin-left: var(--space-e);
+}
+
+.logo {
+  width: 243px;
+  height: 153px;
+
+  background-size: contain;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: var(--size-xxl);
+  line-height: var(--lh-b);
+}
+
+.text {
+  margin-top: var(--space-n);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.nuance {
+  margin-top: var(--space-n);
+
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
+}
+
+@media (--desktop) {
+  .color {
+    padding: var(--space-xxl) 0;
+  }
+
+  .right {
+    margin-left: var(--space-xb);
+  }
+}
+
+@media (--mobile) {
+  .color {
+    padding: var(--space-b) var(--space-xs);
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: unset;
+  }
+
+  .right {
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: var(--space-l);
+    margin-left: 0;
+  }
+
+  .text {
+    margin-top: var(--space-l);
+  }
+
+  .nuance {
+    margin-top: var(--space-s);
+  }
+}

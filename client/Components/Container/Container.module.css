@@ -1,0 +1,19 @@
+.container {
+  flex: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  @media (--desktop-m) {
+    padding: 0 var(--space-xxl);
+  }
+
+  @media (--mobile-m) {
+    padding: 0 var(--space-s);
+  }
+
+  @media (--desktop-l) {
+    padding: 0 var(--space-xxb);
+  }
+}

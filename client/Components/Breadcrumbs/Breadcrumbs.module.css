@@ -1,0 +1,28 @@
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.breadcrumbsWrap {
+  position: relative;
+
+  display: inline-block;
+
+  &:last-child {
+  }
+}
+
+.breadcrumbsItem {
+  color: var(--color-dark-gray);
+  font-size: var(--size-s);
+  font-family: var(--font-main);
+  line-height: 150%;
+
+  .breadcrumbsWrap:last-child & {
+    cursor: default;
+  }
+}

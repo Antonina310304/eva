@@ -1,0 +1,77 @@
+.cardsPartners {
+}
+
+.wrapperGallery {
+  margin-top: var(--space-l);
+  overflow: hidden;
+}
+
+.gallery {
+  width: 100%;
+  margin: 0 calc(var(--space-s-neg) / 2);
+}
+
+.item {
+  margin-top: var(--space-s);
+  margin-right: var(--space-s);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-s);
+}
+
+.card {
+  padding: var(--space-xs) var(--space-n);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+
+  border: 1px solid var(--color-medium-gray);
+  border-radius: 45px;
+}
+
+.card.selected {
+  background: var(--color-light-gray);
+  border: 1px solid var(--color-light-gray);
+}
+
+.buttonTabsWrapper {
+  margin-top: var(--space-l);
+  overflow: hidden;
+}
+
+.bankBanner {
+  margin-top: var(--space-xb);
+}
+
+.cardInfo {
+  margin-top: var(--space-xb);
+  margin-bottom: var(--space-e);
+}
+
+@media (--desktop) {
+  .cardInfo {
+    margin-bottom: var(--space-xb);
+  }
+}
+
+@media (--mobile) {
+  .item {
+    margin: 0;
+    padding: 0 calc(var(--space-s) / 2);
+  }
+
+  .buttonTabsWrapper {
+    height: 40px;
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
+  }
+}

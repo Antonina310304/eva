@@ -1,0 +1,84 @@
+.accordion {
+  display: block;
+}
+
+.accordionHeader {
+  position: relative;
+
+  padding-bottom: 15px;
+
+  cursor: pointer;
+
+  @media (min-width: 640px) {
+    padding-bottom: 0;
+  }
+
+  &:before {
+    position: absolute;
+    bottom: 1px;
+
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 1px;
+
+    background: var(--color-medium-gray);
+
+    content: '';
+
+    @media (min-width: 640px) {
+      content: none;
+    }
+  }
+
+  &:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: block;
+    width: 15px;
+    height: 10px;
+
+    background-image: url('arrow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: translateY(5.5px);
+
+    transition: transform 0.2s ease-in;
+
+    content: '';
+
+    .accordion.collapsed & {
+      transform: translateY(5.5px) rotate(180deg);
+
+      transition: transform 0.2s ease-in;
+    }
+
+    @media (min-width: 640px) {
+      content: none;
+    }
+  }
+}
+
+.accordionBody {
+  max-height: 0;
+  overflow: hidden;
+
+  transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+
+  @media (min-width: 640px) {
+    max-height: none;
+  }
+
+  .accordion.collapsed & {
+    height: auto;
+    max-height: 9999px;
+
+    transition: max-height 0.35s cubic-bezier(1, 0, 1, 0);
+  }
+}
+
+.accordionBodyIn {
+  padding-top: 15px;
+}

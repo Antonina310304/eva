@@ -1,0 +1,42 @@
+.subscriptionWrapper {
+  position: relative;
+
+  display: block;
+}
+
+.subscriptionFormInput {
+  border-color: transparent;
+  border-radius: 29px;
+}
+
+button.subscriptionFormButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+
+  width: 25px;
+
+  height: 100%;
+  padding: 0;
+
+  font-size: 0;
+  line-height: 0;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:before {
+    display: block;
+    width: 10px;
+    height: 15px;
+
+    background: url('arrow-right.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    content: '';
+  }
+}

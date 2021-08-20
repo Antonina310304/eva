@@ -1,0 +1,45 @@
+.footerNav {
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.footerNavItem {
+  display: block;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footerNavLink {
+  display: inline-block;
+
+  color: var(--color-black);
+  font-size: var(--size-s);
+  line-height: 21px;
+
+  transition: color 0.4s ease-in-out;
+
+  a&:hover {
+    color: var(--color-grafit);
+    font-weight: 500;
+
+    transition: color 0.4s ease-in-out;
+  }
+
+  a&:focus {
+    font-weight: 500;
+
+    transition: color 0.4s ease-in-out;
+  }
+
+  a&:active {
+    font-weight: 500;
+
+    transition: color 0.4s ease-in-out;
+  }
+}

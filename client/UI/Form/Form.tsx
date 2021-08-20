@@ -166,7 +166,6 @@ const Form: FC<FormProps> = (props) => {
       }
 
       const canSubmit = onBeforeSubmit ? onBeforeSubmit(e, data) : true;
-
       if (!canSubmit) return;
       if (onSubmit) {
         onSubmit(e, data);
