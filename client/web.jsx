@@ -1,5 +1,3 @@
-import 'intersection-observer';
-import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { loadableReady } from '@loadable/component';
