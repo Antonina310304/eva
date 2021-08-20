@@ -67,7 +67,21 @@
   max-width: 700px;
   margin: var(--space-xs) 0 0 var(--space-s-neg);
 
-  column-count: 4;
+  &.column1 {
+    column-count: 1;
+  }
+
+  &.column2 {
+    column-count: 2;
+  }
+
+  &.column3 {
+    column-count: 3;
+  }
+
+  &.column4 {
+    column-count: 4;
+  }
 }
 
 .group {

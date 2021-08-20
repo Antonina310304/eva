@@ -45,7 +45,14 @@ const GroupsPopup: FC<GroupsPopupProps> = (props) => {
         <div className={styles.arrow} />
       </div>
 
-      <div className={styles.content}>
+      <div
+        className={cn(styles.content, {
+          [styles.column1]: groups.length === 1,
+          [styles.column2]: groups.length === 2,
+          [styles.column3]: groups.length === 3,
+          [styles.column4]: groups.length >= 4,
+        })}
+      >
         {groups.map((group, index) => (
           <div className={styles.group} key={index}>
             <div className={styles.groupName}>{group.groupName}</div>
