@@ -19,6 +19,7 @@ export type ModalId =
   | 'FinalPrice'
   | 'PriceDrop'
   | 'NotifyAboutReceipt'
+  | 'MobileGroups'
   | 'MobileOptions'
   | 'DeliveryInformation';
 
