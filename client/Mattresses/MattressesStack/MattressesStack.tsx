@@ -55,6 +55,15 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
   const refContainer = useRef<HTMLDivElement>();
   const selectedLayer = useRef<number>(null);
 
+  const getPathKey = useCallback((path: SVGPathElement): PathIds => {
+    const id = path.getAttribute('id') || '';
+    const matches = id.match(/^([a-zA-Z]*)_\d*$/);
+
+    if (!matches) return null;
+
+    return matches[1].toLowerCase() as PathIds;
+  }, []);
+
   const resetSelection = useCallback(() => {
     stack.current.svg?.setAttribute('height', `${stack.current.height}px`);
     stack.current.svg?.classList.remove(styles.opened);
@@ -100,67 +109,76 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
     });
   }, []);
 
-  const parseSvg = useCallback((svg: SVGSVGElement) => {
-    const width = svg.width.baseVal.value;
-    const height = svg.height.baseVal.value;
-    const groups = Array.from(svg.querySelectorAll('g'));
-    const layers = groups.reverse().map((elem) => {
-      const colors: Layer['colors'] = {};
-      const paths: Layer['paths'] = {};
-      const pathElems = Array.from(elem.querySelectorAll('path'));
+  const parseSvg = useCallback(
+    (svg: SVGSVGElement) => {
+      const width = svg.width.baseVal.value;
+      const height = svg.height.baseVal.value;
+      const groups = Array.from(svg.querySelectorAll('g'));
+      const layers = groups.reverse().map((elem) => {
+        const colors: Layer['colors'] = {};
+        const paths: Layer['paths'] = {};
+        const pathElems = Array.from(elem.querySelectorAll('path'));
 
-      pathElems.forEach((pathElem) => {
-        const id = pathElem.getAttribute('id');
-        const fill = pathElem.getAttribute('fill');
-        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase() as PathIds;
+        pathElems.forEach((pathElem) => {
+          const fill = pathElem.getAttribute('fill');
+          const key = getPathKey(pathElem);
 
-        paths[key] = pathElem;
-        colors[key] = { main: fill, hover: fill };
+          if (!key) return;
 
-        if (isValidHexColor(fill)) {
-          const { h, s, l } = hexToHsl(fill);
-          const color = { main: fill, hover: `hsl(${h}, ${s}%, ${l + 10}%)` };
+          paths[key] = pathElem;
+          colors[key] = { main: fill, hover: fill };
 
-          colors[key] = color;
+          if (isValidHexColor(fill)) {
+            const { h, s, l } = hexToHsl(fill);
+            const color = { main: fill, hover: `hsl(${h}, ${s}%, ${l + 10}%)` };
 
-          if (key === 'upper') {
-            colors.upper.main = `hsl(${h}, ${s}%, ${l - 10}%)`;
-            colors.upper.hover = `hsl(${h}, ${s}%, ${l}%)`;
+            colors[key] = color;
+
+            if (key === 'upper') {
+              colors.upper.main = `hsl(${h}, ${s}%, ${l - 10}%)`;
+              colors.upper.hover = `hsl(${h}, ${s}%, ${l}%)`;
+            }
           }
-        }
+        });
+
+        return { elem, colors, paths };
       });
 
-      return { elem, colors, paths };
-    });
+      stack.current = { svg, width, height, layers };
+    },
+    [getPathKey],
+  );
 
-    stack.current = { svg, width, height, layers };
-  }, []);
+  const transformSvg = useCallback(
+    (svg: SVGSVGElement) => {
+      svg.setAttribute('height', `${stack.current.height}px`);
+      svg.setAttribute('width', `${stack.current.width}px`);
 
-  const transformSvg = useCallback((svg: SVGSVGElement) => {
-    svg.setAttribute('height', `${stack.current.height}px`);
-    svg.setAttribute('width', `${stack.current.width}px`);
+      const groups = Array.from(svg.querySelectorAll('g'));
 
-    const groups = Array.from(svg.querySelectorAll('g'));
+      groups.forEach((group, indexGroup) => {
+        const paths = Array.from(group.querySelectorAll('path'));
 
-    groups.forEach((group, indexGroup) => {
-      const paths = Array.from(group.querySelectorAll('path'));
+        paths.forEach((path) => {
+          const key = getPathKey(path);
 
-      paths.forEach((path) => {
-        const id = path.getAttribute('id');
-        const key = id.match(/^([a-zA-Z]*)_\d*$/)[1].toLowerCase() as PathIds;
-        const index = groups.length - indexGroup - 1;
-        const layer = stack.current.layers[index];
+          if (!key) return;
 
-        path.removeAttribute('id');
-        path.setAttribute('fill', layer.colors[key].main);
-        path.classList.add(styles[key]);
+          const index = groups.length - indexGroup - 1;
+          const layer = stack.current.layers[index];
+
+          path.removeAttribute('id');
+          path.setAttribute('fill', layer.colors[key].main);
+          path.classList.add(styles[key]);
+        });
+
+        group.removeAttribute('id');
       });
 
-      group.removeAttribute('id');
-    });
-
-    svg.removeAttribute('id');
-  }, []);
+      svg.removeAttribute('id');
+    },
+    [getPathKey],
+  );
 
   const handleClickSvg = useCallback(
     (e: MouseEvent) => {
