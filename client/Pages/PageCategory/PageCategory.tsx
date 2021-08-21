@@ -28,7 +28,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator({ id: `${path}${page.categoryTranslite}`, ...page.filters });
-  const isModels = page.productsModel?.length > 0;
+  const isModels = category.productsModel?.length > 0;
 
   const activeSubcategoryIds = useMemo(() => {
     const rubrics: any[] = page.rubrics[0] || [];
