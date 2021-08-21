@@ -1,41 +1,61 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, memo, useCallback } from 'react';
 import cn from 'classnames';
 
-import List from '@UI/List';
 import Button from '@UI/Button/Button';
-import { ProductModel } from '@Types/Category';
 import { CatalogData } from '@Types/Catalog';
+import { ProductData } from '@Types/Product';
 import Section, { SectionItem } from './elements/Section';
 import styles from './ProductSectionsCatalog.module.css';
 
 export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  catalog?: CatalogData;
+  pages?: CatalogData[];
+  hasNextPage?: boolean;
   onMore?: (e: MouseEvent) => void;
 }
 
 const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
-  const { className, catalog, onMore, ...restProps } = props;
+  const { className, pages, hasNextPage, onMore, ...restProps } = props;
+
+  const getProductsBySection = useCallback(
+    (modelId: number) => {
+      const products: ProductData[] = [];
+
+      pages.forEach((page) => {
+        page.products.forEach((product) => {
+          if (product.modelId === modelId) products.push(product);
+        });
+      });
+
+      return products;
+    },
+    [pages],
+  );
 
   return (
     <div {...restProps} className={cn(styles.catalog, className)}>
-      <List
-        className={styles.sections}
-        items={catalog.productsModel}
-        renderChild={(productModel: ProductModel) => {
-          const sectionProducts = catalog.products.filter((product) => {
-            return product.modelId === productModel.id;
+      <div className={styles.sections}>
+        {pages.map((page) => {
+          return page.productsModel.map((productModel) => {
+            const sectionProducts = getProductsBySection(productModel.id);
+            const items: SectionItem[] = [...sectionProducts];
+
+            if (items.length < 1) return null;
+            if (productModel.constructor) items.push({ id: 'stub', ...productModel.constructor });
+
+            return (
+              <Section
+                className={styles.section}
+                productModel={productModel}
+                items={items}
+                key={productModel.id}
+              />
+            );
           });
-          const items: SectionItem[] = [...sectionProducts];
+        })}
+      </div>
 
-          if (items.length < 1) return null;
-          if (productModel.constructor) items.push({ id: 'stub', ...productModel.constructor });
-
-          return <Section className={styles.section} productModel={productModel} items={items} />;
-        }}
-      />
-
-      {catalog.sectionCountLeft > 0 && (
+      {hasNextPage && (
         <div className={styles.moreWrapper}>
           <Button className={styles.moreButton} theme='dirty' onClick={onMore}>
             Смотреть еще
