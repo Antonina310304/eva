@@ -26,7 +26,9 @@ export default async <T>(path: string, opts?: RequestInit): Promise<T> => {
   };
 
   const fullUrl = queryUrl.toString();
-  const res = await (await fetch(fullUrl, fullOpts)).json();
+  const res = await fetch(fullUrl, fullOpts);
 
-  return res;
+  if (res.status !== 200) return Promise.reject(res);
+
+  return res.json();
 };
