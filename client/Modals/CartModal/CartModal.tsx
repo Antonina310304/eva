@@ -47,6 +47,7 @@ const CartModal: FC<ModalSidebarProps> = (props) => {
                   <MainProductCard
                     className={styles.newProduct}
                     product={product}
+                    position={position}
                     key={product.id}
                   />
                 ));
