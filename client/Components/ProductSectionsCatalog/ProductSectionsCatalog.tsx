@@ -1,4 +1,13 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo, useCallback } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  MouseEvent,
+  memo,
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+} from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button/Button';
@@ -11,29 +20,55 @@ export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivEleme
   className?: string;
   pages?: CatalogData[];
   hasNextPage?: boolean;
+  autoload?: boolean;
   onMore?: (e: MouseEvent) => void;
 }
 
 const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
-  const { className, pages, hasNextPage, onMore, ...restProps } = props;
+  const { className, pages, hasNextPage, autoload, onMore, ...restProps } = props;
+  const ref = useRef<HTMLDivElement>();
+
+  const products = useMemo(() => {
+    let result: ProductData[] = [];
+
+    pages.forEach((page) => {
+      result = result.concat(page.products);
+    });
+
+    return result;
+  }, [pages]);
 
   const getProductsBySection = useCallback(
     (modelId: number) => {
-      const products: ProductData[] = [];
-
-      pages.forEach((page) => {
-        page.products.forEach((product) => {
-          if (product.modelId === modelId) products.push(product);
-        });
-      });
-
-      return products;
+      return products.filter((product) => product.modelId === modelId);
     },
-    [pages],
+    [products],
   );
 
+  // Автоподгрузка при скроле
+  const handleScroll = useCallback(
+    (e) => {
+      if (!autoload || !onMore) return;
+
+      const pageYOffsetBottom = window.pageXOffset + document.documentElement.clientHeight;
+      const rect = ref.current.getBoundingClientRect();
+      const distance = 200;
+
+      if (pageYOffsetBottom > rect.bottom - distance) {
+        onMore(e);
+      }
+    },
+    [autoload, onMore],
+  );
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
   return (
-    <div {...restProps} className={cn(styles.catalog, className)}>
+    <div {...restProps} className={cn(styles.catalog, className)} ref={ref}>
       <div className={styles.sections}>
         {pages.map((page) => {
           return page.productsModel.map((productModel) => {

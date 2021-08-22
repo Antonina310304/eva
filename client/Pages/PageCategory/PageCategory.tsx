@@ -28,7 +28,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
   const filtrator = useFiltrator({ id: `${path}${page.categoryTranslite}`, ...page.filters });
-  const isModels = category.productsModel?.length > 0;
+  const isModels = category.data.pages[0].productsModel?.length > 0;
 
   const activeSubcategoryIds = useMemo(() => {
     const rubrics: any[] = page.rubrics[0] || [];
@@ -111,6 +111,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
         {isModels ? (
           <ProductSectionsCatalog
+            autoload
             className={styles.catalog}
             pages={category.data.pages}
             hasNextPage={category.hasNextPage}
@@ -118,6 +119,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
           />
         ) : (
           <ProductMixedCatalog
+            autoload
             className={styles.catalog}
             pages={category.data.pages}
             hasNextPage={category.hasNextPage}

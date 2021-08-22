@@ -19,12 +19,19 @@ const useInfiniteCategory = ({ path }: Params): Result => {
   const category = useInfiniteQuery(
     keys,
     ({ pageParam = 1 }) => {
-      const [p = '', qs = ''] = path.split('?');
-      const searchParams = new URLSearchParams(qs);
+      try {
+        const [p = '', qs = ''] = path.split('?');
+        const searchParams = new URLSearchParams(qs);
 
-      searchParams.append('page', pageParam);
+        searchParams.append('page', pageParam);
 
-      return ApiPages.fetchPage({ path: `${p}?${searchParams.toString()}` });
+        return ApiPages.fetchPage({ path: `${p}?${searchParams.toString()}` });
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+
+        return null;
+      }
     },
     {
       initialData: {

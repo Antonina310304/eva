@@ -23,6 +23,8 @@ const RouteCategory: FC = () => {
   );
 
   const handleMore = useCallback(() => {
+    if (category.isFetching || !category.hasNextPage) return;
+
     category.fetchNextPage();
   }, [category]);
 
