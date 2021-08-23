@@ -14,15 +14,15 @@ export interface PagePaymentRusProps extends HTMLAttributes<HTMLDivElement> {
 
 const PagePaymentRus: FC<PagePaymentRusProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
-  const { teaserText, title, pageMenu, finalText } = page;
+  const { teaserText, title, pageMenu, paymentTypes, finalText } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>{title}</h1>
-      <InformationTabsNavigation navigation={pageMenu} />
+      <InformationTabsNavigation className={styles.navigation} navigation={pageMenu} />
       <div className={styles.wrapper}>
         <div className={styles.introduction}>{teaserText}</div>
-        <PaymentOptions />
+        <PaymentOptions paymentTypes={paymentTypes} />
         <div className={styles.info}>
           <img className={styles.infoPic} src='/react/static/paymentRus/info.svg' />
           <div className={styles.infoDescription}>{finalText}</div>

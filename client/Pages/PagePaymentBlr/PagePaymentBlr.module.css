@@ -24,6 +24,11 @@
   padding-bottom: var(--space-xb);
 }
 
+.navigation {
+  padding-left: var(--space-n);
+  overflow: hidden;
+}
+
 .info {
   display: flex;
   margin-bottom: var(--space-e);

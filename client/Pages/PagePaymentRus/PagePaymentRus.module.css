@@ -15,6 +15,11 @@
   border-bottom: 1px solid var(--color-medium-gray);
 }
 
+.navigation {
+  padding-left: var(--space-n);
+  overflow: hidden;
+}
+
 .introduction {
   padding-top: var(--space-e);
   padding-bottom: var(--space-xb);
@@ -81,11 +86,5 @@
 
     font-size: var(--size-xl);
     line-height: var(--lh-xxl);
-  }
-}
-
-@media (--mobile) {
-  .introduction {
-    max-width: 300px;
   }
 }

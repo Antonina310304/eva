@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
-import styles from './PagePaymentBlr.module.css';
 import PaymentOptions from './elements/PaymentOptionsBlr';
 import PayOnline from './elements/PayOnline';
+import styles from './PagePaymentBlr.module.css';
 
 export interface PagePaymentBlrProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -22,7 +22,7 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>Способы оплаты</h1>
-      <InformationTabsNavigation navigation={pageMenu} />
+      <InformationTabsNavigation className={styles.navigation} navigation={pageMenu} />
       <div className={styles.wrapper}>
         <div className={styles.introduction}>{teaserText}</div>
         <PaymentOptions />
