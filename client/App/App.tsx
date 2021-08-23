@@ -17,6 +17,7 @@ const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
+const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 
 const App: FC = () => {
   return (
@@ -39,6 +40,10 @@ const App: FC = () => {
 
       <Route path='/site/warranty'>
         <RouteWarranty />
+      </Route>
+
+      <Route path='/static-page/privacy-policy'>
+        <RoutePrivacyPolicy />
       </Route>
     </ModalsProvider>
   );
