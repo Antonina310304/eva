@@ -1,4 +1,5 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import { useInView } from 'react-intersection-observer';
 import cn from 'classnames';
 
 import Like from '@Components/Like';
@@ -10,6 +11,7 @@ import List from '@UI/List';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
+import useModals from '@Hooks/useModals';
 import { ProductData, ProductParameterGroupData } from '@Types/Product';
 import Parameter from './elements/Parameter';
 import Sizes, { SizeData } from './elements/Sizes';
@@ -38,9 +40,26 @@ const fabrics = [
 
 const ProductCard: FC<ProductCardProps> = (props) => {
   const { className, product, view, ...restProps } = props;
+  const [firstImage] = product.images || [];
   const hasExpired = product.price.expired > 0;
   const hasDiscount = product.price.discount > 0;
   const { isOnlyDesktop } = useMedias();
+  const [, { openModal }] = useModals();
+  const [ref, inView] = useInView({
+    rootMargin: '200px 0px',
+    triggerOnce: false,
+  });
+
+  const handleBuy = useCallback(() => {
+    openModal('Cart', {
+      products: [
+        {
+          isModular: false,
+          shopProductId: product.id,
+        },
+      ],
+    });
+  }, [openModal, product.id]);
 
   return (
     <div
@@ -50,19 +69,33 @@ const ProductCard: FC<ProductCardProps> = (props) => {
         { [styles.hasExpired]: hasExpired, [styles.viewMini]: view === 'mini' },
         className,
       )}
+      ref={ref}
     >
       <div className={styles.box} />
 
       <div className={styles.container}>
         <div className={styles.containerImage}>
-          <Preview className={styles.preview} images={product.images} link={product.link} />
+          {inView ? (
+            <>
+              <Preview className={styles.preview} images={product.images} link={product.link} />
 
-          <div className={styles.actions}>
-            <FastView className={cn(styles.action, styles.fastView)} />
-            <Like className={cn(styles.action, styles.like)} />
-          </div>
+              <div className={styles.actions}>
+                <FastView className={cn(styles.action, styles.fastView)} />
+                <Like className={cn(styles.action, styles.like)} />
+              </div>
 
-          {product.tags?.length > 0 && <ProductTags className={styles.tags} tags={product.tags} />}
+              {product.tags?.length > 0 && (
+                <ProductTags className={styles.tags} tags={product.tags} />
+              )}
+            </>
+          ) : (
+            <div
+              className={cn(styles.placeholderPreview, {
+                [styles.landscape]: firstImage.orientation === 'landscape',
+                [styles.portrait]: firstImage.orientation === 'portrait',
+              })}
+            />
+          )}
         </div>
 
         <div className={styles.info}>
@@ -96,7 +129,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
           </div>
         </div>
 
-        {isOnlyDesktop && (
+        {inView && isOnlyDesktop && (
           <div className={styles.additionalInfo}>
             {product.parameterGroups?.length > 0 && (
               <List
@@ -134,7 +167,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
               />
             )}
 
-            <Button className={styles.buy} wide>
+            <Button className={styles.buy} wide onClick={handleBuy}>
               В корзину
             </Button>
             <div className={styles.moreWrapper}>

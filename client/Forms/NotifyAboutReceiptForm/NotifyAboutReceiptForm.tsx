@@ -16,7 +16,7 @@ export interface NotifyAboutReceiptFormProps {
 
 const NotifyAboutReceiptForm: FC<NotifyAboutReceiptFormProps> = (props) => {
   const { className, product, ...restProps } = props;
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [, { openModal }] = useModals();
 
   const handleBeforeSubmit = useCallback(
