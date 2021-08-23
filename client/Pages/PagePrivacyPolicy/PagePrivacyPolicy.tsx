@@ -21,8 +21,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           время использования сайта Интернет-магазина, программ и продуктов Интернет-магазина.
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>1.ОПРЕДЕЛЕНИЕ ТЕРМИНОВ</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>1.Определение терминов</div>
+          <div className={styles.infoSectionContent}>
             <p>1.1. В настоящей Политике конфиденциальности используются следующие термины:</p>
             <p>
               1.1.1. «Администрация сайта Интернет-магазина» (далее – Администрация сайта) –
@@ -66,8 +66,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
         </div>
 
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>2. ОБЩИЕ ПОЛОЖЕНИЯ</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>2. Общее положение</div>
+          <div className={styles.infoSectionContent}>
             <p>
               2.1. Использование Пользователем сайта Интернет-магазина означает согласие с настоящей
               Политикой конфиденциальности и условиями обработки персональных данных Пользователя.
@@ -89,8 +89,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>3.ПРЕДМЕТ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>3.Предмет политики конфиденциальности</div>
+          <div className={styles.infoSectionContent}>
             <p>
               3.1. Настоящая Политика Конфиденциальности устанавливает обязательства Администрации
               сайта интернет-магазина по неразглашению и обеспечению режима защиты
@@ -140,10 +140,10 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>
-            4.ЦЕЛИ СБОРА ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЯ
+          <div className={styles.infoSectionTitle}>
+            4.Цели сбора персональной информации пользователя
           </div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionContent}>
             <p>
               4.1. Персональные данные Пользователя Администрация сайта интернет-магазина может
               использовать в целях:
@@ -206,10 +206,10 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>
-            5.СПОСОБЫ И СРОКИ ОБРАБОТКИ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ
+          <div className={styles.infoSectionTitle}>
+            5.Способы и сроки обработки персональной информации
           </div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionContent}>
             <p>
               5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока,
               любым законным способом, в том числе в информационных системах персональных данных с
@@ -245,8 +245,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>6.ОБЯЗАТЕЛЬСТВА СТОРОН</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>6.ОБЯЗАТЕЛЬСТВА СТОРОН</div>
+          <div className={styles.infoSectionContent}>
             <p>
               6.1.1. Предоставить информацию о персональных данных, необходимую для пользования
               Сайтом интернет-магазина.
@@ -286,8 +286,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>7.ОТВЕТСТВЕННОСТЬ СТОРОН</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>7.Ответственность сторон</div>
+          <div className={styles.infoSectionContent}>
             <p>
               7.1. Администрация сайта, не исполнившая свои обязательства, несёт ответственность за
               убытки, понесённые Пользователем в связи с неправомерным использованием персональных
@@ -310,8 +310,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>8.РАЗРЕШЕНИЕ СПОРОВ</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>8.Разрешение споров</div>
+          <div className={styles.infoSectionContent}>
             <p>
               8.1. До обращения в суд с иском по спорам, возникающим из отношений между
               Пользователем сайта Интернет-магазина и Администрацией сайта, обязательным является
@@ -335,8 +335,8 @@ const PagePrivacyPolicy: FC<PagePrivacyPolicyProps> = (props) => {
           </div>
         </div>
         <div className={styles.infoSection}>
-          <div className={styles.infoSection_title}>9.ДОПОЛНИТЕЛЬНЫЕ УСЛОВИЯ</div>
-          <div className={styles.infoSection_content}>
+          <div className={styles.infoSectionTitle}>9.Дополнительные условиям</div>
+          <div className={styles.infoSectionContent}>
             <p>
               9.1. Администрация сайта вправе вносить изменения в настоящую Политику
               Конфиденциальности без согласия Пользователя.

@@ -4,13 +4,13 @@
 }
 
 .title {
-  margin: 35px 0px;
+  margin: var(--space-xl) 0px;
 
   color: var(--color-black);
   font-weight: 500;
-  font-size: 44px;
-  font-family: Closer Text;
-  line-height: 58px;
+  font-size: var(--size-xb);
+  font-family: var(--font-hero);
+  line-height: var(--lh-xb);
   text-align: center;
 }
 
@@ -20,60 +20,58 @@
     padding: 0px 150px;
   }
   .title {
-    font-size: 35px;
+    font-size: var(--size-b);
   }
 }
 
 @media (--mobile-m) {
   .wrapper {
-    padding: 0px 40px;
+    padding: 0px var(--space-xxl);
   }
 
   .title {
-    font-size: 30px;
+    font-size: var(--size-xxl);
   }
 }
 
 @media (--mobile) {
   .wrapper {
-    padding: 0px 10px;
+    padding: 0px var(--space-xs);
   }
   .title {
-    font-size: 25px;
+    font-size: var(--size-xl);
   }
 }
 
 .subTitle {
-  margin-bottom: 40px;
+  margin-bottom: var(--space-xxl);
 
   color: var(--color-black);
   font-weight: normal;
-  font-size: 16px;
-  font-family: Cera Pro;
+  font-size: var(--size-n);
   font-style: normal;
   line-height: 150%;
 }
 
 .infoSection {
-  margin-bottom: 30px;
+  margin-bottom: var(--space-l);
 }
 
-.infoSection_title {
-  margin-bottom: 10px;
+.infoSectionTitle {
+  margin-bottom: var(--space-xs);
 
   font-weight: normal;
-  font-size: 16px;
-  font-family: Cera Pro;
+  font-size: var(--size-n);
   font-style: normal;
   line-height: 150%;
+  text-transform: uppercase;
 }
 
-.infoSection_content p {
-  margin: 10px 0px;
+.infoSectionContent p {
+  margin: var(--space-xs) 0px;
 
   font-weight: normal;
-  font-size: 14px;
-  font-family: Cera Pro;
+  font-size: var(--size-s);
   font-style: normal;
   line-height: 150%;
 }
