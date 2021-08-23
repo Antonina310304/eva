@@ -3,9 +3,10 @@ import cn from 'classnames';
 
 import Image from '@UI/Image';
 import { PageB2bData } from './typings';
-import styles from './PageB2b.module.css';
 import Rubrics from './elements/Rubrics';
 import Feedback from './elements/Feedback';
+import Press from './elements/Press';
+import styles from './PageB2b.module.css';
 
 export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -33,6 +34,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
         <Rubrics rubrics={rubrics} />
       </div>
       <Feedback />
+      <Press />
     </div>
   );
 };
