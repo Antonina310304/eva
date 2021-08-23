@@ -1,9 +1,7 @@
-.navigation {
-  margin-top: var(--space-n);
+.informationTabsNavigation {
 }
 
 .galleryWrapper {
-  margin-left: var(--space-xs-neg);
   padding: var(--space-xxs) 0;
   overflow: hidden;
 }
@@ -41,5 +39,12 @@
   .navigationLink {
     font-size: var(--size-n);
     line-height: var(--lh-n);
+  }
+}
+
+@media (--mobile) {
+  .galleryWrapper {
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
   }
 }

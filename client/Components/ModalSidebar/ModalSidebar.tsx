@@ -24,6 +24,8 @@ export interface ModalSidebarProps extends HTMLAttributes<HTMLDivElement> {
   loading?: boolean;
   title?: string;
   view?: 'default' | 'fullscreen';
+  cnWrapperContent?: string;
+  cnHead?: string;
   cnContent?: string;
   footer: ReactChild;
   scrollTop?: number;
@@ -39,6 +41,8 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
     modal,
     loading,
     view = 'default',
+    cnWrapperContent,
+    cnHead,
     cnContent,
     footer,
     scrollTop,
@@ -75,14 +79,14 @@ const ModalSidebar: FC<ModalSidebarProps> = (props) => {
       <CSSTransition classNames={{ ...styles }} in={modal.visible} timeout={400}>
         <div className={styles.wrapper}>
           <div className={styles.backdrop} ref={refBackdrop} onClick={handleClickBackdrop} />
-          <div className={styles.wrapperContent}>
+          <div className={cn(styles.wrapperContent, cnWrapperContent)}>
             {loading ? (
               <div className={styles.wrapperPreloader}>
                 <Loader className={styles.loader} />
               </div>
             ) : (
               <>
-                <div className={styles.head}>
+                <div className={cn(styles.head, cnHead)}>
                   <h3 className={styles.title}>{title}</h3>
                   <IconClose
                     className={styles.iconClose}

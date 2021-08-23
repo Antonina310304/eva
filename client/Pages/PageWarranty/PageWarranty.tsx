@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
-import Navigation from './elements/Navigation';
+import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import QualityDepartment from './elements/QualityDepartment';
 import Garanties from './elements/Garanties/Garanties';
 import ContactWithQualityDep from './elements/ContactWithQualityDep';
@@ -35,7 +35,7 @@ const PageWarranty: FC<PageWarrantyProps> = (props) => {
       <div className={styles.pageTitle}>{breadcrumbs[1].text}</div>
 
       <div className={styles.wrapper}>
-        <Navigation navigation={pageList} />
+        <InformationTabsNavigation className={styles.navigation} navigation={pageList} />
 
         <QualityDepartment
           className={styles.qualityDepartment}

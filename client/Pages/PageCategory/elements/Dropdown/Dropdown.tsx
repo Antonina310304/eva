@@ -4,6 +4,7 @@ import React, {
   HTMLAttributes,
   memo,
   ReactElement,
+  Suspense,
   useCallback,
   useState,
 } from 'react';
@@ -36,13 +37,16 @@ const Dropdown: FC<DropdownProps> = (props) => {
         <div className={styles.arrow} />
       </div>
 
-      {children &&
-        cloneElement(children, {
-          ...children.props,
-          visible,
-          className: cn(children.props.className, styles.popup),
-          onClose: handleClose,
-        })}
+      {children && visible && (
+        <Suspense fallback={null}>
+          {cloneElement(children, {
+            ...children.props,
+            visible,
+            className: cn(children.props.className, styles.popup),
+            onClose: handleClose,
+          })}
+        </Suspense>
+      )}
     </div>
   );
 };

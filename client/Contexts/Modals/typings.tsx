@@ -19,7 +19,9 @@ export type ModalId =
   | 'FinalPrice'
   | 'PriceDrop'
   | 'NotifyAboutReceipt'
+  | 'MobileGroups'
   | 'MobileOptions'
+  | 'Cart'
   | 'DeliveryInformation';
 
 export interface Modal {

@@ -1,21 +1,27 @@
-import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo, lazy } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
+import Link from '@UI/Link';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { GroupData } from '@Pages/PageCategory/typings';
 import Dropdown from '../Dropdown';
-import OptionsPopup from '../OptionsPopup';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   count?: number;
+  groups?: GroupData[];
+  isMatrasyCategory?: boolean;
   onOpen?: (e: MouseEvent, id: string) => void;
   onChangeSort?: (e: MouseEvent) => void;
 }
 
+const GroupsPopup = lazy(() => import('../GroupsPopup'));
+const OptionsPopup = lazy(() => import('../OptionsPopup'));
+
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, count, onOpen, onChangeSort, ...restProps } = props;
+  const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
   const filtrator = useFiltrator();
 
   const labelSort = useMemo(() => {
@@ -73,16 +79,34 @@ const Filters: FC<FiltersProps> = (props) => {
         {typeof count === 'number' && <div className={styles.count}>{`Найдено ${count}`}</div>}
       </div>
 
-      <div className={styles.labels}>
-        {/* <Dropdown className={styles.label} label='По группам' /> */}
+      <div className={styles.wrapperLabels}>
+        {isMatrasyCategory && (
+          <Link
+            className={styles.buttonMattresses}
+            to='/promo/mattrasses'
+            target='_blank'
+            view='native'
+          >
+            <Button wide theme='secondary'>
+              <div className={styles.iconMattresses} />
+              Подобрать матрас
+            </Button>
+          </Link>
+        )}
 
-        <Dropdown className={styles.label} label={labelSort}>
-          <OptionsPopup
-            label={labelSort}
-            options={filtrator.sort}
-            onCheckOption={handleChangeSort}
-          />
-        </Dropdown>
+        <div className={styles.labels}>
+          <Dropdown className={styles.label} label='По группам'>
+            <GroupsPopup label='По группам' groups={groups} />
+          </Dropdown>
+
+          <Dropdown className={styles.label} label={labelSort}>
+            <OptionsPopup
+              label={labelSort}
+              options={filtrator.sort}
+              onCheckOption={handleChangeSort}
+            />
+          </Dropdown>
+        </div>
       </div>
     </div>
   );

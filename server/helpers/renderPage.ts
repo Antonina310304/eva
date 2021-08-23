@@ -19,9 +19,8 @@ export default ({ html, state, webExtractor }: Params): string => {
     </head>
     <body>
       <div id="root">${html}</div>
-      <script>
-        window.__SERVER_STATE__=${serialize(state, { isJSON: true })}
-      </script>
+      <script>window.__SERVER_STATE__=${serialize(state, { isJSON: true })}</script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=AbortController%2CIntersectionObserver"></script>
       ${webExtractor.getScriptTags()}
     </body>
     </html>
