@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quantity {
+  width: 100px;
+}
+
+.price {
+  composes: l from 'sizes';
+
+  font-weight: 500;
+}

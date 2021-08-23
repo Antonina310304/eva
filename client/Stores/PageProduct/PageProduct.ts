@@ -128,5 +128,6 @@ export const usePageProduct: UsePageProduct = (initialValue) => {
 
 export default {
   editModule,
+  getParameterValues,
   selectParameter,
 };

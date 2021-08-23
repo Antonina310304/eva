@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
-import PriceDropForm from '@Forms/PriceDropForm/PriceDropForm';
+import PriceDropForm from '@Forms/PriceDropForm';
 import IconClose from '@UI/IconClose';
 import Link from '@UI/Link';
 import { ProductData } from '@Types/Product';

@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';
+import useModals from '@Hooks/useModals';
 import { ConstructorStubData } from '@Types/Category';
 import styles from './ConstructorStub.module.css';
 
@@ -12,10 +13,14 @@ export interface ConstructorStubProps extends HTMLAttributes<HTMLDivElement> {
 
 const ConstructorStub: FC<ConstructorStubProps> = (props) => {
   const { className, stub, ...restProps } = props;
+  const [, { openModal }] = useModals();
 
   const handleOpenConstructor = useCallback(() => {
-    console.log('open constructor');
-  }, []);
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
 
   return (
     <div

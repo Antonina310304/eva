@@ -1,0 +1,39 @@
+.section {
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-xxl);
+}
+
+.title {
+  composes: xl from 'sizes';
+
+  font-weight: 500;
+}
+
+.wrapperGallery {
+  padding: 0 var(--space-xxl);
+}
+
+.gallery {
+  margin: var(--space-l) var(--space-s-neg) 0;
+}
+
+.galleryItem {
+  width: 210px;
+  padding: 0 var(--space-s);
+}
+
+.progress {
+  margin-top: var(--space-l);
+}
+
+@media (--mobile) {
+  .head,
+  .wrapperGallery {
+    padding: 0 var(--space-s);
+  }
+}
