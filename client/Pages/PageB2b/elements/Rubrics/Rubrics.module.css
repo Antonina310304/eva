@@ -2,6 +2,7 @@
   display: grid;
   grid-gap: var(--space-xxl);
   grid-template-columns: 1fr 1fr;
+  margin-bottom: var(--space-xxe);
 }
 
 .picWrapper {
@@ -46,6 +47,10 @@
     min-width: 513px;
     height: 340px;
   }
+
+  .wrapper {
+    margin-bottom: var(--space-e);
+  }
 }
 
 @media (--desktop) {
@@ -57,6 +62,10 @@
   .rubricsTitle {
     font-size: var(--size-xl);
     line-height: var(--lh-xxl);
+  }
+
+  .wrapper {
+    margin-bottom: var(--space-xb);
   }
 }
 

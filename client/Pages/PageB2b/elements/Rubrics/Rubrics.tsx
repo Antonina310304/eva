@@ -4,7 +4,7 @@ import cn from 'classnames';
 import Link from '@UI/Link';
 import Image from '@UI/Image';
 import styles from './Rubrics.module.css';
-import { RubricsItem } from '../typings';
+import { RubricsItem } from '../../typings';
 
 export interface RubricsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

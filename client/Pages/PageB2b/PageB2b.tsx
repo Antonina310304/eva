@@ -4,7 +4,8 @@ import cn from 'classnames';
 import Image from '@UI/Image';
 import { PageB2bData } from './typings';
 import styles from './PageB2b.module.css';
-import Rubrics from './elements';
+import Rubrics from './elements/Rubrics';
+import Feedback from './elements/Feedback';
 
 export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -31,6 +32,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
         </div>
         <Rubrics rubrics={rubrics} />
       </div>
+      <Feedback />
     </div>
   );
 };
