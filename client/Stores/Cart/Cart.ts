@@ -128,6 +128,22 @@ const removeProduct = async (params: any, options: any = {}) => {
   }
 };
 
+// Изменить количество товаров для позиции
+const changeCount = async (params: any) => {
+  try {
+    const response = await ApiCart.update(params);
+
+    update(cartStore, (cart) => ({
+      ...cart,
+      ...response.cart,
+      newPositions: cart.newPositions,
+    }));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  }
+};
+
 // Загрузить сопутствующие товары
 const loadRelatedProducts = async ({ productIds }: any) => {
   try {
@@ -175,5 +191,6 @@ export default {
   addProducts,
   hasInCart,
   removeProduct,
+  changeCount,
   loadRelatedProducts,
 };
