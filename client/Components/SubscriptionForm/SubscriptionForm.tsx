@@ -25,7 +25,6 @@ const SubscriptionForm: FC<SubscriptionFormProps> = ({ className }) => {
       className={cn(styles.subscriptionForm, className)}
       action='/subscribe'
       onSubmit={handleSubmit}
-      onChange={(e) => setEmail(e.target.value)}
     >
       <div className={styles.subscriptionWrapper}>
         <FormItem>
@@ -34,7 +33,8 @@ const SubscriptionForm: FC<SubscriptionFormProps> = ({ className }) => {
             type='text'
             placeholder='email'
             name='Subscription[email]'
-            defaultValue=''
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </FormItem>
         <button className={styles.subscriptionFormButton} type='submit'>
