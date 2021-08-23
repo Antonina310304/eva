@@ -19,12 +19,6 @@
   line-height: var(--lh-xl);
 }
 
-.paymentItem:first-child .paymentHeading {
-  padding-right: var(--space-s);
-
-  white-space: nowrap;
-}
-
 .paymentItem {
   margin-bottom: var(--space-xb);
 }
