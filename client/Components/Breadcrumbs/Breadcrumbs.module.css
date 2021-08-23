@@ -11,9 +11,6 @@
   position: relative;
 
   display: inline-block;
-
-  &:last-child {
-  }
 }
 
 .breadcrumbsItem {

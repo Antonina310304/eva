@@ -28,6 +28,10 @@
   color: var(--color-dark-gray);
   font-size: var(--size-s);
   line-height: 21px;
+  text-decoration: none;
+}
+
+.link {
 }
 
 .footerSubscription {

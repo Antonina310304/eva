@@ -31,11 +31,6 @@ const socialList: IconData[] = [
     icon: 'dzen',
     target: '_black',
   },
-  // {
-  //   name: 'tiktok',
-  //   link: 'https://www.tiktok.com/',
-  //   icon: 'tiktok',
-  // },
 ];
 
 export default socialList;

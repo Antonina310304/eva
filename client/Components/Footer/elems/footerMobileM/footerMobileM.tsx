@@ -19,6 +19,7 @@ import cn from 'classnames';
 import SocialList from '@Components/SocialList';
 import PaymentList from '@Components/PaymentList';
 import FooterTitleNav from '@Components/Footer/elems/FooterTitileNav';
+import Link from '@UI/Link';
 import styles from './footerMobileM.module.css';
 
 const FooterMobileM = () => {
@@ -26,7 +27,7 @@ const FooterMobileM = () => {
     <>
       <div className={styles.col}>
         <div className={styles.wrapperBig}>
-          <Accordion header={<FooterTitleNav title={footerNavFeedback.title} />}>
+          <Accordion header={footerNavFeedback.title}>
             <FooterNav linkList={footerNavFeedback.childrenList} />
           </Accordion>
         </div>
@@ -47,7 +48,10 @@ const FooterMobileM = () => {
           <div className={styles.wrapperMedium}>
             <FooterLogo />
           </div>
-          <p className={styles.footerText}>© ООО «ДИВАН ТРЕЙД», 2013-2021</p>
+          <p className={styles.footerText}>
+            © ООО «ДИВАН ТРЕЙД», 2013-
+            {new Date().getFullYear()}
+          </p>
         </div>
       </div>
 
@@ -59,25 +63,29 @@ const FooterMobileM = () => {
             </div>
           </FooterInfoBlock>
         </div>
-        <Accordion header={<FooterTitleNav title={footerNavBuyers.title} />}>
+        <Accordion header={footerNavBuyers.title}>
           <FooterNav linkList={footerNavBuyers.childrenList} />
         </Accordion>
 
         <div className={styles.marginTopAuto}>
-          <p className={cn(styles.footerText, styles.wrapperMedium)}>Политика конфиденциальности</p>
+          <div className={styles.wrapperMedium}>
+            <Link to='/' view='navigation'>
+              Политика конфиденциальности
+            </Link>
+          </div>
           <SocialList />
         </div>
       </div>
 
       <div className={styles.col}>
         <div className={styles.wrapperBig}>
-          <Accordion header={<FooterTitleNav title={footerNavCatalog.title} />}>
+          <Accordion header={footerNavCatalog.title}>
             <FooterNav linkList={footerNavCatalog.childrenList} />
           </Accordion>
         </div>
 
         <div className={styles.wrapperMedium}>
-          <Accordion header={<FooterTitleNav title={footerNavReviews.title} />}>
+          <Accordion header={footerNavReviews.title}>
             <FooterNav linkList={footerNavReviews.childrenList} />
           </Accordion>
         </div>

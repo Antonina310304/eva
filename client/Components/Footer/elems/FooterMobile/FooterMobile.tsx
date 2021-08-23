@@ -21,6 +21,7 @@ import PaymentList from '@Components/PaymentList';
 import FooterLogo from '@Components/Footer/elems/FooterLogo/FooterLogo';
 import SocialList from '@Components/SocialList';
 import FooterTitleNav from '@Components/Footer/elems/FooterTitileNav/FooterTitleNav';
+import Link from '@UI/Link/Link';
 import styles from './FooterMobile.module.css';
 
 const FooterMobile = () => {
@@ -28,7 +29,7 @@ const FooterMobile = () => {
     <>
       <div className={styles.col}>
         <div className={cn(styles.wrapperMedium, styles.wrapperBigMobileM)}>
-          <Accordion collapsed header={<FooterTitleNav title={footerNavFeedback.title} />}>
+          <Accordion header={footerNavFeedback.title}>
             <FooterNav linkList={footerNavFeedback.childrenList} />
           </Accordion>
         </div>
@@ -52,7 +53,7 @@ const FooterMobile = () => {
           </FooterInfoBlock>
         </div>
         <div className={styles.wrapperRegular}>
-          <Accordion collapsed header={<FooterTitleNav title={footerNavBuyers.title} />}>
+          <Accordion header={footerNavBuyers.title}>
             <FooterNav linkList={footerNavBuyers.childrenList} />
           </Accordion>
         </div>
@@ -60,12 +61,12 @@ const FooterMobile = () => {
 
       <div style={{ flex: 0 }} className={styles.col}>
         <div className={cn(styles.wrapperRegular, styles.wrapperLargeMobileM)}>
-          <Accordion collapsed header={<FooterTitleNav title={footerNavCatalog.title} />}>
+          <Accordion header={footerNavCatalog.title}>
             <FooterNav linkList={footerNavCatalog.childrenList} />
           </Accordion>
         </div>
         <div className={cn(styles.wrapperMedium, styles.wrapperLargeMobileM)}>
-          <Accordion collapsed header={<FooterTitleNav title={footerNavReviews.title} />}>
+          <Accordion header={footerNavReviews.title}>
             <FooterNav linkList={footerNavReviews.childrenList} />
           </Accordion>
         </div>
@@ -84,10 +85,15 @@ const FooterMobile = () => {
             <FooterLogo />
           </div>
           <p className={cn(styles.wrapperSmall, styles.footerText)}>
-            © ООО «ДИВАН ТРЕЙД», 2013-2021
+            © ООО «ДИВАН ТРЕЙД», 2013-
+            {new Date().getFullYear()}
           </p>
 
-          <p className={cn(styles.footerText, styles.wrapperMedium)}>Политика конфиденциальности</p>
+          <div className={styles.wrapperMedium}>
+            <Link to='/' view='navigation'>
+              Политика конфиденциальности
+            </Link>
+          </div>
 
           <SocialList className={styles.wrapperMedium} />
 

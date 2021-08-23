@@ -1,17 +1,8 @@
 .accordion {
-  display: block;
-}
-
-.accordionHeader {
   position: relative;
 
+  display: block;
   padding-bottom: 15px;
-
-  cursor: pointer;
-
-  @media (min-width: 640px) {
-    padding-bottom: 0;
-  }
 
   &:before {
     position: absolute;
@@ -24,12 +15,29 @@
 
     background: var(--color-medium-gray);
 
-    content: '';
+    transition: background 0.2s ease-in;
 
-    @media (min-width: 640px) {
+    content: '';
+  }
+
+  @media (min-width: 640px) {
+    padding-bottom: 0;
+
+    &:before {
       content: none;
     }
   }
+}
+
+.accordionHeader {
+  position: relative;
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--size-s);
+  line-height: 21px;
+
+  cursor: pointer;
 
   &:after {
     position: absolute;
@@ -48,15 +56,47 @@
     transition: transform 0.2s ease-in;
 
     content: '';
+  }
 
-    .accordion.collapsed & {
+  .accordion.disabled & {
+    color: var(--color-medium-gray);
+
+    cursor: default;
+
+    &:after {
+      background-image: url('arrow-disabled.svg');
+    }
+  }
+
+  .accordion.collapsed & {
+    &:before {
+      background: transparent;
+
+      transition: background 0.2s ease-in;
+    }
+
+    &:after {
       transform: translateY(5.5px) rotate(180deg);
 
       transition: transform 0.2s ease-in;
     }
+  }
 
-    @media (min-width: 640px) {
-      content: none;
+  @media (min-width: 640px) {
+    padding-bottom: 0;
+
+    cursor: default;
+
+    &:before {
+      @media (min-width: 640px) {
+        content: none;
+      }
+    }
+
+    &:after {
+      @media (min-width: 640px) {
+        content: none;
+      }
     }
   }
 }

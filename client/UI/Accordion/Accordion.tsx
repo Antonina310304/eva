@@ -8,21 +8,27 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   header: string | ReactChild;
   collapsed?: boolean;
   children?: ReactChild;
+  disabled?: boolean;
 }
 
-const Accordion: FC<AccordionProps> = ({ header, children, collapsed = false }) => {
+const Accordion: FC<AccordionProps> = ({ header, children, collapsed, disabled = false }) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(collapsed);
   const isMobile = useMediaQuery('(max-width: 639px)');
 
   function toggleAccordion() {
-    if (!isMobile) {
+    if (!isMobile || disabled) {
       return;
     }
     setIsCollapsed(!isCollapsed);
   }
 
   return (
-    <div className={cn(styles.accordion, isCollapsed ? styles.collapsed : '')}>
+    <div
+      className={cn(styles.accordion, {
+        [styles.disabled]: disabled === true,
+        [styles.collapsed]: isCollapsed === true,
+      })}
+    >
       <div className={cn(styles.accordionHeader)} onClick={toggleAccordion}>
         {header}
       </div>

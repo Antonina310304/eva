@@ -1,7 +1,4 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
-
-// import { Link } from 'react-router-dom';
-
 import { BreadcrumbData } from '@Types/Breadcrumbs';
 import Link from '@UI/Link';
 import styles from './Breadcrumbs.module.css';

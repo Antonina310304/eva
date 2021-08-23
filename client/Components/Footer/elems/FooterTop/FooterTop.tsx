@@ -16,8 +16,11 @@ const FooterTop: FC<FooterProps> = () => {
         <div className={styles.FooterTopWrap}>
           <p className={styles.FooterTopTitle}>Доставка по всей России</p>
           <p className={styles.FooterTopText}>
-            Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону7 (495)
-            266-71-47. Доставка по городу Москва и области – от 3 дней.
+            Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону&ensp;
+            <Link to='tel:7 (495) 266-71-47' view='primary'>
+              7&nbsp;(495)&nbsp;266-71-47
+            </Link>
+            . Доставка по городу Москва и области – от 3 дней.
           </p>
           <Link view='primary' to='/'>
             Подробнее

@@ -21,13 +21,14 @@ import cn from 'classnames';
 import SocialList from '@Components/SocialList';
 import PaymentList from '@Components/PaymentList';
 import FooterTitleNav from '@Components/Footer/elems/FooterTitileNav/FooterTitleNav';
+import Link from '@UI/Link/Link';
 import styles from './FooterDesktop.module.css';
 
 const FooterDesktop = () => {
   return (
     <>
       <div className={styles.col}>
-        <Accordion header={<FooterTitleNav title={footerNavFeedback.title} />}>
+        <Accordion header={footerNavFeedback.title}>
           <FooterNav linkList={footerNavFeedback.childrenList} />
         </Accordion>
 
@@ -54,20 +55,25 @@ const FooterDesktop = () => {
           </div>
         </FooterInfoBlock>
         <p className={cn(styles.marginTopAuto, styles.footerText)}>
-          © ООО «ДИВАН ТРЕЙД», 2013-2021
+          © ООО «ДИВАН ТРЕЙД», 2013-
+          {new Date().getFullYear()}
         </p>
       </div>
 
       <div className={styles.col}>
-        <Accordion collapsed header={<FooterTitleNav title={footerNavBuyers.title} />}>
+        <Accordion header={footerNavBuyers.title}>
           <FooterNav linkList={footerNavBuyers.childrenList} />
         </Accordion>
 
-        <p className={cn(styles.footerText, styles.marginTop95)}>Политика конфиденциальности</p>
+        <div className={styles.marginTop95}>
+          <Link to='/' view='navigation'>
+            Политика конфиденциальности
+          </Link>
+        </div>
       </div>
 
       <div className={styles.col}>
-        <Accordion collapsed header={<FooterTitleNav title={footerNavCatalog.title} />}>
+        <Accordion collapsed header={footerNavCatalog.title}>
           <FooterNav linkList={footerNavCatalog.childrenList} />
         </Accordion>
         <SocialList className={styles.marginTopAuto} />
@@ -75,7 +81,7 @@ const FooterDesktop = () => {
 
       <div className={styles.col}>
         <div className={styles.wrapperMedium}>
-          <Accordion header={<FooterTitleNav title={footerNavReviews.title} />}>
+          <Accordion header={footerNavReviews.title}>
             <FooterNav linkList={footerNavReviews.childrenList} />
           </Accordion>
         </div>

@@ -39,3 +39,55 @@
 .link.native:hover {
   color: var(--color-black);
 }
+
+.link.navigation {
+  position: relative;
+
+  margin: 0;
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-s);
+  line-height: 21px;
+  text-decoration: none;
+
+  transition: color 150ms ease-in;
+
+  &:before {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+
+    display: block;
+    width: 0;
+    height: 1px;
+
+    background: #404040;
+
+    transition: width 150ms ease-in;
+
+    content: '';
+  }
+
+  &:hover,
+  &:active {
+    color: #404040;
+
+    transition: color 150ms ease-in;
+
+    &:before {
+      width: 100%;
+
+      transition: width 150ms ease-in;
+    }
+  }
+
+  &:focus {
+    transition: color 150ms ease-in;
+
+    &:before {
+      width: 100%;
+
+      transition: width 150ms ease-in;
+    }
+  }
+}
