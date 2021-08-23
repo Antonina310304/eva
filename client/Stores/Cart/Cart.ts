@@ -61,6 +61,18 @@ const findProductById = (productId: number): CartProductData => {
   return allProducts.find((product) => product.id === productId);
 };
 
+// Получить основную информацию о корзине
+const loadInitData = async () => {
+  try {
+    const res = await ApiCart.info();
+
+    cartStore.set(res.cart);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  }
+};
+
 // Добавить товары в корзину
 const addProducts = async (inputsParams: any[], options: any = {}): Promise<void> => {
   const body: any[] = [];
@@ -181,6 +193,10 @@ const loadRelatedProducts = async ({ productIds }: any) => {
 };
 
 export const useCart = () => {
+  const cart = getValue(cartStore);
+
+  if (!cart) loadInitData();
+
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),
