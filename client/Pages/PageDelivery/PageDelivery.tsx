@@ -58,7 +58,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
     deliveryTypes,
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
-  const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes[0]);
+  const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
 
   const tabs = [
     { id: '0', label: 'Доставка' },
