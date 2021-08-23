@@ -18,7 +18,7 @@ const CartModal: FC<ModalSidebarProps> = (props) => {
   const handleOpen = useCallback(() => {
     const productIds = modal.data.products.map((product: any) => product.shopProductId);
 
-    CartStore.addProduct(modal.data.products);
+    CartStore.addProducts(modal.data.products);
     CartStore.loadRelatedProducts({ productIds });
   }, [modal.data.products]);
 
