@@ -15,7 +15,7 @@ export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2b: FC<PageB2bProps> = (props) => {
   const { className, page, ...restProps } = props;
-  const { banner, texts, rubrics } = page;
+  const { banner, texts, articles, rubrics } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -34,7 +34,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
         <Rubrics rubrics={rubrics} />
       </div>
       <Feedback />
-      <Press />
+      <Press articles={articles} />
     </div>
   );
 };
