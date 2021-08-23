@@ -1,5 +1,5 @@
 import React, { FC, HTMLAttributes, memo, ReactChild } from 'react';
-import FooterTitleNav from '@Components/FooterTitileNav/FooterTitleNav';
+import FooterTitleNav from '@Components/Footer/elems/FooterTitileNav/FooterTitleNav';
 
 import cn from 'classnames';
 import styles from './FooterInfoBlock.module.css';

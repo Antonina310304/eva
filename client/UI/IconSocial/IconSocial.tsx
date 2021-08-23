@@ -12,9 +12,10 @@ export interface IconSocialProps extends HTMLAttributes<HTMLDivElement> {
   icon: IconSocialId;
   link: string;
   name: string;
+  target?: string;
 }
 
-const IconSocial: FC<IconSocialProps> = ({ icon, name, link }) => {
+const IconSocial: FC<IconSocialProps> = ({ icon, name, link, target }) => {
   return (
     <Link
       view='simple'
@@ -27,6 +28,7 @@ const IconSocial: FC<IconSocialProps> = ({ icon, name, link }) => {
         [styles.youtube]: icon === 'youtube',
         [styles.instagram]: icon === 'instagram',
       })}
+      target={target}
     >
       {name}
     </Link>

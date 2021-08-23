@@ -1,20 +1,18 @@
 import React, { FC, HTMLAttributes, memo, ReactChild, useState } from 'react';
-
-import FooterTitleNav from '@Components/FooterTitileNav';
 import cn from 'classnames';
-import useMedias from '@Hooks/useMedias';
+import useMediaQuery from '@Hooks/useMediaQuery';
 import styles from './Accordion.module.css';
 
 export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  title: string;
+  header: string | ReactChild;
   collapsed?: boolean;
   children?: ReactChild;
 }
 
-const Accordion: FC<AccordionProps> = ({ title, children, collapsed = false }) => {
+const Accordion: FC<AccordionProps> = ({ header, children, collapsed = false }) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(collapsed);
-  const isMobile = useMedias().isMobileS;
+  const isMobile = useMediaQuery('(max-width: 639px)');
 
   function toggleAccordion() {
     if (!isMobile) {
@@ -25,9 +23,10 @@ const Accordion: FC<AccordionProps> = ({ title, children, collapsed = false }) =
 
   return (
     <div className={cn(styles.accordion, isCollapsed ? styles.collapsed : '')}>
-      <div className={styles.accordionHeader} onClick={toggleAccordion}>
-        <FooterTitleNav title={title} />
+      <div className={cn(styles.accordionHeader)} onClick={toggleAccordion}>
+        {header}
       </div>
+
       <div className={styles.accordionBody}>
         <div className={styles.accordionBodyIn}>{children}</div>
       </div>

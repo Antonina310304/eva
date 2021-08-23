@@ -7,6 +7,7 @@ import styles from './FooterNav.module.css';
 export interface FooterNavProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   linkList: SiteNavigationData[];
+  isExternalLink?: boolean;
 }
 
 const FooterNav: FC<FooterNavProps> = ({ linkList }) => {
@@ -22,9 +23,15 @@ const FooterNav: FC<FooterNavProps> = ({ linkList }) => {
         }
         return (
           <li key={item.url} className={styles.footerNavItem}>
-            <Link className={styles.footerNavLink} to={item.url} view='simple'>
-              {item.title}
-            </Link>
+            {item.isExternalLink ? (
+              <Link target='_blank' className={styles.footerNavLink} to={item.url} view='simple'>
+                {item.title}
+              </Link>
+            ) : (
+              <Link className={styles.footerNavLink} to={item.url} view='simple'>
+                {item.title}
+              </Link>
+            )}
           </li>
         );
       })}

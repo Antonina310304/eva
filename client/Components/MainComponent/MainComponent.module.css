@@ -2,3 +2,19 @@
   flex: 1;
   width: 100%;
 }
+
+.top {
+  margin-bottom: 35px;
+
+  @media (--mobile-m) {
+    margin-bottom: 20px;
+  }
+}
+
+.content {
+  padding-bottom: 80px;
+
+  @media (--desktop) {
+    padding-bottom: 60px;
+  }
+}

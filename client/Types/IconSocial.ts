@@ -5,6 +5,7 @@ export interface IconData {
   name: string;
   link?: string;
   icon: IconSocialId;
+  target?: string;
 }
 
 export interface IconPaymentData {
