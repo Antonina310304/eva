@@ -114,7 +114,6 @@
 }
 
 .bottomInfo {
-
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -168,6 +167,59 @@
   composes: m from 'sizes';
 
   margin-top: var(--space-xb);
+}
+
+.subTitle {
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.city {
+  display: inline-block;
+  box-sizing: border-box;
+
+  vertical-align: baseline;
+
+  border-bottom: 1px solid var(--color-black);
+  cursor: pointer;
+}
+
+.radioGroup {
+  margin-top: var(--space-xxl);
+}
+
+.radioItem {
+  composes: n from 'sizes';
+
+  display: flex;
+  align-items: center;
+
+  color: var(--color-dark-gray);
+}
+
+.radioIcon {
+  margin-left: var(--space-s);
+
+  color: var(--color-dark-gray);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &.toAddress {
+    width: 32px;
+    height: 16px;
+  }
+
+  &.pickupPoint {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.radioName {
+  margin-left: var(--space-xs);
 }
 
 @media (--desktop-m) {
