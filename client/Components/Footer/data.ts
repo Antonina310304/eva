@@ -6,10 +6,12 @@ export const footerNavFeedback: FooterNavData = {
     {
       title: '7(495) 154 38 02 ',
       url: 'tel:7(495) 154 38 02 ',
+      isRedirectToDevice: true,
     },
     {
       title: 'love@divan.ru',
       url: 'mailto:love@divan.ru',
+      isRedirectToDevice: true,
     },
     {
       title: 'Перезвоните мне',
