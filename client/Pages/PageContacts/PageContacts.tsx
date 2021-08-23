@@ -20,8 +20,9 @@ export interface PageContactsProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageContacts: FC<PageContactsProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
-  const { title, organization, forms, map, sellPoints } = page;
+  const { title, organization, forms, map, sellPoints, pickUpPoints } = page;
 
+  // TODO убрать, когда будет получено соответствующее свойство от бэка
   const schedule = [
     {
       name: 'Режим работы',
@@ -40,37 +41,53 @@ const PageContacts: FC<PageContactsProps> = (props) => {
     },
   ];
 
-  console.log('page', page);
-
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <PageTitle className={styles.pageTitle} title={title} />
 
       <Wrapper>
         <div className={styles.hotLineWrapper}>
-          <div className={styles.callIcon} />
+          <div className={styles.callIconWrapper}>
+            <div className={styles.callIcon} />
+          </div>
           <div className={styles.hotContainer}>
             <div className={styles.hotLine}>{organization.phones.label}</div>
             <div className={styles.hotNumber}>{organization.phones.values[0]}</div>
           </div>
         </div>
 
-        <div className={styles.hotInfo}>
-          Партнерский пункт выдачи заказов: 600032, г. Владимир, ул. Растопчина, д. 24а, ТЦ
-          «Меридиан», 2 этаж
+        <div className={styles.hotInfoWrapper}>
+          {pickUpPoints.length > 0 && (
+            <ul className={styles.list}>
+              Партнерские пункты выдачи заказов:
+              {pickUpPoints.map((pickUpPoint, index) => (
+                <li className={styles.listItem} key={index}>
+                  {`${pickUpPoint.address.postalCode}, ${pickUpPoint.address.addressLocality}, ${pickUpPoint.address.streetAddress}`}
+                  {pickUpPoint.address.additional !== '' && `, ${pickUpPoint.address.additional}`}
+                </li>
+              ))}
+            </ul>
+          )}
+          {pickUpPoints.length === 0 && (
+            <div>
+              {`Партнерский пункт выдачи заказов: ${pickUpPoints[0].address.postalCode}, ${pickUpPoints[0].address.addressLocality}, ${pickUpPoints[0].address.streetAddress}`}
+              {pickUpPoints[0].address.additional !== '' &&
+                `, ${pickUpPoints[0].address.additional}`}
+            </div>
+          )}
         </div>
 
         <QualityDepartment schedule={schedule} />
 
         <Requisites className={styles.requisites} requisites={organization} />
 
-        <ButtonsContactForms className={styles.buttonsContactForms} data={forms} />
+        <ButtonsContactForms className={styles.buttonsContactForms} contactDatas={forms} />
       </Wrapper>
 
       <Wrapper type='wide'>
         <Divider className={styles.divider} />
 
-        <SeeUs className={styles.seeUs} data={map} pickupPoints={sellPoints} />
+        <SeeUs className={styles.seeUs} datasForMap={map} pickupPoints={sellPoints} />
       </Wrapper>
     </div>
   );

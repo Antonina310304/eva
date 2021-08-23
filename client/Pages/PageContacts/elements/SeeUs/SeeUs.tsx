@@ -2,19 +2,19 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import ParagraphTitle from '@Pages/PageCredit/elements/ParagraphTitle';
-import { Map, SellPoint } from '@Pages/PageContacts/typings';
+import { MapData, SellPointData } from '@Pages/PageContacts/typings';
 import MapWithPopup from '../MapWithPopup';
 import styles from './SeeUs.module.css';
 
 export interface SeeUsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  data: Map;
-  pickupPoints: SellPoint[];
+  datasForMap: MapData;
+  pickupPoints: SellPointData[];
 }
 
 const SeeUs: FC<SeeUsProps> = (props) => {
-  const { className, data, pickupPoints, ...restProps } = props;
-  const { description, title } = data;
+  const { className, datasForMap, pickupPoints, ...restProps } = props;
+  const { description, title } = datasForMap;
 
   return (
     <div {...restProps} className={cn(styles.seeUs, className)}>

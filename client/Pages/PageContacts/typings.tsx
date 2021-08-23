@@ -13,6 +13,7 @@ export interface Organization {
   ogrn: OrganizationSimpleValue;
   phones: { label: string; values: string[] };
 }
+
 export interface OrganizationAddress {
   label: string;
   postalCode: string;
@@ -26,7 +27,7 @@ export interface OrganizationSimpleValue {
   value: string;
 }
 
-export interface Map {
+export interface MapData {
   center: number[];
   zoom: number;
   title: string;
@@ -34,7 +35,7 @@ export interface Map {
   regionId: number;
 }
 
-export interface SellPoint {
+export interface SellPointData {
   id: string;
   regionId: number;
   coordinates: number[];
@@ -53,10 +54,26 @@ export interface Forms {
   title: string;
 }
 
+export interface PickUpPoint {
+  isVisible: boolean;
+  label: string;
+  address: {
+    postalCode: string;
+    addressLocality: string;
+    streetAddress: string;
+    additional: string;
+  };
+  phones: {
+    label: string;
+    values: string[];
+  };
+}
+
 export interface PageContactsData {
   title: string;
   organization: Organization;
   forms: Forms;
-  map: Map;
-  sellPoints: SellPoint[];
+  map: MapData;
+  sellPoints: SellPointData[];
+  pickUpPoints: PickUpPoint[];
 }

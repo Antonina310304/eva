@@ -9,6 +9,7 @@ export interface PecomMapProps extends HTMLAttributes<HTMLDivElement> {
   pickupPoints: any[];
   selectedPickupPoints?: any[];
   onSelectPickupPoint?: any;
+  balloon?: boolean;
 }
 
 const id = 'pecom-map';
@@ -18,6 +19,7 @@ const PecomMap: FC<PecomMapProps> = (props) => {
     pickupPoints,
     selectedPickupPoints = [],
     onSelectPickupPoint,
+    balloon = true,
     ...restProps
   } = props;
 
@@ -60,7 +62,7 @@ const PecomMap: FC<PecomMapProps> = (props) => {
           pickupPoint,
         },
         {
-          balloonContentLayout: BalloonContentLayout,
+          balloonContentLayout: balloon && BalloonContentLayout,
           // Запретим замену обычного балуна на балун-панель.
           // Если не указывать эту опцию, на картах маленького размера откроется балун-панель.
           balloonPanelMaxMapArea: 0,
@@ -79,7 +81,7 @@ const PecomMap: FC<PecomMapProps> = (props) => {
     });
 
     if (pickupPoints.length > 0) map.setBounds(map.geoObjects.getBounds());
-  }, [handleClickPlacemark, pickupPoints, selectedPickupPoints]);
+  }, [balloon, handleClickPlacemark, pickupPoints, selectedPickupPoints]);
 
   // Загрузка Яндекс.Карты
   useEffect(() => {

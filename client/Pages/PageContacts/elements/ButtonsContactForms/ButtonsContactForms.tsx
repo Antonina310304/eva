@@ -8,12 +8,12 @@ import styles from './ButtonsContactForms.module.css';
 
 export interface ButtonsContactFormsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  data: Forms;
+  contactDatas: Forms;
 }
 
 const ButtonsContactForms: FC<ButtonsContactFormsProps> = (props) => {
-  const { className, data, ...restProps } = props;
-  const { items, text, title } = data;
+  const { className, contactDatas, ...restProps } = props;
+  const { items, text, title } = contactDatas;
   const [, { openModal }] = useModals();
 
   const handleButtonClick = useCallback(
