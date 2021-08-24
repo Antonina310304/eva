@@ -17,7 +17,7 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
 
   const { teaserText, pageMenu, paymentTypes } = page;
-  const payments: any[] = paymentTypes.slice(3, 10);
+  const payments: any[] = paymentTypes.slice(3);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
