@@ -19,6 +19,7 @@ const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
 const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
+const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
 
 const App: FC = () => {
   return (
@@ -49,6 +50,10 @@ const App: FC = () => {
 
       <Route path='/static-page/oferta'>
         <RouteOferta />
+      </Route>
+
+      <Route path='/order/check'>
+        <RouteOrderCheck />
       </Route>
     </ModalsProvider>
   );
