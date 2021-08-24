@@ -70,11 +70,13 @@ const Press: FC<PressProps> = (props) => {
           onChangeProgress={handleChangeProgress}
         >
           {articles.map((item, index) => (
-            <div key={index}>
+            <div className={styles.article} key={index}>
               <div className={styles.articleItem}>
-                <Image className={styles.articleImage} src={item.src} />
-                <img className={styles.logo} src={item.logo} />
-                <Link className={styles.link} to={item.href} view='secondary' target='_blank'>
+                <div className={styles.imageWrapper}>
+                  <Image className={styles.articleImage} src={item.src} />
+                  <img className={styles.logo} src={item.logo} />
+                </div>
+                <Link className={styles.link} to={item.href} target='_blank'>
                   {item.preview}
                 </Link>
               </div>
