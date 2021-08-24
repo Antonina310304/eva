@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import cn from 'classnames';
 
@@ -36,6 +36,19 @@ const MattressesProductCard: FC<MattressesProductCardProps> = (props) => {
   });
 
   const parameterGroups = Object.values(product.parameterGroups);
+
+  const sizeItems = useMemo(() => {
+    if (!product.variants) return [];
+
+    return product.variants.values.map((variant: any, index: number) => ({
+      id: variant.id.toString(),
+      title: variant.parameters,
+      name: variant.parameters,
+      href: variant.link,
+      price: variant.price,
+      selected: index === 0,
+    }));
+  }, [product.variants]);
 
   const handleBuy = useCallback(() => {
     openModal('Cart', {
@@ -131,19 +144,8 @@ const MattressesProductCard: FC<MattressesProductCardProps> = (props) => {
             </div>
           )}
 
-          {product.variants && (
-            <MainSelect
-              className={styles.sizes}
-              title={product.variants.title}
-              options={product.variants.values.map((variant: any, index: number) => ({
-                id: variant.id.toString(),
-                title: variant.parameters,
-                name: variant.parameters,
-                href: variant.link,
-                price: variant.price,
-                selected: index === 0,
-              }))}
-            />
+          {sizeItems.length > 0 && (
+            <MainSelect className={styles.sizes} title={product.variants.title} items={sizeItems} />
           )}
         </div>
 

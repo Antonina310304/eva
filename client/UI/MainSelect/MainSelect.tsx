@@ -1,26 +1,25 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, memo } from 'react';
 import cn from 'classnames';
 
-import Select, { SelectItemData } from '@UI/Select';
+import Select, { SelectProps, SelectItemData } from '@UI/Select';
 import SampleOption from './elems/SampleOption';
 import styles from './MainSelect.module.css';
 
-export interface MainSelectProps extends HTMLAttributes<HTMLDivElement> {
+export interface MainSelectProps extends SelectProps {
   className?: string;
   title: string;
-  options: SelectItemData[];
 }
 
 const MainSelect: FC<MainSelectProps> = (props) => {
-  const { className, title, options, ...restProps } = props;
+  const { className, title, items, ...restProps } = props;
 
   return (
     <Select
       {...restProps}
       className={cn(styles.select, className)}
       title={title}
-      defaultChecked={options.find((option) => option.selected)}
-      items={options}
+      defaultChecked={items.find((option) => option.selected)}
+      items={items}
       wide
       renderItem={(itemProps: SelectItemData) => {
         return <SampleOption item={itemProps} className={cn(styles.option)} />;

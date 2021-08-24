@@ -2,8 +2,8 @@ import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 
 import loadable from '@loadable/component';
 import cn from 'classnames';
 
-import { Tab } from '@UI/ButtonTabs';
 import List from '@UI/List';
+import { Tab } from '@UI/ButtonTabs';
 import { SelectItemData } from '@UI/Select';
 import PageProductStore from '@Stores/PageProduct';
 import { ModuleProductData } from '@Types/ModuleProduct';
@@ -16,7 +16,6 @@ import {
   DocumentData,
   Variant,
 } from '@Pages/PageProduct/typings';
-import SampleOption from './elements/SampleOption';
 import styles from './Characteristics.module.css';
 
 export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
@@ -32,7 +31,7 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ButtonTabs = loadable(() => import('@UI/ButtonTabs'));
-const Select = loadable(() => import('@UI/Select'));
+const MainSelect = loadable(() => import('@UI/MainSelect'));
 const Dimension = loadable(() => import('./elements/Dimension'));
 const Document = loadable(() => import('./elements/Document'));
 const Hardness = loadable(() => import('./elements/Hardness'));
@@ -154,15 +153,11 @@ const Characteristics: FC<CharacteristicsProps> = (props) => {
                 });
 
                 return (
-                  <Select
+                  <MainSelect
+                    wide
                     className={styles.select}
                     title={dropdown.name}
-                    defaultChecked={options.find((option) => option.selected)}
                     items={options}
-                    wide
-                    renderItem={(itemProps: SelectItemData) => {
-                      return <SampleOption item={itemProps} className={cn(styles.option)} />;
-                    }}
                     onChangeSelected={handleChangeParameter}
                   />
                 );

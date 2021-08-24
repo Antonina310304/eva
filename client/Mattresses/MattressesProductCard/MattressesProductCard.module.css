@@ -199,10 +199,6 @@
   margin-top: var(--space-n);
 }
 
-.buy {
-  margin-top: var(--space-m);
-}
-
 .moreWrapper {
   display: flex;
   justify-content: center;
