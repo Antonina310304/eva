@@ -6,8 +6,8 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
+import useMedias from '@Hooks/useMedias';
 import { ArticleItem } from '@Pages/PageB2b/typings';
-import Link from '@UI/Link';
 import styles from './Press.module.css';
 
 export interface PressProps extends HTMLAttributes<HTMLDivElement> {
@@ -17,6 +17,7 @@ export interface PressProps extends HTMLAttributes<HTMLDivElement> {
 
 const Press: FC<PressProps> = (props) => {
   const { className, articles, ...restProps } = props;
+  const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -52,15 +53,17 @@ const Press: FC<PressProps> = (props) => {
     <Section
       {...restProps}
       className={cn(styles.section, className)}
-      title='Мы в прессе:'
       additional={
-        <NavArrows
-          className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
+        !isMobileM && (
+          <NavArrows
+            className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
+            onPrev={handlePrev}
+            onNext={handleNext}
+          />
+        )
       }
     >
+      <h3 className={styles.heading}>Мы в прессе:</h3>
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
@@ -76,9 +79,7 @@ const Press: FC<PressProps> = (props) => {
                   <Image className={styles.articleImage} src={item.src} />
                   <img className={styles.logo} src={item.logo} />
                 </div>
-                <Link className={styles.link} to={item.href} target='_blank'>
-                  {item.preview}
-                </Link>
+                <div className={styles.subheading}>{item.preview}</div>
               </div>
             </div>
           ))}

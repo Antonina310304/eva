@@ -66,8 +66,8 @@
 }
 
 @media (--mobile-m) {
-  .feedback {
-    padding: 0 var(--space-s);
+  .wrapper {
+    max-width: 486px;
   }
 
   .formWrapper {
@@ -79,5 +79,10 @@
 @media (--mobile) {
   .formWrapper {
     min-width: 330px;
+  }
+
+  .description {
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
   }
 }

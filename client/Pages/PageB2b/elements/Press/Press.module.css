@@ -5,7 +5,7 @@
 }
 
 .heading {
-  margin: 0;
+  margin: var(--space-l-neg) 0 0;
 
   font-weight: 500;
   font-size: var(--size-xxl);
@@ -17,17 +17,12 @@
   overflow: hidden;
 }
 
-.link {
+.subheading {
   padding-bottom: var(--space-l);
 
   font-size: var(--size-l);
   line-height: var(--size-xl);
   white-space: normal;
-}
-
-.arrows {
-  max-width: none;
-  padding-left: 0;
 }
 
 .articleItem {
