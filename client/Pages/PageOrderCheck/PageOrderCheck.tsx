@@ -16,7 +16,15 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      PageOrderCheck
+      <div className={styles.wrapper}>
+        <h1 className={styles.title}>Корзина</h1>
+
+        <div className={styles.container}>
+          <div className={styles.content}>Content</div>
+
+          <div className={styles.wrapperSidebar}>Sidebar</div>
+        </div>
+      </div>
     </div>
   );
 };
