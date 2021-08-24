@@ -65,7 +65,7 @@
 
 .content {
   max-width: 700px;
-  margin: var(--space-xs) 0 0 var(--space-s-neg);
+  margin: var(--space-l) 0 0 var(--space-s-neg);
 
   &.column1 {
     column-count: 1;
@@ -94,7 +94,10 @@
 }
 
 .groupName {
+  composes: n from 'sizes';
+
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .categories {
