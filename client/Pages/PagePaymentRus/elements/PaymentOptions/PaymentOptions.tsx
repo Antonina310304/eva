@@ -10,9 +10,10 @@ export interface PaymentItem {
   icon: string;
   visible: boolean;
 }
+
 export interface PaymentOptionsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  paymentTypes: PaymentItem;
+  paymentTypes: PaymentItem[];
 }
 
 const PaymentOptions: FC<PaymentOptionsProps> = (props) => {

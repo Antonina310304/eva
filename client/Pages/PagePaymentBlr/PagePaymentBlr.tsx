@@ -17,7 +17,7 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
 
   const { teaserText, pageMenu, paymentTypes } = page;
-  const payments = paymentTypes.slice(3, 10);
+  const payments: any[] = paymentTypes.slice(3, 10);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -41,6 +41,7 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
                 <img className={styles.paymentImage} src={`/react/static${item.icon}`} />
                 <h3 className={styles.paymentHeading}>{item.name}</h3>
               </div>
+              {/* eslint-disable-next-line react/no-danger */}
               <div dangerouslySetInnerHTML={{ __html: `${item.description}` }} />
             </li>
           ))}
