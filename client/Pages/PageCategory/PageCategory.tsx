@@ -24,6 +24,7 @@ const Filters = loadable(() => import('./elements/Filters'));
 const Subcategories = loadable(() => import('./elements/Subcategories'));
 const PopularLinks = loadable(() => import('./elements/PopularLinks'));
 const ProductCard = loadable(() => import('@Components/ProductCard'));
+const MattressesProductCard = loadable(() => import('@Mattresses/MattressesProductCard'));
 
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
@@ -78,6 +79,17 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
     if (typeof onMore === 'function') onMore(url, page.page + 1);
   }, [activeSubcategoryIds, onMore, page.page]);
 
+  const renderProduct = useCallback(
+    (productProps) => {
+      if (page.isMatrasyCategory) {
+        return <MattressesProductCard {...productProps} />;
+      }
+
+      return <ProductCard {...productProps} />;
+    },
+    [page.isMatrasyCategory],
+  );
+
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
 
   return (
@@ -116,7 +128,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
             className={styles.catalog}
             pages={category.data.pages}
             hasNextPage={category.hasNextPage}
-            renderProduct={({ product }) => <ProductCard product={product} />}
+            renderProduct={renderProduct}
             onMore={handleMore}
           />
         ) : (
@@ -125,7 +137,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
             className={styles.catalog}
             pages={category.data.pages}
             hasNextPage={category.hasNextPage}
-            renderProduct={({ product, view }) => <ProductCard product={product} view={view} />}
+            renderProduct={renderProduct}
             onMore={handleMore}
           />
         )}

@@ -1,0 +1,8 @@
+.fastView {
+  width: 20px;
+  height: 21px;
+
+  background-image: url('./icon.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
