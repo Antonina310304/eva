@@ -4,6 +4,7 @@ import { useStore } from '@kundinos/nanostores/react';
 import { ApiCart } from '@Api/Cart';
 import { CartData, CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
+import { UseCart } from './typings';
 
 const cartStore = createStore<CartData>();
 
@@ -59,6 +60,18 @@ const findProductById = (productId: number): CartProductData => {
   const allProducts = getValue(allProductsStore);
 
   return allProducts.find((product) => product.id === productId);
+};
+
+// Получить основную информацию о корзине
+const loadInitData = async () => {
+  try {
+    const res = await ApiCart.info();
+
+    cartStore.set(res.cart);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  }
 };
 
 // Добавить товары в корзину
@@ -180,7 +193,9 @@ const loadRelatedProducts = async ({ productIds }: any) => {
   }
 };
 
-export const useCart = () => {
+export const useCart: UseCart = (opts = {}) => {
+  if (opts.preload) loadInitData();
+
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),
