@@ -23,6 +23,7 @@ const ProductMixedCatalog = loadable(() => import('@Components/ProductMixedCatal
 const Filters = loadable(() => import('./elements/Filters'));
 const Subcategories = loadable(() => import('./elements/Subcategories'));
 const PopularLinks = loadable(() => import('./elements/PopularLinks'));
+const ProductCard = loadable(() => import('@Components/ProductCard'));
 
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
@@ -115,6 +116,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
             className={styles.catalog}
             pages={category.data.pages}
             hasNextPage={category.hasNextPage}
+            renderProduct={({ product }) => <ProductCard product={product} />}
             onMore={handleMore}
           />
         ) : (
@@ -123,6 +125,7 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
             className={styles.catalog}
             pages={category.data.pages}
             hasNextPage={category.hasNextPage}
+            renderProduct={({ product, view }) => <ProductCard product={product} view={view} />}
             onMore={handleMore}
           />
         )}
