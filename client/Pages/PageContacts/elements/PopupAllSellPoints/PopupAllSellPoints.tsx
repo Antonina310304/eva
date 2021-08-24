@@ -11,7 +11,7 @@ export interface PopupAllSellPointsProps extends HTMLAttributes<HTMLDivElement> 
   className?: string;
   pickupPoints: SellPointData[];
   closePopup: () => void;
-  selectPoint: (id: string) => void;
+  selectPoint: (id: string, index: number) => void;
 }
 
 const PopupAllSellPoints: FC<PopupAllSellPointsProps> = (props) => {
@@ -25,7 +25,7 @@ const PopupAllSellPoints: FC<PopupAllSellPointsProps> = (props) => {
       </div>
 
       <Scroller className={styles.scroller}>
-        {pickupPoints.map((point) => (
+        {pickupPoints.map((point, index) => (
           <div className={styles.item} key={point.id}>
             <div className={styles.pointIcon} />
 
@@ -38,7 +38,7 @@ const PopupAllSellPoints: FC<PopupAllSellPointsProps> = (props) => {
 
               <Button
                 className={styles.moreInfo}
-                onClick={() => selectPoint(point.id)}
+                onClick={() => selectPoint(point.id, index)}
                 theme='linkSecondary'
               >
                 Подробнее
