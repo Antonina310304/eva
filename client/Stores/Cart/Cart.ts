@@ -4,6 +4,7 @@ import { useStore } from '@kundinos/nanostores/react';
 import { ApiCart } from '@Api/Cart';
 import { CartData, CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
+import { UseCart } from './typings';
 
 const cartStore = createStore<CartData>();
 
@@ -192,10 +193,8 @@ const loadRelatedProducts = async ({ productIds }: any) => {
   }
 };
 
-export const useCart = () => {
-  const cart = getValue(cartStore);
-
-  if (!cart) loadInitData();
+export const useCart: UseCart = (opts = {}) => {
+  if (opts.preload) loadInitData();
 
   return {
     ...useStore(cartStore),
