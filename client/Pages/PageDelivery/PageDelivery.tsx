@@ -97,32 +97,36 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
             </span>
           </div>
           {deliveryTypes?.length > 0 && (
-            <List
-              className={styles.radioGroup}
-              items={deliveryTypes}
-              renderChild={(delivery: DeliveryData) => (
-                <div
-                  className={styles.radioItem}
-                  onClick={() => {
-                    handleChangeDeliveryType(delivery);
-                  }}
-                >
-                  <RadioButton
-                    checked={checkedDelivery.type === delivery.type}
-                    className={styles.radioButton}
-                    name='delivery'
-                  />
-                  <Image
-                    className={cn(styles.radioIcon, {
-                      [styles.toAddress]: delivery.type === 'toAddress',
-                      [styles.pickupPoint]: delivery.type === 'pickupPoint',
+            <>
+              <List
+                className={styles.radioGroup}
+                items={deliveryTypes}
+                renderChild={(delivery: DeliveryData) => (
+                  <div
+                    className={cn(styles.radioItem, {
+                      [styles.active]: checkedDelivery.type === delivery.type,
                     })}
-                    src={delivery.type === 'toAddress' ? toAddress : pickupPoint}
-                  />
-                  <div className={styles.radioName}>{delivery.name}</div>
-                </div>
-              )}
-            />
+                    onClick={() => {
+                      handleChangeDeliveryType(delivery);
+                    }}
+                  >
+                    <RadioButton
+                      checked={checkedDelivery.type === delivery.type}
+                      className={styles.radioButton}
+                      name='delivery'
+                    />
+                    <Image
+                      className={cn(styles.radioIcon, {
+                        [styles.toAddress]: delivery.type === 'toAddress',
+                        [styles.pickupPoint]: delivery.type === 'pickupPoint',
+                      })}
+                      src={delivery.type === 'toAddress' ? toAddress : pickupPoint}
+                    />
+                    <div className={styles.radioName}>{delivery.name}</div>
+                  </div>
+                )}
+              />
+            </>
           )}
         </div>
       ) : (
@@ -158,11 +162,6 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                     className={styles.table}
                     dangerouslySetInnerHTML={{ __html: table.delivery }}
                   />
-                  {/*
-            <div
-              className={styles.table}
-              dangerouslySetInnerHTML={{ __html: table.upliftFirstFloor }}
-            /> */}
                 </div>
 
                 <div
