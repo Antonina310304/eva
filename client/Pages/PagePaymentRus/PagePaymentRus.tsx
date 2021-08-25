@@ -19,8 +19,8 @@ const PagePaymentRus: FC<PagePaymentRusProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>{title}</h1>
-      <InformationTabsNavigation className={styles.navigation} navigation={pageMenu} />
       <div className={styles.wrapper}>
+        <InformationTabsNavigation className={styles.navigation} navigation={pageMenu} />
         <div className={styles.introduction}>{teaserText}</div>
         <PaymentOptions paymentTypes={paymentTypes} />
         <div className={styles.info}>
