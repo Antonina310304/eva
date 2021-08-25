@@ -6,6 +6,7 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
+import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import { ArticleItem } from '@Pages/PageB2b/typings';
 import styles from './Press.module.css';
@@ -20,6 +21,11 @@ const Press: FC<PressProps> = (props) => {
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const [, { openModal }] = useModals();
+
+  const handleOpenModal = useCallback(() => {
+    openModal('Article');
+  }, [openModal]);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -73,7 +79,7 @@ const Press: FC<PressProps> = (props) => {
           onChangeProgress={handleChangeProgress}
         >
           {articles.map((item, index) => (
-            <div className={styles.article} key={index}>
+            <div className={styles.article} key={index} onClick={handleOpenModal}>
               <div className={styles.articleItem}>
                 <div className={styles.imageWrapper}>
                   <Image className={styles.articleImage} src={item.src} />

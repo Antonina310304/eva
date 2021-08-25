@@ -22,6 +22,7 @@ export type ModalId =
   | 'MobileGroups'
   | 'MobileOptions'
   | 'Cart'
+  | 'Article'
   | 'DeliveryInformation';
 
 export interface Modal {

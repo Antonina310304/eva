@@ -12,6 +12,7 @@ export interface ArticleItem {
   logo: string;
   preview: string;
   length: number;
+  images: any;
 }
 
 export interface PressItem {
