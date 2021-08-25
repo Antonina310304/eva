@@ -167,13 +167,18 @@ ol {
 }
 
 ol > li {
+  display: flex;
+  align-items: center;
   margin: var(--space-xxs);
 
   counter-increment: my-awesome-counter;
 }
 
 ol > li::before {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
   width: 42px;
   height: 42px;
   margin-right: var(--space-n);
@@ -188,6 +193,14 @@ ol > li::before {
   border-radius: 50%;
 
   content: counter(my-awesome-counter);
+}
+
+.item:last-child ol li:first-child {
+  flex-wrap: wrap;
+}
+
+.item:last-child ol li:first-child ul {
+  flex-basis: 100%;
 }
 
 .textHelp {
