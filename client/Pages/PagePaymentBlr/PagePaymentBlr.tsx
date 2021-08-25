@@ -22,15 +22,15 @@ const PagePaymentBlr: FC<PagePaymentBlrProps> = (props) => {
         <InformationTabsNavigation className={styles.navigation} navigation={pageMenu} />
         <div className={styles.introduction}>{teaserText}</div>
         <ul className={styles.list}>
-          {paymentTypes.map((item, index) => (
+          {(paymentTypes as any[]).map((item, index) => (
             <li className={styles.item} key={index}>
               <div className={styles.headingWrapper}>
                 <img className={styles.paymentImage} src={`/react/static${item.icon}`} />
                 <h3 className={styles.paymentHeading}>{item.name}</h3>
               </div>
-              {/* eslint-disable-next-line react/no-danger */}
               <div
                 className={styles.paymentDescription}
+                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{ __html: `${item.description}` }}
               />
             </li>
