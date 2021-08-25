@@ -25,7 +25,7 @@
 }
 
 .navigation {
-  padding-left: var(--space-n);
+  padding-top: var(--space-m);
   overflow: hidden;
 }
 
@@ -43,6 +43,26 @@
 .description {
   padding-top: var(--space-m);
   padding-bottom: var(--space-m);
+}
+
+.paymentDescription ol li:not(:last-child) {
+  padding-bottom: var(--space-m);
+}
+
+.item:last-child img {
+  display: none !important;
+}
+
+.item:last-child ol ul {
+  padding-top: var(--space-n);
+}
+
+.item:last-child ol b {
+  font-weight: 400;
+}
+
+.item:last-child ul li:not(:last-child) {
+  padding-bottom: var(--space-xs);
 }
 
 .pic {
@@ -208,6 +228,12 @@
 }
 
 @media (--mobile) {
+  .wrapper {
+    max-width: 100%;
+    margin: 0 var(--space-s);
+    padding: 0;
+  }
+
   .inner {
     padding: 0;
 

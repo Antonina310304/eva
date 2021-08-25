@@ -16,6 +16,7 @@
 }
 
 .navigation {
+  padding-top: var(--space-m);
   padding-left: var(--space-n);
   overflow: hidden;
 }
