@@ -23,7 +23,10 @@ const Press: FC<PressProps> = (props) => {
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
 
-  const handleOpenModal = useCallback(() => {
+  const handleClickArticle = useCallback(() => {
+    // Нужно чтобы модалка не открывалась во время спайпа
+    if (window.cancelClick) return;
+
     openModal('Article', { articles });
   }, [openModal, articles]);
 
@@ -79,7 +82,7 @@ const Press: FC<PressProps> = (props) => {
           onChangeProgress={handleChangeProgress}
         >
           {articles.map((item, index) => (
-            <div className={styles.article} key={index} onClick={handleOpenModal}>
+            <div className={styles.article} key={index} onClick={handleClickArticle}>
               <div className={styles.articleItem}>
                 <div className={styles.imageWrapper}>
                   <Image className={styles.articleImage} src={item.src} />

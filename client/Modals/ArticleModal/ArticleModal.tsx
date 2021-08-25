@@ -12,17 +12,18 @@ import useModals from '@Hooks/useModals';
 
 import styles from './ArticleModal.module.css';
 
-export type Image = string;
+export interface ArticleData {
+  link: string;
+  preview: string;
+  src: string;
+  logo: string;
+  text: string;
+  images: string[];
+}
+
 export interface ModalData extends IModal {
   data: {
-    articles: {
-      link: string;
-      preview: string;
-      src: string;
-      logo: string;
-      text: string;
-      images: Image[];
-    };
+    articles: ArticleData;
   };
 }
 export interface ModalMainProps {
@@ -32,10 +33,21 @@ export interface ModalMainProps {
 
 const ArticleModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { preview, link, src, logo, text, images } = modal.data.articles;
+  const { articles } = modal.data;
   const [, { closeModal }] = useModals();
-  console.log(modal);
-  console.log(preview);
+
+  // Ты передаешь в модалку не одну статью, а массив статей
+  // Затем пытаешься работать с массивов статей как будто это одна статья
+  // const { preview, link, src, logo, text, images } = modal.data.articles;
+
+  console.log('This is articles', articles);
+  console.log('This is first arcticle', articles[0]);
+
+  // А это превью для ПЕРВОЙ статьи из массива, но не для той, на которую нажали
+  // Тебе нужно передавать выбранную статью в модалку, а не все статьи
+  // Либо передавать все статьи как сейчас, а ещё индекс выбранной и делать что-то такое
+  // const article = modal.data.articles[modal.data.selectedIndex];
+  const { preview } = articles[0];
 
   const handleClose = useCallback(() => {
     closeModal('Article');
