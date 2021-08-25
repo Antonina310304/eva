@@ -1,6 +1,8 @@
 import { ChunkExtractor } from '@loadable/server';
 import serialize from 'serialize-javascript';
 
+import { envs } from '../../utils/envs';
+
 export interface Params {
   html: string;
   state: any;
@@ -8,6 +10,11 @@ export interface Params {
 }
 
 export default ({ html, state, webExtractor }: Params): string => {
+  const config = {
+    env: envs.mode,
+    sentry: { dsn: envs.sentryDsn },
+  };
+
   return `<!DOCTYPE html>
     <html lang="ru">
     <head>
@@ -19,6 +26,7 @@ export default ({ html, state, webExtractor }: Params): string => {
     </head>
     <body>
       <div id="root">${html}</div>
+      <script>window.__CONFIG__=${serialize(config, { isJSON: true })}</script>
       <script>window.__SERVER_STATE__=${serialize(state, { isJSON: true })}</script>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=AbortController%2CIntersectionObserver"></script>
       ${webExtractor.getScriptTags()}
