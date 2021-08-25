@@ -1,0 +1,286 @@
+.productCard {
+  position: relative;
+
+  &.hasExpired .actualPrice {
+    color: var(--color-red);
+  }
+
+  &.viewMini {
+    max-width: 100%;
+
+    .discount {
+      display: none;
+    }
+
+    .name {
+      height: calc(var(--lh-n) * 2);
+
+      white-space: normal;
+    }
+  }
+}
+
+.box {
+  composes: popup from 'shadows';
+
+  position: absolute;
+  top: var(--space-l-neg);
+  right: var(--space-m-neg);
+  bottom: var(--space-l-neg);
+  left: var(--space-m-neg);
+  z-index: 3;
+
+  display: block;
+  min-height: 100%;
+
+  border-radius: 5px 5px 0 0;
+  visibility: hidden;
+  opacity: 0;
+
+  transition: all 0.2s ease-in-out;
+
+  &:before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 2;
+
+    content: '';
+  }
+}
+
+.placeholderPreview {
+  position: relative;
+
+  &:after {
+    display: block;
+    width: 100%;
+
+    content: '';
+  }
+
+  &.landscape {
+    padding-bottom: 68%;
+  }
+  &.portrait {
+    padding-bottom: 100%;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  height: inherit;
+}
+
+.additionalInfo {
+  composes: popup from 'shadows';
+
+  position: absolute;
+  top: calc(100% + var(--space-l));
+  right: var(--space-m-neg);
+  left: var(--space-m-neg);
+  z-index: 3;
+
+  display: block;
+  padding: 0 var(--space-m) var(--space-l);
+
+  background: var(--color-white);
+  border-radius: 0 0 5px 5px;
+  visibility: hidden;
+  opacity: 0;
+
+  transition: all 0.2s ease-in-out;
+
+  &:before {
+    position: absolute;
+    top: var(--space-n-neg);
+    right: 0;
+    left: 0;
+    z-index: 2;
+
+    height: var(--space-n);
+
+    background: var(--color-white);
+
+    content: '';
+  }
+}
+
+.containerImage {
+  position: relative;
+}
+
+.actions {
+  position: absolute;
+  top: var(--space-n);
+  right: var(--space-n);
+  z-index: 2;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-xs);
+}
+
+.action {
+  cursor: pointer;
+}
+
+.fastView {
+  opacity: 0;
+
+  transition: opacity 0.2s;
+
+  pointer-events: none;
+}
+
+.info {
+  margin-top: var(--space-n);
+}
+
+.name {
+  composes: black from 'colors';
+
+  display: inline-block;
+  max-width: 100%;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+}
+
+.actualPrice {
+  composes: m from 'sizes';
+
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-xs);
+}
+
+.discount {
+  margin-left: var(--space-xs);
+}
+
+.tags {
+  position: absolute;
+  right: var(--space-s);
+  bottom: var(--space-s);
+  z-index: 2;
+}
+
+.parameterGroups {
+  margin-top: var(--space-m);
+}
+
+.parameterGroup {
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-xs);
+
+  border-bottom: 1px solid var(--color-medium-gray);
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
+.sizes {
+  margin-top: var(--space-n);
+}
+
+.moreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-m);
+}
+
+.link {
+  display: block;
+}
+
+@media (--only-desktop) {
+  .productCard:hover {
+    .box,
+    .additionalInfo {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .container {
+      z-index: 4;
+    }
+
+    .fastView {
+      opacity: 1;
+
+      pointer-events: all;
+    }
+
+    .openConstructor {
+      display: block;
+    }
+
+    .tags {
+      opacity: 0;
+    }
+  }
+}
+
+@media (--mobile-m) {
+  .productCard {
+    max-width: 300px;
+  }
+
+  .productCard.viewMini {
+    .info {
+      padding: 0 var(--space-s);
+    }
+
+    .fabricsWrapper {
+      margin-top: var(--space-xs);
+    }
+  }
+
+  .tags,
+  .box,
+  .additionalInfo {
+    display: none;
+  }
+
+  .info {
+    margin-top: var(--space-xs);
+  }
+}
+
+@media (--mobile) {
+  .productCard {
+    .actions {
+      display: none;
+    }
+  }
+
+  .productCard.viewMini {
+    .name {
+      height: calc(var(--lh-s) * 2);
+
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
+
+    .expiredPrice {
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
+  }
+}

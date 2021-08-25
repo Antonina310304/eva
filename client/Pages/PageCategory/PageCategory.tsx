@@ -1,41 +1,36 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useMemo } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { ApiCategory } from '@Api/Category';
-import ProductSectionsCatalog from '@Components/ProductSectionsCatalog';
-import ProductMixedCatalog from '@Components/ProductMixedCatalog';
 import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
-import { CatalogData } from '@Types/Catalog';
-import Filters from './elements/Filters';
-import Subcategories from './elements/Subcategories';
 import styles from './PageCategory.module.css';
-import PopularLinks from './elements/PopularLinks';
 
 export interface PageCategoryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
+  category: any;
   slug: string;
   path: string;
+  onApplyFilters?: (url: string) => void;
+  onMore?: (url: string, pageNumber: number) => void;
 }
 
+const ProductSectionsCatalog = loadable(() => import('@Components/ProductSectionsCatalog'));
+const ProductMixedCatalog = loadable(() => import('@Components/ProductMixedCatalog'));
+const Filters = loadable(() => import('./elements/Filters'));
+const Subcategories = loadable(() => import('./elements/Subcategories'));
+const PopularLinks = loadable(() => import('./elements/PopularLinks'));
+const ProductCard = loadable(() => import('@Components/ProductCard'));
+const MattressesProductCard = loadable(() => import('@Mattresses/MattressesProductCard'));
+
 const PageCategory: FC<PageCategoryProps> = (props) => {
-  const { className, page, slug, path, ...restProps } = props;
-  const isModels = page.productsModel?.length > 0;
-  const [catalog, setCatalog] = useState<CatalogData>(page);
+  const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
-  const filtrator = useFiltrator({ id: path, ...page.filters });
-  const refInit = useRef(false);
+  const filtrator = useFiltrator({ id: `${path}${page.categoryTranslite}`, ...page.filters });
+  const isModels = category.data.pages[0].productsModel?.length > 0;
 
   const activeSubcategoryIds = useMemo(() => {
     const rubrics: any[] = page.rubrics[0] || [];
@@ -45,24 +40,6 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       .map((rubric) => rubric.id)
       .filter(Boolean);
   }, [page.rubrics]);
-
-  const fetchProducts = useCallback(
-    (params: { page: number }) => {
-      const categories = activeSubcategoryIds;
-      const filters = Filtrator.formatFiltersToObject();
-      const url = Filtrator.toUrl({ categories });
-
-      window.history.pushState({}, '', url);
-
-      return ApiCategory.getProducts({
-        ...params,
-        slug,
-        filters,
-        categories,
-      });
-    },
-    [activeSubcategoryIds, slug],
-  );
 
   const [debouceChangeFilters] = useDebouncedCallback(async () => {
     try {
@@ -81,16 +58,13 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   }, 300);
 
   const handleApplyFilters = useCallback(async () => {
-    try {
-      const newCatalog = await fetchProducts({ page: 1 });
+    const url = Filtrator.toUrl({ categories: activeSubcategoryIds });
 
-      setCatalog({ ...newCatalog });
-      closeModal('Filters');
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
-  }, [closeModal, fetchProducts]);
+    window.history.pushState({}, '', url);
+    closeModal('Filters');
+
+    if (onApplyFilters) onApplyFilters(url);
+  }, [activeSubcategoryIds, closeModal, onApplyFilters]);
 
   const hanleOpenFilters = useCallback(
     (_e, selectedFilterId: string) => {
@@ -100,34 +74,23 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   );
 
   const handleMore = useCallback(async () => {
-    try {
-      const newCatalog = await fetchProducts({ page: catalog.page + 1 });
+    const url = Filtrator.toUrl({ categories: activeSubcategoryIds });
 
-      setCatalog((prev) => {
-        const newState = { ...newCatalog, products: [...prev.products, ...newCatalog.products] };
+    if (typeof onMore === 'function') onMore(url, page.page + 1);
+  }, [activeSubcategoryIds, onMore, page.page]);
 
-        if (newCatalog.productsModel) {
-          newState.productsModel = [...prev.productsModel, ...newCatalog.productsModel];
-        }
+  const renderProduct = useCallback(
+    (productProps) => {
+      if (page.isMatrasyCategory) {
+        return <MattressesProductCard {...productProps} />;
+      }
 
-        return newState;
-      });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
-  }, [catalog.page, fetchProducts]);
+      return <ProductCard {...productProps} />;
+    },
+    [page.isMatrasyCategory],
+  );
 
   useEffect(debouceChangeFilters, [debouceChangeFilters, filtrator.selected]);
-
-  useEffect(() => {
-    if (!refInit.current) {
-      refInit.current = true;
-      return;
-    }
-
-    setCatalog(page);
-  }, [page]);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -144,7 +107,10 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
       <div className={styles.catalogWrapper}>
         <div className={styles.filtersWrapper}>
           <Filters
-            count={catalog.productsTotalCount}
+            count={page.productsTotalCount}
+            groups={page.groups}
+            isMatrasyCategory={page.isMatrasyCategory}
+            key={path}
             onOpen={hanleOpenFilters}
             onChangeSort={handleApplyFilters}
           />
@@ -158,12 +124,22 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
 
         {isModels ? (
           <ProductSectionsCatalog
+            autoload
             className={styles.catalog}
-            catalog={catalog}
+            pages={category.data.pages}
+            hasNextPage={category.hasNextPage}
+            renderProduct={renderProduct}
             onMore={handleMore}
           />
         ) : (
-          <ProductMixedCatalog className={styles.catalog} catalog={catalog} onMore={handleMore} />
+          <ProductMixedCatalog
+            autoload
+            className={styles.catalog}
+            pages={category.data.pages}
+            hasNextPage={category.hasNextPage}
+            renderProduct={renderProduct}
+            onMore={handleMore}
+          />
         )}
       </div>
     </div>
