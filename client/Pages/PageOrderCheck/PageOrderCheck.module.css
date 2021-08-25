@@ -77,6 +77,7 @@
 
   .container {
     flex-direction: column;
+    margin: 0 var(--space-s-neg);
     margin-top: var(--space-n);
   }
 
@@ -94,5 +95,9 @@
 
   .position {
     margin-top: var(--space-n);
+
+    &.removed {
+      padding: 0 var(--space-s);
+    }
   }
 }

@@ -130,19 +130,47 @@ const removeProduct = async (params: any, options: any = {}) => {
     const response = await ApiCart.remove({ cartPositionId: position.id });
     const newPositions = options.isRelated ? cart.newPositions : response.cart.newPositions;
     const result = { ...cart, ...response.cart, newPositions };
-    const index = cart.removedPositions.findIndex((item) => position.id === item.id);
-
-    if (index !== -1) {
-      const removedPositions = [...cart.removedPositions];
-      removedPositions.splice(index, 1);
-
-      result.removedPositions = removedPositions;
-    }
 
     cartStore.set(result);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
+  }
+};
+
+// Скрыть позицию
+const hidePosition = async ({ positionId }: { positionId: string }) => {
+  try {
+    const { cart } = await ApiCart.hide({
+      cartPositionId: positionId,
+    });
+
+    cartStore.set(cart);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  }
+};
+
+// Показать позицию
+const showPosition = async ({ positionId }: { positionId: string }) => {
+  try {
+    const { cart } = await ApiCart.unhide({
+      cartPositionId: positionId,
+    });
+
+    const index = (cart.removedPositions as any[]).findIndex((item) => positionId === item.id);
+    if (index !== -1) {
+      const removedPositions = [...cart.removedPositions];
+      removedPositions.splice(index, 1);
+
+      cart.removedPositions = removedPositions;
+    }
+
+    cartStore.set(cart);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
   }
 };
 
@@ -214,5 +242,7 @@ export default {
   hasInCart,
   removeProduct,
   changeCount,
+  hidePosition,
+  showPosition,
   loadRelatedProducts,
 };

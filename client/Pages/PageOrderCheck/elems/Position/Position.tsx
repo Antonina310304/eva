@@ -28,10 +28,14 @@ const Position: FC<PositionProps> = (props) => {
     [position.id],
   );
 
+  const handleRemove = useCallback(() => {
+    CartStore.hidePosition({ positionId: position.id });
+  }, [position.id]);
+
   return (
     <div {...restProps} className={cn(styles.position, className)}>
       <div className={styles.wrapperProduct}>
-        <Remove className={styles.remove} />
+        <Remove className={styles.remove} onClick={handleRemove} />
 
         <Product className={styles.product} product={firstProduct} />
 

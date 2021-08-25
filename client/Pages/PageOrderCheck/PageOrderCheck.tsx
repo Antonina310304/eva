@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
 import cn from 'classnames';
 
 import { useCart } from '@Stores/Cart';
@@ -6,6 +6,7 @@ import { MetaData } from '@Types/Meta';
 import { PageOrderCheckData } from './typings';
 import styles from './PageOrderCheck.module.css';
 import Position from './elems/Position';
+import RemovedPosition from './elems/RemovedPosition';
 
 export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -17,6 +18,12 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const cart = useCart({ preload: true });
 
+  const allPositions = useMemo(() => {
+    if (cart.network !== 'success') return [];
+
+    return [...cart.positions, ...cart.removedPositions];
+  }, [cart.network, cart.positions, cart.removedPositions]);
+
   if (cart.network !== 'success') return null;
 
   return (
@@ -26,9 +33,22 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
 
         <div className={styles.container}>
           <div className={styles.content}>
-            {cart.positions.map((position) => (
-              <Position className={styles.position} position={position} key={position.id} />
-            ))}
+            {allPositions.map((position) => {
+              const removed = cart.removedPositions.includes(position);
+
+              return (
+                <div
+                  className={cn(styles.position, { [styles.removed]: removed })}
+                  key={position.id}
+                >
+                  {removed ? (
+                    <RemovedPosition position={position} />
+                  ) : (
+                    <Position position={position} />
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <div className={styles.wrapperSidebar}>Sidebar</div>
