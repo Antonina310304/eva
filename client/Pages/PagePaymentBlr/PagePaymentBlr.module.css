@@ -122,10 +122,6 @@
   width: 42px;
   height: 42px;
 
-  font-weight: 500;
-  font-size: var(--size-l);
-  line-height: var(--lh-l);
-
   background-color: var(--color-light-gray);
   border-radius: 50%;
 }
@@ -164,13 +160,34 @@
   padding-bottom: var(--space-xs);
 }
 
-.dot {
-  width: 7px;
-  height: 7px;
-  margin-right: var(--space-m);
+ol {
+  list-style: none;
 
-  background-color: var(--color-black);
+  counter-reset: my-awesome-counter;
+}
+
+ol > li {
+  margin: var(--space-xxs);
+
+  counter-increment: my-awesome-counter;
+}
+
+ol > li::before {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin-right: var(--space-n);
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
+  text-align: center;
+
+  background: var(--color-light-gray);
   border-radius: 50%;
+
+  content: counter(my-awesome-counter);
 }
 
 .textHelp {
