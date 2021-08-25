@@ -8,7 +8,7 @@ import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
   className?: string;
-  view?: 'primary' | 'secondary' | 'simple' | 'native' | 'navigation';
+  view?: 'primary' | 'secondary' | 'simple' | 'native' | 'navigation' | 'nav' | 'grayString';
   needFetch?: boolean;
   size?: 's';
   to: string;
@@ -67,7 +67,9 @@ const Link: FC<LinkProps> = (props) => {
           [styles.secondary]: view === 'secondary',
           [styles.simple]: view === 'simple',
           [styles.native]: view === 'native',
+          [styles.grayString]: view === 'grayString',
           [styles.navigation]: view === 'navigation',
+          [styles.navList]: view === 'nav',
           [styles.sizeS]: size === 's',
           [styles.sizeN]: size === 'n',
         },

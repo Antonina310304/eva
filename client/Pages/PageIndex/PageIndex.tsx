@@ -4,6 +4,7 @@ import cn from 'classnames';
 import MainComponent from '@Components/MainComponent';
 import Footer from '@Components/Footer';
 
+import Header from '@Components/Header';
 import mockBreadcrumbsItems from './mocks';
 import styles from './PageIndex.module.css';
 
@@ -16,6 +17,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
+      <Header />
       <MainComponent breadcrumbs={mockBreadcrumbsItems} />
       <Footer />
     </div>

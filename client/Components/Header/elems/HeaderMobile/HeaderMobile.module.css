@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.inner {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.header {
+  padding: 20px 0 40px;
+}
+
+.search {
+  width: 100%;
+  max-width: 280px;
+}

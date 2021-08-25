@@ -1,0 +1,28 @@
+.siteNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  li {
+    display: block;
+  }
+}
+
+.link {
+  display: block;
+
+  font-size: var(--size-n);
+  line-height: 150%;
+
+  &.active {
+    color: var(--color-black);
+
+    &:before {
+      width: 100%;
+    }
+  }
+}

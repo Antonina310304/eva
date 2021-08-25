@@ -1,0 +1,18 @@
+.header {
+  display: block;
+  width: 100%;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerTopWrap {
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
