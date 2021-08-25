@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 
 import InputQuantity from '@UI/InputQuantity';
 import Price from '@UI/Price';
@@ -7,13 +8,14 @@ import CartStore from '@Stores/Cart';
 import { CartPositionData } from '@Types/Cart';
 import Product from '../Product';
 import Remove from '../Remove';
-import RelatedProducsSection from '../RelatedProducsSection';
 import styles from './Position.module.css';
 
 export interface PositionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   position: CartPositionData;
 }
+
+const RelatedProducsSection = loadable(() => import('../RelatedProducsSection'));
 
 const Position: FC<PositionProps> = (props) => {
   const { className, position, ...restProps } = props;
@@ -51,9 +53,11 @@ const Position: FC<PositionProps> = (props) => {
         </div>
       </div>
 
-      <div className={styles.wrapperRelated}>
-        <RelatedProducsSection title='Сопутствующие товары' products={position.relatedProducts} />
-      </div>
+      {position.relatedProducts?.length > 0 && (
+        <div className={styles.wrapperRelated}>
+          <RelatedProducsSection title='Сопутствующие товары' products={position.relatedProducts} />
+        </div>
+      )}
     </div>
   );
 };
