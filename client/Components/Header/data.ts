@@ -609,7 +609,7 @@ export const mainNavList: IMainNav[] = [
   },
 ];
 
-export const userMenu: IUserMenu[] = [
+export const userBottomMenu: IUserMenu[] = [
   {
     title: 'Войти/зарегистрироваться',
     icon: 'user.svg',

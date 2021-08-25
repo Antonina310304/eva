@@ -12,7 +12,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 const Header: FC<HeaderProps> = () => {
   const { isOnlyMobile } = useMedias();
 
-  return isOnlyMobile ? <HeaderMobile /> : <HeaderDesktop />;
+  return <>{isOnlyMobile ? <HeaderMobile /> : <HeaderDesktop />}</>;
 };
 
 export default memo(Header);

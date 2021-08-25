@@ -8,12 +8,25 @@ export interface MainNavListProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   showSideBar: () => void;
   hideSideBar: () => void;
+  showDropDown: () => void;
+  backMainMenu: () => void;
+  isOpenSideBar: boolean;
+  isShowSubMenu: boolean;
+  setIsShowSubMenu: (arg: boolean) => void;
 }
 
 /**
  * прокидываю закрытие hideSideBar и showSideBar в MainNavMobileItem
  * */
-const MainNavMobile: FC<MainNavListProps> = ({ showSideBar, hideSideBar }) => {
+const MainNavMobile: FC<MainNavListProps> = ({
+  backMainMenu,
+  showDropDown,
+  isShowSubMenu,
+  setIsShowSubMenu,
+  showSideBar,
+  hideSideBar,
+  isOpenSideBar,
+}) => {
   return (
     <div className={styles.wrapper}>
       {mainNavList.map((item) => {
@@ -22,7 +35,12 @@ const MainNavMobile: FC<MainNavListProps> = ({ showSideBar, hideSideBar }) => {
             key={item.title}
             category={item}
             showSideBar={showSideBar}
+            showDropDown={showDropDown}
             hideSideBar={hideSideBar}
+            backMainMenu={backMainMenu}
+            isOpenSideBar={isOpenSideBar}
+            isShowSubMenu={isShowSubMenu}
+            setIsShowSubMenu={setIsShowSubMenu}
           />
         );
       })}

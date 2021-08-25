@@ -1,6 +1,5 @@
-import React, { FC, HTMLAttributes, ReactChild, useEffect } from 'react';
+import React, { FC, HTMLAttributes, ReactChild, useEffect, useState } from 'react';
 
-import { useSpring, animated } from 'react-spring';
 import cn from 'classnames';
 import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
 import styles from './DropDownMobileWrapper.module.css';
@@ -11,58 +10,61 @@ import styles from './DropDownMobileWrapper.module.css';
  * */
 
 export interface DropDownMobileWrapperProps extends HTMLAttributes<HTMLDivElement> {
-  isOpen: boolean;
-  hideDropDown: () => void;
-  goBackSideBar: () => void;
+  isOpenDropDown: boolean;
+  isShowSubMenu: boolean;
+  backMainMenu: () => void;
+  hideSideBar: () => void;
+  setIsOpenDropDown: (arg: boolean) => void;
   children: ReactChild;
 }
 const DropDownMobileWrapper: FC<DropDownMobileWrapperProps> = ({
-  isOpen,
-  hideDropDown,
-  goBackSideBar,
+  isOpenDropDown,
+  isShowSubMenu,
+  backMainMenu,
+  hideSideBar,
+  setIsOpenDropDown,
   children,
 }) => {
-  const [{ left }, api] = useSpring(() => ({
-    from: { left: `100%` },
-    config: { duration: 300 },
-  }));
+  const [isOpen, setIsOpen] = useState<boolean>(isOpenDropDown);
+
+  function back() {
+    setIsOpenDropDown(false);
+    backMainMenu();
+  }
+
+  function close() {
+    setIsOpenDropDown(false);
+    hideSideBar();
+  }
 
   useEffect(() => {
-    if (isOpen) {
-      api.start({
-        reset: true,
-        left: '0%',
-      });
+    if (isOpenDropDown) {
+      setIsOpen(isOpenDropDown);
     }
-  }, [isOpen, api]);
+  }, [isOpenDropDown]);
 
-  function goBack() {
-    goBackSideBar();
-    api.start({
-      left: `100%`,
-    });
-  }
-
-  function onClose() {
-    api.start({
-      left: `-100%`,
-    });
-
-    // меняю state в родительском компоненте
-    hideDropDown();
-  }
+  useEffect(() => {
+    if (!isShowSubMenu) {
+      setIsOpen(false);
+    }
+  }, [isShowSubMenu]);
 
   return (
-    <animated.div style={{ left }} className={styles.wrapper}>
+    <div
+      className={cn(styles.wrapper, {
+        [styles.open]: isOpen === true,
+      })}
+    >
       <MobileNavContainer className={styles.buttonWrap}>
         <>
-          <button className={cn(styles.button, styles.buttonBack)} onClick={goBack} type='button'>
+          <button className={cn(styles.button, styles.buttonBack)} onClick={back} type='button'>
             <div className={cn(styles.icon, styles.back)} />
             назад
           </button>
+
           <button
             className={cn(styles.button, styles.icon, styles.close)}
-            onClick={onClose}
+            onClick={close}
             type='button'
           >
             закрыть
@@ -70,7 +72,7 @@ const DropDownMobileWrapper: FC<DropDownMobileWrapperProps> = ({
         </>
       </MobileNavContainer>
       {children}
-    </animated.div>
+    </div>
   );
 };
 

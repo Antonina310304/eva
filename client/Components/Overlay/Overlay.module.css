@@ -1,0 +1,47 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+
+  display: block;
+
+  background: transparent;
+  visibility: hidden;
+  opacity: 0;
+  mix-blend-mode: multiply;
+
+  transition: background 0.8s ease, visibility 0s ease 0.9s, opacity 0s ease 0.9s;
+}
+
+.overlay.show {
+  background: rgba(0, 0, 0, 0.3);
+  visibility: visible;
+  opacity: 1;
+
+  transition: background 0.8s ease, visibility 0s;
+}
+
+@keyframes overlayShow {
+  from {
+    background: transparent;
+  }
+  to {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes overlayHide {
+  0% {
+    background: rgba(0, 0, 0, 0.3);
+    visibility: visible;
+  }
+  99% {
+    background: transparent;
+  }
+  100% {
+    visibility: hidden;
+  }
+}

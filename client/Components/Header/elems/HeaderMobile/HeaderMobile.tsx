@@ -6,13 +6,18 @@ import Search from '@Components/Header/elems/Search';
 import MainNavMobile from '@Components/Header/elems/MainNavMobile';
 import Sidebar from '@Components/Header/elems/SideBar';
 import UserMenu from '@Components/Header/elems/UserMenu';
-import UserMenuMobile from '@Components/Header/elems/UserMenuMobile';
 import SiteNav from '@Components/Header/elems/SiteNav';
 import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
+import { useSpring, animated } from 'react-spring';
+
+import Overlay from '@Components/Overlay';
+import Container from '@Components/Container';
+import UserBottomMenuMobile from '@Components/Header/elems/UserBottomMenuMobile';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
-  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(true);
+  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
+  const [isShowSubMenu, setIsShowSubMenu] = useState<boolean>(false);
 
   function showSideBar() {
     setIsOpenSideBar(true);
@@ -22,31 +27,74 @@ const HeaderMobile = () => {
     setIsOpenSideBar(false);
   }
 
+  const [{ left }, api] = useSpring(() => ({
+    from: { left: `0%` },
+    config: { duration: 300 },
+  }));
+
+  function backMainMenu() {
+    api.start({
+      left: `0%`,
+      onRest: () => {
+        // меняет z-index у выпадающего меню после окончания анимации
+        setIsShowSubMenu(false);
+      },
+    });
+  }
+
+  function showDropDown() {
+    api.start({
+      left: `-100%`,
+    });
+  }
+
   return (
-    <div className={styles.wrapper}>
-      <Burger onClick={showSideBar} />
-      <div className={styles.inner}>
-        <Sidebar isOpenSideBar={isOpenSideBar} hideSideBar={hideSideBar}>
-          <div>
+    <header className={styles.head}>
+      <Container className={styles.wrapper}>
+        <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
+        <Burger onClick={showSideBar} className={styles.burger} />
+        <div className={styles.wrapper}>
+          <div className={styles.sliderWrapper}>
+            <Slider />
+          </div>
+          <div className={styles.flexWrapper}>
+            <div className={styles.dMobileMWrapper}>
+              <Search />
+              <UserMenu />
+            </div>
+          </div>
+        </div>
+      </Container>
+      <Sidebar backMainMenu={backMainMenu} isOpenSideBar={isOpenSideBar} hideSideBar={hideSideBar}>
+        <animated.div style={{ left }} className={styles.inner}>
+          <div data-scroll='scroll' className={styles.inWrap}>
             <MobileNavContainer className={styles.header}>
-              <div className={styles.search}>
-                <Search />
+              <div className={styles.wrapper}>
+                <div className={styles.search}>
+                  <Search />
+                </div>
+                <button className={styles.close} onClick={hideSideBar} type='button'>
+                  закрыть
+                </button>
               </div>
             </MobileNavContainer>
             <MobileNavContainer>
               <SiteNav />
             </MobileNavContainer>
-            <MainNavMobile showSideBar={showSideBar} hideSideBar={hideSideBar} />
-            <UserMenuMobile />
+            <MainNavMobile
+              showDropDown={showDropDown}
+              backMainMenu={backMainMenu}
+              showSideBar={showSideBar}
+              hideSideBar={hideSideBar}
+              isOpenSideBar={isOpenSideBar}
+              isShowSubMenu={isShowSubMenu}
+              setIsShowSubMenu={setIsShowSubMenu}
+            />
+            <UserBottomMenuMobile />
           </div>
-        </Sidebar>
-      </div>
-      <div className={styles.wrapper}>
-        <Slider />
-        <Search />
-        <UserMenu />
-      </div>
-    </div>
+        </animated.div>
+      </Sidebar>
+    </header>
   );
 };
 

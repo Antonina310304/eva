@@ -8,12 +8,13 @@ export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactElement;
   hideSideBar: () => void;
   isOpenSideBar: boolean;
+  backMainMenu: () => void;
 }
 
 /**
  * тут оставляем только функционал открытия и закрытия sidebar
  * */
-const SideBar: FC<SideBarProps> = ({ hideSideBar, isOpenSideBar, children }) => {
+const SideBar: FC<SideBarProps> = ({ backMainMenu, hideSideBar, isOpenSideBar, children }) => {
   const [{ left }, api] = useSpring(() => ({
     from: { left: `-100%` },
     config: { duration: 300 },
@@ -28,15 +29,16 @@ const SideBar: FC<SideBarProps> = ({ hideSideBar, isOpenSideBar, children }) => 
     } else {
       api.start({
         left: '-100%',
+        onRest: () => {
+          backMainMenu();
+        },
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpenSideBar, api]);
 
   return (
     <animated.div style={{ left }} className={styles.sideBar}>
-      <button className={styles.close} onClick={hideSideBar} type='button'>
-        закрыть
-      </button>
       {children}
     </animated.div>
   );

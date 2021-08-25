@@ -1,13 +1,13 @@
-import React from 'react';
-import { userMenu } from '@Components/Header/data';
-import styles from './UserMenuMobile.module.css';
+import React, { memo } from 'react';
+import { userBottomMenu } from '@Components/Header/data';
+import styles from './UserBottomMenuMobile.module.css';
 
 // TODO поменять key
-const UserMenuMobile = () => {
+const UserBottomMenuMobile = () => {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
-        {userMenu.map((item, ind) => {
+        {userBottomMenu.map((item, ind) => {
           return (
             <li key={ind} className={styles.item}>
               <p
@@ -23,4 +23,4 @@ const UserMenuMobile = () => {
   );
 };
 
-export default UserMenuMobile;
+export default memo(UserBottomMenuMobile);
