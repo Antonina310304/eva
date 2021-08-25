@@ -5,7 +5,7 @@
 Установить зависимости
 
 ```
-NODE_ENV=development npm ci`
+NODE_ENV=development npm ci
 ```
 
 Создать файл `.env.local` в корне проекта со следующим содержимым
