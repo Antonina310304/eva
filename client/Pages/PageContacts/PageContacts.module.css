@@ -1,6 +1,14 @@
 .page {
 }
 
+.containerNarrow {
+  composes: narrow from 'containers';
+}
+
+.containerSeeUs {
+  composes: main from 'containers';
+}
+
 .pageTitle {
   margin-top: var(--space-xl);
 }
@@ -75,6 +83,7 @@
 
 .buttonsContactForms {
   margin-top: var(--space-xxe);
+  overflow: hidden;
 }
 
 .divider {

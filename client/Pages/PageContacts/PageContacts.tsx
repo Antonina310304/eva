@@ -45,7 +45,7 @@ const PageContacts: FC<PageContactsProps> = (props) => {
     <div {...restProps} className={cn(styles.page, className)}>
       <PageTitle className={styles.pageTitle} title={title} />
 
-      <Wrapper>
+      <div className={styles.containerNarrow}>
         <div className={styles.hotLineWrapper}>
           <div className={styles.callIconWrapper}>
             <div className={styles.callIcon} />
@@ -82,13 +82,13 @@ const PageContacts: FC<PageContactsProps> = (props) => {
         <Requisites className={styles.requisites} requisites={organization} />
 
         <ButtonsContactForms className={styles.buttonsContactForms} contactDatas={forms} />
-      </Wrapper>
+      </div>
 
-      <Wrapper type='wide'>
+      <div className={styles.containerSeeUs}>
         <Divider className={styles.divider} />
 
         <SeeUs className={styles.seeUs} datasForMap={map} pickupPoints={sellPoints} />
-      </Wrapper>
+      </div>
     </div>
   );
 };
