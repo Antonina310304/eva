@@ -12,6 +12,7 @@ export const envs = {
   isProd,
   port: process.env.PORT || 4444,
   backendOrigin: process.env.BACKEND_ORIGIN,
-  sentryDsn: process.env.SENTRY_DSN,
+  sentryFrontendDsn: process.env.SENTRY_FRONTEND_DSN,
+  sentryBffDsn: process.env.SENTRY_BFF_DSN,
 };
 export default null;

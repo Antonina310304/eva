@@ -12,7 +12,7 @@ export interface Params {
 export default ({ html, state, webExtractor }: Params): string => {
   const config = {
     env: envs.mode,
-    sentry: { dsn: envs.sentryDsn },
+    sentry: { dsn: envs.sentryFrontendDsn },
   };
 
   return `<!DOCTYPE html>

@@ -2,14 +2,18 @@
 
 import express from 'express';
 import compression from 'compression';
+import * as Sentry from '@sentry/node';
 
 import proxyRoutes from './router/proxies';
 import mainRoutes from './router/main';
 import { envs } from '../utils/envs';
 import { paths } from '../utils/paths';
 
+Sentry.init({ dsn: envs.sentryBffDsn });
+
 const app = express();
 
+app.use(Sentry.Handlers.requestHandler());
 app.use(compression());
 app.disable('x-powered-by');
 
@@ -26,6 +30,8 @@ app.use('*', (_req, res, next) => {
 });
 
 app.use(mainRoutes);
+
+app.use(Sentry.Handlers.errorHandler());
 
 app.listen(envs.port, () => {
   console.log(`Eva listening on port ${envs.port}!`);
