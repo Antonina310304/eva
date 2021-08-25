@@ -47,6 +47,10 @@
   right: var(--space-xxl);
 }
 
+.wrapperRelated {
+  padding: var(--space-xl) 0 var(--space-xb);
+}
+
 @media (--desktop) {
   .wrapperProduct {
     flex-direction: column;
@@ -56,6 +60,10 @@
   .wrapperOptions {
     margin-top: var(--space-s);
     margin-left: calc(150px + var(--space-n));
+  }
+
+  .wrapperRelated {
+    padding-bottom: var(--space-xxl);
   }
 
   .remove {

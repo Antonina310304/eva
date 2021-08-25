@@ -27,7 +27,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
         <div className={styles.container}>
           <div className={styles.content}>
             {cart.positions.map((position) => (
-              <Position className={styles.position} position={position} />
+              <Position className={styles.position} position={position} key={position.id} />
             ))}
           </div>
 

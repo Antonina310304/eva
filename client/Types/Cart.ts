@@ -39,7 +39,7 @@ export interface CartProductData {
   image: string;
   link: string;
   name: string;
-  oldprice: number;
+  oldPrice: number;
   price: number;
   quantity: number;
   type: string;

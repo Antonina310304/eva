@@ -6,6 +6,7 @@ import Price from '@UI/Price';
 import { CartPositionData } from '@Types/Cart';
 import Product from '../Product';
 import Remove from '../Remove';
+import RelatedProducsSection from '../RelatedProducsSection';
 import styles from './Position.module.css';
 
 export interface PositionProps extends HTMLAttributes<HTMLDivElement> {
@@ -39,6 +40,10 @@ const Position: FC<PositionProps> = (props) => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className={styles.wrapperRelated}>
+        <RelatedProducsSection title='Сопутствующие товары' products={position.relatedProducts} />
       </div>
     </div>
   );

@@ -13,8 +13,6 @@ export interface ProductProps extends HTMLAttributes<HTMLDivElement> {
 const Product: FC<ProductProps> = (props) => {
   const { className, product, ...restProps } = props;
 
-  console.log(product);
-
   return (
     <div {...restProps} className={cn(styles.product, className)}>
       <Preview className={styles.preview} product={product} />
@@ -29,10 +27,10 @@ const Product: FC<ProductProps> = (props) => {
                 {(() => {
                   switch (param.type) {
                     case 'sizes':
-                      return <div>Sizes</div>;
+                      return <div key={param.id}>Sizes</div>;
 
                     case 'feature':
-                      return <div>Feature</div>;
+                      return <div key={param.id}>Feature</div>;
 
                     default:
                       return null;
