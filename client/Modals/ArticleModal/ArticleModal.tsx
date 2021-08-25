@@ -12,22 +12,31 @@ import useModals from '@Hooks/useModals';
 
 import styles from './ArticleModal.module.css';
 
+export type Image = string;
 export interface ModalData extends IModal {
   data: {
-    preview: string;
+    articles: {
+      link: string;
+      preview: string;
+      src: string;
+      logo: string;
+      text: string;
+      images: Image[];
+    };
   };
 }
-
-export interface ArticleModalProps {
+export interface ModalMainProps {
   className?: string;
   modal: ModalData;
 }
 
-const ArticleModal: FC<ArticleModalProps> = (props) => {
+const ArticleModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { preview } = modal.data;
+  const { preview, link, src, logo, text, images } = modal.data.articles;
   const [, { closeModal }] = useModals();
+  console.log(modal);
   console.log(preview);
+
   const handleClose = useCallback(() => {
     closeModal('Article');
   }, [closeModal]);

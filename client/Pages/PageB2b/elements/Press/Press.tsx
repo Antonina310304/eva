@@ -24,8 +24,8 @@ const Press: FC<PressProps> = (props) => {
   const [, { openModal }] = useModals();
 
   const handleOpenModal = useCallback(() => {
-    openModal('Article');
-  }, [openModal]);
+    openModal('Article', { articles });
+  }, [openModal, articles]);
 
   const normalizeSlide = useCallback(
     (value: number) => {
