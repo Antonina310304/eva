@@ -35,7 +35,10 @@ const PageCredit: FC<PageCreditProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      <PageTitle className={styles.pageTitle} title='Рассрочка и кредит' />
+      <Wrapper type='wide'>
+        <PageTitle className={styles.pageTitle} view='bordered' title='Рассрочка и кредит' />
+      </Wrapper>
+
       <Wrapper>
         <InformationTabsNavigation className={styles.navigation} navigation={pageList} />
 

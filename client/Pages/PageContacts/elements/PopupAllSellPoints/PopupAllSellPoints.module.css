@@ -1,0 +1,69 @@
+.popupAllSellPoints {
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--size-xl);
+  line-height: var(--lh-xxl);
+}
+
+.scroller {
+  width: 100%;
+  height: 363px;
+  margin-top: var(--space-xxl);
+}
+
+.item {
+  display: flex;
+  margin-bottom: var(--space-n);
+  padding-right: var(--space-n);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pointIcon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+
+  background-image: url('./point.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.pointInfo {
+  margin-left: var(--space-s);
+}
+
+.pointAddress {
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+}
+
+.moreInfo {
+  margin-top: var(--space-xs);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+@media (--desktop) {
+  .scroller {
+    height: 310px;
+    margin-top: var(--space-l);
+  }
+
+  .title {
+    font-size: var(--size-l);
+    line-height: var(--lh-m);
+  }
+}
