@@ -21,16 +21,16 @@ const Product: FC<ProductProps> = (props) => {
         <div className={styles.name}>{product.name}</div>
 
         <div className={styles.params}>
-          {product.groups.map((group) => {
+          {product.groups.map((group, indexGroup) => {
             return group.parameters.map((param: any) => (
-              <div className={styles.param}>
+              <div className={styles.param} key={indexGroup}>
                 {(() => {
                   switch (param.type) {
                     case 'sizes':
-                      return <div key={param.id}>Sizes</div>;
+                      return <div>Sizes</div>;
 
                     case 'feature':
-                      return <div key={param.id}>Feature</div>;
+                      return <div>Feature</div>;
 
                     default:
                       return null;

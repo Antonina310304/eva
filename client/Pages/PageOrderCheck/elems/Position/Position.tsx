@@ -1,8 +1,9 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import InputQuantity from '@UI/InputQuantity';
 import Price from '@UI/Price';
+import CartStore from '@Stores/Cart';
 import { CartPositionData } from '@Types/Cart';
 import Product from '../Product';
 import Remove from '../Remove';
@@ -18,6 +19,13 @@ const Position: FC<PositionProps> = (props) => {
   const { className, position, ...restProps } = props;
   const firstProduct = position.products[0];
 
+  const handleChangeQuantity = useCallback(
+    (_e, { quantity }) => {
+      CartStore.changeCount({ cartPositionId: position.id, quantity });
+    },
+    [position.id],
+  );
+
   return (
     <div {...restProps} className={cn(styles.position, className)}>
       <div className={styles.wrapperProduct}>
@@ -32,6 +40,7 @@ const Position: FC<PositionProps> = (props) => {
               min={1}
               value={position.quantity}
               max={position.maxQuantity}
+              onChange={handleChangeQuantity}
             />
 
             <div className={styles.wrapperPrice}>
