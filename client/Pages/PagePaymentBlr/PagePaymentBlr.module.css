@@ -174,8 +174,8 @@ ol > li {
 
 ol > li::before {
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
+  width: 42px;
+  height: 42px;
   margin-right: var(--space-n);
 
   color: var(--color-black);
