@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import loadable from '@loadable/component';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
@@ -23,10 +23,6 @@ const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
 
 const App: FC = () => {
-  useEffect(() => {
-    throw new Error('Test error');
-  }, []);
-
   return (
     <ModalsProvider>
       <Route path='/'>
