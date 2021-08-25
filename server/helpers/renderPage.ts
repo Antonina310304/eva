@@ -1,5 +1,6 @@
 import { ChunkExtractor } from '@loadable/server';
 import serialize from 'serialize-javascript';
+import { NodeOptions } from '@sentry/node';
 
 import { envs } from '../../utils/envs';
 
@@ -10,10 +11,8 @@ export interface Params {
 }
 
 export default ({ html, state, webExtractor }: Params): string => {
-  const config = {
-    env: envs.mode,
-    sentry: { dsn: envs.sentryFrontendDsn },
-  };
+  const sentry: NodeOptions = { dsn: envs.sentryFrontendDsn, environment: envs.sentryEnv };
+  const config = { env: envs.mode, sentry };
 
   return `<!DOCTYPE html>
     <html lang="ru">

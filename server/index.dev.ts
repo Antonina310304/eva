@@ -14,7 +14,7 @@ import mainRoutes from './router/main';
 import { envs } from '../utils/envs';
 import { paths } from '../utils/paths';
 
-Sentry.init({ dsn: envs.sentryBffDsn });
+Sentry.init({ dsn: envs.sentryBffDsn, environment: envs.sentryEnv });
 
 const app = express();
 const publicPath = webConfig.output.publicPath.toString();
