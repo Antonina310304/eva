@@ -2,11 +2,11 @@ import { createDerived, createStore, getValue, update } from '@kundinos/nanostor
 import { useStore } from '@kundinos/nanostores/react';
 
 import { ApiCart } from '@Api/Cart';
-import { CartData, CartPositionData, CartProductData } from '@Types/Cart';
+import { CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
-import { UseCart } from './typings';
+import { CartStoreValue, UseCart } from './typings';
 
-const cartStore = createStore<CartData>();
+const cartStore = createStore<CartStoreValue>();
 
 const networkStore = createStore<NetworkStatus>(() => {
   networkStore.set('pending');
@@ -67,9 +67,9 @@ const loadInitData = async () => {
   networkStore.set('loading');
 
   try {
-    const res = await ApiCart.info();
+    const { cart, deliveryTypes } = await ApiCart.info();
 
-    cartStore.set(res.cart);
+    cartStore.set({ ...cart, deliveryTypes });
     networkStore.set('success');
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -226,6 +226,21 @@ const loadRelatedProducts = async ({ productIds }: any) => {
   }
 };
 
+// Обновить информацию о способе доставки
+const updateDeliveryType = (id: number, newData: any) => {
+  update(cartStore, (oldCart) => ({
+    ...oldCart,
+    deliveryTypes: oldCart.deliveryTypes.map((deliveryType) => {
+      if (deliveryType.id !== id) return deliveryType;
+
+      return {
+        ...deliveryType,
+        ...newData,
+      };
+    }),
+  }));
+};
+
 export const useCart: UseCart = (opts = {}) => {
   const cart = getValue(cartStore);
 
@@ -245,4 +260,5 @@ export default {
   hidePosition,
   showPosition,
   loadRelatedProducts,
+  updateDeliveryType,
 };

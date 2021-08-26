@@ -8,3 +8,27 @@
     margin-top: 0;
   }
 }
+
+.switchBonusesItem {
+  margin-bottom: var(--space-l);
+}
+
+.deliveryRadioGroup {
+  margin-bottom: var(--space-l);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xb);
+}
+
+.btnSubmit {
+  max-width: 420px;
+}
+
+@media (--mobile) {
+  .footer {
+    margin-top: var(--space-xxl);
+  }
+}

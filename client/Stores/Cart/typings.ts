@@ -5,7 +5,11 @@ export interface UseCartOpts {
   preload?: boolean;
 }
 
-export interface UseCartResult extends CartData {
+export interface CartStoreValue extends CartData {
+  deliveryTypes: any[];
+}
+
+export interface UseCartResult extends CartStoreValue {
   network: NetworkStatus;
 }
 
