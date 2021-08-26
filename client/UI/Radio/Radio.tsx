@@ -26,7 +26,7 @@ const Radio: FC<RadioProps> = (props) => {
   useEffect(() => {
     if (id) return;
 
-    setInnerId(nanoid());
+    setInnerId(`id${nanoid()}`);
   }, [id]);
 
   return (
