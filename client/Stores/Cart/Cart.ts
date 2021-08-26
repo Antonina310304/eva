@@ -241,10 +241,10 @@ const updateDeliveryType = (id: number, newData: any) => {
   }));
 };
 
-export const useCart: UseCart = (opts = {}) => {
-  const cart = getValue(cartStore);
-
-  if (opts.preload && !cart) loadInitData();
+export const useCart: UseCart = (initialData) => {
+  if (initialData && !getValue(cartStore)) {
+    cartStore.set(initialData);
+  }
 
   return {
     ...useStore(cartStore),

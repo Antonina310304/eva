@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import OrderForm from '@Forms/OrderForm';
 import { useCart } from '@Stores/Cart';
-import { MetaData } from '@Types/Meta';
 import { PageOrderCheckData } from './typings';
 import WrapperForm from './elems/WrapperForm';
 import styles from './PageOrderCheck.module.css';
@@ -12,14 +11,12 @@ import ListOfPositions from './elems/ListOfPositions';
 export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: PageOrderCheckData;
-  meta: MetaData;
 }
 
 const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
-  const cart = useCart({ preload: true });
+  const { className, page, ...restProps } = props;
 
-  if (cart.network !== 'success') return null;
+  useCart({ ...page.cart, deliveryTypes: page.deliveryTypes });
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

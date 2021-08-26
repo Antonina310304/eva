@@ -1,3 +1,1 @@
-export interface PageOrderCheckData {
-  title: string;
-}
+export type PageOrderCheckData = any;

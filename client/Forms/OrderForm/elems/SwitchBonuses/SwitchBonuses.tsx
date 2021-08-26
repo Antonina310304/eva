@@ -36,9 +36,11 @@ const SwitchBonuses: FC<SwitchBonusesProps> = (props) => {
         <div className={styles.wrapperIcon}>
           <div className={styles.icon} onClick={handleClickInfo} />
 
-          <Suspense fallback={null}>
-            {loadedPopup && <InfoPopup visible={visiblePopup} ref={refPopup} />}
-          </Suspense>
+          {loadedPopup && (
+            <Suspense fallback={null}>
+              <InfoPopup visible={visiblePopup} ref={refPopup} />
+            </Suspense>
+          )}
         </div>
       </div>
     </div>
