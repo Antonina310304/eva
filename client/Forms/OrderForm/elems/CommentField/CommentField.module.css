@@ -1,0 +1,30 @@
+.field {
+  &.collapsed {
+    .iconArrow {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+.wrapperLabel {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.iconArrow {
+  width: 10px;
+  height: 10px;
+  margin-left: var(--space-xxs);
+
+  background-image: url('./iconArrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transition: transform 0.2s;
+}
+
+.content {
+  padding-top: var(--space-l);
+}
