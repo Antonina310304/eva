@@ -25,6 +25,8 @@ const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
     async (_e, hint) => {
       setWaiting(true);
 
+      CartStore.updateDeliveryType(deliveryType.id, { address: hint.title });
+
       try {
         const goodsInfo: any[] = [];
 
@@ -71,6 +73,7 @@ const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
           wide
           name='address'
           placeholder='город, улица, дом, этаж, квартира'
+          value={deliveryType.address || ''}
           onSelectHint={handleSelectHint}
         />
       </FormItem>
