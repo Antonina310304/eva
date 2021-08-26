@@ -43,6 +43,10 @@
   }
 }
 
+.wrapperForm {
+  margin-top: var(--space-xb);
+}
+
 @media (--desktop-m) {
   .title {
     font-size: var(--size-b);
@@ -99,5 +103,9 @@
     &.removed {
       padding: 0 var(--space-s);
     }
+  }
+
+  .wrapperForm {
+    margin-top: var(--space-xxl);
   }
 }

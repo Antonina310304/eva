@@ -4,9 +4,10 @@ import cn from 'classnames';
 import { useCart } from '@Stores/Cart';
 import { MetaData } from '@Types/Meta';
 import { PageOrderCheckData } from './typings';
-import styles from './PageOrderCheck.module.css';
 import Position from './elems/Position';
 import RemovedPosition from './elems/RemovedPosition';
+import WrapperForm from './elems/WrapperForm';
+import styles from './PageOrderCheck.module.css';
 
 export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -49,6 +50,10 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
                 </div>
               );
             })}
+
+            <WrapperForm className={styles.wrapperForm} title='Заполните информацию о себе'>
+              Content
+            </WrapperForm>
           </div>
 
           <div className={styles.wrapperSidebar}>Sidebar</div>
