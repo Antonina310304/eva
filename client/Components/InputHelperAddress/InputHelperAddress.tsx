@@ -7,10 +7,9 @@ import InputHelper, { InputHelperProps, InputHelperHint } from '@UI/InputHelper'
 export type InputHelperAddressProps = Omit<InputHelperProps, 'hints'>;
 
 const InputHelperAddress: FC<InputHelperAddressProps> = (props) => {
-  const { className, onSelectHint, ...restProps } = props;
+  const { className, error, onSelectHint, ...restProps } = props;
   const [loadingHints, setLoadingHints] = useState<boolean>(false);
   const [hints, setHints] = useState<InputHelperHint[]>([]);
-  const [error, setError] = useState<string>(null);
 
   const [debouceChangeValue] = useDebouncedCallback(async (chunk: string) => {
     if (!chunk || chunk.length < 3) return;
@@ -42,10 +41,6 @@ const InputHelperAddress: FC<InputHelperAddressProps> = (props) => {
     [debouceChangeValue],
   );
 
-  const handleFocus = useCallback(() => {
-    setError(null);
-  }, []);
-
   return (
     <InputHelper
       {...restProps}
@@ -53,7 +48,6 @@ const InputHelperAddress: FC<InputHelperAddressProps> = (props) => {
       hints={hints}
       error={error}
       onChange={handleChangeAddress}
-      onFocus={handleFocus}
       onSelectHint={onSelectHint}
     />
   );
