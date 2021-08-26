@@ -35,14 +35,6 @@
   text-align: center;
 }
 
-.position {
-  margin-top: var(--space-xxl);
-
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
 .wrapperForm {
   margin-top: var(--space-xb);
 }
@@ -95,14 +87,6 @@
     flex-grow: 1;
     order: 1;
     width: 100%;
-  }
-
-  .position {
-    margin-top: var(--space-n);
-
-    &.removed {
-      padding: 0 var(--space-s);
-    }
   }
 
   .wrapperForm {

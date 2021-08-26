@@ -4,10 +4,9 @@ import cn from 'classnames';
 import { useCart } from '@Stores/Cart';
 import { MetaData } from '@Types/Meta';
 import { PageOrderCheckData } from './typings';
-import Position from './elems/Position';
-import RemovedPosition from './elems/RemovedPosition';
 import WrapperForm from './elems/WrapperForm';
 import styles from './PageOrderCheck.module.css';
+import ListOfPositions from './elems/ListOfPositions';
 
 export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -19,12 +18,6 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const cart = useCart({ preload: true });
 
-  const allPositions = useMemo(() => {
-    if (cart.network !== 'success') return [];
-
-    return [...cart.positions, ...cart.removedPositions];
-  }, [cart.network, cart.positions, cart.removedPositions]);
-
   if (cart.network !== 'success') return null;
 
   return (
@@ -34,22 +27,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
 
         <div className={styles.container}>
           <div className={styles.content}>
-            {allPositions.map((position) => {
-              const removed = cart.removedPositions.includes(position);
-
-              return (
-                <div
-                  className={cn(styles.position, { [styles.removed]: removed })}
-                  key={position.id}
-                >
-                  {removed ? (
-                    <RemovedPosition position={position} />
-                  ) : (
-                    <Position position={position} />
-                  )}
-                </div>
-              );
-            })}
+            <ListOfPositions />
 
             <WrapperForm className={styles.wrapperForm} title='Заполните информацию о себе'>
               Content
