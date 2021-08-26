@@ -47,7 +47,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
   // Тебе нужно передавать выбранную статью в модалку, а не все статьи
   // Либо передавать все статьи как сейчас, а ещё индекс выбранной и делать что-то такое
   // const article = modal.data.articles[modal.data.selectedIndex];
-  const { preview } = articles[0];
+  const { preview } = articles[2];
 
   const handleClose = useCallback(() => {
     closeModal('Article');

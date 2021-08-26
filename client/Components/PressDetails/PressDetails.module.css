@@ -1,0 +1,147 @@
+.pressDetails {
+  padding: 35px 0 0;
+}
+
+.slider {
+  display: inline-block;
+  width: 100%;
+
+  vertical-align: top;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.sliderItem:before {
+  display: block;
+  padding: 0 0 94%;
+
+  content: '';
+}
+
+.carousel {
+  display: inline-block;
+  width: 420px;
+  overflow: hidden;
+
+  vertical-align: top;
+}
+
+.info {
+  display: inline-block;
+  width: calc(100% - 420px);
+  padding-left: var(--space-xl);
+
+  vertical-align: top;
+}
+
+.logo {
+  display: block;
+  width: 78px;
+  height: 43px;
+  margin-bottom: var(--space-xl);
+
+  background-repeat: no-repeat;
+  background-position: left 0 top 50%;
+  background-size: contain;
+}
+
+.PressDetail-Title {
+  margin-bottom: var(--space-xs);
+}
+
+.PressDetail-Text {
+  margin-bottom: var(--space-xs);
+}
+
+.PressDetail-Link {
+  display: inline-block;
+
+  color: var(--color-text-primary);
+  text-decoration: none;
+  vertical-align: baseline;
+
+  opacity: 0.5;
+
+  transition: opacity var(--animation-duration-fast) ease-in-out;
+}
+
+.PressDetail-LinkIcon {
+  display: inline-block;
+  margin-left: 7px;
+
+  vertical-align: baseline;
+}
+
+.PressDetail-LinkText {
+  display: inline-block;
+
+  vertical-align: baseline;
+}
+
+.PressDetail-Link:hover {
+  opacity: 1;
+}
+
+.PressDetail-Share {
+  margin-top: var(--space-l);
+}
+
+.PressDetail-ShareTitle {
+  margin-bottom: var(--space-s);
+}
+
+.thumbnails {
+  margin-top: var(--space-s);
+}
+
+.progressBar {
+  margin-top: var(--space-xs);
+}
+
+.thumbnails .Thumbnails-SliderNav {
+  opacity: 0;
+
+  transition: opacity var(--animation-duration-fast);
+}
+
+.thumbnails:hover .Thumbnails-SliderNav {
+  opacity: 1;
+}
+
+@media (--mobile-m) {
+  .carousel {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--space-m);
+  }
+
+  .sliderItem:before {
+    padding: 0 0 100%;
+  }
+
+  .info {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+
+  .logo {
+    margin-bottom: var(--space-m);
+  }
+
+  .PressDetail-Text {
+    display: none;
+  }
+
+  .PressDetail-Share {
+    margin-top: var(--space-xl);
+  }
+}
+
+@media (--mobile) {
+  .PressDetails {
+    padding-top: var(--space-2xs);
+  }
+}
