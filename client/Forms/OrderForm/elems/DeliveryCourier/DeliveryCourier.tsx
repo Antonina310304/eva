@@ -8,11 +8,12 @@ import Input from '@UI/Input';
 import Price from '@UI/Price';
 import CartStore, { useCart } from '@Stores/Cart';
 import useMeta from '@Queries/useMeta';
+import { DeliveryTypeData } from '@Types/Cart';
 import styles from './DeliveryCourier.module.css';
 
 export interface DeliveryCourierProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  deliveryType: any;
+  deliveryType: DeliveryTypeData;
 }
 
 const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
@@ -78,10 +79,7 @@ const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
         />
       </FormItem>
 
-      <div className={styles.hint}>
-        Оплата при получении производится после осмотра товаров. Курьер принимает только наличные
-        средства. Пожалуйста, подготовьте сумму без сдачи.
-      </div>
+      {deliveryType.description && <div className={styles.hint}>{deliveryType.description}</div>}
 
       {deliveryType.sum && <Price className={styles.price} price={deliveryType.sum} />}
     </div>

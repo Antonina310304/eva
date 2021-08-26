@@ -1,12 +1,12 @@
 import { NetworkStatus } from '@Types/Base';
-import { CartData } from '@Types/Cart';
+import { CartData, DeliveryTypeData } from '@Types/Cart';
 
 export interface UseCartOpts {
   preload?: boolean;
 }
 
 export interface CartStoreValue extends CartData {
-  deliveryTypes: any[];
+  deliveryTypes: DeliveryTypeData[];
 }
 
 export interface UseCartResult extends CartStoreValue {

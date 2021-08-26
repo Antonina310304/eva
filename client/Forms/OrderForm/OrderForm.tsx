@@ -8,6 +8,7 @@ import Form from '@UI/Form';
 import FormItem from '@UI/FormItem';
 import RadioGroup from '@UI/RadioGroup';
 import { useCart } from '@Stores/Cart';
+import { DeliveryTypeData } from '@Types/Cart';
 import Group from './elems/Group';
 import SwitchBonuses from './elems/SwitchBonuses';
 import CommentField from './elems/CommentField';
@@ -23,7 +24,9 @@ const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, ...restProps } = props;
   const cart = useCart();
   const [loading, setLoading] = useState(false);
-  const [selectedDeliveryId, setSelectedDeliveryId] = useState(cart.deliveryTypes[0].id);
+  const [selectedDeliveryId, setSelectedDeliveryId] = useState<DeliveryTypeData['id']>(() => {
+    return cart.deliveryTypes[0].id;
+  });
 
   const selectedDelivery = useMemo(() => {
     return cart.deliveryTypes.find((dt) => dt.id === selectedDeliveryId);

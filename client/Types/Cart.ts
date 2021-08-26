@@ -91,3 +91,12 @@ export interface CartData {
   deliveryPrice: any;
   selectedVariant: 'bonuses' | 'promocode';
 }
+
+export interface DeliveryTypeData {
+  id: number;
+  address?: string;
+  name: string;
+  description?: string;
+  sum?: number;
+  type: 'toAddress' | 'pickupPoint';
+}
