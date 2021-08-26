@@ -4,11 +4,11 @@ import cn from 'classnames';
 import useModals from '@Hooks/useModals';
 import Button from '@UI/Button';
 import Input from '@UI/Input';
-import Switch from '@UI/Switch';
 import Form from '@UI/Form';
 import FormItem from '@UI/FormItem';
 import analytics from '@Utils/analytics';
 import Group from './elems/Group';
+import SwitchBonuses from './elems/SwitchBonuses';
 import styles from './OrderForm.module.css';
 
 export interface OrderFormProps {
@@ -32,7 +32,7 @@ const OrderForm: FC<OrderFormProps> = (props) => {
       onSubmit={handleSubmit}
     >
       <div className={styles.group}>
-        <Switch />
+        <SwitchBonuses />
       </div>
 
       <Group className={styles.group} title='Выберите способ доставки'>

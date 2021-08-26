@@ -1,0 +1,14 @@
+.popup {
+  width: 360px;
+}
+
+@media (--mobile) {
+  .popup {
+    right: 0;
+    left: auto;
+
+    width: 300px;
+
+    transform: unset;
+  }
+}
