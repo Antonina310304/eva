@@ -20,7 +20,7 @@ export interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Radio: FC<RadioProps> = (props) => {
-  const { className, id, icon, children, defaultChecked, checked, ...restProps } = props;
+  const { className, id, icon, children, ...restProps } = props;
   const [innerId, setInnerId] = useState(id);
 
   useEffect(() => {
