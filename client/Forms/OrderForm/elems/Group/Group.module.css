@@ -1,4 +1,9 @@
 .group {
+  &.cropped {
+    .content {
+      max-width: 526px;
+    }
+  }
 }
 
 .title {

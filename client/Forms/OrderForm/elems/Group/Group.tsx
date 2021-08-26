@@ -6,15 +6,16 @@ import styles from './Group.module.css';
 export interface GroupProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title?: string;
+  cropped?: boolean;
 }
 
 const Group: FC<GroupProps> = (props) => {
-  const { className, title, children, ...restProps } = props;
+  const { className, title, cropped, children, ...restProps } = props;
 
   return (
-    <div {...restProps} className={cn(styles.styles, className)}>
+    <div {...restProps} className={cn(styles.group, { [styles.cropped]: cropped }, className)}>
       {title && <h3 className={styles.title}>{title}</h3>}
-      {children}
+      {cropped ? <div className={styles.content}>{children}</div> : children}
     </div>
   );
 };
