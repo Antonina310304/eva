@@ -1,0 +1,10 @@
+.group {
+}
+
+.title {
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-l);
+
+  font-weight: 500;
+}

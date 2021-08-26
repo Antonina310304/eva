@@ -1,0 +1,10 @@
+.form {
+}
+
+.group {
+  margin-top: var(--space-xb);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}

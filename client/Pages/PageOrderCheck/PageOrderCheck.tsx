@@ -1,6 +1,7 @@
-import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import OrderForm from '@Forms/OrderForm';
 import { useCart } from '@Stores/Cart';
 import { MetaData } from '@Types/Meta';
 import { PageOrderCheckData } from './typings';
@@ -30,7 +31,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
             <ListOfPositions />
 
             <WrapperForm className={styles.wrapperForm} title='Заполните информацию о себе'>
-              Content
+              <OrderForm />
             </WrapperForm>
           </div>
 
