@@ -1,0 +1,140 @@
+.page {
+}
+
+.containerNarrow {
+  composes: narrow from 'containers';
+}
+
+.containerSeeUs {
+  composes: main from 'containers';
+}
+
+.pageTitle {
+  margin-top: var(--space-xl);
+}
+
+.hotLineWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-e);
+
+  font-weight: 500;
+  font-size: var(--size-l);
+  line-height: var(--lh-xm);
+}
+
+.callIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  background: var(--color-grafit);
+  border-radius: 100%;
+}
+
+.callIcon {
+  width: 18.5px;
+  height: 18.5px;
+
+  background-image: url('./image/call.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.hotContainer {
+  display: flex;
+  margin-left: var(--space-n);
+}
+
+.hotNumber {
+  margin-left: var(--space-n);
+}
+
+.hotInfo {
+  margin-top: var(--space-n);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.hotInfoWrapper {
+  margin-top: var(--space-n);
+}
+
+.list,
+.listItem {
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+
+  list-style-position: inside;
+}
+
+.requisites {
+  margin-top: var(--space-xxl);
+}
+
+.buttonsContactForms {
+  margin-top: var(--space-xxe);
+  overflow: hidden;
+}
+
+.divider {
+  margin-top: var(--space-xxl);
+}
+
+.seeUs {
+  margin-top: var(--space-xxl);
+  margin-bottom: var(--space-e);
+}
+
+@media (--desktop-m) {
+  .buttonsContactForms {
+    margin-top: var(--space-e);
+  }
+
+  .divider {
+    margin-top: var(--space-n);
+  }
+}
+
+@media (--desktop) {
+  .hotLineWrapper {
+    margin-top: var(--space-xb);
+  }
+
+  .buttonsContactForms {
+    margin-top: var(--space-xb);
+  }
+
+  .divider {
+    margin-top: 0;
+  }
+
+  .seeUs {
+    margin-bottom: var(--space-xb);
+  }
+}
+
+@media (--mobile-m) {
+  .divider {
+    margin-top: var(--space-n);
+  }
+}
+
+@media (--mobile) {
+  .hotContainer {
+    flex-direction: column;
+  }
+
+  .hotNumber {
+    margin-left: 0;
+  }
+}

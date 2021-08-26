@@ -2,11 +2,13 @@ import React, {
   cloneElement,
   FC,
   HTMLAttributes,
+  MouseEvent,
   memo,
   ReactElement,
   Suspense,
   useCallback,
   useState,
+  useEffect,
 } from 'react';
 import cn from 'classnames';
 
@@ -16,19 +18,29 @@ export interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   label: string;
   children?: ReactElement;
+  opened?: boolean;
+  onOpen?: (e: MouseEvent) => void;
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
-  const { className, label, children, ...restProps } = props;
+  const { className, label, children, opened, onOpen, ...restProps } = props;
   const [visible, setVisible] = useState(false);
 
-  const handleClickLabel = useCallback(() => {
-    setVisible((prev) => !prev);
-  }, []);
+  const handleClickLabel = useCallback(
+    (e) => {
+      if (onOpen && !visible) onOpen(e);
+      setVisible((prev) => !prev);
+    },
+    [onOpen, visible],
+  );
 
   const handleClose = useCallback(() => {
     setVisible(false);
   }, []);
+
+  useEffect(() => {
+    setVisible(opened);
+  }, [opened]);
 
   return (
     <div {...restProps} className={cn(styles.dropdown, { [styles.visible]: visible }, className)}>

@@ -13,7 +13,7 @@ import cn from 'classnames';
 import Button from '@UI/Button/Button';
 import { CatalogData } from '@Types/Catalog';
 import { ProductData } from '@Types/Product';
-import Section, { SectionItem } from './elements/Section';
+import Section, { RenderProduct, SectionItem } from './elements/Section';
 import styles from './ProductSectionsCatalog.module.css';
 
 export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,11 +21,12 @@ export interface ProductSectionsCatalogProps extends HTMLAttributes<HTMLDivEleme
   pages?: CatalogData[];
   hasNextPage?: boolean;
   autoload?: boolean;
+  renderProduct: RenderProduct;
   onMore?: (e: MouseEvent) => void;
 }
 
 const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
-  const { className, pages, hasNextPage, autoload, onMore, ...restProps } = props;
+  const { className, pages, hasNextPage, autoload, renderProduct, onMore, ...restProps } = props;
   const ref = useRef<HTMLDivElement>();
 
   const products = useMemo(() => {
@@ -83,6 +84,7 @@ const ProductSectionsCatalog: FC<ProductSectionsCatalogProps> = (props) => {
                 className={styles.section}
                 productModel={productModel}
                 items={items}
+                renderProduct={renderProduct}
                 key={productModel.id}
               />
             );

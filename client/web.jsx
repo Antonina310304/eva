@@ -5,12 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate, hydrate as hydrateState } from 'react-query/hydration';
 import RequestProvider from '@Contexts/Request/RequestProvider';
+import * as Sentry from '@sentry/browser';
 
 import App from '@App';
 
-const isDev = process.env.NODE_ENV === 'development';
-
 loadableReady(() => {
+  const config = window.__CONFIG__;
+  const state = window.__SERVER_STATE__;
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -18,12 +19,13 @@ loadableReady(() => {
       },
     },
   });
-  const state = window.__SERVER_STATE__;
 
-  // eslint-disable-next-line no-console
-  if (isDev) {
+  if (config.env === 'development') {
+    // eslint-disable-next-line no-console
     console.log(state);
   }
+
+  Sentry.init(config.sentry);
 
   hydrateState(queryClient, state);
   hydrate(

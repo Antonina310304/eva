@@ -1,0 +1,8 @@
+.parameter {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: var(--space-xs);
+}

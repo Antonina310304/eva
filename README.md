@@ -5,7 +5,7 @@
 Установить зависимости
 
 ```
-NODE_ENV=development npm ci`
+NODE_ENV=development npm ci
 ```
 
 Создать файл `.env.local` в корне проекта со следующим содержимым
@@ -25,3 +25,7 @@ npm run dev
 ```
 http://localhost:4444
 ```
+
+## Мониторинг ошибок
+
+Для удобного отслеживания и анализа всех происходящих ошибок они отправляются во [внутренний сервис Sentry.io](https://sentry.hhw.ru/sentry/)

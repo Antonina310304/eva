@@ -12,6 +12,14 @@
   padding: 0 var(--space-xxl);
 }
 
+.newProduct {
+  margin-bottom: var(--space-n);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .description {
   padding-bottom: var(--space-xl);
 

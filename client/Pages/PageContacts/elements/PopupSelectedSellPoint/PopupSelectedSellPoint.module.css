@@ -1,0 +1,100 @@
+.popupSelectedSellPoint {
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pointAddress {
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+}
+
+.back {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.arrowBack {
+  width: 27px;
+  height: 25px;
+
+  background-image: url('./backArrow.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.backText {
+  margin-left: var(--space-xs);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+.scrollerPoint {
+  width: 100%;
+  height: 400px;
+  margin-top: var(--space-n);
+}
+
+.telephone {
+  margin-top: var(--space-n);
+
+  font-weight: 500;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.workTime {
+  font-weight: 500;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.image {
+  height: 192px;
+  margin-top: var(--space-l);
+
+  background-size: cover;
+}
+
+.linkAllPhotosWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-l);
+}
+
+.allPhotos {
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+  text-align: center;
+}
+
+@media (--desktop) {
+  .scrollerPoint {
+    height: 315px;
+    margin-top: var(--space-l);
+  }
+
+  .pointAddress,
+  .telephone,
+  .workTime {
+    font-size: var(--size-s);
+    line-height: var(--lh-s);
+  }
+
+  .image {
+    height: 125px;
+  }
+}
+
+@media (--mobile) {
+  .scrollerPoint {
+    height: 310px;
+  }
+}
