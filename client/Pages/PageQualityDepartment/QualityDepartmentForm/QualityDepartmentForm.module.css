@@ -1,0 +1,47 @@
+.qualityDepartmentForm {
+}
+
+.paragraphTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.block {
+  display: flex;
+  margin: 0 -50px;
+  margin-top: 60px;
+}
+
+.columns {
+  /* display: flex;
+  align-items: flex-start; */
+}
+
+.column {
+  /* flex-shrink: 0;
+  width: 50%;
+  margin-right: var(--space-3xl);
+
+  &:last-child {
+    margin-right: 0;
+  } */
+  width: 50%;
+  padding: 0 50px;
+}
+
+.listTitle {
+  /* margin-bottom: var(--space-s); */
+}
+
+.list {
+  /* margin: 0;
+    padding: 0;
+
+    list-style: none; */
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
