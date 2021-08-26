@@ -1,0 +1,10 @@
+.delivery {
+}
+
+.hint {
+  composes: xs from 'sizes';
+
+  margin-top: var(--space-s);
+
+  color: var(--color-dark-gray);
+}
