@@ -193,7 +193,9 @@ const loadRelatedProducts = async ({ productIds }: any) => {
   }
 };
 
-export const useCart: UseCart = () => {
+export const useCart: UseCart = (opts = {}) => {
+  if (opts.preload && !cartStore.value) loadInitData();
+
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),
@@ -206,5 +208,4 @@ export default {
   removeProduct,
   changeCount,
   loadRelatedProducts,
-  loadInitData,
 };

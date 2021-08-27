@@ -1,4 +1,4 @@
-import React, { memo, InputHTMLAttributes, FC } from 'react';
+import React, { memo, InputHTMLAttributes, FC, useState, useEffect } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
@@ -10,7 +10,11 @@ export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> 
 }
 const RadioButton: FC<RadioButtonProps> = (props) => {
   const { className, checked, id, ...restProps } = props;
-  const radioId = id || nanoid();
+  const [radioId, setRadioId] = useState(id);
+
+  useEffect(() => {
+    setRadioId((prevId) => prevId || nanoid());
+  }, []);
 
   return (
     <div className={cn(styles.radio, className)}>

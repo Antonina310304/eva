@@ -64,8 +64,8 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
-  // const cart = useCart({ preload: true });
-  // console.log(cart);
+  const cart = useCart({ preload: true });
+  console.log(cart);
 
   const tabs = [
     { id: '0', label: 'Доставка' },
