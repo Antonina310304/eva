@@ -32,6 +32,16 @@
       transform: rotate(-180deg);
     }
   }
+
+  &.withoutItems {
+    .field {
+      display: flex;
+    }
+
+    .fieldTitle {
+      font-weight: 400;
+    }
+  }
 }
 
 .field {

@@ -67,11 +67,13 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     items,
     className,
     waiting,
+    withoutItems,
     renderItem,
     onClick,
     onOpen,
     onClose,
     onChangeSelected,
+    getCheckedItems,
     ...restProps
   } = props;
   const { isMobile } = useMedias();
@@ -151,10 +153,12 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
         if (onChangeSelected) onChangeSelected(null, newItems);
 
+        if (getCheckedItems) getCheckedItems(newItems);
+
         return newItems;
       });
     },
-    [mode, onChangeSelected],
+    [getCheckedItems, mode, onChangeSelected],
   );
 
   const uncheckItem = useCallback(
@@ -170,10 +174,12 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
         if (onChangeSelected) onChangeSelected(null, newItems);
 
+        if (getCheckedItems) getCheckedItems(newItems);
+
         return newItems;
       });
     },
-    [mode, onChangeSelected],
+    [getCheckedItems, mode, onChangeSelected],
   );
 
   const handleUnblockScroll = useCallback(() => {
@@ -380,8 +386,16 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         >
           <div className={styles.fieldValue}>
             <div className={styles.fieldText}>
-              <span className={styles.fieldTitle}>{`${title}: `}</span>
-              {fieldText}
+              {withoutItems ? (
+                <>
+                  <span className={styles.fieldTitle}>{title}</span>
+                </>
+              ) : (
+                <>
+                  <span className={styles.fieldTitle}>{`${title}: `}</span>
+                  {fieldText}
+                </>
+              )}
             </div>
           </div>
           <Image className={styles.iconArrow} src={IconArrow} />
@@ -426,6 +440,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
                   faked={faked}
                   title={title}
                   fieldText={fieldText}
+                  withoutItems
                   isMobile={isMobile}
                   renderItem={renderItem}
                   onClickField={handleClick}

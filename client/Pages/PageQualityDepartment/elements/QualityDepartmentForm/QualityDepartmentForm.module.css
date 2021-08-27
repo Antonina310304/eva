@@ -29,19 +29,35 @@
   padding: 0 50px;
 }
 
+.defectDescription {
+  height: 113px;
+}
+
 .listTitle {
-  /* margin-bottom: var(--space-s); */
+  margin-bottom: var(--space-s);
 }
 
 .list {
-  /* margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    list-style: none; */
+  list-style: none;
 }
 
 .footer {
   display: flex;
   justify-content: center;
   margin-top: 60px;
+}
+
+.pretension {
+  height: 134px;
+}
+
+.requirements {
+  height: 113px;
+}
+
+.bottomStyle {
+  color: var(--color-dark-gray);
 }

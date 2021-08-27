@@ -4,7 +4,7 @@ import cn from 'classnames';
 import Wrapper from '@Pages/PageCredit/elements/Wrapper';
 import PageTitle from '@Pages/PageCredit/elements/PageTitle';
 import QualityDepartment from '@Pages/PageContacts/elements/QualityDepartment';
-import QualityDepartmentForm from './QualityDepartmentForm';
+import QualityDepartmentForm from './elements/QualityDepartmentForm';
 import { PageQualityDepartmentData } from './typings';
 import styles from './PageQualityDepartment.module.css';
 

@@ -12,6 +12,8 @@ import Select, { SelectProps, SelectItemData } from '@UI/Select';
 import SampleOption from '@UI/MainSelect/elems/SampleOption';
 import Button from '@UI/Button';
 import Upload from '@UI/Upload';
+import MySelect1 from '../MySelect1';
+import MySelect2 from '../MySelect2';
 import styles from './QualityDepartmentForm.module.css';
 
 export interface QualityDepartmentFormProps extends HTMLAttributes<HTMLDivElement> {
@@ -115,8 +117,9 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
     setWaiting(false);
 
     openModal('Info', {
-      title: 'Произошла ошибка',
-      text: 'Пожалуйста, повторите попытку позже.',
+      view: 'error',
+      title: 'Ошибка!',
+      text: 'Сервер временно недоступен.',
     });
   }, [openModal]);
 
@@ -127,8 +130,9 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
 
       if (response.status === 'success') {
         openModal('Info', {
-          title: 'Благодарим за обращение!',
-          message: 'Специалист отдела качества свяжется с вами в ближайшее время.',
+          view: 'success',
+          title: 'Спасибо! ',
+          text: 'Ваше сообщение отправлено.',
         });
       } else {
         onError(response);
@@ -151,11 +155,27 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
   }, []);
 
   const handleChangeParameter = useCallback((_e, items) => {
-    console.log('edvvd sdv dv items', items);
+    setCheckedPackCondition(items[0]);
   }, []);
 
   const onChangeUploadError = useCallback((e, err) => {
     setUploadError(err);
+  }, []);
+
+  const handleCheckedPackConditions = useCallback((checkedItems) => {
+    console.log('checkedItems', checkedItems);
+    setCheckedPackConditionDetails(checkedItems);
+  }, []);
+
+  const handleUncheckedPackConditions = useCallback((e, item) => {
+    setCheckedPackConditionDetails((prev) => {
+      const itemIndex = prev.findIndex(({ id }) => item.id === id);
+      const newItems = [...prev];
+
+      newItems.splice(itemIndex, 1);
+
+      return newItems;
+    });
   }, []);
 
   return (
@@ -179,7 +199,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             </FormItem>
 
             <FormItem>
-              <Input name='phone' placeholder='Телефон' />
+              <Input name='phone' mask='+7 (999) 999-99-99' placeholder='Телефон' />
             </FormItem>
           </div>
 
@@ -187,6 +207,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             <FormItem>
               <Input name='checkNumber' placeholder='Номер товарного чека' />
             </FormItem>
+
             <FormItem>
               <Input name='productName' placeholder='Наименование товара' />
             </FormItem>
@@ -196,45 +217,28 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
         <div className={styles.block}>
           <div className={styles.column}>
             <FormItem>
-              <Select
-                name='packCondition'
-                className={cn(styles.select, className)}
+              <MySelect1
                 title='Состояние упаковки при приеме товара'
-                defaultChecked={packCondition.find((option) => option.selected)}
+                name='packCondition'
+                withoutItems
+                className={styles.select}
                 items={packCondition}
-                // wide
-                onChangeSelected={handleCheckedPackConditionsFirst}
-                renderItem={(itemProps: SelectItemData) => {
-                  return <SampleOption item={itemProps} className={cn(styles.option)} />;
-                }}
+                onChangeSelected={handleChangeParameter}
               />
             </FormItem>
 
             <FormItem
               hidden={checkedPackCondition.id === 'packGood'}
               bottom='Отметьте, при наличии, повреждения упаковки'
+              cnBottom={styles.bottomStyle}
             >
-              {/* <NewSelect
-                multiple
-                wide
+              <MySelect2
                 title='Тип повреждения упаковки'
                 name='packConditionDetails'
+                withoutItems
+                className={styles.select}
                 items={packConditionDetails}
-                checked={checkedPackConditionDetails}
-                onCheck={handleCheckedPackConditions}
-                onUncheck={handleUncheckedPackConditions}
-              /> */}
-              <Select
-                name='packConditionDetails'
-                className={cn(styles.select, className)}
-                title='Тип повреждения упаковки'
-                // defaultChecked={packConditionDetails.find((option) => option.selected)}
-                items={packConditionDetails}
-                // wide
-                mode='multiple'
-                renderItem={(itemProps: SelectItemData) => {
-                  return <SampleOption item={itemProps} className={cn(styles.option)} />;
-                }}
+                getCheckedItems={handleCheckedPackConditions}
               />
             </FormItem>
 
@@ -244,28 +248,56 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 !checkedPackConditionDetails.find((condition) => condition.id === 'packOther')
               }
               bottom='Опишите состояние упаковки при получении товара'
+              cnBottom={styles.bottomStyle}
             >
               <Input name='packConditionText' placeholder='Состояние упаковки' />
             </FormItem>
 
-            <FormItem bottom='Укажите те части товара, где были обнаружены дефекты'>
+            <FormItem
+              bottom='Укажите те части товара, где были обнаружены дефекты'
+              cnBottom={styles.bottomStyle}
+            >
               <Input
                 name='defectingProductPart'
                 placeholder='Часть изделия, на которой обнаружен дефект'
               />
             </FormItem>
 
-            <FormItem bottom='Опишите характер дефекта. При каких условиях был обнаружен дефект? Каким образом влияет выявленный дефект на эксплуатацию товара?'>
-              <Textarea name='defectDescription' placeholder='Описание дефекта (дефектов)' />
+            <FormItem
+              bottom='Опишите характер дефекта. При каких условиях был обнаружен дефект? Каким образом влияет выявленный дефект на эксплуатацию товара?'
+              cnBottom={styles.bottomStyle}
+            >
+              <Textarea
+                name='defectDescription'
+                className={styles.defectDescription}
+                placeholder='Описание дефекта (дефектов)'
+                resizeDisable
+              />
             </FormItem>
           </div>
           <div className={styles.column}>
-            <FormItem bottom='Напишите, что вас не устраивает в качестве товара (услуг).'>
-              <Textarea name='pretension' placeholder='Претензия' />
+            <FormItem
+              bottom='Напишите, что вас не устраивает в качестве товара (услуг).'
+              cnBottom={styles.bottomStyle}
+            >
+              <Textarea
+                name='pretension'
+                className={styles.pretension}
+                placeholder='Претензия'
+                resizeDisable
+              />
             </FormItem>
 
-            <FormItem bottom='Как бы вы хотели, чтобы компания решила ситуацию?'>
-              <Textarea name='requirements' placeholder='Требование покупателя' />
+            <FormItem
+              bottom='Как бы вы хотели, чтобы компания решила ситуацию?'
+              cnBottom={styles.bottomStyle}
+            >
+              <Textarea
+                name='requirements'
+                className={styles.requirements}
+                placeholder='Требование покупателя'
+                resizeDisable
+              />
             </FormItem>
           </div>
         </div>
@@ -275,6 +307,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             <FormItem>
               <Upload
                 multiple
+                view='vertical'
                 name='files[]'
                 maxCount={8}
                 maxSizePerFile={10 * 1024 * 1024}
@@ -282,6 +315,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 title='Прикрепить фото/видео'
                 description='.jpg, .jpeg, .png, .mp4, .mov, .wmv, .avi и mpg. менее 10 MB'
                 onChangeError={onChangeUploadError}
+                insideUploadedElements
               />
             </FormItem>
           </div>

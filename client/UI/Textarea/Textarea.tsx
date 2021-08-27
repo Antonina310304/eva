@@ -11,10 +11,11 @@ export interface EpicTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEl
   error?: string;
   value?: string;
   name?: string;
+  resizeDisable?: boolean;
 }
 
 const EpicTextarea = forwardRef<EpicTextareaRef, EpicTextareaProps>((props, ref) => {
-  const { className, wide, placeholder, error, disabled, ...restProps } = props;
+  const { className, wide, placeholder, error, disabled, resizeDisable, ...restProps } = props;
 
   return (
     <>
@@ -25,6 +26,7 @@ const EpicTextarea = forwardRef<EpicTextareaRef, EpicTextareaProps>((props, ref)
           {
             [styles.wide]: wide,
             [styles.disabled]: disabled,
+            [styles.resizeDisable]: resizeDisable,
             [styles.errored]: !!error,
           },
           [className],
