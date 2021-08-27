@@ -10,7 +10,7 @@
   padding-left: var(--gap);
 }
 
-.content {
+.narrow {
   --gap: var(--space-xxl);
   --width: 1256px;
   box-sizing: border-box;
@@ -27,14 +27,8 @@
     --gap: var(--space-xxl);
   }
 
-  .content {
+  .narrow {
     --width: 1146px;
-  }
-}
-
-@media (--desktop) {
-  .content {
-    --width: 100%;
   }
 }
 
@@ -43,7 +37,7 @@
     --gap: var(--space-s);
   }
 
-  .content {
+  .narrow {
     --gap: var(--space-s);
   }
 }

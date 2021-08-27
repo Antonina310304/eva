@@ -1,7 +1,6 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, ReactElement, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
-import ProductCard from '@Components/ProductCard';
 import ConstructorStub from '@Components/ConstructorStub';
 import Price from '@UI/Price';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
@@ -12,16 +11,23 @@ import { ProductData } from '@Types/Product';
 import Arrows from '../Arrows';
 import styles from './Section.module.css';
 
+export interface RenderProductParams {
+  product?: ProductData;
+}
+
+export type RenderProduct = (params: RenderProductParams) => ReactElement;
+
 export type SectionItem = ProductData | ConstructorStubData;
 
 export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   productModel: ProductModel;
   items: SectionItem[];
+  renderProduct?: RenderProduct;
 }
 
 const Section: FC<SectionProps> = (props) => {
-  const { className, productModel, items, ...restProps } = props;
+  const { className, productModel, items, renderProduct, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
@@ -45,12 +51,12 @@ const Section: FC<SectionProps> = (props) => {
           {isStub ? (
             <ConstructorStub stub={item as ConstructorStubData} />
           ) : (
-            <ProductCard product={item as ProductData} />
+            <>{renderProduct({ product: item as ProductData })}</>
           )}
         </div>
       );
     });
-  }, [items]);
+  }, [items, renderProduct]);
 
   const handlePrev = useCallback(() => {
     setSlide((prev) => normalizeSlide(prev - 1));

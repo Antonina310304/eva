@@ -33,18 +33,6 @@
   &.errored {
     border-color: var(--color-red);
   }
-
-  &.sizeL {
-    .control {
-      padding: var(--space-s);
-    }
-  }
-
-  &.sizeM {
-    .control {
-      padding: 16px var(--space-s);
-    }
-  }
 }
 
 .before,

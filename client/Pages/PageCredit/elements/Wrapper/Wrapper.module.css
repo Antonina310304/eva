@@ -3,26 +3,37 @@
   margin: 0 auto;
 }
 
+.wrapper.wide {
+  max-width: 1780px;
+}
+
 @media (--desktop-m) {
   .wrapper {
     max-width: 1066px;
   }
+
+  .wrapper.wide {
+    max-width: 1286px;
+  }
 }
 
 @media (--desktop) {
-  .wrapper {
+  .wrapper,
+  .wrapper.wide {
     max-width: 944px;
   }
 }
 
 @media (--mobile-m) {
-  .wrapper {
+  .wrapper,
+  .wrapper.wide {
     max-width: 738px;
   }
 }
 
 @media (--mobile) {
-  .wrapper {
+  .wrapper,
+  .wrapper.wide {
     max-width: 100%;
     margin: 0 var(--space-s);
   }
