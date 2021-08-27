@@ -16,7 +16,7 @@
 }
 
 .contentContainer {
-  composes: content from 'containers';
+  composes: narrow from 'containers';
 
   &.row {
     margin-top: var(--space-e);
@@ -35,7 +35,7 @@
 }
 
 .wrapperTop {
-  margin-bottom: var(--space-m);
+  margin-bottom: var(--space-n);
   padding-bottom: var(--space-xl);
 
   border-bottom: 1px solid var(--color-medium-gray);
@@ -104,7 +104,11 @@
 }
 
 .attention {
-  margin-top: var(--space-m);
+  margin-top: var(--space-xb);
+}
+
+.deliveryText {
+  margin-top: var(--space-xb);
 }
 
 .bottomInfoWrapper {
@@ -167,12 +171,6 @@
   composes: m from 'sizes';
 
   margin-top: var(--space-xb);
-}
-
-.subTitle {
-  font-weight: 500;
-  font-size: var(--size-xxl);
-  line-height: var(--lh-xxl);
 }
 
 .city {
@@ -247,6 +245,22 @@
   margin-left: var(--space-xs);
 }
 
+.deliveryNote {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-n);
+
+  color: var(--color-dark-gray);
+}
+
+.deliveryPhone {
+  margin-top: var(--space-xs);
+
+  font-weight: 500;
+  font-size: var(--size-xl);
+  line-height: var(--lh-l);
+}
+
 @media (--desktop-m) {
   .title {
     font-size: var(--size-b);
@@ -262,6 +276,10 @@
   .title {
     font-size: var(--size-xxl);
     line-height: var(--lh-xxl);
+  }
+
+  .bottomInfoWrapper {
+    margin-top: var(--space-xb);
   }
 
   .bottomInfoContainer {

@@ -1,0 +1,44 @@
+.container {
+  padding: var(--space-xxl) 0 0;
+}
+
+.text {
+  composes: n from 'sizes';
+}
+
+.price {
+  margin-left: var(--space-xs);
+}
+
+.mapTitle {
+  margin-top: var(--space-xb);
+
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.map {
+  height: 500px;
+  margin-top: var(--space-xxl);
+
+  background: var(--color-light-gray);
+}
+
+@media (--desktop) {
+  .mapTitle {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
+  }
+}
+
+@media (--mobile-m) {
+  .mapTitle {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+
+  .map {
+    height: 400px;
+  }
+}
