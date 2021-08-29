@@ -1,10 +1,10 @@
 import React, { HTMLAttributes, FC, memo } from 'react';
 import cn from 'classnames';
 
+import GalleryProductPreviews from '@Components/GalleryProductPreviews';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import { ProductData } from '@Types/Product';
-import Preview from './elements/Preview';
 import styles from './CrossSaleProductCard.module.css';
 
 export interface CrossSaleProductCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -19,7 +19,11 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.card, className)}>
-      <Preview className={styles.preview} images={product.images} link={product.link} />
+      <GalleryProductPreviews
+        className={styles.preview}
+        images={product.images}
+        link={product.link}
+      />
 
       <div className={styles.containerInfo}>
         <div className={styles.info}>
