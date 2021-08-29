@@ -27,8 +27,10 @@ const ListReviews: FC<ListReviewsProps> = (props) => {
   }, [nowPage, reviews]);
 
   const handleChangePage = useCallback((e, { page }) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
     setNowPage(page);
+    setTimeout(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 200);
   }, []);
 
   return (
