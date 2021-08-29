@@ -48,24 +48,6 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     [reviews.length],
   );
 
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlide(current);
-  }, []);
-
-  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
-    setTrack(opts);
-  }, []);
-
-  const handlePrev = useCallback(() => {
-    setSlide((prev) => normalizeSlide(prev - 1));
-  }, [normalizeSlide]);
-
-  const handleNext = useCallback(() => {
-    if (track.finished) return;
-
-    setSlide((prev) => normalizeSlide(prev + 1));
-  }, [normalizeSlide, track]);
-
   const getReviewIndex = useCallback(
     (photoId) => {
       const reviewIndex = reviews.findIndex((item: ReviewData) => {
@@ -86,6 +68,24 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
     },
     [getReviewIndex, reviews],
   );
+
+  const handleChangeCurrent = useCallback(({ current }) => {
+    setSlide(current);
+  }, []);
+
+  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
+    setTrack(opts);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setSlide((prev) => normalizeSlide(prev - 1));
+  }, [normalizeSlide]);
+
+  const handleNext = useCallback(() => {
+    if (track.finished) return;
+
+    setSlide((prev) => normalizeSlide(prev + 1));
+  }, [normalizeSlide, track]);
 
   const handleClickReviewImage = useCallback(
     (_e, photoId) => {
