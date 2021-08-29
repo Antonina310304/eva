@@ -8,11 +8,9 @@
 }
 
 .containerImage {
-  margin-bottom: var(--space-l);
-}
-
-.containerImage.firstImage {
-  position: relative;
+  &.firstImage {
+    position: relative;
+  }
 }
 
 .image {
@@ -45,10 +43,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-  &:last-child {
-    margin-left: var(--space-l);
-  }
 }
 
 .buttonAr {
@@ -101,8 +95,6 @@
     position: relative;
 
     width: 100%;
-    margin-bottom: 0;
-    padding: 0;
 
     cursor: pointer;
   }

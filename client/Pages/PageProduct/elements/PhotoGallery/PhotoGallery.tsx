@@ -97,9 +97,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
 
       if (!isMobileM && e.target.tagName === 'DIV') return;
 
-      openModal('ProductPhotos', {
-        images,
-      });
+      openModal('ProductPhotos', { images });
     },
     [images, isMobileM, openModal],
   );
@@ -125,9 +123,7 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
                     <Image className={styles.smallImage} src={item[1]?.image} />
                   </div>
                 ) : (
-                  <div>
-                    <Image className={styles.image} src={item.image} />
-                  </div>
+                  <Image className={styles.image} src={item.image} />
                 )}
 
                 {!isMobileM && index === 0 && ar && (
