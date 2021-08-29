@@ -53,14 +53,15 @@
   transform: translateX(-50%);
 }
 
-.openGallery {
-  width: 300px;
-  margin: 0 auto;
+.footer {
+  display: flex;
+  justify-content: center;
   margin-top: var(--space-l);
 }
 
 .btnOpenGallery {
-  width: 330px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .tags {
@@ -72,7 +73,7 @@
 
 @media (--desktop-m) {
   .btnOpenGallery {
-    width: 240px;
+    max-width: 240px;
   }
 }
 
@@ -106,9 +107,5 @@
   .tags {
     top: var(--space-s);
     right: 15px;
-  }
-
-  .openGallery {
-    display: none;
   }
 }

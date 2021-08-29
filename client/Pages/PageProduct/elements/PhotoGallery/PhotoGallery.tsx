@@ -134,13 +134,15 @@ const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
           })}
         </Items>
 
-        <div className={styles.openGallery}>
-          {images.length > maxItemsCountInGallery && (
-            <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
-              Открыть фотогалерею
-            </Button>
-          )}
-        </div>
+        {!isMobileM && (
+          <div className={styles.footer}>
+            {images.length > maxItemsCountInGallery && (
+              <Button className={styles.btnOpenGallery} theme='blank' onClick={handleOpen}>
+                Открыть фотогалерею
+              </Button>
+            )}
+          </div>
+        )}
 
         {tags.length > 0 && <ProductTags className={styles.tags} tags={tags} />}
         {isMobileM && ar && <ButtonAr className={styles.buttonAr} ar={ar} />}
