@@ -77,7 +77,7 @@ const Cylindo360Viewer: FC<Cylindo360ViewerProps> = (props) => {
       );
     if (onZoomExit) refCylindo.current.on(events.ZOOM_EXIT, onZoomExit);
     if (onViewerReady) refCylindo.current.on(events.VIEWER_READY, onViewerReady);
-    if (onError) refCylindo.current.on(events.ERROR, () => onError());
+    if (onError) refCylindo.current.on(events.ERROR, onError);
   }, [fullOpts, onError, onViewerReady, onZoomEnter, onZoomExit]);
 
   const handleLoad = useCallback(() => {

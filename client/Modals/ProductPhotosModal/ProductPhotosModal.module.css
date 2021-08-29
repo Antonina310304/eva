@@ -4,6 +4,16 @@
   padding: var(--space-xxe) var(--space-xxl) var(--space-e) var(--space-xxb);
 
   background-color: var(--color-white);
+
+  &.loaded {
+    .arrow.prev {
+      cursor: url(./prev.svg), pointer;
+    }
+
+    .arrow.next {
+      cursor: url(./next.svg), pointer;
+    }
+  }
 }
 
 .closePanel {
@@ -104,15 +114,12 @@
 
 .arrow.prev {
   left: 0;
-
-  cursor: url(./prev.svg), pointer;
 }
 
 .arrow.next {
   right: 0;
 
   transform: rotate(180deg);
-  cursor: url(./next.svg), pointer;
 }
 
 .videoContainer {
