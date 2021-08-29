@@ -19,7 +19,7 @@ const CrossSaleProductCard: FC<CrossSaleProductCardProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.card, className)}>
-      <Preview className={styles.preview} product={product} />
+      <Preview className={styles.preview} images={product.images} link={product.link} />
 
       <div className={styles.containerInfo}>
         <div className={styles.info}>
