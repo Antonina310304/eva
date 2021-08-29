@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo, useRef } from 'react';
 import cn from 'classnames';
 
 import Review from '@Components/Review';
@@ -17,6 +17,7 @@ const ListReviews: FC<ListReviewsProps> = (props) => {
   const { className, reviews, ...restProps } = props;
   const [nowPage, setNowPage] = useState(1);
   const total = Math.round(reviews.length / countVisible);
+  const ref = useRef<HTMLDivElement>();
 
   const visibleReviews = useMemo(() => {
     const start = (nowPage - 1) * countVisible;
@@ -26,11 +27,12 @@ const ListReviews: FC<ListReviewsProps> = (props) => {
   }, [nowPage, reviews]);
 
   const handleChangePage = useCallback((e, { page }) => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
     setNowPage(page);
   }, []);
 
   return (
-    <div {...restProps} className={cn(styles.container, className)}>
+    <div {...restProps} className={cn(styles.container, className)} ref={ref}>
       <List
         className={styles.listReviews}
         items={visibleReviews}
