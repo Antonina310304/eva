@@ -21,10 +21,10 @@
 
   cursor: pointer;
 
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 
   &:hover {
-    background: var(--color-light-gray);
+    background-color: var(--color-light-gray);
   }
 }
 
