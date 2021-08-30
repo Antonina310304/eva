@@ -1,0 +1,48 @@
+.categoryWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 17px 0 12px;
+
+  cursor: pointer;
+}
+
+.inner {
+  box-sizing: border-box;
+
+  border-bottom: 1px solid var(--color-light-gray);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.category {
+  margin: 0;
+  margin-right: auto;
+}
+
+.arrow {
+  display: block;
+  width: 10px;
+  height: 15px;
+  margin: 0;
+
+  background: url('../../../../../static/img/category/arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 25px;
+  margin: 0;
+  margin-right: 25px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
