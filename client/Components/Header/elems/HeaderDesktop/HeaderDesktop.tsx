@@ -38,7 +38,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
   return (
     <header
       className={cn(styles.header, {
-        [styles.scroll]: hideOnScroll === true,
+        [styles.scroll]: hideOnScroll,
       })}
     >
       <div className={styles.in}>
@@ -58,9 +58,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
             </Flex>
           </Container>
         </div>
-        <div
-          className={cn(styles.headerBottom, { [styles.headerBottomFloat]: hideOnScroll === true })}
-        >
+        <div className={cn(styles.headerBottom, { [styles.headerBottomFloat]: hideOnScroll })}>
           <Container>
             <Flex jc='space-between' ai='center'>
               <MainNav

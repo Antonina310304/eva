@@ -3,7 +3,6 @@ import { userBottomMenu } from '@Components/Header/data';
 import Link from '@UI/Link';
 import styles from './UserBottomMenuMobile.module.css';
 
-// TODO поменять key
 const UserBottomMenuMobile = () => {
   return (
     <div className={styles.wrapper}>

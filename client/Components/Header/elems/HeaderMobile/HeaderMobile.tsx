@@ -30,7 +30,6 @@ const HeaderMobile = () => {
    */
   const [isShowSubMenuContent, setIsShowSubMenuContent] = useState<boolean>(false);
 
-  // событие состояние подменю/чтобы
   const [hideOnScroll, setHideOnScroll] = useState(true);
   const [hide, setHide] = useState('default');
 

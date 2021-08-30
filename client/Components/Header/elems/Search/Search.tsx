@@ -35,7 +35,7 @@ const Search: FC<SearchData> = ({ className }) => {
       <button type='submit' className={styles.button} />
       <div
         className={cn(styles.modal, {
-          [styles.show]: isHowModal === true,
+          [styles.show]: isHowModal,
         })}
       >
         <p>Предложения</p>

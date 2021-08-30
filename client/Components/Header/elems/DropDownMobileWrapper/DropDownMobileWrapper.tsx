@@ -34,7 +34,7 @@ const DropDownMobileWrapper: FC<DropDownMobileWrapperProps> = ({
   return (
     <div
       className={cn(styles.wrapper, {
-        [styles.open]: isOpen === true,
+        [styles.open]: isOpen,
       })}
     >
       <MobileNavContainer className={styles.buttonWrap}>
