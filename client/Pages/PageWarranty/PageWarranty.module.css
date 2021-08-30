@@ -20,6 +20,10 @@
   margin: 0 auto;
 }
 
+.navigation {
+  margin-top: var(--space-n);
+}
+
 .qualityDepartment {
   margin-top: var(--gap);
 }

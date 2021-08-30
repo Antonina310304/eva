@@ -33,13 +33,9 @@
 .wrapperCylindo {
   position: relative;
 
-  display: none;
+  display: block;
   width: 100%;
   padding-bottom: 57.2%;
-}
-
-.wrapperCylindo.loaded {
-  display: block;
 }
 
 .wrapperCylindo.zoomed {
@@ -74,10 +70,6 @@
 
 .wrapperRotateHint.hide {
   opacity: 0;
-}
-
-.loading.loaded {
-  display: none;
 }
 
 @media (--desktop-m) {

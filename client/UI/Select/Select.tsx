@@ -1,6 +1,5 @@
 import React, {
   FC,
-  HTMLAttributes,
   useState,
   useCallback,
   MouseEvent,

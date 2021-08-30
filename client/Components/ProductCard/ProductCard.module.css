@@ -1,22 +1,22 @@
 .productCard {
   position: relative;
-}
 
-.productCard.hasExpired .actualPrice {
-  color: var(--color-red);
-}
-
-.productCard.viewMini {
-  max-width: 100%;
-
-  .discount {
-    display: none;
+  &.hasExpired .actualPrice {
+    color: var(--color-red);
   }
 
-  .name {
-    height: calc(var(--lh-n) * 2);
+  &.viewMini {
+    max-width: 100%;
 
-    white-space: normal;
+    .discount {
+      display: none;
+    }
+
+    .name {
+      height: calc(var(--lh-n) * 2);
+
+      white-space: normal;
+    }
   }
 }
 
@@ -46,6 +46,24 @@
     z-index: 2;
 
     content: '';
+  }
+}
+
+.placeholderPreview {
+  position: relative;
+
+  &:after {
+    display: block;
+    width: 100%;
+
+    content: '';
+  }
+
+  &.landscape {
+    padding-bottom: 68%;
+  }
+  &.portrait {
+    padding-bottom: 100%;
   }
 }
 

@@ -10,6 +10,7 @@ import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
 import useModals from '@Hooks/useModals';
+import PageProductStore from '@Stores/PageProduct';
 import { useRelatedProducts } from '@Stores/RelatedProducts';
 import { MetaData } from '@Types/Meta';
 import fabricImages from '../../fabrics';
@@ -42,7 +43,6 @@ const OutOfStock = loadable(() => import('../OutOfStock'));
 
 const Sidebar: FC<SidebarProps> = (props) => {
   const { className, page, meta, onClickCharacteristics, onClickReviews, ...restProps } = props;
-  const { isAvailable, credit } = page;
   const shortName = page.product.name.split(' ')[0];
   const hasExpired = page.product.price.expired > 0;
   const hasDiscount = page.product.price.discount > 0;
@@ -76,6 +76,29 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('PriceDrop', { product: page.product });
   }, [openModal, page.product]);
 
+  const handleClickConstructor = useCallback(() => {
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
+
+  const handleAddToCart = useCallback(() => {
+    openModal('Cart', {
+      products: [
+        {
+          isModular: page.product.modules?.length > 0,
+          shopProductId: page.product.id,
+          parameterValues: PageProductStore.getParameterValues(),
+        },
+      ],
+    });
+  }, [openModal, page.product]);
+
+  const handleClickNotifyAboutReceipt = useCallback(() => {
+    openModal('NotifyAboutReceipt', { product: page.product });
+  }, [openModal, page.product]);
+
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
       <div className={styles.shortName}>
@@ -93,7 +116,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
         </div>
       )}
 
-      {isAvailable ? (
+      {page.isAvailable ? (
         <>
           <div className={styles.wrapperPrice}>
             <div className={styles.containerPrices}>
@@ -143,12 +166,32 @@ const Sidebar: FC<SidebarProps> = (props) => {
       )}
 
       <div className={styles.actions}>
-        <Button className={styles.action} wide theme='secondary'>
-          Изменить конфигурацию
-        </Button>
-        <Button className={styles.action} wide>
-          В корзину
-        </Button>
+        {page.isAvailable ? (
+          <>
+            {page.isConfigurator && (
+              <Button
+                className={styles.action}
+                wide
+                theme='secondary'
+                onClick={handleClickConstructor}
+              >
+                Изменить конфигурацию
+              </Button>
+            )}
+            <Button className={styles.action} wide onClick={handleAddToCart}>
+              В корзину
+            </Button>
+          </>
+        ) : (
+          <Button
+            className={styles.action}
+            wide
+            theme='secondary'
+            onClick={handleClickNotifyAboutReceipt}
+          >
+            Уведомить о поступлении
+          </Button>
+        )}
       </div>
 
       <div className={styles.linksList}>
@@ -160,13 +203,13 @@ const Sidebar: FC<SidebarProps> = (props) => {
               label: 'Информация о доставке',
               onClick: handleClickDeliveryInformation,
             },
-            credit?.creditAvailable && {
+            page.credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.perzent)} />,
               hasArrow: true,
               label: 'Купить в кредит без переплаты',
               onClick: handleClickCredit,
             },
-            !credit?.creditAvailable && {
+            !page.credit?.creditAvailable && {
               icon: <div className={cn(styles.icon, styles.attention)} />,
               hasArrow: true,
               label: 'Финальная цена',

@@ -19,6 +19,7 @@ export interface ProductParameterValueData {
   parameterId: number;
   value: number;
   unitId: number;
+  icon?: string;
 }
 
 export interface ProductParameterData {

@@ -102,7 +102,7 @@
   opacity: 0;
 }
 
-@media (--desktop-m) {
+@media (--desktop) {
   .featuresItem {
     grid-row-gap: var(--space-xxl);
     grid-column-gap: var(--space-xb);

@@ -14,6 +14,7 @@ import loadable from '@loadable/component';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
 import InstagramSection from '@Components/InstagramSection';
+import { LazyProductModel } from '@Components/ProductModel';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
@@ -39,7 +40,6 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 
 const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
 const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
-const ProductModel = loadable(() => import('@Components/ProductModel'));
 const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
 const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
@@ -175,7 +175,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
               </div>
             )}
 
-            {page.cylindo && <ProductModel className={styles.cylindo} medias={page.cylindo} />}
+            {page.cylindo && <LazyProductModel className={styles.cylindo} medias={page.cylindo} />}
 
             {page.description && (
               <div
