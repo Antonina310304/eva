@@ -2,18 +2,29 @@
 }
 
 .pageTitle {
-  margin-top: 35px;
+  margin-top: var(--space-xl);
 }
 
 .text {
-  margin-top: 80px;
+  margin-top: var(--space-e);
 }
 
 .qualityDepartment {
-  margin-top: 40px;
+  margin-top: var(--space-xxl);
 }
 
 .qualityDepartmentForm {
-  margin-top: 100px;
-  margin-bottom: 80px;
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-e);
+}
+
+@media (--desktop-m) {
+  .text {
+    margin-top: var(--space-xb);
+  }
+
+  .qualityDepartmentForm {
+    margin-top: var(--space-xb);
+    margin-bottom: var(--space-xb);
+  }
 }

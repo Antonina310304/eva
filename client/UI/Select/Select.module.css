@@ -141,6 +141,14 @@
   }
 }
 
+.field.heightAsInput {
+  padding: var(--space-s);
+
+  .fieldTitle {
+    font-weight: 400;
+  }
+}
+
 .iconArrow {
   width: 15px;
   height: 15px;
@@ -166,6 +174,18 @@
   z-index: 9999998;
 
   background: rgba(0, 0, 0, 0.3);
+}
+
+@media (--desktop-m) {
+  .field.heightAsInput {
+    padding: var(--space-xs) var(--space-s);
+  }
+}
+
+@media (--mobile-m) {
+  .field.heightAsInput {
+    padding: var(--space-xs) var(--space-s);
+  }
 }
 
 @media (--mobile) {

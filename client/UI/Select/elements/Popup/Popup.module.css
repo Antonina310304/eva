@@ -36,6 +36,7 @@
   &.withoutItems {
     .field {
       display: flex;
+      padding: var(--space-s);
     }
 
     .fieldTitle {
@@ -128,6 +129,28 @@
   padding: var(--space-xs);
 
   background: var(--color-white);
+}
+
+@media (--desktop-m) {
+  .popup.withoutItems {
+    .field {
+      padding: var(--space-xs) var(--space-s);
+    }
+  }
+}
+
+@media (--mobile-m) {
+  .popup.withoutItems {
+    .field {
+      padding: var(--space-xs) var(--space-s);
+    }
+
+    .fieldTitle,
+    .fieldText {
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
+  }
 }
 
 @media (--mobile) {

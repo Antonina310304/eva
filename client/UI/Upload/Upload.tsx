@@ -24,6 +24,7 @@ export interface EpicUploadProps extends InputHTMLAttributes<HTMLInputElement> {
   maxCount?: number;
   view?: 'vertical';
   maxSizePerFile?: number;
+  insideUploadedElements?: boolean;
   error?: string;
   onChangeError: (e: null, errorText: string) => void;
 }
@@ -53,7 +54,7 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
   } = props;
 
   const fileInput = useRef<HTMLInputElement>();
-  const fileInput2 = useRef<HTMLInputElement>();
+  const fileAdd = useRef<HTMLInputElement>();
   const [files, setFiles] = useState([]);
   const [warning, setWarning] = useState<string>();
   const hasError = Boolean(error || warning);
@@ -103,8 +104,8 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
   const handleAddFiles = useCallback(() => {
     const tasks = [];
 
-    for (let index = 0; index < fileInput2.current.files.length; index += 1) {
-      const file = fileInput2.current.files[index] as ExtendedFile;
+    for (let index = 0; index < fileAdd.current.files.length; index += 1) {
+      const file = fileAdd.current.files[index] as ExtendedFile;
 
       file.media = getTypeMedia(file.type);
 
@@ -138,8 +139,8 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
 
     Promise.all(tasks.map((task) => task())).then((_files) => {
       setFiles((prev) => {
-        const newFiles = [];
-        _files.forEach((file) => {
+        const newFiles: ExtendedFile[] = [];
+        _files.forEach((file: ExtendedFile) => {
           const finder = prev.findIndex((item) => item.name === file.name);
 
           if (finder < 0) {
@@ -236,7 +237,7 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
               />
             )}
 
-            <div className={styles.button}>
+            <div className={cn(styles.button, styles.withoutBorder)}>
               {files.length > 0 ? (
                 <div className={cn(styles.list, styles.wideList, { [styles.hasError]: hasError })}>
                   {files.map((file, index) => {
@@ -265,7 +266,7 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
                       <input
                         className={styles.addFiles}
                         type='file'
-                        ref={fileInput2}
+                        ref={fileAdd}
                         onChange={handleAddFiles}
                       />
                     </div>

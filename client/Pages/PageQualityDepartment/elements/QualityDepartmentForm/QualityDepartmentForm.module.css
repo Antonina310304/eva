@@ -8,38 +8,42 @@
 
 .block {
   display: flex;
-  margin: 0 -50px;
-  margin-top: 60px;
-}
-
-.columns {
-  /* display: flex;
-  align-items: flex-start; */
+  margin: 0 var(--space-b-neg);
+  margin-top: var(--space-xb);
 }
 
 .column {
-  /* flex-shrink: 0;
+  box-sizing: border-box;
   width: 50%;
-  margin-right: var(--space-3xl);
-
-  &:last-child {
-    margin-right: 0;
-  } */
-  width: 50%;
-  padding: 0 50px;
+  padding: 0 var(--space-b);
 }
 
 .defectDescription {
   height: 113px;
 }
 
+.formItem {
+  margin-bottom: var(--space-l);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .listTitle {
   margin-bottom: var(--space-s);
+
+  font-weight: 500;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 }
 
 .list {
   margin: 0;
   padding: 0;
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
 
   list-style: none;
 }
@@ -47,11 +51,11 @@
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  margin-top: var(--space-xb);
 }
 
 .pretension {
-  height: 134px;
+  height: 136px;
 }
 
 .requirements {
@@ -60,4 +64,103 @@
 
 .bottomStyle {
   color: var(--color-dark-gray);
+}
+
+.uploadBlock {
+  margin: 0;
+  margin-top: var(--space-xb);
+}
+
+.uploadWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 522px;
+  padding: 0;
+
+  border: 1px dashed var(--color-medium-gray);
+}
+
+.filesInfoWrapper {
+  flex-grow: 1;
+  margin-left: var(--space-xxl);
+  padding: 0;
+}
+
+@media (--desktop-m) {
+  .uploadWrapper {
+    max-width: 332px;
+  }
+
+  .pretension {
+    height: 118px;
+  }
+
+  .defectDescription,
+  .requirements {
+    height: 105px;
+  }
+}
+
+@media (--desktop) {
+  .block {
+    margin: 0 var(--space-l-neg);
+    margin-top: var(--space-xxl);
+  }
+
+  .uploadBlock {
+    margin: 0;
+    margin-top: var(--space-xxl);
+  }
+
+  .column {
+    padding: 0 var(--space-l);
+  }
+
+  .uploadWrapper,
+  .filesInfoWrapper {
+    padding: 0;
+  }
+
+  .footer {
+    margin-top: var(--space-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .uploadWrapper {
+    max-width: 341px;
+  }
+
+  .pretension {
+    height: 111px;
+  }
+}
+
+@media (--mobile) {
+  .block {
+    flex-direction: column;
+    margin: 0;
+    margin-top: var(--space-xxl);
+  }
+
+  .uploadWrapper {
+    width: 100%;
+    max-width: unset;
+    min-height: 276px;
+  }
+
+  .filesInfoWrapper {
+    margin-left: 0;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: var(--space-n);
+    padding: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }

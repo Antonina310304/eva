@@ -47,12 +47,14 @@ export interface SelectProps {
   defaultChecked?: SelectItemData | SelectItemData[];
   items?: SelectItemData[];
   waiting?: boolean;
+  withoutItems?: boolean;
   renderItem?: (props: SelectItemData) => ReactElement;
   onClick?: (e: MouseEvent) => void;
   onOpen?: (e: MouseEvent) => void;
   onClose?: (e: MouseEvent) => void;
   onCheck?: SelectCallback;
   onChangeSelected?: (e: MouseEvent, items: SelectItemData[]) => void;
+  getCheckedItems?: (items: SelectItemData[]) => void;
   onClickItem?: SelectCallback;
 }
 
@@ -237,7 +239,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   const handleClickItem = useCallback(
     (e: MouseEvent, item: SelectItemData) => {
       const hasInChecked = checked.includes(item);
-
       if (hasInChecked) {
         uncheckItem(item);
       } else {
@@ -380,6 +381,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         <div
           className={cn(styles.field, {
             [styles.placeholder]: true,
+            [styles.heightAsInput]: withoutItems,
           })}
           onClick={handleClick}
           ref={refField}

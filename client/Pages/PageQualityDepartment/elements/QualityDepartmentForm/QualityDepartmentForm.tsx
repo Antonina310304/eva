@@ -7,13 +7,9 @@ import Form from '@UI/Form';
 import FormItem from '@UI/FormItem';
 import Input from '@UI/Input';
 import Textarea from '@UI/Textarea';
-import MainSelect from '@UI/MainSelect';
-import Select, { SelectProps, SelectItemData } from '@UI/Select';
-import SampleOption from '@UI/MainSelect/elems/SampleOption';
 import Button from '@UI/Button';
 import Upload from '@UI/Upload';
-import MySelect1 from '../MySelect1';
-import MySelect2 from '../MySelect2';
+import QualitySelect from '../QualitySelect';
 import styles from './QualityDepartmentForm.module.css';
 
 export interface QualityDepartmentFormProps extends HTMLAttributes<HTMLDivElement> {
@@ -135,24 +131,11 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
           text: 'Ваше сообщение отправлено.',
         });
       } else {
-        onError(response);
+        onError();
       }
     },
     [onError, openModal],
   );
-
-  const handleOpenConstructor = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс!',
-      text: 'Ещё не готово, заходите позже…',
-    });
-  }, [openModal]);
-
-  const handleCheckedPackConditionsFirst = useCallback((e, data) => {
-    console.log('handleCheckedPackConditionsFirst');
-
-    setCheckedPackCondition(data);
-  }, []);
 
   const handleChangeParameter = useCallback((_e, items) => {
     setCheckedPackCondition(items[0]);
@@ -163,19 +146,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
   }, []);
 
   const handleCheckedPackConditions = useCallback((checkedItems) => {
-    console.log('checkedItems', checkedItems);
     setCheckedPackConditionDetails(checkedItems);
-  }, []);
-
-  const handleUncheckedPackConditions = useCallback((e, item) => {
-    setCheckedPackConditionDetails((prev) => {
-      const itemIndex = prev.findIndex(({ id }) => item.id === id);
-      const newItems = [...prev];
-
-      newItems.splice(itemIndex, 1);
-
-      return newItems;
-    });
   }, []);
 
   return (
@@ -194,21 +165,21 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
       >
         <div className={styles.block}>
           <div className={styles.column}>
-            <FormItem>
+            <FormItem className={styles.formItem}>
               <Input name='name' placeholder='Ф.И.О' />
             </FormItem>
 
-            <FormItem>
+            <FormItem className={styles.formItem}>
               <Input name='phone' mask='+7 (999) 999-99-99' placeholder='Телефон' />
             </FormItem>
           </div>
 
           <div className={styles.column}>
-            <FormItem>
+            <FormItem className={styles.formItem}>
               <Input name='checkNumber' placeholder='Номер товарного чека' />
             </FormItem>
 
-            <FormItem>
+            <FormItem className={styles.formItem}>
               <Input name='productName' placeholder='Наименование товара' />
             </FormItem>
           </div>
@@ -216,33 +187,38 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
 
         <div className={styles.block}>
           <div className={styles.column}>
-            <FormItem>
-              <MySelect1
+            <FormItem className={styles.formItem}>
+              <QualitySelect
                 title='Состояние упаковки при приеме товара'
                 name='packCondition'
                 withoutItems
                 className={styles.select}
                 items={packCondition}
+                defaultChecked={packCondition.find((option) => option.selected)}
                 onChangeSelected={handleChangeParameter}
               />
             </FormItem>
 
-            <FormItem
-              hidden={checkedPackCondition.id === 'packGood'}
-              bottom='Отметьте, при наличии, повреждения упаковки'
-              cnBottom={styles.bottomStyle}
-            >
-              <MySelect2
-                title='Тип повреждения упаковки'
-                name='packConditionDetails'
-                withoutItems
-                className={styles.select}
-                items={packConditionDetails}
-                getCheckedItems={handleCheckedPackConditions}
-              />
-            </FormItem>
+            {checkedPackCondition.id === 'packBroken' && (
+              <FormItem
+                className={styles.formItem}
+                bottom='Отметьте, при наличии, повреждения упаковки'
+                cnBottom={styles.bottomStyle}
+              >
+                <QualitySelect
+                  title='Тип повреждения упаковки'
+                  name='packConditionDetails'
+                  withoutItems
+                  mode='multiple'
+                  className={styles.select}
+                  items={packConditionDetails}
+                  getCheckedItems={handleCheckedPackConditions}
+                />
+              </FormItem>
+            )}
 
             <FormItem
+              className={styles.formItem}
               hidden={
                 checkedPackCondition.id === 'packGood' ||
                 !checkedPackConditionDetails.find((condition) => condition.id === 'packOther')
@@ -254,6 +230,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             </FormItem>
 
             <FormItem
+              className={styles.formItem}
               bottom='Укажите те части товара, где были обнаружены дефекты'
               cnBottom={styles.bottomStyle}
             >
@@ -262,8 +239,28 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 placeholder='Часть изделия, на которой обнаружен дефект'
               />
             </FormItem>
+          </div>
 
+          <div className={styles.column}>
             <FormItem
+              className={styles.formItem}
+              bottom='Напишите, что вас не устраивает в качестве товара (услуг).'
+              cnBottom={styles.bottomStyle}
+            >
+              <Textarea
+                name='pretension'
+                className={styles.pretension}
+                placeholder='Претензия'
+                resizeDisable
+              />
+            </FormItem>
+          </div>
+        </div>
+
+        <div className={styles.block}>
+          <div className={styles.column}>
+            <FormItem
+              className={styles.formItem}
               bottom='Опишите характер дефекта. При каких условиях был обнаружен дефект? Каким образом влияет выявленный дефект на эксплуатацию товара?'
               cnBottom={styles.bottomStyle}
             >
@@ -275,20 +272,10 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
               />
             </FormItem>
           </div>
+
           <div className={styles.column}>
             <FormItem
-              bottom='Напишите, что вас не устраивает в качестве товара (услуг).'
-              cnBottom={styles.bottomStyle}
-            >
-              <Textarea
-                name='pretension'
-                className={styles.pretension}
-                placeholder='Претензия'
-                resizeDisable
-              />
-            </FormItem>
-
-            <FormItem
+              className={styles.formItem}
               bottom='Как бы вы хотели, чтобы компания решила ситуацию?'
               cnBottom={styles.bottomStyle}
             >
@@ -302,9 +289,9 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
           </div>
         </div>
 
-        <div className={styles.block}>
-          <div className={styles.column}>
-            <FormItem>
+        <div className={cn(styles.block, styles.uploadBlock)}>
+          <div className={cn(styles.column, styles.uploadWrapper)}>
+            <FormItem className={styles.formItem}>
               <Upload
                 multiple
                 view='vertical'
@@ -315,12 +302,14 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 title='Прикрепить фото/видео'
                 description='.jpg, .jpeg, .png, .mp4, .mov, .wmv, .avi и mpg. менее 10 MB'
                 onChangeError={onChangeUploadError}
+                className={styles.upload}
                 insideUploadedElements
               />
             </FormItem>
           </div>
-          <div className={styles.column}>
-            <FormItem>
+
+          <div className={cn(styles.column, styles.filesInfoWrapper)}>
+            <FormItem className={styles.formItem}>
               <>
                 <div className={styles.listTitle}>
                   К данному обращению необходимо приложить следующие материалы:

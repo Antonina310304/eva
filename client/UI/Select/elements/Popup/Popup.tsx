@@ -28,6 +28,7 @@ export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   fieldText: string;
   isMobile: boolean;
+  withoutItems?: boolean;
   items?: SelectItemData[];
   checked: SelectItemData[];
   renderItem?: (props: SelectItemData) => ReactElement;
