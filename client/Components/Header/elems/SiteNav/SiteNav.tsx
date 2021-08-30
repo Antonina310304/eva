@@ -9,7 +9,7 @@ import styles from './SiteNav.module.css';
 export interface SiteNavProp extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
-// TODO навигация по сайту (каталог, контакты и тд)
+
 const SiteNav: FC<SiteNavProp> = () => {
   const location = useLocation();
 

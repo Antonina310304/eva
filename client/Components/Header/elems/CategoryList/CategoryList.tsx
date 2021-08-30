@@ -7,7 +7,6 @@ export interface CategoryListProps extends HTMLAttributes<HTMLDivElement> {
   category: IMainNavSubmenu;
 }
 
-// TODO Удалить key index
 const CategoryList: FC<CategoryListProps> = ({ category }) => {
   return (
     <ul className={styles.list}>

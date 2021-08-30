@@ -19,7 +19,7 @@ const Phone: FC<PhoneProps> = ({ className }) => {
     <div
       onClick={onClick}
       className={cn(className, styles.phone, {
-        [styles.open]: isOpen === true,
+        [styles.open]: isOpen,
       })}
     >
       <span className={styles.number}>+7 (495) 266 78 12</span>

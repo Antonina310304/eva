@@ -19,7 +19,7 @@ const CategoryMobile: FC<CategoryMobileProps> = ({
   setIsShowSubMenu,
   isShowSubMenuContent,
 }) => {
-  // по умолчанию подменю закрыто, иначе все будут сразу открыты
+  // по умолчанию подменю закрыто, иначе все будут сразу открыто
   const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
 
   function showDropDown() {

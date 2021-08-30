@@ -13,13 +13,13 @@ const DropDownWrapper: FC<DropDownWrapperProps> = ({ isFirst, isShow, children }
   return (
     <div
       className={cn(styles.wrapper, {
-        [styles.wrapperShow]: isShow && !isFirst === true,
-        [styles.first]: isFirst === true,
+        [styles.wrapperShow]: isShow && !isFirst,
+        [styles.first]: isFirst,
       })}
     >
       <div
         className={cn(styles.inner, {
-          [styles.show]: isShow === true,
+          [styles.show]: isShow,
         })}
       >
         <Container>

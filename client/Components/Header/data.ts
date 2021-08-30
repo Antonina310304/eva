@@ -611,8 +611,6 @@ export const UserMenuDesktop: IUserMenu[] = [
     title: 'Избранное',
     icon: 'favorites',
     link: 'favorites',
-    // isChecked: true,
-    // count: 3,
   },
   {
     title: 'Корзина',

@@ -39,8 +39,7 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({
         },
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setIsShowSubMenu, isShowSubMenu, api]);
+  }, [setIsShowSubMenuContent, setIsShowSubMenu, isShowSubMenu, api]);
 
   return (
     <animated.div style={{ left }} className={className}>

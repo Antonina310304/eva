@@ -53,8 +53,7 @@ const SideBar: FC<SideBarProps> = ({
         },
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpenSideBar, api]);
+  }, [setIsShowSubMenu, isOpenSideBar, api]);
 
   return (
     <animated.div style={{ left }} className={styles.sideBar}>
