@@ -13,6 +13,10 @@
 
   border: 1px solid var(--color-medium-gray);
   border-radius: 29px;
+
+  input {
+    padding: 0;
+  }
 }
 
 .searchMobile {
@@ -46,23 +50,17 @@
   cursor: pointer;
 
   transition: background 150ms ease-in;
-
-  &:hover {
-    background-image: url('icon-hover.svg');
-
-    transition: background 150ms ease-in;
-  }
 }
 
 .inputWrapper.show .button {
+  transform: translateY(-50%) translateX(-15px);
   visibility: hidden;
   opacity: 0;
 
-  transition: opacity 150ms ease-in, visibility 0s ease 150ms;
+  transition: opacity 150ms ease-in, visibility 0s ease 150ms, transform 150ms ease-in;
 }
 
 .submit {
-  background: red;
   visibility: hidden;
   opacity: 0;
 }
@@ -70,8 +68,6 @@
 .inputWrapper.show .button.submit {
   visibility: visible;
   opacity: 1;
-
-  transition: opacity 150ms ease-in, visibility 0s ease 150ms;
 }
 
 .modal {
@@ -99,17 +95,16 @@
   width: 100%;
   max-width: 30px;
 
-  background: red;
   border: 1px solid transparent;
+  border-radius: 29px;
 
-  transition: max-width 200ms ease-in;
+  transition: max-width 200ms ease-in, border-color 200ms ease-in;
 }
 
 .inputWrapper.show {
   max-width: 100%;
 
   border-color: var(--color-black);
-  border-radius: 29px;
 
-  transition: max-width 200ms ease-in;
+  transition: max-width 200ms ease-in, border-color 200ms ease-in;
 }

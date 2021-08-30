@@ -12,9 +12,11 @@ import cn from 'classnames';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import Flex from '@Components/Flex';
+import useMediaQuery from '@Hooks/useMediaQuery';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
+  const isMobile = useMediaQuery('(max-width: 1023px)');
   /**
    * анимация открытия и закрытия меню 1 уровня
    */
@@ -73,11 +75,10 @@ const HeaderMobile = () => {
           <div className={styles.sliderWrapper}>
             <HeaderLogo />
           </div>
-          <Flex ai='center' jc='flex-end' className={styles.flexWrapper}>
-            <div className={styles.dMobileMWrapper}>
-              <UserMenu userMenuList={UserMenuMobile} />
-            </div>
+
+          <Flex ai='center' jc='space-between' className={styles.flexWrapper}>
             <Search />
+            {!isMobile && <UserMenu userMenuList={UserMenuMobile} />}
           </Flex>
         </Flex>
       </Container>
