@@ -1,4 +1,4 @@
-.preview {
+.previews {
   --proportion: 68%;
 
   position: relative;
@@ -10,16 +10,13 @@
 
     content: '';
   }
-}
 
-.preview.landscape {
-  --proportion: 68%;
-}
-.preview.portrait {
-  --proportion: 100%;
-}
-
-.link {
+  &.landscape {
+    --proportion: 68%;
+  }
+  &.portrait {
+    --proportion: 100%;
+  }
 }
 
 .content {
@@ -31,7 +28,6 @@
 }
 
 .gallery {
-  overflow: hidden;
   overflow: hidden;
 
   background-color: var(--color-light-gray);

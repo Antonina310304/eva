@@ -6,10 +6,10 @@ import useMedias from '@Hooks/useMedias';
 import Image from '@UI/Image';
 import Link from '@UI/Link';
 import { ProductImageData } from '@Types/Product';
-import ImageAreas from '../ImageAreas';
-import styles from './Preview.module.css';
+import ImageAreas from './elems/ImageAreas';
+import styles from './GalleryProductPreviews.module.css';
 
-export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
+export interface GalleryProductPreviewsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   images?: ProductImageData[];
   link: string;
@@ -18,7 +18,7 @@ export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
 
 const Gallery = loadable(() => import('@UI/Gallery'));
 
-const Preview: FC<PreviewProps> = (props) => {
+const GalleryProductPreviews: FC<GalleryProductPreviewsProps> = (props) => {
   const { className, images = [], link, onChangeSlide, ...restProps } = props;
   const [firstImage] = images;
   const hasGallery = images.length > 1;
@@ -43,7 +43,7 @@ const Preview: FC<PreviewProps> = (props) => {
     <div
       {...restProps}
       className={cn(
-        styles.preview,
+        styles.previews,
         {
           [styles.landscape]: firstImage.orientation === 'landscape',
           [styles.portrait]: firstImage.orientation === 'portrait',
@@ -89,4 +89,4 @@ const Preview: FC<PreviewProps> = (props) => {
   );
 };
 
-export default memo(Preview);
+export default memo(GalleryProductPreviews);

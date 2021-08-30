@@ -5,11 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate, hydrate as hydrateState } from 'react-query/hydration';
 import RequestProvider from '@Contexts/Request/RequestProvider';
-import * as Sentry from '@sentry/browser';
 
 import App from '@App';
+import loadSentry from './loadSentry';
 
-loadableReady(() => {
+loadableReady(async () => {
   const config = window.__CONFIG__;
   const state = window.__SERVER_STATE__;
   const queryClient = new QueryClient({
@@ -25,8 +25,6 @@ loadableReady(() => {
     console.log(state);
   }
 
-  Sentry.init(config.sentry);
-
   hydrateState(queryClient, state);
   hydrate(
     <RequestProvider origin={window.location.origin} cookie={document.cookie}>
@@ -40,6 +38,7 @@ loadableReady(() => {
     </RequestProvider>,
     document.getElementById('root'),
   );
+  loadSentry(config);
 });
 
 if (module.hot) {

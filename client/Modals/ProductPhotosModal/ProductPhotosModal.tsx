@@ -28,6 +28,7 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [mainMediaIndex, setMainMediaIndex] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const refScroll = useRef(null);
 
   const selectedMedia = medias[mainMediaIndex];
@@ -116,14 +117,14 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     } else scrollTo(mainMediaIndex);
   }, [mainMediaIndex, startSlideIndex, scrollTo, isMobileM]);
 
+  // Ждём завершения анимации открытия окна
+  useEffect(() => {
+    setTimeout(() => setLoaded(true), 500);
+  }, []);
+
   return (
-    <ModalMain
-      {...restProps}
-      className={cn(styles.productPhotosModal, className)}
-      fullscreen
-      modal={modal}
-    >
-      <div className={styles.wrapper}>
+    <ModalMain {...restProps} fullscreen modal={modal}>
+      <div className={cn(styles.wrapper, { [styles.loaded]: loaded })}>
         <div className={styles.closePanel} onClick={handleClose}>
           <IconClose className={styles.iconClose} view='circle' />
         </div>
