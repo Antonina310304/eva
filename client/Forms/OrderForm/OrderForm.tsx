@@ -2,6 +2,7 @@ import React, { useCallback, useState, memo, FC, useMemo } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
+import InputPhone from '@Components/InputPhone';
 import Button from '@UI/Button';
 import Input from '@UI/Input';
 import Form from '@UI/Form';
@@ -66,7 +67,7 @@ const OrderForm: FC<OrderFormProps> = (props) => {
         </FormItem>
 
         <FormItem label='Телефон*' view='secondary'>
-          <Input wide name='phone' />
+          <InputPhone wide name='phone' />
         </FormItem>
 
         <FormItem label='Почта' view='secondary'>
