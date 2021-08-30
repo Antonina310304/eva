@@ -13,16 +13,14 @@ export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {
   setIsFirstClick: (arg: boolean) => void;
 }
 
-// TODO сделать навигацию каталога
-// TODO Удалить key index
 const MainNav: FC<MainNavProps> = ({ hideOnScroll, isFirstClick, setIsFirstClick, className }) => {
   return (
     <div className={className}>
       <div onMouseLeave={() => setIsFirstClick(false)} className={cn(styles.wrap, styles.mainNav)}>
-        {mainNavList.map((item, ind) => {
+        {mainNavList.map((item) => {
           return (
             <MainNavItem
-              key={ind}
+              key={item.title}
               mainNavItem={item}
               hideOnScroll={hideOnScroll}
               isFirstClick={isFirstClick}

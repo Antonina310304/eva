@@ -13,7 +13,6 @@ export interface CategoryMobileProps extends HTMLAttributes<HTMLDivElement> {
   setIsShowSubMenu: (arg: boolean) => void;
 }
 
-// TODO Удалить key index
 const CategoryMobile: FC<CategoryMobileProps> = ({
   category,
   hideSideBar,

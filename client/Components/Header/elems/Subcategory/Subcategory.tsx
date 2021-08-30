@@ -10,10 +10,6 @@ export interface SubcategoryProps extends HTMLAttributes<HTMLDivElement> {
   category: IMainNav;
 }
 
-/**
- * изображение подкатегории, заголовок,
- * картинка, ссылка и список подкатегорий только для мобильной версии
- */
 const Subcategory: FC<SubcategoryProps> = ({ category }) => {
   return (
     <div>
@@ -30,9 +26,9 @@ const Subcategory: FC<SubcategoryProps> = ({ category }) => {
       </div>
       <MobileNavContainer className={styles.inner}>
         <>
-          {category.dropDown.map((categoryItem, index) => {
+          {category.dropDown.map((categoryItem) => {
             return (
-              <div key={index} className={styles.section}>
+              <div key={categoryItem.name} className={styles.section}>
                 <div className={styles.wrapper}>
                   <p className={styles.type}>{categoryItem.name}</p>
                   <Link view='grayString' to={categoryItem.link}>

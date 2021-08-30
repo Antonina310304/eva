@@ -11,9 +11,6 @@ export interface MainNavListProps extends HTMLAttributes<HTMLDivElement> {
   isShowSubMenuContent: boolean;
 }
 
-/**
- * прокидываю закрытие hideSideBar и showSideBar в MainNavMobileItem
- * */
 const MainNavMobile: FC<MainNavListProps> = ({
   setIsShowSubMenu,
   hideSideBar,

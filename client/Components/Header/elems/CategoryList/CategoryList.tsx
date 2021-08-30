@@ -11,8 +11,8 @@ export interface CategoryListProps extends HTMLAttributes<HTMLDivElement> {
 const CategoryList: FC<CategoryListProps> = ({ category }) => {
   return (
     <ul className={styles.list}>
-      {category.items.map((item, index) => (
-        <li className={styles.item} key={index}>
+      {category.items.map((item) => (
+        <li className={styles.item} key={item.title}>
           <Link view='nav' to={item.link}>
             {item.title}
           </Link>

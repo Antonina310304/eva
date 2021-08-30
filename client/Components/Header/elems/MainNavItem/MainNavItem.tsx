@@ -18,8 +18,6 @@ export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {
   setIsFirstClick: (arg: boolean) => void;
 }
 
-// TODO сделать навигацию каталога
-// TODO Удалить key index
 const MainNavItem: FC<MainNavProps> = ({
   mainNavItem,
   hideOnScroll,
@@ -54,8 +52,8 @@ const MainNavItem: FC<MainNavProps> = ({
       <DropDownWrapper isFirst={isFirst} isShow={isShowSubmenu}>
         <div className={styles.flex}>
           <div className={styles.wrapperList}>
-            {mainNavItem.dropDown.map((i, index) => (
-              <div key={index} className={styles.wrapper}>
+            {mainNavItem.dropDown.map((i) => (
+              <div key={i.name} className={styles.wrapper}>
                 <p className={styles.subtitle}>{i.name}</p>
                 <div className={styles.categoryList}>
                   <CategoryList category={i} />

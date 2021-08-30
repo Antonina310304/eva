@@ -4,11 +4,6 @@ import cn from 'classnames';
 import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
 import styles from './DropDownMobileWrapper.module.css';
 
-/**
- * возврат к главному меню
- * и закрыть SideBar
- * */
-
 export interface DropDownMobileWrapperProps extends HTMLAttributes<HTMLDivElement> {
   isOpenDropDown: boolean;
   hideSideBar: () => void;

@@ -1,4 +1,3 @@
-// TODO обертка для меню 2 уровня - поведение закрытие меню и кнопка назад
 import React, { FC, HTMLAttributes, ReactChild } from 'react';
 import cn from 'classnames';
 import Container from '@Components/Container';
@@ -24,7 +23,7 @@ const DropDownWrapper: FC<DropDownWrapperProps> = ({ isFirst, isShow, children }
         })}
       >
         <Container>
-          <div className={styles.separatop}>{children}</div>
+          <div className={styles.separator}>{children}</div>
         </Container>
       </div>
     </div>

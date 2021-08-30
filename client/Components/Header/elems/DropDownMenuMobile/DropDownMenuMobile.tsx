@@ -1,5 +1,3 @@
-// TODO  тут будет изображение, ссылка, текст и списки
-
 import React, { FC, HTMLAttributes } from 'react';
 import { IMainNavSubmenu } from '@Types/MainNav';
 

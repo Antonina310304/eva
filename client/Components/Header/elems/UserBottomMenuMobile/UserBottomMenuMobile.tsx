@@ -8,9 +8,9 @@ const UserBottomMenuMobile = () => {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
-        {userBottomMenu.map((item, ind) => {
+        {userBottomMenu.map((item) => {
           return (
-            <li key={ind} className={styles.item}>
+            <li key={item.title} className={styles.item}>
               <Link to='/' view='simple' className={styles.link}>
                 <span
                   style={{ backgroundImage: `url(react/static/img/userMenu/${item.icon})` }}
