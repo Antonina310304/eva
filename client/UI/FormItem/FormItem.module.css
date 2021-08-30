@@ -35,6 +35,10 @@
   composes: s from 'sizes';
 }
 
+.content {
+  flex-grow: 1;
+}
+
 .bottom {
   composes: s from 'sizes';
 

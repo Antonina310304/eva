@@ -90,18 +90,14 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
   useImperativeHandle(ref, () => inputRef.current);
 
   return (
-    <>
+    <div className={cn(styles.wrapper, className)}>
       <div
-        className={cn(
-          styles.input,
-          {
-            [styles.wide]: wide,
-            [styles.focused]: focused,
-            [styles.readonly]: readOnly,
-            [styles.errored]: !!error,
-          },
-          [className],
-        )}
+        className={cn(styles.input, {
+          [styles.wide]: wide,
+          [styles.focused]: focused,
+          [styles.readonly]: readOnly,
+          [styles.errored]: !!error,
+        })}
         onClick={handleClick}
       >
         {before && <span className={styles.before}>{before}</span>}
@@ -117,7 +113,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
         {error && <div className={styles.iconError} />}
       </div>
       {error && <div className={styles.error}>{error}</div>}
-    </>
+    </div>
   );
 });
 

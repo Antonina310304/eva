@@ -29,7 +29,7 @@ const FormItem: FC<FormItemProps> = (props) => {
       )}
     >
       {label && <div className={styles.label}>{label}</div>}
-      {children}
+      <div className={styles.content}>{children}</div>
       {bottom && <div className={styles.bottom}>{bottom}</div>}
     </div>
   );
