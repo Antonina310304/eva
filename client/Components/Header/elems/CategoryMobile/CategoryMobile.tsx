@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useState } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import DropDownMobileWrapper from '@Components/Header/elems/DropDownMobileWrapper';
 import { IMainNav } from '@Types/MainNav';
 
@@ -8,43 +8,38 @@ import styles from './CategoryMobile.module.css';
 export interface CategoryMobileProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   category: IMainNav;
-  isOpenSideBar: boolean;
-  showSideBar: () => void;
   hideSideBar: () => void;
-  backMainMenu: () => void;
-  showDropDown: () => void;
-  isShowSubMenu: boolean;
+  isShowSubMenuContent: boolean;
   setIsShowSubMenu: (arg: boolean) => void;
 }
 
-/*
- * список категорий 1 уровня
- * */
 // TODO Удалить key index
 const CategoryMobile: FC<CategoryMobileProps> = ({
   category,
-  showDropDown,
   hideSideBar,
-  backMainMenu,
-  isOpenSideBar,
-  isShowSubMenu,
   setIsShowSubMenu,
+  isShowSubMenuContent,
 }) => {
+  // по умолчанию подменю закрыто, иначе все будут сразу открыты
   const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
 
-  function show() {
-    showDropDown();
-
-    // подменю открыто
+  function showDropDown() {
+    // открывается подменю
     setIsShowSubMenu(true);
 
-    // открываю Dropdown
+    // меняется z-index у актуального пункта меню
     setIsOpenDropDown(true);
   }
 
+  useEffect(() => {
+    if (!isShowSubMenuContent) {
+      setIsOpenDropDown(false);
+    }
+  }, [isShowSubMenuContent]);
+
   return (
     <div className={styles.inner}>
-      <div className={styles.categoryWrapper} onClick={show}>
+      <div className={styles.categoryWrapper} onClick={showDropDown}>
         <p
           style={{ backgroundImage: `url(react/static/img/category/${category.icon})` }}
           className={styles.icon}
@@ -54,11 +49,8 @@ const CategoryMobile: FC<CategoryMobileProps> = ({
       </div>
       <DropDownMobileWrapper
         isOpenDropDown={isOpenDropDown}
-        backMainMenu={backMainMenu}
         hideSideBar={hideSideBar}
-        setIsOpenDropDown={setIsOpenDropDown}
-        isOpenSideBar={isOpenSideBar}
-        isShowSubMenu={isShowSubMenu}
+        setIsShowSubMenu={setIsShowSubMenu}
       >
         <Subcategory category={category} />
       </DropDownMobileWrapper>

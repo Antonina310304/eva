@@ -1,99 +1,94 @@
 import React, { memo, useState } from 'react';
 import Burger from '@Components/Header/elems/Burger';
-import Slider from '@Components/Header/elems/Slider';
 import Search from '@Components/Header/elems/Search';
 
-import MainNavMobile from '@Components/Header/elems/MainNavMobile';
 import Sidebar from '@Components/Header/elems/SideBar';
 import UserMenu from '@Components/Header/elems/UserMenu';
-import SiteNav from '@Components/Header/elems/SiteNav';
-import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
-import { useSpring, animated } from 'react-spring';
 
 import Overlay from '@Components/Overlay';
 import Container from '@Components/Container';
-import UserBottomMenuMobile from '@Components/Header/elems/UserBottomMenuMobile';
+import { UserMenuMobile } from '@Components/Header/data';
+import cn from 'classnames';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
+  /**
+   * анимация открытия и закрытия меню 1 уровня
+   */
+
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
+
+  /**
+   * анимация открытия и закрытия меню 2 уровня
+   */
   const [isShowSubMenu, setIsShowSubMenu] = useState<boolean>(false);
+
+  /**
+   * меняет состояние активного меню после отработки анимации закрытия (используется в самом низком компоненте)
+   */
+  const [isShowSubMenuContent, setIsShowSubMenuContent] = useState<boolean>(false);
+
+  // событие состояние подменю/чтобы
+  const [hideOnScroll, setHideOnScroll] = useState(true);
+  const [hide, setHide] = useState('default');
+
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const isShow = currPos.y > prevPos.y;
+      if (isShow && currPos.y !== 0) {
+        setHide('top');
+      } else if (!isShow && currPos.y !== 0) {
+        setHide('bottom');
+      } else if (currPos.y === 0) {
+        setHide('default');
+      }
+
+      if (isShow !== hideOnScroll) setHideOnScroll(isShow);
+    },
+    [hideOnScroll],
+  );
 
   function showSideBar() {
     setIsOpenSideBar(true);
+    document.querySelector('body').style.overflow = 'hidden';
   }
 
   function hideSideBar() {
     setIsOpenSideBar(false);
   }
 
-  const [{ left }, api] = useSpring(() => ({
-    from: { left: `0%` },
-    config: { duration: 300 },
-  }));
-
-  function backMainMenu() {
-    api.start({
-      left: `0%`,
-      onRest: () => {
-        // меняет z-index у выпадающего меню после окончания анимации
-        setIsShowSubMenu(false);
-      },
-    });
-  }
-
-  function showDropDown() {
-    api.start({
-      left: `-100%`,
-    });
-  }
-
   return (
-    <header className={styles.head}>
+    <header
+      className={cn(styles.header, {
+        [styles.show]: hide === 'top',
+        [styles.hide]: hide === 'bottom',
+      })}
+    >
       <Container className={styles.wrapper}>
         <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={showSideBar} className={styles.burger} />
         <div className={styles.wrapper}>
           <div className={styles.sliderWrapper}>
-            <Slider />
+            <HeaderLogo />
           </div>
           <div className={styles.flexWrapper}>
             <div className={styles.dMobileMWrapper}>
               <Search />
-              <UserMenu />
+              <UserMenu userMenuList={UserMenuMobile} />
             </div>
           </div>
         </div>
       </Container>
-      <Sidebar backMainMenu={backMainMenu} isOpenSideBar={isOpenSideBar} hideSideBar={hideSideBar}>
-        <animated.div style={{ left }} className={styles.inner}>
-          <div data-scroll='scroll' className={styles.inWrap}>
-            <MobileNavContainer className={styles.header}>
-              <div className={styles.wrapper}>
-                <div className={styles.search}>
-                  <Search />
-                </div>
-                <button className={styles.close} onClick={hideSideBar} type='button'>
-                  закрыть
-                </button>
-              </div>
-            </MobileNavContainer>
-            <MobileNavContainer>
-              <SiteNav />
-            </MobileNavContainer>
-            <MainNavMobile
-              showDropDown={showDropDown}
-              backMainMenu={backMainMenu}
-              showSideBar={showSideBar}
-              hideSideBar={hideSideBar}
-              isOpenSideBar={isOpenSideBar}
-              isShowSubMenu={isShowSubMenu}
-              setIsShowSubMenu={setIsShowSubMenu}
-            />
-            <UserBottomMenuMobile />
-          </div>
-        </animated.div>
-      </Sidebar>
+      <Sidebar
+        isOpenSideBar={isOpenSideBar}
+        setIsShowSubMenu={setIsShowSubMenu}
+        isShowSubMenuContent={isShowSubMenuContent}
+        isShowSubMenu={isShowSubMenu}
+        setIsShowSubMenuContent={setIsShowSubMenuContent}
+        hideSideBar={hideSideBar}
+      />
     </header>
   );
 };

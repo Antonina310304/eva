@@ -1,13 +1,18 @@
-import React, { FC, memo, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, memo, useState } from 'react';
 
 import SiteNav from '@Components/Header/elems/SiteNav/SiteNav';
 import MainNav from '@Components/Header/elems/MainNav/MainNav';
-import Slider from '@Components/Header/elems/Slider';
 import Search from '@Components/Header/elems/Search';
 import Location from '@Components/Header/elems/Location';
 import Phone from '@Components/Header/elems/Phone';
 import UserMenu from '@Components/Header/elems/UserMenu';
 import Container from '@Components/Container';
+import { UserMenuDesktop } from '@Components/Header/data';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import cn from 'classnames';
+import Flex from '@Components/Flex';
+import HeaderLogo from '@Components/Header/elems/HeaderLogo';
+import Overlay from '@Components/Overlay';
 import styles from './HeaderDesktop.module.css';
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,33 +20,62 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const HeaderDesktop: FC<HeaderProps> = () => {
-  return (
-    <div className={styles.header}>
-      <div className={styles.headerTopWrap}>
-        <Container>
-          <div className={styles.headerTop}>
-            <div className={styles.flex}>
-              <Slider />
-              <Search />
-              <SiteNav />
-            </div>
+  const [hideOnScroll, setHideOnScroll] = useState<boolean>(false);
+  const [isFirstClick, setIsFirstClick] = useState<boolean>(false);
 
-            <div className={styles.flex}>
-              <Location />
-              <Phone />
-            </div>
-          </div>
-        </Container>
+  useScrollPosition(
+    ({ currPos }) => {
+      if (currPos.y < -2) {
+        setHideOnScroll(true);
+      } else {
+        setHideOnScroll(false);
+        setIsFirstClick(false);
+      }
+    },
+    [hideOnScroll],
+  );
+
+  return (
+    <header
+      className={cn(styles.header, {
+        [styles.scroll]: hideOnScroll === true,
+      })}
+    >
+      <div className={styles.in}>
+        <div className={styles.headerTop}>
+          <Container>
+            <Flex className={styles.headerIn}>
+              <Flex ai='center' jc='flex-start' className={styles.maxWidth}>
+                <HeaderLogo className={styles.slider} />
+                <Search className={styles.search} />
+                <SiteNav />
+              </Flex>
+
+              <Flex ai='center'>
+                <Location className={styles.location} location='Москва' />
+                <Phone />
+              </Flex>
+            </Flex>
+          </Container>
+        </div>
+        <div
+          className={cn(styles.headerBottom, { [styles.headerBottomFloat]: hideOnScroll === true })}
+        >
+          <Container>
+            <Flex jc='space-between' ai='center'>
+              <MainNav
+                isFirstClick={isFirstClick}
+                setIsFirstClick={setIsFirstClick}
+                className={styles.mainNav}
+                hideOnScroll={hideOnScroll}
+              />
+              <UserMenu userMenuList={UserMenuDesktop} />
+            </Flex>
+          </Container>
+        </div>
       </div>
-      <div>
-        <Container>
-          <div className={styles.flex}>
-            <MainNav />
-            <UserMenu />
-          </div>
-        </Container>
-      </div>
-    </div>
+      <Overlay isOpen={isFirstClick} />
+    </header>
   );
 };
 

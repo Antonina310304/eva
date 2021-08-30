@@ -37,6 +37,7 @@
 
 .icon {
   display: block;
+  flex: 0 0 auto;
   width: 34px;
   height: 25px;
   margin: 0;

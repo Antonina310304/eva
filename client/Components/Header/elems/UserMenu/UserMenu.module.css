@@ -1,0 +1,155 @@
+.list {
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  li {
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.link {
+  position: relative;
+
+  display: block;
+  width: 30px;
+  height: 30px;
+
+  font-size: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  transition: background 150ms ease-in;
+}
+
+.user {
+  background-image: url('icons/user.svg');
+
+  &:hover {
+    background-image: url('icons/user-hover.svg');
+  }
+
+  &:focus {
+    background-image: url('icons/user-focus.svg');
+  }
+
+  &:active {
+    background-image: url('icons/user-active.svg');
+  }
+}
+
+.favorites {
+  background-image: url('icons/favorites.svg');
+
+  &:hover {
+    background-image: url('icons/favorites-hover.svg');
+  }
+
+  &:focus {
+    background-image: url('icons/favorites-focus.svg');
+  }
+
+  &:active {
+    background-image: url('icons/favorites-active.svg');
+  }
+}
+
+.basket {
+  background-image: url('icons/basket.svg');
+
+  &:hover {
+    background-image: url('icons/basket-hover.svg');
+
+    span {
+      color: var(--color-dark-gray);
+
+      border-color: var(--color-dark-gray);
+    }
+  }
+
+  &:focus {
+    background-image: url('icons/basket-focus.svg');
+
+    span {
+      color: var(--color-black);
+
+      border-color: var(--color-black);
+    }
+  }
+
+  &:active {
+    background-image: url('icons/basket-active.svg');
+
+    span {
+      color: var(--color-black);
+
+      border-color: var(--color-black);
+    }
+  }
+}
+
+.full {
+  height: 32px;
+
+  background-image: url('icons/basket-full.svg');
+  background-position: bottom;
+
+  span {
+    position: absolute;
+    top: 0px;
+    left: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+    height: 19px;
+
+    color: var(--color-grafit);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 13px;
+    text-align: center;
+
+    transition: background 150ms ease-in, color 150ms ease-in;
+  }
+
+  &:hover {
+    background-image: url('icons/basket-full-hover.svg');
+
+    span {
+      color: var(--color-dark-gray);
+
+      border-color: var(--color-dark-gray);
+    }
+  }
+
+  &:focus {
+    background-image: url('icons/basket-full-focus.svg');
+
+    span {
+      color: var(--color-black);
+
+      border-color: var(--color-black);
+    }
+  }
+
+  &:active {
+    background-image: url('icons/basket-full-active.svg');
+
+    span {
+      color: var(--color-black);
+
+      border-color: var(--color-black);
+    }
+  }
+}

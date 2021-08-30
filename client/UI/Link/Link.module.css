@@ -40,7 +40,7 @@
   color: var(--color-black);
 }
 
-.link.navigation {
+.navigation {
   position: relative;
 
   margin: 0;
@@ -61,7 +61,7 @@
     width: 0;
     height: 1px;
 
-    background: #404040;
+    background: var(--color-grafit);
 
     transition: width 150ms ease-in;
 
@@ -70,7 +70,7 @@
 
   &:hover,
   &:active {
-    color: #404040;
+    color: var(--color-grafit);
 
     transition: color 150ms ease-in;
 
@@ -142,7 +142,7 @@
 
     background: var(--color-dark-gray);
 
-    transition: background 150ms ease-in;
+    transition: background 150ms ease-in, width 150ms ease-in;
 
     content: '';
   }
@@ -153,17 +153,17 @@
     transition: color 150ms ease-in;
 
     &:before {
-      background: transparent;
+      width: 0;
 
-      transition: background 150ms ease-in;
+      transition: width 150ms ease-in;
     }
   }
 
   &:focus {
     &:before {
-      background: transparent;
+      width: 0;
 
-      transition: background 150ms ease-in;
+      transition: width 150ms ease-in;
     }
   }
 
@@ -173,9 +173,11 @@
     transition: color 150ms ease-in;
 
     &:before {
+      width: 100%;
+
       background: var(--color-black);
 
-      transition: background 150ms ease-in;
+      transition: background 150ms ease-in, width 150ms ease-in;
     }
   }
 }

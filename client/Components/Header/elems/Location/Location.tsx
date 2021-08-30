@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { FC, HTMLAttributes } from 'react';
 
-const Location = () => {
-  return <div>расположение</div>;
+import Link from '@UI/Link';
+import styles from './Location.module.css';
+
+export interface LocationProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  location: string;
+  onClick?: () => void;
+}
+
+const Location: FC<LocationProps> = ({ location }) => {
+  return (
+    <Link className={styles.location} view='grayString' to='/'>
+      {location}
+    </Link>
+  );
 };
 
 export default Location;

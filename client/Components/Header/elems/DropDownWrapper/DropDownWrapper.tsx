@@ -1,12 +1,34 @@
 // TODO обертка для меню 2 уровня - поведение закрытие меню и кнопка назад
-import React, { FC, HTMLAttributes, ReactChildren } from 'react';
+import React, { FC, HTMLAttributes, ReactChild } from 'react';
+import cn from 'classnames';
+import Container from '@Components/Container';
 import styles from './DropDownWrapper.module.css';
 
 export interface DropDownWrapperProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactChildren;
+  children: ReactChild;
+  isShow?: boolean;
+  isFirst: boolean;
 }
-const DropDownWrapper: FC<DropDownWrapperProps> = ({ children }) => {
-  return <div className={styles.wrapper}>{children}</div>;
+
+const DropDownWrapper: FC<DropDownWrapperProps> = ({ isFirst, isShow, children }) => {
+  return (
+    <div
+      className={cn(styles.wrapper, {
+        [styles.wrapperShow]: isShow && !isFirst === true,
+        [styles.first]: isFirst === true,
+      })}
+    >
+      <div
+        className={cn(styles.inner, {
+          [styles.show]: isShow === true,
+        })}
+      >
+        <Container>
+          <div className={styles.separatop}>{children}</div>
+        </Container>
+      </div>
+    </div>
+  );
 };
 
 export default DropDownWrapper;

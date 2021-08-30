@@ -35,8 +35,8 @@ const Subcategory: FC<SubcategoryProps> = ({ category }) => {
               <div key={index} className={styles.section}>
                 <div className={styles.wrapper}>
                   <p className={styles.type}>{categoryItem.name}</p>
-                  <Link className={styles.grayLink} view='grayString' to={categoryItem.link}>
-                    Все кровати
+                  <Link view='grayString' to={categoryItem.link}>
+                    {categoryItem.textLink}
                   </Link>
                 </div>
                 <CategoryList category={categoryItem} />

@@ -9,6 +9,15 @@
 
   li {
     display: block;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @media (--only-desktop) {
+      margin-right: 40px;
+    }
   }
 }
 

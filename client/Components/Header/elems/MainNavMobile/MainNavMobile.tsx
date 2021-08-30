@@ -6,26 +6,18 @@ import styles from './MainNavMobile.module.css';
 
 export interface MainNavListProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  showSideBar: () => void;
   hideSideBar: () => void;
-  showDropDown: () => void;
-  backMainMenu: () => void;
-  isOpenSideBar: boolean;
-  isShowSubMenu: boolean;
   setIsShowSubMenu: (arg: boolean) => void;
+  isShowSubMenuContent: boolean;
 }
 
 /**
  * прокидываю закрытие hideSideBar и showSideBar в MainNavMobileItem
  * */
 const MainNavMobile: FC<MainNavListProps> = ({
-  backMainMenu,
-  showDropDown,
-  isShowSubMenu,
   setIsShowSubMenu,
-  showSideBar,
   hideSideBar,
-  isOpenSideBar,
+  isShowSubMenuContent,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -34,13 +26,9 @@ const MainNavMobile: FC<MainNavListProps> = ({
           <CategoryMobile
             key={item.title}
             category={item}
-            showSideBar={showSideBar}
-            showDropDown={showDropDown}
             hideSideBar={hideSideBar}
-            backMainMenu={backMainMenu}
-            isOpenSideBar={isOpenSideBar}
-            isShowSubMenu={isShowSubMenu}
             setIsShowSubMenu={setIsShowSubMenu}
+            isShowSubMenuContent={isShowSubMenuContent}
           />
         );
       })}

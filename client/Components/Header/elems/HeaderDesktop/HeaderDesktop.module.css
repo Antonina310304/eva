@@ -1,18 +1,91 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
   display: block;
   width: 100%;
+  margin-bottom: 64px;
+
+  background: #fff;
+
+  transition: box-shadow 100ms ease-in 300ms;
 }
 
+.scroll {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+
+  transition: box-shadow 100ms ease-in;
+}
 .headerTop {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+
+  padding-top: 40px;
+  padding-bottom: 15px;
+
+  background: var(--color-white);
 }
 
-.headerTopWrap {
+.headerBottom {
+  position: absolute;
+  bottom: -40px;
+
+  display: flex;
+  width: 100%;
+
+  background: var(--color-white);
+
+  transform: translateY(0px);
+  opacity: 1;
+
+  transition: transform 250ms ease-in, opacity 200ms ease-in;
+}
+
+.headerBottomFloat {
+  transform: translateY(-40px);
+  opacity: 0;
+
+  transition: transform 400ms ease-in, opacity 200ms ease-in;
 }
 
 .flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.mainNav {
+  width: 100%;
+  margin-right: 80px;
+}
+
+.maxWidth {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.search {
+  flex: 0 0 auto;
+  width: 240px;
+  margin-right: 35px;
+}
+
+.slider {
+  display: flex;
+  align-items: flex-end;
+  width: 117px;
+  margin-right: 35px;
+}
+
+.in {
+  position: relative;
+  z-index: 5;
+}
+
+.headerWrapper {
+}
+
+.location {
+  margin-right: 15px;
 }

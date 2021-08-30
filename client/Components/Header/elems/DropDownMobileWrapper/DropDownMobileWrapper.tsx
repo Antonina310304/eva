@@ -11,43 +11,30 @@ import styles from './DropDownMobileWrapper.module.css';
 
 export interface DropDownMobileWrapperProps extends HTMLAttributes<HTMLDivElement> {
   isOpenDropDown: boolean;
-  isShowSubMenu: boolean;
-  backMainMenu: () => void;
   hideSideBar: () => void;
-  setIsOpenDropDown: (arg: boolean) => void;
+  setIsShowSubMenu: (arg: boolean) => void;
   children: ReactChild;
 }
 const DropDownMobileWrapper: FC<DropDownMobileWrapperProps> = ({
   isOpenDropDown,
-  isShowSubMenu,
-  backMainMenu,
+  setIsShowSubMenu,
   hideSideBar,
-  setIsOpenDropDown,
   children,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(isOpenDropDown);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function back() {
-    setIsOpenDropDown(false);
-    backMainMenu();
+    setIsShowSubMenu(false);
   }
 
-  function close() {
-    setIsOpenDropDown(false);
+  function hideSideMenu() {
     hideSideBar();
   }
 
   useEffect(() => {
-    if (isOpenDropDown) {
-      setIsOpen(isOpenDropDown);
-    }
+    // нажали на пункт меню значение поменялось на true, меняем state
+    setIsOpen(isOpenDropDown);
   }, [isOpenDropDown]);
-
-  useEffect(() => {
-    if (!isShowSubMenu) {
-      setIsOpen(false);
-    }
-  }, [isShowSubMenu]);
 
   return (
     <div
@@ -64,7 +51,7 @@ const DropDownMobileWrapper: FC<DropDownMobileWrapperProps> = ({
 
           <button
             className={cn(styles.button, styles.icon, styles.close)}
-            onClick={close}
+            onClick={hideSideMenu}
             type='button'
           >
             закрыть
