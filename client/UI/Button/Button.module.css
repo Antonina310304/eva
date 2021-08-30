@@ -54,8 +54,8 @@
   transition: all 0.2s;
 
   &:hover {
-    background: var(--color-dark-gray);
-    border-color: var(--color-dark-gray);
+    background: var(--color-black);
+    border-color: var(--color-black);
   }
 
   &:active {
