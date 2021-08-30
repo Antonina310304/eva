@@ -7,10 +7,7 @@ import { NetworkStatus } from '@Types/Base';
 import { CartStoreValue, UseCart } from './typings';
 
 const cartStore = createStore<CartStoreValue>();
-
-const networkStore = createStore<NetworkStatus>(() => {
-  networkStore.set('pending');
-});
+const networkStore = createStore<NetworkStatus>();
 
 // Все товары
 const allProductsStore = createDerived(cartStore, (cart) => {
@@ -244,6 +241,7 @@ const updateDeliveryType = (id: number, newData: any) => {
 export const useCart: UseCart = (initialData) => {
   if (initialData && !getValue(cartStore)) {
     cartStore.set(initialData);
+    networkStore.set('success');
   }
 
   return {
