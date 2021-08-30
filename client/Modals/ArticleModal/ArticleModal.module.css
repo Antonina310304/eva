@@ -4,7 +4,7 @@
 
 .container {
   box-sizing: border-box;
-  width: 360px;
+  width: 1176px;
   margin: 0 auto;
   padding: var(--space-l) var(--space-l) var(--space-xxl);
 
@@ -15,7 +15,7 @@
 .headingWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: var(--space-l);
 }
 
@@ -46,6 +46,12 @@
 .modalMobile {
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+@media (--desktop) {
+  .container {
+    width: 804px;
+  }
 }
 
 @media (--mobile) {

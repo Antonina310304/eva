@@ -1,4 +1,6 @@
 .pressDetails {
+  display: flex;
+  justify-content: space-between;
   padding: 35px 0 0;
 }
 
@@ -13,6 +15,18 @@
   background-size: cover;
 }
 
+.image {
+  width: 100%;
+
+  background-size: contain;
+}
+
+.sliderItem {
+  width: 100%;
+
+  background-size: contain;
+}
+
 .sliderItem:before {
   display: block;
   padding: 0 0 94%;
@@ -22,7 +36,7 @@
 
 .carousel {
   display: inline-block;
-  width: 420px;
+  width: 543px;
   overflow: hidden;
 
   vertical-align: top;
@@ -30,10 +44,25 @@
 
 .info {
   display: inline-block;
-  width: calc(100% - 420px);
-  padding-left: var(--space-xl);
+  width: calc(100% - 543px);
+  padding-left: var(--space-xxl);
 
   vertical-align: top;
+}
+
+.heading {
+  padding-bottom: var(--space-n);
+
+  font-weight: 500;
+  font-size: var(--size-xl);
+  line-height: var(--size-xxl);
+}
+
+.text {
+  padding-bottom: var(--space-m);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
 }
 
 .logo {
@@ -45,6 +74,18 @@
   background-repeat: no-repeat;
   background-position: left 0 top 50%;
   background-size: contain;
+}
+
+.button {
+  width: 240px;
+
+  font-weight: 500;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.link {
+  color: var(--color-white);
 }
 
 .PressDetail-Title {
@@ -110,7 +151,26 @@
   opacity: 1;
 }
 
+@media (--desktop) {
+  .heading {
+    padding-bottom: var(--space-s);
+
+    font-size: var(--size-l);
+    line-height: var(--size-xm);
+  }
+}
+
 @media (--mobile-m) {
+  .heading {
+    font-size: var(--size-xm);
+    line-height: var(--size-xm);
+  }
+
+  .button {
+    font-size: var(--size-s);
+    line-height: var(--lh-s);
+  }
+
   .carousel {
     display: block;
     width: 100%;

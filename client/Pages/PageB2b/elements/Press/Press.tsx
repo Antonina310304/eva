@@ -23,12 +23,15 @@ const Press: FC<PressProps> = (props) => {
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
 
-  const handleClickArticle = useCallback(() => {
-    // Нужно чтобы модалка не открывалась во время спайпа
-    if (window.cancelClick) return;
+  const handleClickArticle = useCallback(
+    (e, index) => {
+      // Нужно чтобы модалка не открывалась во время спайпа
+      if (window.cancelClick) return;
 
-    openModal('Article', { articles });
-  }, [openModal, articles]);
+      openModal('Article', { articles, index });
+    },
+    [openModal, articles],
+  );
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -82,7 +85,11 @@ const Press: FC<PressProps> = (props) => {
           onChangeProgress={handleChangeProgress}
         >
           {articles.map((item, index) => (
-            <div className={styles.article} key={index} onClick={handleClickArticle}>
+            <div
+              className={styles.article}
+              key={index}
+              onClick={(e) => handleClickArticle(e, index)}
+            >
               <div className={styles.articleItem}>
                 <div className={styles.imageWrapper}>
                   <Image className={styles.articleImage} src={item.src} />
