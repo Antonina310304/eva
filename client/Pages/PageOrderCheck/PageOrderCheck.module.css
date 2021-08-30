@@ -39,6 +39,18 @@
   margin-top: var(--space-xb);
 }
 
+.formUser {
+  font-weight: 500;
+}
+
+.formTitle {
+  composes: xxl from 'sizes';
+
+  margin: 0;
+
+  font-weight: 500;
+}
+
 @media (--desktop-m) {
   .title {
     font-size: var(--size-b);
@@ -58,6 +70,11 @@
 
   .content {
     margin-right: var(--space-xxl);
+  }
+
+  .formTitle {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
   }
 }
 
@@ -91,5 +108,10 @@
 
   .wrapperForm {
     margin-top: var(--space-xxl);
+  }
+
+  .formTitle {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
   }
 }

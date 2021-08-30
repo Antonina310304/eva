@@ -2,7 +2,9 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import OrderForm from '@Forms/OrderForm';
+import Link from '@UI/Link';
 import { useCart } from '@Stores/Cart';
+import { Profile } from '@Types/Profile';
 import { PageOrderCheckData } from './typings';
 import WrapperForm from './elems/WrapperForm';
 import styles from './PageOrderCheck.module.css';
@@ -11,10 +13,11 @@ import ListOfPositions from './elems/ListOfPositions';
 export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: PageOrderCheckData;
+  profile?: Profile;
 }
 
 const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
-  const { className, page, ...restProps } = props;
+  const { className, page, profile, ...restProps } = props;
 
   useCart({ ...page.cart, deliveryTypes: page.deliveryTypes });
 
@@ -27,7 +30,21 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
           <div className={styles.content}>
             <ListOfPositions />
 
-            <WrapperForm className={styles.wrapperForm} title='Заполните информацию о себе'>
+            <WrapperForm
+              className={styles.wrapperForm}
+              head={
+                profile ? (
+                  <div className={styles.formUser}>
+                    {`Участник `}
+                    <Link to='/site/divan-club' target='_blank' view='native'>
+                      Divan.Club
+                    </Link>
+                  </div>
+                ) : (
+                  <h2 className={styles.formTitle}>Заполните информацию о себе</h2>
+                )
+              }
+            >
               <OrderForm />
             </WrapperForm>
           </div>

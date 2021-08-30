@@ -4,14 +4,6 @@
   background-color: var(--color-white);
 }
 
-.title {
-  composes: xxl from 'sizes';
-
-  margin: 0;
-
-  font-weight: 500;
-}
-
 .content {
   margin-top: var(--space-xxl);
 }
@@ -20,20 +12,10 @@
   .wrapper {
     padding: var(--space-l) var(--space-n) var(--space-xxl);
   }
-
-  .title {
-    font-size: var(--size-xl);
-    line-height: var(--lh-xl);
-  }
 }
 
 @media (--mobile-m) {
   .wrapper {
     padding: var(--space-l) var(--space-s) var(--space-xxl);
-  }
-
-  .title {
-    font-size: var(--size-l);
-    line-height: var(--lh-l);
   }
 }
