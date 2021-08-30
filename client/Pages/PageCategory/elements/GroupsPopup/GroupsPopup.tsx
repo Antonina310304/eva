@@ -1,10 +1,8 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo, useEffect } from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, memo } from 'react';
 import cn from 'classnames';
 
 import Popup from '@UI/Popup';
 import Link from '@UI/Link';
-import useMedias from '@Hooks/useMedias';
-import useModals from '@Hooks/useModals';
 import useOnClickOutside from '@Hooks/useOnClickOutside';
 import { GroupData } from '@Pages/PageCategory/typings';
 import styles from './GroupsPopup.module.css';
@@ -17,23 +15,11 @@ export interface GroupsPopupProps extends HTMLAttributes<HTMLDivElement> {
   onClose?: (e: MouseEvent) => void;
 }
 
-const modalId = 'MobileGroups';
 const GroupsPopup: FC<GroupsPopupProps> = (props) => {
   const { className, label, groups, visible, onClose, ...restProps } = props;
-  const { isMobile } = useMedias();
-  const [, { openModal, closeModal }] = useModals();
   const ref = useOnClickOutside(onClose, !visible);
 
-  useEffect(() => {
-    if (!isMobile || !visible) {
-      closeModal(modalId);
-      return;
-    }
-
-    openModal(modalId, { label, groups, onClose });
-  }, [closeModal, groups, isMobile, label, onClose, openModal, visible]);
-
-  return !isMobile ? (
+  return (
     <Popup
       {...restProps}
       className={cn(styles.popup, { [styles.visible]: visible }, className)}
@@ -73,7 +59,7 @@ const GroupsPopup: FC<GroupsPopupProps> = (props) => {
         ))}
       </div>
     </Popup>
-  ) : null;
+  );
 };
 
 export default memo(GroupsPopup);

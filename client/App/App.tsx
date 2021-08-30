@@ -15,8 +15,12 @@ export interface Data {
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
+const RoutePayment = loadable(() => import('@Routes/RoutePayment'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
+const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
+const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
+const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
 
 const App: FC = () => {
   return (
@@ -33,12 +37,28 @@ const App: FC = () => {
         <RouteProduct />
       </Route>
 
+      <Route path='/site/payment'>
+        <RoutePayment />
+      </Route>
+
       <Route exact path='/site/credit'>
         <RouteCredit />
       </Route>
 
       <Route path='/site/warranty'>
         <RouteWarranty />
+      </Route>
+
+      <Route path='/site/contacts'>
+        <RouteContacts />
+      </Route>
+
+      <Route path='/static-page/privacy-policy'>
+        <RoutePrivacyPolicy />
+      </Route>
+
+      <Route path='/static-page/oferta'>
+        <RouteOferta />
       </Route>
     </ModalsProvider>
   );

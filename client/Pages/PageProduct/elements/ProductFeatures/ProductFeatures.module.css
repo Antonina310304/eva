@@ -4,18 +4,11 @@
   grid-template-rows: 1fr;
 }
 
-@media (--desktop-m) {
+@media (--desktop) {
   .wrapper {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xb);
     align-items: start;
-  }
-}
-
-@media (--desktop) {
-  .wrapper {
-    grid-template-columns: 1fr;
-    gap: var(--space-xxl);
   }
 }
 

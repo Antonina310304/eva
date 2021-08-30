@@ -1,0 +1,58 @@
+.mapWithPopup {
+  position: relative;
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 60px;
+
+  display: none;
+  box-sizing: border-box;
+  width: 512px;
+  height: 495px;
+  padding: var(--space-l);
+  padding-bottom: var(--space-n);
+
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px var(--space-n) rgba(0, 0, 0, 0.2);
+  transform: translateY(-50%);
+}
+
+.popup.visible {
+  display: block;
+}
+
+@media (--desktop-m) {
+  .popup {
+    left: 50px;
+  }
+}
+
+@media (--desktop) {
+  .popup {
+    left: 30px;
+
+    width: 330px;
+    height: 412px;
+    padding: var(--space-m) var(--space-s) var(--space-s);
+  }
+}
+
+@media (--mobile) {
+  .map {
+    width: calc(100% + var(--space-s) * 2);
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
+  }
+
+  .popup {
+    left: 50%;
+
+    width: 330px;
+    height: 405px;
+
+    transform: translate(-50%, -50%);
+  }
+}

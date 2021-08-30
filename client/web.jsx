@@ -7,10 +7,11 @@ import { Hydrate, hydrate as hydrateState } from 'react-query/hydration';
 import RequestProvider from '@Contexts/Request/RequestProvider';
 
 import App from '@App';
+import loadSentry from './loadSentry';
 
-const isDev = process.env.NODE_ENV === 'development';
-
-loadableReady(() => {
+loadableReady(async () => {
+  const config = window.__CONFIG__;
+  const state = window.__SERVER_STATE__;
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -18,10 +19,9 @@ loadableReady(() => {
       },
     },
   });
-  const state = window.__SERVER_STATE__;
 
-  // eslint-disable-next-line no-console
-  if (isDev) {
+  if (config.env === 'development') {
+    // eslint-disable-next-line no-console
     console.log(state);
   }
 
@@ -38,6 +38,7 @@ loadableReady(() => {
     </RequestProvider>,
     document.getElementById('root'),
   );
+  loadSentry(config);
 });
 
 if (module.hot) {
