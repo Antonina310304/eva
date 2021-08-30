@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, memo, ReactChild } from 'react';
+import React, { ButtonHTMLAttributes, memo, ReactChild, forwardRef } from 'react';
 import cn from 'classnames';
 
 import styles from './Button.module.css';
@@ -14,7 +14,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   waiting?: boolean;
 }
 
-const Button: FC<ButtonProps> = (props) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     className,
     wide,
@@ -58,11 +58,12 @@ const Button: FC<ButtonProps> = (props) => {
       // eslint-disable-next-line react/button-has-type
       type={type}
       style={color ? { backgroundColor: color, borderColor: color } : undefined}
+      ref={ref}
     >
       {before && <span className={styles.before}>{before}</span>}
       {isText ? <span className={styles.text}>{children}</span> : children}
     </button>
   );
-};
+});
 
 export default memo(Button);
