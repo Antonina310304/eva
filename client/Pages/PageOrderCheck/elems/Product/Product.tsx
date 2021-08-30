@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { CartProductData } from '@Types/Cart';
 import Preview from './elems/Preview';
+import Material from './elems/Material';
 import styles from './Product.module.css';
 
 export interface ProductProps extends HTMLAttributes<HTMLDivElement> {
@@ -22,22 +23,38 @@ const Product: FC<ProductProps> = (props) => {
 
         <div className={styles.params}>
           {product.groups.map((group, indexGroup) => {
-            return group.parameters.map((param: any) => (
-              <div className={styles.param} key={indexGroup}>
-                {(() => {
-                  switch (param.type) {
-                    case 'sizes':
-                      return <div>Sizes</div>;
+            return group.parameters.map((param: any) => {
+              switch (param.type) {
+                case 'sizes': {
+                  const sizes = param.data
+                    .map((item: any) => `${item.value} ${item.unit}`)
+                    .join(' x ');
 
-                    case 'feature':
-                      return <div>Feature</div>;
+                  return <div className={styles.param} key={indexGroup}>{`Размеры: ${sizes}`}</div>;
+                }
 
-                    default:
-                      return null;
-                  }
-                })()}
-              </div>
-            ));
+                case 'feature': {
+                  return (param.data as any[]).map(({ title, value }, indexData) => (
+                    <div className={styles.param} key={`${indexGroup}-${indexData}`}>
+                      {`${title}: ${value}`}
+                    </div>
+                  ));
+                }
+
+                case 'materials': {
+                  return (param.data as any[]).map((material, indexData) => (
+                    <Material
+                      className={styles.param}
+                      key={`${indexGroup}-${indexData}`}
+                      material={material}
+                    />
+                  ));
+                }
+
+                default:
+                  return null;
+              }
+            });
           })}
         </div>
       </div>

@@ -18,6 +18,18 @@
   font-weight: 500;
 }
 
+.params {
+  margin-top: var(--space-s);
+}
+
+.param {
+  margin-bottom: var(--space-xxs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 @media (--desktop) {
   .content {
     margin-left: var(--space-n);

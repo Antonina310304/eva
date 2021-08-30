@@ -17,6 +17,7 @@
 
 .options {
   display: flex;
+  flex-grow: 1;
   align-items: center;
 }
 
@@ -28,6 +29,7 @@
 .wrapperPrice {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: flex-end;
 }
 
