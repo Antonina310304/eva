@@ -56,7 +56,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
           event: 'GAEvent',
         });
       } else {
-        onError(response, formData);
+        onError();
       }
     },
     [onError, openModal],
@@ -85,7 +85,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
           или воспользуйтесь формой обратной связи*
         </div>
         <Form
-          className={styles.form}
+          className={cn(styles.form, [className])}
           action='/b2b/send-letter'
           method='POST'
           validationSchemaUrl='/json-schema/feedback-form.json'

@@ -1,7 +1,6 @@
 .pressDetails {
   display: flex;
   justify-content: space-between;
-  padding: 35px 0 0;
 }
 
 .slider {
@@ -16,6 +15,12 @@
 }
 
 .image {
+  width: 100%;
+
+  background-size: contain;
+}
+
+.navImage {
   width: 100%;
 
   background-size: contain;
@@ -152,6 +157,16 @@
 }
 
 @media (--desktop) {
+  .pressDetails {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info {
+    width: 100%;
+    padding-left: 0;
+  }
+
   .heading {
     padding-bottom: var(--space-s);
 

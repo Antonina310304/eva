@@ -9,6 +9,10 @@ import useModals from '@Hooks/useModals';
 
 import styles from './ArticleModal.module.css';
 
+export interface SocialItem {
+  id: number;
+  link: string;
+}
 export interface ArticleData {
   link: string;
   preview: string;
@@ -28,10 +32,11 @@ export interface ModalMainProps {
   className?: string;
   modal: ModalData;
   index: number;
+  socials: SocialItem;
 }
 
 const ArticleModal: FC<ModalMainProps> = (props) => {
-  const { className, modal, index, ...restProps } = props;
+  const { className, modal, socials, index, ...restProps } = props;
   const [, { closeModal }] = useModals();
   const article = modal.data.articles[modal.data.index];
 
@@ -50,7 +55,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
         <div className={styles.headingWrapper}>
           <IconClose className={styles.iconClose} onClick={handleClose} />
         </div>
-        <PressDetails article={article} />
+        <PressDetails article={article} socials={socials} />
       </div>
     </ModalMain>
   );

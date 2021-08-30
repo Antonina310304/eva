@@ -11,13 +11,18 @@ import useMedias from '@Hooks/useMedias';
 import { ArticleItem } from '@Pages/PageB2b/typings';
 import styles from './Press.module.css';
 
+export interface SocialItem {
+  id: number;
+  link: string;
+}
 export interface PressProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   articles: ArticleItem;
+  socials: SocialItem;
 }
 
 const Press: FC<PressProps> = (props) => {
-  const { className, articles, ...restProps } = props;
+  const { className, articles, socials, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
@@ -28,9 +33,9 @@ const Press: FC<PressProps> = (props) => {
       // Нужно чтобы модалка не открывалась во время спайпа
       if (window.cancelClick) return;
 
-      openModal('Article', { articles, index });
+      openModal('Article', { articles, index, socials });
     },
-    [openModal, articles],
+    [openModal, articles, socials],
   );
 
   const normalizeSlide = useCallback(

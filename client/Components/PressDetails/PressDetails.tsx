@@ -10,6 +10,10 @@ import Link from '@UI/Link';
 
 import styles from './PressDetails.module.css';
 
+export interface SocialItem {
+  id: number;
+  link: string;
+}
 export interface ArticleData {
   link: string;
   logo: string;
@@ -22,14 +26,16 @@ export interface ArticleData {
 export interface PressDetailsProps {
   className?: string;
   article: ArticleData;
+  socials: SocialItem;
 }
 
 const PressDetails: FC<PressDetailsProps> = (props) => {
-  const { className, article, ...restProps } = props;
+  const { className, article, socials, ...restProps } = props;
   const { link, logo, images, preview, text } = article;
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  console.log(images);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -89,11 +95,27 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.pressDetails, [className])}>
       <div className={styles.carousel}>
-        <Gallery className={styles.slider} render={renderNavigation}>
+        <Gallery className={styles.slider}>
           {images.map((item, index) => (
             <Image src={item.src} key={index} className={styles.sliderItem} />
           ))}
         </Gallery>
+        <div className={styles.wrapperGallery}>
+          <Gallery
+            className={styles.gallery}
+            render={renderNavigation}
+            slideIndex={slide}
+            key={images.length}
+            onChangeCurrent={handleChangeCurrent}
+            onChangeProgress={handleChangeProgress}
+          >
+            {images.map((item, index) => (
+              <Image className={styles.navImage} src={item.src} key={index} />
+            ))}
+          </Gallery>
+
+          <ProgressBar className={styles.track} track={track} />
+        </div>
       </div>
       <div className={styles.info}>
         <div className={styles.heading}>{preview}</div>
@@ -103,6 +125,7 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
             Читать статью
           </Link>
         </Button>
+
         <div className={styles.logoWrapper}>
           <Image className={styles.logo} src={logo} />
         </div>
