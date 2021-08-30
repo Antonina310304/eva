@@ -1,7 +1,7 @@
 .field {
   &.collapsed {
     .iconArrow {
-      transform: rotate(1turn);
+      transform: rotate(0);
     }
   }
 }
@@ -21,6 +21,8 @@
   background-image: url('./iconArrow.svg');
   background-repeat: no-repeat;
   background-size: contain;
+
+  transform: rotate(-180deg);
 
   transition: transform 0.2s;
 }
