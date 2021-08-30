@@ -13,7 +13,7 @@
   opacity: 0;
   mix-blend-mode: multiply;
 
-  transition: background 0.8s ease, visibility 0s ease 0.9s, opacity 0s ease 0.9s;
+  transition: background 400ms ease, visibility 0s ease 450ms, opacity 0s ease 450ms;
 }
 
 .overlay.show {
@@ -21,27 +21,5 @@
   visibility: visible;
   opacity: 1;
 
-  transition: background 0.8s ease, visibility 0s;
-}
-
-@keyframes overlayShow {
-  from {
-    background: transparent;
-  }
-  to {
-    background: rgba(0, 0, 0, 0.3);
-  }
-}
-
-@keyframes overlayHide {
-  0% {
-    background: rgba(0, 0, 0, 0.3);
-    visibility: visible;
-  }
-  99% {
-    background: transparent;
-  }
-  100% {
-    visibility: hidden;
-  }
+  transition: background 400ms ease, visibility 0s;
 }
