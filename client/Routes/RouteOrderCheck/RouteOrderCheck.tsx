@@ -11,7 +11,7 @@ const RouteOrderCheck: FC = () => {
   const page = usePage({ path: pathname, ssr: true });
   const profile = useProfile({ ssr: true });
 
-  if (!page.isSuccess || !profile.data) return null;
+  if (!page.isSuccess || !profile.isSuccess) return null;
 
   return (
     <TemplateMain>
