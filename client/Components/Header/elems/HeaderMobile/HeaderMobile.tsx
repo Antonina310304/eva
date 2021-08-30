@@ -11,6 +11,7 @@ import { UserMenuMobile } from '@Components/Header/data';
 import cn from 'classnames';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
+import Flex from '@Components/Flex';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
@@ -69,17 +70,17 @@ const HeaderMobile = () => {
       <Container className={styles.wrapper}>
         <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={showSideBar} className={styles.burger} />
-        <div className={styles.wrapper}>
+        <Flex ai='center' jc='space-between' className={styles.in}>
           <div className={styles.sliderWrapper}>
             <HeaderLogo />
           </div>
-          <div className={styles.flexWrapper}>
+          <Flex ai='center' jc='flex-end' className={styles.flexWrapper}>
             <div className={styles.dMobileMWrapper}>
-              <Search />
               <UserMenu userMenuList={UserMenuMobile} />
             </div>
-          </div>
-        </div>
+            <Search />
+          </Flex>
+        </Flex>
       </Container>
       <Sidebar
         isOpenSideBar={isOpenSideBar}

@@ -2,6 +2,8 @@ import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import Input from '@UI/Input';
 
 import cn from 'classnames';
+import useMediaQuery from '@Hooks/useMediaQuery';
+import useOnClickOutside from '@Hooks/useOnClickOutside';
 import styles from './Search.module.css';
 
 export interface SearchData extends HTMLAttributes<HTMLDivElement> {
@@ -9,12 +11,14 @@ export interface SearchData extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Search: FC<SearchData> = ({ className }) => {
+  // eslint-disable-next-line
   const [isHowModal, setIsHowModal] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 1023px)');
+  const [isShowInput, setIsShowInput] = useState(false);
 
-  function onFocus() {
-    setIsHowModal(true);
-  }
   const myRef = useRef<HTMLFormElement>();
+  // eslint-disable-next-line
+  const inputRef = useRef<HTMLFormElement>();
 
   function handleClickOutside(evt: MouseEvent) {
     if (!myRef.current.contains(evt.target as Node)) {
@@ -24,6 +28,43 @@ const Search: FC<SearchData> = ({ className }) => {
 
   const handleClickInside = () => setIsHowModal(true);
 
+  function showSearchInput() {
+    setIsShowInput(true);
+  }
+
+  function hideSearchInput() {
+    setIsShowInput(false);
+  }
+
+  const mainRef = useOnClickOutside(hideSearchInput, !isShowInput);
+
+  function getInput() {
+    if (isMobile) {
+      return (
+        <div
+          ref={mainRef}
+          className={cn(styles.inputWrapper, { [styles.show]: isShowInput === true })}
+        >
+          <Input onFocus={handleClickInside} className={styles.searchMobile} type='input' />
+          <button className={styles.button} type='button' onClick={() => showSearchInput()}>
+            кнопка поиска
+          </button>
+          <button className={cn(styles.button, styles.submit)} type='submit'>
+            кнопка поиска
+          </button>
+        </div>
+      );
+    }
+    return (
+      <Input
+        className={styles.search}
+        placeholder='Найти мебель'
+        type='input'
+        onFocus={handleClickInside}
+      />
+    );
+  }
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -31,11 +72,10 @@ const Search: FC<SearchData> = ({ className }) => {
 
   return (
     <form ref={myRef} className={cn(styles.wrapper, className)} onClick={handleClickInside}>
-      <Input className={styles.search} placeholder='Найти мебель' type='input' onFocus={onFocus} />
-      <button type='submit' className={styles.button} />
+      {getInput()}
       <div
         className={cn(styles.modal, {
-          [styles.show]: isHowModal === true,
+          // [styles.show]: isHowModal === true,
         })}
       >
         <p>Предложения</p>

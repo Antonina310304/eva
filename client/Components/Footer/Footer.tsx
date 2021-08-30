@@ -16,7 +16,7 @@ export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 
 const Footer: FC<FooterProps> = () => {
   const mediaQuery = {
-    isDesktop: useMediaQuery('(min-width: 1279px)'),
+    isDesktop: useMediaQuery('`(min-width: 1279px)`'),
     isMobileM: useMediaQuery('(min-width: 768px) and (max-width: 1278px)'),
     isMobile: useMediaQuery('(max-width: 767px)'),
   };
