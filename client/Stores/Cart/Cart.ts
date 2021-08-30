@@ -142,7 +142,10 @@ const hidePosition = async ({ positionId }: { positionId: string }) => {
       cartPositionId: positionId,
     });
 
-    cartStore.set(cart);
+    update(cartStore, (prevCart) => ({
+      ...prevCart,
+      ...cart,
+    }));
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
@@ -164,7 +167,10 @@ const showPosition = async ({ positionId }: { positionId: string }) => {
       cart.removedPositions = removedPositions;
     }
 
-    cartStore.set(cart);
+    update(cartStore, (prevCart) => ({
+      ...prevCart,
+      ...cart,
+    }));
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
