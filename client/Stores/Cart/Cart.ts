@@ -6,6 +6,8 @@ import { CartData, CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
 import { UseCart } from './typings';
 
+import data from './data.json';
+
 const cartStore = createStore<CartData>();
 
 const networkStore = createStore<NetworkStatus>(() => {
@@ -194,12 +196,14 @@ const loadRelatedProducts = async ({ productIds }: any) => {
 };
 
 export const useCart: UseCart = (opts = {}) => {
-  if (opts.preload && !cartStore.value) loadInitData();
+  // if (opts.preload && !cartStore.value) loadInitData();
 
-  return {
-    ...useStore(cartStore),
-    network: useStore(networkStore),
-  };
+  // return {
+  //   ...useStore(cartStore),
+  //   network: useStore(networkStore),
+  // };
+
+  return { ...data, network: 'success' };
 };
 
 export default {

@@ -140,7 +140,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
               В случае необходимости, вы можете забрать свой заказ в пункте выдачи ТК
             </div>
           </div>
-          {/* {cart.network === 'success' && cart.count > 0 && <CartBlock />} */}
+          {cart.network === 'success' && cart.count > 0 && <CartBlock cart={cart} />}
           <div className={styles.contentContainer}>
             {checkedDelivery.type === 'pickupPoint' && <PickupPoint region={meta.region.name} />}
             {checkedDelivery.type === 'toAddress' && <ToAddress />}
@@ -267,25 +267,6 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
           <Attention text={acceptanceProduct} />
         </div>
       )}
-
-      <div className={styles.bottomInfoWrapper}>
-        <div className={styles.bottomInfo}>
-          <div className={styles.bottomInfoContainer}>
-            <div className={styles.subtitle}>Доставка по всей России</div>
-            <div className={styles.textBlock}>
-              <div className={styles.text}>
-                Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону 7
-                (495) 266-71-47.
-              </div>
-              <div className={styles.text}>Доставка по городу Москва и области – от 3 дней.</div>
-            </div>
-            <Link to='/' className={styles.moreLink} view='primary'>
-              Подробнее
-            </Link>
-          </div>
-          <Image className={styles.carImage} src={carImage} />
-        </div>
-      </div>
     </div>
   );
 };

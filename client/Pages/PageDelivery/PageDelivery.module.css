@@ -111,22 +111,6 @@
   margin-top: var(--space-xb);
 }
 
-.bottomInfoWrapper {
-  margin-top: var(--space-e);
-
-  background: var(--color-light-gray);
-}
-
-.bottomInfo {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  box-sizing: border-box;
-  max-width: 1860px;
-  margin: 0 auto;
-  padding: 0 var(--space-xxl);
-}
-
 .subtitle {
   margin-bottom: var(--space-xs);
 
@@ -276,14 +260,6 @@
   .title {
     font-size: var(--size-xxl);
     line-height: var(--lh-xxl);
-  }
-
-  .bottomInfoWrapper {
-    margin-top: var(--space-xb);
-  }
-
-  .bottomInfoContainer {
-    max-width: 470px;
   }
 
   .mainContainer {
