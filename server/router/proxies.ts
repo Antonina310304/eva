@@ -12,6 +12,7 @@ const backend = envs.backendOrigin;
 const router = express.Router();
 const proxyOptions: ProxyOptions = { proxyReqPathResolver: (req) => `${req.originalUrl}` };
 const routes = [
+  '/svg/icons',
   '/react/static',
   '/fonts',
   '/marketing-event',
