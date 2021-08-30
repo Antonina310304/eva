@@ -139,7 +139,6 @@ const AuthorizationForm: FC<AuthorizationFormProps> = (props) => {
 
   const handleToRegister = useCallback(
     (e) => {
-      e.preventDefault();
       if (onToRegister) onToRegister(e);
     },
     [onToRegister],
@@ -236,6 +235,7 @@ const AuthorizationForm: FC<AuthorizationFormProps> = (props) => {
           className={styles.link}
           view='primary'
           to='/cabinet/registration'
+          preventDefault
           onClick={handleToRegister}
         >
           Зарегистрироваться
