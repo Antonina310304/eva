@@ -47,21 +47,26 @@ const Search: FC<SearchData> = ({ className }) => {
         >
           <Input onFocus={handleClickInside} className={styles.searchMobile} type='input' />
           <button className={styles.button} type='button' onClick={() => showSearchInput()}>
-            кнопка поиска
+            открыть поиск
           </button>
           <button className={cn(styles.button, styles.submit)} type='submit'>
-            кнопка поиска
+            найти
           </button>
         </div>
       );
     }
     return (
-      <Input
-        className={styles.search}
-        placeholder='Найти мебель'
-        type='input'
-        onFocus={handleClickInside}
-      />
+      <div className={styles.inputBlock}>
+        <Input
+          className={styles.searchMobile}
+          placeholder='Найти мебель'
+          type='input'
+          onFocus={handleClickInside}
+        />
+        <button className={cn(styles.button, styles.submit)} type='submit'>
+          найти
+        </button>
+      </div>
     );
   }
 

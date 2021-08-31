@@ -77,7 +77,9 @@ const HeaderMobile = () => {
           </div>
 
           <Flex ai='center' jc='space-between' className={styles.flexWrapper}>
-            <Search />
+            <div className={styles.search}>
+              <Search className={styles.search} />
+            </div>
             {!isMobile && <UserMenu userMenuList={UserMenuMobile} />}
           </Flex>
         </Flex>

@@ -8,22 +8,32 @@
 
 .search {
   box-sizing: border-box;
-  padding: 7px 15px 7px 46px;
+  padding: 7px 15px 7px 0;
   overflow: hidden;
 
   border: 1px solid var(--color-medium-gray);
   border-radius: 29px;
-
-  input {
-    padding: 0;
-  }
 }
 
 .searchMobile {
   padding: 0;
 
-  border: none;
+  /*border: none;*/
   border-radius: 29px;
+
+  input {
+    padding: 0;
+    padding-left: 46px;
+  }
+}
+
+.inputBlock {
+  input {
+    padding: 0;
+
+    border-color: 1px solid var(--color-medium-gray);
+    border-radius: 29px;
+  }
 }
 
 .button {
@@ -49,15 +59,15 @@
   transform: translateY(-50%);
   cursor: pointer;
 
-  transition: background 150ms ease-in;
+  transition: background 250ms ease-in, transform 250ms linear;
 }
 
 .inputWrapper.show .button {
-  transform: translateY(-50%) translateX(-15px);
+  transform: translateY(-50%) translateX(8px);
   visibility: hidden;
   opacity: 0;
 
-  transition: opacity 150ms ease-in, visibility 0s ease 150ms, transform 150ms ease-in;
+  transition: opacity 250ms ease-in, visibility 250s ease, transform 250ms linear;
 }
 
 .submit {
@@ -68,6 +78,28 @@
 .inputWrapper.show .button.submit {
   visibility: visible;
   opacity: 1;
+}
+
+.inputWrapper {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 30px;
+
+  border-radius: 29px;
+
+  transition: max-width 200ms ease-in, z-index 400s ease 400ms, box-shadow 200ms ease-in;
+}
+
+.inputWrapper.show {
+  z-index: 5;
+
+  max-width: 100%;
+
+  box-shadow: 0px 0px 0px 1px var(--color-black);
+
+  transition: max-width 200ms ease-in, z-index 0s ease, box-shadow 200ms ease-in;
 }
 
 .modal {
@@ -87,24 +119,4 @@
 
 .modal.show {
   display: block;
-}
-
-.inputWrapper {
-  position: relative;
-
-  width: 100%;
-  max-width: 30px;
-
-  border: 1px solid transparent;
-  border-radius: 29px;
-
-  transition: max-width 200ms ease-in, border-color 200ms ease-in;
-}
-
-.inputWrapper.show {
-  max-width: 100%;
-
-  border-color: var(--color-black);
-
-  transition: max-width 200ms ease-in, border-color 200ms ease-in;
 }
