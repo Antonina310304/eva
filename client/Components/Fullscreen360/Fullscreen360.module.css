@@ -22,14 +22,14 @@
 .imageContainer {
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto var(-space-xb);
+  margin: 0 auto var(--space-xb);
   overflow: hidden;
 }
 
 .cylindoContainer {
   position: relative;
 
-  padding: 0 var(-space-xs);
+  padding: 0 var(--space-xs);
 }
 
 .wrapperRotateHint {

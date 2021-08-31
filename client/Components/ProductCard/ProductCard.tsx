@@ -5,6 +5,7 @@ import cn from 'classnames';
 import Like from '@Components/Like';
 import Fabrics from '@Components/Fabrics';
 import ProductTags from '@Components/ProductTags';
+import GalleryProductPreviews from '@Components/GalleryProductPreviews';
 import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import List from '@UI/List';
@@ -16,7 +17,6 @@ import { ProductData, ProductParameterGroupData } from '@Types/Product';
 import Parameter from './elements/Parameter';
 import Sizes, { SizeData } from './elements/Sizes';
 import FastView from './elements/FastView';
-import Preview from './elements/Preview';
 import fabricImages from './fabrics';
 import styles from './ProductCard.module.css';
 
@@ -77,7 +77,11 @@ const ProductCard: FC<ProductCardProps> = (props) => {
         <div className={styles.containerImage}>
           {inView ? (
             <>
-              <Preview className={styles.preview} images={product.images} link={product.link} />
+              <GalleryProductPreviews
+                className={styles.preview}
+                images={product.images}
+                link={product.link}
+              />
 
               <div className={styles.actions}>
                 <FastView className={cn(styles.action, styles.fastView)} />

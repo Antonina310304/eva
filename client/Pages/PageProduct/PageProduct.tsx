@@ -14,6 +14,7 @@ import loadable from '@loadable/component';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
 import InstagramSection from '@Components/InstagramSection';
+import { LazyProductModel } from '@Components/ProductModel';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
@@ -39,7 +40,6 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 
 const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
 const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
-const ProductModel = loadable(() => import('@Components/ProductModel'));
 const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
 const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
@@ -175,7 +175,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
               </div>
             )}
 
-            {page.cylindo && <ProductModel className={styles.cylindo} medias={page.cylindo} />}
+            {page.cylindo && <LazyProductModel className={styles.cylindo} medias={page.cylindo} />}
 
             {page.description && (
               <div
@@ -209,12 +209,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     id: '0',
                     images: [
                       {
-                        url: '/react/static/img/scheme1.jpg',
+                        url: '/react/static/img/scheme1_1.png',
                         width: 511,
                         height: 236,
                       },
                       {
-                        url: '/react/static/img/scheme2.jpg',
+                        url: '/react/static/img/scheme2_1.png',
                         width: 269,
                         height: 235,
                       },
@@ -224,12 +224,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     id: '1',
                     images: [
                       {
-                        url: '/react/static/img/scheme3.jpg',
+                        url: '/react/static/img/scheme3_1.png',
                         width: 232,
                         height: 389,
                       },
                       {
-                        url: '/react/static/img/scheme4.jpg',
+                        url: '/react/static/img/scheme4_1.png',
                         width: 81,
                         height: 388,
                       },

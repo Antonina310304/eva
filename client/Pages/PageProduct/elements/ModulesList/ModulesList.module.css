@@ -10,6 +10,8 @@
   display: inline-block;
   width: calc(100% / var(--columns) - var(--gap-h));
   margin: 0 calc(var(--gap-h) / 2) var(--gap-v);
+
+  vertical-align: top;
 }
 
 .product {
