@@ -92,6 +92,20 @@ export interface CartData {
   selectedVariant: 'bonuses' | 'promocode';
 }
 
+export interface PaymentTypeId {
+  id: number;
+  variants: string[];
+}
+
+export interface PaymentTypeData {
+  id: number;
+  name: string;
+  description: string;
+  icon: string;
+  prefered: boolean;
+  visible: boolean;
+}
+
 export interface DeliveryTypeData {
   id: number;
   address?: string;
@@ -99,4 +113,5 @@ export interface DeliveryTypeData {
   description?: string;
   sum?: number;
   type: 'toAddress' | 'pickupPoint';
+  paymentTypesIds: PaymentTypeId[];
 }

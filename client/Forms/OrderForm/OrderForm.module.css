@@ -17,6 +17,10 @@
   margin-bottom: var(--space-l);
 }
 
+.variantsRadioGroup {
+  margin-top: var(--space-l);
+}
+
 .footer {
   display: flex;
   justify-content: center;

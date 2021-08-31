@@ -19,7 +19,12 @@ export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
 const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const { className, page, profile, ...restProps } = props;
 
-  useCart({ ...page.cart, deliveryTypes: page.deliveryTypes });
+  useCart({
+    ...page.cart,
+    deliveryTypes: page.deliveryTypes,
+    paymentTypes: page.paymentTypes,
+    paymentVariants: page.paymentVariants,
+  });
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

@@ -8,11 +8,13 @@ import Input from '@UI/Input';
 import Form from '@UI/Form';
 import FormItem from '@UI/FormItem';
 import RadioGroup from '@UI/RadioGroup';
+import Price from '@UI/Price';
 import { useCart } from '@Stores/Cart';
-import { DeliveryTypeData } from '@Types/Cart';
+import OrderFormStore, { useOrderForm } from '@Stores/OrderForm';
 import Group from './elems/Group';
 import SwitchBonuses from './elems/SwitchBonuses';
 import CommentField from './elems/CommentField';
+import PaymentList from './elems/PaymentList';
 import styles from './OrderForm.module.css';
 
 export interface OrderFormProps {
@@ -24,14 +26,9 @@ const DeliveryCourier = loadable(() => import('./elems/DeliveryCourier'));
 const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, ...restProps } = props;
   const cart = useCart();
+  const orderForm = useOrderForm(cart);
   const [loading, setLoading] = useState(false);
-  const [selectedDeliveryId, setSelectedDeliveryId] = useState<DeliveryTypeData['id']>(() => {
-    return cart.deliveryTypes[0].id;
-  });
-
-  const selectedDelivery = useMemo(() => {
-    return cart.deliveryTypes.find((dt) => dt.id === selectedDeliveryId);
-  }, [cart.deliveryTypes, selectedDeliveryId]);
+  const paymentsAsSelect = orderForm.visiblePaymentTypes.length > 3;
 
   const deliveryVariants = useMemo(() => {
     return cart.deliveryTypes.map((deliveryType, index) => ({
@@ -41,8 +38,34 @@ const OrderForm: FC<OrderFormProps> = (props) => {
     }));
   }, [cart.deliveryTypes]);
 
+  const handleChangePaymentVariant = useCallback((e, paymentVariant) => {
+    OrderFormStore.select({ paymentVariant: paymentVariant.id });
+
+    // Событие в аналитику при изменении варианта оплаты
+    (window.dataLayer = window.dataLayer || []).push({
+      eCategory: 'checkBox',
+      eAction: 'activate',
+      eLabel: paymentVariant.description,
+      eNI: false,
+      event: 'GAEvent',
+    });
+  }, []);
+
+  const handleCheckPaymentType = useCallback((_e, paymentType) => {
+    OrderFormStore.select({ paymentType: paymentType.id });
+
+    // Событие в аналитику при изменении способа оплаты
+    (window.dataLayer = window.dataLayer || []).push({
+      eCategory: 'checkBox',
+      eAction: 'activate',
+      eLabel: paymentType.name,
+      eNI: false,
+      event: 'GAEvent',
+    });
+  }, []);
+
   const handleChangeDelivery = useCallback((_e, item) => {
-    setSelectedDeliveryId(item.value);
+    OrderFormStore.select({ delivery: item.value });
   }, []);
 
   const handleSubmit = useCallback(() => {
@@ -63,36 +86,67 @@ const OrderForm: FC<OrderFormProps> = (props) => {
         </FormItem>
 
         <FormItem label='Имя' view='secondary'>
-          <Input wide name='name' />
+          <Input wide name='OrderForm[first_name]' />
         </FormItem>
 
         <FormItem label='Телефон*' view='secondary'>
-          <InputPhone wide name='phone' />
+          <InputPhone wide name='OrderForm[mobile]' />
         </FormItem>
 
         <FormItem label='Почта' view='secondary'>
-          <Input wide name='email' />
+          <Input wide name='OrderForm[email]' />
         </FormItem>
       </Group>
 
       <Group className={styles.group} title='Выберите способ доставки' cropped>
         <RadioGroup
           className={styles.deliveryRadioGroup}
-          name='delivery'
+          name='OrderForm[delivery_type_id]'
           items={deliveryVariants}
           onChange={handleChangeDelivery}
         />
 
-        {selectedDelivery.type === 'toAddress' && (
-          <DeliveryCourier deliveryType={selectedDelivery} />
+        {orderForm.selectedDelivery.type === 'toAddress' && (
+          <DeliveryCourier deliveryType={orderForm.selectedDelivery} name='OrderForm[address]' />
         )}
       </Group>
 
-      <Group className={styles.group} title='Выберите способ оплаты'>
-        Content
-      </Group>
+      {orderForm.visiblePaymentTypes.length > 0 && (
+        <Group className={styles.group} title='Выберите способ оплаты' cropped={paymentsAsSelect}>
+          <PaymentList
+            paymentTypes={orderForm.visiblePaymentTypes}
+            checkedType={orderForm.selectedPaymentType}
+            asSelect={paymentsAsSelect}
+            title='Способ оплаты'
+            name='OrderForm[payment_type_id]'
+            onCheck={handleCheckPaymentType}
+          />
 
-      <Group className={styles.group}>
+          {orderForm.availablePaymentVariants.length > 1 && (
+            <RadioGroup
+              className={styles.variantsRadioGroup}
+              name='OrderForm[payment_variant]'
+              items={orderForm.availablePaymentVariants.map((paymentVariant) => {
+                const checked = orderForm.selectedPaymentVariant?.id === paymentVariant.id;
+
+                return {
+                  defaultChecked: checked,
+                  value: paymentVariant.id,
+                  children: (
+                    <div>
+                      {`${paymentVariant.description} `}
+                      {paymentVariant.sum > 0 && <Price price={paymentVariant.sum} />}
+                    </div>
+                  ),
+                };
+              })}
+              onChange={handleChangePaymentVariant}
+            />
+          )}
+        </Group>
+      )}
+
+      <Group className={styles.group} cropped>
         <CommentField label='Добавить комментарий к заказу' />
       </Group>
 
