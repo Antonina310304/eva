@@ -6,7 +6,6 @@ import PressDetails from '@Components/PressDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
-
 import styles from './ArticleModal.module.css';
 
 export interface SocialItem {
@@ -23,26 +22,31 @@ export interface ArticleData {
   images: string[];
 }
 
-export interface ModalData extends IModal {
-  data: {
-    articles: ArticleData;
-  };
+export interface ArticleModalData {
+  articles: ArticleData[];
+  socials: any[];
+  index: number;
 }
-export interface ModalMainProps {
-  className?: string;
-  modal: ModalData;
+
+export interface ArticleModal extends IModal {
+  data: ArticleModalData;
+}
+
+export interface ArticleModalProps extends ModalMainProps {
+  modal: ArticleModal;
   index: number;
   socials: SocialItem;
 }
 
 const ArticleModal: FC<ModalMainProps> = (props) => {
-  const { className, modal, socials, index, ...restProps } = props;
+  const { className, modal, ...restProps } = props;
   const [, { closeModal }] = useModals();
-  const article = modal.data.articles[modal.data.index];
+  const { articles, socials, index } = modal.data;
+  const article = articles[index];
 
   const handleClose = useCallback(() => {
-    closeModal('Article');
-  }, [closeModal]);
+    closeModal(modal.id);
+  }, [closeModal, modal.id]);
 
   return (
     <ModalMain
