@@ -157,6 +157,14 @@
   }
 }
 
+.phone {
+  background-image: url('icons/phone.svg');
+}
+
+.message {
+  background-image: url('icons/message.svg');
+}
+
 .full {
   span {
     position: absolute;

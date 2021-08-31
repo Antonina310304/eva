@@ -5,6 +5,8 @@ import MainComponent from '@Components/MainComponent';
 import Footer from '@Components/Footer';
 
 import Header from '@Components/Header';
+import BottomUserMenu from '@Components/BottomUserMenu';
+import useMediaQuery from '@Hooks/useMediaQuery';
 import mockBreadcrumbsItems from './mocks';
 import styles from './PageIndex.module.css';
 
@@ -14,6 +16,7 @@ export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageIndex: FC<PageIndexProps> = (props) => {
   const { className, ...restProps } = props;
+  const isMobile = useMediaQuery('(max-width: 1023px)');
 
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
@@ -35,6 +38,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
         </p>
       </MainComponent>
       <Footer />
+      {isMobile && <BottomUserMenu />}
     </div>
   );
 };

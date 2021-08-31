@@ -5,7 +5,7 @@ import MainNav from '@Components/Header/elems/MainNav/MainNav';
 import Search from '@Components/Header/elems/Search';
 import Location from '@Components/Header/elems/Location';
 import Phone from '@Components/Header/elems/Phone';
-import UserMenu from '@Components/Header/elems/UserMenu';
+import UserMenu from '@Components/UserMenu';
 import Container from '@Components/Container';
 import { UserMenuDesktop } from '@Components/Header/data';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
