@@ -83,6 +83,11 @@
   }
 }
 
+.btnBuy {
+  font-size: var(--size-m);
+  line-height: var(--lh-m);
+}
+
 .linksList {
   margin-top: var(--space-xxl);
 }
@@ -111,6 +116,11 @@
   .shortName {
     font-size: var(--size-b);
     line-height: var(--lh-b);
+  }
+
+  .btnBuy {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 }
 

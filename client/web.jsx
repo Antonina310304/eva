@@ -12,6 +12,7 @@ import loadSentry from './loadSentry';
 loadableReady(async () => {
   const config = window.__CONFIG__;
   const state = window.__SERVER_STATE__;
+  const isDev = config.env === 'development';
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -20,7 +21,7 @@ loadableReady(async () => {
     },
   });
 
-  if (config.env === 'development') {
+  if (isDev) {
     // eslint-disable-next-line no-console
     console.log(state);
   }
@@ -38,7 +39,10 @@ loadableReady(async () => {
     </RequestProvider>,
     document.getElementById('root'),
   );
-  loadSentry(config);
+
+  if (!isDev) {
+    loadSentry(config);
+  }
 });
 
 if (module.hot) {
