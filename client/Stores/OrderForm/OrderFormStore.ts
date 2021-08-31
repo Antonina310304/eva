@@ -40,6 +40,8 @@ const selectedPaymentTypeStore = createDerived(
 const availablePaymentVariantsStore = createDerived(
   [orderFormStore, selectedDeliveryStore, selectedPaymentTypeStore],
   (form, selectedDelivery, selectedPaymentType) => {
+    if (!selectedPaymentType) return [];
+
     return form.paymentVariants.filter((paymentVariant) => {
       const founded = selectedDelivery.paymentTypesIds.find(
         (pt) => pt.id === selectedPaymentType.id,
@@ -84,12 +86,11 @@ export const useOrderForm = (initialValue?: CartStoreValue) => {
     select({ delivery: initialValue.deliveryTypes[0].id });
     update(selectedStore, (prevValue) => {
       const visiblePaymentTypes = getValue(visiblePaymentTypesStore);
+      const firstVisible = visiblePaymentTypes[0];
       const preferedPaymentType = visiblePaymentTypes.find((pt) => pt.prefered);
+      const paymentType = preferedPaymentType || firstVisible || initialValue.paymentTypes[0];
 
-      return {
-        ...prevValue,
-        paymentType: (preferedPaymentType || visiblePaymentTypes[0]).id,
-      };
+      return { ...prevValue, paymentType: paymentType.id };
     });
     update(selectedStore, (prevValue) => {
       const [paymentVariant] = getValue(availablePaymentVariantsStore);
