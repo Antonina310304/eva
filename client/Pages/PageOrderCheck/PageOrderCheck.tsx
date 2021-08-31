@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import OrderForm from '@Forms/OrderForm';
-import Link from '@UI/Link';
 import { useCart } from '@Stores/Cart';
 import { Profile } from '@Types/Profile';
 import { PageOrderCheckData } from './typings';
@@ -37,20 +36,9 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
 
             <WrapperForm
               className={styles.wrapperForm}
-              head={
-                profile ? (
-                  <div className={styles.formUser}>
-                    {`Участник `}
-                    <Link to='/site/divan-club' target='_blank' view='native'>
-                      Divan.Club
-                    </Link>
-                  </div>
-                ) : (
-                  <h2 className={styles.formTitle}>Заполните информацию о себе</h2>
-                )
-              }
+              head={<h2 className={styles.formTitle}>Заполните информацию о себе</h2>}
             >
-              <OrderForm />
+              <OrderForm profile={profile} />
             </WrapperForm>
           </div>
 

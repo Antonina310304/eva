@@ -8,28 +8,30 @@ export interface SwitchProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Switch: FC<SwitchProps> = (props: SwitchProps) => {
-  const { className, defaultChecked, checked, name, ...restProps } = props;
+  const { className, defaultChecked, checked, name, onChange, ...restProps } = props;
   const [actived, setActived] = useState(defaultChecked || checked || false);
 
-  const handleClick = useCallback(() => {
-    setActived((prev) => !prev);
-  }, []);
+  const handleChange = useCallback(
+    (e) => {
+      setActived(e.target.checked);
+      if (onChange) onChange(e);
+    },
+    [onChange],
+  );
 
   useEffect(() => {
     setActived(checked);
   }, [checked]);
 
   return (
-    <div
-      className={cn(styles.switch, { [styles.actived]: actived }, className)}
-      onClick={handleClick}
-    >
+    <div className={cn(styles.switch, { [styles.actived]: actived }, className)}>
       <input
         {...restProps}
         className={styles.control}
         type='checkbox'
         name={name}
         checked={actived}
+        onChange={handleChange}
       />
     </div>
   );
