@@ -10,21 +10,25 @@
     height: auto;
     overflow: visible;
 
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 
   svg.opened {
-    transform: translateY(-20px);
+    /* transform: translateY(-20px); */
   }
 
   svg g {
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 
   svg g path {
     cursor: pointer;
 
-    transition: all 0.2s;
+    transition: all 0.4s;
+  }
+
+  svg g.actived {
+    transform: scale(1.04) translateX(-2%);
   }
 
   svg g.raised {
