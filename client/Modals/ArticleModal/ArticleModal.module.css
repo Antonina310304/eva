@@ -54,6 +54,12 @@
   }
 }
 
+@media (--mobile-m) {
+  .container {
+    width: 100%;
+  }
+}
+
 @media (--mobile) {
   .container {
     width: 100%;

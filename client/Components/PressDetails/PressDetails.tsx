@@ -50,6 +50,12 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
     [images.length],
   );
 
+  const [slideIndex, setSlideIndex] = useState(1);
+
+  const moveSlide = (index) => {
+    setSlideIndex(index);
+  };
+
   const handleChangeCurrent = useCallback(({ current }) => {
     setSlide(current);
   }, []);
@@ -72,7 +78,11 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
     <div {...restProps} className={cn(styles.pressDetails, [className])}>
       <div className={styles.carousel}>
         <div className={styles.wrapperMainGallery}>
-          <Gallery>
+          <Gallery
+            slideIndex={slide}
+            onChangeCurrent={handleChangeCurrent}
+            onChangeProgress={handleChangeProgress}
+          >
             {images.map((image, index) => (
               <div className={styles.mainGalleryItem}>
                 <Image src={image.src} key={index} className={styles.mainGalleryPreview} />
@@ -80,22 +90,26 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
             ))}
           </Gallery>
         </div>
-
-        <div className={styles.wrapperSecondGallery}>
-          <Gallery
-            className={styles.secondGallery}
-            slideIndex={slide}
-            key={images.length}
-            onChangeCurrent={handleChangeCurrent}
-            onChangeProgress={handleChangeProgress}
-          >
-            {images.map((image, index) => (
-              <div className={styles.secondGalleryItem} key={index}>
-                <Image className={styles.secondGalleryPreview} src={image.src} />
-              </div>
-            ))}
-          </Gallery>
-        </div>
+        {isMobileM ? (
+          <ProgressBar className={styles.progressBar} track={track} />
+        ) : (
+          <div className={styles.wrapperSecondGallery}>
+            <Gallery
+              className={styles.secondGallery}
+              slideIndex={slide}
+              key={images.length}
+              onChangeCurrent={handleChangeCurrent}
+              onChangeProgress={handleChangeProgress}
+            >
+              {images.map((image, index) => (
+                <div className={styles.secondGalleryItem} key={index}>
+                  <Image className={styles.secondGalleryPreview} src={image.src} />
+                </div>
+              ))}
+            </Gallery>
+            <ProgressBar className={styles.progressBar} track={track} />
+          </div>
+        )}
       </div>
       <div className={styles.info}>
         <div className={styles.heading}>{preview}</div>
