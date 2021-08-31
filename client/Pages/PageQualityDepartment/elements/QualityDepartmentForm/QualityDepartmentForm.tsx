@@ -202,8 +202,11 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             {checkedPackCondition.id === 'packBroken' && (
               <FormItem
                 className={styles.formItem}
-                bottom='Отметьте, при наличии, повреждения упаковки'
-                cnBottom={styles.bottomStyle}
+                bottom={
+                  <div className={styles.bottomStyle}>
+                    Отметьте, при наличии, повреждения упаковки
+                  </div>
+                }
               >
                 <QualitySelect
                   title='Тип повреждения упаковки'
@@ -223,16 +226,22 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 checkedPackCondition.id === 'packGood' ||
                 !checkedPackConditionDetails.find((condition) => condition.id === 'packOther')
               }
-              bottom='Опишите состояние упаковки при получении товара'
-              cnBottom={styles.bottomStyle}
+              bottom={
+                <div className={styles.bottomStyle}>
+                  Опишите состояние упаковки при получении товара
+                </div>
+              }
             >
               <Input name='packConditionText' placeholder='Состояние упаковки' />
             </FormItem>
 
             <FormItem
               className={styles.formItem}
-              bottom='Укажите те части товара, где были обнаружены дефекты'
-              cnBottom={styles.bottomStyle}
+              bottom={
+                <div className={styles.bottomStyle}>
+                  Укажите те части товара, где были обнаружены дефекты
+                </div>
+              }
             >
               <Input
                 name='defectingProductPart'
@@ -244,8 +253,11 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
           <div className={styles.column}>
             <FormItem
               className={styles.formItem}
-              bottom='Напишите, что вас не устраивает в качестве товара (услуг).'
-              cnBottom={styles.bottomStyle}
+              bottom={
+                <div className={styles.bottomStyle}>
+                  Напишите, что вас не устраивает в качестве товара (услуг).
+                </div>
+              }
             >
               <Textarea
                 name='pretension'
@@ -261,8 +273,12 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
           <div className={styles.column}>
             <FormItem
               className={styles.formItem}
-              bottom='Опишите характер дефекта. При каких условиях был обнаружен дефект? Каким образом влияет выявленный дефект на эксплуатацию товара?'
-              cnBottom={styles.bottomStyle}
+              bottom={
+                <div className={styles.bottomStyle}>
+                  Опишите характер дефекта. При каких условиях был обнаружен дефект? Каким образом
+                  влияет выявленный дефект на эксплуатацию товара?
+                </div>
+              }
             >
               <Textarea
                 name='defectDescription'
@@ -276,8 +292,11 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
           <div className={styles.column}>
             <FormItem
               className={styles.formItem}
-              bottom='Как бы вы хотели, чтобы компания решила ситуацию?'
-              cnBottom={styles.bottomStyle}
+              bottom={
+                <div className={styles.bottomStyle}>
+                  Как бы вы хотели, чтобы компания решила ситуацию?
+                </div>
+              }
             >
               <Textarea
                 name='requirements'
