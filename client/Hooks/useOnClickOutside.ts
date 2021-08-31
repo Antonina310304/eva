@@ -14,7 +14,6 @@ const useOnClickOutside: UseOnClickOutsideFunction = (
   ignoreList = [],
 ) => {
   const ref = useRef<HTMLDivElement>();
-
   useEffect(() => {
     function check(e: { target: any }) {
       if (!ref.current || ref.current.contains(e.target)) {

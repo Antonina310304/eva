@@ -3,7 +3,10 @@ import Input from '@UI/Input';
 
 import cn from 'classnames';
 import useMediaQuery from '@Hooks/useMediaQuery';
-import useOnClickOutside from '@Hooks/useOnClickOutside';
+
+import ModalSearch from '@Components/Header/elems/Search/elems/ModalSearch';
+import { hits, offers, products, searchResult, viewed } from '@Components/Header/elems/Search/data';
+import ModalSearchContent from '@Components/Header/elems/Search/elems/ModalSearchContent';
 import styles from './Search.module.css';
 
 export interface SearchData extends HTMLAttributes<HTMLDivElement> {
@@ -11,63 +14,35 @@ export interface SearchData extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Search: FC<SearchData> = ({ className }) => {
-  // eslint-disable-next-line
-  const [isHowModal, setIsHowModal] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
   const isMobile = useMediaQuery('(max-width: 1023px)');
+  const isDesktop = useMediaQuery('(min-width: 1366px)');
   const [isShowInput, setIsShowInput] = useState(false);
 
-  const myRef = useRef<HTMLFormElement>();
-  // eslint-disable-next-line
-  const inputRef = useRef<HTMLFormElement>();
+  const inputRef = useRef<HTMLDivElement>();
+  const formRef = useRef<HTMLFormElement>();
 
-  function handleClickOutside(evt: MouseEvent) {
-    if (!myRef.current.contains(evt.target as Node)) {
-      setIsHowModal(false);
-    }
+  function hideModal() {
+    setIsShowModal(false);
+    setIsShowInput(false);
+    document.querySelector('body').style.overflow = '';
   }
 
-  const handleClickInside = () => setIsHowModal(true);
+  const handleClickInside = () => {
+    setIsShowModal(true);
+    if (!isDesktop) {
+      document.querySelector('body').style.overflow = 'hidden';
+    }
+  };
 
   function showSearchInput() {
     setIsShowInput(true);
   }
 
-  function hideSearchInput() {
-    setIsShowInput(false);
-  }
-
-  const mainRef = useOnClickOutside(hideSearchInput, !isShowInput);
-
-  function getInput() {
-    if (isMobile) {
-      return (
-        <div
-          ref={mainRef}
-          className={cn(styles.inputWrapper, { [styles.show]: isShowInput === true })}
-        >
-          <Input onFocus={handleClickInside} className={styles.searchMobile} type='input' />
-          <button className={styles.button} type='button' onClick={() => showSearchInput()}>
-            открыть поиск
-          </button>
-          <button className={cn(styles.button, styles.submit)} type='submit'>
-            найти
-          </button>
-        </div>
-      );
+  function handleClickOutside(evt: MouseEvent) {
+    if (!formRef.current.contains(evt.target as Node)) {
+      hideModal();
     }
-    return (
-      <div className={styles.inputBlock}>
-        <Input
-          className={styles.searchMobile}
-          placeholder='Найти мебель'
-          type='input'
-          onFocus={handleClickInside}
-        />
-        <button className={cn(styles.button, styles.submit)} type='submit'>
-          найти
-        </button>
-      </div>
-    );
   }
 
   useEffect(() => {
@@ -76,23 +51,35 @@ const Search: FC<SearchData> = ({ className }) => {
   });
 
   return (
-    <form ref={myRef} className={cn(styles.wrapper, className)} onClick={handleClickInside}>
-      {getInput()}
+    <form ref={formRef} className={cn(styles.search, className)}>
       <div
-        className={cn(styles.modal, {
-          // [styles.show]: isHowModal === true,
+        ref={inputRef}
+        className={cn({
+          [styles.show]: isShowInput === true,
+          [styles.changeable]: isMobile,
+          [styles.wrapper]: !isMobile,
         })}
       >
-        <p>Предложения</p>
-        <p>Хиты интернет продаж</p>
-        <ul>
-          <li>Диваны Динс</li>
-          <li>Кресла Динс</li>
-          <li>Серия мебели Динс</li>
-          <li>Кушетки Динс</li>
-          <li>Зеркальные шкафы</li>
-        </ul>
+        <Input
+          onFocus={handleClickInside}
+          className={styles.input}
+          type='input'
+          placeholder='Найти мебель'
+        />
+        {isMobile && (
+          <button className={styles.button} type='button' onClick={() => showSearchInput()}>
+            открыть поиск
+          </button>
+        )}
+
+        <button className={cn(styles.button, styles.submit)} type='submit'>
+          найти
+        </button>
       </div>
+
+      <ModalSearch hideModal={hideModal} isShowModal={isShowModal}>
+        <ModalSearchContent request={searchResult} hits={hits} viewed={viewed} offers={offers} />
+      </ModalSearch>
     </form>
   );
 };

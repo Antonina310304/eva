@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import { IUserMenu } from '@Types/UserMenu';
 
 import UserElemMenu from '@UI/UserElemMenu';
+import cn from 'classnames';
 import styles from './UserMenu.module.css';
 
 export interface UserMenuProp extends HTMLAttributes<HTMLDivElement> {
@@ -9,9 +10,9 @@ export interface UserMenuProp extends HTMLAttributes<HTMLDivElement> {
   userMenuList: IUserMenu[];
 }
 
-const UserMenu: FC<UserMenuProp> = ({ userMenuList }) => {
+const UserMenu: FC<UserMenuProp> = ({ className, userMenuList }) => {
   return (
-    <ul className={styles.list}>
+    <ul className={cn(styles.list, className)}>
       {userMenuList.map((item) => (
         <li key={item.link}>
           <UserElemMenu element={item} />

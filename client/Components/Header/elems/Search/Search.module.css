@@ -1,39 +1,45 @@
-.wrapper {
+.search {
   position: relative;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 100%;
 }
 
-.search {
-  box-sizing: border-box;
-  padding: 7px 15px 7px 0;
-  overflow: hidden;
-
-  border: 1px solid var(--color-medium-gray);
-  border-radius: 29px;
-}
-
-.searchMobile {
-  padding: 0;
-
-  /*border: none;*/
+.input {
   border-radius: 29px;
 
   input {
-    padding: 0;
-    padding-left: 46px;
+    padding: 7px 15px 7px 46px;
+    overflow: hidden;
+  }
+
+  .changeable & {
+    border: none;
   }
 }
 
-.inputBlock {
-  input {
-    padding: 0;
+.changeable {
+  position: relative;
+  z-index: 1;
 
-    border-color: 1px solid var(--color-medium-gray);
-    border-radius: 29px;
-  }
+  width: 100%;
+  max-width: 30px;
+  margin-left: auto;
+
+  border-radius: 29px;
+
+  transition: max-width 250ms ease-in, box-shadow 250ms ease-in, z-index 300ms ease-in 300ms;
+}
+
+.changeable.show {
+  z-index: 6;
+
+  max-width: 100%;
+
+  box-shadow: 0 0 0 1px var(--color-black);
+
+  transition: max-width 350ms ease-in, box-shadow 350ms ease-in, z-index 200ms ease-in;
 }
 
 .button {
@@ -62,61 +68,35 @@
   transition: background 250ms ease-in, transform 250ms linear;
 }
 
-.inputWrapper.show .button {
+.changeable.show .button {
   transform: translateY(-50%) translateX(8px);
   visibility: hidden;
   opacity: 0;
 
-  transition: opacity 250ms ease-in, visibility 250s ease, transform 250ms linear;
+  transition: opacity 350ms ease-in, visibility 350s ease, transform 250ms linear;
 }
 
 .submit {
+  left: 8px;
+}
+
+.changeable .submit {
+  left: 0;
+
   visibility: hidden;
   opacity: 0;
 }
 
-.inputWrapper.show .button.submit {
+.changeable.show .button.submit {
   visibility: visible;
   opacity: 1;
 }
 
-.inputWrapper {
+.wrapper {
   position: relative;
-  z-index: 1;
+  position: relative;
+  z-index: 6;
 
   width: 100%;
-  max-width: 30px;
-
-  border-radius: 29px;
-
-  transition: max-width 200ms ease-in, z-index 400s ease 400ms, box-shadow 200ms ease-in;
-}
-
-.inputWrapper.show {
-  z-index: 5;
-
-  max-width: 100%;
-
-  box-shadow: 0px 0px 0px 1px var(--color-black);
-
-  transition: max-width 200ms ease-in, z-index 0s ease, box-shadow 200ms ease-in;
-}
-
-.modal {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 5;
-
-  display: none;
-  width: 1044px;
-  height: 464px;
-  margin-top: 10px;
-
-  background: #fff;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-}
-
-.modal.show {
-  display: block;
+  max-width: 240px;
 }

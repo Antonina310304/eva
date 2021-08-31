@@ -1,0 +1,84 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 96px;
+
+  background: var(--color-white);
+  visibility: hidden;
+  opacity: 0;
+
+  transition: opacity 300ms ease-in, visibility 0s ease 250ms;
+}
+
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+
+  transition: opacity 300ms ease-in, visibility 0s ease;
+}
+
+.modalDesktop {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 5;
+
+  display: none;
+  box-sizing: border-box;
+  width: 1044px;
+  height: auto;
+  max-height: 926px;
+  margin-top: 10px;
+  padding: 40px 0 60px;
+
+  background: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+
+  @media (--desktop-l) {
+    width: 1105px;
+  }
+}
+
+.modalDesktop.show {
+  display: block;
+}
+
+.buttonClose {
+  position: absolute;
+  top: 28px;
+  left: 40px;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+
+  @media (--mobile-m) {
+    left: 15px;
+  }
+}
+
+.inner {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 70px;
+  overflow: hidden;
+  overflow-y: auto;
+
+  @media (--desktop-m) {
+    padding: 0 40px 0;
+  }
+
+  @media (--mobile) {
+    padding: 0 15px 60px;
+  }
+}

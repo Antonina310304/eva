@@ -19,9 +19,13 @@
 
 .sliderWrapper {
   position: relative;
-  z-index: 5;
+  z-index: 6;
 
   margin-right: 30px;
+
+  @media (--mobile-m) {
+    z-index: 5;
+  }
 }
 
 .flexWrapper {
@@ -38,6 +42,7 @@
 
   @media (--mobile-m) {
     position: absolute;
+    top: 0;
   }
 }
 
@@ -68,4 +73,9 @@
 
 .in {
   width: 100%;
+}
+
+.userMenu {
+  position: relative;
+  z-index: 6;
 }

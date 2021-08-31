@@ -80,7 +80,7 @@ const HeaderMobile = () => {
             <div className={styles.search}>
               <Search className={styles.search} />
             </div>
-            {!isMobile && <UserMenu userMenuList={UserMenuMobile} />}
+            {!isMobile && <UserMenu className={styles.userMenu} userMenuList={UserMenuMobile} />}
           </Flex>
         </Flex>
       </Container>
