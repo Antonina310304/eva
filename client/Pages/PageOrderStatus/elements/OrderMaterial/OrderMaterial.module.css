@@ -1,0 +1,29 @@
+.orderMaterial {
+  position: relative;
+
+  padding-left: 44px;
+}
+
+.color {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid var(--color-border-light);
+  border-radius: 50%;
+}
+
+.par {
+  color: var(--color-text-secondary);
+  font-size: var(--size-xs);
+  line-height: 13px;
+}
+
+.val {
+  color: var(--color-text-primary);
+  font-size: var(--size-xs);
+  line-height: 14px;
+}

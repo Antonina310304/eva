@@ -1,0 +1,18 @@
+.charactericsList {
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-2xs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.itemName {
+  margin-right: var(--space-2xs);
+
+  color: var(--color-text-secondary);
+}

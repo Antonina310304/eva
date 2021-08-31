@@ -1,0 +1,43 @@
+.sizes {
+}
+
+.item {
+  position: relative;
+
+  display: inline-block;
+  padding-right: var(--space-l);
+
+  vertical-align: top;
+
+  &::after {
+    position: absolute;
+    top: 8px;
+    right: 13px;
+
+    display: block;
+
+    font-size: var(--size-s);
+    line-height: 14px;
+
+    content: 'x';
+  }
+
+  &:last-child {
+    padding-right: 0;
+
+    &::after {
+      content: none;
+    }
+  }
+}
+
+.name {
+  color: var(--color-secondary);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.value {
+  font-size: var(--size-s);
+  line-height: 14px;
+}
