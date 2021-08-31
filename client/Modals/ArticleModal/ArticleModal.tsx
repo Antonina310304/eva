@@ -5,6 +5,7 @@ import IconClose from '@UI/IconClose';
 import PressDetails from '@Components/PressDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
+import useMeta from '@Queries/useMeta';
 import useModals from '@Hooks/useModals';
 import styles from './ArticleModal.module.css';
 
@@ -41,7 +42,8 @@ export interface ArticleModalProps extends ModalMainProps {
 const ArticleModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const [, { closeModal }] = useModals();
-  const { articles, socials, index } = modal.data;
+  const { articles, index } = modal.data;
+  const meta = useMeta({ ssr: true });
   const article = articles[index];
 
   const handleClose = useCallback(() => {
@@ -59,7 +61,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
         <div className={styles.headingWrapper}>
           <IconClose className={styles.iconClose} onClick={handleClose} />
         </div>
-        <PressDetails article={article} socials={socials} />
+        <PressDetails article={article} socials={meta.data.socials} />
       </div>
     </ModalMain>
   );

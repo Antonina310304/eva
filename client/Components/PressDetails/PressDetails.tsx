@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState, memo } from 'react';
 
 import cn from 'classnames';
 import Image from '@UI/Image';
+import Share from '@Components/Share';
 import ProgressBar from '@UI/ProgressBar';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import useMedias from '@Hooks/useMedias';
@@ -37,6 +38,7 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
   const { className, article, socials, ...restProps } = props;
   const { link, logo, images, preview, text } = article;
   const { isMobileM } = useMedias();
+
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -51,10 +53,6 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
   );
 
   const [slideIndex, setSlideIndex] = useState(1);
-
-  const moveSlide = (index) => {
-    setSlideIndex(index);
-  };
 
   const handleChangeCurrent = useCallback(({ current }) => {
     setSlide(current);
@@ -112,16 +110,23 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
         )}
       </div>
       <div className={styles.info}>
-        <div className={styles.heading}>{preview}</div>
-        <div className={styles.text}>{text}</div>
-        <Button className={styles.button}>
-          <Link className={styles.link} to={link} target='_blank' view='default'>
-            Читать статью
-          </Link>
-        </Button>
-
-        <div className={styles.logoWrapper}>
-          <Image className={styles.logo} src={logo} />
+        <div className={styles.contentWrapper}>
+          <div className={styles.heading}>{preview}</div>
+          <div className={styles.text}>{text}</div>
+          <Button className={styles.button}>
+            <Link className={styles.link} to={link} target='_blank' view='default'>
+              Читать статью
+            </Link>
+          </Button>
+        </div>
+        <div className={styles.contactsWrapper}>
+          <div className={styles.socialsWrapper}>
+            <div className={styles.share}>Поделиться в соц.сетях</div>
+            <Share socials={socials} />
+          </div>
+          <div className={styles.logoWrapper}>
+            <Image className={styles.logo} src={logo} />
+          </div>
         </div>
       </div>
     </div>
