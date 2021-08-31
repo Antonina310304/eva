@@ -38,10 +38,6 @@
   &.errored {
     border-color: var(--color-red);
   }
-
-  &.resizeDisable {
-    resize: none;
-  }
 }
 
 .error {

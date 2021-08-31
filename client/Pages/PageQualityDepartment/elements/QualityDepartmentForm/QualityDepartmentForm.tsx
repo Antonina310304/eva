@@ -261,9 +261,8 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             >
               <Textarea
                 name='pretension'
-                className={styles.pretension}
+                className={cn(styles.pretension, styles.textarea)}
                 placeholder='Претензия'
-                resizeDisable
               />
             </FormItem>
           </div>
@@ -282,9 +281,8 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             >
               <Textarea
                 name='defectDescription'
-                className={styles.defectDescription}
+                className={cn(styles.defectDescription, styles.textarea)}
                 placeholder='Описание дефекта (дефектов)'
-                resizeDisable
               />
             </FormItem>
           </div>
@@ -300,9 +298,8 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             >
               <Textarea
                 name='requirements'
-                className={styles.requirements}
+                className={cn(styles.requirements, styles.textarea)}
                 placeholder='Требование покупателя'
-                resizeDisable
               />
             </FormItem>
           </div>

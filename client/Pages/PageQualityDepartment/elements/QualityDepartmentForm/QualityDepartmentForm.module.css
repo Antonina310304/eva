@@ -87,6 +87,10 @@
   padding: 0;
 }
 
+.textarea {
+  resize: none;
+}
+
 @media (--desktop-m) {
   .uploadWrapper {
     max-width: 332px;
