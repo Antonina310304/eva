@@ -18,6 +18,8 @@ const UserElemMenu: FC<UserElemMenuProp> = ({ className, element }) => {
             [styles.user]: element.icon === 'user',
             [styles.favorites]: element.icon === 'favorites',
             [styles.basket]: element.icon === 'basket',
+            [styles.phone]: element.icon === 'phone',
+            [styles.message]: element.icon === 'message',
             [styles.full]: element.isChecked,
             [styles.disabled]: element.isDisabled,
           })}
@@ -33,6 +35,8 @@ const UserElemMenu: FC<UserElemMenuProp> = ({ className, element }) => {
             [styles.user]: element.icon === 'user',
             [styles.favorites]: element.icon === 'favorites',
             [styles.basket]: element.icon === 'basket',
+            [styles.phone]: element.icon === 'phone',
+            [styles.message]: element.icon === 'message',
             [styles.full]: element.isChecked,
             [styles.disabled]: element.isDisabled,
           })}

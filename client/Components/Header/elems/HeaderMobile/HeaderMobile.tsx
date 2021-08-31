@@ -3,7 +3,7 @@ import Burger from '@Components/Header/elems/Burger';
 import Search from '@Components/Header/elems/Search';
 
 import Sidebar from '@Components/Header/elems/SideBar';
-import UserMenu from '@Components/Header/elems/UserMenu';
+import UserMenu from '@Components/UserMenu';
 
 import Overlay from '@Components/Overlay';
 import Container from '@Components/Container';
