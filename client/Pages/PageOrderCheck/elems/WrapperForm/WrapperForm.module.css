@@ -1,0 +1,21 @@
+.wrapper {
+  padding: var(--space-xxl) var(--space-xxl) var(--space-xb);
+
+  background-color: var(--color-white);
+}
+
+.content {
+  margin-top: var(--space-xxl);
+}
+
+@media (--desktop) {
+  .wrapper {
+    padding: var(--space-l) var(--space-n) var(--space-xxl);
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    padding: var(--space-l) var(--space-s) var(--space-xxl);
+  }
+}

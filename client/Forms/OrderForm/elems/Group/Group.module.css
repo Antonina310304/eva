@@ -1,0 +1,15 @@
+.group {
+  &.cropped {
+    .content {
+      max-width: 526px;
+    }
+  }
+}
+
+.title {
+  composes: n from 'sizes';
+
+  margin-bottom: var(--space-l);
+
+  font-weight: 500;
+}

@@ -1,11 +1,11 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
 
 import { ApiPecom } from '@Api/Pecom';
-import InputHelper, { InputHelperHint } from '@UI/InputHelper';
+import InputHelperAddress from '@Components/InputHelperAddress';
+import { InputHelperHint } from '@UI/InputHelper';
 import Price from '@UI/Price';
 import useMeta from '@Queries/useMeta';
 import styles from './ShippingCostCalculator.module.css';
@@ -24,46 +24,20 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
   const { className, ...restProps } = props;
   const meta = useMeta({ ssr: true });
   const [loading, setLoading] = useState<boolean>(false);
-  const [loadingHints, setLoadingHints] = useState<boolean>(false);
-  const [hints, setHints] = useState<InputHelperHint[]>([]);
   const [price, setPrice] = useState<number>(null);
   const [error, setError] = useState<string>(null);
-
-  const [debouceChangeValue] = useDebouncedCallback(async (chunk: string) => {
-    if (!chunk || chunk.length < 3) return;
-
-    setLoadingHints(true);
-
-    try {
-      const addressHints: any[] = await ApiPecom.getAddressHints({ chunk });
-
-      setHints(() => {
-        return addressHints.map((addressHint, index) => ({
-          id: index,
-          title: addressHint.fullAddress,
-          data: addressHint,
-        }));
-      });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-    } finally {
-      setLoadingHints(false);
-    }
-  }, 400);
-
-  const handleChangeAddress = useCallback(
-    (e) => {
-      debouceChangeValue(e.target.value);
-    },
-    [debouceChangeValue],
-  );
+  const [selectedHint, setSelectedHint] = useState<InputHelperHint>(null);
 
   const handleCalculate = useCallback(
-    async (_e, selectedHint?: InputHelperHint) => {
-      const hint = selectedHint || hints[0];
+    async (_e, targetHint?: InputHelperHint) => {
+      const hint = targetHint || selectedHint;
+
+      if (targetHint) {
+        setSelectedHint(targetHint);
+      }
 
       if (!hint) {
+        setPrice(null);
         setError(errors.notSelectedAddress);
         return;
       }
@@ -87,6 +61,7 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
         setError(null);
         setPrice(cost);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error(err);
         setPrice(null);
         setError(errors.server);
@@ -94,7 +69,7 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
         setLoading(false);
       }
     },
-    [hints, meta.data],
+    [meta.data.region.id, selectedHint],
   );
 
   const handleFocus = useCallback(() => {
@@ -105,13 +80,11 @@ const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
     <div {...restProps} className={cn(styles.calculator, [className])}>
       <div className={styles.form}>
         <span className={styles.label}>Адрес</span>
-        <InputHelper
+        <InputHelperAddress
+          wide
           className={styles.input}
           placeholder='Поиск адреса'
-          loading={loadingHints}
-          hints={hints}
           error={error}
-          onChange={handleChangeAddress}
           onFocus={handleFocus}
           onSelectHint={handleCalculate}
         />

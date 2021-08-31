@@ -8,20 +8,53 @@
   &.hidden {
     display: none;
   }
+
+  &.viewPrimary {
+    .label {
+      margin-bottom: var(--space-xs);
+    }
+  }
+
+  &.viewSecondary {
+    display: flex;
+    align-items: center;
+
+    .label {
+      width: 100%;
+      max-width: 82px;
+      margin-right: var(--space-l);
+      overflow: hidden;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
-.top {
+.label {
   composes: s from 'sizes';
+}
 
-  margin-bottom: var(--space-xs);
-
-  color: var(--color-text-primary);
+.content {
+  flex-grow: 1;
 }
 
 .bottom {
   composes: s from 'sizes';
 
   margin-top: var(--space-xs);
+}
 
-  color: var(--color-text-psevdo-main);
+@media (--mobile) {
+  .formItem {
+    &.viewSecondary {
+      display: block;
+
+      .label {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: var(--space-xs);
+      }
+    }
+  }
 }

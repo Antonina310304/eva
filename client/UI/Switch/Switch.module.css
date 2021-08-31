@@ -1,0 +1,43 @@
+.switch {
+  position: relative;
+
+  display: block;
+  width: 40px;
+  height: 25px;
+
+  border: 1px solid var(--color-medium-gray);
+  border-radius: 20px;
+  cursor: pointer;
+
+  transition: border-color 0.2s;
+
+  &:after {
+    position: absolute;
+    top: var(--space-xxs);
+    left: 0;
+    left: var(--space-xxs);
+
+    display: block;
+    width: 15px;
+    height: 15px;
+
+    background-color: var(--color-grafit);
+    border-radius: 50%;
+
+    transition: left 0.2s;
+
+    content: '';
+  }
+
+  &.actived {
+    border-color: var(--color-grafit);
+
+    &:after {
+      left: var(--space-n);
+    }
+  }
+}
+
+.control {
+  display: none;
+}

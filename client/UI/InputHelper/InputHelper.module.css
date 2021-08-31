@@ -14,6 +14,10 @@
       pointer-events: auto;
     }
   }
+
+  &.wide {
+    width: 100%;
+  }
 }
 
 .wrapperOptions {
