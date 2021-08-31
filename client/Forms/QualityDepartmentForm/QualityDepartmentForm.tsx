@@ -1,11 +1,12 @@
 import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
-import ParagraphTitle from '@Pages/PageCredit/elements/ParagraphTitle';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
 import useModals from '@Hooks/useModals';
 import Form from '@UI/Form';
 import FormItem from '@UI/FormItem';
 import Input from '@UI/Input';
+import InputPhone from '@Components/InputPhone';
 import Textarea from '@UI/Textarea';
 import Button from '@UI/Button';
 import Upload from '@UI/Upload';
@@ -103,13 +104,11 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
     [checkedPackCondition.id],
   );
 
-  //
-  const onSubmit = useCallback(() => {
+  const handleSubmit = useCallback(() => {
     setWaiting(true);
   }, []);
 
-  //
-  const onError = useCallback(() => {
+  const handleError = useCallback(() => {
     setWaiting(false);
 
     openModal('Info', {
@@ -119,8 +118,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
     });
   }, [openModal]);
 
-  //
-  const onResponse = useCallback(
+  const handleResponse = useCallback(
     (response) => {
       setWaiting(false);
 
@@ -131,27 +129,30 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
           text: 'Ваше сообщение отправлено.',
         });
       } else {
-        onError();
+        handleError();
       }
     },
-    [onError, openModal],
+    [handleError, openModal],
   );
 
   const handleChangeParameter = useCallback((_e, items) => {
     setCheckedPackCondition(items[0]);
   }, []);
 
-  const onChangeUploadError = useCallback((e, err) => {
+  const handleChangeUploadError = useCallback((e, err) => {
     setUploadError(err);
   }, []);
 
-  const handleCheckedPackConditions = useCallback((checkedItems) => {
+  const handleCheckedPackConditions = useCallback((_e, checkedItems) => {
     setCheckedPackConditionDetails(checkedItems);
   }, []);
 
   return (
     <div {...restProps} className={cn(styles.qualityDepartmentForm, className)}>
-      <ParagraphTitle className={styles.paragraphTitle} title='Заполните форму обращения' />
+      <ServicePageParagraphTitle
+        className={styles.paragraphTitle}
+        title='Заполните форму обращения'
+      />
 
       <Form
         action='/site/quality-department-send-message'
@@ -159,9 +160,9 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
         validationSchemaUrl='/json-schema/quality-department-form.json'
         disabled={!!uploadError}
         transformDataBeforeSubmit={transformDataBeforeSubmit}
-        onSubmit={onSubmit}
-        onResponse={onResponse}
-        onError={onError}
+        onSubmit={handleSubmit}
+        onResponse={handleResponse}
+        onError={handleError}
       >
         <div className={styles.block}>
           <div className={styles.column}>
@@ -170,7 +171,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
             </FormItem>
 
             <FormItem className={styles.formItem}>
-              <Input name='phone' mask='+7 (999) 999-99-99' placeholder='Телефон' />
+              <InputPhone name='phone' placeholder='Телефон' />
             </FormItem>
           </div>
 
@@ -215,7 +216,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                   mode='multiple'
                   className={styles.select}
                   items={packConditionDetails}
-                  getCheckedItems={handleCheckedPackConditions}
+                  onChangeSelected={handleCheckedPackConditions}
                 />
               </FormItem>
             )}
@@ -317,7 +318,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 accept='image/*, video/*'
                 title='Прикрепить фото/видео'
                 description='.jpg, .jpeg, .png, .mp4, .mov, .wmv, .avi и mpg. менее 10 MB'
-                onChangeError={onChangeUploadError}
+                onChangeError={handleChangeUploadError}
                 className={styles.upload}
                 insideUploadedElements
               />

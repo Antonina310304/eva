@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import ParagraphTitle from '@Pages/PageCredit/elements/ParagraphTitle';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
 import { MapData, SellPointData } from '@Pages/PageContacts/typings';
 import MapWithPopup from '../MapWithPopup';
 import styles from './SeeUs.module.css';
@@ -18,7 +18,7 @@ const SeeUs: FC<SeeUsProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.seeUs, className)}>
-      <ParagraphTitle className={styles.title} title={title} />
+      <ServicePageParagraphTitle className={styles.title} title={title} />
 
       <div className={styles.text}>{description}</div>
 

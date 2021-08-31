@@ -1,15 +1,15 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import styles from './PageTitle.module.css';
+import styles from './ServicePageTitle.module.css';
 
-export interface PageTitleProps extends HTMLAttributes<HTMLDivElement> {
+export interface ServicePageTitleProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
   view?: string;
 }
 
-const PageTitle: FC<PageTitleProps> = (props) => {
+const ServicePageTitle: FC<ServicePageTitleProps> = (props) => {
   const { className, title, view, ...restProps } = props;
 
   return (
@@ -19,4 +19,4 @@ const PageTitle: FC<PageTitleProps> = (props) => {
   );
 };
 
-export default memo(PageTitle);
+export default memo(ServicePageTitle);

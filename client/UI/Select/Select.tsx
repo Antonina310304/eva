@@ -54,7 +54,6 @@ export interface SelectProps {
   onClose?: (e: MouseEvent) => void;
   onCheck?: SelectCallback;
   onChangeSelected?: (e: MouseEvent, items: SelectItemData[]) => void;
-  getCheckedItems?: (items: SelectItemData[]) => void;
   onClickItem?: SelectCallback;
 }
 
@@ -75,7 +74,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     onOpen,
     onClose,
     onChangeSelected,
-    getCheckedItems,
     ...restProps
   } = props;
   const { isMobile } = useMedias();
@@ -155,12 +153,10 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
         if (onChangeSelected) onChangeSelected(null, newItems);
 
-        if (getCheckedItems) getCheckedItems(newItems);
-
         return newItems;
       });
     },
-    [getCheckedItems, mode, onChangeSelected],
+    [mode, onChangeSelected],
   );
 
   const uncheckItem = useCallback(
@@ -176,12 +172,10 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
 
         if (onChangeSelected) onChangeSelected(null, newItems);
 
-        if (getCheckedItems) getCheckedItems(newItems);
-
         return newItems;
       });
     },
-    [getCheckedItems, mode, onChangeSelected],
+    [mode, onChangeSelected],
   );
 
   const handleUnblockScroll = useCallback(() => {
@@ -381,7 +375,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         <div
           className={cn(styles.field, {
             [styles.placeholder]: true,
-            [styles.heightAsInput]: withoutItems,
+            [styles.withoutItemsHeight]: withoutItems,
           })}
           onClick={handleClick}
           ref={refField}

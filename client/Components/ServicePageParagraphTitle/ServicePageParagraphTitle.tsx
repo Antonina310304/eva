@@ -1,14 +1,14 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import styles from './ParagraphTitle.module.css';
+import styles from './ServicePageParagraphTitle.module.css';
 
-export interface ParagraphTitleProps extends HTMLAttributes<HTMLDivElement> {
+export interface ServicePageParagraphTitleProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
 }
 
-const ParagraphTitle: FC<ParagraphTitleProps> = (props) => {
+const ServicePageParagraphTitle: FC<ServicePageParagraphTitleProps> = (props) => {
   const { className, title, ...restProps } = props;
 
   return (
@@ -18,4 +18,4 @@ const ParagraphTitle: FC<ParagraphTitleProps> = (props) => {
   );
 };
 
-export default memo(ParagraphTitle);
+export default memo(ServicePageParagraphTitle);

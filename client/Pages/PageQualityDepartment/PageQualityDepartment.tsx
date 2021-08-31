@@ -1,8 +1,8 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import Wrapper from '@Pages/PageCredit/elements/Wrapper';
-import PageTitle from '@Pages/PageCredit/elements/PageTitle';
+import ServicePageWrapper from '@Components/ServicePageWrapper';
+import ServicePageTitle from '@Components/ServicePageTitle';
 import QualityDepartment from '@Pages/PageContacts/elements/QualityDepartment';
 import QualityDepartmentForm from '@Forms/QualityDepartmentForm';
 import { PageQualityDepartmentData } from './typings';
@@ -10,7 +10,7 @@ import styles from './PageQualityDepartment.module.css';
 
 export interface PageQualityDepartmentProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  // TODO: Типизируй меня полностью
+  // TODO: Добавить типизацию, когда от бэка будет приходить schedule
   page: PageQualityDepartmentData;
 }
 
@@ -38,8 +38,8 @@ const PageQualityDepartment: FC<PageQualityDepartmentProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.pageQualityDepartment, className)}>
-      <Wrapper>
-        <PageTitle className={styles.pageTitle} title='Обращение в отдел качества' />
+      <ServicePageWrapper>
+        <ServicePageTitle className={styles.pageTitle} title='Обращение в отдел качества' />
 
         <div className={styles.text}>
           Мы ответственно несем взятые на себя гарантийные обязательства перед покупателями. Если у
@@ -51,7 +51,7 @@ const PageQualityDepartment: FC<PageQualityDepartmentProps> = (props) => {
         <QualityDepartment className={styles.qualityDepartment} schedule={schedule} />
 
         <QualityDepartmentForm className={styles.qualityDepartmentForm} />
-      </Wrapper>
+      </ServicePageWrapper>
     </div>
   );
 };

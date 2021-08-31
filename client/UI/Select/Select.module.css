@@ -141,7 +141,7 @@
   }
 }
 
-.field.heightAsInput {
+.field.withoutItemsHeight {
   padding: var(--space-s);
 
   .fieldTitle {
@@ -177,13 +177,13 @@
 }
 
 @media (--desktop-m) {
-  .field.heightAsInput {
+  .field.withoutItemsHeight {
     padding: var(--space-xs) var(--space-s);
   }
 }
 
 @media (--mobile-m) {
-  .field.heightAsInput {
+  .field.withoutItemsHeight {
     padding: var(--space-xs) var(--space-s);
   }
 }
