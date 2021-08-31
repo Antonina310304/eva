@@ -380,7 +380,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         >
           <div className={styles.fieldValue}>
             <div className={styles.fieldText}>
-              <span className={styles.fieldTitle}>{`${title}: `}</span>
+              {title && <span className={styles.fieldTitle}>{`${title}: `}</span>}
               {fieldText}
             </div>
           </div>
