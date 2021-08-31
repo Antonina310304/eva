@@ -9,7 +9,7 @@ import Input from '@UI/Input';
 import Textarea from '@UI/Textarea';
 import Button from '@UI/Button';
 import Upload from '@UI/Upload';
-import QualitySelect from '../QualitySelect';
+import MainSelect from '@UI/MainSelect';
 import styles from './QualityDepartmentForm.module.css';
 
 export interface QualityDepartmentFormProps extends HTMLAttributes<HTMLDivElement> {
@@ -188,7 +188,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
         <div className={styles.block}>
           <div className={styles.column}>
             <FormItem className={styles.formItem}>
-              <QualitySelect
+              <MainSelect
                 title='Состояние упаковки при приеме товара'
                 name='packCondition'
                 withoutItems
@@ -208,7 +208,7 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                   </div>
                 }
               >
-                <QualitySelect
+                <MainSelect
                   title='Тип повреждения упаковки'
                   name='packConditionDetails'
                   withoutItems
