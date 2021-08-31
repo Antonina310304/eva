@@ -22,7 +22,8 @@ const Feedback: FC<FeedbackProps> = (props) => {
   const [loading, setLoading] = useState(false);
 
   //
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
     setLoading(true);
   }, []);
 
@@ -56,7 +57,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
           event: 'GAEvent',
         });
       } else {
-        onError();
+        onError(response, formData);
       }
     },
     [onError, openModal],
@@ -85,7 +86,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
           или воспользуйтесь формой обратной связи*
         </div>
         <Form
-          className={cn(styles.form, [className])}
+          className={cn(styles.form, className)}
           action='/b2b/send-letter'
           method='POST'
           validationSchemaUrl='/json-schema/feedback-form.json'
@@ -103,7 +104,9 @@ const Feedback: FC<FeedbackProps> = (props) => {
             <FormItem>
               <Textarea className={styles.input} placeholder='Сообщение' name='message' />
             </FormItem>
-            <Button className={styles.button}>Отправить заявку</Button>
+            <Button type='submit' className={styles.button} waiting={loading}>
+              Отправить заявку
+            </Button>
           </div>
         </Form>
         <span className={styles.info}>* Предложение не является публичной офертой.</span>

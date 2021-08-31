@@ -65,33 +65,6 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
-  const renderNavigation = useCallback(
-    ({ current, total, inViewport, goTo, prev, next }) => {
-      if (inViewport) return null;
-
-      return isMobileM ? (
-        <div className={styles.progressBar}>
-          <ProgressBar className={styles.track} track={track} />
-        </div>
-      ) : (
-        <Gallery
-          className={styles.gallery}
-          slideIndex={slide}
-          key={images.length}
-          onChangeCurrent={handleChangeCurrent}
-          onChangeProgress={handleChangeProgress}
-        >
-          {images.map((item, index) => (
-            <div className={styles.imageWrapper} key={index}>
-              <Image className={styles.articleImage} src={item.src} />
-            </div>
-          ))}
-        </Gallery>
-      );
-    },
-    [images, isMobileM, handleChangeCurrent, handleChangeProgress, slide, track],
-  );
-
   return (
     <div {...restProps} className={cn(styles.pressDetails, [className])}>
       <div className={styles.carousel}>
@@ -103,18 +76,17 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
         <div className={styles.wrapperGallery}>
           <Gallery
             className={styles.gallery}
-            render={renderNavigation}
             slideIndex={slide}
             key={images.length}
             onChangeCurrent={handleChangeCurrent}
             onChangeProgress={handleChangeProgress}
           >
             {images.map((item, index) => (
-              <Image className={styles.navImage} src={item.src} key={index} />
+              <div className={styles.imageWrapper} key={index}>
+                <Image className={styles.navImage} src={item.src} />
+              </div>
             ))}
           </Gallery>
-
-          <ProgressBar className={styles.track} track={track} />
         </div>
       </div>
       <div className={styles.info}>
