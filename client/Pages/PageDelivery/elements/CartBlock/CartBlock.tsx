@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import declOfNum from '@Utils/declOfNum';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import Price from '@UI/Price';
 import PositionsSection from './elements/PositionsSection';
@@ -18,19 +19,21 @@ const CartBlock: FC<CartBlockProps> = (props) => {
     <div {...restProps} className={cn(styles.cart, className)}>
       <div className={styles.container}>
         <div className={styles.info}>
-          {`В вашей корзине ${cart.count} товаров на сумму `}
+          {`В вашей корзине ${declOfNum(cart.count, [
+            'товар',
+            'товара',
+            'товаров',
+          ])} товаров на сумму `}
           <Price price={cart.cost} />
           {cart.positions?.length > 0 && (
             <PositionsSection
               className={styles.sectionCrossSale}
               title='Ваша корзина'
-              products={cart.positions}
-              renderItem={(productCardProps) => (
+              positions={cart.positions}
+              renderItem={({ product, quantity }) => (
                 <div className={styles.productItem}>
-                  <CrossSaleProductCard {...productCardProps} />
-                  <div className={styles.productCount}>
-                    {`Кол-во: ${productCardProps.quantity} шт.`}
-                  </div>
+                  <CrossSaleProductCard {...product} />
+                  <div className={styles.productCount}>{`Кол-во: ${quantity} шт.`}</div>
                 </div>
               )}
             />
