@@ -1,0 +1,26 @@
+.remove {
+  display: inline-flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  &:hover .icon {
+    transform: rotate(1turn);
+  }
+}
+
+.text {
+  color: var(--color-dark-gray);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-left: var(--space-xxs);
+
+  background-image: url('./iconClose.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transition: transform 0.4s;
+}

@@ -51,7 +51,8 @@ const render: RequestHandler = async (req, res) => {
       return (
         Array.isArray(query.queryKey) &&
         query.queryKey.includes('ssr') &&
-        query.state.dataUpdateCount < 1
+        query.state.dataUpdateCount < 1 &&
+        (query.options as any).enabled !== false
       );
     });
 

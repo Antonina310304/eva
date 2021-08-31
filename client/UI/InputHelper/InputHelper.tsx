@@ -28,6 +28,7 @@ const InputHelper: FC<InputHelperProps> = (props) => {
     value,
     defaultValue,
     slotInput,
+    wide,
     onFocus,
     onBlur,
     onChange,
@@ -188,6 +189,7 @@ const InputHelper: FC<InputHelperProps> = (props) => {
 
   const inputProps = {
     ...restProps,
+    wide,
     value: innerValue,
     ref: refInput,
     className: styles.input,
@@ -209,7 +211,7 @@ const InputHelper: FC<InputHelperProps> = (props) => {
     <div
       className={cn(
         styles.inputHelper,
-        { [styles.opened]: !loading && opened && innerValue.length > 2 },
+        { [styles.opened]: !loading && opened && innerValue.length > 2, [styles.wide]: wide },
         className,
       )}
     >

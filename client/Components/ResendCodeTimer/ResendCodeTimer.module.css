@@ -1,0 +1,31 @@
+.timer {
+  &.waiting {
+    .iconReset {
+      animation-name: ResendCodeTimerRotation;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+.action {
+  display: flex;
+  align-items: center;
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+.iconReset {
+  margin-right: var(--space-xs);
+}
+
+@keyframes ResendCodeTimerRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

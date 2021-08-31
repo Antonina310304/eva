@@ -9,16 +9,27 @@ export interface RouteProps extends BaseRouteProps {
   regional?: boolean;
 }
 
-const Route: FC<RouteProps> = (props) => {
-  const { path, exact = true, regional = true, ...restProps } = props;
-  const paths = [path, regional && `/:region${path}`].filter(Boolean) as string[];
-  const request = useRequest();
+const Initiator: FC = () => {
   const meta = useMeta({ ssr: true });
 
-  Api.setRequest(request);
   Api.setServices(meta.data?.services);
 
-  return <BaseRoute {...restProps} exact={exact} path={paths} />;
+  return null;
+};
+
+const Route: FC<RouteProps> = (props) => {
+  const { path, exact = true, regional = true, children, ...restProps } = props;
+  const paths = [path, regional && `/:region${path}`].filter(Boolean) as string[];
+  const request = useRequest();
+
+  Api.setRequest(request);
+
+  return (
+    <BaseRoute {...restProps} exact={exact} path={paths}>
+      <Initiator />
+      {children}
+    </BaseRoute>
+  );
 };
 
 export default memo(Route);
