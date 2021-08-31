@@ -14,10 +14,14 @@ export interface SocialItem {
   id: number;
   link: string;
 }
+
+export interface ArticleImage {
+  src: string;
+}
 export interface ArticleData {
   link: string;
   logo: string;
-  images: string[];
+  images: ArticleImage[];
   title: string;
   text: string;
   preview: string;
@@ -35,7 +39,6 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
-  console.log(images);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -68,22 +71,27 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.pressDetails, [className])}>
       <div className={styles.carousel}>
-        <Gallery className={styles.slider}>
-          {images.map((item, index) => (
-            <Image src={item.src} key={index} className={styles.sliderItem} />
-          ))}
-        </Gallery>
-        <div className={styles.wrapperGallery}>
+        <div className={styles.wrapperMainGallery}>
+          <Gallery>
+            {images.map((image, index) => (
+              <div className={styles.mainGalleryItem}>
+                <Image src={image.src} key={index} className={styles.mainGalleryPreview} />
+              </div>
+            ))}
+          </Gallery>
+        </div>
+
+        <div className={styles.wrapperSecondGallery}>
           <Gallery
-            className={styles.gallery}
+            className={styles.secondGallery}
             slideIndex={slide}
             key={images.length}
             onChangeCurrent={handleChangeCurrent}
             onChangeProgress={handleChangeProgress}
           >
-            {images.map((item, index) => (
-              <div className={styles.imageWrapper} key={index}>
-                <Image className={styles.navImage} src={item.src} />
+            {images.map((image, index) => (
+              <div className={styles.secondGalleryItem} key={index}>
+                <Image className={styles.secondGalleryPreview} src={image.src} />
               </div>
             ))}
           </Gallery>
