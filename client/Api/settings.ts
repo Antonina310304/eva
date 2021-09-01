@@ -10,6 +10,7 @@ export type ServicesSettings = MetaData['services'];
 export interface Current {
   request?: RequestSettings;
   services?: ServicesSettings;
+  region?: string;
 }
 
 export interface Store {
@@ -38,4 +39,15 @@ export function setServices(services: ServicesSettings): void {
 
 export function getServices(): ServicesSettings {
   return store.current?.services;
+}
+
+export function setRegion(region: string): void {
+  store.current = {
+    ...store.current,
+    region,
+  };
+}
+
+export function getRegion(): string {
+  return store.current?.region;
 }

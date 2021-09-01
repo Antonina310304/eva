@@ -17,7 +17,7 @@ const useMeta = (params: Params = {}): UseQueryResult<MetaData> => {
   const { region } = useParams<RouteParams>();
   const keys = ['meta', ssr && 'ssr', region].filter(Boolean);
 
-  return useQuery(keys, () => ApiMeta.fetch({ region }), {
+  return useQuery(keys, () => ApiMeta.fetch(), {
     retryOnMount: false,
     refetchOnMount: false,
   });
