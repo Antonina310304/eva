@@ -2,24 +2,25 @@
 }
 
 .galleryWrapper {
-  padding: var(--space-xxs) 0;
   overflow: hidden;
 }
 
 .gallery {
-  margin: 0 var(--space-xs-neg);
+  margin: 0 var(--space-xxs-neg);
 }
 
 .navigationItem {
-  padding: 0px var(--space-n);
+  padding: 0 var(--space-n);
 }
 
 .navigationLink {
+  display: inline-block;
   padding: var(--space-xxs) 0;
 
   color: var(--color-dark-gray);
   font-size: var(--size-l);
   line-height: var(--lh-xl);
+  vertical-align: top;
 }
 
 .navigationLink.active {
