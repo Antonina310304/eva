@@ -47,7 +47,6 @@ export interface SelectProps {
   defaultChecked?: SelectItemData | SelectItemData[];
   items?: SelectItemData[];
   waiting?: boolean;
-  withoutItems?: boolean;
   renderItem?: (props: SelectItemData) => ReactElement;
   onClick?: (e: MouseEvent) => void;
   onOpen?: (e: MouseEvent) => void;
@@ -68,7 +67,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     items,
     className,
     waiting,
-    withoutItems,
     renderItem,
     onClick,
     onOpen,
@@ -233,6 +231,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
   const handleClickItem = useCallback(
     (e: MouseEvent, item: SelectItemData) => {
       const hasInChecked = checked.includes(item);
+
       if (hasInChecked) {
         uncheckItem(item);
       } else {
@@ -375,23 +374,14 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         <div
           className={cn(styles.field, {
             [styles.placeholder]: true,
-            [styles.withoutItemsHeight]: withoutItems,
           })}
           onClick={handleClick}
           ref={refField}
         >
           <div className={styles.fieldValue}>
             <div className={styles.fieldText}>
-              {withoutItems ? (
-                <>
-                  <span className={styles.fieldTitle}>{title}</span>
-                </>
-              ) : (
-                <>
-                  <span className={styles.fieldTitle}>{`${title}: `}</span>
-                  {fieldText}
-                </>
-              )}
+              <span className={styles.fieldTitle}>{`${title}: `}</span>
+              {fieldText}
             </div>
           </div>
           <Image className={styles.iconArrow} src={IconArrow} />
@@ -436,7 +426,6 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
                   faked={faked}
                   title={title}
                   fieldText={fieldText}
-                  withoutItems
                   isMobile={isMobile}
                   renderItem={renderItem}
                   onClickField={handleClick}

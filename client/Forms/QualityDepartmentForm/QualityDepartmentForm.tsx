@@ -192,7 +192,6 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
               <MainSelect
                 title='Состояние упаковки при приеме товара'
                 name='packCondition'
-                withoutItems
                 className={styles.select}
                 items={packCondition}
                 defaultChecked={packCondition.find((option) => option.selected)}
@@ -212,7 +211,6 @@ const QualityDepartmentForm: FC<QualityDepartmentFormProps> = (props) => {
                 <MainSelect
                   title='Тип повреждения упаковки'
                   name='packConditionDetails'
-                  withoutItems
                   mode='multiple'
                   className={styles.select}
                   items={packConditionDetails}

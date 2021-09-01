@@ -28,7 +28,6 @@ export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   fieldText: string;
   isMobile: boolean;
-  withoutItems?: boolean;
   items?: SelectItemData[];
   checked: SelectItemData[];
   renderItem?: (props: SelectItemData) => ReactElement;
@@ -48,7 +47,6 @@ const Popup: FC<PopupProps> = (props) => {
     isMobile,
     items,
     checked,
-    withoutItems,
     renderItem,
     onClickItem,
     onClickField,
@@ -84,7 +82,6 @@ const Popup: FC<PopupProps> = (props) => {
           [styles.wide]: wide,
           [styles.disabled]: disabled,
           [styles.faked]: faked,
-          [styles.withoutItems]: withoutItems,
         },
         className,
       )}
@@ -92,16 +89,8 @@ const Popup: FC<PopupProps> = (props) => {
       <div className={styles.field} onClick={handleClick}>
         <div className={styles.fieldValue}>
           <div className={styles.fieldText}>
-            {withoutItems ? (
-              <>
-                <span className={styles.fieldTitle}>{title}</span>
-              </>
-            ) : (
-              <>
-                <span className={styles.fieldTitle}>{`${title}: `}</span>
-                <span className={styles.checkedValue}>{fieldText}</span>
-              </>
-            )}
+            <span className={styles.fieldTitle}>{`${title}: `}</span>
+            <span className={styles.checkedValue}>{fieldText}</span>
           </div>
         </div>
         <Image className={styles.iconArrow} src={IconArrow} />
