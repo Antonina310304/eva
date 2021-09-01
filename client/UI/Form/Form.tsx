@@ -13,6 +13,7 @@ import React, {
 import { Ajv } from 'ajv';
 
 import isFile from '@Utils/isFile';
+import { ApiForms } from '@Api/Forms';
 
 export type CallbackData = unknown;
 
@@ -324,13 +325,15 @@ const Form: FC<FormProps> = (props) => {
 
   // Загружаем схему валидации с сервера
   useEffect(() => {
-    if (!validationSchemaUrl) {
-      return;
+    if (!validationSchemaUrl) return;
+
+    async function loadScheme() {
+      const jsonScheme = await ApiForms.loadJSONScheme(validationSchemaUrl);
+
+      setSchema(jsonScheme);
     }
 
-    fetch(validationSchemaUrl)
-      .then((res) => res.json())
-      .then((jsonSchema) => setSchema(jsonSchema));
+    loadScheme();
   }, [validationSchemaUrl]);
 
   // TODO: стоит пересмотреть подход к работе с элементами формами и либо иметь весь стейт формы, либо делать с помощью нативных элементов
