@@ -8,7 +8,6 @@ import ShippingCostCalculator from '@Components/ShippingCostCalculator';
 import { MetaData } from '@Types/Meta';
 import ButtonTabs from '@UI/ButtonTabs';
 import List from '@UI/List';
-import Link from '@UI/Link';
 import Image from '@UI/Image';
 import Breadcrumbs from '@UI/Breadcrumbs';
 import RadioButton from '@UI/RadioButton';
@@ -24,8 +23,6 @@ import pickupPoint from './icons/pickupPoint.svg';
 import toAddress from './icons/toAddress.svg';
 import styles from './PageDelivery.module.css';
 import './PageDelivery-Raw.css';
-
-import carImage from './car.svg';
 
 export interface PaymentTypesIdsData {
   id: number;
@@ -47,6 +44,10 @@ export interface PageDeliveryProps extends HTMLAttributes<HTMLDivElement> {
   meta: MetaData;
 }
 
+const tabs = [
+  { id: '0', label: 'Доставка' },
+  { id: '1', label: 'Сборка' },
+];
 const PageDelivery: FC<PageDeliveryProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const {
@@ -64,13 +65,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
-  const cart = useCart({ preload: true });
-  console.log(cart);
-
-  const tabs = [
-    { id: '0', label: 'Доставка' },
-    { id: '1', label: 'Сборка' },
-  ];
+  const cart = useCart();
 
   const isRus = meta.country === 'RUS';
 
@@ -183,6 +178,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                 >
                   <div
                     className={styles.table}
+                    // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: table.delivery }}
                   />
                 </div>
@@ -194,6 +190,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                 >
                   <div
                     className={styles.table}
+                    // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: table.assembly }}
                   />
                 </div>
