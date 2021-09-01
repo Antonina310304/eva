@@ -1,5 +1,6 @@
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
+import equal from 'fast-deep-equal';
 
 import { CartStoreValue } from '@Stores/Cart';
 import { DeliveryTypeData, PaymentTypeData, PaymentVariantData } from '@Types/Cart';
@@ -76,11 +77,11 @@ const select = (ids: Partial<SelectedIds>): void => {
   update(selectedStore, (prevValue) => ({ ...prevValue, ...ids }));
 };
 
-export const useOrderForm = (initialValue?: CartStoreValue) => {
+const init = (initialValue: CartStoreValue): void => {
   const value = getValue(orderFormStore);
 
   // Указываем начальные значения для хранилищ
-  if (initialValue && !value) {
+  if (initialValue && !equal(initialValue, value)) {
     orderFormStore.set(initialValue);
 
     select({ delivery: initialValue.deliveryTypes[0].id });
@@ -98,7 +99,9 @@ export const useOrderForm = (initialValue?: CartStoreValue) => {
       return { ...prevValue, paymentVariant: paymentVariants[0].id };
     });
   }
+};
 
+export const useOrderForm = () => {
   return {
     ...useStore(orderFormStore),
     visiblePaymentTypes: useStore(visiblePaymentTypesStore),
@@ -109,4 +112,4 @@ export const useOrderForm = (initialValue?: CartStoreValue) => {
   };
 };
 
-export default { select, updateDelivery };
+export default { init, select, updateDelivery };

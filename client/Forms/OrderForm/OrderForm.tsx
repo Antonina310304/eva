@@ -10,7 +10,6 @@ import FormItem from '@UI/FormItem';
 import RadioGroup from '@UI/RadioGroup';
 import Price from '@UI/Price';
 import Link from '@UI/Link';
-import { useCart } from '@Stores/Cart';
 import OrderFormStore, { useOrderForm } from '@Stores/OrderForm';
 import { Profile } from '@Types/Profile';
 import Group from './elems/Group';
@@ -28,19 +27,18 @@ const DeliveryCourier = loadable(() => import('./elems/DeliveryCourier'));
 
 const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, profile, ...restProps } = props;
-  const cart = useCart();
-  const orderForm = useOrderForm(cart);
   const [loading, setLoading] = useState(false);
   const [wantBonuses, setWantBonuses] = useState(false);
+  const orderForm = useOrderForm();
   const paymentsAsSelect = orderForm.visiblePaymentTypes.length > 3;
 
   const deliveryVariants = useMemo(() => {
-    return cart.deliveryTypes.map((deliveryType, index) => ({
+    return orderForm.deliveryTypes.map((deliveryType, index) => ({
       defaultChecked: index === 0,
       value: deliveryType.id,
       children: deliveryType.name,
     }));
-  }, [cart.deliveryTypes]);
+  }, [orderForm.deliveryTypes]);
 
   const handleChangeWantBonuses = useCallback(() => {
     setWantBonuses((prev) => !prev);
