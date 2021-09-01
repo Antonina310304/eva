@@ -18,9 +18,9 @@ const Sizes: FC<SizesProps> = (props: SizesProps) => {
 
   return (
     <div {...restProps} className={cn(styles.sizes, className)}>
-      {sizes.map(({ name, value }, index) => (
+      {'Размеры: '}
+      {sizes.map(({ value }, index) => (
         <div className={styles.item} key={index}>
-          <div className={styles.name}>{name.toLowerCase()}</div>
           <div className={styles.value}>{value}</div>
         </div>
       ))}

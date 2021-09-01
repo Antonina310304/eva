@@ -1,0 +1,16 @@
+.characteristicsList {
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.itemName {
+  margin-right: 5px;
+}

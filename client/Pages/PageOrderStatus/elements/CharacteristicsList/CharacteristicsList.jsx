@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
 import cn from 'classnames';
 
-import styles from './CharactericsList.module.css';
+import styles from './CharacteristicsList.module.css';
 
-const CharactericsList = (props) => {
+const CharacteristicsList = (props) => {
   const { className, characteristics, ...restProps } = props;
 
   return (
-    <div {...restProps} className={cn(styles.charactericsList, className)}>
+    <div {...restProps} className={cn(styles.characteristicsList, className)}>
       {characteristics.map((characteristic, index) => (
         <div className={styles.item} key={index}>
           <div className={styles.itemName}>{characteristic.name}</div>
@@ -18,4 +18,4 @@ const CharactericsList = (props) => {
   );
 };
 
-export default memo(CharactericsList);
+export default memo(CharacteristicsList);

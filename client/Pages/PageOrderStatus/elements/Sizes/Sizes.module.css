@@ -1,23 +1,22 @@
 .sizes {
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .item {
   position: relative;
 
   display: inline-block;
-  padding-right: var(--space-l);
+  padding-right: 25px;
 
   vertical-align: top;
 
   &::after {
     position: absolute;
-    top: 8px;
-    right: 13px;
+    top: 0;
+    right: 10px;
 
     display: block;
-
-    font-size: var(--size-s);
-    line-height: 14px;
 
     content: 'x';
   }
@@ -29,15 +28,4 @@
       content: none;
     }
   }
-}
-
-.name {
-  color: var(--color-secondary);
-  font-size: 11px;
-  line-height: 16px;
-}
-
-.value {
-  font-size: var(--size-s);
-  line-height: 14px;
 }
