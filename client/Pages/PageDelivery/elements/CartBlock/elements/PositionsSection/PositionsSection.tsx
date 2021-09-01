@@ -14,33 +14,34 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import { ProductData } from '@Types/Product';
+import { CartPositionData } from '@Types/Cart';
 import styles from './PositionsSection.module.css';
 
 export interface RenderItem {
   product: ProductData;
+  position: CartPositionData;
 }
 
 export interface PositionsSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   title: string;
-  products: ProductData[];
-  tabs?: ReactElement;
+  positions: CartPositionData[];
   renderItem?: (props: RenderItem) => ReactElement;
 }
 
 const PositionsSection: FC<PositionsSectionProps> = (props) => {
-  const { className, title, products, tabs, renderItem, ...restProps } = props;
+  const { className, title, positions, renderItem, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
   const normalizeSlide = useCallback(
     (value: number) => {
       if (value < 0) return 0;
-      if (value > products.length) return products.length;
+      if (value > positions.length) return positions.length;
 
       return value;
     },
-    [products.length],
+    [positions.length],
   );
 
   const handleChangeCurrent = useCallback(({ current }) => {
@@ -74,20 +75,21 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
         />
       }
     >
-      {tabs && <div className={styles.tabs}>{tabs}</div>}
-
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
           slideIndex={slide}
-          key={products.length}
+          key={positions.length}
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >
-          {products.map((product) => {
-            const item = renderItem({ product });
+          {positions.map((position) => {
+            const item = renderItem({
+              product: (position.products[0] as unknown) as ProductData,
+              position,
+            });
 
-            return cloneElement(item, { ...item.props, key: product.id });
+            return cloneElement(item, { ...item.props, key: position.id });
           })}
         </Gallery>
 
