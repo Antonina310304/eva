@@ -52,11 +52,12 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
     [images.length],
   );
 
-  const [slideIndex, setSlideIndex] = useState(1);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [slideIndexUp, setSlideIndexUp] = useState(0);
 
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlide(current);
-  }, []);
+  const handleCurrent = useCallback(() => {
+    setSlideIndex(slideIndexUp);
+  }, [slideIndexUp]);
 
   const handleChangeProgress = useCallback((opts: ProgressOptions) => {
     setTrack(opts);
@@ -76,14 +77,10 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
     <div {...restProps} className={cn(styles.pressDetails, [className])}>
       <div className={styles.carousel}>
         <div className={styles.wrapperMainGallery}>
-          <Gallery
-            slideIndex={slide}
-            onChangeCurrent={handleChangeCurrent}
-            onChangeProgress={handleChangeProgress}
-          >
-            {images.map((image, index) => (
-              <div className={styles.mainGalleryItem}>
-                <Image src={image.src} key={index} className={styles.mainGalleryPreview} />
+          <Gallery onChangeProgress={handleChangeProgress}>
+            {images.map((image, indexSlide) => (
+              <div className={styles.mainGalleryItem} slideIndexUp={slideIndexUp}>
+                <Image src={image.src} key={indexSlide} className={styles.mainGalleryPreview} />
               </div>
             ))}
           </Gallery>
@@ -94,13 +91,16 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
           <div className={styles.wrapperSecondGallery}>
             <Gallery
               className={styles.secondGallery}
-              slideIndex={slide}
               key={images.length}
-              onChangeCurrent={handleChangeCurrent}
               onChangeProgress={handleChangeProgress}
             >
-              {images.map((image, index) => (
-                <div className={styles.secondGalleryItem} key={index}>
+              {images.map((image, indexSlide) => (
+                <div
+                  className={styles.secondGalleryItem}
+                  key={indexSlide}
+                  slideIndex={slideIndex}
+                  onClick={handleCurrent}
+                >
                   <Image className={styles.secondGalleryPreview} src={image.src} />
                 </div>
               ))}

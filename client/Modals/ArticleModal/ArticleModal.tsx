@@ -1,10 +1,11 @@
-import React, { FC, memo, useCallback } from 'react';
+import React, { FC, memo, useCallback, useState, useMemo } from 'react';
 
 import cn from 'classnames';
 import IconClose from '@UI/IconClose';
 import PressDetails from '@Components/PressDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
+import Link from '@UI/Link';
 import useMeta from '@Queries/useMeta';
 import useModals from '@Hooks/useModals';
 import styles from './ArticleModal.module.css';
@@ -20,6 +21,7 @@ export interface ArticleData {
   logo: string;
   text: string;
   index: number;
+  href: string;
   images: string[];
 }
 
@@ -45,6 +47,33 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
   const { articles, index } = modal.data;
   const meta = useMeta({ ssr: true });
   const article = articles[index];
+  const [currentIndex, setCurrentIndex] = useState<number>(index);
+
+  const normalizeIndex = useCallback(
+    (value: number) => {
+      if (value < 0) return articles.length - 1;
+      if (value > articles.length - 1) return 0;
+
+      return value;
+    },
+    [articles.length],
+  );
+
+  const nextId = useMemo(() => {
+    return articles[normalizeIndex(currentIndex + 1)].id;
+  }, [currentIndex, normalizeIndex, articles]);
+
+  const prevId = useMemo(() => {
+    return articles[normalizeIndex(currentIndex - 1)].id;
+  }, [currentIndex, normalizeIndex, articles]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => normalizeIndex(prev - 1));
+  }, [normalizeIndex]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => normalizeIndex(prev + 1));
+  }, [normalizeIndex]);
 
   const handleClose = useCallback(() => {
     closeModal(modal.id);
@@ -58,10 +87,20 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
       onClose={handleClose}
     >
       <div className={styles.container}>
+        <Link to={modal.href} className={styles.prev} view='simple'>
+          <div className={styles.arrowBackground} onClick={handlePrev}>
+            <div className={styles.arrow} />
+          </div>
+        </Link>
         <div className={styles.headingWrapper}>
           <IconClose className={styles.iconClose} onClick={handleClose} />
         </div>
         <PressDetails article={article} socials={meta.data.socials} />
+        <Link to={modal.href} className={styles.next} view='simple'>
+          <div className={styles.arrowBackground} onClick={handleNext}>
+            <div className={styles.arrow} />
+          </div>
+        </Link>
       </div>
     </ModalMain>
   );
