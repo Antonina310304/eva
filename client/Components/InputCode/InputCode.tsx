@@ -11,7 +11,6 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
-import Input from '@UI/Input';
 import styles from './InputCode.module.css';
 
 export interface InputCodeProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -88,6 +87,8 @@ const InputCode: FC<InputCodeProps> = (props) => {
 
   const handleKeyDown = useCallback(
     (e, index: number) => {
+      if (readOnly) return;
+
       // Только цифры и Backspace
       const allowedKeyCodes = [
         8,
@@ -130,7 +131,7 @@ const InputCode: FC<InputCodeProps> = (props) => {
         changeFocus();
       }
     },
-    [changeFocus, normalizeIndex],
+    [changeFocus, normalizeIndex, readOnly],
   );
 
   const handleClickCodeWrapper = useCallback((e, index) => {
@@ -161,7 +162,7 @@ const InputCode: FC<InputCodeProps> = (props) => {
             key={index}
             onClick={(e) => handleClickCodeWrapper(e, index)}
           >
-            <Input
+            <input
               className={cn(styles.code, { [styles.errored]: !!error })}
               ref={addInputRef(index)}
               type='tel'
