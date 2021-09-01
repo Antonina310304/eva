@@ -10,6 +10,7 @@ import FormItem from '@UI/FormItem';
 import RadioGroup from '@UI/RadioGroup';
 import Price from '@UI/Price';
 import Link from '@UI/Link';
+import useModals from '@Hooks/useModals';
 import OrderFormStore, { useOrderForm } from '@Stores/OrderForm';
 import { Profile } from '@Types/Profile';
 import Group from './elems/Group';
@@ -29,6 +30,10 @@ const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, profile, ...restProps } = props;
   const [loading, setLoading] = useState(false);
   const [wantBonuses, setWantBonuses] = useState(false);
+  const [name, setName] = useState<string>(null);
+  const [phone, setPhone] = useState<string>(null);
+  const [email, setEmail] = useState<string>(null);
+  const [, { openModal }] = useModals();
   const orderForm = useOrderForm();
   const paymentsAsSelect = orderForm.visiblePaymentTypes.length > 3;
 
@@ -74,6 +79,22 @@ const OrderForm: FC<OrderFormProps> = (props) => {
     OrderFormStore.select({ delivery: item.value });
   }, []);
 
+  const handleChangePhone = useCallback((e) => {
+    setPhone(e.target.value);
+  }, []);
+
+  const handleChangeName = useCallback((e) => {
+    setName(e.target.value);
+  }, []);
+
+  const handleChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const handleClickAuth = useCallback(() => {
+    openModal('Authorization', { defaultPhone: phone, defaultName: name, defaultEmail: email });
+  }, [email, name, openModal, phone]);
+
   const handleSubmit = useCallback(() => {
     setLoading(true);
   }, []);
@@ -101,15 +122,21 @@ const OrderForm: FC<OrderFormProps> = (props) => {
         </FormItem>
 
         <FormItem label='Имя' view='secondary'>
-          <Input wide name='OrderForm[first_name]' />
+          <Input wide name='OrderForm[first_name]' value={name} onChange={handleChangeName} />
         </FormItem>
 
         <FormItem label='Телефон*' view='secondary'>
           <div className={styles.wrapperInputPhone}>
-            <InputPhone wide name='OrderForm[mobile]' className={styles.inputPhone} />
+            <InputPhone
+              wide
+              name='OrderForm[mobile]'
+              className={styles.inputPhone}
+              value={phone}
+              onChange={handleChangePhone}
+            />
 
             {wantBonuses && (
-              <Button type='submit' className={styles.btnReceiveCode}>
+              <Button className={styles.btnReceiveCode} onClick={handleClickAuth}>
                 Получить код в SMS
               </Button>
             )}
@@ -117,7 +144,7 @@ const OrderForm: FC<OrderFormProps> = (props) => {
         </FormItem>
 
         <FormItem label='Почта' view='secondary'>
-          <Input wide name='OrderForm[email]' />
+          <Input wide name='OrderForm[email]' value={email} onChange={handleChangeEmail} />
         </FormItem>
       </Group>
 
