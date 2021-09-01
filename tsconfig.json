@@ -13,7 +13,6 @@
     "checkJs": false,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "noImplicitAny": true,
     "baseUrl": "./",
     "paths": {
       "@Api/*": ["./client/Api/*"],

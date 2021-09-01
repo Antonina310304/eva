@@ -1,7 +1,7 @@
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
-import { CartStoreValue } from '@Stores/Cart/typings';
 
+import { CartStoreValue } from '@Stores/Cart';
 import { DeliveryTypeData, PaymentTypeData, PaymentVariantData } from '@Types/Cart';
 
 export interface SelectedIds {
@@ -93,9 +93,9 @@ export const useOrderForm = (initialValue?: CartStoreValue) => {
       return { ...prevValue, paymentType: paymentType.id };
     });
     update(selectedStore, (prevValue) => {
-      const [paymentVariant] = getValue(availablePaymentVariantsStore);
+      const paymentVariants = getValue(availablePaymentVariantsStore);
 
-      return { ...prevValue, paymentVariant: paymentVariant.id };
+      return { ...prevValue, paymentVariant: paymentVariants[0].id };
     });
   }
 
