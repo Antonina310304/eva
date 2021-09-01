@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.input {
+.input > div {
   border-radius: 29px;
 
   input {

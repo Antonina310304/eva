@@ -88,6 +88,7 @@ const Search: FC<SearchData> = ({ className }) => {
         })}
       >
         <Input
+          daat-test='asdfasfd'
           onFocus={handleClickInside}
           onChange={onChange}
           className={styles.input}
