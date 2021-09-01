@@ -167,8 +167,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     /**
      * Основной отступ
      */
-    const getGeneralIndent = () => {
-      return state.dragging ? getDragIndent() : getIndent(state.current);
+    const getGeneralIndent = (currentState: GalleryState) => {
+      return currentState.dragging ? getDragIndent() : getIndent(currentState.current);
     };
 
     /**
@@ -274,7 +274,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       },
 
       setDelta: ({ deltaX }: { deltaX: number }) => {
-        return { ...state, deltaX, generalIndent: getGeneralIndent() };
+        return { ...state, deltaX, generalIndent: getGeneralIndent(state) };
       },
 
       resetDeltaX: () => {
@@ -292,7 +292,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     const actionData = typeof action === 'string' ? undefined : action.data;
     const newState = (actions as any)[actionName](actionData);
 
-    return { ...newState, generalIndent: getGeneralIndent() };
+    return { ...newState, generalIndent: getGeneralIndent(newState) };
   }
 
   const [state, dispatch] = useReducer(reducer, {
@@ -471,6 +471,8 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
 
     dispatch({ type: 'init', data: getSizes() });
   }, [getSizes, state.initialized]);
+
+  console.log(state);
 
   return (
     <Touch
