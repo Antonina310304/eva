@@ -168,6 +168,12 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
           newItems.splice(itemIndex, 1);
         }
 
+        if (mode === 'multiple' && prev[0].id !== item.id) {
+          const itemIndex = prev.findIndex(({ id }) => item.id === id);
+
+          newItems.splice(itemIndex, 1);
+        }
+
         if (onChangeSelected) onChangeSelected(null, newItems);
 
         return newItems;
