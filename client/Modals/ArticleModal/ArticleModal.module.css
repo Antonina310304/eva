@@ -84,6 +84,10 @@
 }
 
 .prev {
+  position: absolute;
+  top: 50%;
+  left: 300px;
+
   margin-right: var(--space-l);
 
   .arrow {
@@ -92,6 +96,10 @@
 }
 
 .next {
+  position: absolute;
+  top: 50%;
+  right: 300px;
+
   margin-left: var(--space-l);
 
   .arrow {

@@ -59,6 +59,8 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
     [articles.length],
   );
 
+  console.log(article.href);
+
   const nextId = useMemo(() => {
     return articles[normalizeIndex(currentIndex + 1)].id;
   }, [currentIndex, normalizeIndex, articles]);
@@ -87,7 +89,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
       onClose={handleClose}
     >
       <div className={styles.container}>
-        <Link to={modal.href} className={styles.prev} view='simple'>
+        <Link to={prevId} className={styles.prev} view='simple'>
           <div className={styles.arrowBackground} onClick={handlePrev}>
             <div className={styles.arrow} />
           </div>
@@ -96,7 +98,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
           <IconClose className={styles.iconClose} onClick={handleClose} />
         </div>
         <PressDetails article={article} socials={meta.data.socials} />
-        <Link to={modal.href} className={styles.next} view='simple'>
+        <Link to={nextId} className={styles.next} view='simple'>
           <div className={styles.arrowBackground} onClick={handleNext}>
             <div className={styles.arrow} />
           </div>

@@ -60,21 +60,25 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
         </div>
 
         <div className={styles.wrapperSecondGallery}>
-          <Gallery
-            className={styles.secondGallery}
-            key={images.length}
-            onChangeProgress={handleChangeProgress}
-          >
-            {images.map((image, indexSlide) => (
-              <div
-                className={styles.secondGalleryItem}
-                key={indexSlide}
-                onClick={(e) => handleClickPreview(e, indexSlide)}
-              >
-                <Image className={styles.secondGalleryPreview} src={image.src} />
-              </div>
-            ))}
-          </Gallery>
+          {isMobileM ? (
+            <ProgressBar className={styles.progressBar} track={track} />
+          ) : (
+            <Gallery
+              className={styles.secondGallery}
+              key={images.length}
+              onChangeProgress={handleChangeProgress}
+            >
+              {images.map((image, indexSlide) => (
+                <div
+                  className={styles.secondGalleryItem}
+                  key={indexSlide}
+                  onClick={(e) => handleClickPreview(e, indexSlide)}
+                >
+                  <Image className={styles.secondGalleryPreview} src={image.src} />
+                </div>
+              ))}
+            </Gallery>
+          )}
 
           <ProgressBar className={styles.progressBar} track={track} />
         </div>
