@@ -107,10 +107,6 @@
   line-height: var(--lh-n);
 }
 
-.link {
-  color: var(--color-white);
-}
-
 .share {
   padding-bottom: var(--space-xs);
 
