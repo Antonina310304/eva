@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import cookie from 'cookie';
 import proxy, { ProxyOptions } from 'express-http-proxy';
 
 import { envs } from '../../utils/envs';
@@ -11,6 +12,7 @@ const backend = envs.backendOrigin;
 const router = express.Router();
 const proxyOptions: ProxyOptions = { proxyReqPathResolver: (req) => `${req.originalUrl}` };
 const routes = [
+  '/svg/icons',
   '/react/static',
   '/fonts',
   '/marketing-event',
@@ -47,6 +49,25 @@ router.use('/p/:path', (req, res, next) => {
   proxy(url, {
     proxyReqPathResolver: (proxyReq) => {
       return `${decodeURIComponent(proxyReq.params.path)}`;
+    },
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+      const domain = new URL(backend).host;
+      const cookies = cookie.parse(srcReq.headers.cookie || '');
+
+      // Переопределяем домен для сессионных кук
+      const cookieString = Object.entries(cookies).map(([name, value]) => {
+        const opts = name.includes('_SESS_ID') ? { domain } : {};
+
+        return cookie.serialize(name, value, opts);
+      });
+
+      return {
+        ...proxyReqOpts,
+        headers: {
+          ...proxyReqOpts.headers,
+          cookie: cookieString,
+        },
+      };
     },
   })(req, res, next);
 });

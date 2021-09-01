@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import Image from '@UI/Image';
 import useMedias from '@Hooks/useMedias';
-import Wrapper from '../Wrapper';
+import ServicePageWrapper from '@Components/ServicePageWrapper';
 import { Partner } from '../../typings';
 import styles from './BankBanner.module.css';
 
@@ -31,7 +31,7 @@ const BankBanner: FC<BankBannerProps> = (props) => {
           [styles.priorbank]: id === 'priorbank',
         })}
       >
-        <Wrapper className={cn({ [styles.wrapper]: !isDesktopM })}>
+        <ServicePageWrapper className={cn({ [styles.wrapper]: !isDesktopM })}>
           <div className={styles.container}>
             <div className={styles.left}>
               <Image className={styles.logo} src={card} />
@@ -43,7 +43,7 @@ const BankBanner: FC<BankBannerProps> = (props) => {
               <div className={styles.nuance}>{note}</div>
             </div>
           </div>
-        </Wrapper>
+        </ServicePageWrapper>
       </div>
     </div>
   );

@@ -1,0 +1,36 @@
+.symbol {
+  position: relative;
+
+  display: inline-block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-indent: 101%;
+  vertical-align: top;
+
+  &::after {
+    position: absolute;
+
+    text-indent: 0;
+  }
+
+  &.rub {
+    width: 0.75em;
+
+    &::after {
+      right: 0;
+
+      content: '\20bd';
+    }
+  }
+
+  &.byn {
+    &::after {
+      right: -3px;
+
+      content: ' руб.';
+    }
+  }
+}

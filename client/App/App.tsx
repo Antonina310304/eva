@@ -18,9 +18,12 @@ const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RoutePayment = loadable(() => import('@Routes/RoutePayment'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
+const RouteDelivery = loadable(() => import('@Routes/RouteDelivery'));
+const RouteQualityDepartment = loadable(() => import('@Routes/RouteQualityDepartment'));
 const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
 const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
+const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
 
 const App: FC = () => {
   return (
@@ -49,8 +52,16 @@ const App: FC = () => {
         <RouteWarranty />
       </Route>
 
+      <Route path='/site/quality-department'>
+        <RouteQualityDepartment />
+      </Route>
+
       <Route path='/site/contacts'>
         <RouteContacts />
+      </Route>
+
+      <Route path='/site/delivery'>
+        <RouteDelivery />
       </Route>
 
       <Route path='/static-page/privacy-policy'>
@@ -59,6 +70,10 @@ const App: FC = () => {
 
       <Route path='/static-page/oferta'>
         <RouteOferta />
+      </Route>
+
+      <Route path='/order/check'>
+        <RouteOrderCheck />
       </Route>
     </ModalsProvider>
   );

@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import ParagraphTitle from '../ParagraphTitle';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
 import styles from './ConditionsToBuyInCredit.module.css';
 
 export interface ConditionsToBuyInCreditProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,7 +13,7 @@ const ConditionsToBuyInCredit: FC<ConditionsToBuyInCreditProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.conditionsToBuyInCredit, className)}>
-      <ParagraphTitle title='Что нужно для покупки в кредит без переплаты?' />
+      <ServicePageParagraphTitle title='Что нужно для покупки в кредит без переплаты?' />
 
       <div className={styles.wrapper}>
         <div className={styles.condition}>

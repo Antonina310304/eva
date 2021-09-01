@@ -1,0 +1,41 @@
+.list {
+  counter-reset: step;
+}
+
+.itemContainer {
+  display: inline-block;
+  max-width: calc(100% - 42px - var(--space-n));
+
+  white-space: normal;
+  vertical-align: top;
+}
+
+.item {
+  margin-top: var(--space-m);
+
+  white-space: nowrap;
+
+  counter-increment: step;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:before {
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    margin-right: var(--space-n);
+
+    font-weight: 500;
+    font-size: var(--size-l);
+    line-height: 42px;
+    text-align: center;
+    vertical-align: top;
+
+    background: var(--color-light-gray);
+    border-radius: 50%;
+
+    content: counter(step);
+  }
+}

@@ -10,6 +10,7 @@ export interface LinkProps extends BaseLinkProps {
   className?: string;
   view?: 'primary' | 'secondary' | 'simple' | 'native' | 'navigation' | 'nav' | 'grayString';
   needFetch?: boolean;
+  preventDefault?: boolean;
   size?: 's';
   to: string;
   onClick?(e: MouseEvent): void;
@@ -21,6 +22,7 @@ const Link: FC<LinkProps> = (props) => {
     to,
     view = 'primary',
     needFetch = true,
+    preventDefault,
     children,
     size = 'n',
     target,
@@ -32,12 +34,17 @@ const Link: FC<LinkProps> = (props) => {
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
+      if (window.cancelClick) return;
+
+      if (onClick) onClick(e);
+
+      if (preventDefault) {
+        e.preventDefault();
+        return;
+      }
       if (target === '_blank') return;
 
       e.preventDefault();
-
-      if (window.cancelClick) return;
-      if (onClick) onClick(e);
 
       if (to.substr(0, 1) === '#') {
         history.push(to);
@@ -52,7 +59,7 @@ const Link: FC<LinkProps> = (props) => {
         window.scrollTo({ top: 0 });
       }
     },
-    [history, needFetch, onClick, queryClient, target, to],
+    [history, needFetch, onClick, preventDefault, queryClient, target, to],
   );
 
   return (
