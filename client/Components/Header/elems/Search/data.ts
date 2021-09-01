@@ -90,27 +90,27 @@ export const searchResult: SearchResultData = {
     { title: 'Кресла Динс', link: 'chairs' },
   ],
   products: [
-    // {
-    //   id: 0,
-    //   img: 'react/static/img/products/product1.png',
-    //   link: 'link',
-    //   name: 'Диван угловой Росис Velvet Blue',
-    //   price: 19990,
-    // },
-    // {
-    //   id: 1,
-    //   img: 'react/static/img/products/product1.png',
-    //   link: 'link',
-    //   name: 'Шерона 140 Sherst Beige',
-    //   price: 24640,
-    // },
-    // {
-    //   id: 2,
-    //   img: 'react/static/img/products/product2.png',
-    //   link: 'link',
-    //   name: 'Слипсон Мини Happy Yellow',
-    //   price: 20690,
-    // },
+    {
+      id: 0,
+      img: 'react/static/img/products/product1.png',
+      link: 'link',
+      name: 'Диван угловой Росис Velvet Blue',
+      price: 19990,
+    },
+    {
+      id: 1,
+      img: 'react/static/img/products/product1.png',
+      link: 'link',
+      name: 'Шерона 140 Sherst Beige',
+      price: 24640,
+    },
+    {
+      id: 2,
+      img: 'react/static/img/products/product2.png',
+      link: 'link',
+      name: 'Слипсон Мини Happy Yellow',
+      price: 20690,
+    },
   ],
   link: 'link',
 };

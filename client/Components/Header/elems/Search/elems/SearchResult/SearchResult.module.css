@@ -1,6 +1,6 @@
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   @media (--mobile-m) {
     display: block;
@@ -9,6 +9,7 @@
 
 .matches {
   flex: 0 0 auto;
+  max-width: 170px;
   margin-right: 80px;
 
   @media (--mobile-m) {
@@ -95,4 +96,8 @@
     font-size: var(--size-l);
     line-height: 120%;
   }
+}
+
+.productList {
+  flex: 1;
 }

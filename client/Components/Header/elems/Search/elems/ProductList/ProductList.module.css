@@ -1,22 +1,22 @@
 .list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-row-gap: 20px;
+  grid-column-gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+
   margin: 0;
-  margin: -15px -10px;
   padding: 0;
 
   list-style: none;
+
+  @media (--mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .item {
   display: flex;
   box-sizing: border-box;
-  width: 33.333333%;
-  padding: 15px 10px;
-
-  @media (--mobile) {
-    width: 50%;
-  }
 }
 
 .link {
@@ -54,6 +54,10 @@
   font-size: var(--size-s);
   line-height: 150%;
   text-decoration: none;
+
+  .link:hover & {
+    font-weight: 500;
+  }
 }
 
 .price {

@@ -23,7 +23,7 @@ const SearchResult: FC<SearchResultProps> = ({ result, className }) => {
           <div className={styles.matches}>
             <List classNameTitle={styles.title} title='Совпадения' list={result.matches} />
           </div>
-          <div>
+          <div className={styles.productList}>
             <div className={styles.header}>
               <p className={styles.title}>Товары</p>
               <p className={styles.count}>{`Найдено ${result.products.length}`}</p>

@@ -69,7 +69,6 @@ const SideBar: FC<SideBarProps> = ({
             <div ref={ref} className={styles.inWrap}>
               <MobileNavContainer className={styles.header}>
                 <Flex ai='center' jc='space-between'>
-                  {/* <Search className={styles.search} /> */}
                   <button className={styles.close} onClick={hideSideBar} type='button'>
                     закрыть
                   </button>

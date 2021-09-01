@@ -11,9 +11,8 @@ import IconClose from '@UI/IconClose';
 import { SearchResultData } from '@Types/SearchResultData';
 
 import _debounce from 'lodash.debounce';
+import _ from 'lodash';
 import styles from './Search.module.css';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 
 export interface SearchData extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -32,8 +31,16 @@ const Search: FC<SearchData> = ({ className }) => {
     products: [],
   });
 
+  const debounceRef = useRef<ReturnType<typeof _debounce>>();
+
   const inputRef = useRef<HTMLDivElement>();
   const formRef = useRef<HTMLFormElement>();
+
+  useEffect(() => {
+    debounceRef.current = _debounce((value) => {
+      setSearchResult((prev) => ({ ...prev, ...value }));
+    }, 1500);
+  }, [setSearchResult]);
 
   function resetSearch() {
     setSearchValue('');
@@ -66,10 +73,37 @@ const Search: FC<SearchData> = ({ className }) => {
 
   function onChange(evt: { target: { value: string } }) {
     const { value } = evt.target;
+
+    if (!debounceRef.current) return;
+
+    if (value === 'диваны') {
+      debounceRef.current({
+        request: value,
+        matches: [
+          { title: 'Диваны Динс', link: 'divans' },
+          { title: 'Кресла Динс', link: 'chairs' },
+        ],
+        products: [
+          {
+            id: 0,
+            img: 'react/static/img/products/product1.png',
+            link: 'link',
+            name: 'Диван угловой Росис Velvet Blue',
+            price: 19990,
+          },
+          {
+            id: 1,
+            img: 'react/static/img/products/product1.png',
+            link: 'link',
+            name: 'Шерона 140 Sherst Beige',
+            price: 24640,
+          },
+        ],
+      });
+    } else {
+      debounceRef.current({ request: value });
+    }
     setSearchValue(value);
-    _debounce(() => {
-      setSearchResult({ ...searchResult, request: value });
-    }, 1000)();
   }
 
   useEffect(() => {
@@ -88,7 +122,6 @@ const Search: FC<SearchData> = ({ className }) => {
         })}
       >
         <Input
-          daat-test='asdfasfd'
           onFocus={handleClickInside}
           onChange={onChange}
           className={styles.input}
