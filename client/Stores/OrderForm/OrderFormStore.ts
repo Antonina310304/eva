@@ -14,7 +14,7 @@ const orderFormStore = createStore<CartStoreValue>();
 const selectedStore = createStore<SelectedIds>();
 
 const selectedDeliveryStore = createDerived([orderFormStore, selectedStore], (form, selected) => {
-  return form.deliveryTypes.find((dt) => dt.id === selected.delivery);
+  return form.deliveryTypes.find((dt) => dt.id === selected?.delivery);
 });
 
 const visiblePaymentTypesStore = createDerived(
@@ -33,7 +33,7 @@ const visiblePaymentTypesStore = createDerived(
 const selectedPaymentTypeStore = createDerived(
   [orderFormStore, selectedStore],
   (form, selected) => {
-    return form.paymentTypes.find((pt) => pt.id === selected.paymentType);
+    return form.paymentTypes.find((pt) => pt.id === selected?.paymentType);
   },
 );
 
@@ -77,10 +77,8 @@ const select = (ids: Partial<SelectedIds>): void => {
 };
 
 export const useOrderForm = (initialValue?: CartStoreValue) => {
-  const value = getValue(orderFormStore);
-
   // Указываем начальные значения для хранилищ
-  if (initialValue && !value) {
+  if (initialValue) {
     orderFormStore.set(initialValue);
 
     select({ delivery: initialValue.deliveryTypes[0].id });

@@ -245,7 +245,7 @@ const updateDeliveryType = (id: number, newData: any) => {
 };
 
 export const useCart: UseCart = (initialData) => {
-  if (initialData && !getValue(cartStore)) {
+  if (initialData) {
     cartStore.set(initialData);
     networkStore.set('success');
   }
