@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import { OfferSearchData, SearchResultData } from '@Types/SearchResultData';
 import { ProductSearchData } from '@Types/Product';
 import Flex from '@Components/Flex/Flex';
@@ -12,17 +12,17 @@ export interface ModalSearchContentProps extends HTMLAttributes<HTMLDivElement> 
   hits: ProductSearchData[];
   viewed: OfferSearchData[];
   offers: OfferSearchData[];
-  request?: SearchResultData;
+  request: SearchResultData;
 }
 const ModalSearchContent: FC<ModalSearchContentProps> = ({ hits, viewed, offers, request }) => {
   return (
     <div>
-      {!!request && (
+      {request.request !== '' && (
         <div className={styles.wrapper}>
           <SearchResult result={request} />
         </div>
       )}
-      {(!request || request?.products.length < 1) && (
+      {request.products.length < 1 && (
         <div className={styles.innerWrap}>
           <Flex fw='wrap' jc='flex-start' className={styles.flexWrapper}>
             {offers && (
@@ -50,4 +50,4 @@ const ModalSearchContent: FC<ModalSearchContentProps> = ({ hits, viewed, offers,
   );
 };
 
-export default ModalSearchContent;
+export default memo(ModalSearchContent);

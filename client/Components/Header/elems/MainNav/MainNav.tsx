@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import { mainNavList } from '@Components/Header/data';
 
 import cn from 'classnames';
@@ -14,9 +14,13 @@ export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const MainNav: FC<MainNavProps> = ({ hideOnScroll, isFirstClick, setIsFirstClick, className }) => {
+  const onMouseLeave = useCallback(() => {
+    setIsFirstClick(false);
+  }, [setIsFirstClick]);
+
   return (
     <div className={className}>
-      <div onMouseLeave={() => setIsFirstClick(false)} className={cn(styles.wrap, styles.mainNav)}>
+      <div onMouseLeave={onMouseLeave} className={cn(styles.wrap, styles.mainNav)}>
         {mainNavList.map((item) => {
           return (
             <MainNavItem

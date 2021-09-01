@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import Link from '@UI/Link';
 import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
@@ -36,4 +36,4 @@ const SiteNav: FC<SiteNavProp> = () => {
   );
 };
 
-export default SiteNav;
+export default memo(SiteNav);

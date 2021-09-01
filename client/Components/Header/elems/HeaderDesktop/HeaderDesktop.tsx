@@ -38,7 +38,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
   return (
     <header
       className={cn(styles.header, {
-        [styles.scroll]: hideOnScroll,
+        // [styles.scroll]: hideOnScroll,
       })}
     >
       <div className={styles.in}>

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useState } from 'react';
+import React, { FC, HTMLAttributes, useState, memo } from 'react';
 
 import cn from 'classnames';
 import styles from './Phone.module.css';
@@ -28,4 +28,4 @@ const Phone: FC<PhoneProps> = ({ className }) => {
   );
 };
 
-export default Phone;
+export default memo(Phone);

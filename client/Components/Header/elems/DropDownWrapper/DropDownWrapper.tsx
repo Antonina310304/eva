@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, ReactChild } from 'react';
+import React, { FC, HTMLAttributes, ReactChild, memo } from 'react';
 import cn from 'classnames';
 import Container from '@Components/Container';
 import styles from './DropDownWrapper.module.css';
@@ -30,4 +30,4 @@ const DropDownWrapper: FC<DropDownWrapperProps> = ({ isFirst, isShow, children }
   );
 };
 
-export default DropDownWrapper;
+export default memo(DropDownWrapper);

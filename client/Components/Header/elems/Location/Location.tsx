@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 
 import Link from '@UI/Link';
 import styles from './Location.module.css';
@@ -17,4 +17,4 @@ const Location: FC<LocationProps> = ({ location }) => {
   );
 };
 
-export default Location;
+export default memo(Location);
