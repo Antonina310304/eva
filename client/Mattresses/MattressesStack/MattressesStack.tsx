@@ -18,13 +18,15 @@ export interface LayerColor {
 
 export interface LayerColors {
   aside: LayerColor;
-  upper: LayerColor;
+  upper?: LayerColor;
+  non_upper?: LayerColor;
   pattern: LayerColor;
 }
 
 export interface LayerPaths {
   aside: SVGPathElement;
-  upper: SVGPathElement;
+  upper?: SVGPathElement;
+  non_upper?: SVGPathElement;
   pattern: SVGPathElement;
 }
 
@@ -34,7 +36,7 @@ export interface Layer {
   paths: Partial<LayerPaths>;
 }
 
-export type PathIds = 'aside' | 'upper' | 'pattern';
+export type PathIds = 'aside' | 'upper' | 'pattern' | 'non_upper';
 
 export interface Stack {
   width?: number;
@@ -57,11 +59,11 @@ const MattressesStack: FC<MattressesStackProps> = (props) => {
 
   const getPathKey = useCallback((path: SVGPathElement): PathIds => {
     const id = path.getAttribute('id') || '';
-    const matches = id.match(/^([a-zA-Z]*)_\d*$/);
+    const matches = id.match(/^([a-zA-Z-]*)_\d*$/);
 
     if (!matches) return null;
 
-    return matches[1].toLowerCase() as PathIds;
+    return matches[1].replace('-', '_').toLowerCase() as PathIds;
   }, []);
 
   const resetSelection = useCallback(() => {
