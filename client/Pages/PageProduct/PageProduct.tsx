@@ -209,12 +209,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     id: '0',
                     images: [
                       {
-                        url: '/react/static/img/scheme1.jpg',
+                        url: '/react/static/img/scheme1_1.png',
                         width: 511,
                         height: 236,
                       },
                       {
-                        url: '/react/static/img/scheme2.jpg',
+                        url: '/react/static/img/scheme2_1.png',
                         width: 269,
                         height: 235,
                       },
@@ -224,12 +224,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     id: '1',
                     images: [
                       {
-                        url: '/react/static/img/scheme3.jpg',
+                        url: '/react/static/img/scheme3_1.png',
                         width: 232,
                         height: 389,
                       },
                       {
-                        url: '/react/static/img/scheme4.jpg',
+                        url: '/react/static/img/scheme4_1.png',
                         width: 81,
                         height: 388,
                       },

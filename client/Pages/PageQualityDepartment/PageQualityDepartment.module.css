@@ -1,0 +1,30 @@
+.pageQualityDepartment {
+}
+
+.pageTitle {
+  margin-top: var(--space-xl);
+}
+
+.text {
+  margin-top: var(--space-e);
+}
+
+.qualityDepartment {
+  margin-top: var(--space-xxl);
+}
+
+.qualityDepartmentForm {
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-e);
+}
+
+@media (--desktop-m) {
+  .text {
+    margin-top: var(--space-xb);
+  }
+
+  .qualityDepartmentForm {
+    margin-top: var(--space-xb);
+    margin-bottom: var(--space-xb);
+  }
+}

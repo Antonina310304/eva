@@ -1,0 +1,65 @@
+.form {
+}
+
+.item {
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+.description {
+  composes: s from 'sizes';
+}
+
+.wrapperPromoCode {
+  display: grid;
+  grid-gap: var(--space-xs);
+  grid-template-columns: 1fr 135px;
+  margin-top: var(--space-s);
+}
+
+.appliedPromocode {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-xs);
+  margin-left: var(--space-xl);
+}
+
+.appliedPromocodeRemove {
+  margin-left: var(--space-s);
+}
+
+.phoneBottom {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons {
+  display: none;
+  margin-top: var(--space-m);
+
+  &.visible {
+    display: block;
+  }
+}
+
+.wrapperAuthLink {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-n);
+}
+
+.authLink {
+  display: inline-block;
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+.info {
+  composes: xs from 'sizes';
+
+  margin-top: var(--space-m);
+
+  color: var(--color-dark-gray);
+}

@@ -1,0 +1,31 @@
+.group {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  margin-right: var(--space-xb);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+@media (--mobile) {
+  .group {
+    display: block;
+
+    .item {
+      display: block;
+    }
+  }
+
+  .item {
+    margin-right: 0;
+    margin-bottom: var(--space-s);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

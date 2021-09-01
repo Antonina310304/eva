@@ -2,17 +2,12 @@ import { createDerived, createStore, getValue, update } from '@kundinos/nanostor
 import { useStore } from '@kundinos/nanostores/react';
 
 import { ApiCart } from '@Api/Cart';
-import { CartData, CartPositionData, CartProductData } from '@Types/Cart';
+import { CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
-import { UseCart } from './typings';
+import { CartStoreValue, UseCart } from './typings';
 
-import data from './data.json';
-
-const cartStore = createStore<CartData>();
-
-const networkStore = createStore<NetworkStatus>(() => {
-  networkStore.set('pending');
-});
+const cartStore = createStore<CartStoreValue>();
+const networkStore = createStore<NetworkStatus>();
 
 // Все товары
 const allProductsStore = createDerived(cartStore, (cart) => {
@@ -66,13 +61,18 @@ const findProductById = (productId: number): CartProductData => {
 
 // Получить основную информацию о корзине
 const loadInitData = async () => {
-  try {
-    const res = await ApiCart.info();
+  networkStore.set('loading');
 
-    cartStore.set(res.cart);
+  try {
+    const { cart, deliveryTypes } = await ApiCart.info();
+
+    cartStore.set({ ...cart, deliveryTypes });
+    networkStore.set('success');
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
+
+    networkStore.set('error');
   }
 };
 
@@ -127,19 +127,53 @@ const removeProduct = async (params: any, options: any = {}) => {
     const response = await ApiCart.remove({ cartPositionId: position.id });
     const newPositions = options.isRelated ? cart.newPositions : response.cart.newPositions;
     const result = { ...cart, ...response.cart, newPositions };
-    const index = cart.removedPositions.findIndex((item) => position.id === item.id);
-
-    if (index !== -1) {
-      const removedPositions = [...cart.removedPositions];
-      removedPositions.splice(index, 1);
-
-      result.removedPositions = removedPositions;
-    }
 
     cartStore.set(result);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
+  }
+};
+
+// Скрыть позицию
+const hidePosition = async ({ positionId }: { positionId: string }) => {
+  try {
+    const { cart } = await ApiCart.hide({
+      cartPositionId: positionId,
+    });
+
+    update(cartStore, (prevCart) => ({
+      ...prevCart,
+      ...cart,
+    }));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  }
+};
+
+// Показать позицию
+const showPosition = async ({ positionId }: { positionId: string }) => {
+  try {
+    const { cart } = await ApiCart.unhide({
+      cartPositionId: positionId,
+    });
+
+    const index = (cart.removedPositions as any[]).findIndex((item) => positionId === item.id);
+    if (index !== -1) {
+      const removedPositions = [...cart.removedPositions];
+      removedPositions.splice(index, 1);
+
+      cart.removedPositions = removedPositions;
+    }
+
+    update(cartStore, (prevCart) => ({
+      ...prevCart,
+      ...cart,
+    }));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
   }
 };
 
@@ -195,15 +229,31 @@ const loadRelatedProducts = async ({ productIds }: any) => {
   }
 };
 
-export const useCart: UseCart = (opts = {}) => {
-  // if (opts.preload && !cartStore.value) loadInitData();
+// Обновить информацию о способе доставки
+const updateDeliveryType = (id: number, newData: any) => {
+  update(cartStore, (oldCart) => ({
+    ...oldCart,
+    deliveryTypes: oldCart.deliveryTypes.map((deliveryType) => {
+      if (deliveryType.id !== id) return deliveryType;
 
-  // return {
-  //   ...useStore(cartStore),
-  //   network: useStore(networkStore),
-  // };
+      return {
+        ...deliveryType,
+        ...newData,
+      };
+    }),
+  }));
+};
 
-  return { ...data, network: 'success' };
+export const useCart: UseCart = (initialData) => {
+  if (initialData && !getValue(cartStore)) {
+    cartStore.set(initialData);
+    networkStore.set('success');
+  }
+
+  return {
+    ...useStore(cartStore),
+    network: useStore(networkStore),
+  };
 };
 
 export default {
@@ -211,5 +261,8 @@ export default {
   hasInCart,
   removeProduct,
   changeCount,
+  hidePosition,
+  showPosition,
   loadRelatedProducts,
+  updateDeliveryType,
 };

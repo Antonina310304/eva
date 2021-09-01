@@ -1,0 +1,37 @@
+.switcher {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  flex-shrink: 0;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  margin-left: var(--space-s);
+}
+
+.wrapperIcon {
+  position: relative;
+
+  margin-left: var(--space-xs);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+
+  background-image: url('./iconInfo.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+@media (--mobile) {
+  .content {
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+}

@@ -9,8 +9,6 @@ export interface EpicTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEl
   className?: string;
   wide?: boolean;
   error?: string;
-  value?: string;
-  name?: string;
 }
 
 const EpicTextarea = forwardRef<EpicTextareaRef, EpicTextareaProps>((props, ref) => {

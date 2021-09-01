@@ -178,7 +178,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 Изменить конфигурацию
               </Button>
             )}
-            <Button className={styles.action} wide onClick={handleAddToCart}>
+            <Button className={cn(styles.action, styles.btnBuy)} wide onClick={handleAddToCart}>
               В корзину
             </Button>
           </>
