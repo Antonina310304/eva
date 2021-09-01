@@ -5,11 +5,11 @@ import { useCart } from '@Stores/Cart';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import ImportantInfo from '@Components/ImportantInfo';
 import ShippingCostCalculator from '@Components/ShippingCostCalculator';
+import ServicePageTitle from '@Components/ServicePageTitle';
 import { MetaData } from '@Types/Meta';
 import ButtonTabs from '@UI/ButtonTabs';
 import List from '@UI/List';
 import Image from '@UI/Image';
-import Breadcrumbs from '@UI/Breadcrumbs';
 import RadioButton from '@UI/RadioButton';
 import FormattedText from '@Pages/PageDelivery/FormattedText';
 import OrderedList from './elements/OrderedList';
@@ -51,7 +51,6 @@ const tabs = [
 const PageDelivery: FC<PageDeliveryProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const {
-    breadcrumbs,
     title,
     pageMenu,
     teaser,
@@ -84,10 +83,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={styles.mainContainer}>
-        <div className={styles.wrapperTop}>
-          <Breadcrumbs breadcrumbs={breadcrumbs} className={styles.breadcrumbs} />
-          <div className={styles.title}>{title}</div>
-        </div>
+        <ServicePageTitle view='bordered' title='Рассрочка и кредит' />
         <InformationTabsNavigation className={styles.menu} navigation={pageMenu} />
       </div>
       {meta.region.isPec ? (
