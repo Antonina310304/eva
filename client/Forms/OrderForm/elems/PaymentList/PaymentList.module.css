@@ -1,0 +1,33 @@
+.list {
+  composes: s from 'sizes';
+
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 var(--space-l-neg) var(--space-l-neg);
+}
+
+.paymentType {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 160px;
+  margin-bottom: var(--space-l);
+  padding: 0 var(--space-l);
+
+  cursor: pointer;
+  opacity: 0.5;
+
+  &.actived {
+    opacity: 1;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 35px;
+  margin-right: var(--space-s);
+
+  background-position: center;
+  background-size: contain;
+}

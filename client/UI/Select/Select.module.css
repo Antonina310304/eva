@@ -99,7 +99,7 @@
   overflow: hidden;
 
   background: transparent;
-  border: 1px solid var(--color-dark-gray);
+  border: 1px solid var(--color-medium-gray);
   border-radius: 5px;
 
   transition: border-color 0.2s ease-in-out;

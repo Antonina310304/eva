@@ -145,7 +145,12 @@ const MattressesProductCard: FC<MattressesProductCardProps> = (props) => {
           )}
 
           {sizeItems.length > 0 && (
-            <MainSelect className={styles.sizes} title={product.variants.title} items={sizeItems} />
+            <MainSelect
+              className={styles.sizes}
+              wide
+              title={product.variants.title}
+              items={sizeItems}
+            />
           )}
         </div>
 

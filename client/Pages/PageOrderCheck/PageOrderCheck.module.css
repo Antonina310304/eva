@@ -39,10 +39,6 @@
   margin-top: var(--space-xb);
 }
 
-.formUser {
-  font-weight: 500;
-}
-
 .formTitle {
   composes: xxl from 'sizes';
 
