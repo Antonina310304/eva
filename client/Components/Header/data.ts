@@ -616,7 +616,6 @@ export const UserMenuDesktop: IUserMenu[] = [
     title: 'Корзина',
     icon: 'basket',
     link: 'basket',
-    isChecked: true,
     count: 5,
     isDisabled: true,
   },
