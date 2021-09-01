@@ -18,6 +18,7 @@ const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RoutePayment = loadable(() => import('@Routes/RoutePayment'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
+const RouteQualityDepartment = loadable(() => import('@Routes/RouteQualityDepartment'));
 const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
 const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
@@ -48,6 +49,10 @@ const App: FC = () => {
 
       <Route path='/site/warranty'>
         <RouteWarranty />
+      </Route>
+
+      <Route path='/site/quality-department'>
+        <RouteQualityDepartment />
       </Route>
 
       <Route path='/site/contacts'>

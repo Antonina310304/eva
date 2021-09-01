@@ -3,8 +3,8 @@ import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
 import Divider from '@Pages/PageCredit/elements/Divider';
-import Wrapper from '@Pages/PageCredit/elements/Wrapper';
-import PageTitle from '@Pages/PageCredit/elements/PageTitle';
+import Wrapper from '@Components/ServicePageWrapper';
+import ServicePageTitle from '@Components/ServicePageTitle';
 import QualityDepartment from './elements/QualityDepartment';
 import Requisites from './elements/Requisites';
 import ButtonsContactForms from './elements/ButtonsContactForms';
@@ -43,7 +43,7 @@ const PageContacts: FC<PageContactsProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      <PageTitle className={styles.pageTitle} title={title} />
+      <ServicePageTitle className={styles.pageTitle} title={title} />
 
       <div className={styles.containerNarrow}>
         <div className={styles.hotLineWrapper}>

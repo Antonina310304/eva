@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import ParagraphTitle from '../ParagraphTitle';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
 import styles from './Halva.module.css';
 
 export interface HalvaProps extends HTMLAttributes<HTMLDivElement> {
@@ -25,7 +25,10 @@ const Halva: FC<HalvaProps> = (props) => {
         № 963 от 05.12.2014 г.
       </div>
 
-      <ParagraphTitle className={styles.title} title='Как совершить покупку по карте «Халва»?' />
+      <ServicePageParagraphTitle
+        className={styles.title}
+        title='Как совершить покупку по карте «Халва»?'
+      />
 
       <ul className={styles.list}>
         <li className={styles.listItem}>Выберите товары на сайте и положите их в корзину;</li>

@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useMedias from '@Hooks/useMedias';
-import Wrapper from '../Wrapper';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
+import ServicePageWrapper from '@Components/ServicePageWrapper';
 import BankBanner from '../BankBanner';
-import ParagraphTitle from '../ParagraphTitle';
 import ListBlock from '../ListBlock';
 import { Partner } from '../../typings';
 import styles from './CardsPartners.module.css';
@@ -34,8 +34,8 @@ const CardsPartners: FC<CardsPartnersProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.cardsPartners, className)}>
-      <Wrapper>
-        <ParagraphTitle title='Карты рассрочки' />
+      <ServicePageWrapper>
+        <ServicePageParagraphTitle title='Карты рассрочки' />
 
         <div className={styles.buttonTabsWrapper}>
           <ButtonTabs
@@ -46,17 +46,17 @@ const CardsPartners: FC<CardsPartnersProps> = (props) => {
             onChangeTab={handleChangeTab}
           />
         </div>
-      </Wrapper>
+      </ServicePageWrapper>
 
       <BankBanner className={styles.bankBanner} cardPartner={selectedPartner} />
 
-      <Wrapper>
+      <ServicePageWrapper>
         <ListBlock
           className={styles.cardInfo}
           title={selectedPartner.title}
           list={selectedPartner.list}
         />
-      </Wrapper>
+      </ServicePageWrapper>
     </div>
   );
 };
