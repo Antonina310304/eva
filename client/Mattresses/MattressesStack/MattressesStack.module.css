@@ -13,10 +13,6 @@
     transition: all 0.4s;
   }
 
-  svg.opened {
-    /* transform: translateY(-20px); */
-  }
-
   svg g {
     transition: all 0.4s;
   }
@@ -33,10 +29,18 @@
 
   svg g.raised {
     transform: translate3d(0, -20px, 0);
+
+    .pattern {
+      stroke: var(--color-medium-gray);
+    }
   }
 
   svg g.lowered {
     transform: translate3d(0, 20px, 0);
+
+    .pattern {
+      stroke: var(--color-medium-gray);
+    }
   }
 }
 
