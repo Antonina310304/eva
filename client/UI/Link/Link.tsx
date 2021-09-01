@@ -4,6 +4,7 @@ import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
+import useMeta from '@Queries/useMeta';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
@@ -31,6 +32,9 @@ const Link: FC<LinkProps> = (props) => {
   } = props;
   const queryClient = useQueryClient();
   const history = useHistory();
+  const meta = useMeta({ ssr: true });
+
+  const href = meta.data ? `${meta.data.region.url}${to}` : to;
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
@@ -46,26 +50,28 @@ const Link: FC<LinkProps> = (props) => {
 
       e.preventDefault();
 
-      if (to.substr(0, 1) === '#') {
-        history.push(to);
+      if (href.substr(0, 1) === '#') {
+        history.push(href);
         return;
       }
 
       if (needFetch) {
-        await queryClient.prefetchQuery(['page', 'ssr', to], () =>
-          ApiPages.fetchPage({ path: to }),
+        await queryClient.prefetchQuery(['page', 'ssr', href], () =>
+          ApiPages.fetchPage({ path: href }),
         );
-        history.push(to);
+        history.push(href);
         window.scrollTo({ top: 0 });
       }
     },
-    [history, needFetch, onClick, preventDefault, queryClient, target, to],
+    [history, href, needFetch, onClick, preventDefault, queryClient, target],
   );
+
+  if (!meta.isSuccess) return null;
 
   return (
     <a
       {...restProps}
-      href={to}
+      href={href}
       target={target}
       className={cn(
         styles.link,
