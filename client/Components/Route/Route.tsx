@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { Route as BaseRoute, RouteProps as BaseRouteProps } from 'react-router-dom';
+import { Route as BaseRoute, RouteProps as BaseRouteProps, useParams } from 'react-router-dom';
 
 import { Api } from '@Api/index';
 import useRequest from '@Hooks/useRequest';
@@ -9,10 +9,16 @@ export interface RouteProps extends BaseRouteProps {
   regional?: boolean;
 }
 
+export interface RouteParams {
+  region?: string;
+}
+
 const Initiator: FC = () => {
   const meta = useMeta({ ssr: true });
+  const { region } = useParams<RouteParams>();
 
   Api.setServices(meta.data?.services);
+  Api.setRegion(region);
 
   return null;
 };
