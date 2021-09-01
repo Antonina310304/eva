@@ -1,8 +1,8 @@
 import { ProductSearchData } from '@Types/Product';
 
 export interface SearchResultData {
-  request: string;
   link: string;
+  request: string;
   matches: OfferSearchData[] | [];
   products: ProductSearchData[] | [];
 }

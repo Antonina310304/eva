@@ -20,12 +20,12 @@ const UserElemMenu: FC<UserElemMenuProp> = ({ className, element }) => {
             [styles.basket]: element.icon === 'basket',
             [styles.phone]: element.icon === 'phone',
             [styles.message]: element.icon === 'message',
-            [styles.full]: element.isChecked,
+            [styles.full]: !!element.count,
             [styles.disabled]: element.isDisabled,
           })}
         >
           {element.title}
-          {element.isChecked && <span>{element.count}</span>}
+          {!!element.count && <span>{element.count}</span>}
         </p>
       ) : (
         <Link
@@ -37,13 +37,13 @@ const UserElemMenu: FC<UserElemMenuProp> = ({ className, element }) => {
             [styles.basket]: element.icon === 'basket',
             [styles.phone]: element.icon === 'phone',
             [styles.message]: element.icon === 'message',
-            [styles.full]: element.isChecked,
+            [styles.full]: !!element.count,
             [styles.disabled]: element.isDisabled,
           })}
         >
           <>
             {element.title}
-            {element.isChecked && <span>{element.count}</span>}
+            {!!element.count && <span>{element.count}</span>}
           </>
         </Link>
       )}

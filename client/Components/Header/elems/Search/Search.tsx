@@ -11,7 +11,7 @@ import IconClose from '@UI/IconClose';
 import { SearchResultData } from '@Types/SearchResultData';
 
 import _debounce from 'lodash.debounce';
-import _ from 'lodash';
+
 import styles from './Search.module.css';
 
 export interface SearchData extends HTMLAttributes<HTMLDivElement> {
@@ -71,11 +71,11 @@ const Search: FC<SearchData> = ({ className }) => {
     }
   }
 
-  function onChange(evt: { target: { value: string } }) {
-    const { value } = evt.target;
-
+  function subscribeToChangeInput(value) {
     if (!debounceRef.current) return;
+    if (value === '') return;
 
+    // для тестирования случаев когда есть результаты, на все остальные результат пустой
     if (value === 'диваны') {
       debounceRef.current({
         request: value,
@@ -101,9 +101,19 @@ const Search: FC<SearchData> = ({ className }) => {
         ],
       });
     } else {
-      debounceRef.current({ request: value });
+      debounceRef.current({ request: value, matches: [], products: [] });
     }
     setSearchValue(value);
+  }
+
+  function onSubmit(evt) {
+    evt.preventDefault();
+    subscribeToChangeInput(searchValue);
+  }
+
+  function onChange(evt: { target: { value: string } }) {
+    const { value } = evt.target;
+    subscribeToChangeInput(value);
   }
 
   useEffect(() => {
@@ -112,11 +122,11 @@ const Search: FC<SearchData> = ({ className }) => {
   });
 
   return (
-    <form ref={formRef} className={cn(styles.search, className)}>
+    <form ref={formRef} className={cn(styles.search, className)} onSubmit={onSubmit}>
       <div
         ref={inputRef}
         className={cn({
-          [styles.show]: isShowInput === true,
+          [styles.show]: isShowInput,
           [styles.changeable]: isMobile,
           [styles.wrapper]: !isMobile,
         })}

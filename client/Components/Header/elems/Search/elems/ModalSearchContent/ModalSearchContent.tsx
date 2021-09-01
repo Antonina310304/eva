@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useEffect } from 'react';
 import { OfferSearchData, SearchResultData } from '@Types/SearchResultData';
 import { ProductSearchData } from '@Types/Product';
 import Flex from '@Components/Flex/Flex';

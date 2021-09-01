@@ -20,10 +20,11 @@ const ModalSearch: FC<ModalSearchProps> = ({ isShowModal, hideModal, children })
 
   return (
     <div
-      className={cn(
-        { [styles.modal]: isMobile, [styles.modalDesktop]: !isMobile },
-        isShow && styles.show,
-      )}
+      className={cn({
+        [styles.modal]: isMobile,
+        [styles.modalDesktop]: !isMobile,
+        [styles.show]: isShow,
+      })}
     >
       {isMobile && (
         <button type='button' onClick={hideModal} className={styles.buttonClose}>
@@ -31,7 +32,7 @@ const ModalSearch: FC<ModalSearchProps> = ({ isShowModal, hideModal, children })
         </button>
       )}
 
-      <div data-t='inner' className={styles.inner}>
+      <div className={styles.inner}>
         {children}
         <div />
       </div>
