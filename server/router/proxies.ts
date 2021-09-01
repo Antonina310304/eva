@@ -25,6 +25,7 @@ const routes = [
   '/json-schema',
   '/robots.txt',
   '/sitemap.xml',
+  '/favicon.ico',
 ];
 
 routes.forEach((route) => {

@@ -4,7 +4,6 @@ import express from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import * as Sentry from '@sentry/node';
 
 import nodeConfig from '../webpack/configs/node';
 import webConfig from '../webpack/configs/web';
@@ -13,8 +12,6 @@ import proxyRoutes from './router/proxies';
 import mainRoutes from './router/main';
 import { envs } from '../utils/envs';
 import { paths } from '../utils/paths';
-
-Sentry.init({ dsn: envs.sentryBffDsn, environment: envs.sentryEnv });
 
 const app = express();
 const publicPath = webConfig.output.publicPath.toString();
@@ -27,7 +24,6 @@ const webCompiler = multiCompiler.compilers.find((compiler) => compiler.name ===
 const nodeCompiler = multiCompiler.compilers.find((compiler) => compiler.name === nodeConfig.name);
 
 const start = async () => {
-  app.use(Sentry.Handlers.requestHandler());
   app.disable('x-powered-by');
 
   app.use(publicPath, express.static(paths.dist.web));
@@ -55,7 +51,10 @@ const start = async () => {
 
   app.use(mainRoutes);
 
-  app.use(Sentry.Handlers.errorHandler());
+  app.use((err, req, res, next) => {
+    res.statusCode = 500;
+    res.send(`<h2>${err.message}</h2><code>${err.stack}</code>`);
+  });
 
   app.listen(envs.port, () => {
     console.log(`Eva listening on port ${envs.port}!`);
