@@ -5,7 +5,9 @@ import { MetaData } from '@Types/Meta';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import useModals from '@Hooks/useModals';
-import PageTitle from '@Pages/PageCredit/elements/PageTitle';
+import ServicePageTitle from '@Components/ServicePageTitle';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
+import Checkbox from '@UI/Checkbox';
 import Box from './elements/Box';
 import ProductCard from './elements/ProductCard';
 import Check, { CheckGroup } from './elements/Check';
@@ -77,18 +79,8 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
   // Группа с итоговой суммой
   const checkTotal = useMemo(() => {
     const result: CheckGroup[] = [];
-    // const productTitle = declOfNum(products.length, ['товар', 'товара', 'товаров']);
-    const productTitle = 'товар';
     result.push({
       items: [
-        {
-          name: `Итого ${products.length} ${productTitle} на сумму`,
-          cost: summCostProducts,
-        },
-        hasServices && {
-          name: 'Дополнительные услуги',
-          cost: price.services,
-        },
         hasServices && {
           isTotal: true,
           name: 'ИТОГО',
@@ -103,26 +95,22 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
     });
 
     return result;
-  }, [payment.paid, price.services, products.length, summCostProducts, hasServices]);
+  }, [payment.paid, price.services, summCostProducts, hasServices]);
 
-  // Информация о сумме оплаты
-  const paymentInfo = useMemo(() => {
-    if (payment.prepaiment) {
-      return {
-        text: 'Предоплата:',
-        cost: payment.prepaiment,
-      };
-    }
+  // Группа с итоговой суммой дополнительных услуг
+  const checkAdditionalTotal = useMemo(() => {
+    const result: CheckGroup[] = [];
+    result.push({
+      items: [
+        hasServices && {
+          name: 'Дополнительные услуги',
+          cost: price.services,
+        },
+      ].filter(Boolean),
+    });
 
-    if (payment.needsToPay) {
-      return {
-        text: 'К оплате:',
-        cost: payment.needsToPay,
-      };
-    }
-
-    return null;
-  }, [payment]);
+    return result;
+  }, [hasServices, price.services]);
 
   const handleError = useCallback(() => {
     openModal('Info', {
@@ -156,7 +144,7 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <div className={styles.wrapper}>
-        <PageTitle className={styles.title} title={`Ваш заказ ${number || ''}`} />
+        <ServicePageTitle className={styles.title} title={`Ваш заказ ${number || ''}`} />
 
         <div className={styles.status}>
           <div className={styles.statusLabel}>Текущее состояние:</div>
@@ -179,45 +167,42 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
           </div>
 
           <Box className={styles.check} view='check'>
-            <div className={styles.checkTitle}>Ваш заказ</div>
+            <ServicePageParagraphTitle className={styles.checkTitle} title='Ваш заказ' />
             <Check groups={checkGroups} className={styles.table} />
 
-            {!!price.services && (
-              <>
-                <div className={styles.checkTitle}>Дополнительные услуги</div>
-                <Check groups={checkServices} className={styles.table} />
-              </>
-            )}
+            {!!price.services && <Check groups={checkAdditionalTotal} className={styles.table} />}
 
-            <Check groups={checkTotal} />
+            <Check groups={checkTotal} className={cn(styles.table, styles.summary)} />
 
             <div className={styles.wrapperTotal}>
-              {paymentInfo ? (
-                <div className={styles.total}>
-                  <div className={styles.totalLabel}>{paymentInfo.text}</div>
-                  <PriceContainer className={styles.totalPrice} price={paymentInfo.cost} />
-                </div>
-              ) : (
-                <div />
-              )}
-
               {payment.button && (
                 <Button className={styles.buttonAction} waiting={waiting} onClick={handlePay}>
-                  {payment.button.text}
+                  Согласен
                 </Button>
               )}
             </div>
 
+            <div className={styles.agreement}>
+              <div>
+                <Checkbox checked />
+              </div>
+              <div className={styles.agreementText}>
+                {`Согласен на получение `}
+                <Link to='#' view='native' target='_blank'>
+                  рекламно-информационных сообщений
+                </Link>
+              </div>
+            </div>
+
             <div className={styles.hint}>
               {`*Оформляя заказ, я соглашаюсь с условиями `}
-              <Link to='/static-page/privacy-policy' target='_blank'>
+              <Link to='/static-page/privacy-policy' view='native' target='_blank'>
                 Политики конфиденциальности
               </Link>
               {` и `}
-              <Link to='/static-page/oferta' target='_blank'>
+              <Link to='/static-page/oferta' view='native' target='_blank'>
                 Договора оферты
               </Link>
-              . Мы дополнительно направим вам информацию о заказе по электронной почте.
             </div>
           </Box>
         </div>

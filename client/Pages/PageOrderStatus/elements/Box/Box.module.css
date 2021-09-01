@@ -2,7 +2,6 @@
   padding: 15px 20px;
 
   background: var(--color-white);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .box.product {
@@ -10,7 +9,8 @@
 }
 
 .box.check {
-  padding: 35px 40px 40px 20px;
+  padding: 40px;
+  padding-bottom: 60px;
 }
 
 @media (--desktop) {

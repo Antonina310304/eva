@@ -32,7 +32,7 @@ const Check: FC<CheckProps> = (props) => {
               <div className={styles.itemName}>{item.name}</div>
 
               <div className={styles.itemValues}>
-                {item.quantity && <div className={styles.itemCount}>{item.quantity}</div>}
+                {item.quantity && <div className={styles.itemCount}>{`${item.quantity} шт.`}</div>}
                 <PriceContainer className={styles.itemCost} price={item.cost} />
               </div>
             </div>

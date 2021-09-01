@@ -48,16 +48,29 @@
 }
 
 .checkTitle {
-  margin-bottom: var(--space-m);
+  /* margin-top: 40px; */
+  /* font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 15px; */
+  margin-bottom: 40px;
+}
 
-  font-size: var(--size-2m);
+.table {
+  margin-top: 40px;
+  /* margin-top: 40px; */
+  /* margin-bottom: 15px; */
+  padding-bottom: 40px;
+  /* border-bottom: 1px solid var(--color-grafit); */
+  border-bottom: 1px dashed var(--color-medium-gray);
+}
+
+.summary {
+  border: none;
 }
 
 .wrapperTotal {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: var(--space-2xl) 0 var(--space-xl);
+  justify-content: center;
 }
 
 .total {
@@ -66,7 +79,7 @@
 }
 
 .totalLabel {
-  margin-right: var(--space-s);
+  margin-right: 15px;
 
   font-size: var(--size-2m);
 }
@@ -77,13 +90,26 @@
 }
 
 .buttonAction {
-  min-width: 240px;
-  height: 48px;
+  min-width: 420px;
+}
+
+.agreement {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.agreementText {
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .hint {
-  color: var(--color-text-secondary);
-  font-size: var(--size-xs);
+  margin-top: 30px;
+
+  color: var(--color-medium-gray);
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .separator {
@@ -92,9 +118,12 @@
   border-top: 1px solid var(--color-border);
 }
 
-.table {
-  margin-bottom: var(--space-s);
-  padding-bottom: var(--space-s);
+@media (--desktop-m) {
+  .page {
+    padding: 35px 40px;
+  }
 
-  border-bottom: 1px solid var(--color-border-light);
+  .main {
+    max-width: 906px;
+  }
 }

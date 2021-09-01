@@ -74,16 +74,19 @@
 }
 
 .count {
-  margin-right: 60px;
+  /* margin-right: 60px; */
 
   font-size: 18px;
   line-height: 27px;
 }
 
 .price {
+  width: 180px;
+
   font-weight: 500;
   font-size: 22px;
   line-height: 28px;
+  text-align: right;
 }
 
 @media (--desktop) {
