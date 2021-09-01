@@ -231,6 +231,13 @@
   margin-top: var(--space-n);
 }
 
+.cartBlock {
+  margin-top: var(--space-xb);
+  padding: var(--space-xb) 0;
+
+  background: var(--color-light-gray);
+}
+
 @media (--desktop-m) {
   .mainContainer {
     --gap: var(--space-xxl);

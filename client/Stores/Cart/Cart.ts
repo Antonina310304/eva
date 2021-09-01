@@ -265,4 +265,5 @@ export default {
   showPosition,
   loadRelatedProducts,
   updateDeliveryType,
+  loadInitData,
 };

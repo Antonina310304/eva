@@ -1,3 +1,26 @@
 .cart {
-  padding: var(--space-xxl) 0 0;
+}
+
+.productsList {
+  margin-top: var(--space-xxl);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xb);
+
+  background: var(--color-white);
+}
+
+.info {
+  composes: n from 'sizes';
+}
+
+.productItem {
+  box-sizing: border-box;
+  width: 250px;
+  padding: 0 var(--space-s);
+}
+
+.productCount {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-m);
 }

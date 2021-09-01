@@ -13,12 +13,11 @@ import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
-import { ProductData } from '@Types/Product';
-import { CartPositionData } from '@Types/Cart';
+import { CartPositionData, CartProductData } from '@Types/Cart';
 import styles from './PositionsSection.module.css';
 
 export interface RenderItem {
-  product: ProductData;
+  product: CartProductData;
   position: CartPositionData;
 }
 
@@ -85,7 +84,7 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
         >
           {positions.map((position) => {
             const item = renderItem({
-              product: (position.products[0] as unknown) as ProductData,
+              product: position.products[0],
               position,
             });
 

@@ -64,7 +64,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
-  const cart = useCart();
+  const cart = useCart(page.cart);
 
   const isRus = meta.country === 'RUS';
 
@@ -83,7 +83,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={styles.mainContainer}>
-        <ServicePageTitle view='bordered' title='Рассрочка и кредит' />
+        <ServicePageTitle view='bordered' title={title} />
         <InformationTabsNavigation className={styles.menu} navigation={pageMenu} />
       </div>
       {meta.region.isPec ? (
@@ -131,7 +131,13 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
               В случае необходимости, вы можете забрать свой заказ в пункте выдачи ТК
             </div>
           </div>
-          {cart.network === 'success' && cart.count > 0 && <CartBlock cart={cart} />}
+          {cart.network === 'success' && cart.count > 0 && (
+            <div className={styles.cartBlock}>
+              <div className={styles.contentContainer}>
+                <CartBlock cart={cart} />
+              </div>
+            </div>
+          )}
           <div className={styles.contentContainer}>
             {checkedDelivery.type === 'pickupPoint' && <PickupPoint region={meta.region.name} />}
             {checkedDelivery.type === 'toAddress' && <ToAddress />}
