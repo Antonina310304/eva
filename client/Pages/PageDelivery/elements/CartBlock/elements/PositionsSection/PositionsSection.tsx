@@ -19,7 +19,7 @@ import styles from './PositionsSection.module.css';
 
 export interface RenderItem {
   product: ProductData;
-  quantity: number;
+  position: CartPositionData;
 }
 
 export interface PositionsSectionProps extends HTMLAttributes<HTMLDivElement> {
@@ -84,7 +84,10 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
           onChangeProgress={handleChangeProgress}
         >
           {positions.map((position) => {
-            const item = renderItem({ product: position.products[0], quantity: position.quantity });
+            const item = renderItem({
+              product: (position.products[0] as unknown) as ProductData,
+              position,
+            });
 
             return cloneElement(item, { ...item.props, key: position.id });
           })}

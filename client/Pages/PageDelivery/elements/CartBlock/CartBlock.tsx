@@ -30,10 +30,10 @@ const CartBlock: FC<CartBlockProps> = (props) => {
               className={styles.sectionCrossSale}
               title='Ваша корзина'
               positions={cart.positions}
-              renderItem={({ product, quantity }) => (
+              renderItem={({ product, position }) => (
                 <div className={styles.productItem}>
-                  <CrossSaleProductCard {...product} />
-                  <div className={styles.productCount}>{`Кол-во: ${quantity} шт.`}</div>
+                  <CrossSaleProductCard product={product} />
+                  <div className={styles.productCount}>{`Кол-во: ${position.quantity} шт.`}</div>
                 </div>
               )}
             />
