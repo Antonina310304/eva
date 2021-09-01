@@ -5,6 +5,7 @@ import { useQueryClient } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
 import useMeta from '@Queries/useMeta';
+import useModals from '@Hooks/useModals';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
@@ -33,6 +34,7 @@ const Link: FC<LinkProps> = (props) => {
   const queryClient = useQueryClient();
   const history = useHistory();
   const meta = useMeta({ ssr: true });
+  const [, { closeAllModals }] = useModals();
 
   const href = meta.data ? `${meta.data.region.url}${to}` : to;
 
@@ -51,6 +53,7 @@ const Link: FC<LinkProps> = (props) => {
       e.preventDefault();
 
       if (href.substr(0, 1) === '#') {
+        closeAllModals();
         history.push(href);
         return;
       }
@@ -59,11 +62,12 @@ const Link: FC<LinkProps> = (props) => {
         await queryClient.prefetchQuery(['page', 'ssr', href], () =>
           ApiPages.fetchPage({ path: href }),
         );
+        closeAllModals();
         history.push(href);
         window.scrollTo({ top: 0 });
       }
     },
-    [history, href, needFetch, onClick, preventDefault, queryClient, target],
+    [closeAllModals, history, href, needFetch, onClick, preventDefault, queryClient, target],
   );
 
   if (!meta.isSuccess) return null;
