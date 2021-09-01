@@ -25,6 +25,7 @@ const routes = [
   '/json-schema',
   '/robots.txt',
   '/sitemap.xml',
+  '/favicon.ico',
 ];
 
 routes.forEach((route) => {
@@ -52,7 +53,7 @@ router.use('/p/:path', (req, res, next) => {
     },
     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
       const domain = new URL(backend).host;
-      const cookies = cookie.parse(srcReq.headers.cookie);
+      const cookies = cookie.parse(srcReq.headers.cookie || '');
 
       // Переопределяем домен для сессионных кук
       const cookieString = Object.entries(cookies).map(([name, value]) => {

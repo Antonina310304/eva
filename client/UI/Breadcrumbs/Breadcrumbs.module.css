@@ -1,0 +1,41 @@
+.breadcrumbs {
+}
+
+.item {
+  composes: s from 'sizes';
+
+  display: inline-block;
+
+  color: var(--color-dark-gray);
+  vertical-align: baseline;
+}
+
+.last {
+  composes: s from 'sizes';
+
+  color: var(--color-dark-gray);
+}
+
+.link {
+  composes: s from 'sizes';
+
+  color: var(--color-dark-gray);
+
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: var(--color-black);
+  }
+}
+
+.separator {
+  composes: s from 'sizes';
+
+  display: inline-block;
+  margin: 0 var(--space-xxs);
+
+  color: var(--color-dark-gray);
+  vertical-align: baseline;
+
+  cursor: default;
+}

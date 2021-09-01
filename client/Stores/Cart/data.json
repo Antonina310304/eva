@@ -1,0 +1,612 @@
+{
+  "count": 3,
+  "cost": 88970,
+  "discount": 0,
+  "couponDiscount": 0,
+  "gameDiscount": 0,
+  "hasConfiguredPositions": false,
+  "positions": [
+    {
+      "quantity": 1,
+      "price": 32990,
+      "oldPrice": null,
+      "discount": 0,
+      "cost": 32990,
+      "id": "ca58fd7a47bc856705bfd6662418212b",
+      "title": "Динс Velvet Yellow",
+      "hidden": false,
+      "products": [
+        {
+          "name": "Динс Velvet Yellow",
+          "id": 4884,
+          "price": 32990,
+          "oldprice": 39990,
+          "quantity": 1,
+          "category": "Прямые диваны",
+          "type": "Диван",
+          "groups": [
+            {
+              "title": "Обивка",
+              "parameters": [
+                {
+                  "type": "materials",
+                  "data": [
+                    {
+                      "title": "Ткань 1",
+                      "name": "Maxx - Макс 560",
+                      "description": "Велюр",
+                      "image": "/nizhnij-tagil/assets/thumb/fabric/3390197/x_ffffff_100_0_2021072813075910800_80.jpg"
+                    },
+                    {
+                      "title": "Ткань 2",
+                      "name": "Maxx - Макс 560",
+                      "description": "Велюр",
+                      "image": "/nizhnij-tagil/assets/thumb/fabric/3390197/x_ffffff_100_0_2021072813075910800_80.jpg"
+                    },
+                    {
+                      "title": "Ткань 3",
+                      "name": "Maxx - Макс 560",
+                      "description": "Велюр",
+                      "image": "/nizhnij-tagil/assets/thumb/fabric/3390197/x_ffffff_100_0_2021072813075910800_80.jpg"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Размеры",
+              "parameters": [
+                {
+                  "type": "sizes",
+                  "data": [
+                    {
+                      "title": "Длина",
+                      "value": 218,
+                      "unit": " см"
+                    },
+                    {
+                      "title": "Ширина",
+                      "value": 95,
+                      "unit": " см"
+                    },
+                    {
+                      "title": "Высота",
+                      "value": 90,
+                      "unit": " см"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "",
+              "parameters": [
+                {
+                  "type": "feature",
+                  "data": [
+                    {
+                      "title": "Наполнение",
+                      "value": "ППУ ST стандартный"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "variant": 17,
+          "link": "/nizhnij-tagil/product/divan-dins-velvet-yellow",
+          "image": "/nizhnij-tagil/assets/thumb/cart_position/3518479/400x300_ffffff_100_0_2021082411241610800_80.jpg"
+        }
+      ],
+      "relatedProducts": [
+        {
+          "id": 23959,
+          "image": "/nizhnij-tagil/assets/thumb/product/584601/200x144_ffffff_100_0_2018112315135210800_80.jpg",
+          "price": 2990,
+          "oldPrice": 3690,
+          "url": "/nizhnij-tagil/product/topper-slim-150x200",
+          "name": "Слим 150x200"
+        },
+        {
+          "id": 6173,
+          "image": "/nizhnij-tagil/assets/thumb/shop_product/229093/200x144_ffffff_100_0_2017110313425110800_80.jpg",
+          "price": 12990,
+          "oldPrice": 15990,
+          "url": "/nizhnij-tagil/product/kreslo-dins-velvet-yellow",
+          "name": "Динс Velvet Yellow"
+        },
+        {
+          "id": 21515,
+          "image": "/nizhnij-tagil/assets/thumb/product/517090/200x144_ffffff_100_0_2018102414562110800_80.jpg",
+          "price": 6990,
+          "oldPrice": 0,
+          "url": "/nizhnij-tagil/product/puf-dins-velvet-yellow",
+          "name": "Динс Velvet Yellow"
+        },
+        {
+          "id": 85787,
+          "image": "/nizhnij-tagil/assets/thumb/product/1921025/200x144_ffffff_100_0_2020061212073610800_80.jpg",
+          "price": 6690,
+          "oldPrice": 6990,
+          "url": "/nizhnij-tagil/product/jurnalnyj-stol-linc-3-light-white",
+          "name": "Линц-3 Light White"
+        }
+      ],
+      "hasDisabledDiscount": true,
+      "hasVisibleDiscount": false,
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/WdIiD7Zkt5DdE7QW2hCBqzbg0BLnnGSb1MN0L2-A0u0/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE5MTg1MDguanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/VlKfpPIIf13duDbcY1ije4j9qSlioxiNT6UP9EZwr2I/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI0NjcxNjYuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/Qqrl8ZdSx4TCEp9IoTiikknki9KTcN6PzxfiIgrvJGQ/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI0NjcxNjcuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/HiI_CkIlfbrvAFXgeIK7dJq71c6aejvb5I0KOrvuqs8/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI0NjcxNjkuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/aSrR122OETENIEuNJtkHJbo83UsAHW5r16i3Bufa8ME/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI0NjcxNzAuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/y_7v1PkNf7LNG-oHvtA52XYm0In2hGw1R52iqJX_Gcs/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI1MTY5ODcuanBn.jpg"
+        },
+        {
+          "type": "video",
+          "code": "iWXzUv0LdZA",
+          "poster": "https://cdn.divan.ru/xw5LfUS7owB6a_anrvR8FrqTVpB9E3w7dspjDuGsafY/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0X3ZpZGVvLzE4MjE4NDUuanBn.jpg"
+        },
+        {
+          "type": "video",
+          "code": "yxi36K22PoM",
+          "poster": "https://cdn.divan.ru/w65-SG3oadXewGDlKBpuJrM2HW0kgQYlcKyxT3NrhcI/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0X3ZpZGVvLzE5OTg5MDMuanBn.jpg"
+        },
+        {
+          "type": "video",
+          "code": "lNWbC8BQpLw",
+          "poster": "https://cdn.divan.ru/xQIwC5c5VnY4zzc65kFaztO2CaFRuXlrzZ03nPa5GpM/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0X3ZpZGVvLzE4MjE4NDYuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/nXlbgBVbp96PIlEedycnwiHQPMxHEfR6DKG4G5zjHjc/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQzMi5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/mxnBiwNVnZvmi46638MkN3jlLqpUMQM-lu-VzPKzWYY/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQzMy5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/4KartbkymFxCGDQbg8l_1zzNZMIpMek8V2KxHhpgbHo/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQzNi5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/JRWtRTrahzsKmhg6ESJlorgNGo1JbfcKTULGEzfqUXY/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQzNy5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/8v_e2WScfBYxyV0JKy4euhSHYNNv8b2aTQnEr4audB8/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzEzNzc5NTEuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/hcCUPVCcjxbTHSVcNHeEk7EXiteADFvMcpqSCRcVx6M/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI0NTA1MDkuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/5OKWufkcyvnnIyy_X1J2MRcjqxFjys-f2KF3lAKw2W0/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI0NTA1MDguanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/hWssuLPzc807wPT0-5aC9mieQCxeGOUN1u42L31kQyo/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQzOS5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/0hTObLI6yBNX5_83e0t2gtpoaRy6st3DlCrhj4yAg5Q/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQ0MC5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/ic8ob_3lMu7GQlDUibK1F0C8V9iGqY21Y0XvxLVz-iQ/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQ0My5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/pYg5AEKhG6NGTSBDOzs_jSUicfo013JRyLrquLkKqZU/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQ0NC5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/TPMWdw1DxY1WWEt7xWZoRdDEXJwXJKTdbhtFT0YNgU0/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQ0NS5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/YDQd43VfDp_Fr1XN590MmhVXXTBgAQoWt0wF9BKi0Zs/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzM2NjQ0Ni5qcGc.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/JzLupZJxBmq8_aTXLy4Ovb3vEQLU0IE6TU0R4KWUCsA/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0Lzc2MDQyMS5qcGc.jpg"
+        }
+      ],
+      "isCredit": false,
+      "deactivateControls": false,
+      "isKit": false,
+      "maxQuantity": 100
+    },
+    {
+      "quantity": 1,
+      "price": 33990,
+      "oldPrice": null,
+      "discount": 0,
+      "cost": 33990,
+      "id": "00da12f9944266f1e606fc5281ab4843",
+      "title": "Динс Мини Velvet Yellow",
+      "hidden": false,
+      "products": [
+        {
+          "name": "Динс Мини Velvet Yellow",
+          "id": 115044,
+          "price": 33990,
+          "oldprice": 39990,
+          "quantity": 1,
+          "category": "Прямые диваны",
+          "type": "Диван",
+          "groups": [
+            {
+              "title": "Обивка",
+              "parameters": [
+                {
+                  "type": "materials",
+                  "data": [
+                    {
+                      "title": "Ткань 1",
+                      "name": "Maxx - Макс 560",
+                      "description": "Велюр",
+                      "image": "/nizhnij-tagil/assets/thumb/fabric/3390197/x_ffffff_100_0_2021072813075910800_80.jpg"
+                    },
+                    {
+                      "title": "Ткань 2",
+                      "name": "Maxx - Макс 560",
+                      "description": "Велюр",
+                      "image": "/nizhnij-tagil/assets/thumb/fabric/3390197/x_ffffff_100_0_2021072813075910800_80.jpg"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Размеры",
+              "parameters": [
+                {
+                  "type": "sizes",
+                  "data": [
+                    {
+                      "title": "Длина",
+                      "value": 162,
+                      "unit": " см"
+                    },
+                    {
+                      "title": "Ширина",
+                      "value": 96,
+                      "unit": " см"
+                    },
+                    {
+                      "title": "Высота",
+                      "value": 89,
+                      "unit": " см"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "",
+              "parameters": [
+                {
+                  "type": "feature",
+                  "data": [
+                    {
+                      "title": "Наполнение",
+                      "value": "ППУ ST стандартный"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "variant": 15,
+          "link": "/nizhnij-tagil/product/divan-dins-mini-velvet-yellow",
+          "image": "/nizhnij-tagil/assets/thumb/cart_position/3518472/400x300_ffffff_100_0_2021082411230510800_80.jpg"
+        }
+      ],
+      "relatedProducts": [
+        {
+          "id": 120792,
+          "image": "/nizhnij-tagil/assets/thumb/product/2637271/200x144_ffffff_100_0_2020122417210810800_80.jpg",
+          "price": 20490,
+          "oldPrice": 22990,
+          "url": "/nizhnij-tagil/product/kreslo-krovat-dins-mini-velvet-yellow",
+          "name": "Динс Мини Velvet Yellow"
+        },
+        {
+          "id": 21475,
+          "image": "/nizhnij-tagil/assets/thumb/product/516642/200x144_ffffff_100_0_2018102410284510800_80.jpg",
+          "price": 2890,
+          "oldPrice": 3490,
+          "url": "/nizhnij-tagil/product/topper-slim-140x200",
+          "name": "Слим 140x200"
+        },
+        {
+          "id": 135393,
+          "image": "/nizhnij-tagil/assets/thumb/product/2955015/200x144_ffffff_100_0_2021032611001910800_80.jpg",
+          "price": 4990,
+          "oldPrice": 5990,
+          "url": "/nizhnij-tagil/product/puf-plidi-happy-yellow",
+          "name": "Плиди Happy Yellow"
+        },
+        {
+          "id": 85787,
+          "image": "/nizhnij-tagil/assets/thumb/product/1921025/200x144_ffffff_100_0_2020061212073610800_80.jpg",
+          "price": 6690,
+          "oldPrice": 6990,
+          "url": "/nizhnij-tagil/product/jurnalnyj-stol-linc-3-light-white",
+          "name": "Линц-3 Light White"
+        }
+      ],
+      "hasDisabledDiscount": true,
+      "hasVisibleDiscount": false,
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/PethdNWMgIKKa_pYgV6eS2qWCMtAf_MANKq3f-Mu854/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE5MDk5NDUuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/3EzAWTkSd9LD_GbgzQ3t2MObg2jjIObPxpV87Y8dXZs/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE5Nzg4NTMuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/cG0m2m9I5Q193SgCC3reIuVaPpsef5vLmeNOOWXvbAU/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE5Nzg4NTIuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/IopmUXoMDDGe-qbg9YxfAG-5Ws9t6YFU0mnpU4DoU5k/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMzQuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/kL8l6eSvWfggw5JR9b7MLrJtZSWYeDXeBT4ue7GRvMA/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMjUuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/EZG2pYF-tMMv5qUyoen5Wy25yLrj8bRNdTO3Qc8lv5I/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMzAuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/gAHW8C819FSbeqDxHOWdRKPn3I0mSLYP6cGh9nkR6xM/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMzEuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/_VEfl7O0BCYAxFUJDXpFP8-9jSvmc4HDSF8xukOnYVo/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMjQuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/4YdAMsLnMuuKJ-u9RkoXwH2OwnpU0YE7YGgd3xlapgE/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMjguanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/VH8m1Cjat8pI4wLCwPGq20KG-SeveRCfqD-OnhsNZhk/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMjYuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/DIdsZgMQa2IL4VoBomISRbJgqCsN0GLSf7MefuBov_o/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMjkuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/GjDkOo4u02f3d0QjtcgGVFPZ_VN6zvVky_mTVY0BO-o/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMjcuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/AZgIHy_8RNABm-E1vQ7AZYGWwOHkQDKrtJNYqeO8uKo/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4NDgwMzMuanBn.jpg"
+        }
+      ],
+      "isCredit": false,
+      "deactivateControls": false,
+      "isKit": false,
+      "maxQuantity": 100
+    },
+    {
+      "quantity": 1,
+      "price": 21990,
+      "oldPrice": null,
+      "discount": 0,
+      "cost": 21990,
+      "id": "2c93b50e9585de3e51dc3aff21597119",
+      "title": "Порту Textile Grey",
+      "hidden": false,
+      "products": [
+        {
+          "name": "Порту Textile Grey",
+          "id": 2209,
+          "price": 21990,
+          "oldprice": 21990,
+          "quantity": 1,
+          "category": "Угловые диваны",
+          "type": "Диван угловой",
+          "groups": [
+            {
+              "title": "Обивка",
+              "parameters": [
+                {
+                  "type": "materials",
+                  "data": [
+                    {
+                      "title": "Ткань 1",
+                      "name": "Domino - Домино 02",
+                      "description": "Рогожка",
+                      "image": "/nizhnij-tagil/assets/thumb/fabric/1734023/x_ffffff_100_0_2020041316550710800_80.jpg"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Размеры",
+              "parameters": [
+                {
+                  "type": "sizes",
+                  "data": [
+                    {
+                      "title": "Длина",
+                      "value": 226,
+                      "unit": " см"
+                    },
+                    {
+                      "title": "Ширина",
+                      "value": 155,
+                      "unit": " см"
+                    },
+                    {
+                      "title": "Высота",
+                      "value": 90,
+                      "unit": " см"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "",
+              "parameters": [
+                {
+                  "type": "feature",
+                  "data": [
+                    {
+                      "title": "Наполнение",
+                      "value": "ППУ ST стандартный"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "",
+              "parameters": [
+                {
+                  "type": "feature",
+                  "data": [
+                    {
+                      "title": "Угол дивана",
+                      "value": "универсальный"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "variant": 0,
+          "link": "/nizhnij-tagil/product/divan-uglovoj-portu-textile-grey",
+          "image": "/nizhnij-tagil/assets/thumb/cart_position/3551575/400x300_ffffff_100_0_2021083016301910800_80.jpg"
+        }
+      ],
+      "relatedProducts": [
+        {
+          "id": 126328,
+          "image": "/nizhnij-tagil/assets/thumb/product/2407234/200x144_ffffff_100_0_2020102917463510800_80.jpg",
+          "price": 15990,
+          "oldPrice": 19990,
+          "url": "/nizhnij-tagil/product/kreslo-rotterdam-velvet-grey",
+          "name": "Роттердам Velvet Grey"
+        },
+        {
+          "id": 21475,
+          "image": "/nizhnij-tagil/assets/thumb/product/516642/200x144_ffffff_100_0_2018102410284510800_80.jpg",
+          "price": 2890,
+          "oldPrice": 3490,
+          "url": "/nizhnij-tagil/product/topper-slim-140x200",
+          "name": "Слим 140x200"
+        },
+        {
+          "id": 141133,
+          "image": "/nizhnij-tagil/assets/thumb/product/3354094/200x144_ffffff_100_0_2021071911183110800_80.jpg",
+          "price": 6990,
+          "oldPrice": 0,
+          "url": "/nizhnij-tagil/product/puf-dins-velvet-grey",
+          "name": "Динс Velvet Grey"
+        },
+        {
+          "id": 143104,
+          "image": "/nizhnij-tagil/assets/thumb/product/3450686/200x144_ffffff_100_0_2021081015540010800_80.jpg",
+          "price": 18990,
+          "oldPrice": 19990,
+          "url": "/nizhnij-tagil/product/tv-tumba-tedjons-time-deco-grafit",
+          "name": "Теджонс Time Deco Grafit"
+        }
+      ],
+      "hasDisabledDiscount": false,
+      "hasVisibleDiscount": false,
+      "gallery": [
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/8-H5WVjPt2Ufmx0Bv1v4aNLIT9f5LKi8Y9wOBXCKNwY/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MTkuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/Nnpwklzd1JmoENFIsn4Ae-GjRcPmjkXhna3quJ8BP4I/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzI3MDc1MjkuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/x2h3-qg_KLu7U-yFQFqXV5Q7Fa6aCu8q-qcj0I1NkFU/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjIuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/3cudJ1Rs7Y1CkQJsl3Pw1S31kinwA2c9GppJJZuFN-o/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjQuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/M0BHfqGdXtAWfbB82JGo_QjpnDsxRtxFYeOfXgpFsBc/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjUuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/QgOA_axSoIubjDENnJevBJSXjo4CDsrlqnW-5NS0yiU/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjYuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/3i1edbpwo9w8GSBr_wXOI2Fwdbq-WlywT-8lhr5IwfY/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjMuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/b4YhaoQDjJEtnv-abYXpFSaOfAyy_GjW6STiVDjcKrQ/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjAuanBn.jpg"
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.divan.ru/A6a3k4O8d8n0hCNqpsUfAqqoJlUGR1nAvSS9lDcpEco/rs:fit:1000:0:1:1/g:ce:0:0/bg:ffffff/q:80/czM6Ly9wcm9kdWN0LzE4MjI4MjEuanBn.jpg"
+        }
+      ],
+      "isCredit": false,
+      "deactivateControls": false,
+      "isKit": false,
+      "maxQuantity": 100
+    }
+  ],
+  "newPositions": [],
+  "removedPositions": [],
+  "affiliation": "Нижний Тагил",
+  "coupon": null,
+  "couponData": null,
+  "delivery": {
+    "freeDeliveryAvailable": false,
+    "untilFreeDelivery": 0,
+    "isFreeDelivery": false
+  },
+  "meta": {
+    "marketing": []
+  },
+  "bonusPoints": {
+    "earnedAmount": 4450,
+    "availableAmount": 0,
+    "spentAmount": 0
+  }
+}

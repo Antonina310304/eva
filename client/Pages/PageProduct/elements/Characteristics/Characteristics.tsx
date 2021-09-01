@@ -32,12 +32,12 @@ export interface CharacteristicsProps extends HTMLAttributes<HTMLDivElement> {
 
 const ButtonTabs = loadable(() => import('@UI/ButtonTabs'));
 const MainSelect = loadable(() => import('@UI/MainSelect'));
+const ImportantInfo = loadable(() => import('@Components/ImportantInfo'));
 const Dimension = loadable(() => import('./elements/Dimension'));
 const Document = loadable(() => import('./elements/Document'));
 const Hardness = loadable(() => import('./elements/Hardness'));
 const SynchronousSchemes = loadable(() => import('./elements/SynchronousSchemes'));
 const StringParameter = loadable(() => import('./elements/StringParameter'));
-const ImportantInfo = loadable(() => import('./elements/ImportantInfo'));
 const ModuleCounter = loadable(() => import('./elements/ModuleCounter'));
 const SampleParameter = loadable(() => import('./elements/SampleParameter'));
 

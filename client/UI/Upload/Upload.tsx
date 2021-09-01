@@ -24,6 +24,7 @@ export interface EpicUploadProps extends InputHTMLAttributes<HTMLInputElement> {
   maxCount?: number;
   view?: 'vertical';
   maxSizePerFile?: number;
+  insideUploadedElements?: boolean;
   error?: string;
   onChangeError: (e: null, errorText: string) => void;
 }
@@ -47,11 +48,13 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
     view,
     maxSizePerFile,
     error,
+    insideUploadedElements,
     onChangeError,
     ...restProps
   } = props;
 
   const fileInput = useRef<HTMLInputElement>();
+  const fileAdd = useRef<HTMLInputElement>();
   const [files, setFiles] = useState([]);
   const [warning, setWarning] = useState<string>();
   const hasError = Boolean(error || warning);
@@ -95,6 +98,58 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
 
     Promise.all(tasks.map((task) => task())).then((_files) => {
       setFiles(_files);
+    });
+  }, []);
+
+  const handleAddFiles = useCallback(() => {
+    const tasks = [];
+
+    for (let index = 0; index < fileAdd.current.files.length; index += 1) {
+      const file = fileAdd.current.files[index] as ExtendedFile;
+
+      file.media = getTypeMedia(file.type);
+
+      switch (file.media) {
+        case 'image': {
+          tasks.push(() => {
+            return new Promise((resolve) => {
+              const reader = new FileReader();
+
+              reader.onload = (e) => {
+                file.src = e.target.result;
+                resolve(file);
+              };
+
+              reader.readAsDataURL(file);
+            });
+          });
+          break;
+        }
+
+        case 'video': {
+          file.src = URL.createObjectURL(file);
+
+          tasks.push(() => Promise.resolve(file));
+          break;
+        }
+
+        default:
+      }
+    }
+
+    Promise.all(tasks.map((task) => task())).then((_files) => {
+      setFiles((prev) => {
+        const newFiles: ExtendedFile[] = [];
+        _files.forEach((file: ExtendedFile) => {
+          const finder = prev.findIndex((item) => item.name === file.name);
+
+          if (finder < 0) {
+            newFiles.push(file);
+          }
+        });
+
+        return [...prev, ...newFiles];
+      });
     });
   }, []);
 
@@ -151,24 +206,85 @@ const EpicUpload: FC<EpicUploadProps> = (props) => {
   return (
     <div className={cn(styles.upload, { [styles.viewVertical]: view === 'vertical' }, [className])}>
       <div className={styles.wrapperControl}>
-        <input
-          {...restProps}
-          className={styles.control}
-          type='file'
-          ref={fileInput}
-          onChange={handleChange}
-        />
+        {!insideUploadedElements && (
+          <>
+            <input
+              {...restProps}
+              className={styles.control}
+              type='file'
+              ref={fileInput}
+              onChange={handleChange}
+            />
+            <div className={styles.button}>
+              {cloneElement(icon, { className: cn(icon.props.className, styles.icon) })}
+              <div className={styles.textes}>
+                <div className={styles.title}>{title}</div>
+                <div className={styles.description}>{description}</div>
+              </div>
+            </div>
+          </>
+        )}
 
-        <div className={styles.button}>
-          {cloneElement(icon, { className: cn(icon.props.className, styles.icon) })}
-          <div className={styles.textes}>
-            <div className={styles.title}>{title}</div>
-            <div className={styles.description}>{description}</div>
-          </div>
-        </div>
+        {insideUploadedElements && (
+          <>
+            {!files.length && (
+              <input
+                {...restProps}
+                className={styles.control}
+                type='file'
+                ref={fileInput}
+                onChange={handleChange}
+              />
+            )}
+
+            <div className={cn(styles.button, styles.withoutBorder)}>
+              {files.length > 0 ? (
+                <div className={cn(styles.list, styles.wideList, { [styles.hasError]: hasError })}>
+                  {files.map((file, index) => {
+                    return (
+                      <div
+                        className={cn(styles.listItem, styles.closingItem)}
+                        key={index}
+                        onClick={() => handleRemove(index)}
+                      >
+                        {file.media === 'image' && (
+                          <img className={styles.listPreview} src={file.src} />
+                        )}
+                        {file.media === 'video' && (
+                          <video className={styles.listPreview} src={file.src} />
+                        )}
+                        <div className={styles.remove} />
+                        <div className={styles.blackFon} />
+                        <div className={styles.fileName}>{file.name}</div>
+                      </div>
+                    );
+                  })}
+
+                  <div className={cn(styles.listItem, styles.closingItem)}>
+                    <div className={styles.addMore}>
+                      <div className={styles.iconPlus} />
+                      <input
+                        className={styles.addFiles}
+                        type='file'
+                        ref={fileAdd}
+                        onChange={handleAddFiles}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                cloneElement(icon, { className: cn(icon.props.className, styles.icon) })
+              )}
+              <div className={styles.textes}>
+                {!files.length && <div className={styles.title}>{title}</div>}
+                <div className={styles.description}>{description}</div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
-      {files.length > 0 && (
+      {!insideUploadedElements && files.length > 0 && (
         <div className={cn(styles.list, { [styles.hasError]: hasError })}>
           {files.map((file, index) => {
             return (

@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import ParagraphTitle from '../ParagraphTitle';
+import ServicePageParagraphTitle from '@Components/ServicePageParagraphTitle';
 import styles from './ListBlock.module.css';
 
 export interface ListBlockProps extends HTMLAttributes<HTMLDivElement> {
@@ -16,7 +16,7 @@ const ListBlock: FC<ListBlockProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.listBlock, className)}>
-      <ParagraphTitle title={title} />
+      <ServicePageParagraphTitle title={title} />
 
       <ul className={styles.list}>
         {list.map((item, index) => (
