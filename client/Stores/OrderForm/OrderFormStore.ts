@@ -55,7 +55,7 @@ const availablePaymentVariantsStore = createDerived(
 const selectedPaymentVariantStore = createDerived(
   [availablePaymentVariantsStore, selectedStore],
   (paymentVariants, selected) => {
-    return paymentVariants.find((pv) => pv.id === selected.paymentVariant);
+    return paymentVariants.find((pv) => pv.id === selected?.paymentVariant);
   },
 );
 
