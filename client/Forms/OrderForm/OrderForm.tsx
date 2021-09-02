@@ -1,6 +1,7 @@
-import React, { useCallback, useState, memo, FC, useMemo } from 'react';
+import React, { useCallback, useState, useEffect, memo, FC, useMemo } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
+import { useQueryClient } from 'react-query';
 
 import InputPhone from '@Components/InputPhone';
 import Button from '@UI/Button';
@@ -32,10 +33,11 @@ const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, profile, ...restProps } = props;
   const [loading, setLoading] = useState(false);
   const [wantBonuses, setWantBonuses] = useState(false);
-  const [name, setName] = useState<string>(null);
-  const [phone, setPhone] = useState<string>(null);
-  const [email, setEmail] = useState<string>(null);
+  const [name, setName] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [, { openModal }] = useModals();
+  const queryClient = useQueryClient();
   const orderForm = useOrderForm();
   const paymentsAsSelect = orderForm.visiblePaymentTypes.length > 3;
 
@@ -93,13 +95,32 @@ const OrderForm: FC<OrderFormProps> = (props) => {
     setEmail(e.target.value);
   }, []);
 
+  const handleAuth = useCallback(() => {
+    queryClient.invalidateQueries('profile');
+  }, [queryClient]);
+
   const handleClickAuth = useCallback(() => {
-    openModal('Authorization', { defaultPhone: phone, defaultName: name, defaultEmail: email });
-  }, [email, name, openModal, phone]);
+    openModal('Authorization', {
+      defaultPhone: phone,
+      defaultName: name,
+      defaultEmail: email,
+      onSuccess: handleAuth,
+    });
+  }, [email, handleAuth, name, openModal, phone]);
 
   const handleSubmit = useCallback(() => {
     setLoading(true);
   }, []);
+
+  // Заполняем поля формы, если человек авторизовался/зарегистрировался
+  useEffect(() => {
+    if (!profile) return;
+
+    setWantBonuses(false);
+    setName((prev) => prev || profile.firstName);
+    setPhone((prev) => prev || profile.phone.slice(1));
+    setEmail((prev) => prev || profile.email);
+  }, [profile]);
 
   return (
     <Form
