@@ -32,7 +32,7 @@ export interface PressDetailsProps {
 const PressDetails: FC<PressDetailsProps> = (props) => {
   const { className, article, socials, ...restProps } = props;
   const { link, logo, images, preview, text } = article;
-  const { isMobileM } = useMedias();
+  const { isMobileM, isDesktop } = useMedias();
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -58,11 +58,10 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
             ))}
           </Gallery>
         </div>
-
-        <div className={styles.wrapperSecondGallery}>
-          {isMobileM ? (
-            <ProgressBar className={styles.progressBar} track={track} />
-          ) : (
+        {isMobileM ? (
+          <ProgressBar className={styles.progressBar} track={track} />
+        ) : (
+          <div className={styles.wrapperSecondGallery}>
             <Gallery
               className={styles.secondGallery}
               key={images.length}
@@ -78,10 +77,9 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
                 </div>
               ))}
             </Gallery>
-          )}
-
-          <ProgressBar className={styles.progressBar} track={track} />
-        </div>
+            <ProgressBar className={styles.progressBar} track={track} />
+          </div>
+        )}
       </div>
       <div className={styles.info}>
         <div className={styles.contentWrapper}>
