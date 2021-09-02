@@ -128,6 +128,8 @@
 
 @media (--desktop) {
   .pressDetails {
+    position: relative;
+
     flex-direction: column;
   }
 
@@ -150,8 +152,8 @@
 
   .scroller {
     position: absolute !important;
-    top: 160px;
-    right: 200px;
+    top: 0;
+    right: 0;
 
     width: 113px;
     height: 340px;
