@@ -12,10 +12,14 @@ export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { className, page, ...restProps } = props;
+  const { title, teaser } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      PageB2bDetailData
+      <h1 className={styles.heading}>{title}</h1>
+      <div className={styles.teaserWrapper}>
+        <div className={styles.teaser}>{teaser}</div>
+      </div>
     </div>
   );
 };
