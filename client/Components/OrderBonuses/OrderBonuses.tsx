@@ -89,8 +89,6 @@ const OrderBonuses: FC<OrderBonusesProps> = (props) => {
               )}
             </Popup>
           </div>
-
-          <div className={styles.text}>за заказ</div>
         </>
       )}
     </div>
