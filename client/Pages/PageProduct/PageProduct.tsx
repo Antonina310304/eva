@@ -211,6 +211,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
+      <div className={styles.head} />
       <div className={cn(styles.mainContainer, styles.wrapperMain)}>
         <div className={styles.grid}>
           <div ref={refMainContent}>
