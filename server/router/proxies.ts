@@ -26,6 +26,7 @@ const routes = [
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',
+  '/order/pay',
 ];
 
 routes.forEach((route) => {

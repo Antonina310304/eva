@@ -10,8 +10,7 @@ const CharacteristicsList = (props) => {
     <div {...restProps} className={cn(styles.characteristicsList, className)}>
       {characteristics.map((characteristic, index) => (
         <div className={styles.item} key={index}>
-          <div className={styles.itemName}>{characteristic.name}</div>
-          <div className={styles.itemValue}>{characteristic.value}</div>
+          <div>{`${characteristic.name} ${characteristic.value}`}</div>
         </div>
       ))}
     </div>

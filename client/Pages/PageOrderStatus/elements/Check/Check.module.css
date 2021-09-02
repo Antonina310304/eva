@@ -2,27 +2,16 @@
 }
 
 .group {
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-
-  border-bottom: 1px solid var(--color-grafit);
-
-  &:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-
-    border-bottom: 0;
-  }
 }
 
 .item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: var(--space-s);
 
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
 
   &:last-child {
     margin-bottom: 0;
@@ -30,42 +19,67 @@
 }
 
 .item.isTotal {
-  margin-top: 20px;
+  margin: var(--space-n);
+  margin-bottom: 0;
 
   .itemName {
-    font-size: 22px;
-    line-height: 33px;
+    font-size: var(--size-l);
+    line-height: var(--lh-xl);
   }
   .itemCost {
     color: var(--color-black);
-    /* font-weight: 500; */
-    font-size: 25px;
-    line-height: 30px;
+    font-size: var(--size-xl);
+    line-height: var(--lh-l);
   }
-}
-
-.itemName {
-  /* font-size: 18px;
-  line-height: 27px; */
 }
 
 .itemValues {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 220px;
 }
 
 .itemCount {
+  width: 100%;
+
+  color: var(--color-dark-gray);
+}
+
+.itemCountMobile {
+  display: none;
+
   color: var(--color-dark-gray);
 }
 
 .itemCost {
-  flex-shrink: 0;
-  width: 180px;
-
   color: var(--color-dark-gray);
 
   font-weight: 500;
-  font-size: 22px;
-  line-height: 28px;
-  text-align: right;
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
+}
+
+@media (--mobile) {
+  .item.isTotal {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .itemCount {
+    display: none;
+  }
+
+  .itemCountMobile {
+    display: block;
+    margin-top: var(--space-xs);
+  }
+
+  .itemValues {
+    width: 50%;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
 }

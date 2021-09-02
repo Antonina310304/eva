@@ -29,7 +29,13 @@ const Check: FC<CheckProps> = (props) => {
         <div className={styles.group} key={indexGroup}>
           {group.items.map((item, indexItem) => (
             <div className={cn(styles.item, { [styles.isTotal]: item.isTotal })} key={indexItem}>
-              <div className={styles.itemName}>{item.name}</div>
+              <div>
+                <div className={styles.itemName}>{item.name}</div>
+
+                {item.quantity && (
+                  <div className={styles.itemCountMobile}>{`${item.quantity} шт.`}</div>
+                )}
+              </div>
 
               <div className={styles.itemValues}>
                 {item.quantity && <div className={styles.itemCount}>{`${item.quantity} шт.`}</div>}

@@ -5,7 +5,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 40px;
+  padding: var(--space-xxl);
 }
 
 .productInformation {
@@ -18,35 +18,28 @@
 
 .contentContainer {
   flex-grow: 1;
-  margin-left: 30px;
+  margin-left: var(--space-l);
 }
 
 .head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* height: 29px; */
-  margin-bottom: 15px;
-  /* padding-right: 60px; */
+  margin-bottom: var(--space-s);
 }
 
 .name {
   font-weight: 500;
-  font-size: 18px;
-  line-height: 23px;
+  font-size: var(--size-m);
+  line-height: var(--lh-n);
 }
-
-/* .headInfo {
-  display: none;
-  align-items: center;
-} */
 
 .params {
   overflow: hidden;
 }
 
 .group {
-  margin-bottom: 5px;
+  margin-bottom: var(--space-xxs);
 
   &:last-child {
     margin-bottom: 0;
@@ -54,73 +47,71 @@
 }
 
 .groupTitle {
-  margin-bottom: 5px;
+  margin-bottom: var(--space-xxs);
 }
 
 .materials {
   display: flex;
   flex-wrap: wrap;
-  /* margin-top: -5px; */
-}
-
-.material {
-  /* margin-top: 10px;
-  margin-right: 10px; */
 }
 
 .priceBlock {
   display: flex;
-  margin-left: 10px;
+  width: 220px;
+  margin-left: var(--space-l);
 }
 
 .count {
-  /* margin-right: 60px; */
+  width: 100%;
 
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
 }
 
 .price {
-  width: 180px;
-
   font-weight: 500;
-  font-size: 22px;
-  line-height: 28px;
-  text-align: right;
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
 }
 
 @media (--desktop) {
-  .PageOrderStatusProductCard {
-    &-Image {
-      width: 105px;
-    }
+  .content {
+    padding: var(--space-n);
+  }
+}
 
-    &-Footer {
-      margin: 0 15px;
-      padding-right: calc(43px + 15px);
-    }
+@media (--mobile-m) {
+  .content {
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
+  }
+
+  .contentContainer {
+    margin-left: var(--space-n);
   }
 }
 
 @media (--mobile) {
-  .PageOrderStatusProductCard {
-    &-Head {
-      display: block;
-      height: auto;
-    }
+  .content {
+    flex-direction: column;
+  }
 
-    &-HeadInfo {
-      margin-top: 5px;
-    }
+  .productInformation {
+    flex-direction: column;
+    width: 100%;
+  }
 
-    &-Footer {
-      display: block;
-      padding-right: 0;
-      padding-left: 80px;
-    }
+  .image {
+    margin: 0 auto;
+  }
 
-    &-FooterCounts {
-      margin-top: 5px;
-    }
+  .contentContainer {
+    margin-left: 0;
+  }
+
+  .priceBlock {
+    width: 100%;
+    margin-top: var(--space-l);
+    margin-left: 0;
   }
 }

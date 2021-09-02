@@ -23,10 +23,9 @@ const OrderMaterial: FC<OrderMaterialProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.orderMaterial, className)}>
       <Image className={styles.color} src={material.image} />
-      <div className={styles.par}>{material.title}</div>
-      <div className={styles.val}>{material.name}</div>
-      {/* проверить зачем нужна эта строка с классом не опознанным */}
-      <div className={cn(styles.val, { tissue: true })}>{material.description}</div>
+      <div className={styles.par}>
+        {`${material.title} ${material.name} ${material.description}`}
+      </div>
     </div>
   );
 };

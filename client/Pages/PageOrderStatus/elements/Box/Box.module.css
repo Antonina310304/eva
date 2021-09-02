@@ -1,5 +1,5 @@
 .box {
-  padding: 15px 20px;
+  padding: var(--space-s) var(--space-n);
 
   background: var(--color-white);
 }
@@ -9,24 +9,19 @@
 }
 
 .box.check {
-  padding: 40px;
-  padding-bottom: 60px;
+  padding: var(--space-xxl);
+  padding-bottom: var(--space-xb);
 }
 
 @media (--desktop) {
-  .box {
-    box-shadow: none;
-  }
-
   .box.check {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: var(--space-l) var(--space-n) var(--space-xxl);
+  }
+}
 
-    box-shadow: none;
-
-    .container {
-      max-width: 448px;
-      margin: 0 auto;
-    }
+@media (--mobile-m) {
+  .box.check {
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
   }
 }

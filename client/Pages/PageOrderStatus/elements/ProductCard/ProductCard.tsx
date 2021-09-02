@@ -27,17 +27,12 @@ const ProductCard: FC<ProductCardProps> = (props) => {
           <div className={styles.contentContainer}>
             <div className={styles.head}>
               <div className={styles.name}>{`${product.type} ${product.name}`}</div>
-              {/* <div className={styles.headInfo}>
-                <div className={styles.count}>{`${product.quantity} шт.`}</div>
-                <PriceContainer className={styles.price} price={product.price} />
-              </div> */}
             </div>
 
             {hasParameters && (
               <div className={styles.params}>
                 {product.groups.map((group, indexGroup) => (
                   <div className={styles.group} key={indexGroup}>
-                    {/* {group.title && <div className={styles.groupTitle}>{group.title}</div>} */}
                     {group.parameters.map((parameter: any, indexParameter: number) => {
                       switch (parameter.type) {
                         case 'materials': {
