@@ -89,20 +89,20 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
       onClose={handleClose}
     >
       <div className={styles.container}>
-        <Link to={prevId} className={styles.prev} view='simple'>
-          <div className={styles.arrowBackground} onClick={handlePrev}>
-            <div className={styles.arrow} />
-          </div>
-        </Link>
         <div className={styles.headingWrapper}>
+          <Link to={prevId} className={styles.prev} view='simple'>
+            <div className={styles.arrowBackground} onClick={handlePrev}>
+              <div className={styles.arrow} />
+            </div>
+          </Link>
           <IconClose className={styles.iconClose} onClick={handleClose} />
+          <Link to={nextId} className={styles.next} view='simple'>
+            <div className={styles.arrowBackground} onClick={handleNext}>
+              <div className={styles.arrow} />
+            </div>
+          </Link>
         </div>
         <PressDetails article={articles[currentIndex]} socials={meta.data.socials} />
-        <Link to={nextId} className={styles.next} view='simple'>
-          <div className={styles.arrowBackground} onClick={handleNext}>
-            <div className={styles.arrow} />
-          </div>
-        </Link>
       </div>
     </ModalMain>
   );

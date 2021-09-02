@@ -13,6 +13,8 @@
 }
 
 .headingWrapper {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -85,8 +87,8 @@
 
 .prev {
   position: absolute;
-  top: 50%;
-  left: 300px;
+  top: 230px;
+  left: -100px;
 
   margin-right: var(--space-l);
 
@@ -97,8 +99,8 @@
 
 .next {
   position: absolute;
-  top: 50%;
-  right: 16%;
+  top: 230px;
+  right: -100px;
 
   margin-left: var(--space-l);
 
