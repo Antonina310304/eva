@@ -18,6 +18,10 @@
   margin: 0 auto;
 }
 
+.mapWrapper {
+  padding: 0 var(--space-xxb) var(--space-e) var(--space-xxb);
+}
+
 .introduction {
   margin-top: var(--space-xxe);
   margin-bottom: var(--space-xxe);
@@ -75,6 +79,10 @@
     height: 605px;
   }
 
+  .mapWrapper {
+    padding: 0 var(--space-xxl) var(--space-xb) var(--space-xxl);
+  }
+
   .introduction {
     margin-top: var(--space-e);
     margin-bottom: var(--space-e);
@@ -124,6 +132,10 @@
 
   .imageWrapper {
     height: 340px;
+  }
+
+  .mapWrapper {
+    padding: 0 var(--space-s) var(--space-e) var(--space-s);
   }
 
   .introduction {

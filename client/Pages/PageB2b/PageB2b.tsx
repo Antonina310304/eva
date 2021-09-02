@@ -1,11 +1,13 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import SeeUs from '@Pages/PageContacts/elements/SeeUs';
 import Image from '@UI/Image';
 import { PageB2bData } from './typings';
 import Rubrics from './elements/Rubrics';
 import Feedback from './elements/Feedback';
 import Press from './elements/Press';
+
 import styles from './PageB2b.module.css';
 
 export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,7 +17,7 @@ export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2b: FC<PageB2bProps> = (props) => {
   const { className, page, ...restProps } = props;
-  const { banner, texts, articles, rubrics } = page;
+  const { banner, texts, articles, rubrics, map, sellPoints, pickUpPoints } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -35,6 +37,9 @@ const PageB2b: FC<PageB2bProps> = (props) => {
       </div>
       <Feedback />
       <Press articles={articles} />
+      <div className={styles.mapWrapper}>
+        <SeeUs datasForMap={map} pickupPoints={sellPoints} />
+      </div>
     </div>
   );
 };
