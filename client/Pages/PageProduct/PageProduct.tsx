@@ -196,18 +196,22 @@ const PageProduct: FC<PageProductProps> = (props) => {
   }, [handleChangePositionSidebar]);
 
   useEffect(() => {
-    const intervalId = setInterval(handleCalc, 100);
-
-    handleCalc();
-    window.addEventListener('resize', handleCalc);
-    window.addEventListener('resize', handleChangePositionSidebar);
-
-    return () => {
+    let intervalId: NodeJS.Timeout = null;
+    const cleanup = () => {
       clearInterval(intervalId);
       window.removeEventListener('resize', handleCalc);
       window.removeEventListener('resize', handleChangePositionSidebar);
     };
-  }, [handleCalc, handleChangePositionSidebar]);
+
+    if (isMobileM) return cleanup;
+
+    handleCalc();
+    intervalId = setInterval(handleCalc, 100);
+    window.addEventListener('resize', handleCalc);
+    window.addEventListener('resize', handleChangePositionSidebar);
+
+    return cleanup;
+  }, [handleCalc, handleChangePositionSidebar, isMobileM]);
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
