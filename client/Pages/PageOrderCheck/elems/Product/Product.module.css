@@ -1,0 +1,67 @@
+.product {
+  display: flex;
+  align-items: flex-start;
+}
+
+.preview {
+  flex-shrink: 0;
+  width: 232px;
+}
+
+.content {
+  margin-left: var(--space-l);
+}
+
+.name {
+  composes: m from 'sizes';
+
+  font-weight: 500;
+}
+
+.params {
+  margin-top: var(--space-s);
+}
+
+.param {
+  margin-bottom: var(--space-xxs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (--desktop) {
+  .content {
+    margin-left: var(--space-n);
+  }
+
+  .preview {
+    width: 150px;
+  }
+
+  .name {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
+  }
+}
+
+@media (--mobile-m) {
+  .preview {
+    width: 180px;
+  }
+}
+
+@media (--mobile) {
+  .product {
+    flex-direction: column;
+  }
+
+  .preview {
+    width: 220px;
+  }
+
+  .content {
+    margin-top: var(--space-n);
+    margin-left: unset;
+  }
+}

@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
-import Wrapper from '../Wrapper';
+import ServicePageWrapper from '@Components/ServicePageWrapper';
 import { Banner } from '../../typings';
 import styles from './VTBBanner.module.css';
 
@@ -19,7 +19,7 @@ const VTBBanner: FC<VTBBannerProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.VTBBanner, className)}>
       <div className={styles.color}>
-        <Wrapper>
+        <ServicePageWrapper>
           <div className={styles.container}>
             <div className={styles.left}>
               <Image className={styles.logo} src={anchor_src} />
@@ -51,7 +51,7 @@ const VTBBanner: FC<VTBBannerProps> = (props) => {
               <div className={styles.nuance}>{note}</div>
             </div>
           </div>
-        </Wrapper>
+        </ServicePageWrapper>
       </div>
     </div>
   );

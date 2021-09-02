@@ -1,0 +1,284 @@
+.page {
+}
+
+.mainContainer {
+  --gap: var(--space-xxb);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  margin-right: auto;
+
+  margin-bottom: var(--space-e);
+
+  margin-left: auto;
+  padding-right: var(--gap);
+  padding-left: var(--gap);
+}
+
+.contentContainer {
+  composes: narrow from 'containers';
+
+  &.row {
+    margin-top: var(--space-e);
+  }
+}
+
+.teaser {
+  composes: m from 'sizes';
+
+  margin-top: var(--space-xb);
+}
+
+.freeDelivery {
+  margin-top: var(--space-xb);
+}
+
+.contrastRow {
+  margin-top: var(--space-e);
+  padding: var(--space-xb) 0 var(--space-xxb);
+
+  background: var(--color-light-gray);
+}
+
+.heading {
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.tabsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xb);
+}
+
+.tableWrapper {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.additionalCost {
+  margin-top: var(--space-xb);
+}
+
+.paragraph {
+  margin-top: var(--space-m);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.rules {
+  margin-top: var(--space-xb);
+}
+
+.rulesText {
+  margin-top: var(--space-m);
+}
+
+.wrapperList {
+  margin-top: var(--space-m);
+}
+
+.attention {
+  margin-top: var(--space-xb);
+}
+
+.deliveryText {
+  margin-top: var(--space-xb);
+}
+
+.subtitle {
+  margin-bottom: var(--space-xs);
+
+  font-weight: 500;
+  font-size: var(--size-xl);
+  line-height: var(--lh-xl);
+}
+
+.textBlock {
+  margin-bottom: var(--space-xs);
+}
+
+.moreLink {
+  composes: n from 'sizes';
+
+  display: inline-block;
+
+  vertical-align: baseline;
+}
+
+.carImage {
+  width: 269px;
+
+  &:before {
+    display: block;
+    padding: 0 0 38.2899628252788%;
+
+    content: '';
+  }
+}
+
+.bottomInfoContainer {
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
+}
+
+.importantInfo {
+  margin-top: var(--space-xb);
+}
+
+.upliftFirstFloor {
+  composes: m from 'sizes';
+
+  margin-top: var(--space-xb);
+}
+
+.city {
+  display: inline-block;
+  box-sizing: border-box;
+
+  vertical-align: baseline;
+
+  border-bottom: 1px solid var(--color-black);
+  cursor: pointer;
+}
+
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-m);
+}
+
+.radioItem {
+  composes: n from 'sizes';
+
+  display: flex;
+  align-items: center;
+
+  margin-top: var(--space-s);
+  margin-right: var(--space-xb);
+
+  color: var(--color-dark-gray);
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: color 0.2s;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.active {
+    color: var(--color-black);
+
+    .radioIcon {
+      opacity: 1;
+    }
+  }
+}
+
+.radioIcon {
+  margin-left: var(--space-s);
+
+  color: var(--color-dark-gray);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.5;
+
+  transition: opacity 0.2s;
+
+  &.toAddress {
+    width: 32px;
+    height: 16px;
+  }
+
+  &.pickupPoint {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.radioName {
+  margin-left: var(--space-xs);
+}
+
+.deliveryNote {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-n);
+
+  color: var(--color-dark-gray);
+}
+
+.deliveryPhone {
+  margin-top: var(--space-xs);
+
+  font-weight: 500;
+  font-size: var(--size-xl);
+  line-height: var(--lh-l);
+}
+
+.menu {
+  margin-top: var(--space-n);
+}
+
+@media (--desktop-m) {
+  .mainContainer {
+    --gap: var(--space-xxl);
+  }
+}
+
+@media (--desktop) {
+  .mainContainer {
+    margin-bottom: var(--space-xb);
+  }
+
+  .heading {
+    font-size: var(--size-xl);
+    line-height: var(--lh-xl);
+  }
+
+  .contentContainer {
+    &.row {
+      margin-top: var(--space-xb);
+    }
+  }
+}
+
+@media (--mobile-m) {
+  .heading {
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
+  }
+
+  .mainContainer {
+    --gap: var(--space-s);
+  }
+
+  .bottomInfo {
+    padding: 0 var(--space-s);
+  }
+}
+
+@media (--mobile) {
+  .contrastRow {
+    padding: var(--space-xxl) 0 var(--space-xb);
+  }
+
+  .tabsHeader {
+    display: block;
+  }
+
+  .tabs {
+    margin-top: var(--space-n);
+  }
+}

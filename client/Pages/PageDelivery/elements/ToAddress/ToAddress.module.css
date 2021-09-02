@@ -1,0 +1,16 @@
+.container {
+  padding: var(--space-xxl) 0 0;
+}
+
+.price {
+  margin-left: var(--space-xs);
+}
+
+.title {
+  font-size: var(--size-l);
+  line-height: var(--lh-xl);
+}
+
+.text {
+  margin-top: var(--space-xxl);
+}

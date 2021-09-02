@@ -57,18 +57,18 @@
   display: flex;
   align-items: center;
   width: 100%;
-
-  padding: 16px var(--space-s);
+  padding: var(--space-s);
 
   font-size: inherit;
   font-family: inherit;
+  text-align: inherit;
 
   background: transparent;
   border: 0;
   outline: none;
 
   &:-internal-autofill-selected {
-    box-shadow: inset 0 -40px 0 0 var(--color-white);
+    box-shadow: inset 0 -42px 0 0 var(--color-white);
   }
 
   &::placeholder {
@@ -79,6 +79,7 @@
 .iconError {
   position: absolute;
   right: var(--space-s);
+  z-index: 4;
 
   width: 22px;
   height: 22px;
@@ -97,7 +98,7 @@
 
 @media (--desktop-m) {
   .control {
-    padding: 12px var(--space-s);
+    padding: 11px var(--space-s);
   }
 }
 
@@ -105,6 +106,6 @@
   .control {
     box-sizing: border-box;
     height: 35px;
-    padding: 8px var(--space-xs);
+    padding: 7px var(--space-xs);
   }
 }

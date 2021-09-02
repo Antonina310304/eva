@@ -1,6 +1,5 @@
 import React, {
   FC,
-  HTMLAttributes,
   useState,
   useCallback,
   MouseEvent,
@@ -164,6 +163,12 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         const newItems = [...prev];
 
         if (mode !== 'single-required' && prev[0].id === item.id) {
+          const itemIndex = prev.findIndex(({ id }) => item.id === id);
+
+          newItems.splice(itemIndex, 1);
+        }
+
+        if (mode === 'multiple' && prev[0].id !== item.id) {
           const itemIndex = prev.findIndex(({ id }) => item.id === id);
 
           newItems.splice(itemIndex, 1);
@@ -381,7 +386,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         >
           <div className={styles.fieldValue}>
             <div className={styles.fieldText}>
-              <span className={styles.fieldTitle}>{`${title}: `}</span>
+              {title && <span className={styles.fieldTitle}>{`${title}: `}</span>}
               {fieldText}
             </div>
           </div>

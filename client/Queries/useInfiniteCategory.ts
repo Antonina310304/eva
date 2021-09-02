@@ -23,7 +23,9 @@ const useInfiniteCategory = ({ path }: Params): Result => {
         const [p = '', qs = ''] = path.split('?');
         const searchParams = new URLSearchParams(qs);
 
-        searchParams.append('page', pageParam);
+        if (pageParam > 1) {
+          searchParams.append('page', pageParam);
+        }
 
         return ApiPages.fetchPage({ path: `${p}?${searchParams.toString()}` });
       } catch (err) {

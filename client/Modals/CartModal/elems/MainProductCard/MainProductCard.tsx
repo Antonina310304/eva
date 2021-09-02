@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import useMedias from '@Hooks/useMedias';
-import { CartProductData } from '@Types/Cart';
+import { CartPositionData, CartProductData } from '@Types/Cart';
 import Preview from './elems/Preview';
 import Footer from './elems/Footer';
 import styles from './MainProductCard.module.css';
@@ -10,10 +10,11 @@ import styles from './MainProductCard.module.css';
 export interface MainProductCardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   product: CartProductData;
+  position: CartPositionData;
 }
 
 const MainProductCard: FC<MainProductCardProps> = (props) => {
-  const { className, product, ...restProps } = props;
+  const { className, product, position, ...restProps } = props;
   const { isMobile } = useMedias();
 
   return (
@@ -25,7 +26,7 @@ const MainProductCard: FC<MainProductCardProps> = (props) => {
           <div className={styles.name}>{`${product.type} ${product.name}`}</div>
           {!isMobile && (
             <div className={styles.wrapperFooter}>
-              <Footer product={product} />
+              <Footer product={product} position={position} />
             </div>
           )}
         </div>
@@ -33,7 +34,7 @@ const MainProductCard: FC<MainProductCardProps> = (props) => {
 
       {isMobile && (
         <div className={styles.wrapperFooter}>
-          <Footer product={product} />
+          <Footer product={product} position={position} />
         </div>
       )}
     </div>

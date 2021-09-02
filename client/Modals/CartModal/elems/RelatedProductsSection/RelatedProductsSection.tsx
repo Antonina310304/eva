@@ -51,7 +51,9 @@ const RelatedProductsSection: FC<RelatedProductsSectionProps> = (props) => {
     <div {...restProps} className={cn(styles.section, className)}>
       <div className={styles.head}>
         <div className={styles.title}>{title}</div>
-        <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
+        {track?.width < 100 && (
+          <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
+        )}
       </div>
 
       <div className={styles.wrapperGallery}>

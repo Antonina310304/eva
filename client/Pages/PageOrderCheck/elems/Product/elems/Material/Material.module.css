@@ -1,0 +1,17 @@
+.material {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-right: var(--space-xs);
+}
+
+.image {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  margin-right: var(--space-xs);
+
+  border-radius: 50%;
+}

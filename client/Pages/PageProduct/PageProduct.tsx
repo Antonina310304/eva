@@ -14,6 +14,7 @@ import loadable from '@loadable/component';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
 import InstagramSection from '@Components/InstagramSection';
+import { LazyProductModel } from '@Components/ProductModel';
 import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
@@ -39,7 +40,6 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
 
 const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
 const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
-const ProductModel = loadable(() => import('@Components/ProductModel'));
 const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
 const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
@@ -55,6 +55,9 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const refWrapperSidebar = useRef<HTMLDivElement>();
   const refSidebar = useRef<HTMLDivElement>();
   const refMainContent = useRef<HTMLDivElement>();
+  const refLastScroll = useRef(0);
+  const howManyCanScroll = useRef(null);
+  const howRestScroll = useRef(null);
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -89,6 +92,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
     });
   }, [page, selectedCrossSaleTab]);
 
+  const handleCalc = useCallback(() => {
+    const rectSidebar = refSidebar.current.getBoundingClientRect();
+
+    howManyCanScroll.current = rectSidebar.height - window.innerHeight + 30;
+  }, []);
+
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
   }, []);
@@ -114,46 +123,99 @@ const PageProduct: FC<PageProductProps> = (props) => {
   }, []);
 
   const handleChangePositionSidebar = useCallback(() => {
+    // Для расчета позиции скрола используем Math.abs(rectDocument.top) вместо window.pageYOffset
+    // Потому что window.pageYOffset обнуляется во время блокировки скрола (например, во время открытия модальных окон)
+
     if (!refMainContent.current) return;
     if (!refSidebar.current) return;
 
+    const rectDocument = document.documentElement.getBoundingClientRect();
     const rectContent = refMainContent.current.getBoundingClientRect();
     const rectWrapperSidebar = refWrapperSidebar.current.getBoundingClientRect();
     const rectSidebar = refSidebar.current.getBoundingClientRect();
-    const fixed =
-      Math.round(rectContent.bottom) > Math.round(rectSidebar.bottom) || rectSidebar.top > 0;
-    const position = fixed
-      ? {
-          position: 'fixed',
-          top: 0,
-          right: `${document.documentElement.offsetWidth - rectWrapperSidebar.right}px`,
-          left: `${rectWrapperSidebar.left}px`,
-        }
-      : {
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        };
+    const diffScroll = refLastScroll.current - Math.abs(rectDocument.top);
+    const right = `${document.documentElement.offsetWidth - rectWrapperSidebar.right}px`;
+    const left = `${rectWrapperSidebar.left}px`;
 
-    setPositionSidebar(position);
+    refLastScroll.current = Math.abs(rectDocument.top);
+
+    if (typeof howRestScroll.current !== 'number') {
+      howRestScroll.current = howManyCanScroll.current;
+    }
+
+    if (rectSidebar.top <= 0) {
+      howRestScroll.current += diffScroll;
+    }
+
+    // Количество оставшего скрола не должно превышать кол-во доступного скрола
+    if (howRestScroll.current < 0) {
+      howRestScroll.current = 0;
+    }
+    if (howRestScroll.current > howManyCanScroll.current) {
+      howRestScroll.current = howManyCanScroll.current;
+    }
+
+    // Отслеживаем момент, когда контент страницы должен вытеснять сайдбар наверх
+    // И прерываем последующие расчеты позиции
+    if (
+      Math.round(rectContent.bottom) <= Math.round(rectSidebar.bottom) &&
+      Math.round(rectSidebar.top) <= 0
+    ) {
+      setPositionSidebar({
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+      });
+      return;
+    }
+
+    // Фиксируем нижнюю границу сайдбара и искусственно смещаем по оси Y на кол-во оставшегося скрола
+    if (Math.round(rectContent.top) <= 0) {
+      setPositionSidebar({
+        position: 'fixed',
+        bottom: 30,
+        right,
+        left,
+        transform: `translateY(${howRestScroll.current}px)`,
+      });
+    } else {
+      setPositionSidebar(null);
+    }
   }, []);
 
   useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 
   useEffect(() => {
-    handleChangePositionSidebar();
-    window.addEventListener('scroll', handleChangePositionSidebar);
-    window.addEventListener('resize', handleChangePositionSidebar);
+    setTimeout(handleChangePositionSidebar, 200);
+    window.addEventListener('scroll', handleChangePositionSidebar, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleChangePositionSidebar);
-      window.removeEventListener('resize', handleChangePositionSidebar);
     };
   }, [handleChangePositionSidebar]);
 
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout = null;
+    const cleanup = () => {
+      clearInterval(intervalId);
+      window.removeEventListener('resize', handleCalc);
+      window.removeEventListener('resize', handleChangePositionSidebar);
+    };
+
+    if (isMobileM) return cleanup;
+
+    handleCalc();
+    intervalId = setInterval(handleCalc, 100);
+    window.addEventListener('resize', handleCalc);
+    window.addEventListener('resize', handleChangePositionSidebar);
+
+    return cleanup;
+  }, [handleCalc, handleChangePositionSidebar, isMobileM]);
+
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
+      <div className={styles.head} />
       <div className={cn(styles.mainContainer, styles.wrapperMain)}>
         <div className={styles.grid}>
           <div ref={refMainContent}>
@@ -175,7 +237,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
               </div>
             )}
 
-            {page.cylindo && <ProductModel className={styles.cylindo} medias={page.cylindo} />}
+            {page.cylindo && <LazyProductModel className={styles.cylindo} medias={page.cylindo} />}
 
             {page.description && (
               <div
@@ -209,12 +271,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     id: '0',
                     images: [
                       {
-                        url: '/react/static/img/scheme1.jpg',
+                        url: '/react/static/img/scheme1_1.png',
                         width: 511,
                         height: 236,
                       },
                       {
-                        url: '/react/static/img/scheme2.jpg',
+                        url: '/react/static/img/scheme2_1.png',
                         width: 269,
                         height: 235,
                       },
@@ -224,12 +286,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
                     id: '1',
                     images: [
                       {
-                        url: '/react/static/img/scheme3.jpg',
+                        url: '/react/static/img/scheme3_1.png',
                         width: 232,
                         height: 389,
                       },
                       {
-                        url: '/react/static/img/scheme4.jpg',
+                        url: '/react/static/img/scheme4_1.png',
                         width: 81,
                         height: 388,
                       },

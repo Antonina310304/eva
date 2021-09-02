@@ -1,0 +1,20 @@
+.list {
+}
+
+.position {
+  margin-top: var(--space-xxl);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+@media (--mobile-m) {
+  .position {
+    margin-top: var(--space-n);
+
+    &.removed {
+      padding: 0 var(--space-s);
+    }
+  }
+}

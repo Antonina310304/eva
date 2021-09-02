@@ -1,0 +1,16 @@
+.model {
+  display: none;
+
+  &.loaded {
+    display: block;
+  }
+}
+
+.preloader:before {
+  display: block;
+  padding-bottom: 57.2%;
+
+  background-color: var(--color-light-gray);
+
+  content: '';
+}

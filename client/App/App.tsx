@@ -15,9 +15,16 @@ export interface Data {
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
+const RoutePayment = loadable(() => import('@Routes/RoutePayment'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
 const RouteB2b = loadable(() => import('@Routes/RouteB2b'));
+const RouteDelivery = loadable(() => import('@Routes/RouteDelivery'));
+const RouteQualityDepartment = loadable(() => import('@Routes/RouteQualityDepartment'));
+const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
+const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
+const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
+const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
 
 const App: FC = () => {
   return (
@@ -34,6 +41,10 @@ const App: FC = () => {
         <RouteProduct />
       </Route>
 
+      <Route path='/site/payment'>
+        <RoutePayment />
+      </Route>
+
       <Route exact path='/site/credit'>
         <RouteCredit />
       </Route>
@@ -44,6 +55,30 @@ const App: FC = () => {
 
       <Route path='/b2b'>
         <RouteB2b />
+      </Route>
+
+      <Route path='/site/quality-department'>
+        <RouteQualityDepartment />
+      </Route>
+
+      <Route path='/site/contacts'>
+        <RouteContacts />
+      </Route>
+
+      <Route path='/site/delivery'>
+        <RouteDelivery />
+      </Route>
+
+      <Route path='/static-page/privacy-policy'>
+        <RoutePrivacyPolicy />
+      </Route>
+
+      <Route path='/static-page/oferta'>
+        <RouteOferta />
+      </Route>
+
+      <Route path='/order/check'>
+        <RouteOrderCheck />
       </Route>
     </ModalsProvider>
   );

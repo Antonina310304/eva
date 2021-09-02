@@ -25,6 +25,8 @@
 .galleryItem {
   width: 210px;
   padding: 0 var(--space-s);
+
+  vertical-align: top;
 }
 
 .progress {

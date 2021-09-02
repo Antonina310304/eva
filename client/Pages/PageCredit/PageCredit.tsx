@@ -3,8 +3,8 @@ import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
-import PageTitle from './elements/PageTitle';
-import Wrapper from './elements/Wrapper';
+import ServicePageTitle from '@Components/ServicePageTitle';
+import ServicePageWrapper from '@Components/ServicePageWrapper';
 import SberbankBanner from './elements/SberbankBanner';
 import VTBBanner from './elements/VTBBanner';
 import ListBlock from './elements/ListBlock';
@@ -35,12 +35,15 @@ const PageCredit: FC<PageCreditProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      <PageTitle className={styles.pageTitle} title='Рассрочка и кредит' />
-      <Wrapper>
+      <ServicePageWrapper type='wide'>
+        <ServicePageTitle className={styles.pageTitle} view='bordered' title='Рассрочка и кредит' />
+      </ServicePageWrapper>
+
+      <ServicePageWrapper>
         <InformationTabsNavigation className={styles.navigation} navigation={pageList} />
 
         <div className={styles.topText}>{top_text}</div>
-      </Wrapper>
+      </ServicePageWrapper>
 
       {meta.country === 'RUS' ? (
         <SberbankBanner
@@ -54,7 +57,7 @@ const PageCredit: FC<PageCreditProps> = (props) => {
         />
       )}
 
-      <Wrapper>
+      <ServicePageWrapper>
         <ListBlock
           className={styles.creditWithoutOverpayment}
           title={installment.title}
@@ -73,7 +76,7 @@ const PageCredit: FC<PageCreditProps> = (props) => {
             <Halva className={styles.halva} />
           </>
         )}
-      </Wrapper>
+      </ServicePageWrapper>
 
       {meta.country === 'BLR' && (
         <CardsPartners className={styles.cardsPartners} partners={partners} />

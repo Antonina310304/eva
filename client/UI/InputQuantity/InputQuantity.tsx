@@ -20,10 +20,11 @@ export interface InputQuantityProps extends Omit<InputProps, 'onChange'> {
 
 const InputQuantity: FC<InputQuantityProps> = (props) => {
   const { className, defaultValue, value, min, max, onChange, ...restProps } = props;
-  const [count, setCount] = useState(defaultValue || value || 0);
+  const initValue = value || defaultValue || 0;
+  const [count, setCount] = useState(initValue);
 
   const normalizeCount = useCallback(
-    (newCount: number) => {
+    (newCount: number): number => {
       let quantity = newCount;
 
       if (min !== undefined && newCount < min) quantity = min;
@@ -34,44 +35,41 @@ const InputQuantity: FC<InputQuantityProps> = (props) => {
     [max, min],
   );
 
-  const changeCount = useCallback(
-    (e, newCount: number) => {
-      const quantity = normalizeCount(newCount);
+  const emitOnChange = useCallback(
+    (e, params?: { quantity: number }) => {
+      const quantity = normalizeCount(params ? params.quantity : count);
 
-      if (onChange) {
-        onChange(e, { quantity });
-      } else {
-        setCount(quantity);
-      }
+      if (onChange) onChange(e, { quantity });
+      setCount(quantity);
     },
-    [normalizeCount, onChange],
+    [count, normalizeCount, onChange],
   );
 
-  const handleChange = useCallback(
-    (e) => {
-      const newCount = Number(e.target.value.replace(/\D/, ''));
+  const handleChange = useCallback((e) => {
+    const val = Number(e.target.value.replace(/\D/, ''));
 
-      changeCount(e, newCount);
+    setCount(val);
+  }, []);
+
+  const handleBlur = useCallback(
+    (e) => {
+      emitOnChange(e);
     },
-    [changeCount],
+    [emitOnChange],
   );
 
   const handleMinus = useCallback(
     (e) => {
-      const newCount = count - 1;
-
-      changeCount(e, newCount);
+      emitOnChange(e, { quantity: count - 1 });
     },
-    [changeCount, count],
+    [count, emitOnChange],
   );
 
   const handlePlus = useCallback(
     (e) => {
-      const newCount = count + 1;
-
-      changeCount(e, newCount);
+      emitOnChange(e, { quantity: count + 1 });
     },
-    [changeCount, count],
+    [count, emitOnChange],
   );
 
   useEffect(() => {
@@ -85,7 +83,13 @@ const InputQuantity: FC<InputQuantityProps> = (props) => {
       <div className={styles.icon} onClick={handleMinus}>
         -
       </div>
-      <input {...restProps} className={styles.input} value={count} onChange={handleChange} />
+      <input
+        {...restProps}
+        className={styles.input}
+        value={count}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
       <div className={styles.icon} onClick={handlePlus}>
         +
       </div>

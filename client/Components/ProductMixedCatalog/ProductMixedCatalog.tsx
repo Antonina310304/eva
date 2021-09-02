@@ -1,22 +1,38 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo, useCallback, useEffect, useRef } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  MouseEvent,
+  ReactElement,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import ProductCard from '@Components/ProductCard';
 import { CatalogData } from '@Types/Catalog';
 import { ProductData } from '@Types/Product';
 import styles from './ProductMixedCatalog.module.css';
+
+export interface RenderProductParams {
+  product?: ProductData;
+  view: 'mini';
+}
+
+export type RenderProduct = (params: RenderProductParams) => ReactElement;
 
 export interface ProductMixedCatalogProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   pages: CatalogData[];
   hasNextPage?: boolean;
   autoload?: boolean;
+  renderProduct?: RenderProduct;
   onMore?: (e: MouseEvent) => void;
 }
 
 const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
-  const { className, pages, hasNextPage, autoload, onMore, ...restProps } = props;
+  const { className, pages, hasNextPage, autoload, renderProduct, onMore, ...restProps } = props;
   const ref = useRef<HTMLDivElement>();
 
   // Автоподгрузка при скроле
@@ -47,7 +63,7 @@ const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
         {pages.map((page) => {
           return page.products.map((product: ProductData) => (
             <div className={cn(styles.item)} key={product.id}>
-              <ProductCard product={product} view='mini' />
+              {renderProduct({ product, view: 'mini' })}
             </div>
           ));
         })}

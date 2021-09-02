@@ -76,6 +76,8 @@
 }
 
 .groupName {
+  composes: n from 'sizes';
+
   font-weight: 500;
 }
 

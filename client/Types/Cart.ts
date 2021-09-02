@@ -39,7 +39,7 @@ export interface CartProductData {
   image: string;
   link: string;
   name: string;
-  oldprice: number;
+  oldPrice: number;
   price: number;
   quantity: number;
   type: string;
@@ -90,4 +90,28 @@ export interface CartData {
   checkedDelivery: any;
   deliveryPrice: any;
   selectedVariant: 'bonuses' | 'promocode';
+}
+
+export interface PaymentTypeId {
+  id: number;
+  variants: string[];
+}
+
+export interface PaymentTypeData {
+  id: number;
+  name: string;
+  description: string;
+  icon: string;
+  prefered: boolean;
+  visible: boolean;
+}
+
+export interface DeliveryTypeData {
+  id: number;
+  address?: string;
+  name: string;
+  description?: string;
+  sum?: number;
+  type: 'toAddress' | 'pickupPoint';
+  paymentTypesIds: PaymentTypeId[];
 }

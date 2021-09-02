@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
-import Wrapper from '../Wrapper';
+import ServicePageWrapper from '@Components/ServicePageWrapper';
 import { Banner } from '../../typings';
 import styles from './SberbankBanner.module.css';
 
@@ -18,7 +18,7 @@ const SberbankBanner: FC<SberbankBannerProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.sberbankBanner, className)}>
       <div className={styles.color}>
-        <Wrapper>
+        <ServicePageWrapper>
           <div className={styles.container}>
             <div className={styles.left}>
               <Image className={styles.logo} src={logo} />
@@ -37,7 +37,7 @@ const SberbankBanner: FC<SberbankBannerProps> = (props) => {
               ))}
             </div>
           </div>
-        </Wrapper>
+        </ServicePageWrapper>
       </div>
     </div>
   );

@@ -1,0 +1,64 @@
+.form {
+}
+
+.group {
+  margin-top: var(--space-xb);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.switchBonusesItem {
+  margin-bottom: var(--space-l);
+}
+
+.deliveryRadioGroup {
+  margin-bottom: var(--space-l);
+}
+
+.variantsRadioGroup {
+  margin-top: var(--space-l);
+}
+
+.wrapperInputPhone {
+  display: flex;
+  align-items: center;
+}
+
+.inputPhone {
+  flex-grow: 1;
+}
+
+.btnReceiveCode {
+  margin-left: var(--space-s);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xb);
+}
+
+.btnSubmit {
+  max-width: 420px;
+}
+
+.formUser {
+  font-weight: 500;
+}
+
+@media (--mobile) {
+  .wrapperInputPhone {
+    display: block;
+  }
+
+  .btnReceiveCode {
+    margin-top: var(--space-s);
+    margin-left: 0;
+  }
+
+  .footer {
+    margin-top: var(--space-xxl);
+  }
+}

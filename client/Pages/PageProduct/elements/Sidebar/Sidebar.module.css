@@ -18,9 +18,12 @@
   margin-top: var(--space-n);
 }
 
-.countReviews {
+.sidebar .countReviews {
   height: auto;
   margin-left: var(--space-xs);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
 }
 
 .wrapperPrice {
@@ -54,8 +57,12 @@
   margin-top: var(--space-xs);
 }
 
-.priceReduction {
+.sidebar .priceReduction {
+  display: inline-block;
   margin-top: var(--space-s);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
 }
 
 .wrapperFabrics {
@@ -63,8 +70,11 @@
 }
 
 .orderFabrics {
-  height: auto;
+  display: inline-block;
   margin-top: var(--space-xs);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
 }
 
 .relatedProducts {
@@ -81,6 +91,11 @@
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.btnBuy {
+  font-size: var(--size-m);
+  line-height: var(--lh-m);
 }
 
 .linksList {
@@ -111,6 +126,11 @@
   .shortName {
     font-size: var(--size-b);
     line-height: var(--lh-b);
+  }
+
+  .btnBuy {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 }
 

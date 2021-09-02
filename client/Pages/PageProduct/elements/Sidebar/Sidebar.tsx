@@ -9,6 +9,7 @@ import Price from '@UI/Price';
 import Discount from '@UI/Discount';
 import Button from '@UI/Button';
 import Rating from '@UI/Rating';
+import Link from '@UI/Link';
 import useModals from '@Hooks/useModals';
 import PageProductStore from '@Stores/PageProduct';
 import { useRelatedProducts } from '@Stores/RelatedProducts';
@@ -72,9 +73,13 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('DeliveryInformation');
   }, [openModal]);
 
-  const handleClickPriceDrop = useCallback(() => {
-    openModal('PriceDrop', { product: page.product });
-  }, [openModal, page.product]);
+  const handleClickPriceDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      openModal('PriceDrop', { product: page.product });
+    },
+    [openModal, page.product],
+  );
 
   const handleClickConstructor = useCallback(() => {
     openModal('Info', {
@@ -99,6 +104,26 @@ const Sidebar: FC<SidebarProps> = (props) => {
     openModal('NotifyAboutReceipt', { product: page.product });
   }, [openModal, page.product]);
 
+  const handleClickReviews = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      if (onClickReviews) onClickReviews(e);
+    },
+    [onClickReviews],
+  );
+
+  const handleClickOrderSamples = useCallback(
+    (e) => {
+      e.preventDefault();
+      openModal('Info', {
+        title: 'Упс!',
+        text: 'Ещё не готово, заходите позже…',
+      });
+    },
+    [openModal],
+  );
+
   return (
     <div {...restProps} className={cn(styles.sidebar, className)}>
       <div className={styles.shortName}>
@@ -110,9 +135,9 @@ const Sidebar: FC<SidebarProps> = (props) => {
       {page.reviewsPhotoCount > 0 && (
         <div className={styles.wrapperRating}>
           <Rating className={styles.rating} defaultValue={page.product.rating} />
-          <Button className={styles.countReviews} theme='linkSecondary' onClick={onClickReviews}>
+          <Link className={styles.countReviews} to='#' view='primary' onClick={handleClickReviews}>
             {countReviewsText}
-          </Button>
+          </Link>
         </div>
       )}
 
@@ -134,13 +159,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
             <>
               <OrderBonuses className={styles.bonuses} productIds={[page.product.id]} />
 
-              <Button
+              <Link
                 className={styles.priceReduction}
-                theme='linkSecondary'
+                view='primary'
+                to='#'
                 onClick={handleClickPriceDrop}
               >
                 Подписаться на изменение цены
-              </Button>
+              </Link>
             </>
           )}
         </>
@@ -152,9 +178,14 @@ const Sidebar: FC<SidebarProps> = (props) => {
 
       <div className={styles.wrapperFabrics}>
         <Fabrics fabrics={fabrics} defaultSelectedFabric={fabrics[0]} size='m' />
-        <Button className={styles.orderFabrics} theme='linkSecondary'>
+        <Link
+          className={styles.orderFabrics}
+          to='#'
+          view='primary'
+          onClick={handleClickOrderSamples}
+        >
           Заказать образцы тканей
-        </Button>
+        </Link>
       </div>
 
       {relatedProducts.selectedLists.length > 0 && (
@@ -178,7 +209,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
                 Изменить конфигурацию
               </Button>
             )}
-            <Button className={styles.action} wide onClick={handleAddToCart}>
+            <Button className={cn(styles.action, styles.btnBuy)} wide onClick={handleAddToCart}>
               В корзину
             </Button>
           </>

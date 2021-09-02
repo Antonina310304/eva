@@ -89,7 +89,7 @@ const Popup: FC<PopupProps> = (props) => {
       <div className={styles.field} onClick={handleClick}>
         <div className={styles.fieldValue}>
           <div className={styles.fieldText}>
-            <span className={styles.fieldTitle}>{`${title}: `}</span>
+            {title && <span className={styles.fieldTitle}>{`${title}: `}</span>}
             <span className={styles.checkedValue}>{fieldText}</span>
           </div>
         </div>

@@ -17,42 +17,35 @@ export interface CylindoData {
 export interface ProductModelProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   medias: CylindoData;
+  onViewerReady?: () => void;
+  onError?: () => void;
 }
 
 const ProductModel: FC<ProductModelProps> = (props) => {
-  const { className, medias, ...restProps } = props;
+  const { className, medias, onViewerReady, onError, ...restProps } = props;
   const [, { openModal }] = useModals();
-
   const [zoom, setZoom] = useState<[number, number]>(null);
   const [hideRotateHint, setHideRotateHint] = useState<boolean>(false);
-  const [fullLoaded, setFullLoaded] = useState<boolean>(false);
-  const [errorLoad, setErrorLoad] = useState<boolean>(false);
 
-  const onZoomEnter = useCallback(({ x, y }) => {
+  const handleZoomEnter = useCallback(({ x, y }) => {
     setHideRotateHint(true);
     setZoom([x, y]);
   }, []);
 
-  const onZoomExit = useCallback(() => {
+  const handleZoomExit = useCallback(() => {
     setHideRotateHint(false);
     setZoom(null);
   }, []);
 
-  const onZoom = useCallback(() => {
+  const handleZoom = useCallback(() => {
     setZoom((prev) => (prev ? null : [0.5, 0.5]));
   }, []);
 
-  const onFullscreen = useCallback(() => {
+  const handleFullscreen = useCallback(() => {
     openModal('Fullscreen360', {
       opts: medias,
     });
   }, [medias, openModal]);
-
-  const onFullLoaded = useCallback(() => {
-    setFullLoaded(true);
-  }, []);
-
-  const onError = useCallback(() => setErrorLoad(true), []);
 
   return (
     <div {...restProps} className={cns(styles.productModel, [className])}>
@@ -64,24 +57,23 @@ const ProductModel: FC<ProductModelProps> = (props) => {
         <MainSliderPanel
           className={styles.buttonsPanel}
           isZoom={!!zoom}
-          onFullscreen={onFullscreen}
-          onZoom={onZoom}
+          onFullscreen={handleFullscreen}
+          onZoom={handleZoom}
         />
 
         <div className={styles.content}>
           <div
             className={cns(styles.wrapperCylindo, {
               [styles.zoomed]: !!zoom,
-              [styles.loaded]: fullLoaded,
             })}
           >
             <Cylindo360Viewer
               className={styles.cylindoViewer}
               opts={medias}
               zoom={zoom}
-              onZoomEnter={onZoomEnter}
-              onZoomExit={onZoomExit}
-              onViewerReady={onFullLoaded}
+              onZoomEnter={handleZoomEnter}
+              onZoomExit={handleZoomExit}
+              onViewerReady={onViewerReady}
               onError={onError}
             />
 
@@ -89,18 +81,6 @@ const ProductModel: FC<ProductModelProps> = (props) => {
               <CylindoRotateHint />
             </div>
           </div>
-
-          {errorLoad ? (
-            <div>Ошибка загрузки</div>
-          ) : (
-            <div
-              className={cns(styles.loading, {
-                [styles.loaded]: fullLoaded,
-              })}
-            >
-              Загрузка
-            </div>
-          )}
         </div>
       </div>
     </div>
