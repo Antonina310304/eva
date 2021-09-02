@@ -1,0 +1,13 @@
+.selector {
+}
+
+.label {
+  composes: xs from 'sizes';
+
+  color: var(--color-dark-gray);
+}
+
+.button {
+  max-width: 240px;
+  margin-top: var(--space-n);
+}

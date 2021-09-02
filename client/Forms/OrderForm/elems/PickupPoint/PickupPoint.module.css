@@ -1,0 +1,11 @@
+.point {
+  composes: s from 'sizes';
+}
+
+.label {
+  color: var(--color-dark-gray);
+}
+
+.address {
+  margin-top: var(--space-xxs);
+}

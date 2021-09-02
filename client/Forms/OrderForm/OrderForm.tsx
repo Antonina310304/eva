@@ -17,7 +17,9 @@ import Group from './elems/Group';
 import SwitchBonuses from './elems/SwitchBonuses';
 import CommentField from './elems/CommentField';
 import PaymentList from './elems/PaymentList';
+import PickupPoint from './elems/PickupPoint';
 import styles from './OrderForm.module.css';
+import PickupPointSelector from './elems/PickupPointSelector';
 
 export interface OrderFormProps {
   className?: string;
@@ -158,6 +160,16 @@ const OrderForm: FC<OrderFormProps> = (props) => {
 
         {orderForm.selectedDelivery.type === 'toAddress' && (
           <DeliveryCourier deliveryType={orderForm.selectedDelivery} name='OrderForm[address]' />
+        )}
+
+        {orderForm.selectedDelivery.type === 'pickupPoint' && (
+          <>
+            {orderForm.selectedDelivery.address ? (
+              <PickupPoint>{orderForm.selectedDelivery.address}</PickupPoint>
+            ) : (
+              <PickupPointSelector />
+            )}
+          </>
         )}
       </Group>
 
