@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
 import cn from 'classnames';
 
 import { CartData } from '@Types/Cart';
@@ -14,8 +14,21 @@ export interface CartBlockProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const CartBlock: FC<CartBlockProps> = (props) => {
-  const { className, cart, ...restProps } = props;
+  const { className, cart, deliveryCost, type, ...restProps } = props;
   const units = declOfNum(cart.count, ['товар', 'товара', 'товаров']);
+
+  const deliveryInfo = useMemo(() => {
+    const isCourier = type === 'courier';
+
+    if (!deliveryCost) return null;
+
+    return {
+      text: isCourier
+        ? 'Доставка транспортной компанией «ПЭК» до подъезда'
+        : 'Доставка ТК «ПЭК» до пункта выдачи',
+      price: isCourier ? deliveryCost.courierSum : deliveryCost.pickupSum,
+    };
+  }, [deliveryCost, type]);
 
   return (
     <div {...restProps} className={cn(styles.cart, className)}>

@@ -1,6 +1,7 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
+import { ApiPecom } from '@Api/Pecom';
 import { useCart } from '@Stores/Cart';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import ImportantInfo from '@Components/ImportantInfo';
@@ -61,10 +62,37 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
     attention,
     deliveryTypes,
     layout,
+    productIds,
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
   const cart = useCart(page.cart);
+  const [deliveryCost, setDeliveryCost] = useState(null);
+
+  //
+  const goodsInfo = useMemo(() => {
+    const result = [];
+
+    if (cart.positions.length > 0) {
+      cart.positions.forEach((position) => {
+        position.products.forEach((product) => {
+          result.push({
+            id: product.id,
+            quantity: product.quantity,
+          });
+        });
+      });
+    } else {
+      productIds.forEach((producId) => {
+        result.push({
+          id: producId,
+          quantity: 1,
+        });
+      });
+    }
+
+    return result;
+  }, [cart.positions, productIds]);
 
   const isRus = meta.country === 'RUS';
 
@@ -79,6 +107,39 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   const handleClickCity = useCallback(() => {
     // openModal('pecom-regions');
   }, []);
+
+  // Получаем информацию о стоимости доставки до подьезда
+  const load = useCallback(async () => {
+    if (goodsInfo.length < 1) return;
+
+    try {
+      const options = {
+        goodsInfo,
+        receiverCityInfo: meta.region.name,
+      };
+      const [courierSum, pickupSum] = await Promise.all([
+        await ApiPecom.getDeliveryCost({
+          ...options,
+          isDelivery: true,
+          courierAddress: `${meta.region.name}, улица Ленина, д. 1`,
+        }),
+        await ApiPecom.getDeliveryCost({
+          ...options,
+          isDelivery: false,
+          courierAddress: '',
+        }),
+      ]);
+
+      setDeliveryCost({ courierSum, pickupSum });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
+  }, [goodsInfo, meta.region.name]);
+
+  useEffect(() => {
+    load();
+  }, [load]);
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
