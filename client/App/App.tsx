@@ -24,6 +24,7 @@ const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
 const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
 const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
+const RouteB2bDetail = loadable(() => import('@Routes/RouteB2bDetail'));
 
 const App: FC = () => {
   return (
@@ -74,6 +75,10 @@ const App: FC = () => {
 
       <Route path='/order/check'>
         <RouteOrderCheck />
+      </Route>
+
+      <Route path='/b2b/detail/:slug'>
+        <RouteB2bDetail />
       </Route>
     </ModalsProvider>
   );
