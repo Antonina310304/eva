@@ -472,8 +472,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     dispatch({ type: 'init', data: getSizes() });
   }, [getSizes, state.initialized]);
 
-  console.log(state);
-
   return (
     <Touch
       {...restProps}

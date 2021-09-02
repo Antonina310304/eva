@@ -97,7 +97,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
         <div className={styles.headingWrapper}>
           <IconClose className={styles.iconClose} onClick={handleClose} />
         </div>
-        <PressDetails article={article} socials={meta.data.socials} />
+        <PressDetails article={articles[currentIndex]} socials={meta.data.socials} />
         <Link to={nextId} className={styles.next} view='simple'>
           <div className={styles.arrowBackground} onClick={handleNext}>
             <div className={styles.arrow} />
