@@ -3,6 +3,7 @@ import React, { FC, useCallback, useState, memo } from 'react';
 import cn from 'classnames';
 import Image from '@UI/Image';
 import Share from '@Components/Share';
+import Scroller from '@UI/Scroller';
 import ProgressBar from '@UI/ProgressBar';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import useMedias from '@Hooks/useMedias';
@@ -58,8 +59,18 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
             ))}
           </Gallery>
         </div>
-        {isMobileM ? (
-          <ProgressBar className={styles.progressBar} track={track} />
+        {isDesktop ? (
+          <Scroller className={styles.scroller}>
+            {images.map((image, indexSlide) => (
+              <div
+                className={styles.secondGalleryItem}
+                key={indexSlide}
+                onClick={(e) => handleClickPreview(e, indexSlide)}
+              >
+                <Image className={styles.secondGalleryPreview} src={image.src} />
+              </div>
+            ))}
+          </Scroller>
         ) : (
           <div className={styles.wrapperSecondGallery}>
             <Gallery
@@ -80,6 +91,28 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
             <ProgressBar className={styles.progressBar} track={track} />
           </div>
         )}
+        {/* {isMobileM ? (
+          <ProgressBar className={styles.progressBar} track={track} />
+        ) : (
+          <div className={styles.wrapperSecondGallery}>
+            <Gallery
+              className={styles.secondGallery}
+              key={images.length}
+              onChangeProgress={handleChangeProgress}
+            >
+              {images.map((image, indexSlide) => (
+                <div
+                  className={styles.secondGalleryItem}
+                  key={indexSlide}
+                  onClick={(e) => handleClickPreview(e, indexSlide)}
+                >
+                  <Image className={styles.secondGalleryPreview} src={image.src} />
+                </div>
+              ))}
+            </Gallery>
+            <ProgressBar className={styles.progressBar} track={track} />
+          </div>
+        )} */}
       </div>
       <div className={styles.info}>
         <div className={styles.contentWrapper}>

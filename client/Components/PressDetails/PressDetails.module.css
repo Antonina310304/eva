@@ -137,6 +137,7 @@
   }
 
   .heading {
+    padding-top: var(--space-xxl);
     padding-bottom: var(--space-s);
 
     font-size: var(--size-l);
@@ -146,10 +147,25 @@
   .button {
     margin-bottom: var(--space-l);
   }
+
+  .scroller {
+    position: absolute !important;
+    top: 160px;
+    right: 200px;
+
+    width: 113px;
+    height: 340px;
+  }
+
+  .secondGalleryItem {
+    padding-bottom: var(--space-s);
+  }
 }
 
 @media (--mobile-m) {
   .heading {
+    padding-top: 0;
+
     font-size: var(--size-xm);
     line-height: var(--size-xm);
   }
@@ -167,6 +183,10 @@
 
   .sliderItem:before {
     padding: 0 0 100%;
+  }
+
+  .scroller {
+    display: none;
   }
 
   .info {
