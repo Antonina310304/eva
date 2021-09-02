@@ -2,6 +2,10 @@
   --sidebar-width: 25.764%;
 }
 
+.head {
+  height: 1px;
+}
+
 .mainContainer {
   composes: main from 'containers';
 }
