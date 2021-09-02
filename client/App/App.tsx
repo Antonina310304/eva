@@ -29,7 +29,7 @@ const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
 const App: FC = () => {
   return (
     <ModalsProvider>
-      <Route path='/'>
+      <Route regional={false} path='/'>
         <RouteIndex />
       </Route>
 
