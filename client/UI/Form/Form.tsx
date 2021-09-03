@@ -44,7 +44,6 @@ const Form: FC<FormProps> = (props) => {
   const {
     method = 'POST',
     action,
-    className,
     children,
     validationSchemaUrl,
     disabled,
