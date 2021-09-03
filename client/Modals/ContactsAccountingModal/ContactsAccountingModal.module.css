@@ -1,0 +1,34 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  width: 423px;
+  margin: 0 auto;
+  padding: var(--space-l);
+  padding-bottom: var(--space-xxl);
+
+  background: var(--color-white);
+  border-radius: 5px;
+}
+
+.wrapperTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-l);
+}
+
+.title {
+  composes: l from 'sizes';
+
+  font-weight: 500;
+}
+
+@media (--mobile) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-m) var(--space-s) var(--space-l);
+
+    border-radius: 0;
+  }
+}

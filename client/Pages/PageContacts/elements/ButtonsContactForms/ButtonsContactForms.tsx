@@ -16,6 +16,8 @@ const ButtonsContactForms: FC<ButtonsContactFormsProps> = (props) => {
   const { items, text, title } = contactDatas;
   const [, { openModal }] = useModals();
 
+  console.log('contactDatas', contactDatas);
+
   const handleButtonClick = useCallback(
     (item) => {
       if (item.href) {
@@ -23,16 +25,17 @@ const ButtonsContactForms: FC<ButtonsContactFormsProps> = (props) => {
       }
 
       if (item.data.action === 'contacts') {
-        openModal('Info', {
+        openModal('Contacts', {
           title: item.data.title,
-          text: 'Ещё не готово, заходите позже…',
+          email: item.data.email,
+          director: item.data.director,
         });
       }
 
       if (item.data.action === 'contacts-accounting') {
-        openModal('Info', {
+        openModal('ContactsAccounting', {
           title: item.data.title,
-          text: 'Ещё не готово, заходите позже…',
+          email: item.data.email,
         });
       }
     },

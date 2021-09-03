@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
 import Divider from '@Pages/PageCredit/elements/Divider';
-import Wrapper from '@Components/ServicePageWrapper';
 import ServicePageTitle from '@Components/ServicePageTitle';
 import QualityDepartment from './elements/QualityDepartment';
 import Requisites from './elements/Requisites';
