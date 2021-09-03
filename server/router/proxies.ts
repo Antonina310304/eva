@@ -24,6 +24,7 @@ const routes = [
   '/cabinet/formes',
   '/json-schema',
   '/order/coupon',
+  '/order/set-amount-points-bonus',
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',

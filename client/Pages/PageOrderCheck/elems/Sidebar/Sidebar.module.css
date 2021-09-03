@@ -1,0 +1,85 @@
+.label {
+  composes: s from 'sizes';
+
+  color: var(--color-dark-gray);
+}
+
+.price {
+  composes: b from 'sizes';
+
+  margin-top: var(--space-xxs);
+
+  font-weight: 500;
+}
+
+.wrapperDelivery {
+  margin-top: var(--space-xxl);
+}
+
+.delivery {
+  display: flex;
+  align-items: center;
+}
+
+.deliveryText {
+  composes: s from 'sizes';
+
+  margin-right: var(--space-xs);
+}
+
+.deliveryPrice {
+  composes: m from 'sizes';
+
+  font-weight: 500;
+}
+
+.wrapperLinks {
+  margin-top: var(--space-xxl);
+  padding-top: var(--space-s);
+
+  border-top: 1px solid var(--color-medium-gray);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-xs);
+
+  color: var(--color-black);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:after {
+    display: block;
+    width: 10px;
+    height: 10px;
+
+    background-image: url('./iconArrow.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    content: '';
+  }
+}
+
+.constructorHint {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-s);
+  padding-top: var(--space-xxl);
+
+  color: var(--color-dark-gray);
+
+  border-top: 1px solid var(--color-medium-gray);
+
+  p {
+    margin: 0 0 var(--space-s);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

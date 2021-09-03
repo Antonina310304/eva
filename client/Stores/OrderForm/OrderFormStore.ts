@@ -9,6 +9,7 @@ export interface SelectedIds {
   delivery: DeliveryTypeData['id'];
   paymentType: PaymentTypeData['id'];
   paymentVariant: PaymentVariantData['id'];
+  discountVariant: string;
 }
 
 const orderFormStore = createStore<CartStoreValue>();
@@ -60,6 +61,23 @@ const selectedPaymentVariantStore = createDerived(
   },
 );
 
+const selectedDiscountVariantStore = createDerived([selectedStore], (selected) => {
+  return selected?.discountVariant;
+});
+
+// Универсальная информацию о купоне
+const universalCouponStore = createDerived([orderFormStore], (form) => {
+  if (form.gameDiscount === 0 && form.couponDiscount === 0) return null;
+
+  return {
+    text:
+      form.gameDiscount > form.couponDiscount
+        ? 'Скидка по результатам игры: '
+        : 'Скидка по купону: ',
+    sum: Math.max(form.gameDiscount, form.couponDiscount),
+  };
+});
+
 const updateDelivery = (id: DeliveryTypeData['id'], newData: Partial<DeliveryTypeData>): void => {
   const form = getValue(orderFormStore);
 
@@ -73,18 +91,38 @@ const updateDelivery = (id: DeliveryTypeData['id'], newData: Partial<DeliveryTyp
   });
 };
 
+const updateCouponInfo = (newData: Partial<CartStoreValue>) => {
+  update(orderFormStore, (prevValue) => ({
+    ...prevValue,
+    coupon: newData.coupon,
+    couponData: newData.couponData,
+    couponDiscount: newData.couponDiscount,
+    discount: newData.discount,
+    gameDiscount: newData.gameDiscount,
+  }));
+};
+
 const select = (ids: Partial<SelectedIds>): void => {
   update(selectedStore, (prevValue) => ({ ...prevValue, ...ids }));
+};
+
+const selectDiscountVariant = (newVariant: string): void => {
+  update(selectedStore, (prevValue) => ({
+    ...prevValue,
+    discountVariant: prevValue.discountVariant === newVariant ? null : newVariant,
+  }));
 };
 
 const init = (initialValue: CartStoreValue): void => {
   const value = getValue(orderFormStore);
 
-  // Указываем начальные значения для хранилищ
   if (initialValue && !equal(initialValue, value)) {
     orderFormStore.set(initialValue);
 
+    // Способ доставки
     select({ delivery: initialValue.deliveryTypes[0].id });
+
+    // Тип оплаты
     update(selectedStore, (prevValue) => {
       const visiblePaymentTypes = getValue(visiblePaymentTypesStore);
       const firstVisible = visiblePaymentTypes[0];
@@ -93,10 +131,21 @@ const init = (initialValue: CartStoreValue): void => {
 
       return { ...prevValue, paymentType: paymentType.id };
     });
+
+    // Способ оплаты
     update(selectedStore, (prevValue) => {
       const paymentVariants = getValue(availablePaymentVariantsStore);
 
       return { ...prevValue, paymentVariant: paymentVariants[0].id };
+    });
+
+    // Вариант скидки
+    update(selectedStore, (prevValue) => {
+      const form = getValue(orderFormStore);
+      const hasSpentBonuses = form.bonusPoints?.spentAmount > 0;
+      const discountVariant = hasSpentBonuses ? 'bonuses' : 'promocode';
+
+      return { ...prevValue, discountVariant };
     });
   }
 };
@@ -104,12 +153,14 @@ const init = (initialValue: CartStoreValue): void => {
 export const useOrderForm = () => {
   return {
     ...useStore(orderFormStore),
+    universalCoupon: useStore(universalCouponStore),
     visiblePaymentTypes: useStore(visiblePaymentTypesStore),
     availablePaymentVariants: useStore(availablePaymentVariantsStore),
     selectedDelivery: useStore(selectedDeliveryStore),
     selectedPaymentType: useStore(selectedPaymentTypeStore),
     selectedPaymentVariant: useStore(selectedPaymentVariantStore),
+    selectedDiscountVariant: useStore(selectedDiscountVariantStore),
   };
 };
 
-export default { init, select, updateDelivery };
+export default { init, select, selectDiscountVariant, updateDelivery, updateCouponInfo };

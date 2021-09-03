@@ -15,14 +15,19 @@
 }
 
 .content {
-  flex-grow: 1;
-  width: 100%;
+  width: calc(100% - 300px - var(--space-xe));
   margin-right: var(--space-xe);
 }
 
 .wrapperSidebar {
   flex-shrink: 0;
   width: 300px;
+}
+
+.sidebar {
+  max-width: 486px;
+  margin: 0 auto;
+  padding: 0 var(--space-s);
 }
 
 .title {
@@ -45,6 +50,13 @@
   margin: 0;
 
   font-weight: 500;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 @media (--desktop-m) {
@@ -92,6 +104,7 @@
 
   .content {
     order: 2;
+    width: 100%;
     margin-top: var(--space-xxl);
     margin-right: unset;
   }
