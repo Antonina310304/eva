@@ -10,7 +10,6 @@
 
 .container {
   display: flex;
-  align-items: flex-start;
   margin-top: var(--space-xl);
 }
 
@@ -20,14 +19,17 @@
 }
 
 .wrapperSidebar {
+  position: relative;
+
   flex-shrink: 0;
   width: 300px;
 }
 
 .sidebar {
-  max-width: 486px;
+  width: 100%;
+  max-width: 300px;
   margin: 0 auto;
-  padding: 0 var(--space-s);
+  padding: var(--space-xxl) var(--space-s) 0;
 }
 
 .title {
@@ -113,6 +115,10 @@
     flex-grow: 1;
     order: 1;
     width: 100%;
+  }
+
+  .sidebar {
+    max-width: 486px;
   }
 
   .wrapperForm {
