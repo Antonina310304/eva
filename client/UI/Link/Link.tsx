@@ -10,7 +10,7 @@ import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
   className?: string;
-  view?: 'primary' | 'secondary' | 'simple' | 'native';
+  view?: 'primary' | 'secondary' | 'native';
   needFetch?: boolean;
   preventDefault?: boolean;
   size?: 's';
@@ -22,7 +22,7 @@ const Link: FC<LinkProps> = (props) => {
   const {
     className,
     to,
-    view = 'primary',
+    view,
     needFetch = true,
     preventDefault,
     children,
@@ -82,7 +82,6 @@ const Link: FC<LinkProps> = (props) => {
         {
           [styles.primary]: view === 'primary',
           [styles.secondary]: view === 'secondary',
-          [styles.simple]: view === 'simple',
           [styles.native]: view === 'native',
           [styles.sizeS]: size === 's',
           [styles.sizeN]: size === 'n',

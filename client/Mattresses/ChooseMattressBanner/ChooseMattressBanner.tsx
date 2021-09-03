@@ -47,13 +47,7 @@ const ChooseMattressBanner: FC<Props> = (props) => {
           <div className={styles.title}>{title}</div>
           <div className={styles.text}>{children}</div>
 
-          <Link
-            className={styles.link}
-            to={action.link}
-            target='_blank'
-            view='simple'
-            onClick={onLink}
-          >
+          <Link className={styles.link} to={action.link} target='_blank' onClick={onLink}>
             <Button wide theme='linkPrimary'>
               {action.title}
             </Button>
