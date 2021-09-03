@@ -13,14 +13,16 @@ export type OrderBonusesStatus = 'loading' | 'resolved' | 'rejected';
 
 export interface OrderBonusesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  productIds: number[];
+  productIds?: number[];
+  count?: number;
 }
 
 const OrderBonuses: FC<OrderBonusesProps> = (props) => {
-  const { className, productIds, ...restProps } = props;
+  const { className, productIds, count, ...restProps } = props;
+  const needLoad = typeof count !== 'number';
   const [visiblePopup, setVisiblePopup] = useState(false);
   const profile = useProfile();
-  const orderBonuses = useOrderBonuses({ productIds });
+  const orderBonuses = useOrderBonuses({ productIds, enabled: needLoad });
   const extra = orderBonuses.isSuccess && orderBonuses.data.extraBonus;
 
   const handleClickBonuses = useCallback(() => {
@@ -47,7 +49,7 @@ const OrderBonuses: FC<OrderBonusesProps> = (props) => {
         </>
       )}
 
-      {orderBonuses.isSuccess && (
+      {(orderBonuses.isSuccess || !needLoad) && (
         <>
           <div className={styles.iconPoints} />
 
@@ -55,9 +57,10 @@ const OrderBonuses: FC<OrderBonusesProps> = (props) => {
             <CounterPoints
               className={styles.count}
               income
-              count={orderBonuses.data.earnedAmount}
+              count={count || orderBonuses.data.earnedAmount}
               onClick={handleClickBonuses}
             />
+
             <Popup className={styles.popup} visible={visiblePopup}>
               {profile.data ? (
                 <>
