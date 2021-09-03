@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
+import Button from '@UI/Button';
 import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
@@ -20,6 +21,12 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { title, teaser, projects, examples } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
+
+  console.log(examples.length);
+  const onClickMore = useCallback(() => {
+    setVisibleItems(visibleItems + 3);
+  }, [visibleItems]);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -56,29 +63,40 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      <Section
-        {...restProps}
-        className={cn(styles.section, className)}
-        additional={<NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />}
-      >
-        <div className={styles.wrapperGallery}>
-          <Gallery
-            className={styles.gallery}
-            slideIndex={slide}
-            key={examples.length}
-            onChangeCurrent={handleChangeCurrent}
-            onChangeProgress={handleChangeProgress}
-          >
-            {(examples as any[]).map((item, index) => (
-              <div className={styles.galleryItem} key={index}>
-                <Image className={styles.galleryImage} src={item.src} />
-              </div>
-            ))}
-          </Gallery>
+      {examples.slice(0, visibleItems).map((item, index) => (
+        <Section
+          {...restProps}
+          className={cn(styles.section, className)}
+          additional={
+            <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
+          }
+          key={index}
+        >
+          <div className={styles.wrapperGallery}>
+            <Gallery
+              className={styles.gallery}
+              slideIndex={slide}
+              key={examples.length}
+              onChangeCurrent={handleChangeCurrent}
+              onChangeProgress={handleChangeProgress}
+            >
+              {(examples as any[]).map((element, elementIndex) => (
+                <div className={styles.galleryItem} key={elementIndex}>
+                  <Image className={styles.galleryImage} src={element.src} />
+                </div>
+              ))}
+            </Gallery>
 
-          <ProgressBar className={styles.progressBar} track={track} />
-        </div>
-      </Section>
+            <ProgressBar className={styles.progressBar} track={track} />
+          </div>
+        </Section>
+      ))}
+
+      <div className={styles.buttonWrapper}>
+        <Button className={styles.button} type='button' theme='dirty' onClick={onClickMore}>
+          Смотреть еще
+        </Button>
+      </div>
     </div>
   );
 };
