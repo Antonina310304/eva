@@ -33,6 +33,10 @@
   &.errored {
     border-color: var(--color-red);
   }
+
+  &.viewPlain:not(&.errored) {
+    border-color: var(--color-white);
+  }
 }
 
 .before,
