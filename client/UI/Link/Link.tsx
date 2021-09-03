@@ -9,6 +9,7 @@ import styles from './Link.module.css';
 export interface LinkProps extends BaseLinkProps {
   className?: string;
   view?: 'primary' | 'secondary' | 'simple' | 'native';
+  asButton?: boolean;
   needFetch?: boolean;
   preventDefault?: boolean;
   size?: 's';
@@ -26,6 +27,7 @@ const Link: FC<LinkProps> = (props) => {
     children,
     size = 'n',
     target,
+    asButton,
     onClick,
     ...restProps
   } = props;
@@ -74,6 +76,7 @@ const Link: FC<LinkProps> = (props) => {
           [styles.secondary]: view === 'secondary',
           [styles.simple]: view === 'simple',
           [styles.native]: view === 'native',
+          [styles.button]: asButton,
           [styles.sizeS]: size === 's',
           [styles.sizeN]: size === 'n',
         },

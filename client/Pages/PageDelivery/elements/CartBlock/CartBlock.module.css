@@ -24,3 +24,33 @@
 
   margin-top: var(--space-m);
 }
+
+.pecIcon {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 56px;
+  height: 23px;
+  margin-right: var(--space-s);
+}
+
+.deliveryInfo {
+  display: flex;
+  margin-top: var(--space-xxl);
+}
+
+.deliveryText {
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
+}
+
+.button {
+  max-width: 420px;
+  margin: var(--space-xxl) auto 0;
+}
+
+@media (--desktop) {
+  .deliveryText {
+    font-size: var(--size-m);
+    line-height: var(--lh-m);
+  }
+}

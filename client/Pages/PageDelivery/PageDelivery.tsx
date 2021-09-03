@@ -195,7 +195,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
           {cart.network === 'success' && cart.count > 0 && (
             <div className={styles.cartBlock}>
               <div className={styles.contentContainer}>
-                <CartBlock cart={cart} />
+                <CartBlock cart={cart} deliveryCost={deliveryCost} type={checkedDelivery.type} />
               </div>
             </div>
           )}
