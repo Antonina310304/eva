@@ -57,6 +57,55 @@
   overflow: hidden;
 }
 
+.arrowBackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 42px;
+  margin: 0 var(--space-l);
+
+  background-color: var(--color-white);
+  border-radius: 100%;
+  cursor: pointer;
+
+  &:hover {
+    .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+.arrow {
+  width: 15px;
+  height: 10px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.6;
+
+  transition: opacity 0.2s;
+}
+
+.arrowBackground.prev {
+  .arrow {
+    background-image: url('./icon-prev.svg');
+  }
+}
+
+.arrowBackground.next {
+  .arrow {
+    background-image: url('./icon-next.svg');
+  }
+}
+
+.navigationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 @media (--mobile) {
   .enterActive {
     .wrapper {
