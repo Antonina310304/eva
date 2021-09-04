@@ -18,7 +18,7 @@ export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { className, page, ...restProps } = props;
-  const { title, teaser, projects, examples } = page;
+  const { title, teaser, examples } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
@@ -27,6 +27,14 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const onClickMore = useCallback(() => {
     setVisibleItems(visibleItems + 3);
   }, [visibleItems]);
+
+  const projectsMap = {};
+  examples.forEach((example) => {
+    if (!projectsMap[example.projectId]) {
+      projectsMap[example.projectId] = example;
+    }
+  });
+  const projects = Object.values(projectsMap);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -63,7 +71,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      {examples.slice(0, visibleItems).map((item, index) => (
+      {projects.slice(0, visibleItems).map((item, index) => (
         <Section
           {...restProps}
           className={cn(styles.section, className)}
@@ -80,7 +88,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
               onChangeCurrent={handleChangeCurrent}
               onChangeProgress={handleChangeProgress}
             >
-              {(examples as any[]).map((element, elementIndex) => (
+              {projects.map((element, elementIndex) => (
                 <div className={styles.galleryItem} key={elementIndex}>
                   <Image className={styles.galleryImage} src={element.src} />
                 </div>
