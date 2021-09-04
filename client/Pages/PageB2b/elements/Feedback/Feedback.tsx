@@ -8,7 +8,6 @@ import FormItem from '@UI/FormItem';
 import Input from '@UI/Input';
 import Button from '@UI/Button';
 import Textarea from '@UI/Textarea';
-
 import styles from './Feedback.module.css';
 
 export interface FeedbackProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,29 +20,28 @@ const Feedback: FC<FeedbackProps> = (props) => {
   const [, { openModal }] = useModals();
   const [loading, setLoading] = useState(false);
 
-  //
-  const onSubmit = useCallback((e) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     setLoading(true);
   }, []);
 
-  //
   const onError = useCallback(() => {
     setLoading(false);
 
     openModal('Info', {
+      view: 'error',
       title: 'Произошла ошибка',
       text: 'Пожалуйста, повторите попытку позже.',
     });
   }, [openModal]);
 
-  //
   const onResponse = useCallback(
     (response, formData) => {
       setLoading(false);
 
       if (response.status === 'success') {
         openModal('Info', {
+          view: 'success',
           title: 'Ваша заявка принята!',
           text: 'Наш менеджер свяжется с вами в ближайшее время.',
         });
@@ -91,7 +89,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
           method='POST'
           validationSchemaUrl='/json-schema/feedback-form.json'
           onError={onError}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit}
           onResponse={onResponse}
         >
           <div className={styles.formWrapper}>

@@ -8,7 +8,7 @@ import { RubricsItem } from '../../typings';
 
 export interface RubricsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  rubrics: RubricsItem;
+  rubrics: RubricsItem[];
 }
 
 const Rubrics: FC<RubricsProps> = (props) => {
