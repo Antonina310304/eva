@@ -16,7 +16,7 @@ export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2b: FC<PageB2bProps> = (props) => {
   const { className, page, ...restProps } = props;
-  const { banner, texts, articles, rubrics, map, sellPoints, pickUpPoints } = page;
+  const { banner, texts, articles, rubrics, socials, map, sellPoints } = page;
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
@@ -35,7 +35,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
         <Rubrics rubrics={rubrics} />
       </div>
       <Feedback />
-      <Press articles={articles} />
+      <Press articles={articles} socials={socials} />
       <div className={styles.mapWrapper}>
         <SeeUs datasForMap={map} pickupPoints={sellPoints} />
       </div>

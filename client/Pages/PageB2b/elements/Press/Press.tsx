@@ -17,8 +17,8 @@ export interface SocialItem {
 }
 export interface PressProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  articles: ArticleItem;
-  socials: SocialItem;
+  articles: ArticleItem[];
+  socials: SocialItem[];
 }
 
 const Press: FC<PressProps> = (props) => {

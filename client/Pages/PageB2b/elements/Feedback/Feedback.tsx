@@ -55,7 +55,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
           event: 'GAEvent',
         });
       } else {
-        onError(response, formData);
+        onError();
       }
     },
     [onError, openModal],
