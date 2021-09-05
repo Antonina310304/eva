@@ -26,12 +26,15 @@
 .content {
   height: calc(100% - var(--space-xl) - 30px);
   margin-top: var(--space-xl);
-  padding: 0 var(--space-xl);
 }
 
 .scroller {
   height: 375px;
   margin-top: var(--space-l);
+}
+
+.mainWrapper {
+  padding: 0 var(--space-xl);
 }
 
 @media (--mobile) {
@@ -49,7 +52,7 @@
     padding: 0 var(--space-s);
   }
 
-  .content {
+  .mainWrapper {
     padding: 0 var(--space-s);
   }
 

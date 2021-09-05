@@ -10,6 +10,7 @@ import useMedias from '@Hooks/useMedias';
 import { RegionHintData } from '@Types/Region';
 import Search from './elems/Search';
 import FavoriteRegions from './elems/FavoriteRegions';
+import ListOfHints from './elems/ListOfHints';
 import styles from './RegionSelectorModal.module.css';
 
 const RegionSelectorModal: FC<ModalMainProps> = (props) => {
@@ -18,6 +19,11 @@ const RegionSelectorModal: FC<ModalMainProps> = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [favoriteRegions, setFavoriteRegions] = useState(null);
   const [hints, setHints] = useState<RegionHintData[]>(null);
+  const [query, setQuery] = useState<string>(null);
+
+  const handleChangeQuery = useCallback((_e, newQuery) => {
+    setQuery(newQuery);
+  }, []);
 
   const handleChangeHints = useCallback((newHints) => {
     setHints(newHints);
@@ -60,13 +66,24 @@ const RegionSelectorModal: FC<ModalMainProps> = (props) => {
         </div>
 
         <div className={styles.content}>
-          <Search onChangeHints={handleChangeHints} />
+          <div className={styles.mainWrapper}>
+            <Search onChangeQuery={handleChangeQuery} onChangeHints={handleChangeHints} />
+          </div>
 
           <Scroller className={styles.scroller}>
-            {favoriteRegions?.length > 0 && (
-              <div className={styles.wrapperFavoriteRegions}>
-                <FavoriteRegions regions={favoriteRegions} onSelectRegion={handleSelectRegion} />
-              </div>
+            {hints?.length > 0 ? (
+              <ListOfHints query={query} regions={hints} onSelectRegion={handleSelectRegion} />
+            ) : (
+              <>
+                {favoriteRegions?.length > 0 && (
+                  <div className={styles.mainWrapper}>
+                    <FavoriteRegions
+                      regions={favoriteRegions}
+                      onSelectRegion={handleSelectRegion}
+                    />
+                  </div>
+                )}
+              </>
             )}
           </Scroller>
         </div>

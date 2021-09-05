@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, FC, HTMLAttributes, memo } from 'react';
+import React, { useCallback, useState, useRef, FC, HTMLAttributes, ChangeEvent, memo } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 
@@ -16,10 +16,11 @@ export interface SearchProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   examples?: Example[];
   onChangeHints?: (hints: RegionHintData[]) => void;
+  onChangeQuery?: (e: ChangeEvent, query: string) => void;
 }
 
 const Search: FC<SearchProps> = (props) => {
-  const { className, examples, onChangeHints, ...restProps } = props;
+  const { className, examples, onChangeQuery, onChangeHints, ...restProps } = props;
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const [error, setError] = useState(null);
@@ -70,8 +71,9 @@ const Search: FC<SearchProps> = (props) => {
       }
 
       setValue(val.trim());
+      if (onChangeQuery) onChangeQuery(e, val.trim());
     },
-    [debounceCity, onChangeHints],
+    [debounceCity, onChangeHints, onChangeQuery],
   );
 
   return (
