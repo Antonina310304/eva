@@ -33,6 +33,10 @@
   &.errored {
     border-color: var(--color-red);
   }
+
+  &.rounded {
+    border-radius: 30px;
+  }
 }
 
 .before,

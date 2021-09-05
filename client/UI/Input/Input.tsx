@@ -22,6 +22,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   wide?: boolean;
   mask?: string;
   error?: string;
+  rounded?: boolean;
   onBeforePaste?: (pastedValue: string, opts: any) => string;
 }
 
@@ -33,6 +34,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
     wide,
     mask,
     error,
+    rounded,
     readOnly,
     onFocus,
     onBlur,
@@ -97,6 +99,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
           [styles.focused]: focused,
           [styles.readonly]: readOnly,
           [styles.errored]: !!error,
+          [styles.rounded]: rounded,
         })}
         onClick={handleClick}
       >
