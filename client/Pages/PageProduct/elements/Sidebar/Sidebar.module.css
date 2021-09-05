@@ -69,7 +69,7 @@
   margin-top: var(--space-xl);
 }
 
-.orderFabrics {
+.sidebar .orderFabrics {
   display: inline-block;
   margin-top: var(--space-xs);
 
