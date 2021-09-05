@@ -23,6 +23,8 @@ const routes = [
   '/site/quality-department-send-message',
   '/cabinet/formes',
   '/json-schema',
+  '/region-priority',
+  '/region',
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',
