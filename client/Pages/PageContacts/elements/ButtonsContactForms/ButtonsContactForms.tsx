@@ -16,8 +16,6 @@ const ButtonsContactForms: FC<ButtonsContactFormsProps> = (props) => {
   const { items, text, title } = contactDatas;
   const [, { openModal }] = useModals();
 
-  console.log('contactDatas', contactDatas);
-
   const handleButtonClick = useCallback(
     (item) => {
       if (item.href) {

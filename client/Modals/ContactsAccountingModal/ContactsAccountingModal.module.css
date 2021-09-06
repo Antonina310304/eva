@@ -1,7 +1,7 @@
 .container {
   box-sizing: border-box;
   width: 100%;
-  width: 423px;
+  max-width: 423px;
   margin: 0 auto;
   padding: var(--space-l);
   padding-bottom: var(--space-xxl);

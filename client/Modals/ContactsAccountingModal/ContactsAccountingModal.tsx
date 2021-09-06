@@ -12,8 +12,8 @@ const ContactsAccountingModal: FC<ModalMainProps> = (props) => {
   const [, { closeModal }] = useModals();
 
   const handleClose = useCallback(() => {
-    closeModal('ContactsAccounting');
-  }, [closeModal]);
+    closeModal(modal.id);
+  }, [closeModal, modal.id]);
 
   return (
     <ModalMain
