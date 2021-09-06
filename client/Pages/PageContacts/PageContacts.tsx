@@ -4,10 +4,10 @@ import cn from 'classnames';
 import { MetaData } from '@Types/Meta';
 import Divider from '@Pages/PageCredit/elements/Divider';
 import ServicePageTitle from '@Components/ServicePageTitle';
+import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import QualityDepartment from './elements/QualityDepartment';
 import Requisites from './elements/Requisites';
 import ButtonsContactForms from './elements/ButtonsContactForms';
-import SeeUs from './elements/SeeUs';
 import { PageContactsData } from './typings';
 import styles from './PageContacts.module.css';
 
@@ -86,7 +86,7 @@ const PageContacts: FC<PageContactsProps> = (props) => {
       <div className={styles.containerSeeUs}>
         <Divider className={styles.divider} />
 
-        <SeeUs className={styles.seeUs} datasForMap={map} pickupPoints={sellPoints} />
+        <SectionShowroomsMap className={styles.seeUs} datasForMap={map} pickupPoints={sellPoints} />
       </div>
     </div>
   );

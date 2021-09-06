@@ -5,6 +5,7 @@ export interface MapData {
   description: string;
   regionId: number;
 }
+
 export interface PickUpPoint {
   isVisible: boolean;
   label: string;
@@ -24,6 +25,7 @@ export interface SocialsItem {
   id: number;
   link: string;
 }
+
 export interface SellPointData {
   id: string;
   regionId: number;

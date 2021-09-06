@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
-import SeeUs from './elements/SeeUs';
+import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import { PageB2bData } from './typings';
 import Rubrics from './elements/Rubrics';
 import Feedback from './elements/Feedback';
@@ -37,7 +37,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
       <Feedback />
       <Press articles={articles} socials={socials} />
       <div className={styles.mapWrapper}>
-        <SeeUs datasForMap={map} pickupPoints={sellPoints} />
+        <SectionShowroomsMap datasForMap={map} pickupPoints={sellPoints} />
       </div>
     </div>
   );

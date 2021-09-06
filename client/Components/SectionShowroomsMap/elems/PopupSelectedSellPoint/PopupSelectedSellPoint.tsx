@@ -5,7 +5,7 @@ import IconClose from '@UI/IconClose';
 import Link from '@UI/Link';
 import Scroller from '@UI/Scroller';
 import Image from '@UI/Image';
-import { SellPointData } from '@Pages/PageContacts/typings';
+import { SellPointData } from '../../typings';
 import styles from './PopupSelectedSellPoint.module.css';
 
 export interface PopupSelectedSellPointProps extends HTMLAttributes<HTMLDivElement> {
