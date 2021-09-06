@@ -41,6 +41,8 @@
 }
 
 .link {
+  composes: s from 'sizes';
+
   display: flex;
   align-items: center;
   justify-content: space-between;

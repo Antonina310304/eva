@@ -13,7 +13,6 @@ export interface LinkProps extends BaseLinkProps {
   view?: 'primary' | 'secondary' | 'native';
   needFetch?: boolean;
   preventDefault?: boolean;
-  size?: 's';
   to: string;
   onClick?(e: MouseEvent): void;
 }
@@ -26,7 +25,6 @@ const Link: FC<LinkProps> = (props) => {
     needFetch = true,
     preventDefault,
     children,
-    size = 'n',
     target,
     onClick,
     ...restProps
@@ -83,8 +81,6 @@ const Link: FC<LinkProps> = (props) => {
           [styles.primary]: view === 'primary',
           [styles.secondary]: view === 'secondary',
           [styles.native]: view === 'native',
-          [styles.sizeS]: size === 's',
-          [styles.sizeN]: size === 'n',
         },
         className,
       )}

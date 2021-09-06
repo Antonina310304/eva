@@ -62,7 +62,7 @@ const ResendCodeTimer: FC<ResendCodeTimerProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.timer, { [styles.waiting]: waiting }, className)}>
       {finished ? (
-        <Link className={styles.action} view='native' to='#' onClick={handleRepeat}>
+        <Link className={styles.action} preventDefault view='native' to='#' onClick={handleRepeat}>
           <Icon36Reset className={styles.iconReset} width={12} height={12} />
           Отправить код еще раз
         </Link>

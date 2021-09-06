@@ -65,13 +65,7 @@ const OrderBonuses: FC<OrderBonusesProps> = (props) => {
               {profile.data ? (
                 <>
                   {`Бонусы начисляются после оформления заказа и станут доступны через 14 дней после доставки товара. `}
-                  <Link
-                    className={styles.link}
-                    to='/site/divan-club'
-                    target='_blank'
-                    view='native'
-                    size='s'
-                  >
+                  <Link className={styles.link} to='/site/divan-club' target='_blank' view='native'>
                     Подробнее о программе лояльности
                   </Link>
                 </>
@@ -79,13 +73,7 @@ const OrderBonuses: FC<OrderBonusesProps> = (props) => {
                 <>
                   {`Зарегистрируйтесь или авторизуйтесь в программе Divan Club. Бонусы начисляются сразу
                 после оформления заказа и доступны для списания через 14 дней после доставки товара. `}
-                  <Link
-                    className={styles.link}
-                    to='/site/divan-club'
-                    target='_blank'
-                    view='native'
-                    size='s'
-                  >
+                  <Link className={styles.link} to='/site/divan-club' target='_blank' view='native'>
                     Подробнее о программе лояльности
                   </Link>
                 </>

@@ -77,7 +77,6 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
             preventDefault
             className={styles.link}
             to='/site/delivery'
-            size='s'
             onClick={handleClickDelivery}
           >
             Доставка и оплата
@@ -88,7 +87,6 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
           preventDefault
           className={styles.link}
           to='/static-page/oferta'
-          size='s'
           onClick={handleClickOferta}
         >
           Договор оферты
