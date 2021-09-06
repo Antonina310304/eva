@@ -44,6 +44,8 @@
 }
 
 .link {
+  composes: s from 'sizes';
+
   display: inline-block;
   margin-top: var(--space-xs);
 }

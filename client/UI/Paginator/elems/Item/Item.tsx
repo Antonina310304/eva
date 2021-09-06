@@ -22,7 +22,6 @@ const PaginationItem: FC<ItemProps> = (props) => {
         { [styles.actived]: actived, [styles.disabled]: disabled },
         className,
       )}
-      view='simple'
       to={link}
       needFetch={false}
     >

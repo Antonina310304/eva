@@ -33,7 +33,14 @@ const Position: FC<PositionProps> = (props) => {
   }, [position.id]);
 
   return (
-    <div {...restProps} className={cn(styles.position, className)}>
+    <div
+      {...restProps}
+      className={cn(
+        styles.position,
+        { [styles.withWarning]: position.hasDisabledDiscount },
+        className,
+      )}
+    >
       <div className={styles.wrapperProduct}>
         <Remove className={styles.remove} onClick={handleRemove} />
 
@@ -56,6 +63,10 @@ const Position: FC<PositionProps> = (props) => {
           </div>
         </div>
       </div>
+
+      {position.hasDisabledDiscount && (
+        <div className={styles.warning}>На этот товар условия акций не действуют</div>
+      )}
 
       {position.relatedProducts?.length > 0 && (
         <div className={styles.wrapperRelated}>

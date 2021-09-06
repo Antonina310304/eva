@@ -58,7 +58,12 @@ const QualityGuaranteeModal: FC<ModalSidebarProps> = (props) => {
         </div>
 
         <div className={styles.linkWrapper}>
-          <Link className={styles.link} to='/scandinavian-collection' onClick={handleClickLink}>
+          <Link
+            className={styles.link}
+            to='/scandinavian-collection'
+            view='primary'
+            onClick={handleClickLink}
+          >
             Подробнее о производстве
           </Link>
         </div>

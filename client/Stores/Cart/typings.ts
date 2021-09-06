@@ -11,4 +11,4 @@ export interface UseCartResult extends CartStoreValue {
   network: NetworkStatus;
 }
 
-export type UseCart = (initialData?: CartStoreValue) => UseCartResult;
+export type UseCart = () => UseCartResult;
