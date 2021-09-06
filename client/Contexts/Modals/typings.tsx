@@ -25,6 +25,7 @@ export type ModalId =
   | 'DeliveryInformation'
   | 'Contacts'
   | 'ContactsAccounting'
+  | 'RegionSelector'
   | 'Authorization';
 
 export interface Modal {
