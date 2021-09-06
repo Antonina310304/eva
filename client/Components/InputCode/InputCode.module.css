@@ -4,6 +4,16 @@
       border-color: var(--color-red);
     }
   }
+
+  &.readOnly {
+    .codeWrapper {
+      background-color: var(--color-light-gray);
+    }
+
+    .code {
+      background-color: inherit;
+    }
+  }
 }
 
 .codes {

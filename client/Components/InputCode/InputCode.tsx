@@ -152,8 +152,20 @@ const InputCode: FC<InputCodeProps> = (props) => {
   }, [autoFocus, changeFocus]);
 
   return (
-    <div className={cn(styles.wrapper, { [styles.errored]: !!error }, className)}>
-      <input {...restProps} className={styles.control} type='hidden' value={value || finalValue} />
+    <div
+      className={cn(
+        styles.inputCode,
+        { [styles.errored]: !!error, [styles.readOnly]: readOnly },
+        className,
+      )}
+    >
+      <input
+        {...restProps}
+        className={styles.control}
+        readOnly={readOnly}
+        type='hidden'
+        value={value || finalValue}
+      />
 
       <div className={styles.codes}>
         {codes.map((index) => (
@@ -163,7 +175,7 @@ const InputCode: FC<InputCodeProps> = (props) => {
             onClick={(e) => handleClickCodeWrapper(e, index)}
           >
             <input
-              className={cn(styles.code, { [styles.errored]: !!error })}
+              className={styles.code}
               ref={addInputRef(index)}
               type='tel'
               maxLength={1}
