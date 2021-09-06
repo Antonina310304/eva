@@ -8,6 +8,7 @@ import React, {
   useState,
   useRef,
   useImperativeHandle,
+  ReactChild,
 } from 'react';
 import cn from 'classnames';
 
@@ -17,11 +18,12 @@ export type InputRef = HTMLInputElement;
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  before?: string;
-  after?: string;
+  before?: ReactChild;
+  after?: ReactChild;
   wide?: boolean;
   mask?: string;
   error?: string;
+  rounded?: boolean;
   onBeforePaste?: (pastedValue: string, opts: any) => string;
 }
 
@@ -33,6 +35,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
     wide,
     mask,
     error,
+    rounded,
     readOnly,
     onFocus,
     onBlur,
@@ -97,10 +100,11 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
           [styles.focused]: focused,
           [styles.readonly]: readOnly,
           [styles.errored]: !!error,
+          [styles.rounded]: rounded,
         })}
         onClick={handleClick}
       >
-        {before && <span className={styles.before}>{before}</span>}
+        {before}
         <input
           {...restProps}
           className={styles.control}
@@ -109,8 +113,7 @@ const Input = forwardRef<InputRef, InputProps>((props, ref: MutableRefObject<HTM
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        {after && <span className={styles.after}>{after}</span>}
-        {error && <div className={styles.iconError} />}
+        {error ? <div className={styles.iconError} /> : <>{after}</>}
       </div>
       {error && <div className={styles.error}>{error}</div>}
     </div>

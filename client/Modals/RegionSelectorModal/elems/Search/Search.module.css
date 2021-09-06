@@ -1,0 +1,17 @@
+.search {
+}
+
+.input {
+  border-radius: 50%;
+}
+
+.iconSearch {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: var(--space-s);
+
+  background-image: url('./iconSearch.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
