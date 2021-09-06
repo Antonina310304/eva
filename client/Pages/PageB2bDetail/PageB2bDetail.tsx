@@ -34,9 +34,19 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
     }
   });
   const projects = Object.values(projectsMap);
-  const uniqueProjects = projects.slice(0, visibleItems);
+  const balance = projects.length - visibleItems;
 
-  console.log(projects[2]);
+  // var result = data.reduce((acc, item)=>{
+  //   var date = item.date.split(' ')[0]
+  //   if (acc[date]) {
+  //     acc[date].push(item)
+  //   } else {
+  //     acc[date] = [item]
+  //   }
+  //   return acc
+  // }, {})
+
+  console.log(projects);
   console.log(examples);
 
   const normalizeSlide = useCallback(
@@ -74,8 +84,8 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      {uniqueProjects.map((item, index) => (
-        <div className={styles.wrapperGallery}>
+      {projects.slice(0, visibleItems).map((item, index) => (
+        <div className={styles.contentWrapper}>
           <Section
             {...restProps}
             className={cn(styles.section, className)}
@@ -102,7 +112,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
           </Section>
 
           <ProgressBar className={styles.progressBar} track={track} />
-          <div className={styles.projectName}>{item.title}</div>
+          <h3 className={styles.projectName}>{item.title}</h3>
           <div className={styles.descriptionWrapper}>
             {item.text.map((elem, elemIndex: number) => (
               <div className={styles.description} key={elemIndex}>
@@ -115,7 +125,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
 
       <div className={styles.buttonWrapper}>
         <Button className={styles.button} type='button' theme='dirty' onClick={onClickMore}>
-          Смотреть еще
+          {`Смотреть еще ${balance}`}
         </Button>
       </div>
     </div>
