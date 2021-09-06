@@ -38,7 +38,7 @@
 }
 
 .gallery {
-  margin: 0 var(--space-xs-neg) var(--space-xxl);
+  margin: 0 var(--space-xs-neg) var(--space-l);
 }
 
 @media (--desktop) {

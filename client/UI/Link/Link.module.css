@@ -23,13 +23,15 @@
   background-size: 100% 1px;
 }
 
-.link.button.primary {
+.button {
+  height: 50px;
+}
 
+.link.button.primary {
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  height: 50px;
   padding: 0 var(--space-n);
 
   color: var(--color-white);

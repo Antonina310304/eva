@@ -62,7 +62,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
     attention,
     deliveryTypes,
     layout,
-    productIds,
+    productIds = [],
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
@@ -73,7 +73,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   const goodsInfo = useMemo(() => {
     const result = [];
 
-    if (cart.positions.length > 0) {
+    if (cart.positions?.length > 0) {
       cart.positions.forEach((position) => {
         position.products.forEach((product) => {
           result.push({

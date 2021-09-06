@@ -53,4 +53,25 @@
     font-size: var(--size-m);
     line-height: var(--lh-m);
   }
+
+  .productsList {
+    margin-right: var(--space-xxl-neg);
+    margin-left: var(--space-xxl-neg);
+  }
+
+  .productItem {
+    width: 240px;
+    padding: 0 var(--space-xs);
+  }
+}
+
+@media (--mobile-m) {
+  .productsList {
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-s-neg);
+  }
+
+  .button {
+    max-width: 330px;
+  }
 }
