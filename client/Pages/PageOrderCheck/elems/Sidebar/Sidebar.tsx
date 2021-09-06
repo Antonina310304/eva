@@ -35,10 +35,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   }, [openModal]);
 
   const handleClickDelivery = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс!',
-      text: 'Ещё не готово, заходите позже…',
-    });
+    openModal('DeliveryInfo');
   }, [openModal]);
 
   if (!meta.isSuccess) return null;

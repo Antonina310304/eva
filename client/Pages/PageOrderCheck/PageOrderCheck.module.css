@@ -26,6 +26,7 @@
 }
 
 .sidebar {
+  box-sizing: border-box;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
