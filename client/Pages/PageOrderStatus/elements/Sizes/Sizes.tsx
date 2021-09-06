@@ -4,8 +4,9 @@ import cn from 'classnames';
 import styles from './Sizes.module.css';
 
 export interface SizeItemData {
-  name: string;
-  value: string;
+  title: string;
+  value: number;
+  unit: string;
 }
 
 export interface SizesProps extends HTMLAttributes<HTMLDivElement> {

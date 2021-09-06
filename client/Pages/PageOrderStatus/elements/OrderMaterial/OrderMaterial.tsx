@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
-
 import styles from './OrderMaterial.module.css';
 
 export interface ProductMaterialData {

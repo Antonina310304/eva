@@ -2,10 +2,10 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { ProductData } from '@Pages/PageOrderStatus/typings';
-import OrderMaterial from '../OrderMaterial';
-import PriceContainer from '../PriceContainer';
-import CharacteristicsList from '../CharacteristicsList';
-import Sizes from '../Sizes';
+import Price from '@UI/Price';
+import OrderMaterial, { ProductMaterialData } from '../OrderMaterial';
+import CharacteristicsList, { CharacteristicData } from '../CharacteristicsList';
+import Sizes, { SizeItemData } from '../Sizes';
 import styles from './ProductCard.module.css';
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -38,13 +38,15 @@ const ProductCard: FC<ProductCardProps> = (props) => {
                         case 'materials': {
                           return (
                             <div className={styles.materials} key={indexParameter}>
-                              {parameter.data.map((material: any, indexMaterial: number) => (
-                                <OrderMaterial
-                                  className={styles.material}
-                                  key={indexMaterial}
-                                  material={material}
-                                />
-                              ))}
+                              {parameter.data.map(
+                                (material: ProductMaterialData, indexMaterial: number) => (
+                                  <OrderMaterial
+                                    className={styles.material}
+                                    key={indexMaterial}
+                                    material={material}
+                                  />
+                                ),
+                              )}
                             </div>
                           );
                         }
@@ -53,7 +55,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
                           return (
                             <Sizes
                               key={indexParameter}
-                              sizes={parameter.data.map((size: any) => ({
+                              sizes={parameter.data.map((size: SizeItemData) => ({
                                 value: `${size.value} ${size.unit}`,
                               }))}
                             />
@@ -64,10 +66,12 @@ const ProductCard: FC<ProductCardProps> = (props) => {
                           return (
                             <CharacteristicsList
                               key={indexParameter}
-                              characteristics={parameter.data.map((feature: any) => ({
-                                name: `${feature.title}: `,
-                                value: feature.value,
-                              }))}
+                              characteristics={parameter.data.map(
+                                (feature: CharacteristicData) => ({
+                                  title: `${feature.title}: `,
+                                  value: feature.value,
+                                }),
+                              )}
                             />
                           );
                         }
@@ -85,7 +89,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
 
         <div className={styles.priceBlock}>
           <div className={styles.count}>{`${product.quantity} шт.`}</div>
-          <PriceContainer className={styles.price} price={product.price} />
+          <Price className={styles.price} price={product.price} />
         </div>
       </div>
     </div>

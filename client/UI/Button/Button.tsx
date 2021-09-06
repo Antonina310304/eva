@@ -33,12 +33,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     typeof children === 'string' ||
     (Array.isArray(children) && children.every((child) => typeof child === 'string'));
 
-  const content = useMemo(() => {
-    if (waiting) return <Loader />;
-
-    return <>{isText ? <span className={styles.text}>{children}</span> : children}</>;
-  }, [waiting, isText, children]);
-
   return (
     <button
       {...restProps}
@@ -68,7 +62,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       ref={ref}
     >
       {before && <span className={styles.before}>{before}</span>}
-      {content}
+      {waiting ? (
+        <Loader />
+      ) : (
+        <>{isText ? <span className={styles.text}>{children}</span> : children}</>
+      )}
     </button>
   );
 });

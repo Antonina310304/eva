@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
-import PriceContainer from '../PriceContainer';
+import Price from '@UI/Price';
 import styles from './Check.module.css';
 
 export interface CheckItem {
@@ -39,7 +39,7 @@ const Check: FC<CheckProps> = (props) => {
 
               <div className={styles.itemValues}>
                 {item.quantity && <div className={styles.itemCount}>{`${item.quantity} шт.`}</div>}
-                <PriceContainer className={styles.itemCost} price={item.cost} />
+                <Price className={styles.itemCost} price={item.cost} />
               </div>
             </div>
           ))}

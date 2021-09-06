@@ -10,7 +10,6 @@ export default async ({ id }: Params): Promise<any> => {
   searchParams.set('id', id);
 
   const url = `/order/pay?${searchParams.toString()}`;
-
   const res = await Api.queryProxi<any>(url);
 
   return res;

@@ -3,12 +3,12 @@ import cn from 'classnames';
 
 import styles from './Box.module.css';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   view?: 'check' | 'product';
 }
 
-const Box: FC<Props> = (props) => {
+const Box: FC<BoxProps> = (props) => {
   const { className, title, view, children, ...restProps } = props;
 
   return (
@@ -16,7 +16,7 @@ const Box: FC<Props> = (props) => {
       {...restProps}
       className={cn(
         styles.box,
-        { [styles.check]: view === 'check', [styles.product]: view === 'product' },
+        { [styles.viewCheck]: view === 'check', [styles.viewProduct]: view === 'product' },
         className,
       )}
     >

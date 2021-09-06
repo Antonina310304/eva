@@ -4,23 +4,23 @@
   background: var(--color-white);
 }
 
-.box.product {
+.box.viewProduct {
   padding: 0;
 }
 
-.box.check {
+.box.viewCheck {
   padding: var(--space-xxl);
   padding-bottom: var(--space-xb);
 }
 
 @media (--desktop) {
-  .box.check {
+  .box.viewCheck {
     padding: var(--space-l) var(--space-n) var(--space-xxl);
   }
 }
 
 @media (--mobile-m) {
-  .box.check {
+  .box.viewCheck {
     padding-right: var(--space-s);
     padding-left: var(--space-s);
   }

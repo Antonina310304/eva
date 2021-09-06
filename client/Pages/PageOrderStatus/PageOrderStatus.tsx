@@ -28,6 +28,8 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
   const [waiting, setWaiting] = useState(false);
   const hasServices = !!price.services;
 
+  console.log('page', page);
+
   // Плоский список товаров
   const products = useMemo(() => {
     let result: ProductData[] = [];
@@ -86,15 +88,15 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
     const result: CheckGroup[] = [];
     result.push({
       items: [
-        hasServices && {
+        {
           name: 'Дополнительные услуги',
           cost: price.services,
         },
-      ].filter(Boolean),
+      ],
     });
 
     return result;
-  }, [hasServices, price.services]);
+  }, [price.services]);
 
   const handleError = useCallback(() => {
     openModal('Info', {
