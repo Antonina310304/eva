@@ -31,7 +31,6 @@
   "dependencies": {
     "@babel/runtime": "^7.10.4",
     "@divanru/icons": "^1.67.0",
-    "@divanru/ts-ui": "^2.13.23",
     "@kundinos/nanostores": "^0.4.3",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.2",
