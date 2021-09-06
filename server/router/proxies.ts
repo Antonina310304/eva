@@ -23,6 +23,8 @@ const routes = [
   '/site/quality-department-send-message',
   '/cabinet/formes',
   '/json-schema',
+  '/region-priority',
+  '/region',
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',
@@ -50,7 +52,7 @@ router.use('/p/:path', (req, res, next) => {
 
   proxy(url, {
     proxyReqPathResolver: (proxyReq) => {
-      return `${decodeURIComponent(proxyReq.params.path)}`;
+      return proxyReq.params.path;
     },
     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
       const domain = new URL(backend).host;

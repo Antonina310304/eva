@@ -1,0 +1,24 @@
+.hints {
+}
+
+.hint {
+  padding: var(--space-xxs) var(--space-xl);
+
+  cursor: pointer;
+
+  transition: background-color 0.4s;
+
+  &:not(&:last-child) {
+    margin-bottom: var(--space-xs);
+  }
+
+  &:hover {
+    background-color: var(--color-light-gray);
+  }
+}
+
+@media (--mobile) {
+  .hint {
+    padding: var(--space-xxs) var(--space-s);
+  }
+}
