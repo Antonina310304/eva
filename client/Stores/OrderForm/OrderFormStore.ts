@@ -143,7 +143,11 @@ const init = (initialValue: CartStoreValue): void => {
     update(selectedStore, (prevValue) => {
       const form = getValue(orderFormStore);
       const hasSpentBonuses = form.bonusPoints?.spentAmount > 0;
-      const discountVariant = hasSpentBonuses ? 'bonuses' : 'promocode';
+      const hasCoupon = form.universalCoupon?.sum > 0;
+
+      let discountVariant = null;
+      if (hasSpentBonuses) discountVariant = 'bonuses';
+      if (hasCoupon) discountVariant = 'promocode';
 
       return { ...prevValue, discountVariant };
     });
