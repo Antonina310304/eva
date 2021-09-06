@@ -28,6 +28,8 @@ const routes = [
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',
+  '/site/message-for-department',
+  '/site/message-for-accounting-department',
 ];
 
 routes.forEach((route) => {
