@@ -36,18 +36,15 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const projects = Object.values(projectsMap);
   const balance = projects.length - visibleItems;
 
-  // var result = data.reduce((acc, item)=>{
-  //   var date = item.date.split(' ')[0]
-  //   if (acc[date]) {
-  //     acc[date].push(item)
-  //   } else {
-  //     acc[date] = [item]
-  //   }
-  //   return acc
-  // }, {})
+  /* eslint-disable no-param-reassign */
+  const gallery = examples.reduce((a, c) => {
+    a[c.projectId] = a[c.projectId] || [];
+    a[c.projectId].push(c);
+    return a;
+  }, {});
+  /* eslint-enable no-param-reassign */
 
-  console.log(projects);
-  console.log(examples);
+  const subGallery = Object.values(gallery);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -98,11 +95,11 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
               <Gallery
                 className={styles.gallery}
                 slideIndex={slide}
-                key={examples.length}
+                key={subGallery.length}
                 onChangeCurrent={handleChangeCurrent}
                 onChangeProgress={handleChangeProgress}
               >
-                {examples.map((element, elementIndex) => (
+                {subGallery[index].map((element, elementIndex) => (
                   <div className={styles.galleryItem} key={elementIndex}>
                     <Image className={styles.galleryImage} src={element.src} />
                   </div>
