@@ -28,6 +28,10 @@
   .item:last-child & {
     padding-right: 0;
   }
+
+  &:hover {
+    font-weight: 500;
+  }
 }
 
 .first {
@@ -35,9 +39,10 @@
 }
 
 .subtitle {
-  margin: 0 0 20px;
+  margin: 0 0 15px;
 
   color: var(--color-black);
+  font-weight: 500;
   font-size: var(--size-m);
   line-height: 23px;
 }
@@ -45,7 +50,7 @@
 .wrapper {
   display: block;
   max-width: 25%;
-  margin-right: 10px;
+  margin-right: 80px;
 
   &:last-child {
     margin-right: 0;
@@ -65,7 +70,7 @@
 .wrapperList {
   display: flex;
   flex: 1;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   @media (--desktop-l) {
     flex: 0 0 auto;
@@ -77,5 +82,5 @@
 }
 
 .categoryList {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }

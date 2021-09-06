@@ -1,33 +1,62 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import Link from '@UI/Link';
-import { useLocation } from 'react-router-dom';
-import cn from 'classnames';
-import siteNavList from './data';
 
+import cn from 'classnames';
+import MainNav from '@Components/Header/elems/MainNav/MainNav';
+
+import Container from '@Components/Container/Container';
+import Flex from '@Components/Flex/Flex';
+import UserMenu from '@Components/UserMenu/UserMenu';
+import { siteNavList, UserMenuDesktop } from '@Components/Header/data';
 import styles from './SiteNav.module.css';
 
 export interface SiteNavProp extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  isFirstClick: boolean;
+  hideOnScroll: boolean;
+  setIsFirstClick: (arg: boolean) => void;
 }
 
-const SiteNav: FC<SiteNavProp> = () => {
-  const location = useLocation();
+const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick }) => {
+  const [activeElement, isActiveElement] = useState<string>('catalog');
+
+  const onMouseOver = useCallback((element) => {
+    isActiveElement(element);
+  }, []);
 
   return (
     <nav>
       <ul className={styles.siteNav}>
         {siteNavList.map((item) => {
           return (
-            <li key={item.title}>
-              <Link
-                className={cn(styles.link, {
-                  [styles.active]: location.pathname.indexOf(item.link) !== -1,
-                })}
-                view='navigation'
-                to={item.link}
-              >
-                {item.title}
+            <li
+              onMouseOver={() => onMouseOver(item.link)}
+              className={cn(styles.item, {
+                [styles.active]: item.link === activeElement,
+              })}
+              key={item.title}
+            >
+              <Link view='simple' className={styles.linkWrapper} to={item.link}>
+                <span className={cn(styles.link)}>{item.title}</span>
               </Link>
+              <div
+                className={cn(styles.headerBottom, {
+                  [styles.headerBottomFloat]: hideOnScroll,
+                })}
+              >
+                <Container>
+                  <Flex jc='space-between' ai='center'>
+                    <MainNav
+                      mainNavList={item.submenu}
+                      isFirstClick={isFirstClick}
+                      setIsFirstClick={setIsFirstClick}
+                      className={styles.mainNav}
+                      hideOnScroll={hideOnScroll}
+                    />
+                    {!hideOnScroll && <UserMenu userMenuList={UserMenuDesktop} />}
+                  </Flex>
+                </Container>
+              </div>
             </li>
           );
         })}

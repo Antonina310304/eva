@@ -16,7 +16,7 @@ import useMediaQuery from '@Hooks/useMediaQuery';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
-  const isMobile = useMediaQuery('(max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   /**
    * анимация открытия и закрытия меню 1 уровня
    */

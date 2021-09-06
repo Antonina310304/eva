@@ -22,6 +22,8 @@
 .category {
   margin: 0;
   margin-right: auto;
+
+  font-size: var(--size-s);
 }
 
 .arrow {

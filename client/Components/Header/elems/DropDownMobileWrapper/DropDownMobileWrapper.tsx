@@ -41,7 +41,7 @@ const DropDownMobileWrapper: FC<DropDownMobileWrapperProps> = ({
         <>
           <button className={cn(styles.button, styles.buttonBack)} onClick={back} type='button'>
             <div className={cn(styles.icon, styles.back)} />
-            назад
+            Назад
           </button>
 
           <button

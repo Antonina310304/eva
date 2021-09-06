@@ -14,7 +14,7 @@ const UserMenu: FC<UserMenuProp> = ({ className, userMenuList }) => {
   return (
     <ul className={cn(styles.list, className)}>
       {userMenuList.map((item) => (
-        <li key={item.link}>
+        <li className={styles.userMenuItem} key={item.link}>
           <UserElemMenu element={item} />
         </li>
       ))}

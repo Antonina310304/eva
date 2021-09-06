@@ -20,7 +20,7 @@ export interface SearchData extends HTMLAttributes<HTMLDivElement> {
 
 const Search: FC<SearchData> = ({ className }) => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const isDesktop = useMediaQuery('(min-width: 1366px)');
   const [isShowInput, setIsShowInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');

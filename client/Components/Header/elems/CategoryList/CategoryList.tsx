@@ -12,7 +12,7 @@ const CategoryList: FC<CategoryListProps> = ({ category }) => {
     <ul className={styles.list}>
       {category.items.map((item) => (
         <li className={styles.item} key={item.title}>
-          <Link view='nav' to={item.link}>
+          <Link view='nav' className={styles.link} to={item.link}>
             {item.title}
           </Link>
         </li>

@@ -37,6 +37,9 @@
 }
 
 .close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   width: 40px;
   height: 40px;
@@ -46,10 +49,6 @@
   font-size: 0;
 
   background: transparent;
-  background: url('close.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 20px auto;
   border: none;
   cursor: pointer;
 }

@@ -48,26 +48,21 @@ const HeaderDesktop: FC<HeaderProps> = () => {
               <Flex ai='center' jc='flex-start' className={styles.maxWidth}>
                 <HeaderLogo className={styles.slider} />
                 <Search className={styles.search} />
-                <SiteNav />
+                <SiteNav
+                  isFirstClick={isFirstClick}
+                  setIsFirstClick={setIsFirstClick}
+                  className={styles.mainNav}
+                  hideOnScroll={hideOnScroll}
+                />
               </Flex>
 
               <Flex ai='center'>
                 <Location className={styles.location} location='Москва' />
                 <Phone />
+                {hideOnScroll && (
+                  <UserMenu className={styles.userMenu} userMenuList={UserMenuDesktop} />
+                )}
               </Flex>
-            </Flex>
-          </Container>
-        </div>
-        <div className={cn(styles.headerBottom, { [styles.headerBottomFloat]: hideOnScroll })}>
-          <Container>
-            <Flex jc='space-between' ai='center'>
-              <MainNav
-                isFirstClick={isFirstClick}
-                setIsFirstClick={setIsFirstClick}
-                className={styles.mainNav}
-                hideOnScroll={hideOnScroll}
-              />
-              <UserMenu userMenuList={UserMenuDesktop} />
             </Flex>
           </Container>
         </div>

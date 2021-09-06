@@ -9,6 +9,7 @@ import SiteNav from '@Components/Header/elems/SiteNav';
 import MainNavMobile from '@Components/Header/elems/MainNavMobile';
 import UserBottomMenuMobile from '@Components/Header/elems/UserBottomMenuMobile/UserBottomMenuMobile';
 import Flex from '@Components/Flex';
+import IconClose from '@UI/IconClose';
 import styles from './SideBar.module.css';
 
 export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -70,12 +71,16 @@ const SideBar: FC<SideBarProps> = ({
               <MobileNavContainer className={styles.header}>
                 <Flex ai='center' jc='space-between'>
                   <button className={styles.close} onClick={hideSideBar} type='button'>
-                    закрыть
+                    <IconClose />
                   </button>
                 </Flex>
               </MobileNavContainer>
               <MobileNavContainer>
-                <SiteNav />
+                <SiteNav
+                  hideSideBar={hideSideBar}
+                  setIsShowSubMenu={setIsShowSubMenu}
+                  isShowSubMenuContent={isShowSubMenuContent}
+                />
               </MobileNavContainer>
               <MainNavMobile
                 hideSideBar={hideSideBar}

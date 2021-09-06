@@ -1,9 +1,9 @@
 import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
-import { mainNavList } from '@Components/Header/data';
 
 import cn from 'classnames';
 
 import MainNavItem from '@Components/Header/elems/MainNavItem';
+import { IMainNav } from '@Types/MainNav';
 import styles from './MainNav.module.css';
 
 export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,9 +11,16 @@ export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {
   isFirstClick: boolean;
   hideOnScroll: boolean;
   setIsFirstClick: (arg: boolean) => void;
+  mainNavList: IMainNav[];
 }
 
-const MainNav: FC<MainNavProps> = ({ hideOnScroll, isFirstClick, setIsFirstClick, className }) => {
+const MainNav: FC<MainNavProps> = ({
+  mainNavList,
+  hideOnScroll,
+  isFirstClick,
+  setIsFirstClick,
+  className,
+}) => {
   const onMouseLeave = useCallback(() => {
     setIsFirstClick(false);
   }, [setIsFirstClick]);

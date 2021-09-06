@@ -60,7 +60,7 @@
 
   &:before {
     position: absolute;
-    bottom: 1px;
+    bottom: 0;
 
     display: block;
     width: 100%;

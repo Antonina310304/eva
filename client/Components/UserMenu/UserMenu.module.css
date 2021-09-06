@@ -5,13 +5,13 @@
   padding: 0;
 
   list-style: none;
+}
 
-  li {
-    margin-right: 15px;
+.userMenuItem {
+  margin-right: 15px;
 
-    &:last-child {
-      margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
   }
 }
 
