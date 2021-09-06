@@ -24,6 +24,7 @@ const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
 const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
 const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
+const RouteTextileSamples = loadable(() => import('@Routes/RouteTextileSamples'));
 
 const App: FC = () => {
   return (
@@ -62,6 +63,10 @@ const App: FC = () => {
 
       <Route path='/site/delivery'>
         <RouteDelivery />
+      </Route>
+
+      <Route path='/site/fabrics'>
+        <RouteTextileSamples />
       </Route>
 
       <Route path='/static-page/privacy-policy'>
