@@ -23,9 +23,13 @@ const routes = [
   '/site/quality-department-send-message',
   '/cabinet/formes',
   '/json-schema',
+  '/region-priority',
+  '/region',
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',
+  '/site/message-for-department',
+  '/site/message-for-accounting-department',
 ];
 
 routes.forEach((route) => {
@@ -49,7 +53,7 @@ router.use('/p/:path', (req, res, next) => {
 
   proxy(url, {
     proxyReqPathResolver: (proxyReq) => {
-      return `${decodeURIComponent(proxyReq.params.path)}`;
+      return proxyReq.params.path;
     },
     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
       const domain = new URL(backend).host;
