@@ -14,6 +14,6 @@ export interface PageB2bDetailData {
   projects: ProjectItem;
   title: string;
   teaser: string;
-  examples: ExamplesData;
+  examples: ExamplesData[];
   test: any;
 }

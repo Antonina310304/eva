@@ -23,7 +23,6 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
 
-  console.log(examples.length);
   const onClickMore = useCallback(() => {
     setVisibleItems(visibleItems + 3);
   }, [visibleItems]);
@@ -35,6 +34,10 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
     }
   });
   const projects = Object.values(projectsMap);
+  const uniqueProjects = projects.slice(0, visibleItems);
+
+  console.log(projects[2]);
+  console.log(examples);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -71,33 +74,43 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      {projects.slice(0, visibleItems).map((item, index) => (
-        <Section
-          {...restProps}
-          className={cn(styles.section, className)}
-          additional={
-            <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
-          }
-          key={index}
-        >
-          <div className={styles.wrapperGallery}>
-            <Gallery
-              className={styles.gallery}
-              slideIndex={slide}
-              key={examples.length}
-              onChangeCurrent={handleChangeCurrent}
-              onChangeProgress={handleChangeProgress}
-            >
-              {projects.map((element, elementIndex) => (
-                <div className={styles.galleryItem} key={elementIndex}>
-                  <Image className={styles.galleryImage} src={element.src} />
-                </div>
-              ))}
-            </Gallery>
+      {uniqueProjects.map((item, index) => (
+        <div className={styles.wrapperGallery}>
+          <Section
+            {...restProps}
+            className={cn(styles.section, className)}
+            additional={
+              <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
+            }
+            key={index}
+          >
+            <div className={styles.wrapperGallery}>
+              <Gallery
+                className={styles.gallery}
+                slideIndex={slide}
+                key={examples.length}
+                onChangeCurrent={handleChangeCurrent}
+                onChangeProgress={handleChangeProgress}
+              >
+                {examples.map((element, elementIndex) => (
+                  <div className={styles.galleryItem} key={elementIndex}>
+                    <Image className={styles.galleryImage} src={element.src} />
+                  </div>
+                ))}
+              </Gallery>
+            </div>
+          </Section>
 
-            <ProgressBar className={styles.progressBar} track={track} />
+          <ProgressBar className={styles.progressBar} track={track} />
+          <div className={styles.projectName}>{item.title}</div>
+          <div className={styles.descriptionWrapper}>
+            {item.text.map((elem, elemIndex: number) => (
+              <div className={styles.description} key={elemIndex}>
+                {elem}
+              </div>
+            ))}
           </div>
-        </Section>
+        </div>
       ))}
 
       <div className={styles.buttonWrapper}>
