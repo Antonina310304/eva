@@ -31,10 +31,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const cart = useCart();
 
   const handleClickOferta = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс!',
-      text: 'Ещё не готово, заходите позже…',
-    });
+    openModal('OfferAgreement');
   }, [openModal]);
 
   const handleClickDelivery = useCallback(() => {
