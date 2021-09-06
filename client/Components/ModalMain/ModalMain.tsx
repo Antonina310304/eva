@@ -1,13 +1,4 @@
-import React, {
-  useCallback,
-  useRef,
-  useEffect,
-  useMemo,
-  memo,
-  HTMLAttributes,
-  FC,
-  MouseEvent,
-} from 'react';
+import React, { useCallback, useRef, useEffect, memo, HTMLAttributes, FC, MouseEvent } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 
@@ -21,11 +12,11 @@ export interface ModalMainProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   modal: IModal;
   fullscreen?: boolean;
-  navigation?: boolean;
+  navigation?: { nextHref: string; prevHref: string } | boolean;
   nextHref?: string;
   prevHref?: string;
-  onNext?: () => void;
-  onPrev?: () => void;
+  onNext?: (e: MouseEvent | KeyboardEvent) => void;
+  onPrev?: (e: MouseEvent | KeyboardEvent) => void;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
   onLoad?: () => void;
 }
@@ -36,9 +27,7 @@ const ModalMain: FC<ModalMainProps> = (props) => {
     modal,
     fullscreen,
     children,
-    navigation = false,
-    nextHref,
-    prevHref,
+    navigation,
     onClose,
     onLoad,
     onNext,
@@ -46,6 +35,7 @@ const ModalMain: FC<ModalMainProps> = (props) => {
   } = props;
   const refWrapper = useRef();
   const { isMobile } = useMedias();
+
   const handleClickWrapper = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
       if (e.target !== refWrapper.current) return;
@@ -62,41 +52,19 @@ const ModalMain: FC<ModalMainProps> = (props) => {
     [onClose],
   );
 
-  const prev = useMemo(() => {
-    const prevArrow = (
-      <div className={cn(styles.arrowBackground, { [styles.prev]: true })} onClick={onPrev}>
-        <div className={styles.arrow} />
-      </div>
-    );
+  const handleNext = useCallback(
+    (e) => {
+      if (onNext) onNext(e);
+    },
+    [onNext],
+  );
 
-    if (prevHref) {
-      return (
-        <Link to={prevHref} className={styles.prev} view='simple'>
-          {prevArrow}
-        </Link>
-      );
-    }
-
-    return prevArrow;
-  }, [onPrev, prevHref]);
-
-  const next = useMemo(() => {
-    const nextArrow = (
-      <div className={cn(styles.arrowBackground, { [styles.next]: true })} onClick={onNext}>
-        <div className={styles.arrow} />
-      </div>
-    );
-
-    if (nextHref) {
-      return (
-        <Link to={nextHref} className={styles.next} view='simple'>
-          {nextArrow}
-        </Link>
-      );
-    }
-
-    return nextArrow;
-  }, [nextHref, onNext]);
+  const handlePrev = useCallback(
+    (e) => {
+      if (onPrev) onPrev(e);
+    },
+    [onPrev],
+  );
 
   useEffect(() => {
     if (onLoad) onLoad();
@@ -112,9 +80,35 @@ const ModalMain: FC<ModalMainProps> = (props) => {
           <div className={styles.wrapper} ref={refWrapper} onClick={handleClickWrapper}>
             {navigation && !isMobile ? (
               <div className={styles.navigationWrapper}>
-                {prev}
+                <Link
+                  to={typeof navigation === 'boolean' ? '#' : navigation.prevHref}
+                  className={styles.prev}
+                  view='simple'
+                  preventDefault={typeof navigation === 'boolean'}
+                >
+                  <div
+                    className={cn(styles.arrowBackground, { [styles.prev]: true })}
+                    onClick={handlePrev}
+                  >
+                    <div className={styles.arrow} />
+                  </div>
+                </Link>
+
                 {children}
-                {next}
+
+                <Link
+                  to={typeof navigation === 'boolean' ? '#' : navigation.nextHref}
+                  className={styles.next}
+                  view='simple'
+                  preventDefault={typeof navigation === 'boolean'}
+                >
+                  <div
+                    className={cn(styles.arrowBackground, { [styles.next]: true })}
+                    onClick={handleNext}
+                  >
+                    <div className={styles.arrow} />
+                  </div>
+                </Link>
               </div>
             ) : (
               <div className={styles.content}>{children}</div>

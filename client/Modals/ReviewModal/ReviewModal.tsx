@@ -54,9 +54,7 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
       {...restProps}
       className={cn(styles.reviewModal, [className])}
       modal={modal}
-      navigation
-      nextHref={`#review-${nextId}`}
-      prevHref={`#review-${prevId}`}
+      navigation={{ nextHref: `#review-${nextId}`, prevHref: `#review-${prevId}` }}
       onClose={handleClose}
       onNext={handleNext}
       onPrev={handlePrev}
