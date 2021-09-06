@@ -23,6 +23,7 @@ export type ModalId =
   | 'MobileOptions'
   | 'Cart'
   | 'DeliveryInformation'
+  | 'RegionSelector'
   | 'Authorization';
 
 export interface Modal {
