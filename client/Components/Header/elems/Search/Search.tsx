@@ -129,7 +129,7 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
     <form ref={formRef} className={cn(styles.search, className)} onSubmit={onSubmit}>
       <div
         ref={inputRef}
-        className={cn({
+        className={cn(styles.inputWrapper, {
           [styles.show]: isShowInput,
           [styles.changeable]: isMobile && !isMenu,
           [styles.wrapper]: !isMobile,
@@ -140,7 +140,7 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
           onChange={(evt) => !isMenu && onChange(evt)}
           className={styles.input}
           type='input'
-          defaultValue={searchValue}
+          value={searchValue}
           placeholder='Найти мебель'
         />
         {searchValue !== '' && (

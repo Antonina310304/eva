@@ -98,7 +98,6 @@
   z-index: 6;
 
   width: 100%;
-  //max-width: 240px;
 }
 
 .buttonReset {
@@ -126,4 +125,8 @@
 .search .buttonReset .iconReset {
   width: 100%;
   height: 100%;
+}
+
+.inputWrapper {
+  width: 100%;
 }

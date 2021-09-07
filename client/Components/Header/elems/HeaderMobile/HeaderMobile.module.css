@@ -44,6 +44,8 @@
   @media (--mobile) {
     position: absolute;
     top: 0;
+
+    max-width: 100%;
   }
 }
 

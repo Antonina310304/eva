@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, MouseEvent } from 'react';
+import React, { FC, memo, useCallback, MouseEvent, useMemo } from 'react';
 import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
@@ -89,8 +89,6 @@ const Link: FC<LinkProps> = (props) => {
           [styles.grayString]: view === 'grayString',
           [styles.navigation]: view === 'navigation',
           [styles.navList]: view === 'nav',
-          [styles.sizeS]: size === 's',
-          [styles.sizeN]: size === 'n',
         },
         className,
       )}
