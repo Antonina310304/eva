@@ -43,8 +43,6 @@ const ModalMain: FC<ModalMainProps> = (props) => {
   const refWrapper = useRef();
   const { isMobile } = useMedias();
 
-  const navigationWithoutLinks = useMemo(() => typeof navigation === 'boolean', [navigation]);
-
   const nextHref = useMemo(() => {
     if (typeof navigation === 'boolean') return '#';
 
@@ -104,7 +102,7 @@ const ModalMain: FC<ModalMainProps> = (props) => {
                 <Link
                   to={prevHref}
                   className={styles.prev}
-                  preventDefault={navigationWithoutLinks}
+                  preventDefault={typeof navigation === 'boolean'}
                   onClick={handlePrev}
                 >
                   <div className={cn(styles.arrowBackground, { [styles.prev]: true })}>
@@ -117,7 +115,7 @@ const ModalMain: FC<ModalMainProps> = (props) => {
                 <Link
                   to={nextHref}
                   className={styles.next}
-                  preventDefault={navigationWithoutLinks}
+                  preventDefault={typeof navigation === 'boolean'}
                   onClick={handleNext}
                 >
                   <div className={cn(styles.arrowBackground, { [styles.next]: true })}>
