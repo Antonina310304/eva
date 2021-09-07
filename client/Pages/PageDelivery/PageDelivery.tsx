@@ -196,7 +196,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
               В случае необходимости, вы можете забрать свой заказ в пункте выдачи ТК
             </div>
           </div>
-          {cart.network === 'success' && cart.count > 0 && (
+          {cart.count > 0 && (
             <div className={styles.cartBlock}>
               <div className={styles.contentContainer}>
                 <CartBlock cart={cart} deliveryCost={deliveryCost} type={checkedDelivery.type} />
@@ -262,15 +262,17 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                   />
                 </div>
 
-                <List
-                  className={styles.additionalCost}
-                  items={additionalCost}
-                  renderChild={(paragraph: string) => (
-                    <div className={styles.paragraph}>
-                      <FormattedText currency={meta.currency}>{paragraph}</FormattedText>
-                    </div>
-                  )}
-                />
+                {additionalCost?.length > 0 && (
+                  <List
+                    className={styles.additionalCost}
+                    items={additionalCost}
+                    renderChild={(paragraph: string) => (
+                      <div className={styles.paragraph}>
+                        <FormattedText currency={meta.currency}>{paragraph}</FormattedText>
+                      </div>
+                    )}
+                  />
+                )}
               </div>
             </div>
           )}
@@ -312,14 +314,16 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                   )}
                 </div>
 
-                <div className={styles.wrapperList}>
-                  {!isRus && <div className={styles.listTitle}>При получении товара:</div>}
-                  <OrderedList
-                    className={styles.list}
-                    list={acceptanceRules}
-                    currency={meta.currency}
-                  />
-                </div>
+                {acceptanceRules?.length > 0 && (
+                  <div className={styles.wrapperList}>
+                    {!isRus && <div className={styles.listTitle}>При получении товара:</div>}
+                    <OrderedList
+                      className={styles.list}
+                      list={acceptanceRules}
+                      currency={meta.currency}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
