@@ -51,7 +51,6 @@ const Link: FC<LinkProps> = (props) => {
       e.preventDefault();
 
       if (href.substr(0, 1) === '#') {
-        closeAllModals();
         history.push(href);
         return;
       }
