@@ -3,6 +3,8 @@ import cn from 'classnames';
 
 import { ApiPecom } from '@Api/Pecom';
 import { useCart } from '@Stores/Cart';
+import useModals from '@Hooks/useModals';
+import CartBlock from '@Components/CartBlock';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import ImportantInfo from '@Components/ImportantInfo';
 import ShippingCostCalculator from '@Components/ShippingCostCalculator';
@@ -19,7 +21,6 @@ import Attention from './elements/Attention';
 import SuburbTable from './elements/SuburbTable';
 import PickupPoint from './elements/PickupPoint';
 import ToAddress from './elements/ToAddress';
-import CartBlock from './elements/CartBlock';
 import pickupPoint from './icons/pickupPoint.svg';
 import toAddress from './icons/toAddress.svg';
 import styles from './PageDelivery.module.css';
@@ -66,10 +67,10 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
-  const cart = useCart(page.cart);
+  const cart = useCart();
   const [deliveryCost, setDeliveryCost] = useState(null);
+  const [, { openModal }] = useModals();
 
-  //
   const goodsInfo = useMemo(() => {
     const result = [];
 
@@ -105,8 +106,11 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   }, []);
 
   const handleClickCity = useCallback(() => {
-    // openModal('pecom-regions');
-  }, []);
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
 
   // Получаем информацию о стоимости доставки до подьезда
   const load = useCallback(async () => {
