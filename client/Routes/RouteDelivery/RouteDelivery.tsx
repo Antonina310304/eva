@@ -5,6 +5,7 @@ import usePage from '@Queries/usePage';
 import TemplateMain from '@Templates/TemplateMain';
 import PageDelivery from '@Pages/PageDelivery';
 import useMeta from '@Queries/useMeta';
+import CartStore from '@Stores/Cart';
 
 const RouteDelivery: FC = () => {
   const { pathname } = useLocation();
@@ -12,6 +13,8 @@ const RouteDelivery: FC = () => {
   const meta = useMeta({ ssr: true });
 
   if (!page.isSuccess || !meta.isSuccess) return null;
+
+  CartStore.init(page.data.cart);
 
   return (
     <TemplateMain>

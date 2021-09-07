@@ -9,16 +9,15 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
-import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
-import { ProductData } from '@Types/Product';
-import { CartPositionData } from '@Types/Cart';
+import { CartPositionData, CartProductData } from '@Types/Cart';
+import useMedias from '@Hooks/useMedias';
 import styles from './PositionsSection.module.css';
 
 export interface RenderItem {
-  product: ProductData;
+  product: CartProductData;
   position: CartPositionData;
 }
 
@@ -33,6 +32,7 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
   const { className, title, positions, renderItem, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const { isMobileM } = useMedias();
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -63,18 +63,19 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
   }, [normalizeSlide, track]);
 
   return (
-    <Section
-      {...restProps}
-      className={cn(styles.section, className)}
-      title={title}
-      additional={
-        <NavArrows
-          className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
-      }
-    >
+    <div {...restProps} className={cn(styles.section, className)}>
+      <div className={styles.heading}>
+        <div className={styles.title}>{title}</div>
+        {!isMobileM && (
+          <div className={styles.additional}>
+            <NavArrows
+              className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
+              onPrev={handlePrev}
+              onNext={handleNext}
+            />
+          </div>
+        )}
+      </div>
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
@@ -85,7 +86,7 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
         >
           {positions.map((position) => {
             const item = renderItem({
-              product: (position.products[0] as unknown) as ProductData,
+              product: position.products[0],
               position,
             });
 
@@ -95,7 +96,7 @@ const PositionsSection: FC<PositionsSectionProps> = (props) => {
 
         <ProgressBar track={track} />
       </div>
-    </Section>
+    </div>
   );
 };
 

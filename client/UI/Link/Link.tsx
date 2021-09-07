@@ -11,6 +11,7 @@ import styles from './Link.module.css';
 export interface LinkProps extends BaseLinkProps {
   className?: string;
   view?: 'primary' | 'secondary' | 'native';
+  asButton?: boolean;
   needFetch?: boolean;
   preventDefault?: boolean;
   to: string;
@@ -26,6 +27,7 @@ const Link: FC<LinkProps> = (props) => {
     preventDefault,
     children,
     target,
+    asButton,
     onClick,
     ...restProps
   } = props;
@@ -86,6 +88,7 @@ const Link: FC<LinkProps> = (props) => {
           [styles.primary]: view === 'primary',
           [styles.secondary]: view === 'secondary',
           [styles.native]: view === 'native',
+          [styles.asButton]: asButton,
         },
         className,
       )}

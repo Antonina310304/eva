@@ -28,4 +28,59 @@
       color: var(--color-black);
     }
   }
+
+  &.asButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    height: 50px;
+    padding: 0 var(--space-n);
+
+    color: var(--color-white);
+    font-size: var(--size-n);
+
+    font-family: var(--font-main);
+    line-height: var(--lh-n);
+
+    background: var(--color-grafit);
+    border: 1px solid var(--color-grafit);
+
+    outline: none;
+    cursor: pointer;
+
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--color-black);
+      border-color: var(--color-black);
+    }
+
+    &:active {
+      color: var(--color-black);
+
+      background: var(--color-white);
+      border-color: var(--color-black);
+    }
+  }
+}
+
+@media (--desktop-m) {
+  .link {
+    &.asButton {
+      height: 42px;
+    }
+  }
+}
+
+@media (--mobile-m) {
+  .link {
+    &.asButton {
+      height: 35px;
+
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
+    }
+  }
 }

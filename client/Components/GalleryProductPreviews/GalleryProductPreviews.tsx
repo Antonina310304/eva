@@ -25,6 +25,7 @@ const GalleryProductPreviews: FC<GalleryProductPreviewsProps> = (props) => {
   const [slide, setSlide] = useState(0);
   const [hovered, setHovered] = useState(false);
   const { isOnlyDesktop } = useMedias();
+  const orientation = firstImage.orientation || 'landscape';
 
   const handleChangeCurrent = useCallback(
     ({ current }) => {
@@ -45,8 +46,8 @@ const GalleryProductPreviews: FC<GalleryProductPreviewsProps> = (props) => {
       className={cn(
         styles.previews,
         {
-          [styles.landscape]: firstImage.orientation === 'landscape',
-          [styles.portrait]: firstImage.orientation === 'portrait',
+          [styles.landscape]: orientation === 'landscape',
+          [styles.portrait]: orientation === 'portrait',
         },
         className,
       )}
