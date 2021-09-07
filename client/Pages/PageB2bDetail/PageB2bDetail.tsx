@@ -113,11 +113,13 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
           <ProgressBar className={styles.progressBar} track={track} />
           <div className={styles.descriptionWrapper}>
             <h3 className={styles.projectName}>{item.title}</h3>
-            {item.text.map((elem, elemIndex: number) => (
-              <div className={styles.description} key={elemIndex}>
-                {elem}
-              </div>
-            ))}
+            <div className={styles.textWrapper}>
+              {item.text.map((elem, elemIndex: number) => (
+                <div className={styles.description} key={elemIndex}>
+                  {elem}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ))}
