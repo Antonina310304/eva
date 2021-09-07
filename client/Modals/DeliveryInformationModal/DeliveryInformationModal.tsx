@@ -62,7 +62,7 @@ const DeliveryInformationModal: FC<ModalSidebarProps> = (props) => {
       </div>
 
       <div className={styles.linkWrapper}>
-        <Link className={styles.link} to='/site/delivery' onClick={handleClickLink}>
+        <Link className={styles.link} to='/site/delivery' view='primary' onClick={handleClickLink}>
           Подробнее о доставке
         </Link>
       </div>

@@ -1,0 +1,65 @@
+.loader {
+  position: absolute;
+
+  top: 50%;
+  left: 16px;
+
+  width: 7px;
+
+  height: 7px;
+  margin: -16px auto 0;
+
+  &.themeDark {
+    animation: SquareLoaderBlackLoading 1s ease infinite;
+  }
+
+  &.themeLight {
+    animation: SquareLoaderWhiteLoading 1s ease infinite;
+  }
+}
+
+@keyframes SquareLoaderWhiteLoading {
+  0%,
+  100% {
+    box-shadow: -4px 7px 0 #fff, 4px 7px 0 rgba(255, 255, 255, 0.25),
+      4px 16px 0 rgba(255, 255, 255, 0.25), -4px 16px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  25% {
+    box-shadow: -4px 7px 0 rgba(255, 255, 255, 0.25), 4px 7px 0 #fff,
+      4px 16px 0 rgba(255, 255, 255, 0.25), -4px 16px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  50% {
+    box-shadow: -4px 7px 0 rgba(255, 255, 255, 0.25), 4px 7px 0 rgba(255, 255, 255, 0.25),
+      4px 16px 0 #fff, -4px 16px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  75% {
+    box-shadow: -4px 7px 0 rgba(255, 255, 255, 0.25), 4px 7px 0 rgba(255, 255, 255, 0.25),
+      4px 16px 0 rgba(255, 255, 255, 0.25), -4px 16px 0 #fff;
+  }
+}
+
+@keyframes SquareLoaderBlackLoading {
+  0%,
+  100% {
+    box-shadow: -4px 7px 0 #000, 4px 7px 0 rgba(0, 0, 0, 0.25), 4px 16px 0 rgba(0, 0, 0, 0.25),
+      -4px 16px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  25% {
+    box-shadow: -4px 7px 0 rgba(0, 0, 0, 0.25), 4px 7px 0 #000, 4px 16px 0 rgba(0, 0, 0, 0.25),
+      -4px 16px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  50% {
+    box-shadow: -4px 7px 0 rgba(0, 0, 0, 0.25), 4px 7px 0 rgba(0, 0, 0, 0.25), 4px 16px 0 #000,
+      -4px 16px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  75% {
+    box-shadow: -4px 7px 0 rgba(0, 0, 0, 0.25), 4px 7px 0 rgba(0, 0, 0, 0.25),
+      4px 16px 0 rgba(0, 0, 0, 0.25), -4px 16px 0 #000;
+  }
+}

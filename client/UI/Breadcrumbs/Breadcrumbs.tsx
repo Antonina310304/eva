@@ -20,7 +20,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = (props) => {
   return (
     <nav
       {...restProps}
-      className={cn(styles.breadcrumbs, {}, className)}
+      className={cn(styles.breadcrumbs, className)}
       itemScope
       itemType='http://schema.org/BreadcrumbList'
     >
@@ -36,7 +36,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = (props) => {
             itemType='http://schema.org/ListItem'
           >
             {isNotLast ? (
-              <Link view='secondary' size='s' className={styles.link} to={item.link}>
+              <Link view='secondary' className={styles.link} to={item.link}>
                 {item.text}
               </Link>
             ) : (

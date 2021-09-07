@@ -23,12 +23,16 @@ const routes = [
   '/site/quality-department-send-message',
   '/cabinet/formes',
   '/json-schema',
+  '/order/coupon',
+  '/order/set-amount-points-bonus',
   '/region-priority',
   '/region',
   '/robots.txt',
   '/sitemap.xml',
   '/favicon.ico',
   '/order/pay',
+  '/site/message-for-department',
+  '/site/message-for-accounting-department',
 ];
 
 routes.forEach((route) => {

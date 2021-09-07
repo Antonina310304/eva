@@ -11,7 +11,6 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
-import Input from '@UI/Input';
 import styles from './InputCode.module.css';
 
 export interface InputCodeProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -88,6 +87,8 @@ const InputCode: FC<InputCodeProps> = (props) => {
 
   const handleKeyDown = useCallback(
     (e, index: number) => {
+      if (readOnly) return;
+
       // Только цифры и Backspace
       const allowedKeyCodes = [
         8,
@@ -130,7 +131,7 @@ const InputCode: FC<InputCodeProps> = (props) => {
         changeFocus();
       }
     },
-    [changeFocus, normalizeIndex],
+    [changeFocus, normalizeIndex, readOnly],
   );
 
   const handleClickCodeWrapper = useCallback((e, index) => {
@@ -151,8 +152,20 @@ const InputCode: FC<InputCodeProps> = (props) => {
   }, [autoFocus, changeFocus]);
 
   return (
-    <div className={cn(styles.wrapper, { [styles.errored]: !!error }, className)}>
-      <input {...restProps} className={styles.control} type='hidden' value={value || finalValue} />
+    <div
+      className={cn(
+        styles.inputCode,
+        { [styles.errored]: !!error, [styles.readOnly]: readOnly },
+        className,
+      )}
+    >
+      <input
+        {...restProps}
+        className={styles.control}
+        readOnly={readOnly}
+        type='hidden'
+        value={value || finalValue}
+      />
 
       <div className={styles.codes}>
         {codes.map((index) => (
@@ -161,8 +174,8 @@ const InputCode: FC<InputCodeProps> = (props) => {
             key={index}
             onClick={(e) => handleClickCodeWrapper(e, index)}
           >
-            <Input
-              className={cn(styles.code, { [styles.errored]: !!error })}
+            <input
+              className={styles.code}
               ref={addInputRef(index)}
               type='tel'
               maxLength={1}
