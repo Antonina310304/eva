@@ -1,5 +1,11 @@
 import React, { FC, memo } from 'react';
-import { Route as BaseRoute, RouteProps as BaseRouteProps, useParams } from 'react-router-dom';
+import {
+  Route as BaseRoute,
+  RouteProps as BaseRouteProps,
+  useParams,
+  Redirect,
+  useLocation,
+} from 'react-router-dom';
 
 import { Api } from '@Api/index';
 import useRequest from '@Hooks/useRequest';
@@ -13,14 +19,25 @@ export interface RouteParams {
   region?: string;
 }
 
-const Initiator: FC = () => {
+const Initiator: FC<any> = ({ children }) => {
   const meta = useMeta({ ssr: true });
+  const { pathname } = useLocation();
   const { region } = useParams<RouteParams>();
 
   Api.setServices(meta.data?.services);
   Api.setRegion(region);
 
-  return null;
+  // Если регион из URL не совпадает с регионом из meta-информации,
+  // то выполняем редирект на регион из meta-информации
+  if (region && meta.data && `/${region}` !== meta.data.region.url) {
+    const chunks = pathname.split('/');
+
+    chunks[1] = meta.data.region.url.slice(1);
+
+    return <Redirect to={chunks.join('/')} />;
+  }
+
+  return children;
 };
 
 const Route: FC<RouteProps> = (props) => {
@@ -32,8 +49,7 @@ const Route: FC<RouteProps> = (props) => {
 
   return (
     <BaseRoute {...restProps} exact={exact} path={paths}>
-      <Initiator />
-      {children}
+      <Initiator>{children}</Initiator>
     </BaseRoute>
   );
 };

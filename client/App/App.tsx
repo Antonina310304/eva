@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import loadable from '@loadable/component';
+import { Switch } from 'react-router-dom';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
 import Route from '@Components/Route';
