@@ -88,7 +88,7 @@ const Link: FC<LinkProps> = (props) => {
           [styles.primary]: view === 'primary',
           [styles.secondary]: view === 'secondary',
           [styles.native]: view === 'native',
-          [styles.button]: asButton,
+          [styles.asButton]: asButton,
         },
         className,
       )}
