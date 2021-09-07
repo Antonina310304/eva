@@ -25,6 +25,11 @@
   font-weight: 500;
 }
 
+.name {
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
 .expiredPrice {
   margin-left: var(--space-xs);
 }
@@ -33,8 +38,32 @@
   margin-left: var(--space-xs);
 }
 
+@media (--mobile-m) {
+  .actualPrice {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
+  }
+
+  .expiredPrice {
+    font-size: var(--size-s);
+    line-height: var(--lh-s);
+  }
+}
+
 @media (--desktop) {
   .discount {
     display: none;
+  }
+}
+
+@media (--mobile) {
+  .actualPrice {
+    font-size: var(--size-m);
+    line-height: var(--lh-n);
+  }
+
+  .expiredPrice {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 }
