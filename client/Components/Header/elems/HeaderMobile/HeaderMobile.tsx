@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import Burger from '@Components/Header/elems/Burger';
 import Search from '@Components/Header/elems/Search';
 
@@ -52,14 +52,14 @@ const HeaderMobile = () => {
     [hideOnScroll],
   );
 
-  function showSideBar() {
+  const showSideBar = useCallback(() => {
     setIsOpenSideBar(true);
     document.querySelector('body').style.overflow = 'hidden';
-  }
+  }, []);
 
-  function hideSideBar() {
+  const hideSideBar = useCallback(() => {
     setIsOpenSideBar(false);
-  }
+  }, []);
 
   return (
     <header

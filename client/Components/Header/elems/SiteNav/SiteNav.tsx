@@ -30,33 +30,37 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
         {siteNavList.map((item) => {
           return (
             <li
-              onMouseOver={() => onMouseOver(item.link)}
+              onMouseOver={() => item.submenu && onMouseOver(item.link)}
               className={cn(styles.item, {
                 [styles.active]: item.link === activeElement,
               })}
               key={item.title}
             >
               <Link view='simple' className={styles.linkWrapper} to={item.link}>
-                <span className={cn(styles.link)}>{item.title}</span>
+                <span className={cn({ [styles.active]: item.link === activeElement }, styles.link)}>
+                  {item.title}
+                </span>
               </Link>
-              <div
-                className={cn(styles.headerBottom, {
-                  [styles.headerBottomFloat]: hideOnScroll,
-                })}
-              >
-                <Container>
-                  <Flex jc='space-between' ai='center'>
-                    <MainNav
-                      mainNavList={item.submenu}
-                      isFirstClick={isFirstClick}
-                      setIsFirstClick={setIsFirstClick}
-                      className={styles.mainNav}
-                      hideOnScroll={hideOnScroll}
-                    />
-                    {!hideOnScroll && <UserMenu userMenuList={UserMenuDesktop} />}
-                  </Flex>
-                </Container>
-              </div>
+              {item.submenu && (
+                <div
+                  className={cn(styles.headerBottom, {
+                    [styles.headerBottomFloat]: hideOnScroll,
+                  })}
+                >
+                  <Container>
+                    <Flex jc='space-between' ai='center'>
+                      <MainNav
+                        mainNavList={item.submenu}
+                        isFirstClick={isFirstClick}
+                        setIsFirstClick={setIsFirstClick}
+                        className={styles.mainNav}
+                        hideOnScroll={hideOnScroll}
+                      />
+                      {!hideOnScroll && <UserMenu userMenuList={UserMenuDesktop} />}
+                    </Flex>
+                  </Container>
+                </div>
+              )}
             </li>
           );
         })}

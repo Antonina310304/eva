@@ -1,7 +1,8 @@
-import React, { FC, HTMLAttributes } from 'react';
-import { mainNavList } from '@Components/Header/data';
+import React, { FC, HTMLAttributes, memo } from 'react';
+import { siteNavList } from '@Components/Header/data';
 
 import CategoryMobile from '@Components/Header/elems/CategoryMobile';
+import cn from 'classnames';
 import styles from './MainNavMobile.module.css';
 
 export interface MainNavListProps extends HTMLAttributes<HTMLDivElement> {
@@ -9,28 +10,34 @@ export interface MainNavListProps extends HTMLAttributes<HTMLDivElement> {
   hideSideBar: () => void;
   setIsShowSubMenu: (arg: boolean) => void;
   isShowSubMenuContent: boolean;
+  activeMenu: string;
 }
 
 const MainNavMobile: FC<MainNavListProps> = ({
   setIsShowSubMenu,
   hideSideBar,
   isShowSubMenuContent,
+  activeMenu,
 }) => {
   return (
     <div className={styles.wrapper}>
-      {mainNavList.map((item) => {
+      {siteNavList.map((menu) => {
         return (
-          <CategoryMobile
-            key={item.title}
-            category={item}
-            hideSideBar={hideSideBar}
-            setIsShowSubMenu={setIsShowSubMenu}
-            isShowSubMenuContent={isShowSubMenuContent}
-          />
+          <div key={menu.link} className={cn({ [styles.submenu]: activeMenu !== menu.link })}>
+            {menu.submenu.map((item) => (
+              <CategoryMobile
+                key={item.title}
+                category={item}
+                hideSideBar={hideSideBar}
+                setIsShowSubMenu={setIsShowSubMenu}
+                isShowSubMenuContent={isShowSubMenuContent}
+              />
+            ))}
+          </div>
         );
       })}
     </div>
   );
 };
 
-export default MainNavMobile;
+export default memo(MainNavMobile);

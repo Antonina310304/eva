@@ -1,15 +1,16 @@
-import React, { FC, HTMLAttributes, useEffect } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 
 import { useSpring, animated } from 'react-spring';
 
 import AnimatedWrapper from '@Components/Header/elems/AnimatedWrapper';
 import MobileNavContainer from '@Components/Header/elems/MobileNavContainer/MobileNavContainer';
 import Search from '@Components/Header/elems/Search';
-import SiteNav from '@Components/Header/elems/SiteNav';
+import SiteNavMobile from '@Components/Header/elems/SiteNavMobile';
 import MainNavMobile from '@Components/Header/elems/MainNavMobile';
 import UserBottomMenuMobile from '@Components/Header/elems/UserBottomMenuMobile/UserBottomMenuMobile';
 import Flex from '@Components/Flex';
 import IconClose from '@UI/IconClose';
+
 import styles from './SideBar.module.css';
 
 export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,6 +34,8 @@ const SideBar: FC<SideBarProps> = ({
   hideSideBar,
   setIsShowSubMenuContent,
 }) => {
+  const [activeMenu, setActiveMenu] = useState('catalog');
+
   const [{ left }, api] = useSpring(() => ({
     from: { left: `-100%` },
     config: { duration: 300 },
@@ -48,7 +51,7 @@ const SideBar: FC<SideBarProps> = ({
       api.start({
         left: '-100%',
         onRest: () => {
-          document.querySelector('body').style.overflow = '';
+          // document.querySelector('body').style.overflow = 'hidden';
           setIsShowSubMenu(false);
           // вернуться в исходное состояние при закрытии всего sidebar
         },
@@ -76,13 +79,10 @@ const SideBar: FC<SideBarProps> = ({
                 </Flex>
               </MobileNavContainer>
               <MobileNavContainer>
-                <SiteNav
-                  hideSideBar={hideSideBar}
-                  setIsShowSubMenu={setIsShowSubMenu}
-                  isShowSubMenuContent={isShowSubMenuContent}
-                />
+                <SiteNavMobile activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
               </MobileNavContainer>
               <MainNavMobile
+                activeMenu={activeMenu}
                 hideSideBar={hideSideBar}
                 setIsShowSubMenu={setIsShowSubMenu}
                 isShowSubMenuContent={isShowSubMenuContent}

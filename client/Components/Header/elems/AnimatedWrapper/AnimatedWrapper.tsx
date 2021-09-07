@@ -26,15 +26,17 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({
     if (isShowSubMenu) {
       api.start({
         left: `-100%`,
-        onRest: () => {},
+        onRest: () => {
+          document.querySelector('body').style.overflow = 'hidden';
+        },
       });
       setIsShowSubMenuContent(true);
     } else {
       wrapperRef.current.scrollTo(0, 0);
-
       api.start({
         left: `0%`,
         onRest: () => {
+          document.querySelector('body').style.overflow = 'hidden';
           setIsShowSubMenuContent(false);
         },
       });

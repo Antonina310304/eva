@@ -24,9 +24,9 @@ export interface IMainNavSubmenu {
 export interface IMainNav {
   title: string;
   icon: string;
-  link: string;
-  img: string;
+  link?: string;
+  img?: string;
   banner?: IBannerMenu;
   withBanner?: boolean;
-  dropDown: IMainNavSubmenu[];
+  dropDown?: IMainNavSubmenu[];
 }

@@ -51,12 +51,6 @@
 }
 
 .link {
-  display: block;
-
-  font-size: var(--size-n);
-  line-height: 150%;
-  white-space: nowrap;
-
   &.active {
     color: var(--color-black);
 
@@ -69,12 +63,16 @@
 .link {
   position: relative;
 
+  display: block;
+
   margin: 0;
   padding-bottom: 5px;
 
   color: var(--color-dark-gray);
-  font-size: var(--size-s);
+
+  font-size: var(--size-n);
   line-height: 21px;
+  white-space: nowrap;
   text-decoration: none;
 
   transition: color 150ms ease-in;
@@ -121,7 +119,7 @@
 
 .headerBottom {
   position: absolute;
-  top: calc(100% + 1px);
+  top: 100%;
   left: 0;
   z-index: -3;
 

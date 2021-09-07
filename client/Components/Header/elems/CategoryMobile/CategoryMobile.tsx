@@ -3,6 +3,7 @@ import DropDownMobileWrapper from '@Components/Header/elems/DropDownMobileWrappe
 import { IMainNav } from '@Types/MainNav';
 
 import Subcategory from '@Components/Header/elems/Subcategory';
+import Link from '@UI/Link';
 import styles from './CategoryMobile.module.css';
 
 export interface CategoryMobileProps extends HTMLAttributes<HTMLDivElement> {
@@ -38,21 +39,33 @@ const CategoryMobile: FC<CategoryMobileProps> = ({
 
   return (
     <div className={styles.inner}>
-      <div className={styles.categoryWrapper} onClick={showDropDown}>
-        <p
-          style={{ backgroundImage: `url(react/static/img/category/${category.icon})` }}
-          className={styles.icon}
-        />
-        <p className={styles.category}>{category.title}</p>
-        <p className={styles.arrow} />
-      </div>
-      <DropDownMobileWrapper
-        isOpenDropDown={isOpenDropDown}
-        hideSideBar={hideSideBar}
-        setIsShowSubMenu={setIsShowSubMenu}
-      >
-        <Subcategory category={category} />
-      </DropDownMobileWrapper>
+      {category.dropDown ? (
+        <>
+          <div className={styles.categoryWrapper} onClick={showDropDown}>
+            <p
+              style={{ backgroundImage: `url(react/static/img/category/${category.icon})` }}
+              className={styles.icon}
+            />
+            <p className={styles.category}>{category.title}</p>
+            <p className={styles.arrow} />
+          </div>
+          <DropDownMobileWrapper
+            isOpenDropDown={isOpenDropDown}
+            hideSideBar={hideSideBar}
+            setIsShowSubMenu={setIsShowSubMenu}
+          >
+            <Subcategory category={category} />
+          </DropDownMobileWrapper>
+        </>
+      ) : (
+        <Link view='simple' className={styles.categoryWrapper} to={category.link}>
+          <p
+            style={{ backgroundImage: `url(react/static/img/category/${category.icon})` }}
+            className={styles.icon}
+          />
+          <p className={styles.category}>{category.title}</p>
+        </Link>
+      )}
     </div>
   );
 };

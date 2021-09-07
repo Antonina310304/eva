@@ -27,11 +27,15 @@ const MainNavItem: FC<MainNavProps> = ({
   const [isShowSubmenu, setIsShowSubmenu] = useState<boolean>(false);
   const [isFirst, setIsFirst] = useState<boolean>(false);
 
-  function onHover() {
+  function onHover(isDropDown) {
+    console.log(isDropDown);
     setIsShowSubmenu(true);
     if (!isFirstClick) {
       setIsFirstClick(true);
       setIsFirst(true);
+    }
+    if (!isDropDown) {
+      setIsFirstClick(false);
     }
   }
 
@@ -47,32 +51,44 @@ const MainNavItem: FC<MainNavProps> = ({
   }, [hideOnScroll]);
 
   return (
-    <div className={cn(styles.item)} onMouseOver={onHover} onMouseLeave={onBlur}>
-      <p className={styles.title}>{mainNavItem.title}</p>
-      <DropDownWrapper isFirst={isFirst} isShow={isShowSubmenu}>
-        <div className={styles.flex}>
-          <div className={styles.wrapperList}>
-            {mainNavItem.dropDown.map((i) => (
-              <div key={i.name} className={styles.wrapper}>
-                <p className={styles.subtitle}>{i.name}</p>
-                <div className={styles.categoryList}>
-                  <CategoryList category={i} />
-                </div>
-                <Link view='grayString' to={i.link}>
-                  {i.textLink}
-                </Link>
+    <div
+      className={cn(styles.item)}
+      onMouseOver={() => onHover(!!mainNavItem.dropDown)}
+      onMouseLeave={onBlur}
+    >
+      {mainNavItem.dropDown ? (
+        <>
+          <p className={styles.title}>{mainNavItem.title}</p>
+          <DropDownWrapper isFirst={isFirst} isShow={isShowSubmenu}>
+            <div className={styles.flex}>
+              <div className={styles.wrapperList}>
+                {mainNavItem.dropDown.map((i) => (
+                  <div key={i.name} className={styles.wrapper}>
+                    <p className={styles.subtitle}>{i.name}</p>
+                    <div className={styles.categoryList}>
+                      <CategoryList category={i} />
+                    </div>
+                    <Link view='grayString' to={i.link}>
+                      {i.textLink}
+                    </Link>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div>
-            {mainNavItem.withBanner && (
-              <div className={styles.banner}>
-                <BannerMenu banner={mainNavItem.banner} />
+              <div>
+                {mainNavItem.withBanner && (
+                  <div className={styles.banner}>
+                    <BannerMenu banner={mainNavItem.banner} />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
-      </DropDownWrapper>
+            </div>
+          </DropDownWrapper>
+        </>
+      ) : (
+        <Link view='simple' to={mainNavItem.link} className={styles.title}>
+          {mainNavItem.title}
+        </Link>
+      )}
     </div>
   );
 };

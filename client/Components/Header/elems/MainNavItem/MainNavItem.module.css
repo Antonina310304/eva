@@ -18,8 +18,11 @@
 }
 
 .title {
+  display: block;
   margin: 0;
   padding: 10px 35px 10px 0;
+
+  color: var(--color-black);
 
   white-space: nowrap;
 

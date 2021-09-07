@@ -9,3 +9,7 @@
   display: block;
   margin-bottom: 15px;
 }
+
+.submenu {
+  display: none;
+}
