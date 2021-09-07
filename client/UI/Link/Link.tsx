@@ -46,7 +46,10 @@ const Link: FC<LinkProps> = (props) => {
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
-      if (window.cancelClick) return;
+      if (window.cancelClick) {
+        e.preventDefault();
+        return;
+      }
 
       if (onClick) onClick(e);
 
