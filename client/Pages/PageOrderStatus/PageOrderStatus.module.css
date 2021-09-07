@@ -1,6 +1,6 @@
 .page {
   padding: var(--space-xl) var(--space-xxb);
-  padding-bottom: 120px;
+  padding-bottom: var(--space-e);
 
   background: var(--color-light-gray);
 }
@@ -80,7 +80,7 @@
 @media (--desktop-m) {
   .page {
     padding: var(--space-xl) var(--space-xxl);
-    padding-bottom: var(--space-xxe);
+    padding-bottom: var(--space-xb);
   }
 
   .main {

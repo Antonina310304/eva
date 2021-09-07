@@ -26,6 +26,7 @@
     font-size: var(--size-l);
     line-height: var(--lh-xl);
   }
+
   .itemCost {
     color: var(--color-black);
     font-size: var(--size-xl);

@@ -14,6 +14,9 @@
 
 .image {
   width: 232px;
+  min-height: 147px;
+
+  background-color: var(--color-light-gray);
 }
 
 .contentContainer {

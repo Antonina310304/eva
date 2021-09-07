@@ -157,7 +157,7 @@ const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
             <Check groups={checkGroups} className={styles.table} />
             <div className={styles.divider} />
 
-            {!!price.services && (
+            {hasServices && (
               <>
                 <Check groups={checkAdditionalTotal} className={styles.table} />
                 <div className={styles.divider} />
