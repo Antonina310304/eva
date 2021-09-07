@@ -27,7 +27,6 @@ const InformationTabsNavigation: FC<InformationTabsNavigationProps> = (props) =>
               <Link
                 to={item.href}
                 className={cn(styles.navigationLink, { [styles.active]: item.active })}
-                view='simple'
               >
                 {item.name}
               </Link>

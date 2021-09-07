@@ -70,13 +70,12 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
       {...restProps}
       className={cn(styles.instagramPostModal, [className])}
       modal={modal}
+      navigation
       onClose={handleClose}
+      onNext={handleNext}
+      onPrev={handlePrev}
     >
       <div className={styles.modalView}>
-        <div className={cn(styles.arrowBackground, { [styles.prev]: true })} onClick={handlePrev}>
-          <div className={styles.arrow} />
-        </div>
-
         <div className={styles.container}>
           <div className={styles.header}>
             <IconClose onClick={handleClose} />
@@ -118,12 +117,7 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
           <div className={styles.postInfo}>
             <div className={styles.author}>
               <div className={styles.postText}>Автор фотографии</div>
-              <Link
-                className={styles.linkToInstagram}
-                to={currentPost.link}
-                target='_blank'
-                view='simple'
-              >
+              <Link className={styles.linkToInstagram} to={currentPost.link} target='_blank'>
                 <div className={styles.instagramIcon} />
                 <div className={styles.authorNikname}>{`@${currentPost.author}`}</div>
               </Link>
@@ -134,10 +128,6 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
               <Share className={styles.shareIcons} socials={meta.data.socials} />
             </div>
           </div>
-        </div>
-
-        <div className={cn(styles.arrowBackground, { [styles.next]: true })} onClick={handleNext}>
-          <div className={styles.arrow} />
         </div>
       </div>
     </ModalMain>

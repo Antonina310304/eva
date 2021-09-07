@@ -1,0 +1,15 @@
+.orderMaterial {
+  display: flex;
+  align-items: center;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.color {
+  width: 12px;
+  height: 12px;
+  margin-right: var(--space-xs);
+
+  border-radius: 50%;
+}

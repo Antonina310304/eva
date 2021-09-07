@@ -1,10 +1,6 @@
 .modalView {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
   max-width: 1205px;
-  margin: 0 auto;
-  padding: 0 var(--space-b);
 }
 
 .container {
@@ -97,61 +93,9 @@
   }
 }
 
-.arrows {
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: var(--space-xs);
-}
-
-.arrowBackground {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 42px;
-  min-height: 42px;
-
-  background-color: var(--color-white);
-  border-radius: 100%;
-  cursor: pointer;
-
-  &:hover {
-    .arrow {
-      opacity: 1;
-    }
-  }
-}
-
-.arrow {
-  width: 15px;
-  height: 10px;
-
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.6;
-
-  transition: opacity 0.2s;
-}
-
-.arrowBackground.prev {
-  margin-right: var(--space-l);
-
-  .arrow {
-    background-image: url('./icon-prev.svg');
-  }
-}
-
-.arrowBackground.next {
-  margin-left: var(--space-l);
-
-  .arrow {
-    background-image: url('./icon-next.svg');
-  }
-}
-
 @media (--desktop) {
   .modalView {
     max-width: 782px;
-    padding: 0 var(--space-s);
   }
 
   .container {
@@ -182,14 +126,6 @@
   .modalView {
     max-width: 738px;
   }
-
-  .arrowBackground.prev {
-    margin-right: var(--space-s);
-  }
-
-  .arrowBackground.next {
-    margin-left: var(--space-s);
-  }
 }
 
 @media (--mobile) {
@@ -198,11 +134,6 @@
     max-width: unset;
     height: 100%;
     margin: 0;
-    padding: 0;
-  }
-
-  .arrowBackground {
-    display: none;
   }
 
   .container {
