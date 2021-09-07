@@ -46,13 +46,13 @@ const ModalMain: FC<ModalMainProps> = (props) => {
   const nextHref = useMemo(() => {
     if (typeof navigation === 'boolean') return '#';
 
-    return navigation.nextHref;
+    return navigation?.nextHref || '#';
   }, [navigation]);
 
   const prevHref = useMemo(() => {
     if (typeof navigation === 'boolean') return '#';
 
-    return navigation.prevHref;
+    return navigation?.nextHref || '#';
   }, [navigation]);
 
   const handleClickWrapper = useCallback(
