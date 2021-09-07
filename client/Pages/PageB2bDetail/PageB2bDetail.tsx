@@ -21,11 +21,6 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { title, teaser, examples } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
-  const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
-
-  const onClickMore = useCallback(() => {
-    setVisibleItems(visibleItems + 3);
-  }, [visibleItems]);
 
   const projectsMap = {};
   examples.forEach((example) => {
@@ -34,6 +29,12 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
     }
   });
   const projects = Object.values(projectsMap);
+  const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
+
+  const onClickMore = useCallback(() => {
+    setVisibleItems(visibleItems + 3);
+  }, [visibleItems]);
+
   const balance = projects.length - visibleItems;
 
   /* eslint-disable no-param-reassign */
@@ -45,6 +46,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   /* eslint-enable no-param-reassign */
 
   const subGallery = Object.values(gallery);
+  console.log(subGallery);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -109,8 +111,8 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
           </Section>
 
           <ProgressBar className={styles.progressBar} track={track} />
-          <h3 className={styles.projectName}>{item.title}</h3>
           <div className={styles.descriptionWrapper}>
+            <h3 className={styles.projectName}>{item.title}</h3>
             {item.text.map((elem, elemIndex: number) => (
               <div className={styles.description} key={elemIndex}>
                 {elem}
@@ -120,11 +122,13 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         </div>
       ))}
 
-      <div className={styles.buttonWrapper}>
-        <Button className={styles.button} type='button' theme='dirty' onClick={onClickMore}>
-          {`Смотреть еще ${balance}`}
-        </Button>
-      </div>
+      {balance > 0 && (
+        <div className={styles.buttonWrapper}>
+          <Button className={styles.button} type='button' theme='dirty' onClick={onClickMore}>
+            {`Смотреть еще ${balance}`}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
