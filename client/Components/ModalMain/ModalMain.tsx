@@ -1,4 +1,13 @@
-import React, { useCallback, useRef, useEffect, memo, HTMLAttributes, FC, MouseEvent } from 'react';
+import React, {
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+  memo,
+  HTMLAttributes,
+  FC,
+  MouseEvent,
+} from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 
@@ -13,8 +22,6 @@ export interface ModalMainProps extends HTMLAttributes<HTMLDivElement> {
   modal: IModal;
   fullscreen?: boolean;
   navigation?: { nextHref: string; prevHref: string } | boolean;
-  nextHref?: string;
-  prevHref?: string;
   onNext?: (e: MouseEvent | KeyboardEvent) => void;
   onPrev?: (e: MouseEvent | KeyboardEvent) => void;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
@@ -35,6 +42,20 @@ const ModalMain: FC<ModalMainProps> = (props) => {
   } = props;
   const refWrapper = useRef();
   const { isMobile } = useMedias();
+
+  const navigationWithoutLinks = useMemo(() => typeof navigation === 'boolean', [navigation]);
+
+  const nextHref = useMemo(() => {
+    if (typeof navigation === 'boolean') return '#';
+
+    return navigation.nextHref;
+  }, [navigation]);
+
+  const prevHref = useMemo(() => {
+    if (typeof navigation === 'boolean') return '#';
+
+    return navigation.prevHref;
+  }, [navigation]);
 
   const handleClickWrapper = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -81,15 +102,13 @@ const ModalMain: FC<ModalMainProps> = (props) => {
             {navigation && !isMobile ? (
               <div className={styles.navigationWrapper}>
                 <Link
-                  to={typeof navigation === 'boolean' ? '#' : navigation.prevHref}
+                  to={prevHref}
                   className={styles.prev}
                   view='simple'
-                  preventDefault={typeof navigation === 'boolean'}
+                  preventDefault={navigationWithoutLinks}
+                  onClick={handlePrev}
                 >
-                  <div
-                    className={cn(styles.arrowBackground, { [styles.prev]: true })}
-                    onClick={handlePrev}
-                  >
+                  <div className={cn(styles.arrowBackground, { [styles.prev]: true })}>
                     <div className={styles.arrow} />
                   </div>
                 </Link>
@@ -97,15 +116,13 @@ const ModalMain: FC<ModalMainProps> = (props) => {
                 {children}
 
                 <Link
-                  to={typeof navigation === 'boolean' ? '#' : navigation.nextHref}
+                  to={nextHref}
                   className={styles.next}
                   view='simple'
-                  preventDefault={typeof navigation === 'boolean'}
+                  preventDefault={navigationWithoutLinks}
+                  onClick={handleNext}
                 >
-                  <div
-                    className={cn(styles.arrowBackground, { [styles.next]: true })}
-                    onClick={handleNext}
-                  >
+                  <div className={cn(styles.arrowBackground, { [styles.next]: true })}>
                     <div className={styles.arrow} />
                   </div>
                 </Link>
