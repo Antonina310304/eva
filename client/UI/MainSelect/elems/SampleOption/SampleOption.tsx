@@ -23,7 +23,7 @@ const Container: FC<ContainerProps> = (props) => {
   const { item, ...restProps } = props;
 
   return item.href ? (
-    <Link {...restProps} className={styles.container} to={item.href} view='simple' />
+    <Link {...restProps} className={styles.container} to={item.href} />
   ) : (
     <div {...restProps} className={styles.container} />
   );

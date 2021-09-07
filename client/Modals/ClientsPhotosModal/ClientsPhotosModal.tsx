@@ -51,7 +51,6 @@ const ClientsPhotosModal: FC<ModalMainProps> = (props) => {
                     <Link
                       className={styles.link}
                       to={`#review-${review.id}`}
-                      view='simple'
                       onClick={(e) => handleClickLinkToReview(e, reviewIndex)}
                       key={index}
                     >

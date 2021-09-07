@@ -52,6 +52,8 @@
 }
 
 .more {
+  composes: s from 'sizes';
+
   margin-top: var(--space-xxs);
 
   color: var(--color-dark-gray);

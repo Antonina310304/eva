@@ -117,12 +117,7 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
           <div className={styles.postInfo}>
             <div className={styles.author}>
               <div className={styles.postText}>Автор фотографии</div>
-              <Link
-                className={styles.linkToInstagram}
-                to={currentPost.link}
-                target='_blank'
-                view='simple'
-              >
+              <Link className={styles.linkToInstagram} to={currentPost.link} target='_blank'>
                 <div className={styles.instagramIcon} />
                 <div className={styles.authorNikname}>{`@${currentPost.author}`}</div>
               </Link>

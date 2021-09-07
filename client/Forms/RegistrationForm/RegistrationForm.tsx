@@ -31,6 +31,9 @@ import styles from './RegistrationForm.module.css';
 
 export interface RegistrationFormProps extends HTMLAttributes<HTMLFormElement> {
   className?: string;
+  defaultName: string;
+  defaultPhone: string;
+  defaultEmail: string;
   onToAuth?: (e: MouseEvent) => void;
   onSuccess?: (profile: Profile) => void;
 }
@@ -49,7 +52,15 @@ export type ErrorMessage = string | ErrorMessageObject;
 export type Step = 'register' | 'check-confirmation-code';
 
 const RegistrationForm: FC<RegistrationFormProps> = (props) => {
-  const { className, onSuccess, onToAuth, ...restProps } = props;
+  const {
+    className,
+    defaultName,
+    defaultPhone,
+    defaultEmail,
+    onSuccess,
+    onToAuth,
+    ...restProps
+  } = props;
   const [, { openModal }] = useModals();
   const [step, setStep] = useState<Step>('register');
   const [serverErrors, setServerErrors] = useState<any[]>([]);
@@ -255,7 +266,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
       </FormItem>
 
       <FormItem label='ФИО*'>
-        <Input readOnly={disabledFirstStep} name='fullName' />
+        <Input readOnly={disabledFirstStep} name='fullName' defaultValue={defaultName} />
       </FormItem>
 
       <FormItem
@@ -275,11 +286,11 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
           )
         }
       >
-        <InputPhone readOnly={disabledFirstStep} name='phone' />
+        <InputPhone readOnly={disabledFirstStep} name='phone' defaultValue={defaultPhone} />
       </FormItem>
 
       <FormItem label='E-mail*'>
-        <Input readOnly={disabledFirstStep} name='email' />
+        <Input readOnly={disabledFirstStep} name='email' defaultValue={defaultEmail} />
       </FormItem>
 
       <FormItem

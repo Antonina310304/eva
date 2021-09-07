@@ -3,8 +3,9 @@ import { useQuery, UseQueryResult } from 'react-query';
 import { ApiOrder } from '@Api/Order';
 
 export interface Params {
-  productIds: number[];
+  productIds?: number[];
   ssr?: boolean;
+  enabled?: boolean;
 }
 
 export interface Result {
@@ -13,12 +14,11 @@ export interface Result {
 }
 
 const useOrderBonuses = (params: Params): UseQueryResult<Result> => {
-  const { ssr, productIds } = params;
-  const keys = ['order-bonuses', ...productIds];
-
-  if (ssr) keys.push('ssr');
+  const { ssr, productIds = [], enabled } = params;
+  const keys = ['order-bonuses', ssr && 'ssr', ...productIds].filter(Boolean);
 
   return useQuery(keys, () => ApiOrder.getBonuses({ productIds }), {
+    enabled,
     retryOnMount: false,
     refetchOnMount: false,
   });

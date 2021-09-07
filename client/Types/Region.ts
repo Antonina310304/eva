@@ -3,4 +3,5 @@ export interface RegionHintData {
   name: string;
   region: string;
   weight: number;
+  flagman?: boolean;
 }

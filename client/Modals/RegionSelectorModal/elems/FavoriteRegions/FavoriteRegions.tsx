@@ -2,12 +2,13 @@ import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react'
 import cn from 'classnames';
 
 import Link from '@UI/Link';
+import { RegionHintData } from '@Types/Region';
 import styles from './FavoriteRegions.module.css';
 
 export interface FavoriteRegionsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  regions: any[];
-  onSelectRegion?: (e: MouseEvent, region: any) => void;
+  regions: RegionHintData[];
+  onSelectRegion?: (e: MouseEvent, region: RegionHintData) => void;
 }
 
 const FavoriteRegions: FC<FavoriteRegionsProps> = (props) => {
@@ -28,7 +29,6 @@ const FavoriteRegions: FC<FavoriteRegionsProps> = (props) => {
           preventDefault
           key={index}
           to='#'
-          view='simple'
           onClick={(e) => handleClickRegion(e, region)}
         >
           {region.name}

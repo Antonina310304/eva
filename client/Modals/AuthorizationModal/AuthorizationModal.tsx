@@ -1,12 +1,4 @@
-import React, {
-  useCallback,
-  memo,
-  HTMLAttributes,
-  MouseEvent,
-  useState,
-  useEffect,
-  FC,
-} from 'react';
+import React, { useCallback, memo, MouseEvent, useState, useEffect, FC } from 'react';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import AuthorizationForm from '@Forms/AuthorizationForm';
@@ -16,10 +8,6 @@ import { Profile } from '@Types/Profile';
 import styles from './AuthorizationModal.module.css';
 
 export type Step = 'authorization' | 'registration';
-
-export interface AuthorizationModalProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string;
-}
 
 const titles = {
   authorization: 'Вход и регистрация',
@@ -67,13 +55,19 @@ const AuthorizationModal: FC<ModalSidebarProps> = (props) => {
         {step === 'authorization' && (
           <AuthorizationForm
             wide
-            defaultPhone={data?.defaultPhone}
+            defaultPhone={data.defaultPhone}
             onToRegister={handleToRegister}
             onSuccess={handleSuccess}
           />
         )}
         {step === 'registration' && (
-          <RegistrationForm onToAuth={handleToAuth} onSuccess={handleSuccess} />
+          <RegistrationForm
+            defaultName={data.defaultName}
+            defaultPhone={data.defaultPhone}
+            defaultEmail={data.defaultEmail}
+            onToAuth={handleToAuth}
+            onSuccess={handleSuccess}
+          />
         )}
       </div>
     </ModalSidebar>
