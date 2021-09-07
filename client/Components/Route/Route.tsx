@@ -29,10 +29,15 @@ const Initiator: FC<any> = ({ children }) => {
 
   // Если регион из URL не совпадает с регионом из meta-информации,
   // то выполняем редирект на регион из meta-информации
-  if (region && meta.data && `/${region}` !== meta.data.region.url) {
+  if (meta.data && `/${region}` !== meta.data.region.url) {
     const chunks = pathname.split('/');
+    const metaRegion = meta.data.region.url.slice(1);
 
-    chunks[1] = meta.data.region.url.slice(1);
+    if (region) {
+      chunks[1] = metaRegion;
+    } else {
+      chunks.splice(1, 0, metaRegion);
+    }
 
     return <Redirect to={chunks.join('/')} />;
   }
