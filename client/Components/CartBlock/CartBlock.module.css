@@ -29,8 +29,10 @@
   flex-grow: 0;
   flex-shrink: 0;
   width: 56px;
-  height: 23px;
+  height: 30px;
   margin-right: var(--space-s);
+
+  background-position: center;
 }
 
 .deliveryInfo {

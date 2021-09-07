@@ -5,7 +5,6 @@ import { CartData } from '@Types/Cart';
 import declOfNum from '@Utils/declOfNum';
 import Price from '@UI/Price';
 import Image from '@UI/Image';
-import Button from '@UI/Button';
 import Link from '@UI/Link';
 import PecIcon from './pecIcon.svg';
 import PositionsSection from './elements/PositionsSection';
