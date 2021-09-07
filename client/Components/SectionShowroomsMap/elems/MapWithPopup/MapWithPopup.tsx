@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo, useCallback, useState, useRef } from '
 import cn from 'classnames';
 
 import PecomMap from '@Components/PecomMap';
-import { SellPointData } from '@Pages/PageContacts/typings';
+import { SellPointData } from '../../typings';
 import PopupAllSellPoints from '../PopupAllSellPoints';
 import PopupSelectedSellPoint from '../PopupSelectedSellPoint';
 import SelectedIcon from './selectedIcon.png';

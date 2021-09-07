@@ -6,7 +6,7 @@ import styles from './Section.module.css';
 
 export interface SectionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   className?: string;
-  title: ReactChild;
+  title?: ReactChild;
   additional?: ReactChild | ReactChild[];
   additionalBreakup?: boolean;
   priceMin?: number;
