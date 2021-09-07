@@ -104,7 +104,6 @@ const ModalMain: FC<ModalMainProps> = (props) => {
                 <Link
                   to={prevHref}
                   className={styles.prev}
-                  view='simple'
                   preventDefault={navigationWithoutLinks}
                   onClick={handlePrev}
                 >
@@ -118,7 +117,6 @@ const ModalMain: FC<ModalMainProps> = (props) => {
                 <Link
                   to={nextHref}
                   className={styles.next}
-                  view='simple'
                   preventDefault={navigationWithoutLinks}
                   onClick={handleNext}
                 >
