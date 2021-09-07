@@ -1,11 +1,9 @@
-import React, { FC, memo, useCallback, useState, useMemo } from 'react';
+import React, { FC, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
-import IconClose from '@UI/IconClose';
 import PressDetails from '@Components/PressDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
-import Link from '@UI/Link';
 import useMeta from '@Queries/useMeta';
 import { MetaDataSocial } from '@Types/Meta';
 import styles from './ArticleModal.module.css';
@@ -59,14 +57,6 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
     [articles.length],
   );
 
-  const nextId = useMemo(() => {
-    return articles[normalizeIndex(currentIndex + 1)].id;
-  }, [currentIndex, normalizeIndex, articles]);
-
-  const prevId = useMemo(() => {
-    return articles[normalizeIndex(currentIndex - 1)].id;
-  }, [currentIndex, normalizeIndex, articles]);
-
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => normalizeIndex(prev - 1));
   }, [normalizeIndex]);
@@ -80,22 +70,12 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
       {...restProps}
       className={cn(styles.modal, className)}
       modal={modal}
+      navigation
+      onPrev={handlePrev}
+      onNext={handleNext}
       onClose={onClose}
     >
       <div className={styles.container}>
-        <div className={styles.headingWrapper}>
-          <Link to={prevId} className={styles.prev}>
-            <div className={styles.arrowBackground} onClick={handlePrev}>
-              <div className={styles.arrow} />
-            </div>
-          </Link>
-          <IconClose className={styles.iconClose} onClick={onClose} />
-          <Link to={nextId} className={styles.next}>
-            <div className={styles.arrowBackground} onClick={handleNext}>
-              <div className={styles.arrow} />
-            </div>
-          </Link>
-        </div>
         <PressDetails article={currentArticle} socials={meta.data.socials} />
       </div>
     </ModalMain>
