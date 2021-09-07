@@ -29,7 +29,7 @@ const Press: FC<PressProps> = (props) => {
   const [, { openModal }] = useModals();
 
   const handleClickArticle = useCallback(
-    (e, index) => {
+    (_e, index) => {
       // Нужно чтобы модалка не открывалась во время спайпа
       if (window.cancelClick) return;
 

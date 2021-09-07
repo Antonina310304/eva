@@ -1,19 +1,20 @@
 import React, { FC, memo, useCallback, useState, useMemo } from 'react';
-
 import cn from 'classnames';
+
 import IconClose from '@UI/IconClose';
 import PressDetails from '@Components/PressDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import Link from '@UI/Link';
 import useMeta from '@Queries/useMeta';
-import useModals from '@Hooks/useModals';
+import { MetaDataSocial } from '@Types/Meta';
 import styles from './ArticleModal.module.css';
 
 export interface SocialItem {
   id: number;
   link: string;
 }
+
 export interface ArticleData {
   link: string;
   preview: string;
@@ -27,7 +28,7 @@ export interface ArticleData {
 
 export interface ArticleModalData {
   articles: ArticleData[];
-  socials: any[];
+  socials: MetaDataSocial[];
   index: number;
 }
 
@@ -42,12 +43,11 @@ export interface ArticleModalProps extends ModalMainProps {
 }
 
 const ArticleModal: FC<ModalMainProps> = (props) => {
-  const { className, modal, ...restProps } = props;
-  const [, { closeModal }] = useModals();
+  const { className, modal, onClose, ...restProps } = props;
   const { articles, index } = modal.data;
   const meta = useMeta({ ssr: true });
-  const article = articles[index];
   const [currentIndex, setCurrentIndex] = useState<number>(index);
+  const currentArticle = articles[currentIndex];
 
   const normalizeIndex = useCallback(
     (value: number) => {
@@ -58,8 +58,6 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
     },
     [articles.length],
   );
-
-  console.log(article.href);
 
   const nextId = useMemo(() => {
     return articles[normalizeIndex(currentIndex + 1)].id;
@@ -77,32 +75,28 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
     setCurrentIndex((prev) => normalizeIndex(prev + 1));
   }, [normalizeIndex]);
 
-  const handleClose = useCallback(() => {
-    closeModal(modal.id);
-  }, [closeModal, modal.id]);
-
   return (
     <ModalMain
       {...restProps}
       className={cn(styles.modal, className)}
       modal={modal}
-      onClose={handleClose}
+      onClose={onClose}
     >
       <div className={styles.container}>
         <div className={styles.headingWrapper}>
-          <Link to={prevId} className={styles.prev} view='simple'>
+          <Link to={prevId} className={styles.prev}>
             <div className={styles.arrowBackground} onClick={handlePrev}>
               <div className={styles.arrow} />
             </div>
           </Link>
-          <IconClose className={styles.iconClose} onClick={handleClose} />
-          <Link to={nextId} className={styles.next} view='simple'>
+          <IconClose className={styles.iconClose} onClick={onClose} />
+          <Link to={nextId} className={styles.next}>
             <div className={styles.arrowBackground} onClick={handleNext}>
               <div className={styles.arrow} />
             </div>
           </Link>
         </div>
-        <PressDetails article={articles[currentIndex]} socials={meta.data.socials} />
+        <PressDetails article={currentArticle} socials={meta.data.socials} />
       </div>
     </ModalMain>
   );

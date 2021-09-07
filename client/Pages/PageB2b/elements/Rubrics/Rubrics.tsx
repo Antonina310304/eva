@@ -21,7 +21,7 @@ const Rubrics: FC<RubricsProps> = (props) => {
           <div className={styles.picWrapper}>
             <Image className={styles.rubricsPic} src={item.src} />
           </div>
-          <Link className={styles.rubricsTitle} view='simple' to={item.link}>
+          <Link className={styles.rubricsTitle} to={item.link}>
             {item.title}
           </Link>
           <div className={styles.rubricsContent}>{item.text}</div>

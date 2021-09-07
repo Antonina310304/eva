@@ -16,7 +16,6 @@ export interface FeedbackProps extends HTMLAttributes<HTMLDivElement> {
 
 const Feedback: FC<FeedbackProps> = (props) => {
   const { className, ...restProps } = props;
-
   const [, { openModal }] = useModals();
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +24,7 @@ const Feedback: FC<FeedbackProps> = (props) => {
     setLoading(true);
   }, []);
 
-  const onError = useCallback(() => {
+  const handleError = useCallback(() => {
     setLoading(false);
 
     openModal('Info', {
@@ -35,30 +34,31 @@ const Feedback: FC<FeedbackProps> = (props) => {
     });
   }, [openModal]);
 
-  const onResponse = useCallback(
-    (response, formData) => {
+  const handleResponse = useCallback(
+    (response) => {
       setLoading(false);
 
-      if (response.status === 'success') {
-        openModal('Info', {
-          view: 'success',
-          title: 'Ваша заявка принята!',
-          text: 'Наш менеджер свяжется с вами в ближайшее время.',
-        });
-
-        // Аналитика
-        (window.dataLayer = window.dataLayer || []).push({
-          eCategory: 'proposalForCooperationForm',
-          eAction: 'send',
-          eLabel: '',
-          eNI: false,
-          event: 'GAEvent',
-        });
-      } else {
-        onError();
+      if (response?.status !== 'success') {
+        handleError();
+        return;
       }
+
+      openModal('Info', {
+        view: 'success',
+        title: 'Ваша заявка принята!',
+        text: 'Наш менеджер свяжется с вами в ближайшее время.',
+      });
+
+      // Аналитика
+      (window.dataLayer = window.dataLayer || []).push({
+        eCategory: 'proposalForCooperationForm',
+        eAction: 'send',
+        eLabel: '',
+        eNI: false,
+        event: 'GAEvent',
+      });
     },
-    [onError, openModal],
+    [handleError, openModal],
   );
 
   // Событие в аналитику при открытии формы
@@ -88,9 +88,9 @@ const Feedback: FC<FeedbackProps> = (props) => {
           action='/b2b/send-letter'
           method='POST'
           validationSchemaUrl='/json-schema/feedback-form.json'
-          onError={onError}
+          onError={handleError}
           onSubmit={handleSubmit}
-          onResponse={onResponse}
+          onResponse={handleResponse}
         >
           <div className={styles.formWrapper}>
             <FormItem>
