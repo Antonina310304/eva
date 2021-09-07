@@ -24,7 +24,7 @@ const ContactWithQualityDep: FC<ContactWithQualityDepProps> = (props) => {
             наступлении гарантийного случая.
           </div>
 
-          <Link className={styles.link} to={feedbackLink} view='simple'>
+          <Link className={styles.link} to={feedbackLink}>
             <Button className={styles.button} theme='primary' view='main'>
               Написать нам
             </Button>

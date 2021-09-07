@@ -54,7 +54,7 @@ const GalleryProductPreviews: FC<GalleryProductPreviewsProps> = (props) => {
       onMouseEnter={handleHover}
       onPointerEnter={handleHover}
     >
-      <Link to={link}>
+      <Link to={link} view='primary'>
         {isOnlyDesktop ? (
           <div className={styles.content}>
             {hasGallery ? (

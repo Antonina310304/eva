@@ -2,7 +2,6 @@ import React, { memo, FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
-import Link from '@UI/Link';
 import IconClose from '@UI/IconClose';
 import useModals from '@Hooks/useModals';
 import Review from './elems/Review';
@@ -55,15 +54,12 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
       {...restProps}
       className={cn(styles.reviewModal, [className])}
       modal={modal}
+      navigation={{ nextHref: `#review-${nextId}`, prevHref: `#review-${prevId}` }}
       onClose={handleClose}
+      onNext={handleNext}
+      onPrev={handlePrev}
     >
       <div className={styles.modalView}>
-        <Link to={`#review-${prevId}`} className={styles.prev} view='simple'>
-          <div className={styles.arrowBackground} onClick={handlePrev}>
-            <div className={styles.arrow} />
-          </div>
-        </Link>
-
         <div className={styles.container}>
           <div className={styles.header}>
             <div className={styles.back} onClick={handleBackClick}>
@@ -76,12 +72,6 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
 
           <Review className={styles.review} review={reviews[currentReviewIndex]} />
         </div>
-
-        <Link to={`#review-${nextId}`} className={styles.next} view='simple'>
-          <div className={styles.arrowBackground} onClick={handleNext}>
-            <div className={styles.arrow} />
-          </div>
-        </Link>
       </div>
     </ModalMain>
   );

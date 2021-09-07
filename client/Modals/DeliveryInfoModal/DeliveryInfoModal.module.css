@@ -1,0 +1,34 @@
+.wrapper {
+  min-width: 1247px;
+  max-width: 1247px;
+}
+
+.content {
+}
+
+.tables {
+  margin-top: var(--space-xxl);
+}
+
+.table:not(:last-child) {
+  margin-bottom: var(--space-xxl);
+}
+
+.containerPayments {
+  margin-top: var(--space-xb);
+}
+
+.paymentTitle {
+  composes: xxl from 'sizes';
+
+  margin-bottom: var(--space-xxl);
+
+  font-weight: 500;
+}
+
+@media (--desktop) {
+  .wrapper {
+    min-width: unset;
+    max-width: 823px;
+  }
+}

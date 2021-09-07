@@ -99,7 +99,7 @@ const MattressesProductCard: FC<MattressesProductCardProps> = (props) => {
         </div>
 
         <div className={styles.info}>
-          <Link className={styles.name} to={product.link} view='simple'>
+          <Link className={styles.name} to={product.link}>
             {product.name}
           </Link>
 

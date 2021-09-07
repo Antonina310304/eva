@@ -1,0 +1,20 @@
+.section {
+}
+
+.text {
+  margin-top: var(--space-m);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.mapWithPopup {
+  height: 630px;
+  margin-top: var(--space-xxl);
+}
+
+@media (--desktop) {
+  .mapWithPopup {
+    height: 463px;
+  }
+}
