@@ -9,19 +9,19 @@ import Image from '@UI/Image';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
 import { ArticleItem } from '@Pages/PageB2b/typings';
-import styles from './Press.module.css';
+import styles from './PressGallery.module.css';
 
 export interface SocialItem {
   id: number;
   link: string;
 }
-export interface PressProps extends HTMLAttributes<HTMLDivElement> {
+export interface PressGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   articles: ArticleItem[];
   socials: SocialItem[];
 }
 
-const Press: FC<PressProps> = (props) => {
+const PressGallery: FC<PressGalleryProps> = (props) => {
   const { className, articles, socials, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
@@ -70,6 +70,7 @@ const Press: FC<PressProps> = (props) => {
     <Section
       {...restProps}
       className={cn(styles.section, className)}
+      title='Мы в прессе:'
       additional={
         !isMobileM && (
           <NavArrows
@@ -80,7 +81,6 @@ const Press: FC<PressProps> = (props) => {
         )
       }
     >
-      <h3 className={styles.heading}>Мы в прессе:</h3>
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
@@ -112,4 +112,4 @@ const Press: FC<PressProps> = (props) => {
   );
 };
 
-export default memo(Press);
+export default memo(PressGallery);

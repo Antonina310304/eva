@@ -1,5 +1,6 @@
 .page {
   --gap: var(--space-e);
+  padding-bottom: var(--space-e);
 }
 
 .pageTitle {
@@ -16,10 +17,6 @@
 .wrapper {
   max-width: 1480px;
   margin: 0 auto;
-}
-
-.mapWrapper {
-  padding: 0 var(--space-xxb) var(--space-e) var(--space-xxb);
 }
 
 .introduction {
@@ -62,7 +59,17 @@
   margin-bottom: var(--gap);
 }
 
+.sectionPress {
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-xxe);
+  overflow: hidden;
+}
+
 @media (--desktop-m) {
+  .page {
+    padding-bottom: var(--space-xb);
+  }
+
   .pageTitle {
     max-width: 1900px;
     margin: 0 var(--space-xxl);
@@ -80,10 +87,15 @@
   }
 
   .mapWrapper {
-    padding: 0 var(--space-xxl) var(--space-xb) var(--space-xxl);
+    composes: main from 'containers';
   }
 
   .introduction {
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-e);
+  }
+
+  .sectionPress {
     margin-top: var(--space-e);
     margin-bottom: var(--space-e);
   }
@@ -115,6 +127,11 @@
   .imageWrapper {
     height: 453px;
   }
+
+  .sectionPress {
+    margin-top: var(--space-xb);
+    margin-bottom: var(--space-xb);
+  }
 }
 
 @media (--mobile-m) {
@@ -132,10 +149,6 @@
 
   .imageWrapper {
     height: 340px;
-  }
-
-  .mapWrapper {
-    padding: 0 var(--space-s) var(--space-e) var(--space-s);
   }
 
   .introduction {

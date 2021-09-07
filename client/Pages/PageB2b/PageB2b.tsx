@@ -6,7 +6,7 @@ import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import { PageB2bData } from './typings';
 import Rubrics from './elements/Rubrics';
 import Feedback from './elements/Feedback';
-import Press from './elements/Press';
+import PressGallery from './elements/PressGallery';
 import styles from './PageB2b.module.css';
 
 export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {
@@ -34,8 +34,13 @@ const PageB2b: FC<PageB2bProps> = (props) => {
         </div>
         <Rubrics rubrics={rubrics} />
       </div>
+
       <Feedback />
-      <Press articles={articles} socials={socials} />
+
+      <div className={styles.sectionPress}>
+        <PressGallery articles={articles} socials={socials} />
+      </div>
+
       <div className={styles.mapWrapper}>
         <SectionShowroomsMap datasForMap={map} pickupPoints={sellPoints} />
       </div>
