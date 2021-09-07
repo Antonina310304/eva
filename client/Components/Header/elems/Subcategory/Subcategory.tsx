@@ -3,6 +3,7 @@ import { IMainNav } from '@Types/MainNav';
 import CategoryList from '@Components/Header/elems/CategoryList';
 import Link from '@UI/Link';
 import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
+import Scroller from '@UI/Scroller';
 import styles from './Subcategory.module.css';
 
 export interface SubcategoryProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,7 +13,7 @@ export interface SubcategoryProps extends HTMLAttributes<HTMLDivElement> {
 
 const Subcategory: FC<SubcategoryProps> = ({ category }) => {
   return (
-    <div>
+    <div className={styles.subcategory}>
       <div className={styles.header}>
         <img src={category.img} alt={category.title} />
         <MobileNavContainer className={styles.titleBlock}>
@@ -25,21 +26,23 @@ const Subcategory: FC<SubcategoryProps> = ({ category }) => {
         </MobileNavContainer>
       </div>
       <MobileNavContainer className={styles.inner}>
-        <>
-          {category.dropDown.map((categoryItem) => {
-            return (
-              <div key={categoryItem.name} className={styles.section}>
-                <div className={styles.wrapper}>
-                  <p className={styles.type}>{categoryItem.name}</p>
-                  <Link view='grayString' to={categoryItem.link}>
-                    {categoryItem.textLink}
-                  </Link>
+        <Scroller className={styles.scroller}>
+          <div className={styles.scrollerInner}>
+            {category.dropDown.map((categoryItem) => {
+              return (
+                <div key={categoryItem.name} className={styles.section}>
+                  <div className={styles.wrapper}>
+                    <p className={styles.type}>{categoryItem.name}</p>
+                    <Link view='grayString' to={categoryItem.link}>
+                      {categoryItem.textLink}
+                    </Link>
+                  </div>
+                  <CategoryList category={categoryItem} />
                 </div>
-                <CategoryList category={categoryItem} />
-              </div>
-            );
-          })}
-        </>
+              );
+            })}
+          </div>
+        </Scroller>
       </MobileNavContainer>
     </div>
   );

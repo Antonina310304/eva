@@ -132,7 +132,7 @@
   visibility: hidden;
   opacity: 1;
 
-  transition: transform 400ms ease-in, opacity 200ms ease-in;
+  transition: transform 400ms ease-in, opacity 350ms ease-in;
 }
 
 .item {
@@ -148,7 +148,7 @@
   transform: translateY(-40px);
   opacity: 0;
 
-  transition: transform 400ms ease-in, opacity 200ms ease-in;
+  transition: transform 400ms ease-in, opacity 350ms ease-in;
 }
 
 .item:hover .headerBottomFloat.headerBottom {

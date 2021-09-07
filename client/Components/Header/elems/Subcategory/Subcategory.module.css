@@ -1,6 +1,8 @@
 .header {
   position: relative;
 
+  flex: 0 0 auto;
+
   width: 100%;
   height: 220px;
   overflow: hidden;
@@ -73,14 +75,29 @@
 }
 
 .inner {
+  height: 100%;
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 10px;
+  overflow: hidden;
 }
 
 .section {
   margin-bottom: 40px;
+}
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+.subcategory {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.scroller {
+  box-sizing: border-box;
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+.scrollerInner {
+  padding-right: 20px;
 }
