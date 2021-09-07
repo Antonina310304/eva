@@ -39,6 +39,7 @@
 
 .search {
   width: 100%;
+  max-width: 240px;
 
   @media (--mobile) {
     position: absolute;

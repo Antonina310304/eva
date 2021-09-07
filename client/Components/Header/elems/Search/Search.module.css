@@ -56,8 +56,8 @@
 
   font-size: 0;
 
-  background: transparent url('icon.svg') no-repeat center;
-  background-size: 16px auto;
+  background: transparent url('search.svg') no-repeat center;
+  background-size: contain;
   border: 0;
   transform: translateY(-50%);
   cursor: pointer;
@@ -75,6 +75,9 @@
 
 .submit {
   left: 8px;
+
+  background: transparent url('icon.svg') no-repeat center;
+  background-size: 16px auto;
 }
 
 .changeable .submit {
@@ -95,7 +98,7 @@
   z-index: 6;
 
   width: 100%;
-  max-width: 240px;
+  //max-width: 240px;
 }
 
 .buttonReset {

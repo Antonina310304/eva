@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useRef, useState, memo } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useRef, useState, memo, useCallback } from 'react';
 import Input from '@UI/Input';
 
 import cn from 'classnames';
@@ -16,9 +16,10 @@ import styles from './Search.module.css';
 
 export interface SearchData extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  isMenu?: boolean;
 }
 
-const Search: FC<SearchData> = ({ className }) => {
+const Search: FC<SearchData> = ({ className, isMenu = false }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isDesktop = useMediaQuery('(min-width: 1366px)');
@@ -42,34 +43,37 @@ const Search: FC<SearchData> = ({ className }) => {
     }, 1500);
   }, [setSearchResult]);
 
-  function resetSearch() {
+  const resetSearch = useCallback(() => {
     setSearchValue('');
     setSearchResult({ request: '', link: '', matches: [], products: [] });
-  }
+  }, []);
 
-  function hideModal() {
+  const hideModal = useCallback(() => {
     setIsShowModal(false);
     setIsShowInput(false);
     resetSearch();
     document.querySelector('body').style.overflow = '';
-  }
+  }, [resetSearch]);
 
-  const handleClickInside = () => {
+  const handleClickInside = (evt: { target: { value: string } }) => {
     setIsShowModal(true);
     if (!isDesktop) {
       document.querySelector('body').style.overflow = 'hidden';
     }
   };
 
-  function showSearchInput() {
+  const showSearchInput = useCallback(() => {
     setIsShowInput(true);
-  }
+  }, []);
 
-  function handleClickOutside(evt: MouseEvent) {
-    if (!formRef.current.contains(evt.target as Node)) {
-      hideModal();
-    }
-  }
+  const handleClickOutside = useCallback(
+    (evt: MouseEvent) => {
+      if (!formRef.current.contains(evt.target as Node)) {
+        hideModal();
+      }
+    },
+    [hideModal],
+  );
 
   function subscribeToChangeInput(value) {
     if (!debounceRef.current) return;
@@ -127,16 +131,16 @@ const Search: FC<SearchData> = ({ className }) => {
         ref={inputRef}
         className={cn({
           [styles.show]: isShowInput,
-          [styles.changeable]: isMobile,
+          [styles.changeable]: isMobile && !isMenu,
           [styles.wrapper]: !isMobile,
         })}
       >
         <Input
-          onFocus={handleClickInside}
-          onChange={onChange}
+          onFocus={(evt) => !isMenu && handleClickInside(evt)}
+          onChange={(evt) => !isMenu && onChange(evt)}
           className={styles.input}
           type='input'
-          value={searchValue}
+          defaultValue={searchValue}
           placeholder='Найти мебель'
         />
         {searchValue !== '' && (
@@ -146,7 +150,7 @@ const Search: FC<SearchData> = ({ className }) => {
           </button>
         )}
 
-        {isMobile && (
+        {isMobile && !isMenu && (
           <button className={styles.button} type='button' onClick={() => showSearchInput()}>
             открыть поиск
           </button>

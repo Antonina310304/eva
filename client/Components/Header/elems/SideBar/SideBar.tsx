@@ -51,7 +51,6 @@ const SideBar: FC<SideBarProps> = ({
       api.start({
         left: '-100%',
         onRest: () => {
-          // document.querySelector('body').style.overflow = 'hidden';
           setIsShowSubMenu(false);
           // вернуться в исходное состояние при закрытии всего sidebar
         },
@@ -73,9 +72,8 @@ const SideBar: FC<SideBarProps> = ({
             <div ref={ref} className={styles.inWrap}>
               <MobileNavContainer className={styles.header}>
                 <Flex ai='center' jc='space-between'>
-                  <button className={styles.close} onClick={hideSideBar} type='button'>
-                    <IconClose />
-                  </button>
+                  <Search isMenu className={styles.search} />
+                  <button className={styles.close} onClick={hideSideBar} type='button' />
                 </Flex>
               </MobileNavContainer>
               <MobileNavContainer>

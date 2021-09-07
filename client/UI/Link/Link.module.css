@@ -125,7 +125,7 @@
   }
 }
 
-.link.grayString {
+.grayString {
   position: relative;
 
   color: var(--color-dark-gray);

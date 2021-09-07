@@ -21,5 +21,9 @@
   visibility: visible;
   opacity: 1;
 
-  transition: background 400ms ease, visibility 0s 300ms, opacity 400ms ease;
+  transition: background 400ms ease, visibility 0s, opacity 400ms ease;
+
+  @media (--only-desktop) {
+    transition: background 400ms ease, visibility 0s ease 300ms, opacity 400ms ease;
+  }
 }

@@ -26,12 +26,19 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
 
   return (
     <nav>
-      <ul className={styles.siteNav}>
+      <ul
+        className={cn(
+          {
+            [styles.separator]: hideOnScroll,
+          },
+          styles.siteNav,
+        )}
+      >
         {siteNavList.map((item) => {
           return (
             <li
               onMouseOver={() => item.submenu && onMouseOver(item.link)}
-              className={cn(styles.item, {
+              className={cn(styles.siteNavItem, {
                 [styles.active]: item.link === activeElement,
               })}
               key={item.title}

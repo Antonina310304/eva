@@ -15,10 +15,6 @@ export interface SiteNavProp extends HTMLAttributes<HTMLDivElement> {
 const SiteNavMobile: FC<SiteNavProp> = ({ activeMenu, setActiveMenu }) => {
   const [activeElement, isActiveElement] = useState<string>('catalog');
 
-  const onMouseOver = useCallback((element) => {
-    isActiveElement(element);
-  }, []);
-
   return (
     <nav>
       <ul className={styles.siteNav}>
@@ -27,13 +23,13 @@ const SiteNavMobile: FC<SiteNavProp> = ({ activeMenu, setActiveMenu }) => {
             <li
               onClick={() => setActiveMenu(item.link)}
               className={cn(styles.item, {
-                [styles.active]: item.link === activeElement,
+                [styles.active]: item.link === activeMenu,
               })}
               key={item.title}
             >
               <Link
                 view='navigation'
-                className={cn({ [styles.active]: activeMenu }, styles.link)}
+                className={cn({ [styles.active]: item.link === activeMenu }, styles.link)}
                 to={item.link}
               >
                 {item.title}

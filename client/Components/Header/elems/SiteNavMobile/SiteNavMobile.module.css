@@ -28,3 +28,15 @@
   line-height: 150%;
   white-space: nowrap;
 }
+
+.active {
+  color: var(--color-grafit);
+
+  transition: color 150ms ease-in;
+
+  &:before {
+    width: 100%;
+
+    transition: width 150ms ease-in;
+  }
+}
