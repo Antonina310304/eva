@@ -1,0 +1,14 @@
+.orderQueueItem {
+  display: flex;
+}
+
+.itemLogo {
+  min-width: 85px;
+}
+
+.itemText {
+  margin-top: var(--space-xs);
+
+  font-size: var(--size-n);
+  line-height: var(--size-xl);
+}
