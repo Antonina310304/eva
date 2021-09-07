@@ -11,7 +11,7 @@ export interface ProjectItem {
   title: string;
 }
 export interface PageB2bDetailData {
-  projects: ProjectItem;
+  projects: ProjectItem[];
   title: string;
   teaser: string;
   examples: ExamplesData[];

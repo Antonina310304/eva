@@ -47,6 +47,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
 
   const subGallery = Object.values(gallery);
   console.log(subGallery);
+  console.log(projects);
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -101,7 +102,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
                 onChangeCurrent={handleChangeCurrent}
                 onChangeProgress={handleChangeProgress}
               >
-                {subGallery[index].map((element, elementIndex) => (
+                {(subGallery[index] as any[]).map((element, elementIndex) => (
                   <div className={styles.galleryItem} key={elementIndex}>
                     <Image className={styles.galleryImage} src={element.src} />
                   </div>
