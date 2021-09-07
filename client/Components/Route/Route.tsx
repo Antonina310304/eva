@@ -23,13 +23,14 @@ const Initiator: FC<any> = ({ children }) => {
   const meta = useMeta({ ssr: true });
   const { pathname } = useLocation();
   const { region } = useParams<RouteParams>();
+  const regionUrl = region ? `/${region}` : '';
 
   Api.setServices(meta.data?.services);
   Api.setRegion(region);
 
   // Если регион из URL не совпадает с регионом из meta-информации,
   // то выполняем редирект на регион из meta-информации
-  if (meta.data && `/${region}` !== meta.data.region.url) {
+  if (meta.data && regionUrl !== meta.data.region.url) {
     const chunks = pathname.split('/');
     const metaRegion = meta.data.region.url.slice(1);
 
@@ -39,7 +40,11 @@ const Initiator: FC<any> = ({ children }) => {
       chunks.splice(1, 0, metaRegion);
     }
 
-    return <Redirect to={chunks.join('/')} />;
+    const url = chunks.filter(Boolean).join('/');
+
+    console.log(chunks, 'url', url);
+
+    return <Redirect to={`/${url}`} />;
   }
 
   return children;
