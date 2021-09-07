@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, MouseEvent } from 'react';
+import React, { FC, memo, useCallback, useMemo, MouseEvent } from 'react';
 import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
@@ -34,7 +34,13 @@ const Link: FC<LinkProps> = (props) => {
   const meta = useMeta({ ssr: true });
   const [, { closeAllModals }] = useModals();
 
-  const href = meta.data ? `${meta.data.region.url}${to}` : to;
+  // Добавляем регион, если ссылка его не содержит
+  const href = useMemo(() => {
+    const regionUrl = meta.data ? meta.data.region.url : null;
+    const needAddRegion = regionUrl && !to.startsWith(`${regionUrl}/`);
+
+    return needAddRegion ? `${regionUrl}${to}` : to;
+  }, [meta.data, to]);
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
