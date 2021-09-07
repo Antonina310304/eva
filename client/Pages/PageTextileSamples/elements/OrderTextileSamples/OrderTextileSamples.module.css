@@ -1,8 +1,16 @@
 .orderTextileSamplesBlock {
+  box-sizing: border-box;
   min-height: 260px;
-  padding: var(--space-xl);
+  padding: 60px 70px;
 
-  background: #abd08e;
+  background: #d8f1f1;
+}
+
+.orderTextileTitle {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: center;
 }
 
 .wrapper {
@@ -12,14 +20,14 @@
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  max-width: 1000px;
+  max-width: 1176px;
   margin: 0 auto;
-  margin-top: var(--space-4xl);
+  margin-top: 60px;
 }
 
 .orderRulesItem {
   flex-direction: column;
-  width: 194px;
+  max-width: 213px;
 
   text-align: center;
 }
@@ -64,6 +72,19 @@
 
     content: '';
   }
+}
+
+.iconRight {
+  position: relative;
+  bottom: 30px;
+
+  width: 15px;
+  height: 10px;
+
+  background-image: url('./rightArrow.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 @media (--mobile-l) {

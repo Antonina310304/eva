@@ -1,2 +1,38 @@
 .page {
 }
+
+.pageTitle {
+  margin-top: 35px;
+}
+
+.orderTextileSamples {
+  margin-top: 60px;
+}
+
+.wrapper {
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.text {
+  margin-top: 60px;
+
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.textileSelector {
+  margin-top: 100px;
+}
+
+.callBack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 574px;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 80px;
+
+  text-align: center;
+}

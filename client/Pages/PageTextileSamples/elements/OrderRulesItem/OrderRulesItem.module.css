@@ -10,5 +10,5 @@
   margin-top: var(--space-xs);
 
   font-size: var(--size-n);
-  line-height: var(--size-xl);
+  line-height: var(--lh-n);
 }

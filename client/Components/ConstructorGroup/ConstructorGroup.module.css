@@ -1,0 +1,165 @@
+.constructorGroup {
+  padding: var(--space-m) var(--space-l);
+
+  transition: background var(--animation-duration-fast);
+}
+
+.constructorGroup.visible {
+  background: var(--color-default);
+
+  .tags {
+    transition-delay: unset;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  margin-left: var(--space-m);
+
+  opacity: 0;
+
+  transition: var(--animation-duration) ease 0.5s;
+}
+
+.tags.visible {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.tag {
+  margin-right: var(--space-s);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.right {
+  display: flex;
+}
+
+.toggle {
+  display: block;
+
+  transition: all var(--animation-duration-fast) 0s ease-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.toggle.disabled {
+  opacity: 0;
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+.subhead {
+  display: none;
+  margin: var(--space-2xs) 0 var(--space-s);
+}
+
+.info {
+  overflow: hidden;
+}
+
+.infoContent {
+  padding-top: var(--space-s);
+}
+
+.catalog {
+  margin: var(--space-xl) var(--space-xs-neg) 0;
+}
+
+.catalog.desktopView {
+  display: grid;
+  grid-column-gap: 43px;
+  grid-template-columns: repeat(auto-fit, 123px);
+  margin: 0;
+  margin-top: var(--space-xl);
+}
+
+@media (--desktop-m) {
+  .ConstructorGroup {
+    &-Catalog {
+      &_desktopView {
+        grid-column-gap: 51px;
+      }
+    }
+  }
+}
+
+@media (--desktop) {
+  .ConstructorGroup {
+    &-Catalog {
+      &_desktopView {
+        grid-column-gap: 30px;
+      }
+    }
+  }
+}
+
+@media (--mobile-l) {
+  .ConstructorGroup {
+    &-Catalog {
+      &_desktopView {
+        grid-column-gap: 50px;
+      }
+    }
+  }
+}
+
+@media (--mobile-m) {
+  .ConstructorGroup {
+    &-Catalog {
+      &_desktopView {
+        grid-column-gap: 28px;
+      }
+    }
+  }
+}
+
+@media (--mobile) {
+  .ConstructorGroup {
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
+
+    &-DesktopSubtitle {
+      display: none;
+    }
+
+    &-Tags {
+      display: none;
+    }
+
+    &-Subhead {
+      display: block;
+    }
+
+    &-InfoContent {
+      padding-top: var(--space-m);
+    }
+
+    &-Catalog {
+      &_desktopView {
+        grid-column-gap: 30px;
+        grid-template-columns: repeat(auto-fit, 90px);
+      }
+    }
+  }
+}

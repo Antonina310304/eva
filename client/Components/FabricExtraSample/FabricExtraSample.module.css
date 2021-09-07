@@ -1,0 +1,94 @@
+.fabricExtraSample {
+  display: inline-block;
+  margin-bottom: var(--space-m);
+
+  vertical-align: top;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.fabricExtraSample.modalView {
+  padding: 0 var(--space-xs);
+}
+
+.fabricExtraSample.gray {
+  .mask {
+    color: var(--color-bg-light);
+  }
+}
+
+.fabricExtraSample.white {
+  .mask {
+    color: var(--color-default);
+  }
+}
+
+.wrapperImage {
+  position: relative;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  transition: color var(--animation-duration-fast);
+}
+
+.image {
+  position: relative;
+  z-index: 1;
+
+  flex-shrink: 0;
+
+  width: 90px;
+  height: 90px;
+
+  border: 1px solid white;
+}
+
+.image.large {
+  width: 123px;
+  height: 123px;
+}
+
+.wrapperOk {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+
+  background: var(--color-default);
+  border-radius: 50%;
+}
+
+.name {
+  line-height: var(--size-l);
+}
+
+@media (--mobile) {
+  .FabricExtraSample {
+    &-SampleHint {
+      display: none;
+    }
+  }
+}

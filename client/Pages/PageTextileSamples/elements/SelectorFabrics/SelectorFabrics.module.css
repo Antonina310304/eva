@@ -1,0 +1,287 @@
+.head {
+  padding: 0 var(--space-l);
+}
+
+.title {
+  padding-bottom: 30px;
+
+  text-align: center;
+
+  border-bottom: 1px solid var(--color-medium-gray);
+}
+
+.fabrickFilters {
+  margin-top: var(--space-m);
+
+  background: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+
+  & button {
+    background-color: var(--color-default);
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+  }
+}
+
+.wrapperMainContent {
+  display: flex;
+  max-width: 1582px;
+  margin-top: var(--space-xl);
+  padding-right: var(--space-3xl);
+}
+
+.left {
+  flex-grow: 1;
+  max-width: calc(100% - 350px);
+  min-height: 500px;
+}
+
+.constructorGroup {
+  margin-top: var(--space-xs);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.fabricExtraSample {
+  margin-bottom: var(--space-xl);
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0;
+
+  color: var(--color-text-secondary);
+}
+
+.notFoundTitle {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.right {
+  position: relative;
+
+  min-width: 350px;
+}
+
+.wrapperFormOrder {
+  padding: var(--space-m) 0 var(--space-3xl) 0;
+}
+
+.samplesForm {
+  width: 350px;
+  padding: var(--space-xl) var(--space-m);
+
+  background: var(--color-default);
+  box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.2);
+}
+
+.samplesFormTitle {
+  margin-bottom: var(--space-m);
+
+  font-size: var(--size-l);
+  line-height: var(--size-2xl);
+  text-align: center;
+}
+
+.samplesFormContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.examples {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.example {
+  width: 53px;
+  height: 53px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input {
+  margin-top: var(--space-l);
+}
+
+.samplesFormWrapperInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-l);
+
+  text-align: center;
+}
+
+.submit {
+  width: 100%;
+}
+
+.samplesFormInfo {
+  margin-top: var(--space-s);
+
+  font-size: var(--size-xs);
+  line-height: var(--size-m);
+  text-align: center;
+}
+
+.samplesFormInfoLink {
+  color: var(--color-text-secondary);
+}
+
+.mobileForm {
+  z-index: 2;
+
+  display: none;
+  width: 100%;
+  padding: var(--space-xs) 0;
+
+  background: var(--color-default);
+  box-shadow: 0px -3px 16px rgb(0 0 0 / 20%);
+}
+
+.exampleMobile {
+  width: 47px;
+  height: 47px;
+}
+
+.mobileBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 47px;
+  height: 47px;
+}
+
+.samplesFormInfoMobile {
+  margin-top: var(--space-s);
+
+  font-size: var(--size-xs);
+  line-height: var(--size-n);
+  text-align: center;
+}
+
+.basket {
+  color: var(--color-default);
+}
+
+.showAllGroups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 120px;
+  margin: 0 auto;
+
+  color: var(--color-secondary);
+
+  cursor: pointer;
+}
+
+.arrow {
+  margin-left: var(--space-2xs);
+}
+
+@media (--mobile-l) {
+  .head {
+    padding: 0 var(--space-s);
+  }
+
+  .wrapperMainContent {
+    flex-direction: column;
+    padding-right: 0;
+  }
+
+  .left {
+    position: relative;
+
+    max-width: 100%;
+  }
+
+  .constructorGroup {
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
+  }
+
+  .right {
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .containerForm {
+    position: fixed;
+    right: 0;
+    bottom: -100%;
+    left: 0;
+    z-index: var(--z-index-modal);
+
+    transition: bottom var(--animation-duration-fast);
+  }
+  .containerForm.opened {
+    bottom: 0;
+  }
+
+  .samplesForm {
+    position: static;
+
+    width: 100%;
+  }
+
+  .samplesFormContent {
+    max-width: 330px;
+    margin: 0 auto;
+  }
+
+  .samplesFormWrapperInfo {
+    max-width: 330px;
+    margin: 0 auto;
+    margin-top: var(--space-l);
+  }
+
+  .mobileForm {
+    display: block;
+  }
+
+  .wrapperFormOrder {
+    padding: 0;
+  }
+
+  .example {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media (--mobile) {
+  .samplesForm {
+    padding: var(--space-s) var(--space-m);
+  }
+
+  .samplesFormTitle {
+    text-align: center;
+  }
+
+  .samplesFormInfoMobile {
+    max-width: 330px;
+    margin: 0 auto;
+    margin-top: var(--space-s);
+
+    text-align: unset;
+  }
+
+  .examples {
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+}

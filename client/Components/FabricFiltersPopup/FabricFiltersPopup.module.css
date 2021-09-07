@@ -1,0 +1,47 @@
+.fabricFiltersPopup {
+  font-size: var(--size-s);
+  font-family: inherit;
+}
+
+.title {
+  padding: var(--space-xs) var(--space-s);
+}
+
+.item {
+  display: flex;
+  aling-items: center;
+
+  padding: var(--space-xs);
+
+  transition: background var(--animation-duration-fast);
+
+  &:hover {
+    background: var(--color-bg-light);
+    cursor: pointer;
+  }
+}
+
+.item.checked {
+  background: #b3d4fc !important;
+}
+
+.color {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: var(--space-xs);
+
+  border: 1px solid var(--color-border-light);
+  border-radius: 50%;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin-right: var(--space-xs);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}

@@ -25,7 +25,7 @@ const OrderTextileSamples: FC<OrderTextileSamplesProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.orderTextileSamplesBlock, className)}>
-      <div className={styles.OrderTextileTitle}>Как заказать образцы тканей на дом?</div>
+      <div className={styles.orderTextileTitle}>Как заказать образцы тканей на дом?</div>
 
       <div className={styles.wrapper}>
         {orderIconsText.map((step, index) => {
@@ -47,7 +47,8 @@ const OrderTextileSamples: FC<OrderTextileSamplesProps> = (props) => {
                 styleForText={styleForText}
               />
 
-              <div className={styles.dots} />
+              {/* <div className={styles.dots} /> */}
+              <div className={styles.iconRight} />
             </Fragment>
           );
         })}
