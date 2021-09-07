@@ -4,14 +4,15 @@ import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
 import { ApiPages } from '@Api/Pages';
+import useMeta from '@Queries/useMeta';
+import useModals from '@Hooks/useModals';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
   className?: string;
-  view?: 'primary' | 'secondary' | 'simple' | 'native';
+  view?: 'primary' | 'secondary' | 'native';
   needFetch?: boolean;
   preventDefault?: boolean;
-  size?: 's';
   to: string;
   onClick?(e: MouseEvent): void;
 }
@@ -20,17 +21,20 @@ const Link: FC<LinkProps> = (props) => {
   const {
     className,
     to,
-    view = 'primary',
+    view,
     needFetch = true,
     preventDefault,
     children,
-    size = 'n',
     target,
     onClick,
     ...restProps
   } = props;
   const queryClient = useQueryClient();
   const history = useHistory();
+  const meta = useMeta({ ssr: true });
+  const [, { closeAllModals }] = useModals();
+
+  const href = meta.data ? `${meta.data.region.url}${to}` : to;
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
@@ -46,36 +50,37 @@ const Link: FC<LinkProps> = (props) => {
 
       e.preventDefault();
 
-      if (to.substr(0, 1) === '#') {
-        history.push(to);
+      if (href.substr(0, 1) === '#') {
+        closeAllModals();
+        history.push(href);
         return;
       }
 
       if (needFetch) {
-        await queryClient.prefetchQuery(['page', 'ssr', to], () =>
-          ApiPages.fetchPage({ path: to }),
+        await queryClient.prefetchQuery(['page', 'ssr', href], () =>
+          ApiPages.fetchPage({ path: href }),
         );
-        history.push(to);
+        closeAllModals();
+        history.push(href);
         window.scrollTo({ top: 0 });
       }
     },
-    [history, needFetch, onClick, preventDefault, queryClient, target, to],
+    [closeAllModals, history, href, needFetch, onClick, preventDefault, queryClient, target],
   );
+
+  if (!meta.isSuccess) return null;
 
   return (
     <a
       {...restProps}
-      href={to}
+      href={href}
       target={target}
       className={cn(
         styles.link,
         {
           [styles.primary]: view === 'primary',
           [styles.secondary]: view === 'secondary',
-          [styles.simple]: view === 'simple',
           [styles.native]: view === 'native',
-          [styles.sizeS]: size === 's',
-          [styles.sizeN]: size === 'n',
         },
         className,
       )}

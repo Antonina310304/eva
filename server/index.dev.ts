@@ -52,6 +52,8 @@ const start = async () => {
   app.use(mainRoutes);
 
   app.use((err, req, res, next) => {
+    console.log(err);
+
     res.statusCode = 500;
     res.send(`<h2>${err.message}</h2><code>${err.stack}</code>`);
   });

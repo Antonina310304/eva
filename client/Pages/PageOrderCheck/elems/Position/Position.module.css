@@ -1,5 +1,11 @@
 .position {
   background-color: var(--color-white);
+
+  &.withWarning {
+    .wrapperRelated {
+      border-top: none;
+    }
+  }
 }
 
 .wrapperProduct {
@@ -47,6 +53,31 @@
   position: absolute;
   top: var(--space-xxl);
   right: var(--space-xxl);
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) 0;
+
+  color: var(--color-grafit);
+
+  border-top: 1px dashed var(--color-medium-gray);
+  border-bottom: 1px dashed var(--color-medium-gray);
+
+  &:before {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: var(--space-s);
+
+    background-image: url('./iconWarning.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    content: '';
+  }
 }
 
 .wrapperRelated {

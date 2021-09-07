@@ -58,7 +58,7 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
       onClose={handleClose}
     >
       <div className={styles.modalView}>
-        <Link to={`#review-${prevId}`} className={styles.prev} view='simple'>
+        <Link to={`#review-${prevId}`} className={styles.prev}>
           <div className={styles.arrowBackground} onClick={handlePrev}>
             <div className={styles.arrow} />
           </div>
@@ -77,7 +77,7 @@ const ReviewModal: FC<ModalMainProps> = (props) => {
           <Review className={styles.review} review={reviews[currentReviewIndex]} />
         </div>
 
-        <Link to={`#review-${nextId}`} className={styles.next} view='simple'>
+        <Link to={`#review-${nextId}`} className={styles.next}>
           <div className={styles.arrowBackground} onClick={handleNext}>
             <div className={styles.arrow} />
           </div>

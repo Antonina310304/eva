@@ -1,0 +1,9 @@
+.form {
+  &.hidden {
+    display: none;
+  }
+}
+
+.button {
+  margin-top: var(--space-s);
+}
