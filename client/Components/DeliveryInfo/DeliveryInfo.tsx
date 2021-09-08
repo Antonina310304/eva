@@ -15,12 +15,12 @@ const DeliveryInfo: FC<DeliveryInfoProps> = () => {
           <p className={styles.title}>Доставка по всей России</p>
           <p className={styles.text}>
             Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону&ensp;
-            <Link to='tel:7 (495) 266-71-47' view='primary'>
+            <Link className={styles.link} to='tel:7 (495) 266-71-47'>
               7&nbsp;(495)&nbsp;266-71-47
             </Link>
-            . Доставка по городу Москва и области – от 3 дней.
+            {`. Доставка по городу Москва и области – от 3 дней. `}
           </p>
-          <Link view='primary' to='/'>
+          <Link view='primary' to='/site/delivery'>
             Подробнее
           </Link>
         </div>

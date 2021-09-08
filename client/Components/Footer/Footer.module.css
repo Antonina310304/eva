@@ -1,14 +1,13 @@
 .footer {
+  composes: main from 'containers';
+
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
+  padding-top: var(--space-xxl);
   padding-bottom: 60px;
 
   background: var(--color-light-gray);
-}
-
-.container {
-  composes: main from 'containers';
 }
 
 .row {

@@ -17,7 +17,7 @@ const RouteDelivery: FC = () => {
   CartStore.init(page.data.cart);
 
   return (
-    <TemplateMain>
+    <TemplateMain hideDeliveryInfo>
       <PageDelivery page={page.data} meta={meta.data} />
     </TemplateMain>
   );
