@@ -1,19 +1,19 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
 
 import Link from '@UI/Link';
-import styles from './FooterTop.module.css';
+import styles from './DeliveryInfo.module.css';
 
-export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
+export interface DeliveryInfoProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const FooterTop: FC<FooterProps> = () => {
+const DeliveryInfo: FC<DeliveryInfoProps> = () => {
   return (
-    <div className={styles.footerTop}>
-      <div className={styles.footerInner}>
-        <div className={styles.FooterTopWrap}>
-          <p className={styles.FooterTopTitle}>Доставка по всей России</p>
-          <p className={styles.FooterTopText}>
+    <div className={styles.delivery}>
+      <div className={styles.inner}>
+        <div className={styles.wrap}>
+          <p className={styles.title}>Доставка по всей России</p>
+          <p className={styles.text}>
             Чтобы заказать товар в магазине сайте, свяжитесь с нашим менеджером по телефону&ensp;
             <Link to='tel:7 (495) 266-71-47' view='primary'>
               7&nbsp;(495)&nbsp;266-71-47
@@ -24,7 +24,7 @@ const FooterTop: FC<FooterProps> = () => {
             Подробнее
           </Link>
         </div>
-        <div className={styles.FooterTopImg}>
+        <div className={styles.img}>
           <img src='/react/static/img/car.svg' alt='я везу замечательный диван' />
         </div>
       </div>
@@ -32,4 +32,4 @@ const FooterTop: FC<FooterProps> = () => {
   );
 };
 
-export default memo(FooterTop);
+export default memo(DeliveryInfo);
