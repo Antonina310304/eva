@@ -71,7 +71,7 @@ const FooterDesktop = () => {
       </div>
 
       <div className={styles.col}>
-        <Accordion collapsed header={footerNavCatalog.title}>
+        <Accordion defaultCollapsed header={footerNavCatalog.title}>
           <FooterNav linkList={footerNavCatalog.childrenList} />
         </Accordion>
         <SocialList className={styles.marginTopAuto} />
