@@ -62,7 +62,7 @@ export interface PressItem {
 
 export type DescriptionData = string[];
 export interface TextItem {
-  descriptions: DescriptionData[];
+  descriptions: DescriptionData;
   press: PressItem;
   title: string;
 }
