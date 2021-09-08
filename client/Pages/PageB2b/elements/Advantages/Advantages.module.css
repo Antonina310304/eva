@@ -88,16 +88,44 @@
     font-size: var(--size-n);
     line-height: var(--lh-n);
   }
+
+  .advantagesItem {
+    max-width: 125px;
+  }
 }
 
 @media (--mobile-m) {
+  .contentWrapper {
+    padding-top: var(--space-xxl);
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
+  }
+
   .advantage {
     font-size: var(--size-s);
     line-height: var(--lh-s);
   }
 
   .introduction {
+    padding-top: 0;
+
     font-size: var(--size-s);
     line-height: var(--lh-s);
+  }
+
+  .advantagesList {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .advantagesItem {
+    max-width: 206px;
+    margin-bottom: var(--space-b);
+  }
+}
+
+@media (--mobile) {
+  .advantagesItem {
+    max-width: 130px;
   }
 }
