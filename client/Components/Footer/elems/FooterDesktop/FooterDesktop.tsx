@@ -17,12 +17,21 @@ import SocialList from '@Components/SocialList';
 import PaymentList from '@Components/PaymentList';
 import Link from '@UI/Link/Link';
 import SubscriptionForm from '@Forms/SubscriptionForm';
+import { FooterData } from '@Types/Layout';
 import FooterNav from '../FooterNav/FooterNav';
 import FooterLogo from '../FooterLogo/FooterLogo';
 import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import styles from './FooterDesktop.module.css';
 
-const FooterDesktop: FC = () => {
+export interface FooterDesktopProps {
+  footer: FooterData;
+}
+
+const FooterDesktop: FC<FooterDesktopProps> = (props) => {
+  const { footer } = props;
+
+  console.log(footer);
+
   return (
     <>
       <div className={styles.col}>
@@ -59,9 +68,11 @@ const FooterDesktop: FC = () => {
       </div>
 
       <div className={styles.col}>
-        <Accordion header={footerNavBuyers.title}>
-          <FooterNav linkList={footerNavBuyers.childrenList} />
-        </Accordion>
+        {footer.toCustomers?.items.length > 0 && (
+          <Accordion header={footer.toCustomers.title}>
+            <FooterNav items={footer.toCustomers.items} />
+          </Accordion>
+        )}
 
         <div className={styles.marginTop95}>
           <Link to='/static-page/privacy-policy' view='secondary'>
@@ -71,9 +82,11 @@ const FooterDesktop: FC = () => {
       </div>
 
       <div className={styles.col}>
-        <Accordion defaultCollapsed header={footerNavCatalog.title}>
-          <FooterNav linkList={footerNavCatalog.childrenList} />
-        </Accordion>
+        {footer.catalog?.items.length > 0 && (
+          <Accordion defaultCollapsed header={footer.catalog.title}>
+            <FooterNav items={footer.catalog.items} />
+          </Accordion>
+        )}
         <SocialList className={styles.marginTopAuto} />
       </div>
 
