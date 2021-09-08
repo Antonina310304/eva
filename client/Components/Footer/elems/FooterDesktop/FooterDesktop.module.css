@@ -1,0 +1,49 @@
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  max-width: 35%;
+  padding: 0 15px;
+
+  &:first-child {
+    min-width: 284px;
+  }
+}
+
+.wrapperMedium {
+  margin-bottom: 25px;
+}
+
+.wrapperBig {
+  margin-bottom: 45px;
+}
+
+.footerSubscription {
+  width: 240px;
+  max-width: 240px;
+}
+
+.footerText {
+  margin: 0;
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-s);
+  line-height: 21px;
+}
+
+.madeIn {
+  margin: 0;
+
+  color: var(--color-black);
+  font-size: var(--size-s);
+  line-height: 25px;
+}
+
+.marginTop95 {
+  margin-top: 95px;
+}
+
+.marginTopAuto {
+  margin-top: auto;
+}

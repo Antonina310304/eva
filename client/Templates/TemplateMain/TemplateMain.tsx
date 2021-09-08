@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo, ReactElement } from 'react';
 import cn from 'classnames';
 
+import Footer from '@Components/Footer';
 import styles from './TemplateMain.module.css';
 
 export interface TemplateMainProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,6 +15,8 @@ const TemplateMain: FC<TemplateMainProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.templateMain, className)}>
       {children}
+
+      <Footer />
     </div>
   );
 };

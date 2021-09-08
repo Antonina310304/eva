@@ -38,6 +38,8 @@ const Link: FC<LinkProps> = (props) => {
 
   // Добавляем регион, если ссылка его не содержит
   const href = useMemo(() => {
+    if (!to) return to;
+
     const regionUrl = meta.data ? meta.data.region.url : null;
     const needAddRegion = regionUrl && !to.startsWith(`${regionUrl}/`);
 
