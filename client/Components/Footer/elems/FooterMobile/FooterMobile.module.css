@@ -1,10 +1,6 @@
 .col {
   box-sizing: border-box;
   width: 100%;
-
-  @media (min-width: 640px) {
-    max-width: 50%;
-  }
 }
 
 .footerText {
@@ -17,11 +13,6 @@
 
 .footerSubscription {
   width: 100%;
-  max-width: 330px;
-
-  @media (min-width: 640px) {
-    max-width: 220px;
-  }
 }
 
 .madeIn {
@@ -44,24 +35,6 @@
   margin-bottom: 25px;
 }
 
-.wrapperBigMobileM {
-  @media (min-width: 640px) {
-    margin-bottom: 45px;
-  }
-}
-
 .wrapperBig {
   margin-bottom: 45px;
-}
-
-.wrapperLargeMobileM {
-  @media (min-width: 640px) {
-    margin-bottom: 60px;
-  }
-}
-
-.footerBox {
-  @media (min-width: 640px) {
-    margin-top: 105px;
-  }
 }

@@ -26,7 +26,7 @@ const FooterMobile: FC = () => {
   return (
     <>
       <div className={styles.col}>
-        <div className={cn(styles.wrapperMedium, styles.wrapperBigMobileM)}>
+        <div className={styles.wrapperMedium}>
           <Accordion header={footerNavFeedback.title}>
             <FooterNav linkList={footerNavFeedback.childrenList} />
           </Accordion>
@@ -58,12 +58,12 @@ const FooterMobile: FC = () => {
       </div>
 
       <div style={{ flex: 0 }} className={styles.col}>
-        <div className={cn(styles.wrapperRegular, styles.wrapperLargeMobileM)}>
+        <div className={styles.wrapperRegular}>
           <Accordion header={footerNavCatalog.title}>
             <FooterNav linkList={footerNavCatalog.childrenList} />
           </Accordion>
         </div>
-        <div className={cn(styles.wrapperMedium, styles.wrapperLargeMobileM)}>
+        <div className={styles.wrapperMedium}>
           <Accordion header={footerNavReviews.title}>
             <FooterNav linkList={footerNavReviews.childrenList} />
           </Accordion>

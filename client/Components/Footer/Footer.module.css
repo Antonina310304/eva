@@ -1,6 +1,4 @@
 .footer {
-  composes: main from 'containers';
-
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
@@ -10,9 +8,15 @@
   background: var(--color-light-gray);
 }
 
-.row {
-  @media (min-width: 640px) {
-    display: flex;
-    justify-content: space-between;
+.content {
+  composes: main from 'containers';
+
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (--mobile) {
+  .content {
+    display: block;
   }
 }

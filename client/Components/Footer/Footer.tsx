@@ -13,7 +13,7 @@ export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 const Footer: FC<FooterProps> = () => {
   const { isMobileM, isMobile } = useMedias();
 
-  const renderFooter = useCallback(() => {
+  const renderContent = useCallback(() => {
     if (isMobile) {
       return <FooterMobile />;
     }
@@ -27,7 +27,7 @@ const Footer: FC<FooterProps> = () => {
 
   return (
     <div className={styles.footer}>
-      <div className={styles.row}>{renderFooter()}</div>
+      <div className={styles.content}>{renderContent()}</div>
     </div>
   );
 };
