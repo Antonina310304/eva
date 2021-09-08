@@ -1,0 +1,11 @@
+.wrapper {
+}
+
+.title {
+  margin: 0;
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
