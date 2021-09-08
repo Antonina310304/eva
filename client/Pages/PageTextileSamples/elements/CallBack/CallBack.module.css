@@ -26,3 +26,9 @@
   font-size: 14px;
   line-height: 21px;
 }
+
+@media (--desktop) {
+  .button {
+    max-width: 300px;
+  }
+}

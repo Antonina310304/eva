@@ -36,3 +36,47 @@
 
   text-align: center;
 }
+
+@media (--desktop-m) {
+  .wrapper {
+    max-width: 1080px;
+  }
+
+  .textileSelector {
+    margin-top: 80px;
+  }
+
+  .callBack {
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    max-width: 944px;
+  }
+
+  .text {
+    margin-top: 40px;
+  }
+
+  .textileSelector {
+    margin-top: 60px;
+  }
+
+  .callBack {
+    margin-top: 60px;
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .orderTextileSamples {
+    margin-top: 40px;
+  }
+}

@@ -1,11 +1,10 @@
 import React, { HTMLAttributes, FC, memo, useCallback, useMemo, MutableRefObject } from 'react';
 import cn from 'classnames';
 
-import Icon12CheckDark from '@divanru/icons/dist/12/check_dark';
 import Icon90SampleMask from '@divanru/icons/dist/90/sample_mask';
 
 import Image from '@UI/Image';
-
+import useModals from '@Hooks/useModals';
 import useOrderFabrics from '@Hooks/useOrderFabrics';
 import { ConstructorValueData } from '@Types/Constructor';
 import styles from './FabricExtraSample.module.css';
@@ -32,8 +31,8 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
     ...restProps
   } = props;
   const orderFabrics = useOrderFabrics();
-
-  const maskSize = largeImage ? 123 : 90;
+  const [, { openModal }] = useModals();
+  const maskSize = largeImage ? 145 : 90;
 
   const selected = useMemo(() => {
     return (
@@ -46,6 +45,13 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
   const handleClick = useCallback(() => {
     orderFabrics.toggleSelect({ sample });
   }, [orderFabrics, sample]);
+
+  const handleClickMoreInfo = useCallback(() => {
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
 
   return (
     <div
@@ -60,22 +66,31 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
         },
         [className],
       )}
-      onClick={handleClick}
     >
-      <div className={styles.wrapperImage}>
+      <div className={styles.wrapperImage} onClick={handleClick}>
         <div>
           <Icon90SampleMask width={maskSize} height={maskSize} className={styles.mask} />
           <Image className={cn(styles.image, { [styles.large]: largeImage })} src={sample.image} />
         </div>
 
-        <div className={styles.wrapperOk}>
-          <div className={styles.ok}>
-            <Icon12CheckDark className={styles.iconOk} width={14} height={10} />
+        {!selected && (
+          <div className={styles.wrapperIcon}>
+            <div className={styles.iconAdd} />
           </div>
-        </div>
+        )}
+
+        {selected && (
+          <div className={styles.wrapperIcon}>
+            <div className={styles.iconDel} />
+          </div>
+        )}
       </div>
 
       <div className={styles.name}>{sample.title}</div>
+
+      <div className={styles.moreInfo} onClick={handleClickMoreInfo}>
+        Подробнее
+      </div>
     </div>
   );
 };

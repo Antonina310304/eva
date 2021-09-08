@@ -2,11 +2,7 @@ import React, { memo, HTMLAttributes, FC, useCallback } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 
-import Icon19Plus from '@divanru/icons/dist/19/plus';
-import Icon31CircleCross from '@divanru/icons/dist/31/circle_cross';
-
 import Image from '@UI/Image';
-
 import { ConstructorValueData } from '@Types/Constructor';
 import useOrderFabrics from '@Hooks/useOrderFabrics';
 import styles from './FabricSample.module.css';
@@ -37,9 +33,9 @@ const FabricSample: FC<FabricSampleProps> = (props) => {
       <CSSTransition unmountOnExit classNames={styles.image} timeout={400} in={!!sample}>
         <Image className={styles.image} src={sample ? sample.image : ''} />
       </CSSTransition>
-      {removable && <Icon31CircleCross className={styles.iconRemove} />}
+      {removable && <div className={styles.iconRemove} />}
 
-      <Icon19Plus className={styles.iconPlus} />
+      <div className={styles.iconPlus} />
     </div>
   );
 };

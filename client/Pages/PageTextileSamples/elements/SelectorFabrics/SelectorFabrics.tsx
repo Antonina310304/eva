@@ -40,7 +40,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
   const { className, ...restProps } = props;
   const [, { openModal }] = useModals();
   const orderFabrics = useOrderFabrics();
-  const { isMobile, isMobileL } = useMedias();
+  const { isMobile, isMobileM, isDesktop } = useMedias();
   const [mainFormStyle, setMainFormStyle] = useState(null);
   const [waiting, setWaiting] = useState(false);
   const [allGroups, setAllGroups] = useState(false);
@@ -122,12 +122,12 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     });
 
     // Обрезаем группы
-    if (isMobileL && !allGroups) {
+    if (isDesktop && !allGroups) {
       result = result.slice(0, 5);
     }
 
     return result;
-  }, [allGroups, filterStore.parameters, isMobileL, orderFabrics.data]);
+  }, [allGroups, filterStore.parameters, isDesktop, orderFabrics.data]);
 
   const transformDataBeforeSubmit = useCallback(
     (data) => {
@@ -197,7 +197,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
       openModal('Info', {
         view: 'success',
         title: 'Заявка принята!',
-        message: 'Благодарим за выбор divan.ru. Наш оператор свяжется с вами в ближайшее время.',
+        text: 'Благодарим за выбор divan.ru. Наш оператор свяжется с вами в ближайшее время.',
       });
 
       setStep('preview');
@@ -249,13 +249,13 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
       window.removeEventListener('scroll', handleScrollMainForm);
     }
 
-    if (isMobileL) return cleanup;
+    if (isDesktop) return cleanup;
 
     handleScrollMainForm();
     window.addEventListener('scroll', handleScrollMainForm);
 
     return cleanup;
-  }, [handleScrollMainForm, isMobileL]);
+  }, [handleScrollMainForm, isDesktop]);
 
   // Возваращаемся на шаг с превью, если на шаге заказа пользователь удалил все ткани
   useEffect(() => {
@@ -291,11 +291,12 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                   className={styles.constructorGroup}
                   key={index}
                   group={group}
-                  groupView={isMobileL ? 'mobileDesktop' : 'fullDesktop'}
+                  // groupView={isDesktop ? 'mobileDesktop' : 'fullDesktop'}
+                  groupView='mobileDesktop'
                   slotCatalogItem={
                     <FabricExtraSample
                       className={styles.fabricExtraSample}
-                      largeImage={!isMobile}
+                      largeImage={!isMobileM}
                       sample={null}
                       refCatalog={refCatalog}
                     />
@@ -303,7 +304,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                 />
               ))}
 
-              {isMobileL && !allGroups && (
+              {isDesktop && !allGroups && (
                 <div className={styles.showAllGroups} onClick={handleShowAllGroups}>
                   <div>Показать все</div>
                   <Icon8ChevronDownThin width={10} className={styles.arrow} />
@@ -324,9 +325,9 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
               [styles.opened]: opened,
             })}
             ref={refForm}
-            style={mainFormStyle}
+            // style={mainFormStyle}
           >
-            {!isMobileL || step === 'order' ? (
+            {/* {!isDesktop || step === 'order' ? (
               <div className={styles.wrapperFormOrder}>
                 <Form
                   className={styles.samplesForm}
@@ -373,7 +374,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                     </Button>
                   </div>
 
-                  {isMobileL && (
+                  {isDesktop && (
                     <div className={styles.samplesFormInfo}>
                       <div className={styles.samplesFormInfoRow}>
                         Подтверждая заказ, я соглашаюсь с условиями
@@ -386,14 +387,14 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                           // decoration='underline'
                           className={styles.samplesFormInfoLink}
                         >
-                          Политики конфиденциальности
+                          Политики конфиденциальности 1
                         </Link>
                       </div>
                     </div>
                   )}
                 </Form>
 
-                {!isMobileL && (
+                {!isDesktop && (
                   <div className={styles.samplesFormInfo}>
                     <div className={styles.samplesFormInfoRow}>
                       Подтверждая заказ, я соглашаюсь с условиями
@@ -406,49 +407,97 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                         // decoration='underline'
                         className={styles.samplesFormInfoLink}
                       >
-                        Политики конфиденциальности
+                        Политики конфиденциальности 2
                       </Link>
                     </div>
                   </div>
                 )}
               </div>
+            ) : ( */}
+
+            {step === 'order' ? (
+              <div />
             ) : (
               <div className={styles.mobileForm}>
-                <div className={styles.samplesFormContent}>
-                  <div className={styles.examples}>
-                    {orderFabrics.data.selected.map((item, index) => (
-                      <FabricSample
-                        key={index}
-                        className={styles.exampleMobile}
-                        removable
-                        sample={item.sample}
+                <ServicePageParagraphTitle
+                  className={styles.titleForm}
+                  title='Выберите до 5 образцов мебельных тканей'
+                />
+
+                <div className={styles.formContainer}>
+                  <div className={styles.samplesFormContent}>
+                    <div className={styles.examples}>
+                      {orderFabrics.data.selected.map((item, index) => (
+                        <FabricSample
+                          key={index}
+                          className={styles.exampleMobile}
+                          removable
+                          sample={item.sample}
+                        />
+                      ))}
+                    </div>
+
+                    {!isMobile && (
+                      <div className={styles.samplesFormInfoMobile}>
+                        <div>Стоимость курьерской доставки образцов - от 300 ₽ </div>
+
+                        <div className={styles.samplesFormInfoRow}>
+                          {`Подтверждая заказ, я соглашаюсь с условиями `}
+                          <Link
+                            view='native'
+                            to='/static-page/privacy-policy'
+                            // theme='secondary'
+                            //  decoration='underline'
+                          >
+                            Политики конфиденциальности
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={styles.samplesFormWrapperInfo}>
+                    <div className={styles.inputs}>
+                      <Input className={styles.input} placeholder='Имя' name='FabricsForm[name]' />
+                      <InputPhone
+                        className={styles.input}
+                        placeholder='Телефон'
+                        name='FabricsForm[phone]'
                       />
-                    ))}
+                    </div>
+
                     <Button
-                      className={styles.mobileBtn}
+                      className={styles.submit}
+                      type='submit'
                       // theme={disabled ? 'gray' : 'primary'}
+                      waiting={waiting}
                       disabled={disabled}
-                      onClick={handleClickToMainForm}
                     >
-                      <Icon32Basket className={styles.basket} />
+                      Заказать ткани
                     </Button>
                   </div>
-                </div>
 
-                <div className={styles.samplesFormInfoMobile}>
-                  <div className={styles.samplesFormInfoRow}>
-                    {`Подтверждая заказ, я соглашаюсь с условиями `}
-                    <Link
-                      to='/static-page/privacy-policy'
-                      // theme='secondary'
-                      //  decoration='underline'
-                    >
-                      Политики конфиденциальности
-                    </Link>
-                  </div>
+                  {isMobile && (
+                    <div className={styles.samplesFormInfoMobile}>
+                      <div>Стоимость курьерской доставки образцов - от 300 ₽ </div>
+
+                      <div className={styles.samplesFormInfoRow}>
+                        {`Подтверждая заказ, я соглашаюсь с условиями `}
+                        <Link
+                          view='native'
+                          to='/static-page/privacy-policy'
+                          // theme='secondary'
+                          //  decoration='underline'
+                        >
+                          Политики конфиденциальности
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
+            {/* )} */}
           </div>
         </div>
       </div>

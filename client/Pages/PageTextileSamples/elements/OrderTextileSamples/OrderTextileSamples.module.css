@@ -1,9 +1,17 @@
 .orderTextileSamplesBlock {
   box-sizing: border-box;
-  min-height: 260px;
-  padding: 60px 70px;
+  padding: 60px 0;
 
   background: #d8f1f1;
+}
+
+.wrapperLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+
+  cursor: pointer;
 }
 
 .orderTextileTitle {
@@ -11,6 +19,29 @@
   font-size: 22px;
   line-height: 26px;
   text-align: center;
+}
+
+.iconArrow {
+  width: 13px;
+  height: 13px;
+  margin-left: var(--space-xxs);
+
+  background-image: url('./iconArrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transform: rotate(-180deg);
+
+  transition: transform 0.2s;
+}
+
+.iconArrow.collapsed {
+  transform: rotate(0);
+}
+
+.content {
+  padding: 0 15px;
+  padding-top: var(--space-l);
 }
 
 .wrapper {
@@ -87,33 +118,68 @@
   background-size: contain;
 }
 
-@media (--mobile-l) {
+@media (--desktop-m) {
+  .wrapper {
+    max-width: 1080px;
+  }
+}
+
+@media (--desktop) {
   .orderTextileSamplesBlock {
-    padding: var(--space-xl) var(--space-s);
+    padding: 40px 0;
+  }
+
+  .wrapper {
+    max-width: 944px;
+    margin-top: 30px;
+  }
+
+  .orderRulesItem {
+    max-width: 179px;
   }
 }
 
 @media (--mobile-m) {
   .wrapper {
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 0;
+
+    & :last-child {
+      font-size: 14px;
+      line-height: 21px;
+    }
   }
 
   .orderRulesItem {
     flex-direction: row;
     align-items: center;
-    width: 290px;
-    margin-top: var(--space-4xl);
+    max-width: 290px;
+    margin-top: 30px;
 
     text-align: left;
   }
 
-  .dots {
-    margin: 0 var(--space-2xl);
+  .iconRight {
+    margin: 0 35px;
+
+    &:nth-child(4) {
+      display: none;
+    }
   }
 }
 
 @media (--mobile) {
+  .orderTextileTitle {
+    margin-right: 20px;
+
+    text-align: start;
+    /* max-width: 300px; */
+  }
+
+  .iconRight {
+    display: none;
+  }
+
   .wrapper {
     flex-direction: column;
     flex-wrap: no-wrap;
@@ -124,7 +190,7 @@
   }
 
   .orderRulesItem {
-    width: 100%;
+    max-width: 100%;
   }
 
   .dots {

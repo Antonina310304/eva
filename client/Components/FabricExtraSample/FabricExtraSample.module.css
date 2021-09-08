@@ -4,9 +4,9 @@
 
   vertical-align: top;
 
-  &:hover {
+  /* &:hover {
     cursor: pointer;
-  }
+  } */
 }
 
 .fabricExtraSample.modalView {
@@ -15,18 +15,26 @@
 
 .fabricExtraSample.gray {
   .mask {
-    color: var(--color-bg-light);
+    color: var(--color-dark-gray);
   }
 }
 
 .fabricExtraSample.white {
   .mask {
-    color: var(--color-default);
+    color: var(--color-white);
   }
 }
 
 .wrapperImage {
   position: relative;
+
+  &:hover {
+    cursor: pointer;
+
+    .iconAdd {
+      opacity: 1;
+    }
+  }
 }
 
 .mask {
@@ -37,7 +45,7 @@
   left: 0;
   z-index: 2;
 
-  transition: color var(--animation-duration-fast);
+  transition: color 0.4s;
 }
 
 .image {
@@ -49,15 +57,15 @@
   width: 90px;
   height: 90px;
 
-  border: 1px solid white;
+  /* border: 1px solid var( --color-white); */
 }
 
 .image.large {
-  width: 123px;
-  height: 123px;
+  width: 145px;
+  height: 145px;
 }
 
-.wrapperOk {
+.wrapperIcon {
   position: absolute;
   top: 0;
   right: 0;
@@ -71,18 +79,55 @@
 }
 
 .ok {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
   width: 30px;
   height: 30px;
 
-  background: var(--color-default);
-  border-radius: 50%;
+  background: var(--color-white);
+  border-radius: 50%; */
+}
+
+.iconDel {
+  width: 36px;
+  height: 36px;
+
+  background-image: url('./del.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.iconAdd {
+  width: 50px;
+  height: 50px;
+
+  background-image: url('./plus.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0;
 }
 
 .name {
-  line-height: var(--size-l);
+  margin-top: 15px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.moreInfo {
+  margin-top: 10px;
+
+  color: var(--color-dark-gray);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+
+  cursor: pointer;
 }
 
 @media (--mobile) {
