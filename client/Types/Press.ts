@@ -12,7 +12,7 @@ export interface PublicationData {
   gallery: ImageData[];
 }
 
-export interface NewsItemData {
+export interface ArticleData {
   href: string;
   id: number;
   link: string;

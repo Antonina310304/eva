@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { PublicationData } from '@Types/Press';
@@ -13,10 +13,8 @@ export interface PublicationProps extends HTMLAttributes<HTMLDivElement> {
 const Publication: FC<PublicationProps> = (props) => {
   const { className, publication, ...restProps } = props;
 
-  const handleClick = useCallback(() => {}, []);
-
   return (
-    <div {...restProps} className={cn(styles.article, className)} onClick={handleClick}>
+    <div {...restProps} className={cn(styles.article, className)}>
       <Image src={publication.image} className={styles.image} />
       <div className={styles.title}>{publication.title}</div>
       <div className={styles.date}>{publication.date}</div>

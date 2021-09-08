@@ -18,11 +18,10 @@ export interface SocialItem {
 export interface PressGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   articles: ArticleItem[];
-  socials: SocialItem[];
 }
 
 const PressGallery: FC<PressGalleryProps> = (props) => {
-  const { className, articles, socials, ...restProps } = props;
+  const { className, articles, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
@@ -33,9 +32,9 @@ const PressGallery: FC<PressGalleryProps> = (props) => {
       // Нужно чтобы модалка не открывалась во время спайпа
       if (window.cancelClick) return;
 
-      openModal('Article', { articles, index, socials });
+      openModal('Article', { articles, index });
     },
-    [openModal, articles, socials],
+    [openModal, articles],
   );
 
   const normalizeSlide = useCallback(

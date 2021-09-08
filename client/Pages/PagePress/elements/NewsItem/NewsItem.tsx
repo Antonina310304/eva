@@ -1,22 +1,20 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import { NewsItemData } from '@Types/Press';
+import { ArticleData } from '@Types/Press';
 import Image from '@UI/Image';
 import styles from './NewsItem.module.css';
 
 export interface NewsItemProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  article: NewsItemData;
+  article: ArticleData;
 }
 
 const NewsItem: FC<NewsItemProps> = (props) => {
   const { className, article, ...restProps } = props;
 
-  const handleClick = useCallback(() => {}, []);
-
   return (
-    <div {...restProps} className={cn(styles.article, className)} onClick={handleClick}>
+    <div {...restProps} className={cn(styles.article, className)}>
       <Image src={article.images[0].src} className={styles.image}>
         <Image src={article.logo} className={styles.logo} />
       </Image>
