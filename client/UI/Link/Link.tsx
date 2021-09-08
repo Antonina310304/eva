@@ -6,6 +6,7 @@ import { useQueryClient } from 'react-query';
 import { ApiPages } from '@Api/Pages';
 import useMeta from '@Queries/useMeta';
 import useModals from '@Hooks/useModals';
+import isAbsoluteLink from '@Utils/isAbsoluteLink';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
@@ -39,6 +40,7 @@ const Link: FC<LinkProps> = (props) => {
   // Добавляем регион, если ссылка его не содержит
   const href = useMemo(() => {
     if (!to) return to;
+    if (isAbsoluteLink(to)) return to;
 
     const regionUrl = meta.data ? meta.data.region.url : null;
     const needAddRegion = regionUrl && !to.startsWith(`${regionUrl}/`);
@@ -60,6 +62,7 @@ const Link: FC<LinkProps> = (props) => {
         return;
       }
       if (target === '_blank') return;
+      if (isAbsoluteLink(href)) return;
 
       e.preventDefault();
 
