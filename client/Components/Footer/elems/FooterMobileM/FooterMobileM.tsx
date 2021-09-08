@@ -12,10 +12,10 @@ import {
   footerNavSubscription,
   footerNavWinner,
 } from '@Components/Footer/data';
-import SubscriptionForm from '@Components/SubscriptionForm';
 import SocialList from '@Components/SocialList';
 import PaymentList from '@Components/PaymentList';
 import Link from '@UI/Link';
+import SubscriptionForm from '@Forms/SubscriptionForm';
 import FooterNav from '../FooterNav/FooterNav';
 import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import FooterLogo from '../FooterLogo/FooterLogo';
