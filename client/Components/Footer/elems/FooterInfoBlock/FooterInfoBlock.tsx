@@ -1,7 +1,6 @@
 import React, { FC, HTMLAttributes, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
-import FooterTitleNav from '../FooterTitleNav';
 import styles from './FooterInfoBlock.module.css';
 
 export interface FooterInfoBlockProps extends HTMLAttributes<HTMLDivElement> {
@@ -10,12 +9,15 @@ export interface FooterInfoBlockProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactChild;
 }
 
-const FooterInfoBlock: FC<FooterInfoBlockProps> = ({ title, children, className }) => {
+const FooterInfoBlock: FC<FooterInfoBlockProps> = (props) => {
+  const { title, children, className } = props;
+
   return (
     <div className={cn(styles.footerInfoBlock, className)}>
-      <div className={styles.FooterInfoBlockHeader}>
-        <FooterTitleNav title={title} />
+      <div className={styles.header}>
+        <div className={styles.title}>{title}</div>
       </div>
+
       {children}
     </div>
   );

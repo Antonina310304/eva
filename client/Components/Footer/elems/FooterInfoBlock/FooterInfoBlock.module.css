@@ -1,3 +1,13 @@
-.FooterInfoBlockHeader {
+.header {
   padding-bottom: 15px;
+}
+
+.title {
+  display: block;
+  margin: 0;
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--size-s);
+  line-height: 21px;
 }
