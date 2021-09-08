@@ -37,16 +37,17 @@ const Link: FC<LinkProps> = (props) => {
   const meta = useMeta({ ssr: true });
   const [, { closeAllModals }] = useModals();
 
+  const isExternal = isAbsoluteLink(to || '');
+
   // Добавляем регион, если ссылка его не содержит
   const href = useMemo(() => {
-    if (!to) return to;
-    if (isAbsoluteLink(to)) return to;
+    if (!to || isExternal) return to;
 
     const regionUrl = meta.data ? meta.data.region.url : null;
     const needAddRegion = regionUrl && !to.startsWith(`${regionUrl}/`);
 
     return needAddRegion ? `${regionUrl}${to}` : to;
-  }, [meta.data, to]);
+  }, [isExternal, meta.data, to]);
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
@@ -89,7 +90,7 @@ const Link: FC<LinkProps> = (props) => {
     <a
       {...restProps}
       href={href}
-      target={target}
+      target={isExternal ? '_blank' : target}
       className={cn(
         styles.link,
         {
