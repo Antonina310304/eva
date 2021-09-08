@@ -6,7 +6,7 @@
 
     background-image: linear-gradient(var(--color-black), var(--color-black));
     background-repeat: no-repeat;
-    background-position: left 0 bottom calc(16% - 3px);
+    background-position: left 0 bottom calc(16% - 4px);
     background-size: 100% 1px;
   }
 
@@ -15,7 +15,7 @@
 
     background-image: linear-gradient(var(--color-dark-gray), var(--color-dark-gray));
     background-repeat: no-repeat;
-    background-position: left 0 bottom calc(16% - 3px);
+    background-position: left 0 bottom calc(16% - 4px);
     background-size: 100% 1px;
   }
 

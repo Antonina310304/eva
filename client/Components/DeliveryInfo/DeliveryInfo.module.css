@@ -38,6 +38,10 @@
   color: var(--color-black);
 }
 
+.more {
+  display: inline-block;
+}
+
 .img {
   display: flex;
   justify-content: flex-end;

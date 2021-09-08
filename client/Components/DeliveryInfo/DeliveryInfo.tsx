@@ -20,7 +20,7 @@ const DeliveryInfo: FC<DeliveryInfoProps> = () => {
             </Link>
             {`. Доставка по городу Москва и области – от 3 дней. `}
           </p>
-          <Link view='primary' to='/site/delivery'>
+          <Link className={styles.more} view='primary' to='/site/delivery'>
             Подробнее
           </Link>
         </div>
