@@ -68,7 +68,7 @@ const FooterMobileM: FC = () => {
 
         <div className={styles.marginTopAuto}>
           <div className={styles.wrapperMedium}>
-            <Link to='/static-page/privacy-policy' view='navigation'>
+            <Link to='/static-page/privacy-policy' view='secondary'>
               Политика конфиденциальности
             </Link>
           </div>

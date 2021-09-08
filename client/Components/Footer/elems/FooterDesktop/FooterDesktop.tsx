@@ -64,7 +64,7 @@ const FooterDesktop: FC = () => {
         </Accordion>
 
         <div className={styles.marginTop95}>
-          <Link to='/static-page/privacy-policy' view='navigation'>
+          <Link to='/static-page/privacy-policy' view='secondary'>
             Политика конфиденциальности
           </Link>
         </div>
