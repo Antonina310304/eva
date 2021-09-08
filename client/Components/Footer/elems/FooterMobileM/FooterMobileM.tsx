@@ -19,7 +19,7 @@ import Link from '@UI/Link';
 import FooterNav from '../FooterNav/FooterNav';
 import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import FooterLogo from '../FooterLogo/FooterLogo';
-import styles from './footerMobileM.module.css';
+import styles from './FooterMobileM.module.css';
 
 const FooterMobileM = () => {
   return (

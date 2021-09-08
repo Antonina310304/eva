@@ -3,7 +3,7 @@ import React, { FC, memo, HTMLAttributes } from 'react';
 import useMediaQuery from '@Hooks/useMediaQuery';
 import FooterTop from './elems/FooterTop';
 import FooterDesktop from './elems/FooterDesktop';
-import FooterMobileM from './elems/footerMobileM';
+import FooterMobileM from './elems/FooterMobileM';
 import FooterMobile from './elems/FooterMobile';
 import styles from './Footer.module.css';
 
