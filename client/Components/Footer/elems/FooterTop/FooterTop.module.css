@@ -9,6 +9,8 @@
 }
 
 .footerInner {
+  composes: main from 'containers';
+
   @media (min-width: 768px) {
     display: flex;
     align-items: flex-end;

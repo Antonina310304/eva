@@ -4,10 +4,9 @@
   justify-content: space-between;
   box-sizing: border-box;
   max-width: 35%;
-  padding: 0 15px;
 
-  &:first-child {
-    min-width: 284px;
+  &:not(:last-child) {
+    margin-right: var(--space-l);
   }
 }
 

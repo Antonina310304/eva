@@ -7,11 +7,13 @@
   background: var(--color-light-gray);
 }
 
+.container {
+  composes: main from 'containers';
+}
+
 .row {
   @media (min-width: 640px) {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0 -15px;
   }
 }

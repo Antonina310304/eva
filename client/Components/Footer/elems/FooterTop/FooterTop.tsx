@@ -2,7 +2,6 @@ import React, { FC, memo, HTMLAttributes } from 'react';
 
 import Link from '@UI/Link';
 
-import Container from '@Components/Container';
 import styles from './FooterTop.module.css';
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,7 +11,7 @@ export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 const FooterTop: FC<FooterProps> = () => {
   return (
     <div className={styles.footerTop}>
-      <Container className={styles.footerInner}>
+      <div className={styles.footerInner}>
         <div className={styles.FooterTopWrap}>
           <p className={styles.FooterTopTitle}>Доставка по всей России</p>
           <p className={styles.FooterTopText}>
@@ -29,7 +28,7 @@ const FooterTop: FC<FooterProps> = () => {
         <div className={styles.FooterTopImg}>
           <img src='/react/static/img/car.svg' alt='я везу замечательный диван' />
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

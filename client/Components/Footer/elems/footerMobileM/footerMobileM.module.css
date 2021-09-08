@@ -6,11 +6,9 @@
   box-sizing: border-box;
   width: auto;
   max-width: 33.3333333%;
-  padding: 0 15px;
 
-  &:first-child {
-    flex: inherit;
-    min-width: 284px;
+  &:not(&:last-child) {
+    margin-right: var(--space-l);
   }
 }
 

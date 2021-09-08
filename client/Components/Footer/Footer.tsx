@@ -2,7 +2,6 @@ import React, { FC, memo, HTMLAttributes } from 'react';
 
 import FooterTop from '@Components/Footer/elems/FooterTop';
 
-import Container from '@Components/Container';
 import useMediaQuery from '@Hooks/useMediaQuery';
 
 import FooterDesktop from '@Components/Footer/elems/FooterDesktop';
@@ -37,9 +36,9 @@ const Footer: FC<FooterProps> = () => {
   return (
     <div className={styles.footer}>
       <FooterTop />
-      <Container>
+      <div className={styles.container}>
         <div className={styles.row}>{renderColumns()}</div>
-      </Container>
+      </div>
     </div>
   );
 };
