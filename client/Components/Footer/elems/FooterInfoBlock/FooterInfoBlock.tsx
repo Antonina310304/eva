@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, ReactChild } from 'react';
 import cn from 'classnames';
 
-import FooterTitleNav from '../FooterTitileNav';
+import FooterTitleNav from '../FooterTitleNav';
 import styles from './FooterInfoBlock.module.css';
 
 export interface FooterInfoBlockProps extends HTMLAttributes<HTMLDivElement> {
