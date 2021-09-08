@@ -1,5 +1,4 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
-
 import cn from 'classnames';
 
 import { IconPayment } from '@Types/IconSocial';

@@ -1,12 +1,10 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
 
-import FooterTop from '@Components/Footer/elems/FooterTop';
-
 import useMediaQuery from '@Hooks/useMediaQuery';
-
-import FooterDesktop from '@Components/Footer/elems/FooterDesktop';
-import FooterMobileM from '@Components/Footer/elems/footerMobileM';
-import FooterMobile from '@Components/Footer/elems/FooterMobile';
+import FooterTop from './elems/FooterTop';
+import FooterDesktop from './elems/FooterDesktop';
+import FooterMobileM from './elems/footerMobileM';
+import FooterMobile from './elems/FooterMobile';
 import styles from './Footer.module.css';
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {

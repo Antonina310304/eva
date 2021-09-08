@@ -1,8 +1,7 @@
 import React, { FC, HTMLAttributes, memo, MouseEvent } from 'react';
+
 import { SiteNavigationData } from '@Types/SiteNavigationData';
 import Link from '@UI/Link';
-import { Link as LinkReact } from 'react-router-dom';
-
 import styles from './FooterNav.module.css';
 
 export interface FooterNavProps extends HTMLAttributes<HTMLDivElement> {

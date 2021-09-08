@@ -1,9 +1,7 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
-
 import cn from 'classnames';
 
 import Link from '@UI/Link';
-
 import { IconSocialId } from '@Types/IconSocial';
 import styles from './IconSocial.module.css';
 

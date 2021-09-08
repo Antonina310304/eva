@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes } from 'react';
-import PaySystem from '@UI/IconPaySystem/IconPaySystem';
 import cn from 'classnames';
+
+import PaySystem from '@UI/IconPaySystem/IconPaySystem';
 import styles from './PaymentList.module.css';
 import paymentSystemList from './data';
 

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import Accordion from '@UI/Accordion/Accordion';
 import {
   footerNavBuyers,
@@ -11,15 +12,13 @@ import {
   footerNavSubscription,
   footerNavWinner,
 } from '@Components/Footer/data';
-import FooterNav from '@Components/Footer/elems/FooterNav/FooterNav';
-import FooterInfoBlock from '@Components/Footer/elems/FooterInfoBlock/FooterInfoBlock';
-import FooterLogo from '@Components/Footer/elems/FooterLogo/FooterLogo';
 import SubscriptionForm from '@Components/SubscriptionForm';
-import cn from 'classnames';
 import SocialList from '@Components/SocialList';
 import PaymentList from '@Components/PaymentList';
-import FooterTitleNav from '@Components/Footer/elems/FooterTitileNav';
 import Link from '@UI/Link';
+import FooterNav from '../FooterNav/FooterNav';
+import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
+import FooterLogo from '../FooterLogo/FooterLogo';
 import styles from './footerMobileM.module.css';
 
 const FooterMobileM = () => {

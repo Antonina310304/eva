@@ -1,7 +1,6 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
 
 import Link from '@UI/Link';
-
 import styles from './FooterTop.module.css';
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
