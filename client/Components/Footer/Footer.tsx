@@ -1,6 +1,6 @@
-import React, { FC, memo, HTMLAttributes } from 'react';
+import React, { FC, memo, HTMLAttributes, useCallback } from 'react';
 
-import useMediaQuery from '@Hooks/useMediaQuery';
+import useMedias from '@Hooks/useMedias';
 import FooterTop from './elems/FooterTop';
 import FooterDesktop from './elems/FooterDesktop';
 import FooterMobileM from './elems/FooterMobileM';
@@ -12,30 +12,25 @@ export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Footer: FC<FooterProps> = () => {
-  const mediaQuery = {
-    isDesktop: useMediaQuery('(min-width: 1279px)'),
-    isMobileM: useMediaQuery('(min-width: 768px) and (max-width: 1278px)'),
-    isMobile: useMediaQuery('(max-width: 767px)'),
-  };
+  const { isMobileM, isMobile } = useMedias();
 
-  function renderColumns() {
-    if (mediaQuery.isMobile) {
+  const renderFooter = useCallback(() => {
+    if (isMobile) {
       return <FooterMobile />;
     }
-    if (mediaQuery.isMobileM) {
+
+    if (isMobileM) {
       return <FooterMobileM />;
     }
-    if (mediaQuery.isDesktop) {
-      return <FooterDesktop />;
-    }
-    return false;
-  }
+
+    return <FooterDesktop />;
+  }, [isMobile, isMobileM]);
 
   return (
     <div className={styles.footer}>
       <FooterTop />
       <div className={styles.container}>
-        <div className={styles.row}>{renderColumns()}</div>
+        <div className={styles.row}>{renderFooter()}</div>
       </div>
     </div>
   );
