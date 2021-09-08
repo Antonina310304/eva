@@ -2,10 +2,10 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
+import Feedback from '@Forms/Feedback';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import { PageB2bData } from './typings';
 import Rubrics from './elements/Rubrics';
-import Feedback from './elements/Feedback';
 import PressGallery from './elements/PressGallery';
 import styles from './PageB2b.module.css';
 
