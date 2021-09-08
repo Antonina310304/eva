@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { ApiProfile } from '@Api/Profile';
+import * as ApiProfile from '@Api/Profile';
 import { Profile } from '@Types/Profile';
 
 export interface Params {

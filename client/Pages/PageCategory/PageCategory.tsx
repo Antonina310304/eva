@@ -3,7 +3,7 @@ import cn from 'classnames';
 import loadable from '@loadable/component';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { ApiCategory } from '@Api/Category';
+import * as ApiCategory from '@Api/Category';
 import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import styles from './PageCategory.module.css';

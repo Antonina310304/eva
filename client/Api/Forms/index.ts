@@ -1,6 +1,2 @@
-import loadJSONScheme from './loadJSONScheme';
-
-export const ApiForms = {
-  loadJSONScheme,
-};
+export { default as loadJSONScheme } from './loadJSONScheme';
 export default null;

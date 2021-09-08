@@ -1,18 +1,7 @@
-import hide from './hide';
-import info from './info';
-import loadRelatedProducts from './loadRelatedProducts';
-import put from './put';
-import remove from './remove';
-import unhide from './unhide';
-import update from './update';
-
-export const ApiCart = {
-  hide,
-  info,
-  loadRelatedProducts,
-  put,
-  remove,
-  unhide,
-  update,
-};
-export default null;
+export { default as hide } from './hide';
+export { default as info } from './info';
+export { default as loadRelatedProducts } from './loadRelatedProducts';
+export { default as put } from './put';
+export { default as remove } from './remove';
+export { default as unhide } from './unhide';
+export { default as update } from './update';
