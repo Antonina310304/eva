@@ -14,7 +14,7 @@ const RouteOrderStatus: FC = () => {
   if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageOrderStatus page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );
