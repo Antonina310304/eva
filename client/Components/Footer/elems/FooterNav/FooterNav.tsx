@@ -16,7 +16,7 @@ const FooterNav: FC<FooterNavProps> = ({ linkList }) => {
         return (
           <li key={item.title} className={styles.footerNavItem}>
             {item.url ? (
-              <Link className={styles.footerNavLink} to={item.url} view='simple'>
+              <Link className={styles.footerNavLink} to={item.url}>
                 {item.title}
               </Link>
             ) : (

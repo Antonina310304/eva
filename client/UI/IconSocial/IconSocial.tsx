@@ -16,7 +16,6 @@ export interface IconSocialProps extends HTMLAttributes<HTMLDivElement> {
 const IconSocial: FC<IconSocialProps> = ({ icon, name, link, target }) => {
   return (
     <Link
-      view='simple'
       to={link}
       className={cn(styles.icon, {
         [styles.dzen]: icon === 'dzen',
