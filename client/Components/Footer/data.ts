@@ -6,12 +6,10 @@ export const footerNavFeedback: FooterNavData = {
     {
       title: '7(495) 154 38 02 ',
       url: 'tel:7(495) 154 38 02 ',
-      isRedirectToDevice: true,
     },
     {
       title: 'love@divan.ru',
       url: 'mailto:love@divan.ru',
-      isRedirectToDevice: true,
     },
     {
       title: 'Перезвоните мне',
@@ -149,7 +147,6 @@ export const footerNavReviews: FooterNavData = {
     {
       title: 'Яндекс Маркет',
       url: 'ymarket',
-      isExternalLink: true,
     },
   ],
 };
@@ -160,12 +157,10 @@ export const footerNavWinner: FooterNavData = {
     {
       title: 'Red Dot Award',
       url: 'Red_dot_award',
-      isExternalLink: true,
     },
     {
       title: 'Премия Рунета',
       url: 'runet',
-      isExternalLink: true,
     },
   ],
 };
