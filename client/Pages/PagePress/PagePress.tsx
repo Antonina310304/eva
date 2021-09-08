@@ -22,7 +22,7 @@ export interface PagePressProps extends HTMLAttributes<HTMLDivElement> {
 
 const PagePress: FC<PagePressProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
-  const { pageMenu, news, publications } = page;
+  const { pageMenu, news, publications, mail } = page;
   const { isDesktopL, isDesktopM, isMobileM } = useMedias();
   const [showAll, setShowAll] = useState(false);
   const [, { openModal }] = useModals();
@@ -88,7 +88,7 @@ const PagePress: FC<PagePressProps> = (props) => {
         )}
       </div>
       <div className={styles.coloredRow}>
-        <FeedbackPanel className={styles.mainContainer} />
+        <FeedbackPanel className={styles.mainContainer} page='press' mailTo={mail} />
       </div>
       <List
         {...restProps}

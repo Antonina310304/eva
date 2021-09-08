@@ -1,17 +1,27 @@
 import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
+import useModals from '@Hooks/useModals';
 import Button from '@UI/Button';
 import styles from './FeedbackPanel.module.css';
 
 export interface FeedbackPanelProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  mailTo: string;
+  page: string;
 }
 
 const FeedbackPanel: FC<FeedbackPanelProps> = (props) => {
-  const { className, ...restProps } = props;
+  const { className, mailTo, page, ...restProps } = props;
+  const [, { openModal }] = useModals();
 
-  const handleClick = useCallback(() => {}, []);
+  const handleClick = useCallback(() => {
+    openModal('Cooperation', {
+      title: 'Заявка на сотрудничество',
+      email: mailTo,
+      page,
+    });
+  }, [page, mailTo, openModal]);
 
   return (
     <div {...restProps} className={cn(styles.panel, className)}>

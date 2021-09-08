@@ -30,7 +30,8 @@ export type ModalId =
   | 'OfferAgreement'
   | 'DeliveryInfo'
   | 'Publication'
-  | 'Authorization';
+  | 'Authorization'
+  | 'Cooperation';
 
 export interface Modal {
   id: ModalId;
