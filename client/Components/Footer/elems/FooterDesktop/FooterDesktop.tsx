@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import cn from 'classnames';
 
 import Accordion from '@UI/Accordion/Accordion';
@@ -22,7 +22,7 @@ import FooterLogo from '../FooterLogo/FooterLogo';
 import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import styles from './FooterDesktop.module.css';
 
-const FooterDesktop = () => {
+const FooterDesktop: FC = () => {
   return (
     <>
       <div className={styles.col}>
@@ -64,7 +64,7 @@ const FooterDesktop = () => {
         </Accordion>
 
         <div className={styles.marginTop95}>
-          <Link to='/' view='navigation'>
+          <Link to='/static-page/privacy-policy' view='navigation'>
             Политика конфиденциальности
           </Link>
         </div>

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, FC } from 'react';
 
 import Accordion from '@UI/Accordion/Accordion';
 import {
@@ -21,7 +21,7 @@ import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import FooterLogo from '../FooterLogo/FooterLogo';
 import styles from './FooterMobileM.module.css';
 
-const FooterMobileM = () => {
+const FooterMobileM: FC = () => {
   return (
     <>
       <div className={styles.col}>
@@ -68,7 +68,7 @@ const FooterMobileM = () => {
 
         <div className={styles.marginTopAuto}>
           <div className={styles.wrapperMedium}>
-            <Link to='/' view='navigation'>
+            <Link to='/static-page/privacy-policy' view='navigation'>
               Политика конфиденциальности
             </Link>
           </div>
