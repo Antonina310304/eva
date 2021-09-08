@@ -32,7 +32,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
           <Hits />
         </div>
         <Recommendations />
-        <Popular />
+        <Popular title='Популярные категории' />
         <Ideas />
         <NewProducts />
         <div className={styles.section}>
