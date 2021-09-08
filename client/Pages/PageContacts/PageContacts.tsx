@@ -85,7 +85,6 @@ const PageContacts: FC<PageContactsProps> = (props) => {
 
       <div className={styles.containerSeeUs}>
         <Divider className={styles.divider} />
-
         <SectionShowroomsMap className={styles.seeUs} datasForMap={map} pickupPoints={sellPoints} />
       </div>
     </div>
