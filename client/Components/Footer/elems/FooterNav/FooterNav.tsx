@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 
 import { SiteNavigationData } from '@Types/SiteNavigationData';
 import Link from '@UI/Link';
+import Boldik from '@UI/Boldik';
 import styles from './FooterNav.module.css';
 
 export interface FooterNavProps extends HTMLAttributes<HTMLDivElement> {
@@ -17,7 +18,7 @@ const FooterNav: FC<FooterNavProps> = ({ linkList }) => {
           <li key={item.title} className={styles.footerNavItem}>
             {item.url ? (
               <Link className={styles.footerNavLink} to={item.url}>
-                {item.title}
+                <Boldik>{item.title}</Boldik>
               </Link>
             ) : (
               <span className={styles.footerNavLink}>{item.title}</span>
