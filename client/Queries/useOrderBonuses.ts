@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { ApiOrder } from '@Api/Order';
+import * as ApiOrder from '@Api/Order';
 
 export interface Params {
   productIds?: number[];

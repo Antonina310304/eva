@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import { ApiPages } from '@Api/Pages';
+import * as ApiPages from '@Api/Pages';
 import useMeta from '@Queries/useMeta';
 import useModals from '@Hooks/useModals';
 import styles from './Link.module.css';

@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState, FC, useCallback } from 'react';
 import cn from 'classnames';
 
-import { ApiMeta } from '@Api/Meta';
+import * as ApiMeta from '@Api/Meta';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import IconClose from '@UI/IconClose';
 import Scroller from '@UI/Scroller';
