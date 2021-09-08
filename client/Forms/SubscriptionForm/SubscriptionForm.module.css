@@ -1,19 +1,12 @@
-.subscriptionWrapper {
+.wrapper {
   position: relative;
-
-  display: block;
 }
 
-.subscriptionFormInput > div {
-  border-color: transparent;
-  border-radius: 29px;
-}
-
-button.subscriptionFormButton {
+.button {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 3;
 
   width: 25px;
 
@@ -32,7 +25,7 @@ button.subscriptionFormButton {
     width: 10px;
     height: 15px;
 
-    background: url('arrow-right.svg');
+    background: url('./arrow-right.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

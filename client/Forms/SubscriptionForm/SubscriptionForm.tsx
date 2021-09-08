@@ -1,24 +1,25 @@
-import React, { FC, HTMLAttributes, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, useCallback } from 'react';
+import cn from 'classnames';
 
 import Input from '@UI/Input/Input';
-
 import Form from '@UI/Form';
-import cn from 'classnames';
-import FormItem from '@UI/FormItem/FormItem';
+import useModals from '@Hooks/useModals';
 import styles from './SubscriptionForm.module.css';
 
 export interface SubscriptionFormProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const SubscriptionForm: FC<SubscriptionFormProps> = ({ className }) => {
-  const [email, setEmail] = useState<string>('');
+const SubscriptionForm: FC<SubscriptionFormProps> = (props) => {
+  const { className } = props;
+  const [, { openModal }] = useModals();
 
   const handleSubmit = useCallback(() => {
-    // eslint-disable-next-line no-console
-    console.log(`Подписка оформлена на email ${email}`);
-    setEmail('');
-  }, [email]);
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
 
   return (
     <Form
@@ -26,18 +27,17 @@ const SubscriptionForm: FC<SubscriptionFormProps> = ({ className }) => {
       action='/subscribe'
       onSubmit={handleSubmit}
     >
-      <div className={styles.subscriptionWrapper}>
-        <FormItem>
-          <Input
-            className={styles.subscriptionFormInput}
-            type='text'
-            placeholder='email'
-            name='Subscription[email]'
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </FormItem>
-        <button className={styles.subscriptionFormButton} type='submit'>
+      <div className={styles.wrapper}>
+        <Input
+          className={styles.input}
+          wide
+          rounded
+          view='plain'
+          type='text'
+          placeholder='email'
+          name='Subscription[email]'
+        />
+        <button className={styles.button} type='submit'>
           Отправить
         </button>
       </div>
