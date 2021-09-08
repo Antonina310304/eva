@@ -1,0 +1,12 @@
+.characteristicsList {
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xxs);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

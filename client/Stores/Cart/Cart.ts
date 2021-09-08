@@ -1,5 +1,6 @@
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
+import equal from 'fast-deep-equal';
 
 import { ApiCart } from '@Api/Cart';
 import { CartPositionData, CartProductData } from '@Types/Cart';
@@ -194,7 +195,7 @@ const changeCount = async (params: any) => {
 };
 
 // Загрузить сопутствующие товары
-const loadRelatedProducts = async ({ productIds }: any) => {
+const loadRelatedProducts = async ({ productIds }: any): Promise<void> => {
   try {
     const response = await ApiCart.loadRelatedProducts({ productIds });
     const relatedProducts = (response.relatedProducts as any[]).map(
@@ -230,7 +231,7 @@ const loadRelatedProducts = async ({ productIds }: any) => {
 };
 
 // Обновить информацию о способе доставки
-const updateDeliveryType = (id: number, newData: any) => {
+const updateDeliveryType = (id: number, newData: any): void => {
   update(cartStore, (oldCart) => ({
     ...oldCart,
     deliveryTypes: oldCart.deliveryTypes.map((deliveryType) => {
@@ -244,12 +245,16 @@ const updateDeliveryType = (id: number, newData: any) => {
   }));
 };
 
-export const useCart: UseCart = (initialData) => {
-  if (initialData && !getValue(cartStore)) {
-    cartStore.set(initialData);
+const init = (initialValue: CartStoreValue): void => {
+  const value = getValue(cartStore);
+
+  if (initialValue && !equal(initialValue, value)) {
+    cartStore.set(initialValue);
     networkStore.set('success');
   }
+};
 
+export const useCart: UseCart = () => {
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),
@@ -257,6 +262,7 @@ export const useCart: UseCart = (initialData) => {
 };
 
 export default {
+  init,
   addProducts,
   hasInCart,
   removeProduct,
@@ -265,4 +271,5 @@ export default {
   showPosition,
   loadRelatedProducts,
   updateDeliveryType,
+  loadInitData,
 };

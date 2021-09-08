@@ -1,0 +1,57 @@
+.method:not(:last-child) {
+  margin-bottom: var(--space-xxl);
+}
+
+.head,
+.headContent {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  composes: l from 'sizes';
+
+  margin: 0;
+
+  font-weight: 400;
+}
+
+.description {
+  margin: var(--space-m) 0 0;
+}
+
+.wrapperIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  margin-right: var(--space-s);
+}
+
+.images {
+  display: flex;
+  align-items: center;
+
+  margin-left: var(--space-s);
+}
+
+.image:not(:last-child) {
+  margin-right: var(--space-s);
+}
+
+@media (--mobile) {
+  .head {
+    align-items: flex-start;
+  }
+
+  .headContent {
+    display: block;
+    margin-top: 4px;
+  }
+
+  .images {
+    margin-top: var(--space-s);
+    margin-left: 0;
+  }
+}

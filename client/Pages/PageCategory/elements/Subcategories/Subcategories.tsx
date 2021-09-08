@@ -21,7 +21,7 @@ const Subcategories: FC<SubcategoriesProps> = (props) => {
           className={cn(styles.subcategory, { [styles.actived]: subcategory.actived })}
           key={index}
         >
-          <Link className={styles.link} to={subcategory.link} view='simple'>
+          <Link className={styles.link} to={subcategory.link}>
             <div
               className={styles.subcategoryIcon}
               // eslint-disable-next-line react/no-danger

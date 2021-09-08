@@ -1,0 +1,17 @@
+.wrapper {
+  min-width: 1247px;
+  max-width: 1247px;
+}
+
+.content {
+  :global(.h1style) {
+    display: none;
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    min-width: unset;
+    max-width: 823px;
+  }
+}

@@ -1,5 +1,6 @@
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
+import equal from 'fast-deep-equal';
 
 import { CartStoreValue } from '@Stores/Cart';
 import { DeliveryTypeData, PaymentTypeData, PaymentVariantData } from '@Types/Cart';
@@ -8,6 +9,7 @@ export interface SelectedIds {
   delivery: DeliveryTypeData['id'];
   paymentType: PaymentTypeData['id'];
   paymentVariant: PaymentVariantData['id'];
+  discountVariant: string;
 }
 
 const orderFormStore = createStore<CartStoreValue>();
@@ -55,9 +57,26 @@ const availablePaymentVariantsStore = createDerived(
 const selectedPaymentVariantStore = createDerived(
   [availablePaymentVariantsStore, selectedStore],
   (paymentVariants, selected) => {
-    return paymentVariants.find((pv) => pv.id === selected.paymentVariant);
+    return paymentVariants.find((pv) => pv.id === selected?.paymentVariant);
   },
 );
+
+const selectedDiscountVariantStore = createDerived([selectedStore], (selected) => {
+  return selected?.discountVariant;
+});
+
+// Универсальная информацию о купоне
+const universalCouponStore = createDerived([orderFormStore], (form) => {
+  if (form.gameDiscount === 0 && form.couponDiscount === 0) return null;
+
+  return {
+    text:
+      form.gameDiscount > form.couponDiscount
+        ? 'Скидка по результатам игры: '
+        : 'Скидка по купону: ',
+    sum: Math.max(form.gameDiscount, form.couponDiscount),
+  };
+});
 
 const updateDelivery = (id: DeliveryTypeData['id'], newData: Partial<DeliveryTypeData>): void => {
   const form = getValue(orderFormStore);
@@ -72,18 +91,38 @@ const updateDelivery = (id: DeliveryTypeData['id'], newData: Partial<DeliveryTyp
   });
 };
 
+const updateCouponInfo = (newData: Partial<CartStoreValue>) => {
+  update(orderFormStore, (prevValue) => ({
+    ...prevValue,
+    coupon: newData.coupon,
+    couponData: newData.couponData,
+    couponDiscount: newData.couponDiscount,
+    discount: newData.discount,
+    gameDiscount: newData.gameDiscount,
+  }));
+};
+
 const select = (ids: Partial<SelectedIds>): void => {
   update(selectedStore, (prevValue) => ({ ...prevValue, ...ids }));
 };
 
-export const useOrderForm = (initialValue?: CartStoreValue) => {
+const selectDiscountVariant = (newVariant: string): void => {
+  update(selectedStore, (prevValue) => ({
+    ...prevValue,
+    discountVariant: prevValue.discountVariant === newVariant ? null : newVariant,
+  }));
+};
+
+const init = (initialValue: CartStoreValue): void => {
   const value = getValue(orderFormStore);
 
-  // Указываем начальные значения для хранилищ
-  if (initialValue && !value) {
+  if (initialValue && !equal(initialValue, value)) {
     orderFormStore.set(initialValue);
 
+    // Способ доставки
     select({ delivery: initialValue.deliveryTypes[0].id });
+
+    // Тип оплаты
     update(selectedStore, (prevValue) => {
       const visiblePaymentTypes = getValue(visiblePaymentTypesStore);
       const firstVisible = visiblePaymentTypes[0];
@@ -92,21 +131,40 @@ export const useOrderForm = (initialValue?: CartStoreValue) => {
 
       return { ...prevValue, paymentType: paymentType.id };
     });
+
+    // Способ оплаты
     update(selectedStore, (prevValue) => {
       const paymentVariants = getValue(availablePaymentVariantsStore);
 
       return { ...prevValue, paymentVariant: paymentVariants[0].id };
     });
-  }
 
+    // Вариант скидки
+    update(selectedStore, (prevValue) => {
+      const form = getValue(orderFormStore);
+      const hasSpentBonuses = form.bonusPoints?.spentAmount > 0;
+      const hasCoupon = form.universalCoupon?.sum > 0;
+
+      let discountVariant = null;
+      if (hasSpentBonuses) discountVariant = 'bonuses';
+      if (hasCoupon) discountVariant = 'promocode';
+
+      return { ...prevValue, discountVariant };
+    });
+  }
+};
+
+export const useOrderForm = () => {
   return {
     ...useStore(orderFormStore),
+    universalCoupon: useStore(universalCouponStore),
     visiblePaymentTypes: useStore(visiblePaymentTypesStore),
     availablePaymentVariants: useStore(availablePaymentVariantsStore),
     selectedDelivery: useStore(selectedDeliveryStore),
     selectedPaymentType: useStore(selectedPaymentTypeStore),
     selectedPaymentVariant: useStore(selectedPaymentVariantStore),
+    selectedDiscountVariant: useStore(selectedDiscountVariantStore),
   };
 };
 
-export default { select, updateDelivery };
+export default { init, select, selectDiscountVariant, updateDelivery, updateCouponInfo };

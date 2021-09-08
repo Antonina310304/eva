@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import loadable from '@loadable/component';
+import { Switch } from 'react-router-dom';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
 import Route from '@Components/Route';
@@ -18,18 +19,20 @@ const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RoutePayment = loadable(() => import('@Routes/RoutePayment'));
 const RouteCredit = loadable(() => import('@Routes/RouteCredit'));
 const RouteWarranty = loadable(() => import('@Routes/RouteWarranty'));
+const RouteB2b = loadable(() => import('@Routes/RouteB2b'));
 const RouteDelivery = loadable(() => import('@Routes/RouteDelivery'));
 const RouteQualityDepartment = loadable(() => import('@Routes/RouteQualityDepartment'));
 const RouteContacts = loadable(() => import('@Routes/RouteContacts'));
 const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
+const RouteOrderStatus = loadable(() => import('@Routes/RouteOrderStatus'));
 const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
 const RoutePress = loadable(() => import('@Routes/RoutePress'));
 
 const App: FC = () => {
   return (
     <ModalsProvider>
-      <Route path='/'>
+      <Route regional={false} path='/'>
         <RouteIndex />
       </Route>
 
@@ -53,6 +56,10 @@ const App: FC = () => {
         <RouteWarranty />
       </Route>
 
+      <Route path='/b2b'>
+        <RouteB2b />
+      </Route>
+
       <Route path='/site/quality-department'>
         <RouteQualityDepartment />
       </Route>
@@ -71,6 +78,10 @@ const App: FC = () => {
 
       <Route path='/static-page/oferta'>
         <RouteOferta />
+      </Route>
+
+      <Route path='/order/status/:orderId'>
+        <RouteOrderStatus />
       </Route>
 
       <Route path='/order/check'>
