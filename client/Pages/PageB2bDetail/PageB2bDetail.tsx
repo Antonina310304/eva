@@ -7,6 +7,8 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import Image from '@UI/Image';
 import ProgressBar from '@UI/ProgressBar';
+import useMedias from '@Hooks/useMedias';
+import useModals from '@Hooks/useModals';
 import { PageB2bDetailData } from './typings';
 import styles from './PageB2bDetail.module.css';
 
@@ -21,6 +23,8 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { title, teaser, examples } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const { isMobileM } = useMedias();
+  const [, { openModal }] = useModals();
 
   const projectsMap = {};
   examples.forEach((example) => {
@@ -45,9 +49,17 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   }, {});
   /* eslint-enable no-param-reassign */
 
-  const subGallery = Object.values(gallery);
-  console.log(subGallery);
-  console.log(projects);
+  const images = Object.values(gallery);
+  console.log(images);
+
+  const handleOpen = useCallback(
+    (e, projectIndex) => {
+      if (window.cancelClick) return;
+
+      openModal('Project', { images, projectIndex });
+    },
+    [images, openModal],
+  );
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -84,7 +96,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      {projects.slice(0, visibleItems).map((item, index) => (
+      {projects.slice(0, visibleItems).map((item, projectIndex) => (
         <div className={styles.contentWrapper}>
           <Section
             {...restProps}
@@ -92,18 +104,22 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
             additional={
               <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
             }
-            key={index}
+            key={projectIndex}
           >
             <div className={styles.wrapperGallery}>
               <Gallery
                 className={styles.gallery}
                 slideIndex={slide}
-                key={subGallery.length}
+                key={images.length}
                 onChangeCurrent={handleChangeCurrent}
                 onChangeProgress={handleChangeProgress}
               >
-                {(subGallery[index] as any[]).map((element, elementIndex) => (
-                  <div className={styles.galleryItem} key={elementIndex}>
+                {(images[projectIndex] as any[]).map((element, elementIndex) => (
+                  <div
+                    className={styles.galleryItem}
+                    key={elementIndex}
+                    onClick={(e) => handleOpen(e, projectIndex)}
+                  >
                     <Image className={styles.galleryImage} src={element.src} />
                   </div>
                 ))}
