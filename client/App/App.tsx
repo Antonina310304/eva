@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import loadable from '@loadable/component';
-import { Switch } from 'react-router-dom';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';
-import Route from '@Components/Route';
+import Route from '@Navigation/Route';
+import routes from '@Navigation/routes';
 import '@UI/fonts.module.css';
 import '@UI/vars.module.css';
 import './App.css';
@@ -32,63 +32,63 @@ const RoutePress = loadable(() => import('@Routes/RoutePress'));
 const App: FC = () => {
   return (
     <ModalsProvider>
-      <Route regional={false} path='/'>
+      <Route {...routes.index}>
         <RouteIndex />
       </Route>
 
-      <Route path='/category/:slug'>
+      <Route {...routes.category}>
         <RouteCategory />
       </Route>
 
-      <Route path='/product/:slug'>
+      <Route {...routes.product}>
         <RouteProduct />
       </Route>
 
-      <Route path='/site/payment'>
+      <Route {...routes.payment}>
         <RoutePayment />
       </Route>
 
-      <Route exact path='/site/credit'>
+      <Route {...routes.credit}>
         <RouteCredit />
       </Route>
 
-      <Route path='/site/warranty'>
+      <Route {...routes.warranty}>
         <RouteWarranty />
       </Route>
 
-      <Route path='/b2b'>
+      <Route {...routes.b2b}>
         <RouteB2b />
       </Route>
 
-      <Route path='/site/quality-department'>
+      <Route {...routes.qualityDepartment}>
         <RouteQualityDepartment />
       </Route>
 
-      <Route path='/site/contacts'>
+      <Route {...routes.contacts}>
         <RouteContacts />
       </Route>
 
-      <Route path='/site/delivery'>
+      <Route {...routes.delivery}>
         <RouteDelivery />
       </Route>
 
-      <Route path='/static-page/privacy-policy'>
+      <Route {...routes.privacyPolicy}>
         <RoutePrivacyPolicy />
       </Route>
 
-      <Route path='/static-page/oferta'>
+      <Route {...routes.oferta}>
         <RouteOferta />
       </Route>
 
-      <Route path='/order/status/:orderId'>
+      <Route {...routes.orderStatus}>
         <RouteOrderStatus />
       </Route>
 
-      <Route path='/order/check'>
+      <Route {...routes.orderCheck}>
         <RouteOrderCheck />
       </Route>
 
-      <Route path='/site/press'>
+      <Route {...routes.press}>
         <RoutePress />
       </Route>
     </ModalsProvider>

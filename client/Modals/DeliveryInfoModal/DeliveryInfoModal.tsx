@@ -1,6 +1,7 @@
 import React, { memo, FC, useState, useEffect, useCallback, useMemo } from 'react';
 
-import { ApiOrder, GetDeliveryInfoResult } from '@Api/Order';
+import * as ApiOrder from '@Api/Order';
+import { GetDeliveryInfoResult } from '@Api/Order/typings';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
 import logger from '@Utils/logger';

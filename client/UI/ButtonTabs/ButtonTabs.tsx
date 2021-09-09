@@ -10,6 +10,7 @@ import React, {
 import cn from 'classnames';
 
 import Gallery from '@UI/Gallery';
+import Boldik from '@UI/Boldik';
 import styles from './ButtonTabs.module.css';
 
 export type TabId = string;
@@ -94,8 +95,7 @@ const ButtonTabs: FC<ButtonTabsProps> = (props) => {
               type='button'
               onClick={(e: MouseEvent) => handleClickTab(e, tab)}
             >
-              <span className={styles.boldText}>{tab.label}</span>
-              <span className={styles.text}>{tab.label}</span>
+              <Boldik className={styles.text}>{tab.label}</Boldik>
             </button>
           </div>
         );

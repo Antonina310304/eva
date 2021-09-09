@@ -3,14 +3,17 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 import useModals from '@Hooks/useModals';
+import { MetaData } from '@Types/Meta';
 import styles from './PageIndex.module.css';
 
 export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  page: any;
+  meta: MetaData;
 }
 
 const PageIndex: FC<PageIndexProps> = (props) => {
-  const { className, ...restProps } = props;
+  const { className, page, meta, ...restProps } = props;
   const [, { openModal }] = useModals();
 
   const handleClickButton = useCallback(() => {

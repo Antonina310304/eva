@@ -14,7 +14,7 @@ const RouteWarranty: FC = () => {
   if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageWarranty page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );

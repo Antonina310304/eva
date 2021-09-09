@@ -1,6 +1,2 @@
-import fetchProfile from './fetchProfile';
-
-export const ApiProfile = {
-  fetchProfile,
-};
+export { default as fetchProfile } from './fetchProfile';
 export default null;

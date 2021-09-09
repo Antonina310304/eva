@@ -1,0 +1,19 @@
+.boldik {
+  position: relative;
+
+  &:before {
+    display: inline;
+
+    font-weight: bold;
+
+    opacity: 0;
+
+    content: attr(data-text);
+    user-select: none;
+  }
+}
+
+.text {
+  position: absolute;
+  left: 0;
+}

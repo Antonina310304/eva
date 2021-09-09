@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useMemo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
-import { ApiOrder } from '@Api/Order';
+import * as ApiOrder from '@Api/Order';
 import { MetaData } from '@Types/Meta';
 import Button from '@UI/Button';
 import Link from '@UI/Link';

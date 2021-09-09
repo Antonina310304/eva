@@ -1,0 +1,22 @@
+.footer {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: var(--space-xxl);
+  padding-bottom: 60px;
+
+  background: var(--color-light-gray);
+}
+
+.content {
+  composes: main from 'containers';
+
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (--mobile) {
+  .content {
+    display: block;
+  }
+}
