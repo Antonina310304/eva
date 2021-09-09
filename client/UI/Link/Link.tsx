@@ -3,9 +3,10 @@ import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import * as ApiPages from '@Api/Pages';
 import useMeta from '@Queries/useMeta';
+import prefetchUrl from '@Navigation/prefetchUrl';
 import useModals from '@Hooks/useModals';
+import isAbsoluteLink from '@Utils/isAbsoluteLink';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
@@ -36,13 +37,17 @@ const Link: FC<LinkProps> = (props) => {
   const meta = useMeta({ ssr: true });
   const [, { closeAllModals }] = useModals();
 
+  const isExternal = isAbsoluteLink(to || '');
+
   // Добавляем регион, если ссылка его не содержит
   const href = useMemo(() => {
+    if (!to || isExternal) return to;
+
     const regionUrl = meta.data ? meta.data.region.url : null;
     const needAddRegion = regionUrl && !to.startsWith(`${regionUrl}/`);
 
     return needAddRegion ? `${regionUrl}${to}` : to;
-  }, [meta.data, to]);
+  }, [isExternal, meta.data, to]);
 
   const handleClick = useCallback(
     async (e: MouseEvent) => {
@@ -58,6 +63,7 @@ const Link: FC<LinkProps> = (props) => {
         return;
       }
       if (target === '_blank') return;
+      if (isAbsoluteLink(href)) return;
 
       e.preventDefault();
 
@@ -67,9 +73,7 @@ const Link: FC<LinkProps> = (props) => {
       }
 
       if (needFetch) {
-        await queryClient.prefetchQuery(['page', 'ssr', href], () =>
-          ApiPages.fetchPage({ path: href }),
-        );
+        await prefetchUrl(href, queryClient);
         closeAllModals();
         history.push(href);
         window.scrollTo({ top: 0 });
@@ -84,7 +88,7 @@ const Link: FC<LinkProps> = (props) => {
     <a
       {...restProps}
       href={href}
-      target={target}
+      target={isExternal ? '_blank' : target}
       className={cn(
         styles.link,
         {

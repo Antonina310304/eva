@@ -3,9 +3,8 @@ import cn from 'classnames';
 
 import Image from '@UI/Image';
 import styles from './IconInfo.module.css';
-
-import Icon from './icon.svg';
-import IconActive from './icon_active.svg';
+import iconSrc from './icon.svg';
+import iconActiveSrc from './icon_active.svg';
 
 export interface State {
   active: boolean;
@@ -32,7 +31,7 @@ const IconInfo: FC<IconInfoProps> = (props) => {
       {...restProps}
       className={cn(styles.icon, { [styles.active]: active }, className)}
       onClick={handleClick}
-      src={active ? IconActive : Icon}
+      src={active ? iconActiveSrc : iconSrc}
     />
   );
 };

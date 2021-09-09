@@ -16,7 +16,7 @@ const RouteProduct: FC = () => {
   if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageProduct page={pageProduct} meta={meta.data} key={page.data.product.id} />
     </TemplateMain>
   );

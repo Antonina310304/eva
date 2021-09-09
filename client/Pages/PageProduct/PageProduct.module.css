@@ -1,5 +1,6 @@
 .page {
   --sidebar-width: 25.764%;
+  padding-bottom: var(--space-e);
 }
 
 .head {
@@ -145,6 +146,7 @@
 @media (--desktop-m) {
   .page {
     --sidebar-width: 25.66%;
+    padding-bottom: var(--space-xb);
   }
 
   .grid {
