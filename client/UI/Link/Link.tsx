@@ -3,8 +3,8 @@ import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import { ApiPages } from '@Api/Pages';
 import useMeta from '@Queries/useMeta';
+import prefetchUrl from '@Navigation/prefetchUrl';
 import useModals from '@Hooks/useModals';
 import isAbsoluteLink from '@Utils/isAbsoluteLink';
 import styles from './Link.module.css';
@@ -73,9 +73,7 @@ const Link: FC<LinkProps> = (props) => {
       }
 
       if (needFetch) {
-        await queryClient.prefetchQuery(['page', 'ssr', href], () =>
-          ApiPages.fetchPage({ path: href }),
-        );
+        await prefetchUrl(href, queryClient);
         closeAllModals();
         history.push(href);
         window.scrollTo({ top: 0 });
