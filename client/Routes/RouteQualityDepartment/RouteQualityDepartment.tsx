@@ -11,6 +11,8 @@ const RouteQualityDepartment: FC = () => {
   const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
 
+  if (!page.isSuccess || !meta.isSuccess) return null;
+
   return (
     <TemplateMain meta={meta.data}>
       <PageQualityDepartment page={page.data as any} />
