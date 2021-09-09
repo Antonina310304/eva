@@ -22,11 +22,11 @@ const Footer: FC<FooterProps> = () => {
     if (!footer) return null;
 
     if (isMobile) {
-      return <FooterMobile />;
+      return <FooterMobile footer={footer} />;
     }
 
     if (isMobileM) {
-      return <FooterMobileM />;
+      return <FooterMobileM footer={footer} />;
     }
 
     return <FooterDesktop footer={footer} />;

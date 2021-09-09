@@ -3,9 +3,7 @@ import cn from 'classnames';
 
 import Accordion from '@UI/Accordion/Accordion';
 import {
-  footerNavBuyers,
   footerNavCallCenter,
-  footerNavCatalog,
   footerNavDelivery,
   footerNavFeedback,
   footerNavPaySystems,
@@ -17,12 +15,19 @@ import PaymentList from '@Components/PaymentList';
 import SocialList from '@Components/SocialList';
 import Link from '@UI/Link/Link';
 import SubscriptionForm from '@Forms/SubscriptionForm';
+import { FooterData } from '@Types/Layout';
 import FooterNav from '../FooterNav/FooterNav';
 import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import FooterLogo from '../FooterLogo/FooterLogo';
 import styles from './FooterMobile.module.css';
 
-const FooterMobile: FC = () => {
+export interface FooterMobileProps {
+  footer: FooterData;
+}
+
+const FooterMobile: FC<FooterMobileProps> = (props) => {
+  const { footer } = props;
+
   return (
     <>
       <div className={styles.col}>
@@ -50,19 +55,25 @@ const FooterMobile: FC = () => {
             </div>
           </FooterInfoBlock>
         </div>
-        <div className={styles.wrapperRegular}>
-          <Accordion header={footerNavBuyers.title}>
-            <FooterNav linkList={footerNavBuyers.childrenList} />
-          </Accordion>
-        </div>
+
+        {footer.toCustomers?.items.length > 0 && (
+          <div className={styles.wrapperRegular}>
+            <Accordion header={footer.toCustomers.title}>
+              <FooterNav items={footer.toCustomers.items} />
+            </Accordion>
+          </div>
+        )}
       </div>
 
       <div style={{ flex: 0 }} className={styles.col}>
-        <div className={styles.wrapperRegular}>
-          <Accordion header={footerNavCatalog.title}>
-            <FooterNav linkList={footerNavCatalog.childrenList} />
-          </Accordion>
-        </div>
+        {footer.catalog?.items.length > 0 && (
+          <div className={styles.wrapperRegular}>
+            <Accordion header={footer.catalog.title}>
+              <FooterNav items={footer.catalog.items} />
+            </Accordion>
+          </div>
+        )}
+
         <div className={styles.wrapperMedium}>
           <Accordion header={footerNavReviews.title}>
             <FooterNav linkList={footerNavReviews.childrenList} />

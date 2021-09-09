@@ -3,9 +3,7 @@ import cn from 'classnames';
 
 import Accordion from '@UI/Accordion/Accordion';
 import {
-  footerNavBuyers,
   footerNavCallCenter,
-  footerNavCatalog,
   footerNavDelivery,
   footerNavFeedback,
   footerNavPaySystems,
@@ -29,8 +27,6 @@ export interface FooterDesktopProps {
 
 const FooterDesktop: FC<FooterDesktopProps> = (props) => {
   const { footer } = props;
-
-  console.log(footer);
 
   return (
     <>

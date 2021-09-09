@@ -2,9 +2,7 @@ import React, { memo, FC } from 'react';
 
 import Accordion from '@UI/Accordion/Accordion';
 import {
-  footerNavBuyers,
   footerNavCallCenter,
-  footerNavCatalog,
   footerNavDelivery,
   footerNavFeedback,
   footerNavPaySystems,
@@ -16,12 +14,19 @@ import SocialList from '@Components/SocialList';
 import PaymentList from '@Components/PaymentList';
 import Link from '@UI/Link';
 import SubscriptionForm from '@Forms/SubscriptionForm';
+import { FooterData } from '@Types/Layout';
 import FooterNav from '../FooterNav/FooterNav';
 import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
 import FooterLogo from '../FooterLogo/FooterLogo';
 import styles from './FooterMobileM.module.css';
 
-const FooterMobileM: FC = () => {
+export interface FooterMobileMProps {
+  footer: FooterData;
+}
+
+const FooterMobileM: FC<FooterMobileMProps> = (props) => {
+  const { footer } = props;
+
   return (
     <>
       <div className={styles.col}>
@@ -62,9 +67,12 @@ const FooterMobileM: FC = () => {
             </div>
           </FooterInfoBlock>
         </div>
-        <Accordion header={footerNavBuyers.title}>
-          <FooterNav linkList={footerNavBuyers.childrenList} />
-        </Accordion>
+
+        {footer.toCustomers?.items.length > 0 && (
+          <Accordion header={footer.toCustomers.title}>
+            <FooterNav items={footer.toCustomers.items} />
+          </Accordion>
+        )}
 
         <div className={styles.marginTopAuto}>
           <div className={styles.wrapperMedium}>
@@ -77,11 +85,13 @@ const FooterMobileM: FC = () => {
       </div>
 
       <div className={styles.col}>
-        <div className={styles.wrapperBig}>
-          <Accordion header={footerNavCatalog.title}>
-            <FooterNav linkList={footerNavCatalog.childrenList} />
-          </Accordion>
-        </div>
+        {footer.catalog?.items.length > 0 && (
+          <div className={styles.wrapperBig}>
+            <Accordion header={footer.catalog.title}>
+              <FooterNav items={footer.catalog.items} />
+            </Accordion>
+          </div>
+        )}
 
         <div className={styles.wrapperMedium}>
           <Accordion header={footerNavReviews.title}>
