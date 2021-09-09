@@ -15,9 +15,10 @@ const NewsItem: FC<NewsItemProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.article, className)}>
-      <Image src={article.images[0].src} className={styles.image}>
+      <div className={styles.imageWrapper}>
+        <Image src={article.images[0].src} className={styles.image} />
         <Image src={article.logo} className={styles.logo} />
-      </Image>
+      </div>
       <div className={styles.title}>{article.preview}</div>
     </div>
   );

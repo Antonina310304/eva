@@ -2,7 +2,7 @@
   cursor: pointer;
 
   &:hover {
-    .image {
+    .imageWrapper {
       &:after {
         opacity: 1;
       }
@@ -10,11 +10,8 @@
   }
 }
 
-.image {
+.imageWrapper {
   position: relative;
-
-  background-position: center;
-  background-size: cover;
 
   &:before {
     display: block;
@@ -29,7 +26,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
 
     display: block;
 
@@ -42,11 +39,23 @@
   }
 }
 
+.image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  background-position: center;
+  background-size: cover;
+}
+
 .logo {
   position: absolute;
   bottom: var(--space-m);
   left: 0;
-  z-index: 2;
+  z-index: 3;
 
   box-sizing: border-box;
   width: 110px;
