@@ -1,39 +1,40 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
-import PressDetails from '@Components/PressDetails';
+import PublicationDetails from '@Components/PublicationDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
-import { ArticleData } from '@Types/Press';
-import styles from './ArticleModal.module.css';
+import { PublicationData } from '@Types/Press';
+import IconClose from '@UI/IconClose/IconClose';
+import styles from './PublicationModal.module.css';
 
-export interface ArticleModalData {
-  articles: ArticleData[];
+export interface PublicationModalData {
+  publications: PublicationData[];
   index: number;
 }
 
-export interface ArticleModal extends IModal {
-  data: ArticleModalData;
+export interface PublicationModal extends IModal {
+  data: PublicationModalData;
 }
 
-export interface ArticleModalProps extends ModalMainProps {
-  modal: ArticleModal;
+export interface PublicationModalProps extends ModalMainProps {
+  modal: PublicationModal;
 }
 
-const ArticleModal: FC<ArticleModalProps> = (props) => {
+const PublicationModal: FC<PublicationModalProps> = (props) => {
   const { className, modal, onClose, ...restProps } = props;
-  const { articles, index } = modal.data;
+  const { publications, index } = modal.data;
   const [currentIndex, setCurrentIndex] = useState<number>(index);
-  const currentArticle = articles[currentIndex];
+  const currentPublication = publications[currentIndex];
 
   const normalizeIndex = useCallback(
     (value: number) => {
-      if (value < 0) return articles.length - 1;
-      if (value > articles.length - 1) return 0;
+      if (value < 0) return publications.length - 1;
+      if (value > publications.length - 1) return 0;
 
       return value;
     },
-    [articles.length],
+    [publications.length],
   );
 
   const handlePrev = useCallback(() => {
@@ -55,10 +56,11 @@ const ArticleModal: FC<ArticleModalProps> = (props) => {
       onClose={onClose}
     >
       <div className={styles.container}>
-        <PressDetails article={currentArticle} />
+        <IconClose className={styles.iconClose} onClick={onClose} />
+        <PublicationDetails publication={currentPublication} />
       </div>
     </ModalMain>
   );
 };
 
-export default memo(ArticleModal);
+export default memo(PublicationModal);

@@ -1,0 +1,45 @@
+.publication {
+  cursor: pointer;
+}
+
+.image {
+  width: 195px;
+  margin: 0 auto;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid var(--color-dark-gray);
+
+  cursor: pointer;
+
+  &:before {
+    position: relative;
+    top: var(--space-xs);
+    left: var(--space-xs);
+    z-index: -1;
+
+    display: block;
+    padding: 0 0 128.7234%;
+
+    border: 1px solid var(--color-dark-gray);
+
+    content: '';
+  }
+}
+
+.title {
+  composes: l from 'sizes';
+
+  margin-top: var(--space-xxl);
+
+  text-align: center;
+}
+
+.date {
+  composes: s from 'sizes';
+
+  margin-top: var(--space-xxs);
+
+  text-align: center;
+}
