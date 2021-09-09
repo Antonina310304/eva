@@ -1297,3 +1297,107 @@ export const posts: InstagramPostData[] = [
     ],
   },
 ];
+
+export const hits = {
+  title: 'Мебель начинается с дивана',
+  description:
+    'В нашем интернет-магазине представлены только тщательно отобранные модели, исключительные диваны – хиты продаж в Москве и по России. Каждая модель дивана из нашего интернет каталога – это воплощение отличного дизайна, легенда мебельной отрасли.',
+  products,
+};
+
+export const newProducts = {
+  title: 'Новинки',
+  description:
+    'В нашем интернет-магазине представлены только тщательно отобранные модели, исключительные диваны – хиты продаж в Москве и по России. Каждая модель дивана из нашего интернет каталога – это воплощение отличного дизайна, легенда мебельной отрасли.',
+  products,
+};
+
+export const popular = {
+  title: 'Популярные категории',
+  products: [
+    {
+      id: 1544,
+      title: 'Диваны',
+      count: 4000,
+      img: 'react/static/popularImages/image_1.png',
+      price: 14350,
+    },
+    {
+      id: 1545,
+      title: 'Текстиль',
+      count: 4000,
+      img: 'react/static/popularImages/image_2.png',
+      price: 2490,
+    },
+    {
+      id: 1546,
+      title: 'Аксессуары',
+      count: 193,
+      img: 'react/static/popularImages/image_3.png',
+      price: 1300,
+    },
+    {
+      id: 1547,
+      title: 'Кухни',
+      count: 400,
+      img: 'react/static/popularImages/image_4.png',
+      price: 2490,
+    },
+    {
+      id: 1548,
+      title: 'Гостиная',
+      count: 193,
+      img: 'react/static/popularImages/image_5.png',
+      price: 1300,
+    },
+    {
+      id: 1549,
+      title: 'Шкафы',
+      count: 203,
+      img: 'react/static/popularImages/image_6.png',
+      price: 15000,
+    },
+    {
+      id: 1550,
+      title: 'Диваны',
+      count: 4000,
+      img: 'react/static/popularImages/image_1.png',
+      price: 14350,
+    },
+    {
+      id: 1551,
+      title: 'Текстиль',
+      count: 4000,
+      img: 'react/static/popularImages/image_2.png',
+      price: 2490,
+    },
+    {
+      id: 1552,
+      title: 'Аксессуары',
+      count: 193,
+      img: 'react/static/popularImages/image_3.png',
+      price: 1300,
+    },
+    {
+      id: 1553,
+      title: 'Кухни',
+      count: 400,
+      img: 'react/static/popularImages/image_4.png',
+      price: 2490,
+    },
+    {
+      id: 1554,
+      title: 'Гостиная',
+      count: 193,
+      img: 'react/static/popularImages/image_5.png',
+      price: 1300,
+    },
+    {
+      id: 1555,
+      title: 'Шкафы',
+      count: 203,
+      img: 'react/static/popularImages/image_6.png',
+      price: 15000,
+    },
+  ],
+};

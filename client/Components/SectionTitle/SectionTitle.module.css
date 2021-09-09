@@ -9,6 +9,7 @@
   font-size: var(--size-xxl);
   font-family: var(--font-hero);
   line-height: var(--lh-xxl);
+  text-align: left;
 
   @media (--desktop) {
     font-size: var(--size-xl);

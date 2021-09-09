@@ -3,7 +3,10 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 1920px;
+  max-width: 1778px;
   margin: 0 auto;
+  padding-right: var(--gap);
+  padding-left: var(--gap);
 
   @media (--only-desktop) {
     padding: 0 var(--space-xxb);

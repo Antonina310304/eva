@@ -1,0 +1,23 @@
+.badge {
+  &:before {
+    height: 100%;
+
+    content: '';
+  }
+}
+
+.badgeIn {
+  position: relative;
+
+  padding: 10px 20px;
+
+  background: var(--color-white);
+  border-radius: 0px 8px 8px 0px;
+}
+.span {
+  width: 0;
+  height: 100%;
+  padding-left: 54%;
+
+  background: red;
+}

@@ -1,15 +1,14 @@
 import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
-import useModals from '@Hooks/useModals';
 import MainSlider from '@Pages/PageIndex/elems/MainSlider';
 import Hits from '@Pages/PageIndex/elems/Hits';
 import Recommendations from '@Pages/PageIndex/elems/Recommendations';
 import Popular from '@Pages/PageIndex/elems/Popular';
 import Ideas from '@Pages/PageIndex/elems/Ideas';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap/SectionShowroomsMap';
-import { pickupPoints, maps, posts } from '@Pages/PageIndex/data';
-import Instagram from '@Pages/PageIndex/elems/Instagram';
+import { pickupPoints, maps, posts, hits, newProducts, popular } from '@Pages/PageIndex/data';
+
 import NewProducts from '@Pages/PageIndex/elems/NewProducts';
 
 import Container from '@Components/Container';
@@ -29,19 +28,27 @@ const PageIndex: FC<PageIndexProps> = (props) => {
       <>
         <MainSlider />
         <div className={styles.section}>
-          <Hits />
+          <Hits data={hits} />
         </div>
         <Recommendations />
-        <Popular title='Популярные категории' />
-        <Ideas />
-        <NewProducts />
         <div className={styles.section}>
-          <SectionShowroomsMap
-            className={styles.map}
-            datasForMap={maps}
-            pickupPoints={pickupPoints}
-          />
+          <Popular data={popular} />
         </div>
+        <div className={styles.section}>
+          <Ideas />
+        </div>
+        <div className={styles.section}>
+          <NewProducts data={newProducts} />
+        </div>
+        <Container>
+          <div className={styles.section}>
+            <SectionShowroomsMap
+              className={styles.map}
+              datasForMap={maps}
+              pickupPoints={pickupPoints}
+            />
+          </div>
+        </Container>
         <div className={styles.section}>
           <InstagramSection
             className={styles.instagram}

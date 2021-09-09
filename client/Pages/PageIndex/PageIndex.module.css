@@ -32,8 +32,11 @@
 
 .section {
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 
+  @media (--desktop-m) {
+    margin-bottom: 80px;
+  }
   @media (--desktop) {
     margin-bottom: 60px;
   }
