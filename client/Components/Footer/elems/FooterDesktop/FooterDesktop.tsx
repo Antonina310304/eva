@@ -16,9 +16,9 @@ import PaymentList from '@Components/PaymentList';
 import Link from '@UI/Link/Link';
 import SubscriptionForm from '@Forms/SubscriptionForm';
 import { FooterData } from '@Types/Layout';
-import FooterNav from '../FooterNav/FooterNav';
-import FooterLogo from '../FooterLogo/FooterLogo';
-import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
+import FooterNav from '../FooterNav';
+import FooterLogo from '../FooterLogo';
+import FooterInfoBlock from '../FooterInfoBlock';
 import styles from './FooterDesktop.module.css';
 
 export interface FooterDesktopProps {

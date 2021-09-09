@@ -16,9 +16,9 @@ import SocialList from '@Components/SocialList';
 import Link from '@UI/Link/Link';
 import SubscriptionForm from '@Forms/SubscriptionForm';
 import { FooterData } from '@Types/Layout';
-import FooterNav from '../FooterNav/FooterNav';
-import FooterInfoBlock from '../FooterInfoBlock/FooterInfoBlock';
-import FooterLogo from '../FooterLogo/FooterLogo';
+import FooterNav from '../FooterNav';
+import FooterInfoBlock from '../FooterInfoBlock';
+import FooterLogo from '../FooterLogo';
 import styles from './FooterMobile.module.css';
 
 export interface FooterMobileProps {
