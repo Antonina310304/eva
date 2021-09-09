@@ -64,10 +64,7 @@
   .introduction {
     max-width: 1066px;
     margin: 0 auto;
-    padding-top: var(--space-xb);
-    padding-right: 0;
-    padding-bottom: var(--space-e);
-    padding-left: 0;
+    padding: var(--space-xb) 0 var(--space-e);
   }
 
   .contentWrapper {

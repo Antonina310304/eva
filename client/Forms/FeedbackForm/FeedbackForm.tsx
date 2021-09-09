@@ -8,13 +8,13 @@ import FormItem from '@UI/FormItem';
 import Input from '@UI/Input';
 import Button from '@UI/Button';
 import Textarea from '@UI/Textarea';
-import styles from './Feedback.module.css';
+import styles from './FeedbackForm.module.css';
 
-export interface FeedbackProps extends HTMLAttributes<HTMLDivElement> {
+export interface FeedbackFormProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const Feedback: FC<FeedbackProps> = (props) => {
+const FeedbackForm: FC<FeedbackFormProps> = (props) => {
   const { className, ...restProps } = props;
   const [, { openModal }] = useModals();
   const [loading, setLoading] = useState(false);
@@ -113,4 +113,4 @@ const Feedback: FC<FeedbackProps> = (props) => {
   );
 };
 
-export default memo(Feedback);
+export default memo(FeedbackForm);

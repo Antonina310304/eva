@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
-import Feedback from '@Forms/Feedback';
+import FeedbackForm from '@Forms/FeedbackForm';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import { PageB2bData } from './typings';
 import Advantages from './elements/Advantages';
@@ -25,12 +25,12 @@ const PageB2b: FC<PageB2bProps> = (props) => {
       <div className={styles.imageWrapper}>
         <Image className={styles.bannerImage} src={banner} />
       </div>
-      <Advantages advantages={advantages} text={texts.descriptions} />
+      {advantages && <Advantages advantages={advantages} texts={texts.descriptions} />}
       <div className={styles.wrapper}>
         <Rubrics rubrics={rubrics} />
       </div>
 
-      <Feedback />
+      <FeedbackForm />
 
       <div className={styles.sectionPress}>
         <PressGallery articles={articles} socials={socials} />

@@ -12,11 +12,11 @@ export interface AdvantagesItem {
 export interface AdvantagesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   advantages: AdvantagesItem[];
-  text: string[];
+  texts: string[];
 }
 
 const Advantages: FC<AdvantagesProps> = (props) => {
-  const { className, advantages, text, ...restProps } = props;
+  const { className, advantages, texts, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.wrapper, className)}>
@@ -32,11 +32,12 @@ const Advantages: FC<AdvantagesProps> = (props) => {
           ))}
         </div>
         <div className={styles.introduction}>
-          {text.map((item, index: number) => (
-            <div className={styles.text} key={index}>
-              {item}
-            </div>
-          ))}
+          {texts &&
+            texts.map((item, index: number) => (
+              <div className={styles.text} key={index}>
+                {item}
+              </div>
+            ))}
         </div>
       </div>
     </div>
