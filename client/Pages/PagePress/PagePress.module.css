@@ -64,6 +64,7 @@
 
   .publicationsList {
     justify-content: space-between;
+    margin-top: var(--space-xb);
   }
 
   .publicationItem {
@@ -72,10 +73,6 @@
   }
 
   .coloredRow {
-    margin-top: var(--space-xb);
-  }
-
-  .publicationsList {
     margin-top: var(--space-xb);
   }
 
@@ -98,5 +95,10 @@
 @media (--mobile) {
   .articlesList {
     grid-template-columns: 1fr;
+  }
+
+  .publicationsList {
+    flex-direction: column;
+    align-items: center;
   }
 }
