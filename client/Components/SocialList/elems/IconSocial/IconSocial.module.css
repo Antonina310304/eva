@@ -40,50 +40,50 @@
   }
 }
 
-.dzen {
-  background-image: url('icons/dzen_default_30.svg');
+.zen {
+  background-image: url('./icons/zen_default_30.svg');
 
   &:before {
-    background-image: url('icons/dzen_hover_30.svg');
+    background-image: url('./icons/zen_hover_30.svg');
   }
 }
 
 .facebook {
-  background-image: url('icons/facebook_default_30.svg');
+  background-image: url('./icons/facebook_default_30.svg');
 
   &:before {
-    background-image: url('icons/facebook_hover_30.svg');
+    background-image: url('./icons/facebook_hover_30.svg');
   }
 }
 
 .instagram {
-  background-image: url('icons/instagram_default_30.svg');
+  background-image: url('./icons/instagram_default_30.svg');
 
   &:before {
-    background-image: url('icons/instagram_hover_30.svg');
+    background-image: url('./icons/instagram_hover_30.svg');
   }
 }
 
 .tiktok {
-  background-image: url('icons/tiktok_default_30.svg');
+  background-image: url('./icons/tiktok_default_30.svg');
 
   &:before {
-    background-image: url('icons/tiktok_hover_30.svg');
+    background-image: url('./icons/tiktok_hover_30.svg');
   }
 }
 
 .vk {
-  background-image: url('icons/vk_default_30.svg');
+  background-image: url('./icons/vk_default_30.svg');
 
   &:before {
-    background-image: url('icons/vk_hover_30.svg');
+    background-image: url('./icons/vk_hover_30.svg');
   }
 }
 
 .youtube {
-  background-image: url('icons/youtube_default_30.svg');
+  background-image: url('./icons/youtube_default_30.svg');
 
   &:before {
-    background-image: url('icons/youtube_hover_30.svg');
+    background-image: url('./icons/youtube_hover_30.svg');
   }
 }
