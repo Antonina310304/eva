@@ -39,11 +39,11 @@ const CooperationForm: FC<CooperationFormProps> = (props) => {
   const handleResponse = useCallback(
     (response) => {
       setLoading(false);
-      if (response.status === 'ok') {
+      if (response.status === 'success') {
         openModal('Info', {
           view: 'success',
-          title: 'Спасибо!',
-          message: 'Ваше сообщение отправлено.',
+          title: 'Ваша заявка принята!',
+          message: 'Наш менеджер свяжется с вами в ближайшее время.',
         });
 
         (window.dataLayer = window.dataLayer || []).push({
@@ -90,30 +90,22 @@ const CooperationForm: FC<CooperationFormProps> = (props) => {
       <input type='hidden' name='mailTo' value={mailTo} />
       <input type='hidden' name='pageCode' value={page} />
       <FormItem>
-        <Input type='text' placeholder='Имя' name='PressFeedbackForm[name]' />
+        <Input type='text' placeholder='Имя' name='name' />
       </FormItem>
 
       <FormItem>
-        <Input type='text' placeholder='Электронная почта' name='PressFeedbackForm[email]' />
+        <Input type='text' placeholder='Электронная почта' name='mailFrom' />
       </FormItem>
 
       <FormItem>
-        <Textarea
-          className={styles.textarea}
-          placeholder='Сообщение'
-          name='PressFeedbackForm[text]'
-        />
+        <Textarea className={styles.textarea} placeholder='Сообщение' name='message' />
       </FormItem>
 
-      <input type='hidden' name='PressFeedbackForm[mailTo]' value={mailTo} />
-
-      <FormItem>
-        <div className={styles.actions}>
-          <Button className={styles.action} wide type='submit' waiting={loading}>
-            Отправить
-          </Button>
-        </div>
-      </FormItem>
+      <div className={styles.actions}>
+        <Button className={styles.action} wide type='submit' waiting={loading}>
+          Отправить
+        </Button>
+      </div>
 
       <div className={styles.info}>
         *Отправляя заявку, я соглашаюсь с условиями
