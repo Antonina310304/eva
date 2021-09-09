@@ -25,7 +25,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
       <div className={styles.imageWrapper}>
         <Image className={styles.bannerImage} src={banner} />
       </div>
-      {advantages && <Advantages advantages={advantages} texts={texts.descriptions} />}
+      {advantages?.length > 0 && <Advantages advantages={advantages} texts={texts.descriptions} />}
       <div className={styles.wrapper}>
         <Rubrics rubrics={rubrics} />
       </div>

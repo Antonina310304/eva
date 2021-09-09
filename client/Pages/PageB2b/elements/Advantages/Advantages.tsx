@@ -32,7 +32,7 @@ const Advantages: FC<AdvantagesProps> = (props) => {
           ))}
         </div>
         <div className={styles.introduction}>
-          {texts &&
+          {texts?.length > 0 &&
             texts.map((item, index: number) => (
               <div className={styles.text} key={index}>
                 {item}
