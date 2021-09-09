@@ -15,6 +15,10 @@ import NewProducts from '@Pages/PageIndex/elems/NewProducts';
 import Container from '@Components/Container';
 import InstagramSection from '@Components/InstagramSection/InstagramSection';
 import Link from '@UI/Link/Link';
+import {
+  ideasMockButtonTabs,
+  ideasMockProducts,
+} from '@Pages/PageIndex/elems/Ideas/IdeasMockProps';
 import styles from './PageIndex.module.css';
 
 export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,7 +37,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
         </div>
         <Recommendations />
         <Popular title='Популярные категории' />
-        <Ideas />
+        <Ideas tabGroup={ideasMockButtonTabs} products={ideasMockProducts} />
         <NewProducts />
         <div className={styles.section}>
           <SectionShowroomsMap
