@@ -1,6 +1,6 @@
 import { useInfiniteQuery, UseInfiniteQueryResult, UseQueryResult } from 'react-query';
 
-import { ApiPages } from '@Api/Pages';
+import * as ApiPages from '@Api/Pages';
 import usePage from '@Queries/usePage';
 
 export interface Params {

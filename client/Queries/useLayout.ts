@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import { ApiPages } from '@Api/Pages';
+import * as ApiPages from '@Api/Pages';
 import { Layout } from '@Types/Layout';
 
 export interface Params {

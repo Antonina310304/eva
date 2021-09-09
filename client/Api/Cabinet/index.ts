@@ -1,6 +1,2 @@
-import checkPromoCode from './checkPromoCode';
-
-export const ApiCabinet = {
-  checkPromoCode,
-};
-export default null;
+export * from './checkPromoCode';
+export { default as checkPromoCode } from './checkPromoCode';

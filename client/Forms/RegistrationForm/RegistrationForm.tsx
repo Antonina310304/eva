@@ -11,7 +11,7 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
-import { ApiCabinet } from '@Api/Cabinet';
+import * as ApiCabinet from '@Api/Cabinet';
 import InputCode from '@Components/InputCode';
 import ResendCodeTimer from '@Components/ResendCodeTimer';
 import InputPhone from '@Components/InputPhone';
