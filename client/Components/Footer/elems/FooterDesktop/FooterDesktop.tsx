@@ -83,7 +83,10 @@ const FooterDesktop: FC<FooterDesktopProps> = (props) => {
             <FooterNav items={footer.catalog.items} />
           </Accordion>
         )}
-        <SocialList className={styles.marginTopAuto} />
+
+        {footer.socials?.items.length > 0 && (
+          <SocialList className={styles.marginTopAuto} items={footer.socials.items} />
+        )}
       </div>
 
       <div className={styles.col}>

@@ -25,11 +25,11 @@ export const footerNavFeedback: FooterNavData = {
     },
     {
       title: 'Контакты',
-      url: 'contacts',
+      url: '/site/contacts',
     },
     {
       title: 'Обращение в отдел качества',
-      url: 'quality-department',
+      url: '/site/quality-department',
     },
     {
       title: 'Написать руководству',

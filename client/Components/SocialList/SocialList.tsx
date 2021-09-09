@@ -1,20 +1,28 @@
 import React, { FC, HTMLAttributes } from 'react';
-import IconSocial from '@UI/IconSocial/IconSocial';
 import cn from 'classnames';
+
+import IconSocial from './elems/IconSocial';
 import styles from './SocialList.module.css';
-import socialList from './data';
+
+export interface SocialItem {
+  link?: string;
+  iconType?: string;
+}
 
 export interface SocialListProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  items: SocialItem[];
 }
 
-const SocialList: FC<SocialListProps> = ({ className }) => {
+const SocialList: FC<SocialListProps> = (props) => {
+  const { className, items } = props;
+
   return (
     <ul className={cn(styles.socialList, className)}>
-      {socialList.map((item) => {
+      {items.map((item) => {
         return (
           <div key={item.link} className={styles.item}>
-            <IconSocial target={item.target} icon={item.icon} name={item.name} link={item.link} />
+            <IconSocial type={item.iconType} link={item.link} />
           </div>
         );
       })}
