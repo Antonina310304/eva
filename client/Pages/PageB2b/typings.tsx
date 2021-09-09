@@ -62,14 +62,20 @@ export interface PressItem {
 
 export type DescriptionData = string[];
 export interface TextItem {
-  descriptions: DescriptionData[];
+  descriptions: DescriptionData;
   press: PressItem;
   title: string;
+}
+
+export interface AdvantagesItem {
+  src: string;
+  text: string;
 }
 export interface PageB2bData {
   test: string;
   banner: string;
   rubrics: RubricsItem[];
+  advantages: AdvantagesItem[];
   articles: ArticleItem[];
   texts: TextItem;
   sellPoints: SellPointData[];

@@ -34,7 +34,6 @@
 }
 
 .formWrapper {
-  min-width: 574px;
   padding-top: var(--space-l);
 }
 
@@ -54,14 +53,13 @@
 }
 
 @media (--desktop-m) {
-  .formWrapper {
-    min-width: 628px;
+  .wrapper {
+    max-width: 628px;
   }
-}
 
-@media (--desktop) {
-  .formWrapper {
-    min-width: 622px;
+  .description {
+    padding-right: var(--space-e);
+    padding-left: var(--space-e);
   }
 }
 
@@ -71,12 +69,22 @@
   }
 
   .formWrapper {
-    min-width: 486px;
     max-width: 486px;
+  }
+
+  .description {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
 @media (--mobile) {
+  .wrapper {
+    max-width: 486px;
+    padding-right: var(--space-s);
+    padding-left: var(--space-s);
+  }
+
   .formWrapper {
     min-width: 330px;
   }
