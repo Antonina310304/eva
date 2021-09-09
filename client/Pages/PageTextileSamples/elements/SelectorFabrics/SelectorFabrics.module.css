@@ -236,7 +236,7 @@
 }
 
 .arrow {
-  margin-left: var(--space-2xs);
+  margin-left: 10px;
 }
 
 .containerForm {
