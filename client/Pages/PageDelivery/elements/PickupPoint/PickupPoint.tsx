@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useRef, useState, useEffect } from 'react';
 import cn from 'classnames';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import PecomMap from '@Components/PecomMap';
 import Price from '@UI/Price';
 import MarkerIcon from './pecmarker.svg';

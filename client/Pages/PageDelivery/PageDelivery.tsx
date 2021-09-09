@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import { useCart } from '@Stores/Cart';
 import useModals from '@Hooks/useModals';
 import CartBlock from '@Components/CartBlock';

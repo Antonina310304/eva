@@ -14,7 +14,7 @@ const RouteContacts: FC = () => {
   if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageContacts page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );

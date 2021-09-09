@@ -14,7 +14,7 @@ const RouteCredit: FC = () => {
   if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageCredit page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );

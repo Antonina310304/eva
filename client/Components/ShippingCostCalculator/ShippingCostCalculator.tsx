@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import Button from '@UI/Button';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import InputHelperAddress from '@Components/InputHelperAddress';
 import { InputHelperHint } from '@UI/InputHelper';
 import Price from '@UI/Price';

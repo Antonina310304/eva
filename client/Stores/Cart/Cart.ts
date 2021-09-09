@@ -2,7 +2,7 @@ import { createDerived, createStore, getValue, update } from '@kundinos/nanostor
 import { useStore } from '@kundinos/nanostores/react';
 import equal from 'fast-deep-equal';
 
-import { ApiCart } from '@Api/Cart';
+import * as ApiCart from '@Api/Cart';
 import { CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
 import { CartStoreValue, UseCart } from './typings';

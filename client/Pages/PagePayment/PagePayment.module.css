@@ -228,6 +228,10 @@
 }
 
 @media (--desktop-m) {
+  .page {
+    padding-bottom: var(--space-xb);
+  }
+
   .wrapper {
     max-width: 1070px;
   }
@@ -242,10 +246,6 @@
 }
 
 @media (--desktop) {
-  .page {
-    padding-bottom: var(--space-xb);
-  }
-
   .wrapper {
     max-width: none;
     padding: 0 var(--space-xxl);

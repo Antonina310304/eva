@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect } fro
 import { useInView } from 'react-intersection-observer';
 import cn from 'classnames';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import PecomMap from '@Components/PecomMap';
 import useMeta from '@Queries/useMeta';
 import Variant from './elems/Variant';

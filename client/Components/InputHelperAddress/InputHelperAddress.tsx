@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import InputHelper, { InputHelperProps, InputHelperHint } from '@UI/InputHelper';
 
 export type InputHelperAddressProps = Omit<InputHelperProps, 'hints'>;
