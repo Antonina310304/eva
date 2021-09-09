@@ -104,7 +104,9 @@ const FooterMobile: FC<FooterMobileProps> = (props) => {
             </Link>
           </div>
 
-          <SocialList className={styles.wrapperMedium} />
+          {footer.socials?.items.length > 0 && (
+            <SocialList className={styles.wrapperMedium} items={footer.socials.items} />
+          )}
 
           <p className={styles.madeIn}>Сделано в Супрематике</p>
         </div>

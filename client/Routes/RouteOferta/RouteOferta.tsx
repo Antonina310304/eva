@@ -11,7 +11,7 @@ const RouteOferta: FC = () => {
   const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
 
-  if (!page.isSuccess) return null;
+  if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
     <TemplateMain meta={meta.data}>

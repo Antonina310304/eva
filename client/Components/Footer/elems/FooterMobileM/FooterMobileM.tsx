@@ -80,7 +80,8 @@ const FooterMobileM: FC<FooterMobileMProps> = (props) => {
               Политика конфиденциальности
             </Link>
           </div>
-          <SocialList />
+
+          {footer.socials?.items.length > 0 && <SocialList items={footer.socials.items} />}
         </div>
       </div>
 

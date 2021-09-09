@@ -27,6 +27,7 @@ const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
 const RouteOrderStatus = loadable(() => import('@Routes/RouteOrderStatus'));
 const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
+const RoutePress = loadable(() => import('@Routes/RoutePress'));
 
 const App: FC = () => {
   return (
@@ -85,6 +86,10 @@ const App: FC = () => {
 
       <Route {...routes.orderCheck}>
         <RouteOrderCheck />
+      </Route>
+
+      <Route {...routes.press}>
+        <RoutePress />
       </Route>
     </ModalsProvider>
   );

@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 import usePage from '@Queries/usePage';
 import useMeta from '@Queries/useMeta';
 import TemplateMain from '@Templates/TemplateMain';
-import PagePrivacyPolicy from '@Pages/PagePrivacyPolicy';
+import PagePress from '@Pages/PagePress';
 
-const RoutePrivacyPolicy: FC = () => {
+const RoutePress: FC = () => {
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
   const meta = useMeta({ ssr: true });
@@ -15,9 +15,9 @@ const RoutePrivacyPolicy: FC = () => {
 
   return (
     <TemplateMain meta={meta.data}>
-      <PagePrivacyPolicy page={page.data as any} />
+      <PagePress page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );
 };
 
-export default memo(RoutePrivacyPolicy);
+export default memo(RoutePress);

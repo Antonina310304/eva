@@ -29,7 +29,9 @@ export type ModalId =
   | 'RegionSelector'
   | 'OfferAgreement'
   | 'DeliveryInfo'
-  | 'Authorization';
+  | 'Publication'
+  | 'Authorization'
+  | 'Cooperation';
 
 export interface Modal {
   id: ModalId;

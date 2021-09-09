@@ -125,7 +125,7 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
 
             <div className={styles.share}>
               <div className={styles.postText}>Поделиться в соц. сетях</div>
-              <Share className={styles.shareIcons} socials={meta.data.socials} />
+              <Share className={styles.shareIcons} />
             </div>
           </div>
         </div>
