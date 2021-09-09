@@ -23,6 +23,7 @@
       "@Hooks/*": ["./client/Hooks/*"],
       "@Mattresses/*": ["./client/Mattresses/*"],
       "@Modals/*": ["./client/Modals/*"],
+      "@Navigation/*": ["./client/Navigation/*"],
       "@Pages/*": ["./client/Pages/*"],
       "@Queries/*": ["./client/Queries/*"],
       "@Routes/*": ["./client/Routes/*"],

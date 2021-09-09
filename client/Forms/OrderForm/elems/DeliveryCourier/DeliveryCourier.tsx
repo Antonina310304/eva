@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import InputHelperAddress from '@Components/InputHelperAddress';
 import FormItem from '@UI/FormItem';
 import Input from '@UI/Input';

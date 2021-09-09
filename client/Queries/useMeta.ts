@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 import { useParams } from 'react-router';
 
-import { ApiMeta } from '@Api/Meta';
+import * as ApiMeta from '@Api/Meta';
 import { MetaData } from '@Types/Meta';
 
 export interface Params {

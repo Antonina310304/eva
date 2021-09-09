@@ -13,7 +13,7 @@ import React, {
 import { Ajv } from 'ajv';
 
 import isFile from '@Utils/isFile';
-import { ApiForms } from '@Api/Forms';
+import * as ApiForms from '@Api/Forms';
 
 export type CallbackData = unknown;
 

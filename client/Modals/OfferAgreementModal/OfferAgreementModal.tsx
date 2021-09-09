@@ -1,6 +1,6 @@
 import React, { memo, FC, useState, useEffect, useCallback } from 'react';
 
-import { ApiOrder } from '@Api/Order';
+import * as ApiOrder from '@Api/Order';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
 import logger from '@Utils/logger';

@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import TemplateMain from '@Templates/TemplateMain';
 import PageCategory from '@Pages/PageCategory';
 import useInfiniteCategory from '@Queries/useInfiniteCategory';
+import useMeta from '@Queries/useMeta';
 
 export interface RouteParams {
   slug: string;
@@ -14,6 +15,7 @@ const RouteCategory: FC = () => {
   const { slug } = useParams<RouteParams>();
   const [path, setPath] = useState(`${pathname}${search}`);
   const { page, category } = useInfiniteCategory({ path });
+  const meta = useMeta({ ssr: true });
 
   const handleApplyFilters = useCallback(
     (url) => {
@@ -32,10 +34,10 @@ const RouteCategory: FC = () => {
     setPath(`${pathname}${search}`);
   }, [pathname, search]);
 
-  if (!page.isSuccess || !category.isSuccess) return null;
+  if (!page.isSuccess || !category.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageCategory
         page={page.data}
         category={category}

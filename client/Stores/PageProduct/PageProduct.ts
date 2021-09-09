@@ -1,7 +1,7 @@
 import { createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 
-import { ApiProduct } from '@Api/Product';
+import * as ApiProduct from '@Api/Product';
 import { ModuleProductData } from '@Types/ModuleProduct';
 import { ProductData } from '@Types/Product';
 import { NetworkStatus } from '@Types/Base';
