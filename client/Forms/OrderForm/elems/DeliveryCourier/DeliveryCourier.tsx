@@ -22,7 +22,7 @@ const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
   const { className, deliveryType, name, ...restProps } = props;
   const [waiting, setWaiting] = useState(false);
   const cart = useCart();
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
 
   const handleChangeAddress = useCallback(
     (e) => {

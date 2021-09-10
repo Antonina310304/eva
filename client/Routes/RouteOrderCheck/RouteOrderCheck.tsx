@@ -12,7 +12,7 @@ import OrderFormStore from '@Stores/OrderForm';
 const RouteOrderCheck: FC = () => {
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const profile = useProfile({ ssr: true });
 
   if (!page.isSuccess || !meta.isSuccess) return null;

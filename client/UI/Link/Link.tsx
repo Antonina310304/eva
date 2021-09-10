@@ -34,7 +34,7 @@ const Link: FC<LinkProps> = (props) => {
   } = props;
   const queryClient = useQueryClient();
   const history = useHistory();
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const [, { closeAllModals }] = useModals();
 
   const isExternal = isAbsoluteLink(to || '');

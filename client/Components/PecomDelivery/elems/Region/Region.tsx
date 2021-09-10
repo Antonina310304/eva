@@ -11,7 +11,7 @@ export interface RegionProps extends HTMLAttributes<HTMLDivElement> {
 
 const Region: FC<RegionProps> = (props) => {
   const { className, ...restProps } = props;
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const [, { openModal }] = useModals();
 
   const handleClickRegion = useCallback(

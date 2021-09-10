@@ -15,7 +15,7 @@ const RouteCategory: FC = () => {
   const { slug } = useParams<RouteParams>();
   const [path, setPath] = useState(`${pathname}${search}`);
   const { page, category } = useInfiniteCategory({ path });
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
 
   const handleApplyFilters = useCallback(
     (url) => {

@@ -10,7 +10,7 @@ import { usePageProduct } from '@Stores/PageProduct';
 const RouteProduct: FC = () => {
   const { pathname } = useLocation();
   const page: any = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const pageProduct = usePageProduct(page.data);
 
   if (!page.isSuccess || !meta.isSuccess) return null;

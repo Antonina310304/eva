@@ -9,7 +9,7 @@ import PageOferta from '@Pages/PageOferta';
 const RouteOferta: FC = () => {
   const { pathname } = useLocation();
   const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
