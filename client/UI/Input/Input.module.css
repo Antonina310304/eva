@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  padding: 0 var(--space-s);
   overflow: hidden;
 
   background: var(--color-white);
@@ -21,8 +22,10 @@
   }
 
   &.readonly {
-    .control {
-      opacity: 0.5;
+    background: var(--color-light-gray);
+
+    .control:-internal-autofill-selected {
+      box-shadow: inset 0 -42px 0 0 var(--color-light-gray);
     }
   }
 
@@ -32,6 +35,21 @@
 
   &.errored {
     border-color: var(--color-red);
+  }
+
+  &.viewPlain {
+    border-color: var(--color-white);
+  }
+  &.viewPlain:hover,
+  &.viewPlain.focused {
+    border-color: var(--color-medium-gray);
+  }
+  &.viewPlain.errored {
+    border-color: var(--color-red);
+  }
+
+  &.rounded {
+    border-radius: 30px;
   }
 }
 
@@ -57,16 +75,17 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--space-s);
+  padding: var(--space-s) 0;
 
   font-size: inherit;
   font-family: inherit;
   text-align: inherit;
 
-  background: transparent;
+  background: inherit;
   border: 0;
   outline: none;
 
+  /* Хак чтобы скрыть дефолтную желтую заливку для полей с автокомплитом */
   &:-internal-autofill-selected {
     box-shadow: inset 0 -42px 0 0 var(--color-white);
   }
@@ -98,14 +117,18 @@
 
 @media (--desktop-m) {
   .control {
-    padding: 11px var(--space-s);
+    padding: 11px 0;
   }
 }
 
 @media (--mobile-m) {
+  .input {
+    padding: 0 var(--space-xs);
+  }
+
   .control {
     box-sizing: border-box;
     height: 35px;
-    padding: 7px var(--space-xs);
+    padding: 7px 0;
   }
 }

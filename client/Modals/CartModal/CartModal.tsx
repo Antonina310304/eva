@@ -5,6 +5,7 @@ import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import declOfNum from '@Utils/declOfNum';
 import Price from '@UI/Price';
 import Button from '@UI/Button';
+import Link from '@UI/Link';
 import MainProductCard from './elems/MainProductCard';
 import RelatedProductsSection from './elems/RelatedProductsSection';
 import styles from './CartModal.module.css';
@@ -67,9 +68,11 @@ const CartModal: FC<ModalSidebarProps> = (props) => {
               </div>
             </div>
 
-            <Button wide className={styles.orderButton}>
-              Оформить заказ
-            </Button>
+            <Link to='/order/check'>
+              <Button wide className={styles.orderButton}>
+                Оформить заказ
+              </Button>
+            </Link>
           </div>
 
           {cart.relatedProducts?.length > 0 && (

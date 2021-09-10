@@ -1,0 +1,89 @@
+.icon {
+  position: relative;
+
+  display: block;
+  width: 30px;
+  height: 30px;
+
+  font-size: 0;
+  line-height: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0;
+
+    transition: opacity 0.2s ease-in;
+
+    content: '';
+  }
+
+  &:hover {
+    &:before {
+      opacity: 1;
+
+      transition: opacity 0.2s ease-in;
+    }
+  }
+}
+
+.zen {
+  background-image: url('./icons/zen_default_30.svg');
+
+  &:before {
+    background-image: url('./icons/zen_hover_30.svg');
+  }
+}
+
+.facebook {
+  background-image: url('./icons/facebook_default_30.svg');
+
+  &:before {
+    background-image: url('./icons/facebook_hover_30.svg');
+  }
+}
+
+.instagram {
+  background-image: url('./icons/instagram_default_30.svg');
+
+  &:before {
+    background-image: url('./icons/instagram_hover_30.svg');
+  }
+}
+
+.tiktok {
+  background-image: url('./icons/tiktok_default_30.svg');
+
+  &:before {
+    background-image: url('./icons/tiktok_hover_30.svg');
+  }
+}
+
+.vk {
+  background-image: url('./icons/vk_default_30.svg');
+
+  &:before {
+    background-image: url('./icons/vk_hover_30.svg');
+  }
+}
+
+.youtube {
+  background-image: url('./icons/youtube_default_30.svg');
+
+  &:before {
+    background-image: url('./icons/youtube_hover_30.svg');
+  }
+}

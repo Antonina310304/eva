@@ -34,7 +34,7 @@ const ListItem: FC<ListItemProps> = (props) => {
       <Collapse collapsed={!opened}>
         <div className={styles.content}>
           <div className={styles.contentInfo}>
-            <Link className={styles.more} view='secondary' to='/site/showroom' size='s'>
+            <Link className={styles.more} view='secondary' to='/site/showroom'>
               Подробнее
             </Link>
             <div className={styles.phone}>{showroom.phone}</div>

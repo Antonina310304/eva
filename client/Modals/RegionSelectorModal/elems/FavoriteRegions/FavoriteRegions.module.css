@@ -1,0 +1,23 @@
+.regions {
+  column-count: 2;
+}
+
+.link {
+  display: block;
+
+  color: var(--color-black);
+
+  &:not(&:last-child) {
+    margin-bottom: var(--space-s);
+  }
+
+  &.flagman {
+    font-weight: 500;
+  }
+}
+
+@media (--mobile) {
+  .regions {
+    column-count: 1;
+  }
+}

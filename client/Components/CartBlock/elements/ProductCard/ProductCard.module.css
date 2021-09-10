@@ -1,0 +1,40 @@
+.card {
+}
+
+.containerInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-n);
+}
+
+.name {
+  max-height: calc(var(--lh-n) * 2);
+  overflow: hidden;
+
+  white-space: normal;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+}
+
+.actualPrice {
+  composes: m from 'sizes';
+
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-xs);
+}
+
+.discount {
+  margin-left: var(--space-xs);
+}
+
+@media (--desktop) {
+  .discount {
+    display: none;
+  }
+}

@@ -4,6 +4,7 @@
 .title {
   font-weight: 500;
   font-size: var(--size-xb);
+  font-family: var(--font-hero);
   line-height: var(--lh-xb);
   text-align: center;
 }

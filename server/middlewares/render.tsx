@@ -25,24 +25,19 @@ const render: RequestHandler = async (req, res, next) => {
     const nodeExtractor = new ChunkExtractor({ statsFile: paths.stats.node });
     const { default: Entry } = nodeExtractor.requireEntrypoint();
 
-    // Redirect
-    if (routerContext.url) {
-      return res.redirect(routerContext.statusCode, routerContext.url);
-    }
-
     const webExtractor = new ChunkExtractor({ statsFile: paths.stats.web });
     const renderAndWait = async (): Promise<string> => {
       const components = (
-        <RequestProvider
-          origin={`${req.protocol}://${req.hostname}${envs.isDev ? `:${envs.port}` : ''}`}
-          cookie={req.headers.cookie}
-        >
-          <QueryClientProvider client={queryClient}>
-            <StaticRouter location={req.url} context={routerContext}>
+        <StaticRouter location={req.url} context={routerContext}>
+          <RequestProvider
+            origin={`${req.protocol}://${req.hostname}${envs.isDev ? `:${envs.port}` : ''}`}
+            cookie={req.headers.cookie}
+          >
+            <QueryClientProvider client={queryClient}>
               <Entry />
-            </StaticRouter>
-          </QueryClientProvider>
-        </RequestProvider>
+            </QueryClientProvider>
+          </RequestProvider>
+        </StaticRouter>
       );
       const jsx = webExtractor.collectChunks(components);
       const html = renderToString(jsx);
@@ -69,6 +64,12 @@ const render: RequestHandler = async (req, res, next) => {
       return html;
     };
     const html = await renderAndWait();
+
+    // Обрабатываем редиректы
+    if (routerContext.url) {
+      return res.redirect(302, routerContext.url);
+    }
+
     const state = dehydrate(queryClient);
     const htmlDocument = renderPage({ html, state, webExtractor });
 

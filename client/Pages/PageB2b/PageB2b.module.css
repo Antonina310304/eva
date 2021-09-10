@@ -1,0 +1,140 @@
+.page {
+  --gap: var(--space-e);
+  padding-bottom: var(--space-e);
+}
+
+.pageTitle {
+  max-width: 1780px;
+  margin: 0 auto;
+  padding: var(--space-xl) 0px;
+
+  font-weight: 500;
+  font-size: var(--size-xb);
+  line-height: var(--lh-xb);
+  text-align: center;
+}
+
+.wrapper {
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.imageWrapper {
+  height: 850px;
+}
+
+.bannerImage {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.qualityDepartment {
+  margin-top: var(--gap);
+}
+
+.garanties {
+  margin-top: var(--gap);
+}
+
+.contactWithQualityDep {
+  margin-top: var(--gap);
+}
+
+.exchangeAndRefund {
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.sectionPress {
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-xxe);
+  overflow: hidden;
+}
+
+@media (--desktop-m) {
+  .pageTitle {
+    max-width: 1900px;
+    margin: 0 var(--space-xxl);
+
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+
+  .wrapper {
+    max-width: 1066px;
+  }
+
+  .imageWrapper {
+    height: 605px;
+  }
+
+  .mapWrapper {
+    composes: main from 'containers';
+  }
+
+  .sectionPress {
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-e);
+  }
+}
+
+@media (--desktop) {
+  .page {
+    --gap: var(--space-xb);
+
+    padding-bottom: var(--space-xb);
+  }
+
+  .pageTitle {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+
+  .wrapper {
+    max-width: none;
+    padding: 0 var(--space-xxl);
+  }
+
+  .imageWrapper {
+    height: 453px;
+  }
+
+  .sectionPress {
+    margin-top: var(--space-xb);
+    margin-bottom: var(--space-xb);
+  }
+}
+
+@media (--mobile-m) {
+  .pageTitle {
+    margin: 0 var(--space-s);
+    padding: var(--space-n) 0px;
+
+    font-size: var(--size-xl);
+    line-height: var(--lh-xxl);
+  }
+
+  .wrapper {
+    padding: 0 var(--space-s);
+  }
+
+  .imageWrapper {
+    height: 340px;
+  }
+}
+
+@media (--mobile) {
+  .bannerImage {
+    min-height: 360px;
+  }
+
+  .imageWrapper {
+    height: 360px;
+  }
+}

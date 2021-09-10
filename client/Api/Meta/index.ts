@@ -1,6 +1,3 @@
-import fetch from './fetch';
-
-export const ApiMeta = {
-  fetch,
-};
-export default null;
+export { default as fetch } from './fetch';
+export { default as getRegionHints } from './getRegionHints';
+export { default as getRegionPriority } from './getRegionPriority';

@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
-import { ApiOrder } from '@Api/Order';
+import * as ApiOrder from '@Api/Order';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import useModals from '@Hooks/useModals';
 import Price from '@UI/Price';
