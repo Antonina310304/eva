@@ -56,6 +56,36 @@ const Filters: FC<FiltersProps> = (props) => {
     [onOpen],
   );
 
+  const otfiltronino = useMemo(() => {
+    const cvetaId = filtrator.selected.parameters[40]?.default || [];
+    const resColors = cvetaId.map((cvetId) => {
+      const res = filtrator.selected.parameterValues.find(
+        (param) => param.parameterId === '40' && param.value[0] === cvetId,
+      );
+      return res.name;
+    });
+
+    const tagsId = filtrator.selected.parameters[10]?.default || [];
+    const resTags = tagsId.map((tagId) => {
+      const res = filtrator.selected.parameterValues.find(
+        (param) => param.parameterId === '10' && param.value[0] === tagId,
+      );
+      return res.name;
+    });
+
+    const collections = filtrator.selected.parameters[20]?.default || [];
+    const resCollections = collections.map((collectionId) => {
+      const res = filtrator.selected.parameterValues.find(
+        (param) => param.parameterId === '20' && param.value[0] === collectionId,
+      );
+      return res.name;
+    });
+
+    const resultArray = [...resCollections, ...resColors, ...resTags];
+
+    return resultArray.join(' x ');
+  }, [filtrator.selected.parameterValues, filtrator.selected.parameters]);
+
   // const handleChangeSort = useCallback(
   //   (e: MouseEvent, option: typeof filtrator.sort[0]) => {
   //     Filtrator.setSort(option);
@@ -157,6 +187,7 @@ const Filters: FC<FiltersProps> = (props) => {
           </Dropdown>
         </div> */}
       </div>
+      <div>{otfiltronino}</div>
     </div>
   );
 };

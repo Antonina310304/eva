@@ -9,6 +9,7 @@ import React, {
   useMemo,
 } from 'react';
 import cn from 'classnames';
+import loadable from '@loadable/component';
 
 import Button from '@UI/Button';
 import Form from '@UI/Form';
@@ -28,7 +29,10 @@ import { IConstructorGroup } from '@Types/Constructor';
 import useMedias from '@Hooks/useMedias';
 import Icon8ChevronDownThin from '@divanru/icons/dist/8/chevron_down_thin';
 import Icon32Basket from '@divanru/icons/dist/32/basket';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import styles from './SelectorFabrics.module.css';
+
+const Filters = loadable(() => import('../Filters'));
 
 export type Step = 'preview' | 'order';
 
@@ -37,36 +41,197 @@ export interface SelectorFabricsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
-  const { className, ...restProps } = props;
-  const [, { openModal }] = useModals();
+  const { className, page, ...restProps } = props;
+  const [, { openModal, closeModal }] = useModals();
+
+  //   избавиться от этого
   const orderFabrics = useOrderFabrics();
+
   const { isMobile, isMobileM, isDesktop } = useMedias();
   const [mainFormStyle, setMainFormStyle] = useState(null);
   const [waiting, setWaiting] = useState(false);
   const [allGroups, setAllGroups] = useState(false);
+  const [vseSamples, setVseSamples] = useState([
+    {
+      sample: null,
+    },
+    {
+      sample: null,
+    },
+    {
+      sample: null,
+    },
+    {
+      sample: null,
+    },
+    {
+      sample: null,
+    },
+  ]);
   const [step, setStep] = useState<Step>('preview');
   const refRight = useRef(null);
   const refForm = useRef(null);
   const refLeft = useRef(null);
   const refCatalog = useRef<HTMLDivElement>(null);
 
-  const { filterStore, addCheckbox, removeCheckbox, resetAll, resetGroup } = useFilters(
-    orderFabrics.data.filters,
+  // const { filterStore, addCheckbox, removeCheckbox, resetAll, resetGroup } = useFilters(
+  //   orderFabrics.data.filters,
+  // );
+  // console.log('orderFabrics', orderFabrics);
+  // console.log('filterStore', filterStore);
+
+  function collectCollections(data: ConstructorRequestInfoData): ConstructorCollection[] {
+    // Формируем коллекции тканей
+
+    const collectionsMap = {};
+    data.parameterValues
+      .filter((p) => p.type === 'fabric')
+      // Оставляем только ткани, которые являются товарами-образцами
+      .filter((p) => !!p.sampleId)
+      .forEach((fabric) => {
+        const { collectionId } = fabric.tags;
+
+        if (collectionsMap[collectionId]) {
+          if (fabric.price < collectionsMap[collectionId].minPrice) {
+            collectionsMap[collectionId].minPrice = fabric.price;
+          }
+
+          collectionsMap[collectionId].fabrics.push(fabric);
+        } else {
+          collectionsMap[collectionId] = {
+            ...data.tags.collections[collectionId],
+            minPrice: fabric.price,
+            fabrics: [fabric],
+          };
+        }
+      });
+
+    return Object.values(collectionsMap);
+  }
+
+  const orderFabrics2 = collectCollections(page);
+  console.log('---orderFabrics2---', orderFabrics2);
+
+  const colorsFilter = Object.values(page.tags.colors).map((color) => {
+    return {
+      parameterId: '40',
+      type: 'variant',
+      name: color.title,
+      value: [color.id],
+      meta: {
+        color: color.code,
+      },
+    };
+  });
+
+  const typesFilter = Object.values(page.tags.types).map((type) => {
+    return {
+      parameterId: '10',
+      type: 'variant',
+      name: type.title,
+      value: [type.id],
+      meta: {
+        color: '',
+      },
+    };
+  });
+
+  const collectionsFilter = Object.values(page.tags.collections).map((collection) => {
+    return {
+      parameterId: '20',
+      type: 'variant',
+      name: collection.title,
+      value: [collection.id],
+      meta: {
+        color: '',
+      },
+    };
+  });
+
+  const filters = {
+    filters: [
+      {
+        name: 'Цвет',
+        theme: 'checkbox',
+        items: [
+          {
+            theme: 'checkbox',
+            parameterId: '40',
+          },
+        ],
+      },
+      {
+        name: 'Свойства',
+        theme: 'checkbox',
+        items: [
+          {
+            theme: 'checkbox',
+            parameterId: '10',
+          },
+        ],
+      },
+      {
+        name: 'Коллекция',
+        theme: 'checkbox',
+        items: [
+          {
+            theme: 'checkbox',
+            parameterId: '20',
+          },
+        ],
+      },
+    ],
+    parameterValues: [...colorsFilter, ...typesFilter, ...collectionsFilter],
+    parameters: {
+      40: {
+        name: 'Цвет',
+        unit: '',
+        default: [],
+      },
+      10: {
+        name: 'Свойства',
+        unit: '',
+        default: [],
+      },
+      20: {
+        name: 'Коллекция',
+        unit: '',
+        default: [],
+      },
+    },
+  };
+
+  const handleApplyFilters = useCallback(async () => {
+    // const url = Filtrator.toUrl({ categories: [] });
+
+    // window.history.pushState({}, '', url);
+    closeModal('Filters');
+  }, [closeModal]);
+
+  const hanleOpenFilters = useCallback(
+    (_e, selectedFilterId: string) => {
+      openModal('Filters', { selectedFilterId, onApply: handleApplyFilters });
+    },
+    [handleApplyFilters, openModal],
   );
 
-  const selectedSamples = orderFabrics.data.selected.filter((selected) => !!selected.sample);
+  const filtrator = useFiltrator({ id: 'xz', ...filters });
+  console.log('filtrator', filtrator);
+
+  // const selectedSamples = orderFabrics.data.selected.filter((selected) => !!selected.sample);
+  const selectedSamples = vseSamples.filter((selected) => !!selected.sample);
   const disabled = selectedSamples.length < 1;
   const opened = selectedSamples.length > 0;
 
   const groups = useMemo(() => {
     // Фильтруем
-    let filteredCollections = [...orderFabrics.data.collections];
+    // let filteredCollections = [...orderFabrics.data.collections];
+    let filteredCollections = [...orderFabrics2];
     let result: IConstructorGroup[] = [];
 
-    filteredCollections = [...orderFabrics.data.collections];
-
     // Фильтруем по цвету
-    const colors = filterStore.parameters.colors.default;
+    // const colors = filterStore.parameters.colors.default;
+    const colors = filtrator.selected.parameters[40]?.default || [];
     filteredCollections = filteredCollections.map((collection) => {
       if (!colors.length) return collection;
 
@@ -77,7 +242,8 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     });
 
     // Фильтруем по свойствам
-    const tags = filterStore.parameters.tags.default;
+    // const tags = filterStore.parameters.tags.default;
+    const tags = filtrator.selected.parameters[10]?.default || [];
     filteredCollections = filteredCollections.map((collection) => {
       if (!tags.length) return collection;
 
@@ -91,6 +257,21 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
       };
     });
 
+    // Фильтруем по коллекциям
+    const collections = filtrator.selected.parameters[20]?.default || [];
+    console.log('filteredCollections', filteredCollections);
+
+    filteredCollections = filteredCollections.map((collection) => {
+      if (!collections.length) return collection;
+
+      return {
+        ...collection,
+        fabrics: collection.fabrics.filter((fabric) =>
+          collections.includes(fabric.tags.collectionId),
+        ),
+      };
+    });
+
     // Оставляем только те коллекции, в которых есть ткани и сортируем
     filteredCollections = filteredCollections.filter((collection) => collection.fabrics.length > 0);
     filteredCollections = filteredCollections.sort((ca, cb) => ca.sort - cb.sort);
@@ -98,7 +279,8 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     // Собираем в группы
     filteredCollections.forEach((collection) => {
       const groupTags = [];
-      collection.tags.typeIds.map((typeId) => groupTags.push(orderFabrics.data.tags.types[typeId]));
+      // collection.tags.typeIds.map((typeId) => groupTags.push(orderFabrics.data.tags.types[typeId]));
+      collection.tags.typeIds.map((typeId) => groupTags.push(page.tags.types[typeId]));
 
       result.push({
         tags: groupTags,
@@ -127,12 +309,24 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     }
 
     return result;
-  }, [allGroups, filterStore.parameters, isDesktop, orderFabrics.data]);
+  }, [allGroups, filtrator.selected.parameters, isDesktop, orderFabrics2, page.tags.types]);
+
+  // const count = useMemo(() => {
+  //   const res = groups.reduce((total, item) => {
+  //     total += item.samples.length;
+  //     return total;
+  //   }, 0);
+
+  //   return res;
+  // }, [groups]);
 
   const transformDataBeforeSubmit = useCallback(
     (data) => {
       const ids = [];
-      orderFabrics.data.selected.map(({ sample }) => {
+      // orderFabrics.data.selected.map(({ sample }) => {
+      //   return sample && ids.push(sample.sampleId);
+      // });
+      vseSamples.map(({ sample }) => {
         return sample && ids.push(sample.sampleId);
       });
 
@@ -141,33 +335,28 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
         'FabricsForm[fabricIds][]': ids,
       };
     },
-    [orderFabrics.data.selected],
+    [vseSamples],
   );
 
-  const handleResetGroup = useCallback(
-    (_e, params) => {
-      resetGroup(params);
-    },
-    [resetGroup],
-  );
+  const handleResetGroup = useCallback((_e, params) => {
+    // resetGroup(params);
+    Filtrator.resetGroup(params);
+  }, []);
 
   const handleResetAll = useCallback(() => {
-    resetAll();
-  }, [resetAll]);
+    // resetAll();
+    Filtrator.resetAll();
+  }, []);
 
-  const handleAddCheckbox = useCallback(
-    (_e, params) => {
-      addCheckbox(params);
-    },
-    [addCheckbox],
-  );
+  const handleAddCheckbox = useCallback((_e, params) => {
+    // addCheckbox(params);
+    Filtrator.addCheckbox(params);
+  }, []);
 
-  const handleRemoveCheckbox = useCallback(
-    (_e, params) => {
-      removeCheckbox(params);
-    },
-    [removeCheckbox],
-  );
+  const handleRemoveCheckbox = useCallback((_e, params) => {
+    // removeCheckbox(params);
+    Filtrator.removeCheckbox(params);
+  }, []);
 
   const handleSubmit = useCallback(() => {
     setWaiting(true);
@@ -242,6 +431,32 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     setStep('order');
   }, []);
 
+  // Выбрать/снять образец ткани
+  const toggleSelect = useCallback(
+    ({ sample }) => {
+      let newSelected = [...vseSamples];
+      const foundedIndex = newSelected.findIndex(
+        (selected) => selected.sample?.value === sample.value,
+      );
+
+      if (foundedIndex > -1) {
+        newSelected = [
+          ...newSelected.slice(0, foundedIndex),
+          ...newSelected.slice(foundedIndex + 1),
+          { sample: null },
+        ];
+      } else {
+        const freeIndex = newSelected.findIndex((selected) => !selected.sample);
+
+        newSelected[freeIndex] = { sample };
+      }
+
+      setVseSamples(newSelected);
+      // updateData({ selected: newSelected });
+    },
+    [vseSamples],
+  );
+
   // Отслеживаем скролл для позиционирования формы на десктопе
   useEffect(() => {
     function cleanup() {
@@ -273,14 +488,25 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
         />
       </div>
 
-      <FabricFilters
+      <div className={styles.filtersWrapper}>
+        <Filters
+          // count={count}
+          // groups={page.groups}
+          // isMatrasyCategory={page.isMatrasyCategory}
+          // key={path}
+          onOpen={hanleOpenFilters}
+          onChangeSort={handleApplyFilters}
+        />
+      </div>
+
+      {/* <FabricFilters
         className={styles.fabrickFilters}
         filterStore={filterStore}
         onResetGroup={handleResetGroup}
         onResetAll={handleResetAll}
         onAddCheckbox={handleAddCheckbox}
         onRemoveCheckbox={handleRemoveCheckbox}
-      />
+      /> */}
 
       <div className={styles.wrapperMainContent}>
         <div className={styles.left} ref={refLeft}>
@@ -299,6 +525,8 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                       largeImage={!isMobileM}
                       sample={null}
                       refCatalog={refCatalog}
+                      vse={vseSamples}
+                      foo={toggleSelect}
                     />
                   }
                 />
@@ -427,12 +655,14 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                 <div className={styles.formContainer}>
                   <div className={styles.samplesFormContent}>
                     <div className={styles.examples}>
-                      {orderFabrics.data.selected.map((item, index) => (
+                      {/* {orderFabrics.data.selected.map((item, index) => ( */}
+                      {vseSamples.map((item, index) => (
                         <FabricSample
                           key={index}
                           className={styles.exampleMobile}
                           removable
                           sample={item.sample}
+                          foo={toggleSelect}
                         />
                       ))}
                     </div>

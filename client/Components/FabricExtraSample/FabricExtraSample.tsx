@@ -28,6 +28,8 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
     modalView = true,
     largeImage = false,
     isFirstCollection,
+    vse,
+    foo,
     ...restProps
   } = props;
   const orderFabrics = useOrderFabrics();
@@ -36,15 +38,18 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
 
   const selected = useMemo(() => {
     return (
-      orderFabrics.data.selected.findIndex((selectedItem) => selectedItem.sample === sample) > -1
+      // orderFabrics.data.selected.findIndex((selectedItem) => selectedItem.sample === sample) > -1
+      vse.findIndex((selectedItem) => selectedItem.sample === sample) > -1
     );
-  }, [orderFabrics.data.selected, sample]);
+  }, [sample, vse]);
 
   const view = useMemo(() => (visible && modalView ? 'gray' : 'white'), [modalView, visible]);
 
   const handleClick = useCallback(() => {
-    orderFabrics.toggleSelect({ sample });
-  }, [orderFabrics, sample]);
+    // orderFabrics.toggleSelect({ sample });
+
+    foo({ sample });
+  }, [foo, sample]);
 
   const handleClickMoreInfo = useCallback(() => {
     openModal('Info', {

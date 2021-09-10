@@ -14,15 +14,16 @@ export interface FabricSampleProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const FabricSample: FC<FabricSampleProps> = (props) => {
-  const { className, sample, ...restProps } = props;
+  const { className, sample, vse, foo, ...restProps } = props;
   const removable = Boolean(restProps.removable && sample);
   const orderFabrics = useOrderFabrics();
 
   const handleClick = useCallback(() => {
     if (!removable) return;
 
-    orderFabrics.toggleSelect({ sample });
-  }, [orderFabrics, removable, sample]);
+    // orderFabrics.toggleSelect({ sample });
+    foo({ sample });
+  }, [foo, removable, sample]);
 
   return (
     <div

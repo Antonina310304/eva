@@ -64,7 +64,7 @@
 
 @media (--desktop) {
   .button.secondary {
-    display: none;
+    /* display: none; */
   }
 }
 
