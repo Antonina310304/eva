@@ -48,6 +48,7 @@
 .image {
   width: 415px;
   height: 271px;
+  object-fit: cover;
 }
 
 .title {
