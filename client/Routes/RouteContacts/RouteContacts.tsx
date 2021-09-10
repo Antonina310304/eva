@@ -8,7 +8,7 @@ import PageContacts from '@Pages/PageContacts';
 
 const RouteContacts: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage({ path: pathname, ssr: true });
+  const page = usePage({ path: pathname });
   const meta = useMeta();
 
   if (!page.isSuccess || !meta.isSuccess) return null;

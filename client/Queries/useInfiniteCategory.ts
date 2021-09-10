@@ -15,7 +15,7 @@ export interface Result {
 
 const useInfiniteCategory = ({ path }: Params): Result => {
   const keys = ['infiniteCategory', 'ssr', path];
-  const page = usePage({ path, ssr: true });
+  const page = usePage({ path });
   const category = useInfiniteQuery(
     keys,
     ({ pageParam = 1 }) => {
