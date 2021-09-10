@@ -1,8 +1,10 @@
+import { useQuery } from 'react-query';
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 import equal from 'fast-deep-equal';
 
 import * as ApiCart from '@Api/Cart';
+import * as ApiOrder from '@Api/Order';
 import { CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
 import { CartStoreValue, UseCart } from './typings';
@@ -254,7 +256,21 @@ const init = (initialValue: CartStoreValue): void => {
   }
 };
 
-export const useCart: UseCart = () => {
+export const useCart: UseCart = (params) => {
+  const { ssr = true } = params || {};
+  const keys = ['cart', ssr && 'ssr'];
+
+  const result = useQuery(keys, () => ApiOrder.getCartInfo(), {
+    enabled: ssr,
+    keepPreviousData: true,
+    retryOnMount: false,
+    refetchOnMount: false,
+  });
+
+  if (result.data) {
+    init(result.data);
+  }
+
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),
