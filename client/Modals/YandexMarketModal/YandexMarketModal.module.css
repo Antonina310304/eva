@@ -46,7 +46,7 @@
 
 @media (--mobile) {
   .container {
-    width: 100%;
+    width: 100vw;
     padding: var(--space-n) var(--space-s) var(--space-l) var(--space-s);
 
     border-radius: 0px;

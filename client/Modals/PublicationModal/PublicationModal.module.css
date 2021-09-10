@@ -28,15 +28,13 @@
 
 @media (--mobile-m) {
   .container {
-    width: 100%;
+    width: 100vw;
     padding: var(--space-e) var(--space-s) var(--space-s);
   }
 }
 
 @media (--mobile) {
   .container {
-    width: 100%;
-
     border-radius: 0;
   }
 

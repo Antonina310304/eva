@@ -24,6 +24,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
     openModal('VideoConsultation');
   }, [openModal]);
 
+  const handleClickDesignerServicesButton = useCallback(() => {
+    openModal('DesignerServices');
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
       <div className={styles.title}>EVA / PageIndex</div>
@@ -32,6 +36,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
 
       <Button onClick={handleClickVideoConsultationButton} className={styles.button}>
         Видеоконсультация со специалистом
+      </Button>
+
+      <Button onClick={handleClickDesignerServicesButton} className={styles.button}>
+        Услуга дизайнера
       </Button>
     </div>
   );

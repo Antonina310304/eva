@@ -34,6 +34,7 @@ const routes = [
   '/site/message-for-department',
   '/site/message-for-accounting-department',
   '/site/send-video-consultation',
+  '/site/send-designer-service',
 ];
 
 routes.forEach((route) => {

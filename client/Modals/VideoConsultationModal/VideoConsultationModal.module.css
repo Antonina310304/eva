@@ -20,10 +20,15 @@
 }
 
 .image {
-  height: 215px;
-
   background: var(--color-light-gray) url('./image.jpg') no-repeat center/cover;
   border-radius: 5px 5px 0 0;
+
+  &:before {
+    display: block;
+    padding: 0 0 37.5%;
+
+    content: '';
+  }
 }
 
 .close {
@@ -88,8 +93,6 @@
 
 @media (--mobile) {
   .image {
-    height: 135px;
-
     border-radius: 0;
   }
 
@@ -114,9 +117,5 @@
     &:first-child {
       margin-top: 0;
     }
-  }
-
-  .container {
-    max-width: 100%;
   }
 }
