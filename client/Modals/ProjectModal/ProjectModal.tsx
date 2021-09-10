@@ -12,15 +12,24 @@ import ProgressBar from '@UI/ProgressBar';
 import IconClose from '@UI/IconClose';
 import styles from './ProjectModal.module.css';
 
+export interface ProjectData {
+  height: number;
+  projectId: number;
+  src: string;
+  text: string[];
+  title: string;
+  width: number;
+}
 export interface ModalData {
   images: any[];
   startSlideIndex?: number;
   projectIndex: number;
+  projects: ProjectData;
 }
 
 const ProjectModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { images: medias, startSlideIndex, projectIndex } = modal.data as ModalData;
+  const { images: medias, projects, startSlideIndex, projectIndex } = modal.data as ModalData;
   const [, { closeModal, openModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
@@ -119,6 +128,9 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
 
+  console.log('projects', projects);
+  console.log('projects[projectIndex]', projects[projectIndex]);
+
   return (
     <ModalMain {...restProps} fullscreen modal={modal}>
       <div className={cn(styles.wrapper, { [styles.loaded]: loaded })}>
@@ -161,6 +173,16 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                 src={medias[projectIndex][mainMediaIndex].src}
                 alt=''
               />
+              <div className={styles.descriptionWrapper}>
+                <h3 className={styles.projectName}>{projects[projectIndex].title}</h3>
+                <div className={styles.textWrapper}>
+                  {projects[projectIndex].text.map((elem, elemIndex: number) => (
+                    <div className={styles.description} key={elemIndex}>
+                      {elem}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {!medias[mainMediaIndex].video && (
@@ -169,18 +191,6 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                 <div className={cn(styles.arrow, styles.next)} onClick={handleClickNext} />
               </>
             )}
-            {medias[projectIndex].map((item, index) => (
-              <div className={styles.descriptionWrapper} key={index}>
-                <h3 className={styles.projectName}>{item.title}</h3>
-                <div className={styles.textWrapper}>
-                  {item.text.map((elem, elemIndex: number) => (
-                    <div className={styles.description} key={elemIndex}>
-                      {elem}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
           </div>
 
           {isDesktop && (

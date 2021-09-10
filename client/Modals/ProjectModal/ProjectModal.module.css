@@ -90,6 +90,7 @@
 
 .mainMediaWrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -122,25 +123,49 @@
   transform: rotate(180deg);
 }
 
-.videoContainer {
-  position: relative;
-
-  display: block;
+.descriptionWrapper {
+  display: flex;
+  align-items: flex-start;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  margin-top: var(--space-xxl);
 }
 
-.video {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 3;
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 55px;
+}
 
-  width: 100%;
-  height: 100%;
+.projectName {
+  width: 375px;
+  margin: 0;
+  padding-right: var(--space-xe);
+
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.description {
+  width: 300px;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.description:not(:last-of-type) {
+  padding-right: var(--space-xxl);
+}
+
+@media (--desktop-m) {
+  .description {
+    width: 275px;
+  }
+
+  .projectName {
+    font-size: var(--size-xl);
+  }
 }
 
 @media (--desktop) {
@@ -198,13 +223,15 @@
     object-fit: contain;
   }
 
-  .videoHeight {
-    padding-top: 100%;
+  .projectName {
+    width: 275px;
+
+    font-size: var(--size-l);
+    line-height: var(--lh-xm);
   }
 
-  .video {
-    width: 90%;
-    margin: 0 auto;
+  .textWrapper {
+    height: 82px;
   }
 }
 
@@ -249,10 +276,6 @@
     opacity: 1;
   }
 
-  .videoHeight {
-    padding-top: 66.7%;
-  }
-
   .closePanel {
     justify-content: flex-end;
     width: 100%;
@@ -263,5 +286,34 @@
 
   .iconClose {
     margin: var(--space-s);
+  }
+
+  .projectName {
+    width: 233px;
+    padding-right: var(--space-xxl);
+  }
+
+  .description {
+    width: 213px;
+  }
+}
+
+@media (--mobile) {
+  .descriptionWrapper {
+    flex-direction: column;
+  }
+
+  .projectName {
+    width: 330px;
+    padding-right: 0;
+    padding-bottom: var(--space-n);
+  }
+
+  .textWrapper {
+    flex-wrap: nowrap;
+  }
+
+  .description {
+    width: 100%;
   }
 }

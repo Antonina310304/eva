@@ -8,15 +8,13 @@ import NavArrows from '@UI/NavArrows';
 import Image from '@UI/Image';
 import FeedbackForm from '@Forms/FeedbackForm';
 import ProgressBar from '@UI/ProgressBar';
-import useMedias from '@Hooks/useMedias';
 import useModals from '@Hooks/useModals';
 import PressGallery from '@Components/PressGallery';
-import { PageB2bDetailData } from './typings';
+import { PageB2bDetailData, ProjectItem } from './typings';
 import styles from './PageB2bDetail.module.css';
 
 export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  // TODO: типизируй меня полностью
   page: PageB2bDetailData;
 }
 
@@ -33,7 +31,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
       projectsMap[example.projectId] = example;
     }
   });
-  const projects = Object.values(projectsMap);
+  const projects: ProjectItem = Object.values(projectsMap);
   const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
 
   const onClickMore = useCallback(() => {
@@ -56,9 +54,9 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
     (e, projectIndex) => {
       if (window.cancelClick) return;
 
-      openModal('Project', { images, projectIndex });
+      openModal('Project', { images, projectIndex, projects });
     },
-    [images, openModal],
+    [images, projects, openModal],
   );
 
   const normalizeSlide = useCallback(

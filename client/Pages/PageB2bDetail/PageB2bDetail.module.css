@@ -110,6 +110,7 @@
 .pressWrapper {
   margin-top: var(--space-xxe);
   margin-bottom: var(--space-e);
+  overflow: hidden;
 }
 
 @media (--desktop-m) {
@@ -149,7 +150,6 @@
   .pressWrapper {
     margin-top: var(--space-e);
     margin-bottom: var(--space-xb);
-    overflow: hidden;
   }
 }
 
