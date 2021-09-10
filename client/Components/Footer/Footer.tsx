@@ -13,7 +13,7 @@ export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 
 const Footer: FC<FooterProps> = () => {
   const { isMobileM, isMobile } = useMedias();
-  const layout = useLayout({ ssr: true });
+  const layout = useLayout();
   const footer = layout.isSuccess ? layout.data.footer : null;
 
   const renderContent = useCallback(() => {

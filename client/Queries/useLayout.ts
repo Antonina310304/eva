@@ -7,8 +7,8 @@ export interface Params {
   ssr?: boolean;
 }
 
-const useLayout = (params: Params): UseQueryResult<Layout> => {
-  const { ssr } = params || {};
+const useLayout = (params?: Params): UseQueryResult<Layout> => {
+  const { ssr = true } = params || {};
   const keys = ['layout', ssr && 'ssr'];
 
   const result = useQuery(keys, () => ApiMeta.getLayout(), {
