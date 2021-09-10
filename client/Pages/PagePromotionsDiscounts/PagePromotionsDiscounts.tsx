@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 
+import mockCategories from '@Pages/PagePromotionsDiscounts/elems/Trends/Mock/mockCategories';
 import CurrentPromotions from './elems/CurrentPromotions';
 import CurrentDiscounts from './elems/CurrentDiscounts';
 import FreeServices from './elems/FreeServices';
@@ -15,7 +16,7 @@ const PagePromotionsDiscounts: FC = () => {
       <CurrentPromotions />
       <CurrentDiscounts />
       <FreeServices />
-      <Trends />
+      <Trends categories={mockCategories} />
       <Top10 />
     </div>
   );

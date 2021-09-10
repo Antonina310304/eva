@@ -1,0 +1,23 @@
+.section {
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 70px;
+}
+
+.trendsLogo {
+  width: 100%;
+}
+
+.wrapperGallery {
+  composes: main from 'containers';
+
+  display: flex;
+}
+
+.gallery {
+  display: flex;
+}
