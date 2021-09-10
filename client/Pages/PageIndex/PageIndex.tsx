@@ -20,11 +20,19 @@ const PageIndex: FC<PageIndexProps> = (props) => {
     openModal('RegionSelector');
   }, [openModal]);
 
+  const handleClickVideoConsultationButton = useCallback(() => {
+    openModal('VideoConsultation');
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
       <div className={styles.title}>EVA / PageIndex</div>
 
       <Button onClick={handleClickButton}>Change region</Button>
+
+      <Button onClick={handleClickVideoConsultationButton} className={styles.button}>
+        Видеоконсультация со специалистом
+      </Button>
     </div>
   );
 };

@@ -47,14 +47,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100% - var(--space-xxl) * 2);
-  margin-top: var(--space-xxl);
-  margin-bottom: var(--space-xxl);
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
 }
 
+/* Обрезает селекты внутри модалки */
 .content {
-  flex-grow: 1;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .arrowBackground {

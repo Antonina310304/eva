@@ -33,6 +33,7 @@ const routes = [
   '/order/pay',
   '/site/message-for-department',
   '/site/message-for-accounting-department',
+  '/site/send-video-consultation',
 ];
 
 routes.forEach((route) => {

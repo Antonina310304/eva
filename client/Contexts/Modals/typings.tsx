@@ -31,6 +31,7 @@ export type ModalId =
   | 'DeliveryInfo'
   | 'Publication'
   | 'Authorization'
+  | 'VideoConsultation'
   | 'Cooperation';
 
 export interface Modal {
