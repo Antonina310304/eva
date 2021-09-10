@@ -51,6 +51,9 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
   const [mainFormStyle, setMainFormStyle] = useState(null);
   const [waiting, setWaiting] = useState(false);
   const [allGroups, setAllGroups] = useState(false);
+  const [gColors, setgColors] = useState([]);
+  const [gTags, setgTags] = useState([]);
+  const [gCollections, setgCollections] = useState([]);
   const [vseSamples, setVseSamples] = useState([
     {
       sample: null,
@@ -201,9 +204,15 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     },
   };
 
-  const handleApplyFilters = useCallback(async () => {
-    // const url = Filtrator.toUrl({ categories: [] });
+  const filtrator = useFiltrator({ id: 'xz', ...filters });
+  console.log('filtrator', filtrator);
 
+  const handleApplyFilters = useCallback(async () => {
+    const filteredParameters = Filtrator.formatFiltersToObject();
+
+    if (filteredParameters.parameters[40]) setgColors(filteredParameters.parameters[40]);
+    if (filteredParameters.parameters[10]) setgTags(filteredParameters.parameters[10]);
+    if (filteredParameters.parameters[20]) setgCollections(filteredParameters.parameters[20]);
     // window.history.pushState({}, '', url);
     closeModal('Filters');
   }, [closeModal]);
@@ -215,9 +224,6 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     [handleApplyFilters, openModal],
   );
 
-  const filtrator = useFiltrator({ id: 'xz', ...filters });
-  console.log('filtrator', filtrator);
-
   // const selectedSamples = orderFabrics.data.selected.filter((selected) => !!selected.sample);
   const selectedSamples = vseSamples.filter((selected) => !!selected.sample);
   const disabled = selectedSamples.length < 1;
@@ -227,11 +233,12 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     // Фильтруем
     // let filteredCollections = [...orderFabrics.data.collections];
     let filteredCollections = [...orderFabrics2];
-    let result: IConstructorGroup[] = [];
+    const result: IConstructorGroup[] = [];
 
     // Фильтруем по цвету
     // const colors = filterStore.parameters.colors.default;
-    const colors = filtrator.selected.parameters[40]?.default || [];
+    // const colors = filtrator.selected.parameters[40]?.default || [];
+    const colors = gColors;
     filteredCollections = filteredCollections.map((collection) => {
       if (!colors.length) return collection;
 
@@ -243,7 +250,8 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
 
     // Фильтруем по свойствам
     // const tags = filterStore.parameters.tags.default;
-    const tags = filtrator.selected.parameters[10]?.default || [];
+    // const tags = filtrator.selected.parameters[10]?.default || [];
+    const tags = gTags;
     filteredCollections = filteredCollections.map((collection) => {
       if (!tags.length) return collection;
 
@@ -258,7 +266,8 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     });
 
     // Фильтруем по коллекциям
-    const collections = filtrator.selected.parameters[20]?.default || [];
+    // const collections = filtrator.selected.parameters[20]?.default || [];
+    const collections = gCollections;
     console.log('filteredCollections', filteredCollections);
 
     filteredCollections = filteredCollections.map((collection) => {
@@ -303,13 +312,13 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
       });
     });
 
-    // Обрезаем группы
-    if (isDesktop && !allGroups) {
-      result = result.slice(0, 5);
-    }
+    // // Обрезаем группы
+    // if (isDesktop && !allGroups) {
+    //   result = result.slice(0, 5);
+    // }
 
     return result;
-  }, [allGroups, filtrator.selected.parameters, isDesktop, orderFabrics2, page.tags.types]);
+  }, [gCollections, gColors, gTags, orderFabrics2, page.tags.types]);
 
   // const count = useMemo(() => {
   //   const res = groups.reduce((total, item) => {
@@ -490,7 +499,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
 
       <div className={styles.filtersWrapper}>
         <Filters
-          // count={count}
+          count={69}
           // groups={page.groups}
           // isMatrasyCategory={page.isMatrasyCategory}
           // key={path}
@@ -532,12 +541,12 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                 />
               ))}
 
-              {isDesktop && !allGroups && (
+              {/* {isDesktop && !allGroups && (
                 <div className={styles.showAllGroups} onClick={handleShowAllGroups}>
                   <div>Показать все</div>
                   <Icon8ChevronDownThin width={10} className={styles.arrow} />
                 </div>
-              )}
+              )} */}
             </div>
           ) : (
             <div className={styles.notFound}>
