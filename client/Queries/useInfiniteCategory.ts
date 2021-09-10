@@ -27,7 +27,9 @@ const useInfiniteCategory = ({ path }: Params): Result => {
           searchParams.append('page', pageParam);
         }
 
-        return ApiPages.fetchPage({ path: `${p}?${searchParams.toString()}` });
+        const searchString = searchParams.toString();
+
+        return ApiPages.fetchPage({ path: `${p}${searchString ? `?${searchString}` : ''}` });
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
