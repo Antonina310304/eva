@@ -1,5 +1,7 @@
 import { ButtonTabsProps } from '@UI/ButtonTabs';
 import { MockIcon1, MockIcon2, MockIcon3 } from '@Pages/PageIndex/elems/Ideas/MockIcon';
+import CrossSaleProductCard, { CrossSaleProductCardProps } from '@Components/CrossSaleProductCard';
+import { ProductData } from '@Types/Product';
 
 export const ideasMockButtonTabs: ButtonTabsProps = {
   scrollable: true,
@@ -73,5 +75,21 @@ export const ideasMockProducts = [
     title: 'Диван угловой Росис Velvet Blue',
     details: 'http://google.com',
     icons: [MockIcon1, MockIcon2, MockIcon3],
+  },
+];
+
+export const productCardMock: ProductData[] = [
+  {
+    id: 1,
+    name: 'Диван угловой Росис Velvet Blue',
+    type: 'Диван',
+    price: { actual: 19990, discount: 15, expired: 23990 },
+    tags: [],
+    parameters: [],
+    variants: [],
+    parameterValues: [],
+    parameterGroups: [],
+    link: 'http://google.com',
+    images: [{ src: 'react/static/img/mockIdeas/1.png', orientation: 'landscape' }],
   },
 ];

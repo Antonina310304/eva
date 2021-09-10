@@ -4,6 +4,9 @@ import IconClose from '@UI/IconClose/IconClose';
 import Discount from '@UI/Discount';
 import Link from '@UI/Link';
 import Like from '@Components/Like';
+import CrossSaleProductCard from '@Components/CrossSaleProductCard';
+import { productCardMock } from '@Pages/PageIndex/elems/Ideas/IdeasMockProps';
+import ProductCard from '@Components/ProductCard';
 import styles from './IdeasPopup.module.css';
 
 export interface IdeasPopupData {
@@ -29,25 +32,8 @@ const IdeasPopup = forwardRef<HTMLDivElement, IdeasPopupInterface>(
         <div className={styles.container}>
           <IconClose className={styles.iconClose} view='default' size='m' onClick={onClose} />
           <div className={styles.content}>
-            <div className={styles.imageBlock}>
-              <Like className={styles.like} />
-              <img className={styles.image} src={productData.imageUrl} />
-              <div className={styles.iconContainer}>
-                {productData.icons.map((Icon) => (
-                  <Icon className={styles.iconWrapper} />
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.title}>{productData.title}</div>
-            <div>
-              <span className={styles.price_title}>Цена</span>
-              <span className={styles.totalPrice}>{productData.totalPrice}</span>
-              {productData.price && <span className={styles.price}>{productData.price}</span>}
-              {productData.discount && (
-                <Discount className={styles.discount}>{productData.discount}</Discount>
-              )}
-            </div>
+            {/* <CrossSaleProductCard product={productCardMock[0]} /> */}
+            <ProductCard product={productCardMock[0]} />
             {productData.details && (
               <div className={styles.details}>
                 <Link to={productData.details}>Подробнее</Link>

@@ -3,6 +3,8 @@
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
+  max-width: 1778px;
+  margin: 0 auto;
 }
 
 .buttonTabs {
@@ -57,8 +59,8 @@
 .imageCard_first {
   display: inline-block;
   box-sizing: border-box;
-  width: calc(100vw - 2 * var(--space-xxb));
-  height: calc(0.625 * (100vw - 2 * var(--space-xxb)));
+  width: calc(min(100vw, 1768px) - 2 * var(--space-xxb));
+  height: calc(0.625 * (min(100vw, 1768px) - 2 * var(--space-xxb)));
   margin-bottom: var(--space-l);
   object-fit: cover;
 }
@@ -66,16 +68,16 @@
 .imageCard_vertical {
   display: inline-block;
   box-sizing: border-box;
-  width: calc(50vw - var(--space-xxb) - 0.5 * var(--space-l));
-  height: calc(0.625 * (50vw - var(--space-xxb) - 0.5 * var(--space-l)));
+  width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
+  height: calc(0.625 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
   object-fit: cover;
 }
 
 .imageCard_horizontal {
   display: inline-block;
   box-sizing: border-box;
-  width: calc(50vw - var(--space-xxb) - 0.5 * var(--space-l));
-  height: calc(16 / 10 * (50vw - var(--space-xxb) - 0.5 * var(--space-l)));
+  width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
+  height: calc(16 / 10 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
   object-fit: cover;
 }
 
