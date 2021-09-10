@@ -29,7 +29,6 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
   const [scrollTop, setScrollTop] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const refScroll = useRef(null);
-  const selectedMedia = medias[mainMediaIndex];
 
   const normalizeIndex = useCallback(
     (value: number) => {
@@ -120,10 +119,6 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
 
-  console.log('selected src', selectedMedia[1].src);
-  console.log('selected all', selectedMedia);
-  console.log('medias', medias[projectIndex]);
-
   return (
     <ModalMain {...restProps} fullscreen modal={modal}>
       <div className={cn(styles.wrapper, { [styles.loaded]: loaded })}>
@@ -161,7 +156,11 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
 
           <div className={styles.mainWrapper}>
             <div className={styles.mainMediaWrapper}>
-              <img className={styles.mainMedia} src={selectedMedia[projectIndex].src} alt='' />
+              <img
+                className={styles.mainMedia}
+                src={medias[projectIndex][mainMediaIndex].src}
+                alt=''
+              />
             </div>
 
             {!medias[mainMediaIndex].video && (
