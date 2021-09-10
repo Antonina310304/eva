@@ -9,7 +9,6 @@
   box-sizing: border-box;
   width: 100%;
   padding: 0 var(--space-xxb);
-  padding-right: 0;
   overflow-x: hidden;
 }
 
@@ -21,7 +20,7 @@
   color: var(--color-black);
   font-weight: 500;
   font-size: 30px;
-  font-family: Closer Text;
+  font-family: CloserText;
   font-style: normal;
   line-height: 40px;
 }
@@ -82,6 +81,10 @@
 
 .imageCard_bottomMargin {
   margin-bottom: var(--space-l);
+}
+
+.imageWrapper {
+  position: relative;
 }
 
 @media (max-width: 1366px) {

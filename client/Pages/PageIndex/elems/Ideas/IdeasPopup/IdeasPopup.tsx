@@ -20,16 +20,14 @@ interface IdeasPopupInterface {
   visible: boolean;
   onClose: () => void;
   productData: IdeasPopupData;
-  left: string;
-  top: string;
 }
 
 const IdeasPopup = forwardRef<HTMLDivElement, IdeasPopupInterface>(
-  ({ visible, onClose, productData, left, top }, ref) => {
+  ({ visible, onClose, productData }, ref) => {
     return (
-      <Popup visible={visible} style={{ top, left }} ref={ref}>
+      <Popup className={styles.popup} visible={visible} ref={ref}>
         <div className={styles.container}>
-          <IconClose className={styles.iconClose} view='default' size='s' onClick={onClose} />
+          <IconClose className={styles.iconClose} view='default' size='m' onClick={onClose} />
           <div className={styles.content}>
             <div className={styles.imageBlock}>
               <Like className={styles.like} />

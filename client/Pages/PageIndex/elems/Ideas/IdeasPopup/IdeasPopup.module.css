@@ -1,8 +1,18 @@
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 415px;
+
+  transform: translateX(-50%) translateY(-50%);
+}
+
 .container {
   display: flex;
-  width: max-content;
-  max-width: 455px;
-  margin: 40px 0 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 45px 0 0 0;
 }
 
 .iconClose {
@@ -36,17 +46,18 @@
 }
 
 .image {
-  width: 100%;
+  width: 415px;
+  height: 271px;
 }
 
 .title {
-  margin-top: 10px;
+  margin-top: 9px;
   margin-bottom: 5px;
 
   color: var(--color-black);
   font-weight: normal;
   font-size: 16px;
-  font-family: Cera Pro;
+  font-family: CeraPro;
   font-style: normal;
   line-height: 24px;
 }
@@ -55,18 +66,18 @@
   color: var(--color-black);
   font-weight: normal;
   font-size: 16px;
-  font-family: Cera Pro;
+  font-family: CeraPro;
   font-style: normal;
   line-height: 24px;
 }
 
 .totalPrice {
   margin-left: 10px;
-  /* identical to box height */
+
   color: var(--color-black);
   font-weight: 500;
   font-size: 18px;
-  font-family: Cera Pro;
+  font-family: CeraPro;
   font-style: normal;
   line-height: 23px;
 }
@@ -77,7 +88,7 @@
   color: var(--color-dark-gray);
   font-weight: normal;
   font-size: 16px;
-  font-family: Cera Pro;
+  font-family: CeraPro;
   font-style: normal;
   line-height: 24px;
   text-decoration-line: line-through;
@@ -104,7 +115,7 @@
   color: var(--color-dark-gray);
   font-weight: normal;
   font-size: 16px;
-  font-family: Cera Pro;
+  font-family: CeraPro;
   font-style: normal;
   line-height: 24px;
 }
@@ -119,5 +130,23 @@
   .iconWrapper {
     width: 40px;
     height: 40px;
+  }
+
+  .image {
+    width: 356px;
+    height: 235px;
+  }
+
+  .popup {
+    width: 356px;
+  }
+
+  .container {
+    margin: 35px 0 0 0;
+  }
+
+  .iconClose {
+    top: var(--space-s);
+    right: var(--space-s);
   }
 }

@@ -1,5 +1,5 @@
 import { ButtonTabsProps } from '@UI/ButtonTabs';
-import MockIcon from '@Pages/PageIndex/elems/Ideas/MockIcon';
+import { MockIcon1, MockIcon2, MockIcon3 } from '@Pages/PageIndex/elems/Ideas/MockIcon';
 
 export const ideasMockButtonTabs: ButtonTabsProps = {
   scrollable: true,
@@ -24,31 +24,54 @@ export const ideasMockButtonTabs: ButtonTabsProps = {
 
 export const ideasMockProducts = [
   {
-    imageUrl: 'https://data2.1freewallpapers.com/download/background-gray-abstract.jpg',
+    imageUrl: 'react/static/img/mockIdeas/1.png',
     type: 'Кресло',
-    totalPrice: '42 500',
-    price: '50 000',
-    discount: 15,
+    totalPrice: '19 990 ₽',
+    price: '23 990 ₽',
+    discount: -15,
     title: 'Диван угловой Росис Velvet Blue',
     details: 'http://google.com',
-    icons: [MockIcon, MockIcon, MockIcon],
+    icons: [MockIcon1, MockIcon2, MockIcon3],
   },
+
   {
-    imageUrl:
-      'https://www.zastavki.com/pictures/1920x1080/2014/Backgrounds_On_blue_background_wallpaper_082199_23.jpg',
+    imageUrl: 'react/static/img/mockIdeas/2.png',
     type: 'Кресло',
+    totalPrice: '19 990 ₽',
+    price: '23 990 ₽',
+    discount: -15,
+    title: 'Диван угловой Росис Velvet Blue',
+    details: 'http://google.com',
+    icons: [MockIcon1, MockIcon2, MockIcon3],
   },
   {
-    imageUrl: 'https://img3.goodfon.ru/original/1920x1080/6/6c/fon-oranzhevyy-perehod-yarko-po.jpg',
+    imageUrl: 'react/static/img/mockIdeas/3.png',
     type: 'Топпер',
+    totalPrice: '19 990 ₽',
+    price: '23 990 ₽',
+    discount: -15,
+    title: 'Диван угловой Росис Velvet Blue',
+    details: 'http://google.com',
+    icons: [MockIcon1, MockIcon2, MockIcon3],
   },
   {
-    imageUrl: 'https://storge.pic2.me/cm/3840x2160/933/588866e31688f.jpg',
+    imageUrl: 'react/static/img/mockIdeas/4.png',
     type: 'Кресло',
+    totalPrice: '19 990 ₽',
+    price: '23 990 ₽',
+    discount: -15,
+    title: 'Диван угловой Росис Velvet Blue',
+    details: 'http://google.com',
+    icons: [MockIcon1, MockIcon2, MockIcon3],
   },
   {
-    imageUrl:
-      'https://images.wallpaperscraft.ru/image/single/fioletovyy_temnyy_fon_pyatna_65626_1920x1080.jpg',
+    imageUrl: 'react/static/img/mockIdeas/5.png',
     type: 'Топпер',
+    totalPrice: '19 990 ₽',
+    price: '23 990 ₽',
+    discount: -15,
+    title: 'Диван угловой Росис Velvet Blue',
+    details: 'http://google.com',
+    icons: [MockIcon1, MockIcon2, MockIcon3],
   },
 ];

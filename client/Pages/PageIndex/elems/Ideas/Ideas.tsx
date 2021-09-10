@@ -1,10 +1,9 @@
-import React, { FC, HTMLAttributes, useCallback, useMemo } from 'react';
+import React, { FC, HTMLAttributes, useMemo } from 'react';
 import cn from 'classnames';
 import Button from '@UI/Button';
 import ButtonTabs, { ButtonTabsProps } from '@UI/ButtonTabs';
-import useModals from '@Hooks/useModals';
-import Popup from '@UI/Popup';
 import IdeasPopup from '@Pages/PageIndex/elems/Ideas/IdeasPopup/IdeasPopup';
+import Link from '@UI/Link';
 import styles from './Ideas.module.css';
 
 interface SomeProductInterface {
@@ -23,7 +22,7 @@ export interface IdeasProps extends HTMLAttributes<HTMLDivElement> {
 
 const Ideas: FC<IdeasProps> = ({ className, title, tabGroup, products }) => {
   const [selectedTab, setSelectedTab] = React.useState('all');
-  const [popupVisible, setPopupVisible] = React.useState(false);
+  const [popupVisible, setPopupVisible] = React.useState(-1);
   const [clickedProduct, setClickedProduct] = React.useState(null);
 
   const popupRef = React.useRef<HTMLDivElement>();
@@ -39,16 +38,16 @@ const Ideas: FC<IdeasProps> = ({ className, title, tabGroup, products }) => {
   }, [products, selectedTab]);
 
   const handleImageClick = React.useCallback(
-    (event: React.MouseEvent, product: SomeProductInterface) => {
-      setClickedProduct(product);
-      setPopupVisible(true);
+    (index: number) => {
+      setClickedProduct(filteredProducts[index]);
+      setPopupVisible(index);
     },
-    [],
+    [filteredProducts],
   );
 
   return (
     <div className={cn(className, styles.wrapper)}>
-      <p className={styles.title}>{title || 'Идеи для дома'}</p>
+      <h2 className={styles.title}>{title || 'Идеи для дома'}</h2>
 
       <ButtonTabs
         {...tabGroup}
@@ -57,52 +56,101 @@ const Ideas: FC<IdeasProps> = ({ className, title, tabGroup, products }) => {
       />
       <div className={styles.imageBlock}>
         {filteredProducts[0] && (
-          <img
-            className={cn(styles.imageCard_first)}
-            src={filteredProducts[0].imageUrl}
-            onClick={(event) => handleImageClick(event, filteredProducts[0])}
-          />
+          <div className={styles.imageWrapper}>
+            <img
+              className={cn(styles.imageCard_first)}
+              src={filteredProducts[0].imageUrl}
+              onClick={(event) => handleImageClick(0)}
+            />
+            {popupVisible === 0 && (
+              <IdeasPopup
+                ref={popupRef}
+                productData={clickedProduct}
+                visible={popupVisible === 0}
+                onClose={() => setPopupVisible(-1)}
+              />
+            )}
+          </div>
         )}
         <div className={styles.imageBlock_subWrapper}>
           <div className={styles.leftBlock}>
             {filteredProducts[1] && (
-              <img
-                className={cn(styles.imageCard_horizontal, styles.imageCard_bottomMargin)}
-                src={filteredProducts[1].imageUrl}
-              />
+              <div className={styles.imageWrapper}>
+                <img
+                  className={cn(styles.imageCard_vertical, styles.imageCard_bottomMargin)}
+                  src={filteredProducts[1].imageUrl}
+                  onClick={(event) => handleImageClick(1)}
+                />
+                {popupVisible === 1 && (
+                  <IdeasPopup
+                    ref={popupRef}
+                    productData={clickedProduct}
+                    visible={popupVisible === 1}
+                    onClose={() => setPopupVisible(-1)}
+                  />
+                )}
+              </div>
             )}
             {filteredProducts[2] && (
-              <img className={cn(styles.imageCard_vertical)} src={filteredProducts[2].imageUrl} />
+              <div className={styles.imageWrapper}>
+                <img
+                  className={cn(styles.imageCard_horizontal)}
+                  src={filteredProducts[2].imageUrl}
+                  onClick={(event) => handleImageClick(2)}
+                />
+                {popupVisible === 2 && (
+                  <IdeasPopup
+                    ref={popupRef}
+                    productData={clickedProduct}
+                    visible={popupVisible === 2}
+                    onClose={() => setPopupVisible(-1)}
+                  />
+                )}
+              </div>
             )}
           </div>
           <div className={styles.rightBlock}>
             {filteredProducts[3] && (
-              <img
-                className={cn(styles.imageCard_vertical, styles.imageCard_bottomMargin)}
-                src={filteredProducts[3].imageUrl}
-              />
+              <div className={styles.imageWrapper}>
+                <img
+                  className={cn(styles.imageCard_horizontal, styles.imageCard_bottomMargin)}
+                  src={filteredProducts[3].imageUrl}
+                  onClick={(event) => handleImageClick(3)}
+                />
+                {popupVisible === 3 && (
+                  <IdeasPopup
+                    ref={popupRef}
+                    productData={clickedProduct}
+                    visible={popupVisible === 3}
+                    onClose={() => setPopupVisible(-1)}
+                  />
+                )}
+              </div>
             )}
             {filteredProducts[4] && (
-              <img className={cn(styles.imageCard_horizontal)} src={filteredProducts[4].imageUrl} />
+              <div className={styles.imageWrapper}>
+                <img
+                  className={cn(styles.imageCard_vertical)}
+                  src={filteredProducts[4].imageUrl}
+                  onClick={(event) => handleImageClick(4)}
+                />
+                {popupVisible === 4 && (
+                  <IdeasPopup
+                    ref={popupRef}
+                    productData={clickedProduct}
+                    visible={popupVisible === 4}
+                    onClose={() => setPopupVisible(-1)}
+                  />
+                )}
+              </div>
             )}
           </div>
         </div>
-
-        {popupVisible && (
-          <IdeasPopup
-            ref={popupRef}
-            productData={clickedProduct}
-            visible={popupVisible}
-            left='450px'
-            top='250px'
-            onClose={() => setPopupVisible(false)}
-          />
-        )}
       </div>
 
-      <Button theme='blank' className={styles.buttonMore}>
-        Показать еще идеи
-      </Button>
+      <Link to='' className={styles.buttonMore}>
+        <Button theme='blank'>Показать еще идеи</Button>
+      </Link>
     </div>
   );
 };
