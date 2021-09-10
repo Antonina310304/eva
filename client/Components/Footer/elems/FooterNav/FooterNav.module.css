@@ -8,7 +8,7 @@
 
 .footerNavItem {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: var(--space-s);
 
   &:last-child {
     margin-bottom: 0;
@@ -16,11 +16,11 @@
 }
 
 .footerNavLink {
+  composes: s from 'sizes';
+
   display: inline-block;
 
   color: var(--color-black);
-  font-size: var(--size-s);
-  line-height: 21px;
   text-decoration: none;
 
   transition: color 0.4s ease-in-out;
@@ -28,19 +28,13 @@
   a&:hover {
     color: var(--color-grafit);
     font-weight: 500;
-
-    transition: color 0.4s ease-in-out;
   }
 
   a&:focus {
     font-weight: 500;
-
-    transition: color 0.4s ease-in-out;
   }
 
   a&:active {
     font-weight: 500;
-
-    transition: color 0.4s ease-in-out;
   }
 }

@@ -17,6 +17,7 @@ const FooterNav: FC<FooterNavProps> = (props) => {
 
   return (
     <ul className={styles.footerNav}>
+      {/* TODO: удалить после полной замены фейковых данных на реальные */}
       {(linkList || []).map((item) => {
         return (
           <li key={item.title} className={styles.footerNavItem}>

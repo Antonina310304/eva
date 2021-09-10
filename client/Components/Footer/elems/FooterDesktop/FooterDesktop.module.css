@@ -11,7 +11,7 @@
 }
 
 .wrapperMedium {
-  margin-bottom: 25px;
+  margin-bottom: var(--space-m);
 }
 
 .wrapperBig {
@@ -24,19 +24,19 @@
 }
 
 .footerText {
+  composes: s from 'sizes';
+
   margin: 0;
 
   color: var(--color-dark-gray);
-  font-size: var(--size-s);
-  line-height: 21px;
 }
 
 .madeIn {
+  composes: s from 'sizes';
+
   margin: 0;
 
   color: var(--color-black);
-  font-size: var(--size-s);
-  line-height: 25px;
 }
 
 .marginTop95 {
