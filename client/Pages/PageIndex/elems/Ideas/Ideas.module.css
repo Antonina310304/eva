@@ -1,5 +1,181 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.buttonTabs {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 var(--space-xxb);
+  padding-right: 0;
+  overflow-x: hidden;
 }
 
 .title {
+  box-sizing: border-box;
+  margin-bottom: var(--space-m);
+  padding: 0 var(--space-xxb);
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: 30px;
+  font-family: Closer Text;
+  font-style: normal;
+  line-height: 40px;
+}
+
+.imageBlock {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: var(--space-xxl);
+  padding: 0 var(--space-xxb);
+}
+
+.imageBlock_subWrapper {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-right: var(--space-l);
+}
+
+.rightBlock {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.imageCard_first {
+  display: inline-block;
+  box-sizing: border-box;
+  width: calc(100vw - 2 * var(--space-xxb));
+  height: calc(0.625 * (100vw - 2 * var(--space-xxb)));
+  margin-bottom: var(--space-l);
+  object-fit: cover;
+}
+
+.imageCard_vertical {
+  display: inline-block;
+  box-sizing: border-box;
+  width: calc(50vw - var(--space-xxb) - 0.5 * var(--space-l));
+  height: calc(0.625 * (50vw - var(--space-xxb) - 0.5 * var(--space-l)));
+  object-fit: cover;
+}
+
+.imageCard_horizontal {
+  display: inline-block;
+  box-sizing: border-box;
+  width: calc(50vw - var(--space-xxb) - 0.5 * var(--space-l));
+  height: calc(16 / 10 * (50vw - var(--space-xxb) - 0.5 * var(--space-l)));
+  object-fit: cover;
+}
+
+.imageCard_bottomMargin {
+  margin-bottom: var(--space-l);
+}
+
+@media (max-width: 1366px) {
+  .imageBlock,
+  .title,
+  .buttonTabs {
+    padding: 0 var(--space-xxl);
+  }
+
+  .imageCard_first {
+    width: calc(100vw - 2 * var(--space-xxl));
+    height: calc(0.625 * (100vw - 2 * var(--space-xxl)));
+  }
+
+  .imageCard_vertical {
+    width: calc(50vw - var(--space-xxl) - 0.5 * var(--space-l));
+    height: calc(0.625 * (50vw - var(--space-xxl) - 0.5 * var(--space-l)));
+  }
+
+  .imageCard_horizontal {
+    width: calc(50vw - var(--space-xxl) - 0.5 * var(--space-l));
+    height: calc(16 / 10 * (50vw - var(--space-xxl) - 0.5 * var(--space-l)));
+  }
+}
+
+.buttonMore {
+  align-self: center;
+  width: fit-content;
+  margin-top: var(--space-xxl);
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 25px;
+    line-height: 37px;
+  }
+}
+
+@media (max-width: 768px) {
+  .imageBlock,
+  .title,
+  .buttonTabs {
+    padding: 0 var(--space-s);
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .imageCard_first {
+    width: calc(100vw - 2 * var(--space-s));
+    height: calc(0.625 * (100vw - 2 * var(--space-s)));
+    margin-bottom: var(--space-s);
+  }
+
+  .imageCard_vertical {
+    width: calc(50vw - var(--space-s) - 0.5 * var(--space-n));
+    height: calc(0.625 * (50vw - var(--space-s) - 0.5 * var(--space-n)));
+  }
+
+  .imageCard_horizontal {
+    width: calc(50vw - var(--space-s) - 0.5 * var(--space-n));
+    height: calc(16 / 10 * (50vw - var(--space-s) - 0.5 * var(--space-n)));
+  }
+
+  .leftBlock {
+    margin-right: var(--space-n);
+  }
+
+  .imageCard_bottomMargin {
+    margin-bottom: var(--space-n);
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .imageBlock_subWrapper {
+    flex-direction: column;
+  }
+
+  .imageCard_vertical {
+    width: calc(100vw - 2 * var(--space-s));
+    height: calc(0.625 * (100vw - 2 * var(--space-s)));
+    margin-bottom: var(--space-s);
+  }
+
+  .imageCard_horizontal {
+    width: calc(100vw - 2 * var(--space-s));
+    height: calc(0.625 * (100vw - 2 * var(--space-s)));
+    margin-bottom: var(--space-s);
+  }
 }
