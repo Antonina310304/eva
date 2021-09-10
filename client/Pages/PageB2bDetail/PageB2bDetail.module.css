@@ -149,6 +149,7 @@
   .pressWrapper {
     margin-top: var(--space-e);
     margin-bottom: var(--space-xb);
+    overflow: hidden;
   }
 }
 
