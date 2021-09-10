@@ -14,6 +14,7 @@ export interface Data {
 }
 
 const RouteIndex = loadable(() => import('@Routes/RouteIndex'));
+const RoutePromotionsDiscounts = loadable(() => import('@Routes/RoutePromotionsDiscounts'));
 const RouteCategory = loadable(() => import('@Routes/RouteCategory'));
 const RouteProduct = loadable(() => import('@Routes/RouteProduct'));
 const RoutePayment = loadable(() => import('@Routes/RoutePayment'));
@@ -34,6 +35,10 @@ const App: FC = () => {
     <ModalsProvider>
       <Route {...routes.index}>
         <RouteIndex />
+      </Route>
+
+      <Route {...routes.promotionsDiscounts}>
+        <RoutePromotionsDiscounts />
       </Route>
 
       <Route {...routes.category}>

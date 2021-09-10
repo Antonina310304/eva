@@ -63,6 +63,10 @@ const routes: RoutesMap = {
   b2b: {
     path: '/b2b',
   },
+  promotionsDiscounts: {
+    path: '/akcii-skidki',
+    exact: true,
+  },
 };
 
 export default routes;

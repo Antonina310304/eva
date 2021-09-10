@@ -1,0 +1,25 @@
+.title {
+  composes: main from 'containers';
+  composes: xb from 'sizes';
+  composes: hero from 'fonts';
+
+  margin: 0 auto;
+  padding: var(--space-xl) 0;
+
+  font-weight: 500;
+  text-align: center;
+}
+
+@media (--desktop-m) {
+  .title {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+}
+
+@media (--mobile-m) {
+  .title {
+    font-size: var(--size-xl);
+    line-height: 1.5;
+  }
+}
