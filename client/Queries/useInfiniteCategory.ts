@@ -1,43 +1,21 @@
-import { useInfiniteQuery, UseInfiniteQueryResult, UseQueryResult } from 'react-query';
+import { useInfiniteQuery, UseInfiniteQueryResult } from 'react-query';
 
-import * as ApiPages from '@Api/Pages';
-import usePage from '@Queries/usePage';
+import * as ApiCategory from '@Api/Category';
 
 export interface Params {
-  path: string;
+  slug: string;
+  search?: string;
   ssr?: boolean;
 }
 
-export interface Result {
-  page: UseQueryResult<any>;
-  category: UseInfiniteQueryResult<any>;
-}
+export type Result = UseInfiniteQueryResult<any>;
 
 const useInfiniteCategory = (params: Params): Result => {
-  const { path, ssr = true } = params || {};
-  const keys = ['infiniteCategory', ssr && 'ssr', path];
-  const page = usePage({ path });
+  const { slug, ssr = true, search } = params || {};
+  const keys = ['infiniteCategory', ssr && 'ssr', slug, search].filter(Boolean);
   const category = useInfiniteQuery(
     keys,
-    ({ pageParam = 1 }) => {
-      try {
-        const [p = '', qs = ''] = path.split('?');
-        const searchParams = new URLSearchParams(qs);
-
-        if (pageParam > 1) {
-          searchParams.append('page', pageParam);
-        }
-
-        const searchString = searchParams.toString();
-
-        return ApiPages.fetchPage({ path: `${p}${searchString ? `?${searchString}` : ''}` });
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-
-        return null;
-      }
-    },
+    ({ pageParam = 1 }) => ApiCategory.getProducts({ slug, page: pageParam, search }),
     {
       initialData: {
         pageParams: [1],
@@ -53,22 +31,10 @@ const useInfiniteCategory = (params: Params): Result => {
 
         return lastPage.productsCountLeft ? lastPage.page + 1 : null;
       },
-      select: (data) => ({
-        pages: data.pages.map((dataPage) => ({
-          page: dataPage.page,
-          products: dataPage.products,
-          productsCountLeft: dataPage.productsCountLeft,
-          productsModel: dataPage.productsModel,
-        })),
-        pageParams: data.pageParams,
-      }),
     },
   );
 
-  return {
-    page,
-    category,
-  };
+  return category;
 };
 
 export default useInfiniteCategory;

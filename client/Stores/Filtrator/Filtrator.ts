@@ -1,5 +1,6 @@
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
+import equal from 'fast-deep-equal';
 
 import { FiltersData } from '@Types/Filters';
 
@@ -48,7 +49,7 @@ const selected = createDerived(filtratorStore, (filtrator) => {
     return Object.keys(parameters).includes(value.parameterId);
   });
 
-  filtrator.filters.forEach((filter) => {
+  (filtrator.filters || []).forEach((filter) => {
     const items = filter.items.filter((item) => Object.keys(parameters).includes(item.parameterId));
 
     if (items.length > 0) {
@@ -56,7 +57,7 @@ const selected = createDerived(filtratorStore, (filtrator) => {
     }
   });
 
-  return { filters, parameterValues, parameters, sort: filtrator.sort };
+  return { filters, parameterValues, parameters, sort: filtrator.sort || [] };
 });
 
 const changeRange = ({ id, from, to }: any): void => {
@@ -322,20 +323,25 @@ const toUrl = ({ categories }: { categories?: string[] }): string => {
   return `?${items.join('&')}`;
 };
 
-export const useFiltrator = (initial?: FiltersData) => {
-  if (initial && filtratorStore.value?.id !== initial.id) {
-    filtratorStore.set(initial);
-  }
+const init = (initialValue: FiltersData): void => {
+  const value = getValue(filtratorStore);
 
+  if (initialValue && !equal(initialValue, value)) {
+    filtratorStore.set(initialValue);
+  }
+};
+
+export const useFiltrator = () => {
   return {
     ...useStore(filtratorStore),
-    totalCount: useStore(totalCountStore),
+    totalCount: useStore(totalCountStore) || 0,
     tabs: useStore(tabs),
     selected: useStore(selected),
   };
 };
 
 export default {
+  init,
   changeRange,
   addCheckbox,
   removeCheckbox,
