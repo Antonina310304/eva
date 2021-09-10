@@ -6,9 +6,11 @@ import Section from '@Components/Section';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import NavArrows from '@UI/NavArrows';
 import Image from '@UI/Image';
+import FeedbackForm from '@Forms/FeedbackForm';
 import ProgressBar from '@UI/ProgressBar';
 import useMedias from '@Hooks/useMedias';
 import useModals from '@Hooks/useModals';
+import PressGallery from '@Components/PressGallery';
 import { PageB2bDetailData } from './typings';
 import styles from './PageB2bDetail.module.css';
 
@@ -20,7 +22,7 @@ export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { className, page, ...restProps } = props;
-  const { title, teaser, examples } = page;
+  const { title, teaser, examples, articles } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
@@ -146,6 +148,10 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
           </Button>
         </div>
       )}
+      <FeedbackForm />
+      <div className={styles.pressWrapper}>
+        <PressGallery articles={articles} />
+      </div>
     </div>
   );
 };

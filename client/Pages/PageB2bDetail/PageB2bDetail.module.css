@@ -107,6 +107,11 @@
   padding-right: var(--space-xxl);
 }
 
+.pressWrapper {
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-e);
+}
+
 @media (--desktop-m) {
   .heading {
     font-size: var(--size-b);
@@ -139,6 +144,11 @@
 
   .buttonWrapper {
     margin-bottom: var(--space-e);
+  }
+
+  .pressWrapper {
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-xb);
   }
 }
 
@@ -182,6 +192,10 @@
 
   .textWrapper {
     height: 82px;
+  }
+
+  .pressWrapper {
+    margin-top: var(--space-xb);
   }
 }
 
