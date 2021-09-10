@@ -122,6 +122,7 @@ const ProductPhotosModal: FC<ModalMainProps> = (props) => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
 
+  console.log(selectedMedia);
   return (
     <ModalMain {...restProps} fullscreen modal={modal}>
       <div className={cn(styles.wrapper, { [styles.loaded]: loaded })}>

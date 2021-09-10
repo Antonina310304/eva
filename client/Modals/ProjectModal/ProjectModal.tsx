@@ -10,7 +10,6 @@ import Scroller from '@UI/Scroller';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import IconClose from '@UI/IconClose';
-import images from '@Modals/BuyInCreditModal/images';
 import styles from './ProjectModal.module.css';
 
 export interface ModalData {
@@ -121,6 +120,10 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
 
+  console.log('selected src', selectedMedia[1].src);
+  console.log('selected all', selectedMedia);
+  console.log('medias', medias[projectIndex]);
+
   return (
     <ModalMain {...restProps} fullscreen modal={modal}>
       <div className={cn(styles.wrapper, { [styles.loaded]: loaded })}>
@@ -158,7 +161,7 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
 
           <div className={styles.mainWrapper}>
             <div className={styles.mainMediaWrapper}>
-              <img className={styles.mainMedia} src={selectedMedia.src} alt='' />
+              <img className={styles.mainMedia} src={selectedMedia[projectIndex].src} alt='' />
             </div>
 
             {!medias[mainMediaIndex].video && (

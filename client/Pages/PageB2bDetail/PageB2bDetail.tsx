@@ -23,7 +23,6 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { title, teaser, examples } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
-  const { isMobileM } = useMedias();
   const [, { openModal }] = useModals();
 
   const projectsMap = {};
@@ -50,7 +49,6 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   /* eslint-enable no-param-reassign */
 
   const images = Object.values(gallery);
-  console.log(images);
 
   const handleOpen = useCallback(
     (e, projectIndex) => {
