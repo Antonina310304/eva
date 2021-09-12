@@ -20,7 +20,7 @@ export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
 
 const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { className, page, ...restProps } = props;
-  const { title, teaser, examples, articles } = page;
+  const { title, teaser, examples, articles, projects } = page;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
@@ -31,14 +31,14 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
       projectsMap[example.projectId] = example;
     }
   });
-  const projects: ProjectItem = Object.values(projectsMap);
+  const uniqueProjects: ProjectItem = Object.values(projectsMap);
   const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
 
   const onClickMore = useCallback(() => {
     setVisibleItems(visibleItems + 3);
   }, [visibleItems]);
 
-  const balance = projects.length - visibleItems;
+  const balance = uniqueProjects.length - visibleItems;
 
   /* eslint-disable no-param-reassign */
   const gallery = examples.reduce((a, c) => {
@@ -54,9 +54,9 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
     (e, projectIndex) => {
       if (window.cancelClick) return;
 
-      openModal('Project', { images, projectIndex, projects });
+      openModal('Project', { images, projectIndex, uniqueProjects });
     },
-    [images, projects, openModal],
+    [images, uniqueProjects, openModal],
   );
 
   const normalizeSlide = useCallback(
@@ -94,7 +94,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      {projects.slice(0, visibleItems).map((item, projectIndex) => (
+      {uniqueProjects.slice(0, visibleItems).map((item, projectIndex) => (
         <div className={styles.contentWrapper}>
           <Section
             {...restProps}
@@ -118,7 +118,12 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
                     key={elementIndex}
                     onClick={(e) => handleOpen(e, projectIndex)}
                   >
-                    <Image className={styles.galleryImage} src={element.src} />
+                    <Image
+                      className={
+                        element.height / element.width < 1 ? styles.horizontal : styles.vertical
+                      }
+                      src={element.src}
+                    />
                   </div>
                 ))}
               </Gallery>

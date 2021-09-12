@@ -26,8 +26,13 @@ export interface ArticleItem {
   length: number;
   images: any;
 }
+
+export interface ProjectData {
+  title: string;
+}
 export interface PageB2bDetailData {
-  projects: ProjectItem[];
+  uniqueProjects: ProjectItem[];
+  projects: ProjectData;
   title: string;
   teaser: string;
   examples: ExamplesData[];
