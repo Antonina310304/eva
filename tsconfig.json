@@ -36,6 +36,7 @@
     "typeRoots": ["./typings", "node_modules/@types"]
   },
   "include": [
+    "cypress",
     "client/**/*.js",
     "client/**/*.jsx",
     "client/**/*.ts",
