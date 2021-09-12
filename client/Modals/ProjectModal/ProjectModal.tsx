@@ -24,12 +24,12 @@ export interface ModalData {
   images: any[];
   startSlideIndex?: number;
   projectIndex: number;
-  projects: ProjectData;
+  uniqueProjects: ProjectData;
 }
 
 const ProjectModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { images: medias, projects, startSlideIndex, projectIndex } = modal.data as ModalData;
+  const { images: medias, uniqueProjects, startSlideIndex, projectIndex } = modal.data as ModalData;
   const [, { closeModal, openModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
@@ -128,9 +128,6 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
     setTimeout(() => setLoaded(true), 500);
   }, []);
 
-  console.log('projects', projects);
-  console.log('projects[projectIndex]', projects[projectIndex]);
-
   return (
     <ModalMain {...restProps} fullscreen modal={modal}>
       <div className={cn(styles.wrapper, { [styles.loaded]: loaded })}>
@@ -174,9 +171,9 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                 alt=''
               />
               <div className={styles.descriptionWrapper}>
-                <h3 className={styles.projectName}>{projects[projectIndex].title}</h3>
+                <h3 className={styles.projectName}>{uniqueProjects[projectIndex].title}</h3>
                 <div className={styles.textWrapper}>
-                  {projects[projectIndex].text.map((elem, elemIndex: number) => (
+                  {uniqueProjects[projectIndex].text.map((elem, elemIndex: number) => (
                     <div className={styles.description} key={elemIndex}>
                       {elem}
                     </div>
