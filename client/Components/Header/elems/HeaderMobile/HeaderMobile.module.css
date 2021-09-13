@@ -68,6 +68,8 @@
 }
 
 .wrapper {
+  composes: main from 'containers';
+
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -4,7 +4,6 @@ import Link from '@UI/Link';
 import cn from 'classnames';
 import MainNav from '@Components/Header/elems/MainNav/MainNav';
 
-import Container from '@Components/Container/Container';
 import Flex from '@Components/Flex/Flex';
 import UserMenu from '@Components/UserMenu/UserMenu';
 import { siteNavList, UserMenuDesktop } from '@Components/Header/data';
@@ -54,7 +53,7 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
                     [styles.headerBottomFloat]: hideOnScroll,
                   })}
                 >
-                  <Container>
+                  <div className={styles.container}>
                     <Flex jc='space-between' ai='center'>
                       <MainNav
                         mainNavList={item.submenu}
@@ -65,7 +64,7 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
                       />
                       {!hideOnScroll && <UserMenu userMenuList={UserMenuDesktop} />}
                     </Flex>
-                  </Container>
+                  </div>
                 </div>
               )}
             </li>

@@ -6,7 +6,6 @@ import Sidebar from '@Components/Header/elems/SideBar';
 import UserMenu from '@Components/UserMenu';
 
 import Overlay from '@Components/Overlay';
-import Container from '@Components/Container';
 import { UserMenuMobile } from '@Components/Header/data';
 import cn from 'classnames';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
@@ -68,7 +67,7 @@ const HeaderMobile = () => {
         [styles.hide]: hide === 'bottom',
       })}
     >
-      <Container className={styles.wrapper}>
+      <div className={styles.wrapper}>
         <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={showSideBar} className={styles.burger} />
         <Flex ai='center' jc='space-between' className={styles.in}>
@@ -83,7 +82,7 @@ const HeaderMobile = () => {
             {!isMobile && <UserMenu className={styles.userMenu} userMenuList={UserMenuMobile} />}
           </Flex>
         </Flex>
-      </Container>
+      </div>
       <Sidebar
         isOpenSideBar={isOpenSideBar}
         setIsShowSubMenu={setIsShowSubMenu}

@@ -26,6 +26,10 @@
   background: var(--color-white);
 }
 
+.container {
+  composes: main from 'containers';
+}
+
 .flex {
   display: flex;
   align-items: center;

@@ -1,15 +1,13 @@
 import React, { FC, HTMLAttributes, memo, useState } from 'react';
+import cn from 'classnames';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import SiteNav from '@Components/Header/elems/SiteNav/SiteNav';
-import MainNav from '@Components/Header/elems/MainNav/MainNav';
 import Search from '@Components/Header/elems/Search';
 import Location from '@Components/Header/elems/Location';
 import Phone from '@Components/Header/elems/Phone';
 import UserMenu from '@Components/UserMenu';
-import Container from '@Components/Container';
 import { UserMenuDesktop } from '@Components/Header/data';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import cn from 'classnames';
 import Flex from '@Components/Flex';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import Overlay from '@Components/Overlay';
@@ -43,7 +41,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
     >
       <div className={styles.in}>
         <div className={styles.headerTop}>
-          <Container>
+          <div className={styles.container}>
             <Flex className={styles.headerIn}>
               <Flex ai='center' jc='flex-start' className={styles.maxWidth}>
                 <HeaderLogo className={styles.slider} />
@@ -64,7 +62,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
                 )}
               </Flex>
             </Flex>
-          </Container>
+          </div>
         </div>
       </div>
       <Overlay isOpen={isFirstClick} />
