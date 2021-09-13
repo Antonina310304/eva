@@ -16,9 +16,8 @@
 
 .flexWrapper {
   display: flex;
-  flex: 0 0 auto;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-direction: column;
+  flex-shrink: 0;
   margin-right: 80px;
   margin-bottom: 40px;
 

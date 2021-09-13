@@ -1,11 +1,19 @@
-import React, { FC, HTMLAttributes, useEffect, useRef, useState, memo, useCallback } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+  memo,
+  useCallback,
+  lazy,
+  Suspense,
+} from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 
 import Input from '@UI/Input';
 import IconClose from '@UI/IconClose';
-import ModalSearch from '@Components/Header/elems/Search/elems/ModalSearch';
-import ModalSearchContent from '@Components/Header/elems/Search/elems/ModalSearchContent';
 import { hits, offers, viewed } from '@Components/Header/elems/Search/data';
 import { SearchResultData } from '@Types/SearchResultData';
 import useOnClickOutside from '@Hooks/useOnClickOutside';
@@ -16,6 +24,9 @@ export interface SearchData extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   isMenu?: boolean;
 }
+
+const ModalSearch = lazy(() => import('./elems/ModalSearch'));
+const ModalSearchContent = lazy(() => import('./elems/ModalSearchContent'));
 
 const Search: FC<SearchData> = ({ className, isMenu }) => {
   const { isMobile, isOnlyDesktop } = useMedias();
@@ -74,8 +85,6 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
 
   const handleClickSearch = useCallback(() => {
     inputRef.current.focus();
-    setIsShowModal(true);
-    setIsShowInput(true);
   }, []);
 
   const handleSubmit = useCallback(
@@ -96,6 +105,13 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
     },
     [debouceChangeValue],
   );
+
+  const handleFocus = useCallback(() => {
+    setTimeout(() => {
+      setIsShowModal(true);
+      setIsShowInput(true);
+    }, 100);
+  }, []);
 
   // Блокируем скролл на странице
   useEffect(() => {
@@ -128,6 +144,7 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
           placeholder='Найти мебель'
           ref={inputRef}
           onChange={handleChange}
+          onFocus={handleFocus}
         />
         {searchValue !== '' && (
           <button className={styles.buttonReset} type='button' onClick={resetSearch}>
@@ -147,11 +164,18 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
         </button>
       </div>
 
-      <div ref={refPopup}>
-        <ModalSearch hideModal={hideModal} isShowModal={isShowModal}>
-          <ModalSearchContent request={searchResult} hits={hits} viewed={viewed} offers={offers} />
-        </ModalSearch>
-      </div>
+      {isShowModal && (
+        <Suspense fallback={null}>
+          <ModalSearch visible={isShowModal} ref={refPopup} onClose={hideModal}>
+            <ModalSearchContent
+              request={searchResult}
+              hits={hits}
+              viewed={viewed}
+              offers={offers}
+            />
+          </ModalSearch>
+        </Suspense>
+      )}
     </form>
   );
 };
