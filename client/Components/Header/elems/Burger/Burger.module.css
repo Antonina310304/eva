@@ -1,0 +1,14 @@
+.burger {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+
+  background: transparent;
+  background-image: url('icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px auto;
+  border: 0;
+  cursor: pointer;
+}

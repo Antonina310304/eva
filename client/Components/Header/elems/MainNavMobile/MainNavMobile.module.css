@@ -1,0 +1,19 @@
+.wrapper {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 25px 40px 60px;
+
+  @media (--mobile) {
+    padding: 25px 15px 60px;
+  }
+}
+
+.item {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.submenu {
+  display: none;
+}

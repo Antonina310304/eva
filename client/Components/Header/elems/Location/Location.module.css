@@ -1,0 +1,6 @@
+a.location {
+  margin-right: 15px;
+
+  font-size: var(--size-s);
+  line-height: 150%;
+}

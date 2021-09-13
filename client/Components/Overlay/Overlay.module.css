@@ -1,0 +1,29 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 8;
+
+  display: block;
+
+  background: transparent;
+  visibility: hidden;
+  opacity: 0;
+  mix-blend-mode: multiply;
+
+  transition: background 400ms ease, visibility 0s ease 450ms, opacity 0s ease 450ms;
+}
+
+.overlay.show {
+  background: rgba(0, 0, 0, 0.3);
+  visibility: visible;
+  opacity: 1;
+
+  transition: background 400ms ease, visibility 0s, opacity 400ms ease;
+
+  @media (--only-desktop) {
+    transition: background 400ms ease, visibility 0s ease 300ms, opacity 400ms ease;
+  }
+}

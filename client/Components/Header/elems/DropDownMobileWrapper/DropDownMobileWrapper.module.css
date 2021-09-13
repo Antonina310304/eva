@@ -1,0 +1,71 @@
+.wrapper {
+  position: absolute !important;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+
+  z-index: 5;
+
+  width: 100%;
+
+  max-width: 460px;
+  overflow-y: auto;
+
+  background: var(--color-white);
+}
+
+.wrapper.open {
+  z-index: 6;
+}
+
+.wrapper.hide {
+  left: -100%;
+}
+
+.buttonWrap {
+  position: absolute;
+  top: 25px;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button {
+  display: block;
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.buttonBack {
+  display: flex;
+  align-items: center;
+
+  color: var(--color-white);
+}
+.icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon.close {
+  width: 20px;
+  height: 20px;
+
+  font-size: 0;
+
+  background-image: url('close.svg');
+}
+
+.icon.back {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+
+  background-image: url('back.svg');
+}

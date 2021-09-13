@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo, ReactElement } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
+import Header from '@Components/Header';
 import Footer from '@Components/Footer';
 import { MetaData } from '@Types/Meta';
 import styles from './TemplateMain.module.css';
@@ -20,6 +21,8 @@ const TemplateMain: FC<TemplateMainProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.templateMain, className)}>
+      <Header />
+
       {children}
 
       {!hideDeliveryInfo && meta.country === 'RUS' && <DeliveryInfo />}
