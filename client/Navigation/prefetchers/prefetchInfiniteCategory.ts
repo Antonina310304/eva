@@ -1,15 +1,15 @@
-import * as ApiPages from '@Api/Pages';
+import * as ApiCategory from '@Api/Category';
 import { QueryClient } from 'react-query';
+import prefetchPage from './prefetchPage';
 
-export default async (url: string, client: QueryClient): Promise<void> => {
-  await client.prefetchInfiniteQuery(['infiniteCategory', 'ssr', url], ({ pageParam = 1 }) => {
-    const [p = '', qs = ''] = url.split('?');
-    const searchParams = new URLSearchParams(qs);
+export default async (route: any, client: QueryClient): Promise<void> => {
+  const { slug } = route.match.params;
+  const keys = ['infiniteCategory', 'ssr', slug];
 
-    if (pageParam > 1) {
-      searchParams.append('page', pageParam);
-    }
-
-    return ApiPages.fetchPage({ path: `${p}?${searchParams.toString()}` });
-  });
+  await Promise.all([
+    prefetchPage(route, client),
+    client.prefetchInfiniteQuery(keys, ({ pageParam = 1 }) => {
+      return ApiCategory.getProducts({ slug, page: pageParam });
+    }),
+  ]);
 };
