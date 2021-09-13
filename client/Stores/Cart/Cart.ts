@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 import equal from 'fast-deep-equal';
@@ -260,6 +260,7 @@ export const useCart: UseCart = (params) => {
   const { ssr = true } = params || {};
   const keys = ['cart', ssr && 'ssr'];
 
+  const queryClient = useQueryClient();
   const result = useQuery(keys, () => ApiOrder.getCartInfo(), {
     enabled: ssr,
     keepPreviousData: true,
@@ -270,6 +271,11 @@ export const useCart: UseCart = (params) => {
   if (result.data) {
     init(result.data);
   }
+
+  // Sync nanostores with react-query store
+  cartStore.listen((value) => {
+    queryClient.setQueryData(keys, value);
+  });
 
   return {
     ...useStore(cartStore),
