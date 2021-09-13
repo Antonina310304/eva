@@ -1,5 +1,5 @@
 import React, { FC, HTMLAttributes, useEffect, useRef, useState, memo, useCallback } from 'react';
-import _debounce from 'lodash.debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 
 import Input from '@UI/Input';
@@ -8,7 +8,7 @@ import ModalSearch from '@Components/Header/elems/Search/elems/ModalSearch';
 import ModalSearchContent from '@Components/Header/elems/Search/elems/ModalSearchContent';
 import { hits, offers, viewed } from '@Components/Header/elems/Search/data';
 import { SearchResultData } from '@Types/SearchResultData';
-
+import useOnClickOutside from '@Hooks/useOnClickOutside';
 import useMedias from '@Hooks/useMedias';
 import styles from './Search.module.css';
 
@@ -17,68 +17,23 @@ export interface SearchData extends HTMLAttributes<HTMLDivElement> {
   isMenu?: boolean;
 }
 
-const Search: FC<SearchData> = ({ className, isMenu = false }) => {
+const Search: FC<SearchData> = ({ className, isMenu }) => {
+  const { isMobile, isOnlyDesktop } = useMedias();
   const [isShowModal, setIsShowModal] = useState(false);
-  const { isMobile, isOnlyMobile } = useMedias();
   const [isShowInput, setIsShowInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState<SearchResultData>({
     request: '',
-    link: '',
     matches: [],
     products: [],
   });
 
-  const debounceRef = useRef<ReturnType<typeof _debounce>>();
+  const inputRef = useRef<HTMLInputElement>();
 
-  const inputRef = useRef<HTMLDivElement>();
-  const formRef = useRef<HTMLFormElement>();
-
-  useEffect(() => {
-    debounceRef.current = _debounce((value) => {
-      setSearchResult((prev) => ({ ...prev, ...value }));
-    }, 1500);
-  }, [setSearchResult]);
-
-  const resetSearch = useCallback(() => {
-    setSearchValue('');
-    setSearchResult({ request: '', link: '', matches: [], products: [] });
-  }, []);
-
-  const hideModal = useCallback(() => {
-    setIsShowModal(false);
-    setIsShowInput(false);
-    resetSearch();
-    document.querySelector('body').style.overflow = '';
-  }, [resetSearch]);
-
-  const handleClickInside = (evt: { target: { value: string } }) => {
-    setIsShowModal(true);
-    if (isOnlyMobile) {
-      document.querySelector('body').style.overflow = 'hidden';
-    }
-  };
-
-  const showSearchInput = useCallback(() => {
-    setIsShowInput(true);
-  }, []);
-
-  const handleClickOutside = useCallback(
-    (evt: MouseEvent) => {
-      if (!formRef.current.contains(evt.target as Node)) {
-        hideModal();
-      }
-    },
-    [hideModal],
-  );
-
-  function subscribeToChangeInput(value) {
-    if (!debounceRef.current) return;
-    if (value === '') return;
-
+  const [debouceChangeValue] = useDebouncedCallback(async (value: string) => {
     // для тестирования случаев когда есть результаты, на все остальные результат пустой
     if (value === 'диваны') {
-      debounceRef.current({
+      setSearchResult({
         request: value,
         matches: [
           { title: 'Диваны Динс', link: 'divans' },
@@ -102,30 +57,64 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
         ],
       });
     } else {
-      debounceRef.current({ request: value, matches: [], products: [] });
+      setSearchResult({ request: value, matches: [], products: [] });
     }
-    setSearchValue(value);
-  }
+  }, 400);
 
-  function onSubmit(evt) {
-    evt.preventDefault();
-    subscribeToChangeInput(searchValue);
-  }
+  const resetSearch = useCallback(() => {
+    setSearchValue('');
+    setSearchResult({ request: '', matches: [], products: [] });
+  }, []);
 
-  function onChange(evt: { target: { value: string } }) {
-    const { value } = evt.target;
-    subscribeToChangeInput(value);
-  }
+  const hideModal = useCallback(() => {
+    setIsShowModal(false);
+    setIsShowInput(false);
+    resetSearch();
+  }, [resetSearch]);
 
+  const handleClickSearch = useCallback(() => {
+    inputRef.current.focus();
+    setIsShowModal(true);
+    setIsShowInput(true);
+  }, []);
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      debouceChangeValue(searchValue);
+    },
+    [debouceChangeValue, searchValue],
+  );
+
+  const handleChange = useCallback(
+    (e) => {
+      const { value } = e.target;
+
+      setSearchValue(value);
+      debouceChangeValue(value);
+    },
+    [debouceChangeValue],
+  );
+
+  // Блокируем скролл на странице
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  });
+    function cleanup() {
+      document.documentElement.style.overflow = '';
+    }
+
+    if (isOnlyDesktop || !isShowModal) return cleanup;
+
+    document.documentElement.style.overflow = 'hidden';
+
+    return cleanup;
+  }, [isOnlyDesktop, isShowModal]);
+
+  const refPopup = useOnClickOutside(hideModal, !isShowModal);
 
   return (
-    <form ref={formRef} className={cn(styles.search, className)} onSubmit={onSubmit}>
+    <form className={cn(styles.search, className)} onSubmit={handleSubmit}>
       <div
-        ref={inputRef}
         className={cn(styles.inputWrapper, {
           [styles.show]: isShowInput,
           [styles.changeable]: isMobile && !isMenu,
@@ -133,12 +122,12 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
         })}
       >
         <Input
-          onFocus={(evt) => !isMenu && handleClickInside(evt)}
-          onChange={(evt) => !isMenu && onChange(evt)}
           className={styles.input}
           type='input'
           value={searchValue}
           placeholder='Найти мебель'
+          ref={inputRef}
+          onChange={handleChange}
         />
         {searchValue !== '' && (
           <button className={styles.buttonReset} type='button' onClick={resetSearch}>
@@ -148,7 +137,7 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
         )}
 
         {isMobile && !isMenu && (
-          <button className={styles.button} type='button' onClick={() => showSearchInput()}>
+          <button className={styles.button} type='button' onClick={handleClickSearch}>
             открыть поиск
           </button>
         )}
@@ -158,9 +147,11 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
         </button>
       </div>
 
-      <ModalSearch hideModal={hideModal} isShowModal={isShowModal}>
-        <ModalSearchContent request={searchResult} hits={hits} viewed={viewed} offers={offers} />
-      </ModalSearch>
+      <div ref={refPopup}>
+        <ModalSearch hideModal={hideModal} isShowModal={isShowModal}>
+          <ModalSearchContent request={searchResult} hits={hits} viewed={viewed} offers={offers} />
+        </ModalSearch>
+      </div>
     </form>
   );
 };

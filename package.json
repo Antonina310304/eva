@@ -51,7 +51,6 @@
     "http-proxy-middleware": "^1.0.6",
     "inputmask": "^5.0.6",
     "json-parse-even-better-errors": "^2.3.1",
-    "lodash.debounce": "^4.0.8",
     "nanoid": "^3.1.25",
     "path": "^0.12.7",
     "qrcode.react": "^1.0.0",
