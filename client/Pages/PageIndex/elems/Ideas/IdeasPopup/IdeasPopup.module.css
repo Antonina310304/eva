@@ -1,0 +1,153 @@
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 415px;
+
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.container {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 45px 0 0 0;
+}
+
+.iconClose {
+  position: absolute;
+  top: var(--space-n);
+  right: var(--space-n);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.imageBlock {
+  position: relative;
+}
+
+.iconContainer {
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+
+  display: flex;
+}
+
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
+}
+
+.image {
+  width: 415px;
+  height: 271px;
+  object-fit: cover;
+}
+
+.title {
+  margin-top: 9px;
+  margin-bottom: 5px;
+
+  color: var(--color-black);
+  font-weight: normal;
+  font-size: 16px;
+  font-family: CeraPro;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.price_title {
+  color: var(--color-black);
+  font-weight: normal;
+  font-size: 16px;
+  font-family: CeraPro;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.totalPrice {
+  margin-left: 10px;
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: 18px;
+  font-family: CeraPro;
+  font-style: normal;
+  line-height: 23px;
+}
+
+.price {
+  margin-left: 10px;
+
+  color: var(--color-dark-gray);
+  font-weight: normal;
+  font-size: 16px;
+  font-family: CeraPro;
+  font-style: normal;
+  line-height: 24px;
+  text-decoration-line: line-through;
+}
+
+.discount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.details {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 25px;
+
+  border-bottom: 1px solid var(--color-dark-gray);
+}
+
+.details > a {
+  display: inline-block;
+
+  color: var(--color-dark-gray);
+  font-weight: normal;
+  font-size: 16px;
+  font-family: CeraPro;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.like {
+  position: absolute;
+  top: 21px;
+  right: 20px;
+}
+
+@media (max-width: 1024px) {
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .image {
+    width: 356px;
+    height: 235px;
+  }
+
+  .popup {
+    width: 356px;
+  }
+
+  .container {
+    margin: 35px 0 0 0;
+  }
+
+  .iconClose {
+    top: var(--space-s);
+    right: var(--space-s);
+  }
+}

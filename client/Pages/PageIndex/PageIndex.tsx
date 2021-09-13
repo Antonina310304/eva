@@ -22,6 +22,11 @@ import NewProducts from '@Pages/PageIndex/elems/NewProducts';
 import Container from '@Components/Container';
 import InstagramSection from '@Components/InstagramSection/InstagramSection';
 import Link from '@UI/Link/Link';
+import mockPromoCardData from '@Pages/PageIndex/mockPromoCardData';
+import {
+  ideasMockButtonTabs,
+  ideasMockProducts,
+} from '@Pages/PageIndex/elems/Ideas/IdeasMockProps';
 import styles from './PageIndex.module.css';
 
 export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
@@ -40,13 +45,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
         <div className={styles.section}>
           <Hits data={hits} />
         </div>
-        <Recommendations />
-        <div className={styles.section}>
-          <Popular data={popular} />
-        </div>
-        <div className={styles.section}>
-          <Ideas />
-        </div>
+        <Recommendations cards={mockPromoCardData} />
+        <Popular title='Популярные категории' />
+        <Ideas tabGroup={ideasMockButtonTabs} products={ideasMockProducts} />
+        <NewProducts />
         <div className={styles.section}>
           <NewProducts data={newProducts} />
         </div>
