@@ -124,10 +124,10 @@
 
   .wrapper {
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: center;
     min-height: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 
     transform: translate3d(0, 100%, 0);
 

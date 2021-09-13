@@ -33,6 +33,8 @@ export type ModalId =
   | 'Authorization'
   | 'VideoConsultation'
   | 'DesignerServices'
+  | 'Question'
+  | 'Callback'
   | 'Cooperation';
 
 export interface Modal {
