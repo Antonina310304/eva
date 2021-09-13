@@ -10,5 +10,5 @@ export default async (url: string, client: QueryClient): Promise<void> => {
 
   const prefetchFn = prefetchers[route.name] || prefetchers.prefetchPage;
 
-  return prefetchFn(url, client);
+  return prefetchFn(route, client);
 };

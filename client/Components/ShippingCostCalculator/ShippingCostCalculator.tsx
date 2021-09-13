@@ -22,7 +22,7 @@ const errors = {
 
 const ShippingCostCalculator: FC<ShippingCostCalculatorProps> = (props) => {
   const { className, ...restProps } = props;
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const [loading, setLoading] = useState<boolean>(false);
   const [price, setPrice] = useState<number>(null);
   const [error, setError] = useState<string>(null);
