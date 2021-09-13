@@ -8,7 +8,6 @@ export interface PopularCategoryData {
 }
 
 export interface PopularData {
-  ы;
   title: string;
   products: PopularCategoryData[];
 }

@@ -14,7 +14,7 @@
 
 .title {
   box-sizing: border-box;
-  margin-bottom: var(--space-m);
+  margin: 0 0 var(--space-m);
   padding: 0 var(--space-xxb);
 
   color: var(--color-black);

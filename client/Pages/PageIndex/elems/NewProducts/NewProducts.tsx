@@ -20,6 +20,9 @@ const NewProducts: FC<NewProductsProps> = ({ data, className }) => {
           <CrossSaleSection
             className={styles.sectionCrossSale}
             title={data.title}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore скопировала в posts,  данные которые приходят с серверав аналогичные компоненты
+            // не соответсвуют интерфейсу ProductData
             products={data.products}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>

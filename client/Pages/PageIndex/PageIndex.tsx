@@ -43,14 +43,29 @@ const PageIndex: FC<PageIndexProps> = (props) => {
           <MainSlider sliderData={sliderData} />
         </div>
         <div className={styles.section}>
-          <Hits data={hits} />
+          <Hits
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore скопировала в products,  данные которые приходят с сервера в аналогичные компоненты
+            // не соответсвуют интерфейсу ProductData
+            data={hits}
+          />
         </div>
-        <Recommendations cards={mockPromoCardData} />
-        <Popular title='Популярные категории' />
-        <Ideas tabGroup={ideasMockButtonTabs} products={ideasMockProducts} />
-        <NewProducts />
         <div className={styles.section}>
-          <NewProducts data={newProducts} />
+          <Recommendations cards={mockPromoCardData} />
+        </div>
+        <div className={styles.section}>
+          <Popular data={popular} />
+        </div>
+        <div className={styles.section}>
+          <Ideas tabGroup={ideasMockButtonTabs} products={ideasMockProducts} />
+        </div>
+        <div className={styles.section}>
+          <NewProducts
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore скопировала в products, данные которые приходят с сервера в аналогичные компоненты
+            // не соответсвуют интерфейсу ProductData
+            data={newProducts}
+          />
         </div>
         <Container>
           <div className={styles.section}>
@@ -80,6 +95,9 @@ const PageIndex: FC<PageIndexProps> = (props) => {
                 добавляйте хештег #купилвдиванру. Мы публикуем лучшие кадры.`}
               </div>
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore скопировала в posts,  данные которые приходят с серверав аналогичные компоненты
+            // не соответсвуют интерфейсу InstagramPostData
             posts={posts}
           />
         </div>

@@ -20,7 +20,7 @@ const PopularCard = ({ data }) => {
         <span className={styles.title}>{data.title}</span>
         <span className={styles.count}>{`${data.count} ${declOfNum(data.count, declCount)}`}</span>
       </div>
-      <Badge text={`от ${data.price} ₽`} className={styles.badge} />
+      <div className={styles.discount}>{`от ${data.price.toLocaleString()} ₽`}</div>
     </Link>
   );
 };
