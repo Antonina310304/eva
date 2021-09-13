@@ -21,7 +21,7 @@ const PecomDelivery: FC<PecomDeliveryProps> = (props) => {
     rootMargin: '0px',
     triggerOnce: true,
   });
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const [deliveryTypes, setDeliveryTypes] = useState(delivery);
   const [pickupPoints, setPickupPoints] = useState([]);
 

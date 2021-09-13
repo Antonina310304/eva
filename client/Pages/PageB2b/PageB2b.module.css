@@ -19,14 +19,6 @@
   margin: 0 auto;
 }
 
-.introduction {
-  margin-top: var(--space-xxe);
-  margin-bottom: var(--space-xxe);
-
-  font-size: var(--size-m);
-  line-height: var(--lh-xm);
-}
-
 .imageWrapper {
   height: 850px;
 }
@@ -86,11 +78,6 @@
     composes: main from 'containers';
   }
 
-  .introduction {
-    margin-top: var(--space-e);
-    margin-bottom: var(--space-e);
-  }
-
   .sectionPress {
     margin-top: var(--space-e);
     margin-bottom: var(--space-e);
@@ -112,14 +99,6 @@
   .wrapper {
     max-width: none;
     padding: 0 var(--space-xxl);
-  }
-
-  .introduction {
-    margin-top: var(--space-xb);
-    margin-bottom: var(--space-xb);
-
-    font-size: var(--size-n);
-    line-height: var(--lh-n);
   }
 
   .imageWrapper {
@@ -147,11 +126,6 @@
 
   .imageWrapper {
     height: 340px;
-  }
-
-  .introduction {
-    font-size: var(--size-s);
-    line-height: var(--lh-s);
   }
 }
 

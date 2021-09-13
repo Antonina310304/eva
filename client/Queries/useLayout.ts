@@ -1,32 +1,21 @@
 import { useQuery, UseQueryResult } from 'react-query';
 
-import * as ApiPages from '@Api/Pages';
+import * as ApiMeta from '@Api/Meta';
 import { Layout } from '@Types/Layout';
 
 export interface Params {
-  path: string;
   ssr?: boolean;
 }
 
-// TODO: сейчас мы вытаскиваем данные из запроса страницы, но в будущем для этого нужно сделать отдельный запроос,
-// который будет отдавать только нужные данные
-const useLayout = (params: Params): UseQueryResult<Layout> => {
-  const { path, ssr } = params;
-  const keys = ['layout', ssr && 'ssr', path];
+const useLayout = (params?: Params): UseQueryResult<Layout> => {
+  const { ssr = true } = params || {};
+  const keys = ['layout', ssr && 'ssr'];
 
-  const result = useQuery(
-    keys,
-    async () => {
-      const page = await ApiPages.fetchPage({ path });
-
-      return page.layout;
-    },
-    {
-      keepPreviousData: true,
-      retryOnMount: false,
-      refetchOnMount: false,
-    },
-  );
+  const result = useQuery(keys, () => ApiMeta.getLayout(), {
+    keepPreviousData: true,
+    retryOnMount: false,
+    refetchOnMount: false,
+  });
 
   return result;
 };

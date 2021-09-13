@@ -29,7 +29,7 @@ const MattressesProductCard = loadable(() => import('@Mattresses/MattressesProdu
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
-  const filtrator = useFiltrator({ id: `${path}${page.categoryTranslite}`, ...page.filters });
+  const filtrator = useFiltrator();
   const isModels = category.data.pages[0].productsModel?.length > 0;
 
   const activeSubcategoryIds = useMemo(() => {

@@ -1,6 +1,4 @@
-import { IconPaymentData } from '@Types/IconSocial';
-
-const paymentSystemList: IconPaymentData[] = [
+export default [
   {
     name: 'master card',
     icon: 'masterCard',
@@ -14,5 +12,3 @@ const paymentSystemList: IconPaymentData[] = [
     icon: 'mir',
   },
 ];
-
-export default paymentSystemList;

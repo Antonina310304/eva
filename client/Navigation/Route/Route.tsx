@@ -20,7 +20,7 @@ export interface RouteParams {
 }
 
 const Initiator: FC<any> = ({ children }) => {
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const { pathname } = useLocation();
   const { region } = useParams<RouteParams>();
   const regionUrl = region ? `/${region}` : '';

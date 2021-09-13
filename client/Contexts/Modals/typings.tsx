@@ -52,5 +52,5 @@ export interface ModalsState {
 export interface ModalsMethods {
   openModal: (id: ModalId, data?: unknown) => void;
   closeModal: (id: ModalId) => void;
-  closeAllModals: () => void;
+  closeAllModals: () => Promise<void>;
 }

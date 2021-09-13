@@ -12,8 +12,8 @@ export interface RouteParams {
   region?: string;
 }
 
-const useMeta = (params: Params = {}): UseQueryResult<MetaData> => {
-  const { ssr } = params;
+const useMeta = (params?: Params): UseQueryResult<MetaData> => {
+  const { ssr = true } = params || {};
   const { region } = useParams<RouteParams>();
   const keys = ['meta', ssr && 'ssr', region].filter(Boolean);
 
