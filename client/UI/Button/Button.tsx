@@ -1,6 +1,7 @@
-import React, { ButtonHTMLAttributes, memo, ReactChild, forwardRef } from 'react';
+import React, { ButtonHTMLAttributes, memo, ReactChild, forwardRef, useMemo } from 'react';
 import cn from 'classnames';
 
+import Loader from '@UI/Loader';
 import styles from './Button.module.css';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -61,7 +62,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       ref={ref}
     >
       {before && <span className={styles.before}>{before}</span>}
-      {isText ? <span className={styles.text}>{children}</span> : children}
+      {waiting ? (
+        <Loader />
+      ) : (
+        <>{isText ? <span className={styles.text}>{children}</span> : children}</>
+      )}
     </button>
   );
 });

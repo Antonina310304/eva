@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
-import { ApiPecom } from '@Api/Pecom';
+import * as ApiPecom from '@Api/Pecom';
 import InputHelperAddress from '@Components/InputHelperAddress';
 import FormItem from '@UI/FormItem';
 import Input from '@UI/Input';
@@ -22,7 +22,7 @@ const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
   const { className, deliveryType, name, ...restProps } = props;
   const [waiting, setWaiting] = useState(false);
   const cart = useCart();
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
 
   const handleChangeAddress = useCallback(
     (e) => {

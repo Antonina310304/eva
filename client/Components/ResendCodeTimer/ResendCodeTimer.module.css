@@ -10,7 +10,7 @@
 }
 
 .action {
-  display: flex;
+  display: inline-flex;
   align-items: center;
 
   font-size: var(--size-s);

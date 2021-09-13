@@ -1,6 +1,7 @@
-import React, { useCallback, useState, memo, FC, useMemo } from 'react';
+import React, { useCallback, useState, useEffect, memo, FC, useMemo } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
+import { useQueryClient } from 'react-query';
 
 import InputPhone from '@Components/InputPhone';
 import Button from '@UI/Button';
@@ -10,14 +11,16 @@ import FormItem from '@UI/FormItem';
 import RadioGroup from '@UI/RadioGroup';
 import Price from '@UI/Price';
 import Link from '@UI/Link';
-import { useCart } from '@Stores/Cart';
+import useModals from '@Hooks/useModals';
 import OrderFormStore, { useOrderForm } from '@Stores/OrderForm';
 import { Profile } from '@Types/Profile';
 import Group from './elems/Group';
 import SwitchBonuses from './elems/SwitchBonuses';
 import CommentField from './elems/CommentField';
 import PaymentList from './elems/PaymentList';
+import PickupPoint from './elems/PickupPoint';
 import styles from './OrderForm.module.css';
+import PickupPointSelector from './elems/PickupPointSelector';
 
 export interface OrderFormProps {
   className?: string;
@@ -28,19 +31,23 @@ const DeliveryCourier = loadable(() => import('./elems/DeliveryCourier'));
 
 const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, profile, ...restProps } = props;
-  const cart = useCart();
-  const orderForm = useOrderForm(cart);
   const [loading, setLoading] = useState(false);
   const [wantBonuses, setWantBonuses] = useState(false);
+  const [name, setName] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [, { openModal }] = useModals();
+  const queryClient = useQueryClient();
+  const orderForm = useOrderForm();
   const paymentsAsSelect = orderForm.visiblePaymentTypes.length > 3;
 
   const deliveryVariants = useMemo(() => {
-    return cart.deliveryTypes.map((deliveryType, index) => ({
+    return orderForm.deliveryTypes.map((deliveryType, index) => ({
       defaultChecked: index === 0,
       value: deliveryType.id,
       children: deliveryType.name,
     }));
-  }, [cart.deliveryTypes]);
+  }, [orderForm.deliveryTypes]);
 
   const handleChangeWantBonuses = useCallback(() => {
     setWantBonuses((prev) => !prev);
@@ -76,9 +83,44 @@ const OrderForm: FC<OrderFormProps> = (props) => {
     OrderFormStore.select({ delivery: item.value });
   }, []);
 
+  const handleChangePhone = useCallback((e) => {
+    setPhone(e.target.value);
+  }, []);
+
+  const handleChangeName = useCallback((e) => {
+    setName(e.target.value);
+  }, []);
+
+  const handleChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const handleAuth = useCallback(() => {
+    queryClient.invalidateQueries('profile');
+  }, [queryClient]);
+
+  const handleClickAuth = useCallback(() => {
+    openModal('Authorization', {
+      defaultPhone: phone,
+      defaultName: name,
+      defaultEmail: email,
+      onSuccess: handleAuth,
+    });
+  }, [email, handleAuth, name, openModal, phone]);
+
   const handleSubmit = useCallback(() => {
     setLoading(true);
   }, []);
+
+  // Заполняем поля формы, если человек авторизовался/зарегистрировался
+  useEffect(() => {
+    if (!profile) return;
+
+    setWantBonuses(false);
+    setName((prev) => prev || profile.firstName);
+    setPhone((prev) => prev || profile.phone.slice(1));
+    setEmail((prev) => prev || profile.email);
+  }, [profile]);
 
   return (
     <Form
@@ -103,15 +145,21 @@ const OrderForm: FC<OrderFormProps> = (props) => {
         </FormItem>
 
         <FormItem label='Имя' view='secondary'>
-          <Input wide name='OrderForm[first_name]' />
+          <Input wide name='OrderForm[first_name]' value={name} onChange={handleChangeName} />
         </FormItem>
 
         <FormItem label='Телефон*' view='secondary'>
           <div className={styles.wrapperInputPhone}>
-            <InputPhone wide name='OrderForm[mobile]' className={styles.inputPhone} />
+            <InputPhone
+              wide
+              name='OrderForm[mobile]'
+              className={styles.inputPhone}
+              value={phone}
+              onChange={handleChangePhone}
+            />
 
             {wantBonuses && (
-              <Button type='submit' className={styles.btnReceiveCode}>
+              <Button className={styles.btnReceiveCode} onClick={handleClickAuth}>
                 Получить код в SMS
               </Button>
             )}
@@ -119,7 +167,7 @@ const OrderForm: FC<OrderFormProps> = (props) => {
         </FormItem>
 
         <FormItem label='Почта' view='secondary'>
-          <Input wide name='OrderForm[email]' />
+          <Input wide name='OrderForm[email]' value={email} onChange={handleChangeEmail} />
         </FormItem>
       </Group>
 
@@ -133,6 +181,16 @@ const OrderForm: FC<OrderFormProps> = (props) => {
 
         {orderForm.selectedDelivery.type === 'toAddress' && (
           <DeliveryCourier deliveryType={orderForm.selectedDelivery} name='OrderForm[address]' />
+        )}
+
+        {orderForm.selectedDelivery.type === 'pickupPoint' && (
+          <>
+            {orderForm.selectedDelivery.address ? (
+              <PickupPoint>{orderForm.selectedDelivery.address}</PickupPoint>
+            ) : (
+              <PickupPointSelector />
+            )}
+          </>
         )}
       </Group>
 

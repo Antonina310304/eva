@@ -3,16 +3,17 @@ import cn from 'classnames';
 
 import { InstapaperShareButton, FacebookShareButton, VKShareButton } from 'react-share';
 
-import { MetaDataSocial } from '@Types/Meta';
+import useMeta from '@Queries/useMeta';
 import styles from './Share.module.css';
 
 export interface ShareProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  socials: MetaDataSocial[];
 }
 
 const Share: FC<ShareProps> = (props) => {
-  const { className, socials, ...restProps } = props;
+  const { className, ...restProps } = props;
+  const meta = useMeta();
+  const { socials } = meta.data;
 
   const getSocialLink = useCallback(
     (socialId) => {

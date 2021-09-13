@@ -1,8 +1,6 @@
-import getBonuses from './getBonuses';
-import getInstallmentVariants from './getInstallmentVariants';
-
-export const ApiOrder = {
-  getBonuses,
-  getInstallmentVariants,
-};
-export default null;
+export { default as getBonuses } from './getBonuses';
+export { default as getCartInfo } from './getCartInfo';
+export { default as getDeliveryInfo } from './getDeliveryInfo';
+export { default as getInstallmentVariants } from './getInstallmentVariants';
+export { default as getPay } from './getPay';
+export { default as getOfertaInfo } from './getOfertaInfo';

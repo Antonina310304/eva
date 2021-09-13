@@ -204,7 +204,9 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     },
   };
 
-  const filtrator = useFiltrator({ id: 'xz', ...filters });
+  Filtrator.init({ id: 'xz', ...filters });
+
+  const filtrator = useFiltrator();
   console.log('filtrator', filtrator);
 
   const handleApplyFilters = useCallback(async () => {

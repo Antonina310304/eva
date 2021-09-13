@@ -1,10 +1,3 @@
-import fetchCategory from './fetchCategory';
-import getProducts from './getProducts';
-import getProductsCount from './getProductsCount';
-
-export const ApiCategory = {
-  fetchCategory,
-  getProducts,
-  getProductsCount,
-};
-export default null;
+export { default as fetchCategory } from './fetchCategory';
+export { default as getProducts } from './getProducts';
+export { default as getProductsCount } from './getProductsCount';

@@ -1,0 +1,31 @@
+.sizes {
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.item {
+  position: relative;
+
+  display: inline-block;
+  padding-right: var(--space-m);
+
+  vertical-align: top;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 10px;
+
+    display: block;
+
+    content: 'x';
+  }
+
+  &:last-child {
+    padding-right: 0;
+
+    &::after {
+      content: none;
+    }
+  }
+}

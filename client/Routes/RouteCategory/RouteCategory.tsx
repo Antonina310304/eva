@@ -1,25 +1,31 @@
-import React, { FC, memo, useCallback, useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React, { FC, memo, useCallback } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 import TemplateMain from '@Templates/TemplateMain';
 import PageCategory from '@Pages/PageCategory';
+import FiltratorStore from '@Stores/Filtrator';
 import useInfiniteCategory from '@Queries/useInfiniteCategory';
+import useMeta from '@Queries/useMeta';
+import usePage from '@Queries/usePage';
 
 export interface RouteParams {
   slug: string;
 }
 
 const RouteCategory: FC = () => {
-  const { pathname, search } = useLocation();
+  const history = useHistory();
+  const location = useLocation();
   const { slug } = useParams<RouteParams>();
-  const [path, setPath] = useState(`${pathname}${search}`);
-  const { page, category } = useInfiniteCategory({ path });
+  const path = `${location.pathname}${location.search}`;
+  const page = usePage({ path });
+  const category = useInfiniteCategory({ slug, search: location.search });
+  const meta = useMeta();
 
   const handleApplyFilters = useCallback(
     (url) => {
-      setPath(`${pathname}${url}`);
+      history.push(`${location.pathname}${url}`);
     },
-    [pathname],
+    [history, location.pathname],
   );
 
   const handleMore = useCallback(() => {
@@ -28,19 +34,20 @@ const RouteCategory: FC = () => {
     category.fetchNextPage();
   }, [category]);
 
-  useEffect(() => {
-    setPath(`${pathname}${search}`);
-  }, [pathname, search]);
+  if (!page.isSuccess || !category.isSuccess || !meta.isSuccess) return null;
 
-  if (!page.isSuccess || !category.isSuccess) return null;
+  FiltratorStore.init({
+    id: `${path}${page.data.categoryTranslite}`,
+    ...category.data.pages[0].filters,
+  });
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageCategory
         page={page.data}
         category={category}
         slug={slug}
-        path={`${pathname}${search}`}
+        path={path}
         onApplyFilters={handleApplyFilters}
         onMore={handleMore}
       />
