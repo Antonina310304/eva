@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes, memo, useState } from 'react';
 import cn from 'classnames';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import SiteNav from '@Components/Header/elems/SiteNav/SiteNav';
 import Search from '@Components/Header/elems/Search';
@@ -10,6 +9,7 @@ import UserMenu from '@Components/UserMenu';
 import { UserMenuDesktop } from '@Components/Header/data';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import Overlay from '@Components/Overlay';
+import useScrollPosition from '@Hooks/useScrollPosition';
 import styles from './HeaderDesktop.module.css';
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -20,17 +20,14 @@ const HeaderDesktop: FC<HeaderProps> = () => {
   const [hideOnScroll, setHideOnScroll] = useState<boolean>(false);
   const [isFirstClick, setIsFirstClick] = useState<boolean>(false);
 
-  useScrollPosition(
-    ({ currPos }) => {
-      if (currPos.y < -2) {
-        setHideOnScroll(true);
-      } else {
-        setHideOnScroll(false);
-        setIsFirstClick(false);
-      }
-    },
-    [hideOnScroll],
-  );
+  useScrollPosition(({ current }) => {
+    if (current.y > 2) {
+      setHideOnScroll(true);
+    } else {
+      setHideOnScroll(false);
+      setIsFirstClick(false);
+    }
+  });
 
   return (
     <header
