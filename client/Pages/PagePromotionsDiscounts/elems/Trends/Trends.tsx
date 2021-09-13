@@ -1,17 +1,13 @@
-import React, { cloneElement, HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useState } from 'react';
 import CategoryCard from '@Pages/PagePromotionsDiscounts/elems/Trends/CategoryCard/CategoryCard';
 import TrendsLogo from '@Pages/PagePromotionsDiscounts/elems/Trends/TrendsLogo';
-import CrossSaleSection, {
-  CrossSaleSectionProps,
-} from '@Pages/PageProduct/elements/CrossSaleSection';
 import cn from 'classnames';
 import NavArrows from '@UI/NavArrows/NavArrows';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar/ProgressBar';
 import Section from '@Components/Section';
-import { nanoid } from 'nanoid';
-import { ProductData } from '@Types/Product';
-import mockProductsData from '@Pages/PagePromotionsDiscounts/elems/Trends/Mock/mockProductData';
+import Line from '@Pages/PagePromotionsDiscounts/elems/Trends/Line';
+import useMedias from '@Hooks/useMedias';
 import { MockCategoryInterface } from './mock/mockCategories';
 import styles from './Trends.module.css';
 
@@ -27,7 +23,7 @@ const Trends: React.FC<InTrendProps> = ({ categories, className }) => {
   const normalizeSlide = useCallback(
     (value: number) => {
       if (value < 0) return 0;
-      if (value > categories.length - 1) return categories.length - 1;
+      if (value > categories.length) return categories.length;
 
       return value;
     },
@@ -47,73 +43,58 @@ const Trends: React.FC<InTrendProps> = ({ categories, className }) => {
   }, [normalizeSlide]);
 
   const handleNext = useCallback(() => {
-    if (track.finished) return;
+    if (track && track.finished) return;
 
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
+  const mediaMatches = useMedias();
+
   return (
     <>
-      <TrendsLogo className={styles.trendsLogo} />
+      <div className={styles.logoWrapper}>
+        <div className={styles.leftLine_wrapper}>
+          <Line className={styles.leftLine} y={mediaMatches.isDesktop ? '80.2' : '121'} />
+        </div>
+        <TrendsLogo className={styles.trendsLogo} />
+        конечно очень красивое у меня получилось лого за 5ч
+      </div>
 
-      {/* <CrossSaleSection
-        className={styles.trendsLogo}
-        title='title'
-        products={mockProductsData}
-        renderItem={(props) => (
-          <div>
-            <img src={props.product.images[0].src} />
-            <div>{props.product.name}</div>
-          </div>
-        )}
-      /> */}
-
-      <Section
-        className={cn(styles.section, className)}
-        title='Будь в тренде: яркий интерьер в деталях'
-        additional={
-          <NavArrows
-            className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
-            onPrev={handlePrev}
-            onNext={handleNext}
-          />
-        }
-      >
-        <div className={styles.wrapperGallery}>
-          <Gallery
-            className={styles.gallery}
-            slideIndex={slide}
-            key={categories.length}
-            onChangeCurrent={handleChangeCurrent}
-            onChangeProgress={handleChangeProgress}
-          >
-            {categories.map((category, index) => (
-              <div>
-                <CategoryCard
-                  key={index}
-                  imageUrl={category.imageUrl}
-                  title={category.title}
-                  description={category.description}
-                />
+      <div className={styles.wrapper}>
+        <Section
+          className={cn(styles.section, className)}
+          title='Будь в тренде: яркий интерьер в деталях'
+          additional={
+            track?.width < 100 && (
+              <div className={styles.navArrows}>
+                <NavArrows onPrev={handlePrev} onNext={handleNext} />
               </div>
-            ))}
-          </Gallery>
-          <ProgressBar track={track} />
-        </div>
-      </Section>
-
-      {/* <div className={styles.wrapper}>
-        <h2>Будь в тренде: яркий интерьер в деталях</h2>
-        <div className={styles.categoriesWrapper}>
-          {categories.map((category) => (
-            <CategoryCard
-              imageUrl={category.imageUrl}
-              title={category.title}
-              description={category.description}
-            />
-          ))}
-        </div>
-      </div> */}
+            )
+          }
+          additionalBreakup
+        >
+          <div className={styles.wrapperGallery}>
+            <Gallery
+              className={styles.gallery}
+              slideIndex={slide}
+              key={categories.length}
+              onChangeCurrent={handleChangeCurrent}
+              onChangeProgress={handleChangeProgress}
+            >
+              {categories.map((category, index) => (
+                <div key={index} className={cn(styles.slide)}>
+                  <CategoryCard
+                    imageUrl={category.imageUrl}
+                    title={category.title}
+                    description={category.description}
+                  />
+                </div>
+              ))}
+            </Gallery>
+          </div>
+          {track?.width < 100 && <ProgressBar track={track} className={styles.progressBar} />}
+        </Section>
+      </div>
     </>
   );
 };
