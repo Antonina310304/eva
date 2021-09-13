@@ -95,20 +95,27 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     return Object.values(collectionsMap);
   }
 
-  const orderFabrics = collectCollections(pageData);
+  const orderFabrics = useMemo(() => collectCollections(pageData), [pageData]);
 
   const handleApplyFilters = useCallback(async () => {
     const filteredParameters = Filtrator.formatFiltersToObject();
 
     if (Object.keys(filteredParameters).length === 0 && filteredParameters.constructor === Object) {
+      setSelectedColors([]);
+      setSelectedTags([]);
+      setSelectedCollections([]);
       closeModal('Filters');
       return;
     }
 
     if (filteredParameters.parameters[40]) setSelectedColors(filteredParameters.parameters[40]);
+    else setSelectedColors([]);
     if (filteredParameters.parameters[10]) setSelectedTags(filteredParameters.parameters[10]);
+    else setSelectedTags([]);
     if (filteredParameters.parameters[20])
       setSelectedCollections(filteredParameters.parameters[20]);
+    else setSelectedCollections([]);
+
     closeModal('Filters');
   }, [closeModal]);
 
@@ -202,14 +209,13 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     return result;
   }, [orderFabrics, pageData.tags.types, selectedCollections, selectedColors, selectedTags]);
 
-  // const count = useMemo(() => {
-  //   const res = groups.reduce((total, item) => {
-  //     total += item.samples.length;
-  //     return total;
-  //   }, 0);
-
-  //   return res;
-  // }, [groups]);
+  Filtrator.updateTotalCount(
+    groups.reduce((total, item) => {
+      let newTotal = total;
+      newTotal += item.samples.length;
+      return newTotal;
+    }, 0),
+  );
 
   const transformDataBeforeSubmit = useCallback(
     (data) => {
@@ -256,6 +262,24 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
         title: 'Заявка принята!',
         text: 'Благодарим за выбор divan.ru. Наш оператор свяжется с вами в ближайшее время.',
       });
+
+      setCkeckedSamples([
+        {
+          sample: null,
+        },
+        {
+          sample: null,
+        },
+        {
+          sample: null,
+        },
+        {
+          sample: null,
+        },
+        {
+          sample: null,
+        },
+      ]);
 
       setStep('preview');
     },
@@ -304,7 +328,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
       </div>
 
       <div className={styles.filtersWrapper}>
-        <Filters onOpen={hanleOpenFilters} onChangeSort={handleApplyFilters} />
+        <Filters onOpen={hanleOpenFilters} groups={groups} onChangeSort={handleApplyFilters} />
       </div>
 
       <div className={styles.wrapperMainContent}>

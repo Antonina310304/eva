@@ -3,10 +3,6 @@
   margin-bottom: var(--space-m);
 
   vertical-align: top;
-
-  /* &:hover {
-    cursor: pointer;
-  } */
 }
 
 .fabricExtraSample.modalView {
@@ -45,17 +41,6 @@
   left: 0;
   z-index: 2;
 
-  transition: color 0.4s;
-}
-
-.maska {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-
   width: 145px;
   height: 145px;
 
@@ -73,8 +58,6 @@
 
   width: 145px;
   height: 145px;
-
-  /* border: 1px solid var( --color-white); */
 }
 
 .wrapperIcon {
@@ -88,17 +71,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.ok {
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-
-  background: var(--color-white);
-  border-radius: 50%; */
 }
 
 .iconDel {
@@ -143,12 +115,12 @@
 }
 
 @media (--mobile-m) {
-  .maska {
+  .mask {
     width: 90px;
     height: 90px;
   }
 
-  .image.large {
+  .image {
     width: 90px;
     height: 90px;
   }

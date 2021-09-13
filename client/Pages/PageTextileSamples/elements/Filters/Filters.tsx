@@ -2,21 +2,20 @@ import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } fro
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import { useFiltrator } from '@Stores/Filtrator';
-import { GroupData } from '@Pages/PageCategory/typings';
+import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { IConstructorGroup } from '@Types/Constructor';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  count?: number;
-  groups?: GroupData[];
+  groups?: IConstructorGroup[];
   isMatrasyCategory?: boolean;
   onOpen?: (e: MouseEvent, id: string) => void;
   onChangeSort?: (e: MouseEvent) => void;
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
+  const { className, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
   const filtrator = useFiltrator();
 
   const secondaryFilters = useMemo(() => {
@@ -30,11 +29,47 @@ const Filters: FC<FiltersProps> = (props) => {
     [onOpen],
   );
 
+  const countSamples = useCallback(() => {
+    const arr = [];
+    const filtri = Object.keys(filtrator.parameters);
+
+    const parameters = filtrator.parameters[40]?.default || [];
+
+    parameters.forEach((param) => {
+      groups.forEach((group) => {
+        const xz = group.samples.find((sample) => sample.tags.colorId === param);
+        if (xz) arr.push(xz);
+      });
+    });
+
+    const parameters2 = filtrator.parameters[10]?.default || [];
+
+    parameters2.forEach((param) => {
+      groups.forEach((group) => {
+        const xz = group.samples.find((sample) => sample.tags.typeIds.some((it) => it === param));
+        if (xz) arr.push(xz);
+      });
+    });
+
+    const parameters3 = filtrator.parameters[20]?.default || [];
+
+    parameters3.forEach((param) => {
+      groups.forEach((group) => {
+        if (group.samples[0].tags.collectionId === param) arr.push(...group.samples);
+      });
+    });
+
+    const set = new Set(arr);
+    const result = Array.from(set);
+
+    Filtrator.updateTotalCount(result.length);
+  }, [filtrator.parameters, groups]);
+
   const findSelectedParameter = useCallback(
     (parameterId) => {
-      const parameters = filtrator.selected.parameters[parameterId]?.default || [];
+      const parameters = filtrator.parameters[parameterId]?.default || [];
       const selectedParameters = parameters.map((parameter) => {
-        const res = filtrator.selected.parameterValues.find(
+        const res = filtrator.parameterValues.find(
           (param) => param.parameterId === parameterId && param.value[0] === parameter,
         );
 
@@ -45,32 +80,24 @@ const Filters: FC<FiltersProps> = (props) => {
 
       return selectedParameters;
     },
-    [filtrator.selected.parameterValues, filtrator.selected.parameters],
+    [filtrator.parameterValues, filtrator.parameters],
   );
 
   const selectedFilters = useMemo(() => {
-    const selectedColors = findSelectedParameter('40');
-    const selectedTags = findSelectedParameter('10');
-    const selectedCollections = findSelectedParameter('20');
+    const resultArray = [];
+    Object.keys(filtrator.parameters).forEach((parameter) =>
+      resultArray.push(...findSelectedParameter(parameter)),
+    );
 
-    const resultArray = [...selectedCollections, ...selectedColors, ...selectedTags];
+    countSamples();
 
     return resultArray.join(' x ');
-  }, [findSelectedParameter]);
+  }, [countSamples, filtrator.parameters, findSelectedParameter]);
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
       <div className={styles.actions}>
         <div className={styles.buttons}>
-          <Button
-            className={cn(styles.button, styles.main)}
-            view='rounded'
-            before={<div className={styles.iconFilters} />}
-            onClick={(e) => handleOpen(e, 'all')}
-          >
-            Все фильтры
-          </Button>
-
           {secondaryFilters.map((filter) => (
             <Button
               className={cn(styles.button, styles.secondary)}

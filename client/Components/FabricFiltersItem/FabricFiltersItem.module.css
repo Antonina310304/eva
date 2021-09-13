@@ -48,9 +48,3 @@
 
   pointer-events: auto;
 }
-
-@media (--mobile-l) {
-  .FabricFiltersItem {
-    padding: var(--space-s) var(--space-s);
-  }
-}

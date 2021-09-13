@@ -1,10 +1,9 @@
-import React, { FC, HTMLAttributes, memo, useEffect } from 'react';
+import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
 import ServicePageTitle from '@Components/ServicePageTitle';
-import Filtrator, { useFiltrator } from '@Stores/Filtrator';
-import { init } from '@sentry/browser';
+import Filtrator from '@Stores/Filtrator';
 import OrderTextileSamples from './elements/OrderTextileSamples';
 import SelectorFabrics from './elements/SelectorFabrics';
 import CallBack from './elements/CallBack';
@@ -21,106 +20,109 @@ const PageTextileSamples: FC<PageTextileSamplesProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const { title, orderSamples } = page;
 
-  console.log('page', page);
+  const colorsFilter = useMemo(() => {
+    return Object.values(page.tags.colors).map((color) => {
+      return {
+        parameterId: '40',
+        type: 'variant',
+        name: color.title,
+        value: [color.id],
+        meta: {
+          color: color.code,
+        },
+      };
+    });
+  }, [page.tags.colors]);
 
-  const colorsFilter = Object.values(page.tags.colors).map((color) => {
+  const typesFilter = useMemo(() => {
+    return Object.values(page.tags.types).map((type) => {
+      return {
+        parameterId: '10',
+        type: 'variant',
+        name: type.title,
+        value: [type.id],
+        meta: {
+          color: '',
+        },
+      };
+    });
+  }, [page.tags.types]);
+
+  const collectionsFilter = useMemo(() => {
+    return Object.values(page.tags.collections).map((collection) => {
+      return {
+        parameterId: '20',
+        type: 'variant',
+        name: collection.title,
+        value: [collection.id],
+        meta: {
+          color: '',
+        },
+      };
+    });
+  }, [page.tags.collections]);
+
+  const filters = useMemo(() => {
     return {
-      parameterId: '40',
-      type: 'variant',
-      name: color.title,
-      value: [color.id],
-      meta: {
-        color: color.code,
+      id: 'textileSamples',
+      inited: false,
+      filters: [
+        {
+          id: '1',
+          name: 'Цвет',
+          theme: 'checkbox',
+          items: [
+            {
+              theme: 'checkbox',
+              parameterId: '40',
+            },
+          ],
+        },
+        {
+          id: '2',
+          name: 'Свойства',
+          theme: 'checkbox',
+          items: [
+            {
+              theme: 'checkbox',
+              parameterId: '10',
+            },
+          ],
+        },
+        {
+          id: '3',
+          name: 'Коллекция',
+          theme: 'checkbox',
+          items: [
+            {
+              theme: 'checkbox',
+              parameterId: '20',
+            },
+          ],
+        },
+      ],
+      parameterValues: [...colorsFilter, ...typesFilter, ...collectionsFilter],
+      parameters: {
+        '40': {
+          name: 'Цвет',
+          unit: '',
+          default: [],
+        },
+        '10': {
+          name: 'Свойства',
+          unit: '',
+          default: [],
+        },
+        '20': {
+          name: 'Коллекция',
+          unit: '',
+          default: [],
+        },
       },
     };
-  });
+  }, [collectionsFilter, colorsFilter, typesFilter]);
 
-  const typesFilter = Object.values(page.tags.types).map((type) => {
-    return {
-      parameterId: '10',
-      type: 'variant',
-      name: type.title,
-      value: [type.id],
-      meta: {
-        color: '',
-      },
-    };
-  });
-
-  const collectionsFilter = Object.values(page.tags.collections).map((collection) => {
-    return {
-      parameterId: '20',
-      type: 'variant',
-      name: collection.title,
-      value: [collection.id],
-      meta: {
-        color: '',
-      },
-    };
-  });
-
-  const filters = {
-    id: 'textileSamples',
-    inited: true,
-    filters: [
-      {
-        id: '1',
-        name: 'Цвет',
-        theme: 'checkbox',
-        items: [
-          {
-            theme: 'checkbox',
-            parameterId: '40',
-          },
-        ],
-      },
-      {
-        id: '2',
-        name: 'Свойства',
-        theme: 'checkbox',
-        items: [
-          {
-            theme: 'checkbox',
-            parameterId: '10',
-          },
-        ],
-      },
-      {
-        id: '3',
-        name: 'Коллекция',
-        theme: 'checkbox',
-        items: [
-          {
-            theme: 'checkbox',
-            parameterId: '20',
-          },
-        ],
-      },
-    ],
-    parameterValues: [...colorsFilter, ...typesFilter, ...collectionsFilter],
-    parameters: {
-      '40': {
-        name: 'Цвет',
-        unit: '',
-        default: [],
-      },
-      '10': {
-        name: 'Свойства',
-        unit: '',
-        default: [],
-      },
-      '20': {
-        name: 'Коллекция',
-        unit: '',
-        default: [],
-      },
-    },
-  };
-
-  // const filtrator = useFiltrator({ ...filters });
   Filtrator.init({ ...filters });
-  const filtrator = useFiltrator();
-  console.log('filtrator', filtrator);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

@@ -9,7 +9,7 @@
 
 .item {
   display: flex;
-  aling-items: center;
+  align-items: center;
 
   padding: var(--space-xs);
 

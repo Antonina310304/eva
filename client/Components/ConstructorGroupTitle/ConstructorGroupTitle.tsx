@@ -1,9 +1,6 @@
 import React, { FC, memo, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
-// import Link from '@UI/Link';
-// import Paragraph from '@divanru/ts-ui/Paragraph';
-
 import styles from './ConstructorGroupTitle.module.css';
 
 export interface ConstructorGroupTitleProps extends HTMLAttributes<HTMLDivElement> {

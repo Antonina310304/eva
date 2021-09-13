@@ -64,7 +64,7 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
     >
       <div className={styles.wrapperImage} onClick={handleClick}>
         <div>
-          <div className={styles.maska} />
+          <div className={styles.mask} />
           <Image className={styles.image} src={sample.image} />
         </div>
 

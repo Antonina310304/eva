@@ -12,29 +12,10 @@
   grid-gap: var(--space-xs);
 }
 
-.iconFilters {
-  width: 18px;
-  height: 14px;
-
-  background-image: url('./iconFilters.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
 .selectedFilters {
   margin-top: 20px;
 
   color: var(--color-dark-gray);
   font-size: 12px;
   line-height: 18px;
-}
-
-@media (--mobile) {
-  /* .filters {
-    display: block;
-  }
-
-  .groups {
-    margin-top: var(--space-n);
-  } */
 }

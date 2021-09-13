@@ -63,48 +63,6 @@
   text-align: center;
 }
 
-.dots {
-  --dots-color: #8ca677;
-  position: relative;
-  bottom: 30px;
-
-  width: 9px;
-  height: 9px;
-
-  background: var(--dots-color);
-  border-radius: 100%;
-
-  &::before {
-    position: absolute;
-    top: 2px;
-    left: -10px;
-
-    display: block;
-    width: 5px;
-    height: 5px;
-
-    background: var(--dots-color);
-    border-radius: 100%;
-
-    content: '';
-  }
-
-  &::after {
-    position: absolute;
-    top: 2px;
-    left: 14px;
-
-    display: block;
-    width: 5px;
-    height: 5px;
-
-    background: var(--dots-color);
-    border-radius: 100%;
-
-    content: '';
-  }
-}
-
 .iconRight {
   position: relative;
   bottom: 30px;
@@ -190,9 +148,5 @@
 
   .orderRulesItem {
     max-width: 100%;
-  }
-
-  .dots {
-    display: none;
   }
 }

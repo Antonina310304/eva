@@ -1,7 +1,7 @@
 .constructorGroup {
   padding: var(--space-m) var(--space-l);
 
-  transition: background var(--animation-duration-fast);
+  transition: background 0.4s;
 }
 
 .constructorGroup.visible {
