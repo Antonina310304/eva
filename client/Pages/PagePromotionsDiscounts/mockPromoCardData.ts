@@ -41,7 +41,7 @@ const mockPromoCardData: PromoCardProps[] = [
   {
     type: 'service',
     title: 'Доставка за наш счет',
-    description: 'Привезём бесплатно при заказе от 45 000 ₽',
+    description: 'Привезём бесплатно при заказе от&nbsp;45&nbsp;000&nbsp;₽',
     bgImage: '/react/static/promoCards/promo5.svg',
     bgColor: '#FFD9E0',
     theme: 'light',
@@ -92,6 +92,16 @@ const mockPromoCardData: PromoCardProps[] = [
     bgImage: '/react/static/promoCards/promo10.jpg',
     discount: 'до 50%',
     theme: 'light',
+  },
+  {
+    type: 'service',
+    title: 'Образцы тканей',
+    description: 'Закажите понравившиеся варианты, и курьер привезёт их по нужному адресу',
+    bgImage: '/react/static/promoCards/promo2.svg',
+    bgColor: '#F4FFC0',
+    theme: 'light',
+    buttonText: 'Заказать образцы',
+    buttonEvent: 'sampleOrder',
   },
 ];
 

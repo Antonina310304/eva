@@ -15,13 +15,17 @@ const eventCards = mockPromoCardData.filter((card) => {
   return card.type === 'event';
 });
 
+const serviceCards = mockPromoCardData.filter((card) => {
+  return card.type === 'service';
+});
+
 const PagePromotionsDiscounts: FC = () => {
   return (
     <div>
       <h1 className={styles.title}>Акции и скидки</h1>
       <CurrentPromotions cards={eventCards} />
       <CurrentDiscounts />
-      <FreeServices />
+      <FreeServices cards={serviceCards} />
       <Trends categories={mockCategories} />
       <Top10 />
     </div>
