@@ -35,6 +35,7 @@ export type ModalId =
   | 'DesignerServices'
   | 'Question'
   | 'Callback'
+  | 'WriteToManagement'
   | 'Cooperation';
 
 export interface Modal {

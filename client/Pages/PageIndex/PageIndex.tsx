@@ -36,6 +36,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
     openModal('Callback');
   }, [openModal]);
 
+  const handleClickWriteToManagementButton = useCallback(() => {
+    openModal('WriteToManagement');
+  }, [openModal]);
+
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
       <div className={styles.title}>EVA / PageIndex</div>
@@ -56,6 +60,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
 
       <Button onClick={handleClickCallbackButton} className={styles.button}>
         Заказать обратный звонок
+      </Button>
+
+      <Button onClick={handleClickWriteToManagementButton} className={styles.button}>
+        Написать руководству
       </Button>
     </div>
   );
