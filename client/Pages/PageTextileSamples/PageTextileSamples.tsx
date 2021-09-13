@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import React, { FC, HTMLAttributes, memo, useEffect } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';

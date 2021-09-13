@@ -1,0 +1,26 @@
+.callbackForm {
+}
+
+.actions {
+  display: flex;
+}
+
+.textarea {
+  height: 144px;
+
+  resize: none;
+}
+
+.info {
+  margin-top: var(--space-m);
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-xs);
+  line-height: var(--lh-xs);
+}
+
+@media (--mobile) {
+  .textarea {
+    height: 165px;
+  }
+}

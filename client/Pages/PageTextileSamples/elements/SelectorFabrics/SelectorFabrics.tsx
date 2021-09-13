@@ -15,6 +15,7 @@ import Button from '@UI/Button';
 import Input from '@UI/Input';
 import InputPhone from '@Components/InputPhone';
 import Link from '@UI/Link';
+import Form from '@UI/Form';
 import FabricSample from '@Components/FabricSample';
 import FabricExtraSample from '@Components/FabricExtraSample';
 import ConstructorGroup from '@Components/ConstructorGroup';
@@ -38,7 +39,7 @@ export interface SelectorFabricsProps extends HTMLAttributes<HTMLDivElement> {
 const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
   const { className, pageData, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
-
+  const [waiting, setWaiting] = useState(false);
   const { isMobile } = useMedias();
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -98,8 +99,6 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
 
   const handleApplyFilters = useCallback(async () => {
     const filteredParameters = Filtrator.formatFiltersToObject();
-
-    console.log('filteredParameters', filteredParameters);
 
     if (Object.keys(filteredParameters).length === 0 && filteredParameters.constructor === Object) {
       closeModal('Filters');
@@ -211,6 +210,57 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
 
   //   return res;
   // }, [groups]);
+
+  const transformDataBeforeSubmit = useCallback(
+    (data) => {
+      const ids = [];
+      checkedSamples.map(({ sample }) => {
+        return sample && ids.push(sample.sampleId);
+      });
+
+      return {
+        ...data,
+        'FabricsForm[fabricIds][]': ids,
+      };
+    },
+    [checkedSamples],
+  );
+
+  const handleSubmit = useCallback(() => {
+    setWaiting(true);
+  }, []);
+
+  const handleError = useCallback(() => {
+    setWaiting(false);
+
+    openModal('Info', {
+      view: 'error',
+      title: 'Произошла ошибка',
+      text: 'Пожалуйста, повторите попытку позже.',
+    });
+
+    setStep('preview');
+  }, [openModal]);
+
+  const handleResponse = useCallback(
+    (response) => {
+      setWaiting(false);
+
+      if (response.status !== 'ok') {
+        handleError();
+        return;
+      }
+
+      openModal('Info', {
+        view: 'success',
+        title: 'Заявка принята!',
+        text: 'Благодарим за выбор divan.ru. Наш оператор свяжется с вами в ближайшее время.',
+      });
+
+      setStep('preview');
+    },
+    [handleError, openModal],
+  );
 
   // Выбрать/снять образец ткани
   const toggleSelect = useCallback(
@@ -329,7 +379,15 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                     )}
                   </div>
 
-                  <div className={styles.samplesFormWrapperInfo}>
+                  <Form
+                    className={styles.samplesFormWrapperInfo}
+                    action='/site/fabrics-form'
+                    validationSchemaUrl='/json-schema/fabrics-form'
+                    transformDataBeforeSubmit={transformDataBeforeSubmit}
+                    onSubmit={handleSubmit}
+                    onResponse={handleResponse}
+                    onError={handleError}
+                  >
                     <div className={styles.inputs}>
                       <Input className={styles.input} placeholder='Имя' name='FabricsForm[name]' />
                       <InputPhone
@@ -339,10 +397,15 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                       />
                     </div>
 
-                    <Button className={styles.submit} disabled={disabled}>
+                    <Button
+                      className={styles.submit}
+                      type='submit'
+                      waiting={waiting}
+                      disabled={disabled}
+                    >
                       Заказать ткани
                     </Button>
-                  </div>
+                  </Form>
 
                   {isMobile && (
                     <div className={styles.samplesFormInfoMobile}>

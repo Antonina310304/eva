@@ -33,6 +33,8 @@ const routes = [
   '/order/pay',
   '/site/message-for-department',
   '/site/message-for-accounting-department',
+  '/site/fabrics-form',
+  '/site/send-callback',
 ];
 
 routes.forEach((route) => {

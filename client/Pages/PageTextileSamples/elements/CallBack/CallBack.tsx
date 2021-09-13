@@ -14,9 +14,8 @@ const CallBack: FC<CallBackProps> = (props) => {
   const [, { openModal }] = useModals();
 
   const handleClickCallBack = useCallback(() => {
-    openModal('Info', {
-      title: 'Упс!',
-      text: 'Ещё не готово, заходите позже…',
+    openModal('Callback', {
+      title: 'Заказать обратный звонок',
     });
   }, [openModal]);
 
