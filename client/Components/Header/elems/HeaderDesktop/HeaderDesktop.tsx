@@ -8,7 +8,6 @@ import Location from '@Components/Header/elems/Location';
 import Phone from '@Components/Header/elems/Phone';
 import UserMenu from '@Components/UserMenu';
 import { UserMenuDesktop } from '@Components/Header/data';
-import Flex from '@Components/Flex';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import Overlay from '@Components/Overlay';
 import styles from './HeaderDesktop.module.css';
@@ -42,8 +41,8 @@ const HeaderDesktop: FC<HeaderProps> = () => {
       <div className={styles.in}>
         <div className={styles.headerTop}>
           <div className={styles.container}>
-            <Flex className={styles.headerIn}>
-              <Flex ai='center' jc='flex-start' className={styles.maxWidth}>
+            <div className={styles.headerIn}>
+              <div className={styles.maxWidth}>
                 <HeaderLogo className={styles.slider} />
                 <Search className={styles.search} />
                 <SiteNav
@@ -52,16 +51,16 @@ const HeaderDesktop: FC<HeaderProps> = () => {
                   className={styles.mainNav}
                   hideOnScroll={hideOnScroll}
                 />
-              </Flex>
+              </div>
 
-              <Flex ai='center'>
+              <div className={styles.right}>
                 <Location className={styles.location} location='Москва' />
                 <Phone />
                 {hideOnScroll && (
                   <UserMenu className={styles.userMenu} userMenuList={UserMenuDesktop} />
                 )}
-              </Flex>
-            </Flex>
+              </div>
+            </div>
           </div>
         </div>
       </div>

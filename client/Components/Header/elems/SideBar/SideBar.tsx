@@ -1,5 +1,4 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
-
 import { useSpring, animated } from 'react-spring';
 
 import AnimatedWrapper from '@Components/Header/elems/AnimatedWrapper';
@@ -8,9 +7,6 @@ import Search from '@Components/Header/elems/Search';
 import SiteNavMobile from '@Components/Header/elems/SiteNavMobile';
 import MainNavMobile from '@Components/Header/elems/MainNavMobile';
 import UserBottomMenuMobile from '@Components/Header/elems/UserBottomMenuMobile/UserBottomMenuMobile';
-import Flex from '@Components/Flex';
-import IconClose from '@UI/IconClose';
-
 import styles from './SideBar.module.css';
 
 export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -71,10 +67,10 @@ const SideBar: FC<SideBarProps> = ({
           <div className={styles.inWrap}>
             <div ref={ref} className={styles.inWrap}>
               <MobileNavContainer className={styles.header}>
-                <Flex ai='center' jc='space-between'>
+                <div className={styles.wrapperSearch}>
                   <Search isMenu className={styles.search} />
                   <button className={styles.close} onClick={hideSideBar} type='button' />
-                </Flex>
+                </div>
               </MobileNavContainer>
               <MobileNavContainer>
                 <SiteNavMobile activeMenu={activeMenu} setActiveMenu={setActiveMenu} />

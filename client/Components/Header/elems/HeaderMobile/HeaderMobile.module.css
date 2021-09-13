@@ -13,6 +13,9 @@
 .in {
   position: relative;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 100%;
   min-height: 35px;
 }
@@ -29,6 +32,9 @@
 }
 
 .flexWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 
   @media (--mobile) {

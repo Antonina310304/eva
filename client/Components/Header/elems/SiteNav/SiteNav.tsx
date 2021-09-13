@@ -1,10 +1,8 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
-import Link from '@UI/Link';
-
 import cn from 'classnames';
-import MainNav from '@Components/Header/elems/MainNav/MainNav';
 
-import Flex from '@Components/Flex/Flex';
+import Link from '@UI/Link';
+import MainNav from '@Components/Header/elems/MainNav/MainNav';
 import UserMenu from '@Components/UserMenu/UserMenu';
 import { siteNavList, UserMenuDesktop } from '@Components/Header/data';
 import styles from './SiteNav.module.css';
@@ -54,7 +52,7 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
                   })}
                 >
                   <div className={styles.container}>
-                    <Flex jc='space-between' ai='center'>
+                    <div className={styles.wrapperMainNav}>
                       <MainNav
                         mainNavList={item.submenu}
                         isFirstClick={isFirstClick}
@@ -63,7 +61,7 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
                         hideOnScroll={hideOnScroll}
                       />
                       {!hideOnScroll && <UserMenu userMenuList={UserMenuDesktop} />}
-                    </Flex>
+                    </div>
                   </div>
                 </div>
               )}

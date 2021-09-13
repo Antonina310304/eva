@@ -47,7 +47,9 @@
 }
 
 .maxWidth {
+  display: flex;
   flex: 1;
+  align-items: center;
   justify-content: flex-start;
 }
 
@@ -76,4 +78,15 @@
   margin-right: 15px;
 
   font-size: var(--size-s);
+}
+
+.headerIn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

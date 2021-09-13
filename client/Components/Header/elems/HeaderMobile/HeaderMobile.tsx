@@ -1,16 +1,14 @@
 import React, { memo, useCallback, useState } from 'react';
-import Burger from '@Components/Header/elems/Burger';
-import Search from '@Components/Header/elems/Search';
-
-import Sidebar from '@Components/Header/elems/SideBar';
-import UserMenu from '@Components/UserMenu';
-
-import Overlay from '@Components/Overlay';
-import { UserMenuMobile } from '@Components/Header/data';
 import cn from 'classnames';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+
+import Burger from '@Components/Header/elems/Burger';
+import Search from '@Components/Header/elems/Search';
+import Sidebar from '@Components/Header/elems/SideBar';
+import UserMenu from '@Components/UserMenu';
+import Overlay from '@Components/Overlay';
+import { UserMenuMobile } from '@Components/Header/data';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
-import Flex from '@Components/Flex';
 import useMediaQuery from '@Hooks/useMediaQuery';
 import styles from './HeaderMobile.module.css';
 
@@ -70,18 +68,18 @@ const HeaderMobile = () => {
       <div className={styles.wrapper}>
         <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={showSideBar} className={styles.burger} />
-        <Flex ai='center' jc='space-between' className={styles.in}>
+        <div className={styles.in}>
           <div className={styles.sliderWrapper}>
             <HeaderLogo />
           </div>
 
-          <Flex ai='center' jc='space-between' className={styles.flexWrapper}>
+          <div className={styles.flexWrapper}>
             <div className={styles.search}>
               <Search className={styles.search} />
             </div>
             {!isMobile && <UserMenu className={styles.userMenu} userMenuList={UserMenuMobile} />}
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </div>
       <Sidebar
         isOpenSideBar={isOpenSideBar}

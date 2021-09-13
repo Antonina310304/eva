@@ -1,11 +1,10 @@
-import React, { FC, HTMLAttributes, memo, useEffect } from 'react';
-import { OfferSearchData, SearchResultData } from '@Types/SearchResultData';
-import { ProductSearchData } from '@Types/Product';
-import Flex from '@Components/Flex/Flex';
+import React, { FC, HTMLAttributes, memo } from 'react';
 
 import List from '@Components/Header/elems/Search/elems/List';
 import ProductList from '@Components/Header/elems/Search/elems/ProductList';
 import SearchResult from '@Components/Header/elems/Search/elems/SearchResult/SearchResult';
+import { OfferSearchData, SearchResultData } from '@Types/SearchResultData';
+import { ProductSearchData } from '@Types/Product';
 import styles from './ModalSearchContent.module.css';
 
 export interface ModalSearchContentProps extends HTMLAttributes<HTMLDivElement> {
@@ -24,7 +23,7 @@ const ModalSearchContent: FC<ModalSearchContentProps> = ({ hits, viewed, offers,
       )}
       {request.products.length < 1 && (
         <div className={styles.innerWrap}>
-          <Flex fw='wrap' jc='flex-start' className={styles.flexWrapper}>
+          <div className={styles.flexWrapper}>
             {offers && (
               <div className={styles.wrapper}>
                 <List classNameTitle={styles.title} title='Предложения' list={offers} />
@@ -36,7 +35,7 @@ const ModalSearchContent: FC<ModalSearchContentProps> = ({ hits, viewed, offers,
                 <List classNameTitle={styles.title} title='Вы недавно смотрели' list={viewed} />
               </div>
             )}
-          </Flex>
+          </div>
 
           {hits && (
             <div className={styles.wrapper}>

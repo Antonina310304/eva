@@ -177,3 +177,9 @@
 .container {
   composes: main from 'containers';
 }
+
+.wrapperMainNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
