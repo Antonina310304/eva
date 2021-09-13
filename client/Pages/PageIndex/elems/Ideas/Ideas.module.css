@@ -57,7 +57,7 @@
 }
 
 .imageCard_first {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   width: calc(min(100vw, 1768px) - 2 * var(--space-xxb));
   height: calc(0.625 * (min(100vw, 1768px) - 2 * var(--space-xxb)));
@@ -66,7 +66,7 @@
 }
 
 .imageCard_vertical {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
   height: calc(0.625 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
@@ -74,7 +74,7 @@
 }
 
 .imageCard_horizontal {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
   height: calc(16 / 10 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
@@ -89,7 +89,7 @@
   position: relative;
 }
 
-@media (max-width: 1366px) {
+@media (--desktop-m) {
   .imageBlock,
   .title,
   .buttonTabs {
@@ -118,14 +118,14 @@
   margin-top: var(--space-xxl);
 }
 
-@media (max-width: 1024px) {
+@media (desktop) {
   .title {
     font-size: 25px;
     line-height: 37px;
   }
 }
 
-@media (max-width: 768px) {
+@media (--mobile-m) {
   .imageBlock,
   .title,
   .buttonTabs {
@@ -162,7 +162,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (--mobile) {
   .title {
     font-size: 20px;
     line-height: 26px;
@@ -182,5 +182,9 @@
     width: calc(100vw - 2 * var(--space-s));
     height: calc(0.625 * (100vw - 2 * var(--space-s)));
     margin-bottom: var(--space-s);
+  }
+
+  .buttonMore {
+    margin-top: var(--space-m);
   }
 }
