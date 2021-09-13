@@ -88,7 +88,7 @@ const CallbackForm: FC<CallbackFormProps> = (props) => {
         openModal('Info', {
           view: 'success',
           title: 'Спасибо!',
-          message: 'Ваше сообщение отправлено.',
+          text: 'Ваше сообщение отправлено.',
         });
       } else if (response.status === 'error') {
         if (response.code === 0) {

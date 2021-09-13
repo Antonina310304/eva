@@ -20,8 +20,23 @@ function formEmailSubscriptionSend(email: string): void {
   });
 }
 
+// Отправка формы «Заказать звонок»
+function formCallMeSend({ name, phone }): void {
+  directCrm('identify', {
+    operation: 'CallMe',
+    identificator: {
+      provider: 'mobilePhone',
+      identity: phone,
+    },
+    data: {
+      fullName: name,
+    },
+  });
+}
+
 export default {
   directCrm,
   pushDataLayer,
   formEmailSubscriptionSend,
+  formCallMeSend,
 };
