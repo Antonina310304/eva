@@ -9,29 +9,16 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import useMedias from '@Hooks/useMedias';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
-import { MetaDataSocial } from '@Types/Meta';
+import { ArticleData } from '@Types/Press';
 import styles from './PressDetails.module.css';
-
-export interface ArticleImage {
-  src: string;
-}
-export interface ArticleData {
-  link: string;
-  logo: string;
-  images: ArticleImage[];
-  title: string;
-  text: string;
-  preview: string;
-}
 
 export interface PressDetailsProps {
   className?: string;
   article: ArticleData;
-  socials: MetaDataSocial[];
 }
 
 const PressDetails: FC<PressDetailsProps> = (props) => {
-  const { className, article, socials, ...restProps } = props;
+  const { className, article, ...restProps } = props;
   const { link, logo, images, preview, text } = article;
   const { isDesktop } = useMedias();
   const [slideIndex, setSlideIndex] = useState<number>(0);
@@ -105,7 +92,7 @@ const PressDetails: FC<PressDetailsProps> = (props) => {
         <div className={styles.contactsWrapper}>
           <div className={styles.socialsWrapper}>
             <div className={styles.share}>Поделиться в соц.сетях</div>
-            <Share socials={socials} />
+            <Share />
           </div>
           <div className={styles.logoWrapper}>
             <Image className={styles.logo} src={logo} />

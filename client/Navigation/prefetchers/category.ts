@@ -3,6 +3,6 @@ import { QueryClient } from 'react-query';
 import prefetchPage from './prefetchPage';
 import prefetchInfiniteCategory from './prefetchInfiniteCategory';
 
-export default async (url: string, client: QueryClient): Promise<void> => {
-  await Promise.all([await prefetchPage(url, client), await prefetchInfiniteCategory(url, client)]);
+export default async (route: any, client: QueryClient): Promise<void> => {
+  await Promise.all([prefetchPage(route, client), prefetchInfiniteCategory(route, client)]);
 };

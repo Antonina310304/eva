@@ -47,6 +47,9 @@ const routes: RoutesMap = {
   contacts: {
     path: '/site/contacts',
   },
+  press: {
+    path: '/site/press',
+  },
 
   //
   privacyPolicy: {

@@ -13,7 +13,7 @@ import styles from './CartModal.module.css';
 const titles = ['товар', 'товара', 'товаров'];
 const CartModal: FC<ModalSidebarProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const cart = useCart();
+  const cart = useCart({ ssr: false });
   const titleCount = declOfNum(cart.count, titles);
 
   const handleOpen = useCallback(() => {

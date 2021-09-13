@@ -46,7 +46,7 @@ const Filters: FC<FiltersProps> = (props) => {
   }, [filtrator.sort]);
 
   const secondaryFilters = useMemo(() => {
-    return filtrator.filters.slice(0, 3);
+    return (filtrator.filters || []).slice(0, 3);
   }, [filtrator.filters]);
 
   const handleOpen = useCallback(
@@ -90,28 +90,30 @@ const Filters: FC<FiltersProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
       <div className={styles.actions}>
-        <div className={styles.buttons}>
-          <Button
-            className={cn(styles.button, styles.main)}
-            view='rounded'
-            before={<div className={styles.iconFilters} />}
-            onClick={(e) => handleOpen(e, 'all')}
-          >
-            Все фильтры
-          </Button>
-
-          {secondaryFilters.map((filter) => (
+        {filtrator.filters && (
+          <div className={styles.buttons}>
             <Button
-              className={cn(styles.button, styles.secondary)}
+              className={cn(styles.button, styles.main)}
               view='rounded'
-              theme='blank'
-              key={filter.name}
-              onClick={(e) => handleOpen(e, filter.name)}
+              before={<div className={styles.iconFilters} />}
+              onClick={(e) => handleOpen(e, 'all')}
             >
-              {filter.name}
+              Все фильтры
             </Button>
-          ))}
-        </div>
+
+            {secondaryFilters.map((filter) => (
+              <Button
+                className={cn(styles.button, styles.secondary)}
+                view='rounded'
+                theme='blank'
+                key={filter.name}
+                onClick={(e) => handleOpen(e, filter.name)}
+              >
+                {filter.name}
+              </Button>
+            ))}
+          </div>
+        )}
 
         {typeof count === 'number' && <div className={styles.count}>{`Найдено ${count}`}</div>}
       </div>
