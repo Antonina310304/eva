@@ -89,7 +89,7 @@ const App: FC = () => {
         <RouteOrderCheck />
       </Route>
 
-      <Route path='/b2b/detail/:slug'>
+      <Route {...routes.b2bDetail}>
         <RouteB2bDetail />
       </Route>
 
