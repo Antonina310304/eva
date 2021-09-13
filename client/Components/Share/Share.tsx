@@ -12,7 +12,7 @@ export interface ShareProps extends HTMLAttributes<HTMLDivElement> {
 
 const Share: FC<ShareProps> = (props) => {
   const { className, ...restProps } = props;
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const { socials } = meta.data;
 
   const getSocialLink = useCallback(
