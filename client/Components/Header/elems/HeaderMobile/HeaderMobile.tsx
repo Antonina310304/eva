@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
 import cn from 'classnames';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import Burger from '@Components/Header/elems/Burger';
 import Search from '@Components/Header/elems/Search';
@@ -10,6 +9,7 @@ import Overlay from '@Components/Overlay';
 import { UserMenuMobile } from '@Components/Header/data';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import useMedias from '@Hooks/useMedias';
+import useScrollPosition from '@Hooks/useScrollPosition';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
@@ -33,21 +33,19 @@ const HeaderMobile = () => {
   const [hideOnScroll, setHideOnScroll] = useState(true);
   const [hide, setHide] = useState('default');
 
-  useScrollPosition(
-    ({ prevPos, currPos }) => {
-      const isShow = currPos.y > prevPos.y;
-      if (isShow && currPos.y !== 0) {
-        setHide('top');
-      } else if (!isShow && currPos.y !== 0) {
-        setHide('bottom');
-      } else if (currPos.y === 0) {
-        setHide('default');
-      }
+  useScrollPosition(({ previous, current }) => {
+    const isShow = current.y < previous.y;
 
-      if (isShow !== hideOnScroll) setHideOnScroll(isShow);
-    },
-    [hideOnScroll],
-  );
+    if (isShow && current.y !== 0) {
+      setHide('top');
+    } else if (!isShow && current.y !== 0) {
+      setHide('bottom');
+    } else if (current.y === 0) {
+      setHide('default');
+    }
+
+    if (isShow !== hideOnScroll) setHideOnScroll(isShow);
+  });
 
   const showSideBar = useCallback(() => {
     setIsOpenSideBar(true);
