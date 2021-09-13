@@ -98,7 +98,7 @@ const Project: FC<ProjectProps> = (props) => {
   }, [normalizeSlide, track]);
 
   return (
-    <div {...restProps} className={cn(styles.wrapperGallery, className)}>
+    <div {...restProps} className={cn(styles.project, className)}>
       <Section
         {...restProps}
         className={cn(styles.section, className)}

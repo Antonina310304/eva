@@ -39,10 +39,6 @@
   text-align: center;
 }
 
-.arrows {
-  margin-bottom: var(--space-l);
-}
-
 .wrapperGallery {
   overflow: hidden;
 }
