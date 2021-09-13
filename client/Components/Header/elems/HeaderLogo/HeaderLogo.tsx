@@ -12,7 +12,7 @@ const HeaderLogo: FC<IHeaderLogo> = ({ className }) => {
     <div className={cn(className, styles.wrapper)}>
       <Slider />
       <div className={styles.icon}>
-        <img src='react/static/img/topSlider/icon.svg' alt='' />
+        <img src='/react/static/img/topSlider/icon.svg' alt='' />
       </div>
     </div>
   );

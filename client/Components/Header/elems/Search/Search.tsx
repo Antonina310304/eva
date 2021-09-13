@@ -90,14 +90,14 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
         products: [
           {
             id: 0,
-            img: 'react/static/img/products/product1.png',
+            img: '/react/static/img/products/product1.png',
             link: 'link',
             name: 'Диван угловой Росис Velvet Blue',
             price: 19990,
           },
           {
             id: 1,
-            img: 'react/static/img/products/product1.png',
+            img: '/react/static/img/products/product1.png',
             link: 'link',
             name: 'Шерона 140 Sherst Beige',
             price: 24640,

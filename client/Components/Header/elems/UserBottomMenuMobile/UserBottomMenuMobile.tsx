@@ -12,7 +12,7 @@ const UserBottomMenuMobile = () => {
             <li key={item.title} className={styles.item}>
               <Link to='/' className={styles.link}>
                 <span
-                  style={{ backgroundImage: `url(react/static/img/userMenu/${item.icon})` }}
+                  style={{ backgroundImage: `url(/react/static/img/userMenu/${item.icon})` }}
                   className={styles.icon}
                 />
                 {item.title}

@@ -43,7 +43,7 @@ const CategoryMobile: FC<CategoryMobileProps> = ({
         <>
           <div className={styles.categoryWrapper} onClick={showDropDown}>
             <p
-              style={{ backgroundImage: `url(react/static/img/category/${category.icon})` }}
+              style={{ backgroundImage: `url(/react/static/img/category/${category.icon})` }}
               className={styles.icon}
             />
             <p className={styles.category}>{category.title}</p>
@@ -60,7 +60,7 @@ const CategoryMobile: FC<CategoryMobileProps> = ({
       ) : (
         <Link className={styles.categoryWrapper} to={category.link}>
           <p
-            style={{ backgroundImage: `url(react/static/img/category/${category.icon})` }}
+            style={{ backgroundImage: `url(/react/static/img/category/${category.icon})` }}
             className={styles.icon}
           />
           <p className={styles.category}>{category.title}</p>

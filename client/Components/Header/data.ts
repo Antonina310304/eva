@@ -62,12 +62,12 @@ export const siteNavList: ISiteNav[] = [
         title: 'Акции и скидки',
         icon: 'sale.svg',
         link: 'catalog',
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         withBanner: true,
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
@@ -128,12 +128,12 @@ export const siteNavList: ISiteNav[] = [
         title: 'Диваны и кресла',
         icon: 'divans.svg',
         link: 'ideas',
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         withBanner: true,
         banner: {
           title: 'Стильные сканди-новинки',
           text: 'Минималистичные диваны с раскладным механизмом от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть 6 моделей',
           badge: 'sale',
@@ -186,12 +186,12 @@ export const siteNavList: ISiteNav[] = [
         title: 'Шкафы',
         icon: 'wardrobe.svg',
         link: 'about',
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         withBanner: true,
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
@@ -247,12 +247,12 @@ export const siteNavList: ISiteNav[] = [
         title: 'Спальня',
         icon: 'bedroom.svg',
         link: 'store',
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         withBanner: true,
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
@@ -300,12 +300,12 @@ export const siteNavList: ISiteNav[] = [
         title: 'Гостиная',
         link: 'living-room',
         icon: 'hallway.svg',
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         withBanner: true,
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
@@ -358,13 +358,13 @@ export const siteNavList: ISiteNav[] = [
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
         },
 
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         dropDown: [
           {
             name: 'Тип',
@@ -424,13 +424,13 @@ export const siteNavList: ISiteNav[] = [
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
         },
 
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         dropDown: [
           {
             name: 'Тип',
@@ -493,13 +493,13 @@ export const siteNavList: ISiteNav[] = [
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
         },
 
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         dropDown: [
           {
             name: 'Тип',
@@ -562,13 +562,13 @@ export const siteNavList: ISiteNav[] = [
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
         },
 
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         dropDown: [
           {
             name: 'Тип',
@@ -684,13 +684,13 @@ export const siteNavList: ISiteNav[] = [
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
         },
 
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         dropDown: [
           {
             name: 'Тип',
@@ -750,13 +750,13 @@ export const siteNavList: ISiteNav[] = [
         banner: {
           title: 'Осенняя распродажа',
           text: 'Диваны от 21 990 ₽',
-          img: 'react/static/img/catalog-banner.png',
+          img: '/react/static/img/catalog-banner.png',
           link: 'link',
           textLink: 'Смотреть все',
           badge: 'sale',
         },
 
-        img: 'react/static/img/submenu-img.jpg',
+        img: '/react/static/img/submenu-img.jpg',
         dropDown: [
           {
             name: 'Тип',
