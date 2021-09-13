@@ -80,7 +80,7 @@ const DesignerServicesModal: FC<ModalMainProps> = (props) => {
             <Form
               className={styles.form}
               action='/site/send-designer-service'
-              validationSchemaUrl='/json-schema/video-consultation-form.json'
+              validationSchemaUrl='/json-schema/designer-service-form.json'
               onSubmit={handleSubmit}
               onResponse={handleResponse}
               onError={handleError}
