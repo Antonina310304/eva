@@ -9,11 +9,11 @@ import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
 import { UserMenuMobile } from '@Components/Header/data';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
-import useMediaQuery from '@Hooks/useMediaQuery';
+import useMedias from '@Hooks/useMedias';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const { isMobile } = useMedias();
   /**
    * анимация открытия и закрытия меню 1 уровня
    */

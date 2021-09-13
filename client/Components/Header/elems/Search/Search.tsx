@@ -1,17 +1,15 @@
 import React, { FC, HTMLAttributes, useEffect, useRef, useState, memo, useCallback } from 'react';
-import Input from '@UI/Input';
-
+import _debounce from 'lodash.debounce';
 import cn from 'classnames';
-import useMediaQuery from '@Hooks/useMediaQuery';
 
-import ModalSearch from '@Components/Header/elems/Search/elems/ModalSearch';
-import { hits, offers, viewed } from '@Components/Header/elems/Search/data';
-import ModalSearchContent from '@Components/Header/elems/Search/elems/ModalSearchContent';
+import Input from '@UI/Input';
 import IconClose from '@UI/IconClose';
+import ModalSearch from '@Components/Header/elems/Search/elems/ModalSearch';
+import ModalSearchContent from '@Components/Header/elems/Search/elems/ModalSearchContent';
+import { hits, offers, viewed } from '@Components/Header/elems/Search/data';
 import { SearchResultData } from '@Types/SearchResultData';
 
-import _debounce from 'lodash.debounce';
-
+import useMedias from '@Hooks/useMedias';
 import styles from './Search.module.css';
 
 export interface SearchData extends HTMLAttributes<HTMLDivElement> {
@@ -21,8 +19,7 @@ export interface SearchData extends HTMLAttributes<HTMLDivElement> {
 
 const Search: FC<SearchData> = ({ className, isMenu = false }) => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 767px)');
-  const isDesktop = useMediaQuery('(min-width: 1366px)');
+  const { isMobile, isOnlyMobile } = useMedias();
   const [isShowInput, setIsShowInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState<SearchResultData>({
@@ -57,7 +54,7 @@ const Search: FC<SearchData> = ({ className, isMenu = false }) => {
 
   const handleClickInside = (evt: { target: { value: string } }) => {
     setIsShowModal(true);
-    if (!isDesktop) {
+    if (isOnlyMobile) {
       document.querySelector('body').style.overflow = 'hidden';
     }
   };

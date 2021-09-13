@@ -1,7 +1,8 @@
 import React, { HTMLAttributes, FC, useEffect, useState, memo, ReactNode } from 'react';
 import cn from 'classnames';
+
 import IconClose from '@UI/IconClose/IconClose';
-import useMediaQuery from '@Hooks/useMediaQuery';
+import useMedias from '@Hooks/useMedias';
 import styles from './ModalSearch.module.css';
 
 export interface ModalSearchProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,7 +13,7 @@ export interface ModalSearchProps extends HTMLAttributes<HTMLDivElement> {
 
 const ModalSearch: FC<ModalSearchProps> = ({ isShowModal, hideModal, children }) => {
   const [isShow, setIsShow] = useState<boolean>(isShowModal);
-  const isMobile = useMediaQuery('(max-width: 1365px)');
+  const { isOnlyMobile } = useMedias();
 
   useEffect(() => {
     setIsShow(isShowModal);
@@ -21,12 +22,12 @@ const ModalSearch: FC<ModalSearchProps> = ({ isShowModal, hideModal, children })
   return (
     <div
       className={cn({
-        [styles.modal]: isMobile,
-        [styles.modalDesktop]: !isMobile,
+        [styles.modal]: isOnlyMobile,
+        [styles.modalDesktop]: !isOnlyMobile,
         [styles.show]: isShow,
       })}
     >
-      {isMobile && (
+      {isOnlyMobile && (
         <button type='button' onClick={hideModal} className={styles.buttonClose}>
           <IconClose />
         </button>

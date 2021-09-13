@@ -28,7 +28,6 @@ const MainNavItem: FC<MainNavProps> = ({
   const [isFirst, setIsFirst] = useState<boolean>(false);
 
   function onHover(isDropDown) {
-    console.log(isDropDown);
     setIsShowSubmenu(true);
     if (!isFirstClick) {
       setIsFirstClick(true);
