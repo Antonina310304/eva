@@ -1,0 +1,78 @@
+.check {
+}
+
+.group {
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-s);
+
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.item.isTotal {
+  .itemName {
+    font-size: var(--size-l);
+    line-height: var(--lh-xl);
+  }
+
+  .itemCost {
+    color: var(--color-black);
+    font-size: var(--size-xl);
+    line-height: var(--lh-l);
+  }
+}
+
+.itemValues {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 220px;
+}
+
+.itemCount {
+  width: 100%;
+
+  color: var(--color-dark-gray);
+}
+
+.itemCountMobile {
+  display: none;
+
+  color: var(--color-dark-gray);
+}
+
+.itemCost {
+  color: var(--color-dark-gray);
+
+  font-weight: 500;
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
+}
+
+@media (--mobile) {
+  .itemCount {
+    display: none;
+  }
+
+  .itemCountMobile {
+    display: block;
+    margin-top: var(--space-xs);
+  }
+
+  .itemValues {
+    width: 50%;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}

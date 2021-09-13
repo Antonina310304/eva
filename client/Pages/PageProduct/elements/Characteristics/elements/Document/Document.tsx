@@ -19,7 +19,7 @@ const Document: FC<DocumentProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.document, className)}>
       <Image className={styles.icon} src={icon} />
-      <Link to={url} className={styles.link} download target='_blank' view='native' size='s'>
+      <Link to={url} className={styles.link} download target='_blank' view='native'>
         {name}
       </Link>
       <span className={styles.sizeInfo}>{sizeInfo}</span>

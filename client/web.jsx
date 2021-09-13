@@ -28,15 +28,15 @@ loadableReady(async () => {
 
   hydrateState(queryClient, state);
   hydrate(
-    <RequestProvider origin={window.location.origin} cookie={document.cookie}>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={state}>
-          <BrowserRouter>
+    <BrowserRouter>
+      <RequestProvider origin={window.location.origin} cookie={document.cookie}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={state}>
             <App />
-          </BrowserRouter>
-        </Hydrate>
-      </QueryClientProvider>
-    </RequestProvider>,
+          </Hydrate>
+        </QueryClientProvider>
+      </RequestProvider>
+    </BrowserRouter>,
     document.getElementById('root'),
   );
 

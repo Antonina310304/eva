@@ -103,7 +103,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
         </div>
 
         <div className={styles.info}>
-          <Link className={styles.name} to={product.link} view='simple'>
+          <Link className={styles.name} to={product.link}>
             {product.name}
           </Link>
           <div className={styles.price}>

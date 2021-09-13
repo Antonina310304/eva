@@ -23,8 +23,15 @@ export type ModalId =
   | 'MobileOptions'
   | 'Cart'
   | 'DeliveryInformation'
+  | 'Article'
+  | 'Contacts'
+  | 'ContactsAccounting'
   | 'RegionSelector'
-  | 'Authorization';
+  | 'OfferAgreement'
+  | 'DeliveryInfo'
+  | 'Publication'
+  | 'Authorization'
+  | 'Cooperation';
 
 export interface Modal {
   id: ModalId;
@@ -41,5 +48,5 @@ export interface ModalsState {
 export interface ModalsMethods {
   openModal: (id: ModalId, data?: unknown) => void;
   closeModal: (id: ModalId) => void;
-  closeAllModals: () => void;
+  closeAllModals: () => Promise<void>;
 }

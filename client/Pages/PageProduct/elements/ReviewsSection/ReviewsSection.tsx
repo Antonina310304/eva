@@ -158,11 +158,7 @@ const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
             >
               {photos.map((photo) => (
                 <div className={styles.linkWrapper} key={photo.id}>
-                  <Link
-                    to={`#review-${getLinkIndex(photo.id)}`}
-                    className={styles.item}
-                    view='simple'
-                  >
+                  <Link to={`#review-${getLinkIndex(photo.id)}`} className={styles.item}>
                     <Image
                       className={styles.photo}
                       src={photo.image}

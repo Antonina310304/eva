@@ -45,12 +45,7 @@ const GroupsPopup: FC<GroupsPopupProps> = (props) => {
 
             <div className={styles.categories}>
               {group.categories.map((category, indexCategory) => (
-                <Link
-                  className={styles.category}
-                  to={category.translite}
-                  view='simple'
-                  key={indexCategory}
-                >
+                <Link className={styles.category} to={category.translite} key={indexCategory}>
                   {category.name}
                 </Link>
               ))}

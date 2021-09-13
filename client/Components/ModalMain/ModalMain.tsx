@@ -1,8 +1,19 @@
-import React, { useCallback, useRef, useEffect, memo, HTMLAttributes, FC, MouseEvent } from 'react';
+import React, {
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+  memo,
+  HTMLAttributes,
+  FC,
+  MouseEvent,
+} from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 
 import useKeyboardEvents from '@Hooks/useKeyboardEvents';
+import useMedias from '@Hooks/useMedias';
+import Link from '@UI/Link';
 import { Modal as IModal } from '@Contexts/Modals';
 import styles from './ModalMain.module.css';
 
@@ -10,13 +21,39 @@ export interface ModalMainProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   modal: IModal;
   fullscreen?: boolean;
+  navigation?: { nextHref: string; prevHref: string } | boolean;
+  onNext?: (e: MouseEvent | KeyboardEvent) => void;
+  onPrev?: (e: MouseEvent | KeyboardEvent) => void;
   onClose?: (e: MouseEvent | KeyboardEvent) => void;
   onLoad?: () => void;
 }
 
 const ModalMain: FC<ModalMainProps> = (props) => {
-  const { className, modal, fullscreen, children, onClose, onLoad } = props;
+  const {
+    className,
+    modal,
+    fullscreen,
+    children,
+    navigation,
+    onClose,
+    onLoad,
+    onNext,
+    onPrev,
+  } = props;
   const refWrapper = useRef();
+  const { isMobile } = useMedias();
+
+  const nextHref = useMemo(() => {
+    if (typeof navigation === 'boolean') return '#';
+
+    return navigation?.nextHref || '#';
+  }, [navigation]);
+
+  const prevHref = useMemo(() => {
+    if (typeof navigation === 'boolean') return '#';
+
+    return navigation?.nextHref || '#';
+  }, [navigation]);
 
   const handleClickWrapper = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -34,6 +71,20 @@ const ModalMain: FC<ModalMainProps> = (props) => {
     [onClose],
   );
 
+  const handleNext = useCallback(
+    (e) => {
+      if (onNext) onNext(e);
+    },
+    [onNext],
+  );
+
+  const handlePrev = useCallback(
+    (e) => {
+      if (onPrev) onPrev(e);
+    },
+    [onPrev],
+  );
+
   useEffect(() => {
     if (onLoad) onLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +97,35 @@ const ModalMain: FC<ModalMainProps> = (props) => {
       <div className={cn(styles.modal, { [styles.fullscreen]: fullscreen }, className)}>
         <div className={styles.container}>
           <div className={styles.wrapper} ref={refWrapper} onClick={handleClickWrapper}>
-            <div className={styles.content}>{children}</div>
+            {navigation && !isMobile ? (
+              <div className={styles.navigationWrapper}>
+                <Link
+                  to={prevHref}
+                  className={styles.prev}
+                  preventDefault={typeof navigation === 'boolean'}
+                  onClick={handlePrev}
+                >
+                  <div className={cn(styles.arrowBackground, { [styles.prev]: true })}>
+                    <div className={styles.arrow} />
+                  </div>
+                </Link>
+
+                {children}
+
+                <Link
+                  to={nextHref}
+                  className={styles.next}
+                  preventDefault={typeof navigation === 'boolean'}
+                  onClick={handleNext}
+                >
+                  <div className={cn(styles.arrowBackground, { [styles.next]: true })}>
+                    <div className={styles.arrow} />
+                  </div>
+                </Link>
+              </div>
+            ) : (
+              <div className={styles.content}>{children}</div>
+            )}
           </div>
         </div>
       </div>

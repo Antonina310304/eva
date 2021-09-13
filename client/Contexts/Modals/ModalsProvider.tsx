@@ -43,16 +43,23 @@ const ModalsProvider: FC = (props) => {
     }, 400);
   }, []);
 
-  const closeAllModals = useCallback(async () => {
-    setStack((prevStack) => {
-      return prevStack.map((modal) => ({
-        ...modal,
-        visible: false,
-      }));
-    });
+  const closeAllModals = useCallback((): Promise<void> => {
+    const timeout = stack.length > 0 ? 400 : 0;
 
-    setTimeout(() => setStack([]), 400);
-  }, []);
+    return new Promise((resolve) => {
+      setStack((prevStack) => {
+        return prevStack.map((modal) => ({
+          ...modal,
+          visible: false,
+        }));
+      });
+
+      setTimeout(() => {
+        setStack([]);
+        resolve();
+      }, timeout);
+    });
+  }, [stack.length]);
 
   const handleError = useCallback(() => {
     setStack([]);

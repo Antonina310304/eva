@@ -8,13 +8,13 @@ import PageWarranty from '@Pages/PageWarranty';
 
 const RouteWarranty: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const page = usePage({ path: pathname });
+  const meta = useMeta();
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 
   return (
-    <TemplateMain>
+    <TemplateMain meta={meta.data}>
       <PageWarranty page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );

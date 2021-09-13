@@ -1,7 +1,10 @@
+import { useQuery, useQueryClient } from 'react-query';
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
+import equal from 'fast-deep-equal';
 
-import { ApiCart } from '@Api/Cart';
+import * as ApiCart from '@Api/Cart';
+import * as ApiOrder from '@Api/Order';
 import { CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
 import { CartStoreValue, UseCart } from './typings';
@@ -194,7 +197,7 @@ const changeCount = async (params: any) => {
 };
 
 // Загрузить сопутствующие товары
-const loadRelatedProducts = async ({ productIds }: any) => {
+const loadRelatedProducts = async ({ productIds }: any): Promise<void> => {
   try {
     const response = await ApiCart.loadRelatedProducts({ productIds });
     const relatedProducts = (response.relatedProducts as any[]).map(
@@ -230,7 +233,7 @@ const loadRelatedProducts = async ({ productIds }: any) => {
 };
 
 // Обновить информацию о способе доставки
-const updateDeliveryType = (id: number, newData: any) => {
+const updateDeliveryType = (id: number, newData: any): void => {
   update(cartStore, (oldCart) => ({
     ...oldCart,
     deliveryTypes: oldCart.deliveryTypes.map((deliveryType) => {
@@ -244,11 +247,35 @@ const updateDeliveryType = (id: number, newData: any) => {
   }));
 };
 
-export const useCart: UseCart = (initialData) => {
-  if (initialData && !getValue(cartStore)) {
-    cartStore.set(initialData);
+const init = (initialValue: CartStoreValue): void => {
+  const value = getValue(cartStore);
+
+  if (initialValue && !equal(initialValue, value)) {
+    cartStore.set(initialValue);
     networkStore.set('success');
   }
+};
+
+export const useCart: UseCart = (params) => {
+  const { ssr = true } = params || {};
+  const keys = ['cart', ssr && 'ssr'];
+
+  const queryClient = useQueryClient();
+  const result = useQuery(keys, () => ApiOrder.getCartInfo(), {
+    enabled: ssr,
+    keepPreviousData: true,
+    retryOnMount: false,
+    refetchOnMount: false,
+  });
+
+  if (result.data) {
+    init(result.data);
+  }
+
+  // Sync nanostores with react-query store
+  cartStore.listen((value) => {
+    queryClient.setQueryData(keys, value);
+  });
 
   return {
     ...useStore(cartStore),
@@ -257,6 +284,7 @@ export const useCart: UseCart = (initialData) => {
 };
 
 export default {
+  init,
   addProducts,
   hasInCart,
   removeProduct,
@@ -265,4 +293,5 @@ export default {
   showPosition,
   loadRelatedProducts,
   updateDeliveryType,
+  loadInitData,
 };

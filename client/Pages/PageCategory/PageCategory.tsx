@@ -3,7 +3,7 @@ import cn from 'classnames';
 import loadable from '@loadable/component';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { ApiCategory } from '@Api/Category';
+import * as ApiCategory from '@Api/Category';
 import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
 import styles from './PageCategory.module.css';
@@ -29,7 +29,7 @@ const MattressesProductCard = loadable(() => import('@Mattresses/MattressesProdu
 const PageCategory: FC<PageCategoryProps> = (props) => {
   const { className, page, category, slug, path, onApplyFilters, onMore, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
-  const filtrator = useFiltrator({ id: `${path}${page.categoryTranslite}`, ...page.filters });
+  const filtrator = useFiltrator();
   const isModels = category.data.pages[0].productsModel?.length > 0;
 
   const activeSubcategoryIds = useMemo(() => {

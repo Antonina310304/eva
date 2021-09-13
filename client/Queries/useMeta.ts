@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from 'react-query';
 import { useParams } from 'react-router';
 
-import { ApiMeta } from '@Api/Meta';
+import * as ApiMeta from '@Api/Meta';
 import { MetaData } from '@Types/Meta';
 
 export interface Params {
@@ -12,8 +12,8 @@ export interface RouteParams {
   region?: string;
 }
 
-const useMeta = (params: Params = {}): UseQueryResult<MetaData> => {
-  const { ssr } = params;
+const useMeta = (params?: Params): UseQueryResult<MetaData> => {
+  const { ssr = true } = params || {};
   const { region } = useParams<RouteParams>();
   const keys = ['meta', ssr && 'ssr', region].filter(Boolean);
 

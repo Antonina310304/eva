@@ -1,7 +1,9 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
-import { useCart } from '@Stores/Cart';
+import * as ApiPecom from '@Api/Pecom';
+import useModals from '@Hooks/useModals';
+import CartBlock from '@Components/CartBlock';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
 import ImportantInfo from '@Components/ImportantInfo';
 import ShippingCostCalculator from '@Components/ShippingCostCalculator';
@@ -12,13 +14,14 @@ import List from '@UI/List';
 import Image from '@UI/Image';
 import RadioButton from '@UI/RadioButton';
 import FormattedText from '@Pages/PageDelivery/FormattedText';
+import { UseCartResult } from '@Stores/Cart';
+import useLayout from '@Queries/useLayout';
 import OrderedList from './elements/OrderedList';
 import FreeDeliveryBanner from './elements/FreeDeliveryBanner';
 import Attention from './elements/Attention';
 import SuburbTable from './elements/SuburbTable';
 import PickupPoint from './elements/PickupPoint';
 import ToAddress from './elements/ToAddress';
-import CartBlock from './elements/CartBlock';
 import pickupPoint from './icons/pickupPoint.svg';
 import toAddress from './icons/toAddress.svg';
 import styles from './PageDelivery.module.css';
@@ -42,6 +45,7 @@ export interface PageDeliveryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
   meta: MetaData;
+  cart?: UseCartResult;
 }
 
 const tabs = [
@@ -49,7 +53,7 @@ const tabs = [
   { id: '1', label: 'Сборка' },
 ];
 const PageDelivery: FC<PageDeliveryProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, meta, cart, ...restProps } = props;
   const {
     title,
     pageMenu,
@@ -60,13 +64,41 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
     acceptanceProduct,
     attention,
     deliveryTypes,
-    layout,
+    productIds = [],
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
-  const cart = useCart();
-
+  const [deliveryCost, setDeliveryCost] = useState(null);
+  const [, { openModal }] = useModals();
+  const layout = useLayout();
   const isRus = meta.country === 'RUS';
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const ids = useMemo(() => productIds, []);
+
+  const goodsInfo = useMemo(() => {
+    const result = [];
+
+    if (cart.positions?.length > 0) {
+      cart.positions.forEach((position) => {
+        position.products.forEach((product) => {
+          result.push({
+            id: product.id,
+            quantity: product.quantity,
+          });
+        });
+      });
+    } else {
+      ids.forEach((producId) => {
+        result.push({
+          id: producId,
+          quantity: 1,
+        });
+      });
+    }
+
+    return result;
+  }, [cart.positions, ids]);
 
   const handleChangeDeliveryType = useCallback((delivery) => {
     setCheckedDelivery(delivery);
@@ -77,13 +109,53 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   }, []);
 
   const handleClickCity = useCallback(() => {
-    // openModal('pecom-regions');
-  }, []);
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
+
+  // Получаем информацию о стоимости доставки до подьезда
+  const load = useCallback(async () => {
+    if (goodsInfo.length < 1) return;
+
+    try {
+      const options = {
+        goodsInfo,
+        receiverCityInfo: meta.region.name,
+      };
+      const [courierSum, pickupSum] = await Promise.all([
+        ApiPecom.getDeliveryCost({
+          ...options,
+          isDelivery: true,
+          courierAddress: `${meta.region.name}, улица Ленина, д. 1`,
+        }),
+        ApiPecom.getDeliveryCost({
+          ...options,
+          isDelivery: false,
+          courierAddress: '',
+        }),
+      ]);
+
+      setDeliveryCost({ courierSum, pickupSum });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
+  }, [goodsInfo, meta.region.name]);
+
+  useEffect(() => {
+    if (!meta.region.isPec || !cart) return;
+
+    load();
+  }, [cart, load, meta.region.isPec]);
+
+  if (!layout.isSuccess) return null;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
       <div className={styles.mainContainer}>
-        <ServicePageTitle view='bordered' title='Рассрочка и кредит' />
+        <ServicePageTitle view='bordered' title={title} />
         <InformationTabsNavigation className={styles.menu} navigation={pageMenu} />
       </div>
       {meta.region.isPec ? (
@@ -131,7 +203,13 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
               В случае необходимости, вы можете забрать свой заказ в пункте выдачи ТК
             </div>
           </div>
-          {cart.network === 'success' && cart.count > 0 && <CartBlock cart={cart} />}
+          {cart.count > 0 && (
+            <div className={styles.cartBlock}>
+              <div className={styles.contentContainer}>
+                <CartBlock cart={cart} deliveryCost={deliveryCost} type={checkedDelivery.type} />
+              </div>
+            </div>
+          )}
           <div className={styles.contentContainer}>
             {checkedDelivery.type === 'pickupPoint' && <PickupPoint region={meta.region.name} />}
             {checkedDelivery.type === 'toAddress' && <ToAddress />}
@@ -140,7 +218,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
               Свяжитесь с нами, чтобы получить информацию об оптимальных условиях доставки в ваш
               город.
             </div>
-            <div className={styles.deliveryPhone}>{layout.footer.contacts.items[0].text}</div>
+            <div className={styles.deliveryPhone}>{layout.data.footer.contacts.items[0].text}</div>
           </div>
         </>
       ) : (
@@ -191,15 +269,17 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                   />
                 </div>
 
-                <List
-                  className={styles.additionalCost}
-                  items={additionalCost}
-                  renderChild={(paragraph: string) => (
-                    <div className={styles.paragraph}>
-                      <FormattedText currency={meta.currency}>{paragraph}</FormattedText>
-                    </div>
-                  )}
-                />
+                {additionalCost?.length > 0 && (
+                  <List
+                    className={styles.additionalCost}
+                    items={additionalCost}
+                    renderChild={(paragraph: string) => (
+                      <div className={styles.paragraph}>
+                        <FormattedText currency={meta.currency}>{paragraph}</FormattedText>
+                      </div>
+                    )}
+                  />
+                )}
               </div>
             </div>
           )}
@@ -241,14 +321,16 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
                   )}
                 </div>
 
-                <div className={styles.wrapperList}>
-                  {!isRus && <div className={styles.listTitle}>При получении товара:</div>}
-                  <OrderedList
-                    className={styles.list}
-                    list={acceptanceRules}
-                    currency={meta.currency}
-                  />
-                </div>
+                {acceptanceRules?.length > 0 && (
+                  <div className={styles.wrapperList}>
+                    {!isRus && <div className={styles.listTitle}>При получении товара:</div>}
+                    <OrderedList
+                      className={styles.list}
+                      list={acceptanceRules}
+                      currency={meta.currency}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
