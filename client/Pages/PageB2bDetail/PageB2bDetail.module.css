@@ -186,7 +186,7 @@
 
 @media (--desktop) {
   .section {
-    margin-left: var(--space-s-neg);
+    margin-left: var(--space-xxl-neg);
   }
 
   .heading {
@@ -245,7 +245,7 @@
   }
 
   .galleryItem:first-child {
-    padding-left: var(--space-s);
+    padding-left: var(--space-xxl);
   }
 
   .galleryItem:not(:last-child) {
@@ -254,6 +254,10 @@
 }
 
 @media (--mobile-m) {
+  .section {
+    margin-left: var(--space-s-neg);
+  }
+
   .heading {
     padding-top: var(--space-n);
     padding-bottom: var(--space-n);
@@ -305,6 +309,10 @@
   .vertical {
     width: 275px;
     height: 414px;
+  }
+
+  .galleryItem:first-child {
+    padding-left: var(--space-s);
   }
 }
 

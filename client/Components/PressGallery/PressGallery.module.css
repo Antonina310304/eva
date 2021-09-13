@@ -69,11 +69,6 @@
 }
 
 @media (--desktop) {
-  .wrapperGallery {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
   .link {
     font-size: var(--size-m);
     line-height: var(--lh-m);
