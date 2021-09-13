@@ -4,26 +4,25 @@ import cn from 'classnames';
 
 import Image from '@UI/Image';
 import { ConstructorValueData } from '@Types/Constructor';
-import useOrderFabrics from '@Hooks/useOrderFabrics';
 import styles from './FabricSample.module.css';
 
 export interface FabricSampleProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   sample?: ConstructorValueData;
   removable?: boolean;
+  checkedSamples?: any;
+  checkSample?: (sample: any) => void;
 }
 
 const FabricSample: FC<FabricSampleProps> = (props) => {
-  const { className, sample, vse, foo, ...restProps } = props;
+  const { className, sample, checkedSamples, checkSample, ...restProps } = props;
   const removable = Boolean(restProps.removable && sample);
-  const orderFabrics = useOrderFabrics();
 
   const handleClick = useCallback(() => {
     if (!removable) return;
 
-    // orderFabrics.toggleSelect({ sample });
-    foo({ sample });
-  }, [foo, removable, sample]);
+    checkSample({ sample });
+  }, [checkSample, removable, sample]);
 
   return (
     <div

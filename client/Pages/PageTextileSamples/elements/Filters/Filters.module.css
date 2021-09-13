@@ -1,7 +1,4 @@
 .filters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .actions {
@@ -15,12 +12,6 @@
   grid-gap: var(--space-xs);
 }
 
-.count {
-  composes: darkGray from 'colors';
-
-  margin-left: var(--space-l);
-}
-
 .iconFilters {
   width: 18px;
   height: 14px;
@@ -30,69 +21,20 @@
   background-size: contain;
 }
 
-.wrapperLabels {
-  display: flex;
-  align-items: center;
-}
+.selectedFilters {
+  margin-top: 20px;
 
-.labels {
-  display: flex;
-  align-items: center;
-}
-
-.label {
-  margin-right: var(--space-xl);
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-.buttonMattresses {
-  margin-right: var(--space-xl);
-}
-
-.iconMattresses {
-  width: 30px;
-  height: 30px;
-  margin-right: var(--space-xs);
-
-  background-image: url('./iconMattresses.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-@media (--desktop) {
-  .button.secondary {
-    /* display: none; */
-  }
+  color: var(--color-dark-gray);
+  font-size: 12px;
+  line-height: 18px;
 }
 
 @media (--mobile) {
-  .filters {
+  /* .filters {
     display: block;
   }
 
   .groups {
     margin-top: var(--space-n);
-  }
-
-  .wrapperLabels {
-    flex-direction: column;
-    align-items: stretch;
-    margin-top: var(--space-n);
-  }
-
-  .buttonMattresses {
-    margin-right: 0;
-  }
-
-  .labels {
-    justify-content: space-between;
-  }
-
-  .label {
-    margin-top: var(--space-n);
-    margin-right: var(--space-s);
-  }
+  } */
 }

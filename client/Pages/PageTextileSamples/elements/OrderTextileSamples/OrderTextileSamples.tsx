@@ -3,17 +3,19 @@ import cn from 'classnames';
 
 import useMedias from '@Hooks/useMedias';
 import Collapse from '@UI/Collapse';
+import { OrderSampleData } from '@Pages/PageTextileSamples/typings';
 import OrderRulesItem from '../OrderRulesItem';
 import styles from './OrderTextileSamples.module.css';
 
 export interface OrderTextileSamplesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  orderIconsText: OrderSampleData[];
 }
 
 const OrderTextileSamples: FC<OrderTextileSamplesProps> = (props) => {
   const { orderIconsText, className, ...restProps } = props;
   const [collapsed, setCollapsed] = useState(true);
-  const { isMobileM, isMobile } = useMedias();
+  const { isMobileM } = useMedias();
 
   let styleForText = {};
 

@@ -1,10 +1,13 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import { OrderSampleData } from '@Pages/PageTextileSamples/typings';
 import styles from './OrderRulesItem.module.css';
 
 export interface OrderRulesItemProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  iconAndText: OrderSampleData;
+  styleForText?: any;
 }
 
 const OrderRulesItem: FC<OrderRulesItemProps> = (props) => {

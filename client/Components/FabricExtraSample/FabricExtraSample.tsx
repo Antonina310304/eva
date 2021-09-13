@@ -5,7 +5,6 @@ import Icon90SampleMask from '@divanru/icons/dist/90/sample_mask';
 
 import Image from '@UI/Image';
 import useModals from '@Hooks/useModals';
-import useOrderFabrics from '@Hooks/useOrderFabrics';
 import { ConstructorValueData } from '@Types/Constructor';
 import styles from './FabricExtraSample.module.css';
 
@@ -17,6 +16,8 @@ export interface FabricExtraSampleProps extends HTMLAttributes<HTMLDivElement> {
   largeImage?: boolean;
   sample: ConstructorValueData;
   refCatalog: MutableRefObject<HTMLDivElement>;
+  checkedSamples?: any;
+  checkSample?: (sample: any) => void;
 }
 
 const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
@@ -28,28 +29,22 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
     modalView = true,
     largeImage = false,
     isFirstCollection,
-    vse,
-    foo,
+    checkedSamples,
+    checkSample,
     ...restProps
   } = props;
-  const orderFabrics = useOrderFabrics();
   const [, { openModal }] = useModals();
   const maskSize = largeImage ? 145 : 90;
 
   const selected = useMemo(() => {
-    return (
-      // orderFabrics.data.selected.findIndex((selectedItem) => selectedItem.sample === sample) > -1
-      vse.findIndex((selectedItem) => selectedItem.sample === sample) > -1
-    );
-  }, [sample, vse]);
+    return checkedSamples.findIndex((selectedItem) => selectedItem.sample === sample) > -1;
+  }, [checkedSamples, sample]);
 
   const view = useMemo(() => (visible && modalView ? 'gray' : 'white'), [modalView, visible]);
 
   const handleClick = useCallback(() => {
-    // orderFabrics.toggleSelect({ sample });
-
-    foo({ sample });
-  }, [foo, sample]);
+    checkSample({ sample });
+  }, [checkSample, sample]);
 
   const handleClickMoreInfo = useCallback(() => {
     openModal('Info', {

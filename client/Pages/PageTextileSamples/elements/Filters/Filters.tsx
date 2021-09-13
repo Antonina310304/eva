@@ -1,22 +1,9 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  MouseEvent,
-  useMemo,
-  useCallback,
-  useState,
-  memo,
-  lazy,
-} from 'react';
+import React, { FC, HTMLAttributes, MouseEvent, useMemo, useCallback, memo } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-// import Link from '@UI/Link';
-// import useMedias from '@Hooks/useMedias';
-// import useModals from '@Hooks/useModals';
-import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { useFiltrator } from '@Stores/Filtrator';
 import { GroupData } from '@Pages/PageCategory/typings';
-// import Dropdown from '../Dropdown';
 import styles from './Filters.module.css';
 
 export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
@@ -28,22 +15,9 @@ export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
   onChangeSort?: (e: MouseEvent) => void;
 }
 
-// const GroupsPopup = lazy(() => import('../GroupsPopup'));
-// const OptionsPopup = lazy(() => import('../OptionsPopup'));
-
 const Filters: FC<FiltersProps> = (props) => {
   const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
-  // const [openedGroups, setOpenedGroups] = useState(false);
-  // const [openedOptions, setOpenedOptions] = useState(false);
   const filtrator = useFiltrator();
-  // const { isMobile } = useMedias();
-  // const [, { openModal }] = useModals();
-
-  // const labelSort = useMemo(() => {
-  //   const { name } = filtrator.sort.find((item) => item.selected);
-
-  //   return `${name.substr(0, 1).toUpperCase()}${name.substr(1)}`;
-  // }, [filtrator.sort]);
 
   const secondaryFilters = useMemo(() => {
     return filtrator.filters.slice(0, 3);
@@ -56,66 +30,33 @@ const Filters: FC<FiltersProps> = (props) => {
     [onOpen],
   );
 
-  const otfiltronino = useMemo(() => {
-    const cvetaId = filtrator.selected.parameters[40]?.default || [];
-    const resColors = cvetaId.map((cvetId) => {
-      const res = filtrator.selected.parameterValues.find(
-        (param) => param.parameterId === '40' && param.value[0] === cvetId,
-      );
-      return res.name;
-    });
+  const findSelectedParameter = useCallback(
+    (parameterId) => {
+      const parameters = filtrator.selected.parameters[parameterId]?.default || [];
+      const selectedParameters = parameters.map((parameter) => {
+        const res = filtrator.selected.parameterValues.find(
+          (param) => param.parameterId === parameterId && param.value[0] === parameter,
+        );
 
-    const tagsId = filtrator.selected.parameters[10]?.default || [];
-    const resTags = tagsId.map((tagId) => {
-      const res = filtrator.selected.parameterValues.find(
-        (param) => param.parameterId === '10' && param.value[0] === tagId,
-      );
-      return res.name;
-    });
+        if (!res) return '';
 
-    const collections = filtrator.selected.parameters[20]?.default || [];
-    const resCollections = collections.map((collectionId) => {
-      const res = filtrator.selected.parameterValues.find(
-        (param) => param.parameterId === '20' && param.value[0] === collectionId,
-      );
-      return res.name;
-    });
+        return res.name;
+      });
 
-    const resultArray = [...resCollections, ...resColors, ...resTags];
+      return selectedParameters;
+    },
+    [filtrator.selected.parameterValues, filtrator.selected.parameters],
+  );
+
+  const selectedFilters = useMemo(() => {
+    const selectedColors = findSelectedParameter('40');
+    const selectedTags = findSelectedParameter('10');
+    const selectedCollections = findSelectedParameter('20');
+
+    const resultArray = [...selectedCollections, ...selectedColors, ...selectedTags];
 
     return resultArray.join(' x ');
-  }, [filtrator.selected.parameterValues, filtrator.selected.parameters]);
-
-  // const handleChangeSort = useCallback(
-  //   (e: MouseEvent, option: typeof filtrator.sort[0]) => {
-  //     Filtrator.setSort(option);
-
-  //     if (onChangeSort) onChangeSort(e);
-  //   },
-  //   [filtrator, onChangeSort],
-  // );
-
-  // const handleOpenGroups = useCallback(() => {
-  //   if (!isMobile) return;
-
-  //   setOpenedGroups(true);
-  //   openModal('MobileGroups', {
-  //     label: 'По группам',
-  //     groups,
-  //     onClose: () => setOpenedGroups(false),
-  //   });
-  // }, [groups, isMobile, openModal]);
-
-  // const handleOpenOptions = useCallback(() => {
-  //   if (!isMobile) return;
-
-  //   setOpenedOptions(true);
-  //   openModal('MobileOptions', {
-  //     label: labelSort,
-  //     options: filtrator.sort,
-  //     onClose: () => setOpenedOptions(false),
-  //   });
-  // }, [filtrator.sort, isMobile, labelSort, openModal]);
+  }, [findSelectedParameter]);
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
@@ -142,52 +83,9 @@ const Filters: FC<FiltersProps> = (props) => {
             </Button>
           ))}
         </div>
-
-        {/* {typeof count === 'number' && <div className={styles.count}>{`Найдено ${count}`}</div>} */}
       </div>
 
-      <div className={styles.wrapperLabels}>
-        {/* {isMatrasyCategory && (
-          <Link
-            className={styles.buttonMattresses}
-            to='/promo/mattrasses'
-            target='_blank'
-            view='native'
-          >
-            <Button wide theme='secondary'>
-              <div className={styles.iconMattresses} />
-              Подобрать матрас
-            </Button>
-          </Link>
-        )} */}
-
-        {/* <div className={styles.labels}>
-          <Dropdown
-            className={styles.label}
-            label='По группам'
-            opened={openedGroups}
-            onOpen={handleOpenGroups}
-          >
-            {!isMobile && <GroupsPopup label='По группам' groups={groups} />}
-          </Dropdown>
-
-          <Dropdown
-            className={styles.label}
-            label={labelSort}
-            opened={openedOptions}
-            onOpen={handleOpenOptions}
-          >
-            {!isMobile && (
-              <OptionsPopup
-                label={labelSort}
-                options={filtrator.sort}
-                onCheckOption={handleChangeSort}
-              />
-            )}
-          </Dropdown>
-        </div> */}
-      </div>
-      <div>{otfiltronino}</div>
+      <div className={styles.selectedFilters}>{selectedFilters}</div>
     </div>
   );
 };
