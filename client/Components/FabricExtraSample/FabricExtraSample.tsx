@@ -1,8 +1,6 @@
 import React, { HTMLAttributes, FC, memo, useCallback, useMemo, MutableRefObject } from 'react';
 import cn from 'classnames';
 
-import Icon90SampleMask from '@divanru/icons/dist/90/sample_mask';
-
 import Image from '@UI/Image';
 import useModals from '@Hooks/useModals';
 import { ConstructorValueData } from '@Types/Constructor';
@@ -13,7 +11,6 @@ export interface FabricExtraSampleProps extends HTMLAttributes<HTMLDivElement> {
   visible?: boolean;
   isFirstCollection?: boolean;
   modalView?: boolean;
-  largeImage?: boolean;
   sample: ConstructorValueData;
   refCatalog: MutableRefObject<HTMLDivElement>;
   checkedSamples?: any;
@@ -27,14 +24,12 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
     refCatalog,
     visible,
     modalView = true,
-    largeImage = false,
     isFirstCollection,
     checkedSamples,
     checkSample,
     ...restProps
   } = props;
   const [, { openModal }] = useModals();
-  const maskSize = largeImage ? 145 : 90;
 
   const selected = useMemo(() => {
     return checkedSamples.findIndex((selectedItem) => selectedItem.sample === sample) > -1;
@@ -69,8 +64,8 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
     >
       <div className={styles.wrapperImage} onClick={handleClick}>
         <div>
-          <Icon90SampleMask width={maskSize} height={maskSize} className={styles.mask} />
-          <Image className={cn(styles.image, { [styles.large]: largeImage })} src={sample.image} />
+          <div className={styles.maska} />
+          <Image className={styles.image} src={sample.image} />
         </div>
 
         {!selected && (

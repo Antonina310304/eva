@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { MetaData } from '@Types/Meta';
 import ServicePageTitle from '@Components/ServicePageTitle';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import { init } from '@sentry/browser';
 import OrderTextileSamples from './elements/OrderTextileSamples';
 import SelectorFabrics from './elements/SelectorFabrics';
 import CallBack from './elements/CallBack';
@@ -116,7 +117,10 @@ const PageTextileSamples: FC<PageTextileSamplesProps> = (props) => {
     },
   };
 
-  useFiltrator({ ...filters });
+  // const filtrator = useFiltrator({ ...filters });
+  Filtrator.init({ ...filters });
+  const filtrator = useFiltrator();
+  console.log('filtrator', filtrator);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>

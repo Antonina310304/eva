@@ -48,21 +48,33 @@
   transition: color 0.4s;
 }
 
+.maska {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  width: 145px;
+  height: 145px;
+
+  background-image: url('./mask.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
 .image {
   position: relative;
   z-index: 1;
 
   flex-shrink: 0;
 
-  width: 90px;
-  height: 90px;
-
-  /* border: 1px solid var( --color-white); */
-}
-
-.image.large {
   width: 145px;
   height: 145px;
+
+  /* border: 1px solid var( --color-white); */
 }
 
 .wrapperIcon {
@@ -130,10 +142,14 @@
   cursor: pointer;
 }
 
-@media (--mobile) {
-  .FabricExtraSample {
-    &-SampleHint {
-      display: none;
-    }
+@media (--mobile-m) {
+  .maska {
+    width: 90px;
+    height: 90px;
+  }
+
+  .image.large {
+    width: 90px;
+    height: 90px;
   }
 }

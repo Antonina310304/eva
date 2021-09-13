@@ -39,7 +39,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
   const { className, pageData, ...restProps } = props;
   const [, { openModal, closeModal }] = useModals();
 
-  const { isMobile, isMobileM } = useMedias();
+  const { isMobile } = useMedias();
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedCollections, setSelectedCollections] = useState([]);
@@ -98,6 +98,8 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
 
   const handleApplyFilters = useCallback(async () => {
     const filteredParameters = Filtrator.formatFiltersToObject();
+
+    console.log('filteredParameters', filteredParameters);
 
     if (Object.keys(filteredParameters).length === 0 && filteredParameters.constructor === Object) {
       closeModal('Filters');
@@ -268,7 +270,6 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
                   slotCatalogItem={
                     <FabricExtraSample
                       className={styles.fabricExtraSample}
-                      largeImage={!isMobileM}
                       sample={null}
                       refCatalog={refCatalog}
                       checkedSamples={checkedSamples}
