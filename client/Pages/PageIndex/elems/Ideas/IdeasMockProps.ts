@@ -1,6 +1,4 @@
 import { ButtonTabsProps } from '@UI/ButtonTabs';
-import { MockIcon1, MockIcon2, MockIcon3 } from '@Pages/PageIndex/elems/Ideas/MockIcon';
-import CrossSaleProductCard, { CrossSaleProductCardProps } from '@Components/CrossSaleProductCard';
 import { ProductData } from '@Types/Product';
 
 export const ideasMockButtonTabs: ButtonTabsProps = {
@@ -28,7 +26,7 @@ export const ideasMockProducts: Partial<ProductData>[] = [
   {
     id: 1,
     name: 'Диван угловой Росис Velvet Blue',
-    type: 'Диван',
+    type: 'Кресло',
     price: { actual: 19990, discount: 15, expired: 23990 },
     tags: [
       {
@@ -53,7 +51,7 @@ export const ideasMockProducts: Partial<ProductData>[] = [
   {
     id: 2,
     name: 'Диван угловой Росис Velvet Blue',
-    type: 'Диван',
+    type: 'Топпер',
     price: { actual: 19990, discount: 15, expired: 23990 },
     tags: [
       {
@@ -78,7 +76,7 @@ export const ideasMockProducts: Partial<ProductData>[] = [
   {
     id: 3,
     name: 'Диван угловой Росис Velvet Blue',
-    type: 'Диван',
+    type: 'Топпер',
     price: { actual: 19990, discount: 15, expired: 23990 },
     tags: [
       {
@@ -103,7 +101,7 @@ export const ideasMockProducts: Partial<ProductData>[] = [
   {
     id: 4,
     name: 'Диван угловой Росис Velvet Blue',
-    type: 'Диван',
+    type: 'Топпер',
     price: { actual: 19990, discount: 15, expired: 23990 },
     tags: [
       {
@@ -128,7 +126,7 @@ export const ideasMockProducts: Partial<ProductData>[] = [
   {
     id: 5,
     name: 'Диван угловой Росис Velvet Blue',
-    type: 'Диван',
+    type: 'Топпер',
     price: { actual: 19990, discount: 15, expired: 23990 },
     tags: [
       {

@@ -1,10 +1,11 @@
-import React, { forwardRef, HTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 import Popup from '@UI/Popup/Popup';
 import IconClose from '@UI/IconClose/IconClose';
 import Discount from '@UI/Discount';
 import Link from '@UI/Link';
 import Like from '@Components/Like';
 import { ProductData } from '@Types/Product';
+import Price from '@UI/Price';
 import styles from './IdeasPopup.module.css';
 
 interface IdeasPopupInterface {
@@ -33,9 +34,9 @@ const IdeasPopup = forwardRef<HTMLDivElement, IdeasPopupInterface>(
             <div className={styles.title}>{productData.name}</div>
             <div>
               <span className={styles.price_title}>Цена</span>
-              <span className={styles.totalPrice}>{productData.price.actual}</span>
+              <Price price={productData.price.actual} className={styles.totalPrice} />
               {productData.price.expired && (
-                <span className={styles.price}>{productData.price.expired}</span>
+                <Price expired price={productData.price.expired} className={styles.price} />
               )}
               {productData.price.discount && (
                 <Discount className={styles.discount}>{productData.price.discount}</Discount>

@@ -22,7 +22,7 @@
   color: var(--color-black);
   font-weight: 500;
   font-size: 30px;
-  font-family: CloserText;
+  font-family: var(--font-hero);
   font-style: normal;
   line-height: 40px;
 }
@@ -118,10 +118,14 @@
   margin-top: var(--space-xxl);
 }
 
-@media (desktop) {
+@media (--desktop) {
   .title {
     font-size: 25px;
     line-height: 37px;
+  }
+
+  .imageCard_first {
+    margin-bottom: var(--space-xxl);
   }
 }
 
@@ -140,7 +144,7 @@
   .imageCard_first {
     width: calc(100vw - 2 * var(--space-s));
     height: calc(0.625 * (100vw - 2 * var(--space-s)));
-    margin-bottom: var(--space-s);
+    margin-bottom: var(--space-n);
   }
 
   .imageCard_vertical {
