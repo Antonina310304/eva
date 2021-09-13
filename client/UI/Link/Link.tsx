@@ -74,7 +74,7 @@ const Link: FC<LinkProps> = (props) => {
 
       if (needFetch) {
         await prefetchUrl(href, queryClient);
-        closeAllModals();
+        await closeAllModals();
         history.push(href);
         window.scrollTo({ top: 0 });
       }
