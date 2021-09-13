@@ -1,25 +1,17 @@
-import React, { forwardRef, HTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 import Popup from '@UI/Popup/Popup';
 import IconClose from '@UI/IconClose/IconClose';
 import Discount from '@UI/Discount';
 import Link from '@UI/Link';
 import Like from '@Components/Like';
+import { ProductData } from '@Types/Product';
+import Price from '@UI/Price';
 import styles from './IdeasPopup.module.css';
-
-export interface IdeasPopupData {
-  imageUrl: string;
-  icons?: any[];
-  title: string;
-  price?: string; // цена без скидки
-  totalPrice: string; // цена со скидкой, можно конечно считать и тут
-  discount?: number;
-  details?: string;
-}
 
 interface IdeasPopupInterface {
   visible: boolean;
   onClose: () => void;
-  productData: IdeasPopupData;
+  productData: Partial<ProductData>;
 }
 
 const IdeasPopup = forwardRef<HTMLDivElement, IdeasPopupInterface>(
@@ -31,26 +23,28 @@ const IdeasPopup = forwardRef<HTMLDivElement, IdeasPopupInterface>(
           <div className={styles.content}>
             <div className={styles.imageBlock}>
               <Like className={styles.like} />
-              <img className={styles.image} src={productData.imageUrl} />
+              <img className={styles.image} src={productData.images[0].src} />
               <div className={styles.iconContainer}>
-                {productData.icons.map((Icon) => (
-                  <Icon className={styles.iconWrapper} />
+                {productData.tags.map((tag) => (
+                  <img src={tag.image.src} className={styles.iconWrapper} />
                 ))}
               </div>
             </div>
 
-            <div className={styles.title}>{productData.title}</div>
+            <div className={styles.title}>{productData.name}</div>
             <div>
               <span className={styles.price_title}>Цена</span>
-              <span className={styles.totalPrice}>{productData.totalPrice}</span>
-              {productData.price && <span className={styles.price}>{productData.price}</span>}
-              {productData.discount && (
-                <Discount className={styles.discount}>{productData.discount}</Discount>
+              <Price price={productData.price.actual} className={styles.totalPrice} />
+              {productData.price.expired && (
+                <Price expired price={productData.price.expired} className={styles.price} />
+              )}
+              {productData.price.discount && (
+                <Discount className={styles.discount}>{productData.price.discount}</Discount>
               )}
             </div>
-            {productData.details && (
+            {productData.link && (
               <div className={styles.details}>
-                <Link to={productData.details}>Подробнее</Link>
+                <Link to={productData.link}>Подробнее</Link>
               </div>
             )}
           </div>

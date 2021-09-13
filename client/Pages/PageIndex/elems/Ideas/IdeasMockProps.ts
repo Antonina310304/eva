@@ -1,5 +1,5 @@
 import { ButtonTabsProps } from '@UI/ButtonTabs';
-import { MockIcon1, MockIcon2, MockIcon3 } from '@Pages/PageIndex/elems/Ideas/MockIcon';
+import { ProductData } from '@Types/Product';
 
 export const ideasMockButtonTabs: ButtonTabsProps = {
   scrollable: true,
@@ -22,56 +22,130 @@ export const ideasMockButtonTabs: ButtonTabsProps = {
   onChangeTab: (event, tab) => false,
 };
 
-export const ideasMockProducts = [
+export const ideasMockProducts: Partial<ProductData>[] = [
   {
-    imageUrl: 'react/static/img/mockIdeas/1.png',
+    id: 1,
+    name: 'Диван угловой Росис Velvet Blue',
     type: 'Кресло',
-    totalPrice: '19 990 ₽',
-    price: '23 990 ₽',
-    discount: -15,
-    title: 'Диван угловой Росис Velvet Blue',
-    details: 'http://google.com',
-    icons: [MockIcon1, MockIcon2, MockIcon3],
+    price: { actual: 19990, discount: 15, expired: 23990 },
+    tags: [
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag3.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag2.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag1.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+    ],
+    link: 'http://google.com',
+    images: [{ src: 'react/static/img/mockIdeas/1.png', orientation: 'landscape' }],
   },
-
   {
-    imageUrl: 'react/static/img/mockIdeas/2.png',
-    type: 'Кресло',
-    totalPrice: '19 990 ₽',
-    price: '23 990 ₽',
-    discount: -15,
-    title: 'Диван угловой Росис Velvet Blue',
-    details: 'http://google.com',
-    icons: [MockIcon1, MockIcon2, MockIcon3],
-  },
-  {
-    imageUrl: 'react/static/img/mockIdeas/3.png',
+    id: 2,
+    name: 'Диван угловой Росис Velvet Blue',
     type: 'Топпер',
-    totalPrice: '19 990 ₽',
-    price: '23 990 ₽',
-    discount: -15,
-    title: 'Диван угловой Росис Velvet Blue',
-    details: 'http://google.com',
-    icons: [MockIcon1, MockIcon2, MockIcon3],
+    price: { actual: 19990, discount: 15, expired: 23990 },
+    tags: [
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag3.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag2.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag1.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+    ],
+    link: 'http://google.com',
+    images: [{ src: 'react/static/img/mockIdeas/2.png', orientation: 'landscape' }],
   },
   {
-    imageUrl: 'react/static/img/mockIdeas/4.png',
-    type: 'Кресло',
-    totalPrice: '19 990 ₽',
-    price: '23 990 ₽',
-    discount: -15,
-    title: 'Диван угловой Росис Velvet Blue',
-    details: 'http://google.com',
-    icons: [MockIcon1, MockIcon2, MockIcon3],
-  },
-  {
-    imageUrl: 'react/static/img/mockIdeas/5.png',
+    id: 3,
+    name: 'Диван угловой Росис Velvet Blue',
     type: 'Топпер',
-    totalPrice: '19 990 ₽',
-    price: '23 990 ₽',
-    discount: -15,
-    title: 'Диван угловой Росис Velvet Blue',
-    details: 'http://google.com',
-    icons: [MockIcon1, MockIcon2, MockIcon3],
+    price: { actual: 19990, discount: 15, expired: 23990 },
+    tags: [
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag3.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag2.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag1.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+    ],
+    link: 'http://google.com',
+    images: [{ src: 'react/static/img/mockIdeas/3.png', orientation: 'landscape' }],
+  },
+  {
+    id: 4,
+    name: 'Диван угловой Росис Velvet Blue',
+    type: 'Топпер',
+    price: { actual: 19990, discount: 15, expired: 23990 },
+    tags: [
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag3.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag2.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag1.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+    ],
+    link: 'http://google.com',
+    images: [{ src: 'react/static/img/mockIdeas/4.png', orientation: 'landscape' }],
+  },
+  {
+    id: 5,
+    name: 'Диван угловой Росис Velvet Blue',
+    type: 'Кресло',
+    price: { actual: 19990, discount: 15, expired: 23990 },
+    tags: [
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag3.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag2.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+      {
+        title: '123',
+        image: { src: 'react/static/img/mockIdeas/tags/tag1.svg', orientation: 'landscape' },
+        location: 'down',
+      },
+    ],
+    link: 'http://google.com',
+    images: [{ src: 'react/static/img/mockIdeas/5.png', orientation: 'landscape' }],
   },
 ];

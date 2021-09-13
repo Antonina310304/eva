@@ -3,6 +3,8 @@
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
+  max-width: 1778px;
+  margin: 0 auto;
 }
 
 .buttonTabs {
@@ -20,7 +22,7 @@
   color: var(--color-black);
   font-weight: 500;
   font-size: 30px;
-  font-family: CloserText;
+  font-family: var(--font-hero);
   font-style: normal;
   line-height: 40px;
 }
@@ -55,27 +57,27 @@
 }
 
 .imageCard_first {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
-  width: calc(100vw - 2 * var(--space-xxb));
-  height: calc(0.625 * (100vw - 2 * var(--space-xxb)));
+  width: calc(min(100vw, 1768px) - 2 * var(--space-xxb));
+  height: calc(0.625 * (min(100vw, 1768px) - 2 * var(--space-xxb)));
   margin-bottom: var(--space-l);
   object-fit: cover;
 }
 
 .imageCard_vertical {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
-  width: calc(50vw - var(--space-xxb) - 0.5 * var(--space-l));
-  height: calc(0.625 * (50vw - var(--space-xxb) - 0.5 * var(--space-l)));
+  width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
+  height: calc(0.625 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
   object-fit: cover;
 }
 
 .imageCard_horizontal {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
-  width: calc(50vw - var(--space-xxb) - 0.5 * var(--space-l));
-  height: calc(16 / 10 * (50vw - var(--space-xxb) - 0.5 * var(--space-l)));
+  width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
+  height: calc(16 / 10 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
   object-fit: cover;
 }
 
@@ -87,7 +89,7 @@
   position: relative;
 }
 
-@media (max-width: 1366px) {
+@media (--desktop-m) {
   .imageBlock,
   .title,
   .buttonTabs {
@@ -116,14 +118,18 @@
   margin-top: var(--space-xxl);
 }
 
-@media (max-width: 1024px) {
+@media (--desktop) {
   .title {
     font-size: 25px;
     line-height: 37px;
   }
+
+  .imageCard_first {
+    margin-bottom: var(--space-xxl);
+  }
 }
 
-@media (max-width: 768px) {
+@media (--mobile-m) {
   .imageBlock,
   .title,
   .buttonTabs {
@@ -138,7 +144,7 @@
   .imageCard_first {
     width: calc(100vw - 2 * var(--space-s));
     height: calc(0.625 * (100vw - 2 * var(--space-s)));
-    margin-bottom: var(--space-s);
+    margin-bottom: var(--space-n);
   }
 
   .imageCard_vertical {
@@ -160,7 +166,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (--mobile) {
   .title {
     font-size: 20px;
     line-height: 26px;
@@ -180,5 +186,9 @@
     width: calc(100vw - 2 * var(--space-s));
     height: calc(0.625 * (100vw - 2 * var(--space-s)));
     margin-bottom: var(--space-s);
+  }
+
+  .buttonMore {
+    margin-top: var(--space-m);
   }
 }

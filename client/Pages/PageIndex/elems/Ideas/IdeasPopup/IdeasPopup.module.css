@@ -58,7 +58,7 @@
   color: var(--color-black);
   font-weight: normal;
   font-size: 16px;
-  font-family: CeraPro;
+  font-family: var(--font-main);
   font-style: normal;
   line-height: 24px;
 }
@@ -67,7 +67,7 @@
   color: var(--color-black);
   font-weight: normal;
   font-size: 16px;
-  font-family: CeraPro;
+  font-family: var(--font-main);
   font-style: normal;
   line-height: 24px;
 }
@@ -78,7 +78,7 @@
   color: var(--color-black);
   font-weight: 500;
   font-size: 18px;
-  font-family: CeraPro;
+  font-family: var(--font-main);
   font-style: normal;
   line-height: 23px;
 }
@@ -89,7 +89,7 @@
   color: var(--color-dark-gray);
   font-weight: normal;
   font-size: 16px;
-  font-family: CeraPro;
+  font-family: var(--font-main);
   font-style: normal;
   line-height: 24px;
   text-decoration-line: line-through;
@@ -116,7 +116,7 @@
   color: var(--color-dark-gray);
   font-weight: normal;
   font-size: 16px;
-  font-family: CeraPro;
+  font-family: var(--font-main);
   font-style: normal;
   line-height: 24px;
 }
