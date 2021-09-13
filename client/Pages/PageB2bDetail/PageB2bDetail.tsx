@@ -2,14 +2,9 @@ import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
-import Section from '@Components/Section';
-import Gallery, { ProgressOptions } from '@UI/Gallery';
-import NavArrows from '@UI/NavArrows';
-import Image from '@UI/Image';
 import FeedbackForm from '@Forms/FeedbackForm';
-import ProgressBar from '@UI/ProgressBar';
-import useModals from '@Hooks/useModals';
 import PressGallery from '@Components/PressGallery';
+import Project from './elements/Project';
 import { PageB2bDetailData, ProjectItem } from './typings';
 import styles from './PageB2bDetail.module.css';
 
@@ -21,9 +16,6 @@ export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
 const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { className, page, ...restProps } = props;
   const { title, teaser, examples, articles, projects } = page;
-  const [slide, setSlide] = useState(0);
-  const [track, setTrack] = useState<ProgressOptions>(null);
-  const [, { openModal }] = useModals();
 
   const projectsMap = {};
   examples.forEach((example) => {
@@ -40,53 +32,6 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
 
   const balance = uniqueProjects.length - visibleItems;
 
-  /* eslint-disable no-param-reassign */
-  const gallery = examples.reduce((a, c) => {
-    a[c.projectId] = a[c.projectId] || [];
-    a[c.projectId].push(c);
-    return a;
-  }, {});
-  /* eslint-enable no-param-reassign */
-
-  const images = Object.values(gallery);
-
-  const handleOpen = useCallback(
-    (e, projectIndex) => {
-      if (window.cancelClick) return;
-
-      openModal('Project', { images, projectIndex, uniqueProjects });
-    },
-    [images, uniqueProjects, openModal],
-  );
-
-  const normalizeSlide = useCallback(
-    (value: number) => {
-      if (value < 0) return 0;
-      if (value > examples.length) return examples.length;
-
-      return value;
-    },
-    [examples.length],
-  );
-
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlide(current);
-  }, []);
-
-  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
-    setTrack(opts);
-  }, []);
-
-  const handlePrev = useCallback(() => {
-    setSlide((prev) => normalizeSlide(prev - 1));
-  }, [normalizeSlide]);
-
-  const handleNext = useCallback(() => {
-    if (track.finished) return;
-
-    setSlide((prev) => normalizeSlide(prev + 1));
-  }, [normalizeSlide, track]);
-
   return (
     <div {...restProps} className={cn(styles.page, className)}>
       <h1 className={styles.heading}>{title}</h1>
@@ -96,41 +41,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
       <h2 className={styles.subheading}>{projects.title}</h2>
       {uniqueProjects.slice(0, visibleItems).map((item, projectIndex) => (
         <div className={styles.contentWrapper}>
-          <Section
-            {...restProps}
-            className={cn(styles.section, className)}
-            additional={
-              <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
-            }
-            key={projectIndex}
-          >
-            <div className={styles.wrapperGallery}>
-              <Gallery
-                className={styles.gallery}
-                slideIndex={slide}
-                key={images.length}
-                onChangeCurrent={handleChangeCurrent}
-                onChangeProgress={handleChangeProgress}
-              >
-                {(images[projectIndex] as any[]).map((element, elementIndex) => (
-                  <div
-                    className={styles.galleryItem}
-                    key={elementIndex}
-                    onClick={(e) => handleOpen(e, projectIndex)}
-                  >
-                    <Image
-                      className={
-                        element.height / element.width < 1 ? styles.horizontal : styles.vertical
-                      }
-                      src={element.src}
-                    />
-                  </div>
-                ))}
-              </Gallery>
-            </div>
-          </Section>
-
-          <ProgressBar className={styles.progressBar} track={track} />
+          <Project examples={examples} index={projectIndex} />
           <div className={styles.descriptionWrapper}>
             <h3 className={styles.projectName}>{item.title}</h3>
             <div className={styles.textWrapper}>
