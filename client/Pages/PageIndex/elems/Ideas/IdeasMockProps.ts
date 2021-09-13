@@ -126,7 +126,7 @@ export const ideasMockProducts: Partial<ProductData>[] = [
   {
     id: 5,
     name: 'Диван угловой Росис Velvet Blue',
-    type: 'Топпер',
+    type: 'Кресло',
     price: { actual: 19990, discount: 15, expired: 23990 },
     tags: [
       {
