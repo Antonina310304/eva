@@ -1,6 +1,8 @@
 import { SellPointData } from '@Components/SectionShowroomsMap/typings';
 import { ProductData } from '@Types/Product';
 import { InstagramPostData } from '@Types/InstagramPost';
+import MainSliderData from '@Types/MainSlider';
+import { PopularData } from '@Types/PopularCategory';
 
 export const maps = {
   center: [55.751574, 37.573856],
@@ -1312,20 +1314,22 @@ export const newProducts = {
   products,
 };
 
-export const popular = {
+export const popular: PopularData = {
   title: 'Популярные категории',
   products: [
     {
       id: 1544,
       title: 'Диваны',
       count: 4000,
+      link: 'link',
       img: 'react/static/popularImages/image_1.png',
       price: 14350,
     },
     {
       id: 1545,
       title: 'Текстиль',
-      count: 4000,
+      count: 5,
+      link: 'link',
       img: 'react/static/popularImages/image_2.png',
       price: 2490,
     },
@@ -1333,6 +1337,7 @@ export const popular = {
       id: 1546,
       title: 'Аксессуары',
       count: 193,
+      link: 'link',
       img: 'react/static/popularImages/image_3.png',
       price: 1300,
     },
@@ -1340,6 +1345,7 @@ export const popular = {
       id: 1547,
       title: 'Кухни',
       count: 400,
+      link: 'link',
       img: 'react/static/popularImages/image_4.png',
       price: 2490,
     },
@@ -1347,6 +1353,7 @@ export const popular = {
       id: 1548,
       title: 'Гостиная',
       count: 193,
+      link: 'link',
       img: 'react/static/popularImages/image_5.png',
       price: 1300,
     },
@@ -1354,6 +1361,7 @@ export const popular = {
       id: 1549,
       title: 'Шкафы',
       count: 203,
+      link: 'link',
       img: 'react/static/popularImages/image_6.png',
       price: 15000,
     },
@@ -1361,13 +1369,15 @@ export const popular = {
       id: 1550,
       title: 'Диваны',
       count: 4000,
+      link: 'link',
       img: 'react/static/popularImages/image_1.png',
       price: 14350,
     },
     {
       id: 1551,
       title: 'Текстиль',
-      count: 4000,
+      count: 5,
+      link: 'link',
       img: 'react/static/popularImages/image_2.png',
       price: 2490,
     },
@@ -1375,6 +1385,7 @@ export const popular = {
       id: 1552,
       title: 'Аксессуары',
       count: 193,
+      link: 'link',
       img: 'react/static/popularImages/image_3.png',
       price: 1300,
     },
@@ -1382,6 +1393,7 @@ export const popular = {
       id: 1553,
       title: 'Кухни',
       count: 400,
+      link: 'link',
       img: 'react/static/popularImages/image_4.png',
       price: 2490,
     },
@@ -1389,6 +1401,7 @@ export const popular = {
       id: 1554,
       title: 'Гостиная',
       count: 193,
+      link: 'link',
       img: 'react/static/popularImages/image_5.png',
       price: 1300,
     },
@@ -1396,8 +1409,50 @@ export const popular = {
       id: 1555,
       title: 'Шкафы',
       count: 203,
+      link: 'link',
       img: 'react/static/popularImages/image_6.png',
       price: 15000,
     },
   ],
 };
+
+export const sliderData: MainSliderData[] = [
+  {
+    id: 130,
+    period: '1 - 11 мая',
+    header: 'Мягкая мебель в весенних оттенках со скидкой до 30%*',
+    subtitle: 'Скидки на товары из конструктора до -30%',
+    textLink: 'Узнать больше',
+    link: 'link',
+    dateEnd: 1631436300,
+    images: {
+      mobile: 'react/static/img/MainSlider/banner_mobile.png',
+      desktop: 'react/static/img/MainSlider/banner.png',
+    },
+  },
+  {
+    id: 135,
+    // period: '1 - 11 мая',
+    header: 'Мягкая мебель в весенних оттенках со скидкой до 30%*',
+    textLink: 'Узнать больше',
+    link: 'link',
+    dateEnd: 1631944800,
+    images: {
+      mobile: 'react/static/img/MainSlider/banner_mobile.png',
+      desktop: 'react/static/img/MainSlider/banner.png',
+    },
+  },
+  {
+    id: 150,
+    period: '1 - 11 мая',
+    header: 'Мягкая мебель в весенних оттенках со скидкой до 30%*',
+    subtitle: 'Скидки на товары из конструктора до -30%',
+    textLink: 'Узнать больше',
+    link: 'link',
+    dateEnd: 1631436300,
+    images: {
+      mobile: 'react/static/img/MainSlider/banner_mobile.png',
+      desktop: 'react/static/img/MainSlider/banner.png',
+    },
+  },
+];

@@ -2,6 +2,9 @@
   position: relative;
 
   display: block;
+
+  color: var(--color-black);
+  text-decoration: none;
 }
 
 .imgWrapper {
@@ -36,7 +39,7 @@
 
 .titleWrap {
   position: absolute;
-  top: 15px;
+  top: 20px;
   left: 20px;
 
   display: flex;
@@ -44,6 +47,25 @@
 
 .badge {
   position: absolute;
-  bottom: 5px;
-  left: 5px;
+  bottom: 20px;
+  left: 20px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--size-l);
+  line-height: 150%;
+
+  @media (--desktop) {
+    font-size: var(--size-m);
+    line-height: 23px;
+  }
+}
+
+.count {
+  margin-left: 5px;
+
+  color: var(--color-dark-gray);
+  font-size: 12px;
+  line-height: 150%;
 }

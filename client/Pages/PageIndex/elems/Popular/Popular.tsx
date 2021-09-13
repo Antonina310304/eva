@@ -1,11 +1,16 @@
-import React, { cloneElement, FC, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, useCallback, useState } from 'react';
 import cn from 'classnames';
 import SectionTitle from '@Components/SectionTitle';
 import Container from '@Components/Container';
 import PopularCard from '@Pages/PageIndex/elems/PopularCard/PopularCard';
-import CrossSaleSection from '@Components/CrossSaleSection/CrossSaleSection';
-import CrossSaleProductCard from '@Components/CrossSaleProductCard/CrossSaleProductCard';
+
 import Gallery from '@UI/Gallery';
+import NavArrows from '@UI/NavArrows/NavArrows';
+import PopularSlider from '@Pages/PageIndex/elems/PopularSlider';
+import useMedias from '@Hooks/useMedias';
+import Pagination from '@UI/Pagination';
+import GalleryWithPagination from '@Components/GalleryWithPagination';
+import NavSideArrows from '@UI/NavSideArrows/NavSideArrows';
 import styles from './Popular.module.css';
 
 export interface PopularProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,60 +18,63 @@ export interface PopularProps extends HTMLAttributes<HTMLDivElement> {
   data: { title: string; products: any };
 }
 const Popular: FC<PopularProps> = ({ className, data }) => {
-  const productsGroup = [];
-  new Array(Math.ceil(data.products.length / 3)).fill('').forEach((item, index) => {
-    const newArray = data.products.slice(index * 3, (index + 1) * 3);
+  const { isMobileM, isMobile } = useMedias();
 
-    if (typeof productsGroup[Math.floor(index / 2)] === 'undefined') {
-      productsGroup[Math.floor(index / 2)] = [];
+  // в зависимости от ширины экрана получая количество отображаемых слайдеров
+  function getCountCardInSlide() {
+    let result;
+    if (!isMobile && isMobileM) {
+      result = 3;
     }
-    productsGroup[Math.floor(index / 2)].push(newArray);
-  });
-
-  function gallery() {
-    /* это слайды */
-    return productsGroup.map((group, gInd) => {
-      // это 2 блока внутри слайдра
-      return (
-        <div className={styles.cardGroup} key={gInd}>
-          {group.map((item, index) => {
-            // это 3 карточки товара
-            return (
-              <div className={styles.item} key={index}>
-                {item.map((i, ind) => {
-                  return (
-                    <div className={styles.card} key={ind}>
-                      <PopularCard title={i.title} img={i.img} count={i.count} badge={i.badge} />
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      );
-    });
+    if (isMobile && isMobileM) {
+      result = 1;
+    }
+    if (!isMobile && !isMobileM) {
+      result = 6;
+    }
+    return result;
   }
+
+  const transformArray = () => {
+    if (getCountCardInSlide() === 1) {
+      return data.products;
+    }
+    return data.products.reduce((result, item, index) => {
+      if (typeof result[Math.floor(index / getCountCardInSlide())] === 'undefined') {
+        // eslint-disable-next-line no-param-reassign
+        result = [...result, []];
+      }
+      result[Math.floor(index / getCountCardInSlide())].push(item);
+      return result;
+    }, []);
+  };
+
+  const productsGroup = transformArray();
 
   return (
     <div className={cn(className, styles.wrapper)}>
       <Container>
-        <SectionTitle title={data.title} className={styles.title} />
-      </Container>
-
-      <div className={styles.galleryWrapper}>
-        <Container>
-          <Gallery
+        <div className={styles.galleryWrapper}>
+          <GalleryWithPagination
             className={styles.gallery}
-            slideIndex={0}
-            key={productsGroup.length}
-            onChangeCurrent={() => true}
-            onChangeProgress={() => true}
+            buttons={(handlePrev, handleNext) => (
+              <div className={styles.headerWrapper}>
+                <SectionTitle title={data.title} className={styles.title} />
+                <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
+              </div>
+            )}
+            slides={productsGroup.length}
           >
-            {gallery()}
-          </Gallery>
-        </Container>
-      </div>
+            {productsGroup.map((item, index) => {
+              return (
+                <div className={styles.itemWrapper} key={index}>
+                  <PopularSlider count={getCountCardInSlide()} product={item} />
+                </div>
+              );
+            })}
+          </GalleryWithPagination>
+        </div>
+      </Container>
     </div>
   );
 };

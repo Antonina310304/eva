@@ -7,7 +7,15 @@ import Recommendations from '@Pages/PageIndex/elems/Recommendations';
 import Popular from '@Pages/PageIndex/elems/Popular';
 import Ideas from '@Pages/PageIndex/elems/Ideas';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap/SectionShowroomsMap';
-import { pickupPoints, maps, posts, hits, newProducts, popular } from '@Pages/PageIndex/data';
+import {
+  pickupPoints,
+  maps,
+  posts,
+  hits,
+  newProducts,
+  popular,
+  sliderData,
+} from '@Pages/PageIndex/data';
 
 import NewProducts from '@Pages/PageIndex/elems/NewProducts';
 
@@ -26,7 +34,9 @@ const PageIndex: FC<PageIndexProps> = (props) => {
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
       <>
-        <MainSlider />
+        <div className={styles.section}>
+          <MainSlider sliderData={sliderData} />
+        </div>
         <div className={styles.section}>
           <Hits data={hits} />
         </div>

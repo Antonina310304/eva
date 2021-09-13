@@ -10,7 +10,6 @@ export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
 const Badge: FC<BadgeProps> = ({ className, text }) => {
   return (
     <div className={cn(className, styles.badge)}>
-      <div className={styles.span} />
       <div className={styles.badgeIn}>{text}</div>
     </div>
   );

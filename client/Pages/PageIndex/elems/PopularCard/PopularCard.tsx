@@ -1,25 +1,27 @@
 import React, { HTMLAttributes } from 'react';
 import Badge from '@UI/Badge';
+import Link from '@UI/Link';
+import declOfNum from '@Utils/declOfNum';
+import { PopularCategoryData } from '@Types/PopularCategory';
 import styles from './PopularCard.module.css';
 
 export interface PopularCardProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
-  img: string;
-  count: number;
-  badge: string;
+  data: PopularCategoryData;
 }
-const PopularCard = ({ title, img, count, badge }) => {
+const PopularCard = ({ data }) => {
+  const declCount = ['модель', 'модели', 'моделей'];
+
   return (
-    <div className={styles.wrapper}>
+    <Link to={data.link} className={styles.wrapper}>
       <p className={styles.imgWrapper}>
-        <img src={img} alt={title} />
+        <img src={data.img} alt={data.title} />
       </p>
       <div className={styles.titleWrap}>
-        <span className={styles.title}>{title}</span>
-        <span className={styles.subtitle}>{count}</span>
+        <span className={styles.title}>{data.title}</span>
+        <span className={styles.count}>{`${data.count} ${declOfNum(data.count, declCount)}`}</span>
       </div>
-      <Badge text={badge} className={styles.badge} />
-    </div>
+      <Badge text={`от ${data.price} ₽`} className={styles.badge} />
+    </Link>
   );
 };
 

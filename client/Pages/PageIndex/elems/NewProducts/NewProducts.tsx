@@ -15,14 +15,11 @@ export interface NewProductsProps extends HTMLAttributes<HTMLDivElement> {
 const NewProducts: FC<NewProductsProps> = ({ data, className }) => {
   return (
     <div className={cn(className, styles.wrapper)}>
-      <Container>
-        <SectionTitle className={styles.sectionTitle} title={data.title} />
-      </Container>
       <div>
         <div className={styles.wrapperGallery}>
           <CrossSaleSection
             className={styles.sectionCrossSale}
-            title=''
+            title={data.title}
             products={data.products}
             renderItem={(productCardProps) => (
               <div className={styles.productItem}>

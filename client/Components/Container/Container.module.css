@@ -1,22 +1,18 @@
 .container {
   flex: 1;
+  --gap: var(--space-xxb);
   box-sizing: border-box;
   width: 100%;
-  max-width: 1920px;
   max-width: 1778px;
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
   padding-right: var(--gap);
   padding-left: var(--gap);
 
-  @media (--only-desktop) {
-    padding: 0 var(--space-xxb);
+  @media (--desktop-m) {
+    --gap: var(--space-xxl);
   }
-
-  @media (--only-mobile) {
-    padding: 0 var(--space-xxl);
-  }
-
   @media (--mobile-m) {
-    padding: 0 var(--space-s);
+    --gap: var(--space-s);
   }
 }

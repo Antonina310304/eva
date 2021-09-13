@@ -1,23 +1,41 @@
 .badge {
-  &:before {
-    height: 100%;
+  display: flex;
+  padding-left: 37px;
+  overflow: hidden;
 
-    content: '';
-  }
+  background: url('icon_left.svg');
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  border-radius: 0px 8px 8px 0px;
 }
 
 .badgeIn {
   position: relative;
 
+  width: 100%;
   padding: 10px 20px;
+  padding-left: 0;
+
+  font-weight: 500;
+  font-size: var(--size-m);
+  line-height: 23px;
+  word-break: break-all;
 
   background: var(--color-white);
   border-radius: 0px 8px 8px 0px;
 }
 .span {
-  width: 0;
+  flex: 0 0 auto;
+  width: 23px;
   height: 100%;
-  padding-left: 54%;
+  height: 100%;
+}
 
-  background: red;
+.imgWrap {
+  margin: 0;
+
+  img {
+    width: auto;
+    height: 100%;
+  }
 }

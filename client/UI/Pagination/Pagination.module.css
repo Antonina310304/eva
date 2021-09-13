@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px -5px 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.paginationItem {
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+
+  font-size: 0;
+
+  border: 1px solid var(--color-medium-gray);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.paginationItem.active {
+  width: 14px;
+  height: 14px;
+
+  background: var(--color-medium-gray);
+}
