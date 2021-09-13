@@ -52,13 +52,7 @@ const Trends: React.FC<InTrendProps> = ({ categories, className }) => {
 
   return (
     <>
-      <div className={styles.logoWrapper}>
-        <div className={styles.leftLine_wrapper}>
-          <Line className={styles.leftLine} y={mediaMatches.isDesktop ? '80.2' : '121'} />
-        </div>
-        <TrendsLogo className={styles.trendsLogo} />
-        конечно очень красивое у меня получилось лого за 5ч
-      </div>
+      <div className={styles.logoWrapper} />
 
       <div className={styles.wrapper}>
         <Section

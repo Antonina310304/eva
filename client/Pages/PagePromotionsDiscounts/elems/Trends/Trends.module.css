@@ -5,33 +5,23 @@
   margin: var(--space-xxl) auto 0 auto;
 }
 
-.wrapper1 {
-  width: 100%;
-}
-
 .section {
   overflow: hidden;
 }
 
-.trendsWrapper {
-  display: flex;
-  align-items: flex-end;
-}
-
 .logoWrapper {
-  display: flex;
-}
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  height: 123px;
 
-.leftLine_wrapper {
-  width: calc(100% - 684px - 40px - 40px);
-}
-
-.trendsLogo {
-  margin-right: 40px;
+  background: url('../../../../../static/svg/promotionsDiscounts/TrendsLogo.svg');
+  background-position: right center;
+  background-size: cover;
 }
 
 .wrapperGallery {
-  margin-top: var(--space-l);
+  margin: var(--space-l) 0;
   padding: 0 var(--space-xxb);
 }
 .slide {
@@ -80,5 +70,15 @@
 
   .leftLine {
     height: 82px;
+  }
+
+  .logoWrapper1 {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1366px;
+
+    background: url('../../../../../static/svg/promotionsDiscounts/TrendsLogoDesktop.svg') right
+      center;
+    background-size: cover;
   }
 }
