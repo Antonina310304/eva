@@ -7,13 +7,19 @@ import FreeServices from './elems/FreeServices';
 import Trends from './elems/Trends';
 import Top10 from './elems/Top10';
 
+import mockPromoCardData from './mockPromoCardData';
+
 import styles from './PagePromotionDiscounts.module.css';
+
+const eventCards = mockPromoCardData.filter((card) => {
+  return card.type === 'event';
+});
 
 const PagePromotionsDiscounts: FC = () => {
   return (
     <div>
       <h1 className={styles.title}>Акции и скидки</h1>
-      <CurrentPromotions />
+      <CurrentPromotions cards={eventCards} />
       <CurrentDiscounts />
       <FreeServices />
       <Trends categories={mockCategories} />
