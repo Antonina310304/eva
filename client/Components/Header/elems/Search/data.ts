@@ -112,5 +112,4 @@ export const searchResult: SearchResultData = {
       price: 20690,
     },
   ],
-  link: 'link',
 };
