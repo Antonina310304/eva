@@ -18,8 +18,8 @@ const Hits: FC<HitsProps> = ({ data, className }) => {
     <div className={cn(className, styles.wrapper)}>
       <Container>
         <div className={styles.header}>
-          <p className={styles.title}>{data.title}</p>
-          <p className={styles.description}>{data.description}</p>
+          {data.title && <p className={styles.title}>{data.title}</p>}
+          {data.description && <p className={styles.description}>{data.description}</p>}
         </div>
       </Container>
       <div>

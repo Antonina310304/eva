@@ -1,147 +1,116 @@
-import React, { FC, HTMLAttributes, useMemo } from 'react';
+import React, { FC, HTMLAttributes, useMemo, useCallback, memo, useState } from 'react';
+
+import SectionTitle from '@Components/SectionTitle/SectionTitle';
+import Container from '@Components/Container';
 import cn from 'classnames';
-import Button from '@UI/Button';
-import ButtonTabs, { ButtonTabsProps } from '@UI/ButtonTabs';
 import IdeasPopup from '@Pages/PageIndex/elems/Ideas/IdeasPopup/IdeasPopup';
-import Link from '@UI/Link';
-import { ProductData } from '@Types/Product';
+import ButtonTabs from '@UI/ButtonTabs/ButtonTabs';
+import Link from '@UI/Link/Link';
+import Button from '@UI/Button/Button';
+import { IdeasPostData } from '@Types/Ideas';
 import styles from './Ideas.module.css';
 
 export interface IdeasProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  title?: string;
-  tabGroup: ButtonTabsProps;
-  products: Partial<ProductData>[];
+  ideasData: IdeasPostData;
 }
 
-const Ideas: FC<IdeasProps> = ({ className, title, tabGroup, products }) => {
-  const [selectedTab, setSelectedTab] = React.useState('all');
-  const [popupVisible, setPopupVisible] = React.useState(-1);
-  const [clickedProduct, setClickedProduct] = React.useState(null);
+const Ideas: FC<IdeasProps> = ({ className, ideasData }) => {
+  const [selectedTab, setSelectedTab] = useState('all');
+  const [selectedProduct, setSelectedProduct] = useState({ imgId: -1, product: {} });
+  const MAX_COUNT_IMAGE = 5;
 
-  const filteredProducts = useMemo(() => {
-    setPopupVisible(-1);
+  const tabsIdeas = useMemo(() => {
+    if (!ideasData?.images) return [];
 
-    if (!products) return [];
+    const tabs = [{ id: 'all', label: 'Все идеи' }];
 
-    if (selectedTab === 'all') return products;
+    ideasData.images.forEach((p) => {
+      const tab = tabs.find((t) => t.id === p.type);
 
-    return products.filter((product: ProductData) => {
-      return product.type === selectedTab;
+      if (tab) return;
+
+      tabs.push({ id: p.type, label: p.type });
     });
-  }, [products, selectedTab]);
 
-  const handleImageClick = React.useCallback(
-    (index: number) => {
-      setClickedProduct(filteredProducts[index]);
-      setPopupVisible(index);
+    return tabs;
+  }, [ideasData]);
+
+  const onChangeTab = useCallback(
+    (id) => {
+      setSelectedProduct({ imgId: -1, product: {} });
+      setSelectedTab(id);
     },
-    [filteredProducts],
+    [setSelectedTab, setSelectedProduct],
   );
 
-  return (
-    <div className={cn(className, styles.wrapper)}>
-      <h2 className={styles.title}>{title || 'Идеи для дома'}</h2>
+  const filteredTabsIdeas = useMemo(() => {
+    const images = ideasData?.images;
 
-      <ButtonTabs
-        {...tabGroup}
-        onChangeTab={(event, tab) => setSelectedTab(tab.id)}
-        className={styles.buttonTabs}
-      />
-      <div className={styles.imageBlock}>
-        {filteredProducts[0] && (
-          <div className={styles.imageWrapper}>
-            <img
-              className={cn(styles.imageCard_first)}
-              src={filteredProducts[0].images[0].src}
-              onClick={(event) => handleImageClick(0)}
-            />
-            {popupVisible === 0 && (
-              <IdeasPopup
-                productData={clickedProduct}
-                visible={popupVisible === 0}
-                onClose={() => setPopupVisible(-1)}
-              />
-            )}
+    if (!images) return [];
+    if (selectedTab === 'all') return images;
+
+    return images.filter((p) => {
+      return p.type === selectedTab;
+    });
+  }, [ideasData, selectedTab]);
+
+  return (
+    <Container className={className}>
+      <div>
+        {ideasData.title && <SectionTitle title={ideasData.title} className={styles.title} />}
+        <ButtonTabs
+          defaultValue={tabsIdeas[0].id}
+          tabs={tabsIdeas}
+          scrollable
+          onChangeTab={(event, tab) => onChangeTab(tab.id)}
+          className={styles.buttonTabs}
+        />
+        <div>
+          <div className={styles.grid}>
+            {filteredTabsIdeas.slice(0, MAX_COUNT_IMAGE).map((img) => {
+              return (
+                <div key={img.id} className={styles.imageItem}>
+                  <div className={cn(styles.imageWrapper, 'imageInner')}>
+                    {selectedProduct.imgId === img.id && (
+                      <IdeasPopup
+                        productData={selectedProduct.product}
+                        visible={selectedProduct.imgId === img.id}
+                        onClose={() => setSelectedProduct({ imgId: -1, product: {} })}
+                      />
+                    )}
+
+                    <div className={styles.imageInner}>
+                      <img src={img.src} alt='' />
+                      {img.products.map((product, index) => {
+                        return (
+                          <div
+                            onClick={() => {
+                              setSelectedProduct({ imgId: img.id, product });
+                            }}
+                            className={styles.pinWrapper}
+                            key={index}
+                            style={{ top: `${product.coords[0]}%`, left: `${product.coords[1]}%` }}
+                          >
+                            <div className={styles.pin} />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        )}
-        <div className={styles.imageBlock_subWrapper}>
-          <div className={styles.leftBlock}>
-            {filteredProducts[1] && (
-              <div className={styles.imageWrapper}>
-                <img
-                  className={cn(styles.imageCard_vertical, styles.imageCard_bottomMargin)}
-                  src={filteredProducts[1].images[0].src}
-                  onClick={(event) => handleImageClick(1)}
-                />
-                {popupVisible === 1 && (
-                  <IdeasPopup
-                    productData={clickedProduct}
-                    visible={popupVisible === 1}
-                    onClose={() => setPopupVisible(-1)}
-                  />
-                )}
-              </div>
-            )}
-            {filteredProducts[2] && (
-              <div className={styles.imageWrapper}>
-                <img
-                  className={cn(styles.imageCard_horizontal)}
-                  src={filteredProducts[2].images[0].src}
-                  onClick={(event) => handleImageClick(2)}
-                />
-                {popupVisible === 2 && (
-                  <IdeasPopup
-                    productData={clickedProduct}
-                    visible={popupVisible === 2}
-                    onClose={() => setPopupVisible(-1)}
-                  />
-                )}
-              </div>
-            )}
-          </div>
-          <div className={styles.rightBlock}>
-            {filteredProducts[3] && (
-              <div className={styles.imageWrapper}>
-                <img
-                  className={cn(styles.imageCard_horizontal, styles.imageCard_bottomMargin)}
-                  src={filteredProducts[3].images[0].src}
-                  onClick={(event) => handleImageClick(3)}
-                />
-                {popupVisible === 3 && (
-                  <IdeasPopup
-                    productData={clickedProduct}
-                    visible={popupVisible === 3}
-                    onClose={() => setPopupVisible(-1)}
-                  />
-                )}
-              </div>
-            )}
-            {filteredProducts[4] && (
-              <div className={styles.imageWrapper}>
-                <img
-                  className={cn(styles.imageCard_vertical)}
-                  src={filteredProducts[4].images[0].src}
-                  onClick={(event) => handleImageClick(4)}
-                />
-                {popupVisible === 4 && (
-                  <IdeasPopup
-                    productData={clickedProduct}
-                    visible={popupVisible === 4}
-                    onClose={() => setPopupVisible(-1)}
-                  />
-                )}
-              </div>
-            )}
-          </div>
+          {filteredTabsIdeas.length > MAX_COUNT_IMAGE && (
+            <Link to='' className={styles.buttonMore}>
+              <Button theme='blank'>Показать еще идеи</Button>
+            </Link>
+          )}
         </div>
       </div>
-
-      <Link to='' className={styles.buttonMore}>
-        <Button theme='blank'>Показать еще идеи</Button>
-      </Link>
-    </div>
+    </Container>
   );
 };
 
-export default React.memo(Ideas);
+export default memo(Ideas);

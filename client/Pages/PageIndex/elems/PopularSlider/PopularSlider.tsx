@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 
 import PopularCard from '@Pages/PageIndex/elems/PopularCard/PopularCard';
 import { PopularCategoryData } from '@Types/PopularCategory';
@@ -10,7 +10,7 @@ export interface PopularSliderProps extends HTMLAttributes<HTMLDivElement> {
   count: number;
 }
 
-const PopularSlider: FC<PopularSliderProps> = ({ className, product, count }) => {
+const PopularSlider: FC<PopularSliderProps> = ({ product, count }) => {
   function renderItem() {
     let grid;
 
@@ -21,7 +21,7 @@ const PopularSlider: FC<PopularSliderProps> = ({ className, product, count }) =>
             {product.map((item, index) => {
               return (
                 <div className={styles.mobileCardM} key={index}>
-                  <PopularCard data={item} />
+                  <PopularCard data={item} cardFit={!(index % 3) ? 'long' : 'short'} />
                 </div>
               );
             })}
@@ -34,7 +34,10 @@ const PopularSlider: FC<PopularSliderProps> = ({ className, product, count }) =>
             {product.map((item, index) => {
               return (
                 <div className={styles.cardDesktop} key={index}>
-                  <PopularCard data={item} />
+                  <PopularCard
+                    data={item}
+                    cardFit={!(index % 6) || !(index % 5) ? 'long' : 'short'}
+                  />
                 </div>
               );
             })}
@@ -44,7 +47,7 @@ const PopularSlider: FC<PopularSliderProps> = ({ className, product, count }) =>
       default:
         grid = (
           <div>
-            <PopularCard data={product} />
+            <PopularCard data={product} cardFit='mobile' />
           </div>
         );
     }

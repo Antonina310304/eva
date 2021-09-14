@@ -32,7 +32,7 @@
 
   @media (--desktop) {
     /*с 1024 по  1365*/
-    max-width: 330px;
+    max-width: 340px;
     padding: 30px 110px;
   }
 
@@ -184,11 +184,19 @@
   font-family: var(--font-main);
   line-height: 150%;
 
-  @media (--desktop) {
+  @media (--desktop-m) {
     font-size: var(--size-s);
   }
 
   @media (--mobile) {
     margin: 0 0 10px;
+  }
+}
+
+.arrowWrapper {
+  padding: 0 40px;
+
+  @media (--mobile-m) {
+    display: none;
   }
 }

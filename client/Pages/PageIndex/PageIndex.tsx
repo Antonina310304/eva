@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import MainSlider from '@Pages/PageIndex/elems/MainSlider';
@@ -15,6 +15,7 @@ import {
   newProducts,
   popular,
   sliderData,
+  ideasData,
 } from '@Pages/PageIndex/data';
 
 import NewProducts from '@Pages/PageIndex/elems/NewProducts';
@@ -23,10 +24,7 @@ import Container from '@Components/Container';
 import InstagramSection from '@Components/InstagramSection/InstagramSection';
 import Link from '@UI/Link/Link';
 import mockPromoCardData from '@Pages/PageIndex/mockPromoCardData';
-import {
-  ideasMockButtonTabs,
-  ideasMockProducts,
-} from '@Pages/PageIndex/elems/Ideas/IdeasMockProps';
+
 import styles from './PageIndex.module.css';
 
 export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
@@ -40,7 +38,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
       <>
         <div className={styles.section}>
-          <MainSlider sliderData={sliderData} />
+          <MainSlider slidesList={sliderData} />
         </div>
         <div className={styles.section}>
           <Hits
@@ -57,7 +55,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
           <Popular data={popular} />
         </div>
         <div className={styles.section}>
-          <Ideas tabGroup={ideasMockButtonTabs} products={ideasMockProducts} />
+          <Ideas ideasData={ideasData} />
         </div>
         <div className={styles.section}>
           <NewProducts

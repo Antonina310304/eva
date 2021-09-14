@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 import Timer from '@Components/Timer/Timer';
 import Link from '@UI/Link';
 import MainSliderData from '@Types/MainSlider';
@@ -10,13 +10,11 @@ import styles from './MainSlider.module.css';
 
 export interface MainSliderProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  title?: string;
-  sliderData: MainSliderData[];
+  slidesList: MainSliderData[];
 }
 
-const MainSlider: FC<MainSliderProps> = ({ sliderData, title, className }) => {
+const MainSlider: FC<MainSliderProps> = ({ slidesList }) => {
   const { isMobile } = useMedias();
-
   function renderSlide({
     period,
     header,
@@ -61,9 +59,9 @@ const MainSlider: FC<MainSliderProps> = ({ sliderData, title, className }) => {
             <NavSideArrows onPrev={handlePrev} onNext={handleNext} />
           </div>
         )}
-        slides={sliderData.length}
+        slides={slidesList.length}
       >
-        {sliderData.map((currentSlide) => {
+        {slidesList.map((currentSlide) => {
           return (
             <div key={currentSlide.id} className={styles.wrapper}>
               {renderSlide(currentSlide)}

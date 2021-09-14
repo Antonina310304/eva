@@ -344,7 +344,6 @@ const PageProduct: FC<PageProductProps> = (props) => {
       ) : (
         <div className={styles.separator} />
       )}
-
       <div className={styles.wrapperAdditional}>
         {page.crossSalesProducts.products?.length > 0 && (
           <CrossSaleSection

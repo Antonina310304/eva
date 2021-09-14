@@ -1,8 +1,7 @@
 import { SellPointData } from '@Components/SectionShowroomsMap/typings';
-import { ProductData } from '@Types/Product';
-import { InstagramPostData } from '@Types/InstagramPost';
 import MainSliderData from '@Types/MainSlider';
 import { PopularData } from '@Types/PopularCategory';
+import { IdeasPostData } from '@Types/Ideas';
 
 export const maps = {
   center: [55.751574, 37.573856],
@@ -1188,3 +1187,503 @@ export const sliderData: MainSliderData[] = [
     },
   },
 ];
+
+export const ideasData: IdeasPostData = {
+  title: 'Идеи для дома',
+  images: [
+    {
+      id: 0,
+      src: 'react/static/img/mockIdeas/6.png',
+      type: 'Спальня',
+      products: [
+        {
+          id: 65465,
+          name: 'Диван угловой Росис Velvet Blue',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/6.png',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+        {
+          id: 65465,
+          name: 'Роттердам Velvet Yellow',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/6.png',
+          coords: [70, 70],
+          price: {
+            actual: 39900,
+            discount: 15,
+            expired: 33990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 1,
+      src: 'react/static/img/mockIdeas/2.png',
+      type: 'Гостиная',
+      products: [
+        {
+          id: 16545,
+          src: 'react/static/img/mockIdeas/2.png',
+          name: 'Теджонс-2 Time Deco Aquamarine',
+          link: 'link',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 2,
+      src: 'react/static/img/mockIdeas/3.png',
+      type: 'Кухня',
+      products: [
+        {
+          id: 654565,
+          name: 'Честер Barhat Salmon',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/3.png',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 3,
+      src: 'react/static/img/mockIdeas/4.png',
+      type: 'Рабочий кабинет',
+      products: [
+        {
+          id: 698798,
+          src: 'react/static/img/mockIdeas/4.png',
+          name: 'Сasual-Riverside 160x230',
+          link: 'link',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 4,
+      src: 'react/static/img/mockIdeas/5.png',
+      type: 'Дача и сад',
+      products: [
+        {
+          id: 987545,
+          name: 'Монреаль Премиум Barhat Grey',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/5.png',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 5,
+      src: 'react/static/img/mockIdeas/6.png',
+      type: 'Спальня',
+      products: [
+        {
+          id: 65465,
+          name: 'Диван угловой Росис Velvet Blue',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/6.png',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+        {
+          id: 65465,
+          name: 'Роттердам Velvet Yellow',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/6.png',
+          coords: [70, 70],
+          price: {
+            actual: 39900,
+            discount: 15,
+            expired: 33990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 6,
+      src: 'react/static/img/mockIdeas/2.png',
+      type: 'Гостиная',
+      products: [
+        {
+          id: 16545,
+          src: 'react/static/img/mockIdeas/2.png',
+          name: 'Теджонс-2 Time Deco Aquamarine',
+          link: 'link',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 7,
+      src: 'react/static/img/mockIdeas/3.png',
+      type: 'Кухня',
+      products: [
+        {
+          id: 654565,
+          name: 'Честер Barhat Salmon',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/3.png',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 8,
+      src: 'react/static/img/mockIdeas/4.png',
+      type: 'Рабочий кабинет',
+      products: [
+        {
+          id: 698798,
+          src: 'react/static/img/mockIdeas/4.png',
+          name: 'Сasual-Riverside 160x230',
+          link: 'link',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 9,
+      src: 'react/static/img/mockIdeas/5.png',
+      type: 'Дача и сад',
+      products: [
+        {
+          id: 987545,
+          name: 'Монреаль Премиум Barhat Grey',
+          link: 'link',
+          src: 'react/static/img/mockIdeas/5.png',
+          coords: [30, 45],
+          price: {
+            actual: 12990,
+            discount: 23,
+            expired: 16990,
+          },
+          tags: [
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag3.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag2.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+            {
+              title: 'Новинка',
+              image: {
+                src: 'react/static/img/mockIdeas/tags/tag1.svg',
+                orientation: 'landscape',
+              },
+              location: 'down',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};

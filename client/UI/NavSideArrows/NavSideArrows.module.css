@@ -27,13 +27,21 @@
 }
 
 .arrow.prev {
-  left: 0;
+  left: 40px;
 
-  transform: rotate(180deg) translate(-50%);
+  transform: translateY(-50%) rotate(180deg);
+
+  @media (--desktop-l) {
+    left: 70px;
+  }
 }
 
 .arrow.next {
-  right: 0;
+  right: 40px;
 
-  transform: translate(-50%);
+  transform: translateY(-50%);
+
+  @media (--desktop-l) {
+    right: 70px;
+  }
 }

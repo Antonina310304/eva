@@ -1,5 +1,6 @@
 .container {
-  flex: 1;
+  composes: main from 'containers';
+  /*  flex: 1;
   --gap: var(--space-xxb);
   box-sizing: border-box;
   width: 100%;
@@ -14,5 +15,5 @@
   }
   @media (--mobile-m) {
     --gap: var(--space-s);
-  }
+  }*/
 }

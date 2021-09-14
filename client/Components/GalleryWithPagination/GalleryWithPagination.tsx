@@ -8,7 +8,7 @@ export interface GalleryWithPaginationProps extends HTMLAttributes<HTMLDivElemen
   className?: string;
   children: ReactNode;
   slides: number;
-  buttons: (handlePrev: () => void, handleNext: () => void) => void;
+  buttons?: (handlePrev: () => void, handleNext: () => void) => void;
 }
 const GalleryWithPagination: FC<GalleryWithPaginationProps> = ({
   className,
@@ -47,7 +47,7 @@ const GalleryWithPagination: FC<GalleryWithPaginationProps> = ({
   return (
     <div>
       <div className={className}>
-        {buttons(handlePrev, handleNext)}
+        {buttons && buttons(handlePrev, handleNext)}
         <Gallery
           className={styles.gallery}
           slideIndex={slide}

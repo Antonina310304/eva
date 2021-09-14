@@ -1,114 +1,21 @@
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1778px;
-  margin: 0 auto;
+.title {
+  margin: 0 0 var(--space-m);
 }
 
 .buttonTabs {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 var(--space-xxb);
-  overflow-x: hidden;
+  margin-bottom: 40px;
+  overflow: hidden;
 }
 
-.title {
-  box-sizing: border-box;
-  margin: 0 0 var(--space-m);
-  padding: 0 var(--space-xxb);
-
-  color: var(--color-black);
-  font-weight: 500;
-  font-size: 30px;
-  font-family: var(--font-hero);
-  font-style: normal;
-  line-height: 40px;
-}
-
-.imageBlock {
+.imageItem {
   position: relative;
 
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: var(--space-xxl);
-  padding: 0 var(--space-xxb);
-}
+  @media (--mobile) {
+    margin-bottom: 15px;
 
-.imageBlock_subWrapper {
-  display: flex;
-  box-sizing: border-box;
-}
-
-.leftBlock {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  margin-right: var(--space-l);
-}
-
-.rightBlock {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-.imageCard_first {
-  display: block;
-  box-sizing: border-box;
-  width: calc(min(100vw, 1768px) - 2 * var(--space-xxb));
-  height: calc(0.625 * (min(100vw, 1768px) - 2 * var(--space-xxb)));
-  margin-bottom: var(--space-l);
-  object-fit: cover;
-}
-
-.imageCard_vertical {
-  display: block;
-  box-sizing: border-box;
-  width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
-  height: calc(0.625 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
-  object-fit: cover;
-}
-
-.imageCard_horizontal {
-  display: block;
-  box-sizing: border-box;
-  width: calc(min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l));
-  height: calc(16 / 10 * (min(50vw, 884px) - var(--space-xxb) - 0.5 * var(--space-l)));
-  object-fit: cover;
-}
-
-.imageCard_bottomMargin {
-  margin-bottom: var(--space-l);
-}
-
-.imageWrapper {
-  position: relative;
-}
-
-@media (--desktop-m) {
-  .imageBlock,
-  .title,
-  .buttonTabs {
-    padding: 0 var(--space-xxl);
-  }
-
-  .imageCard_first {
-    width: calc(100vw - 2 * var(--space-xxl));
-    height: calc(0.625 * (100vw - 2 * var(--space-xxl)));
-  }
-
-  .imageCard_vertical {
-    width: calc(50vw - var(--space-xxl) - 0.5 * var(--space-l));
-    height: calc(0.625 * (50vw - var(--space-xxl) - 0.5 * var(--space-l)));
-  }
-
-  .imageCard_horizontal {
-    width: calc(50vw - var(--space-xxl) - 0.5 * var(--space-l));
-    height: calc(16 / 10 * (50vw - var(--space-xxl) - 0.5 * var(--space-l)));
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -118,77 +25,137 @@
   margin-top: var(--space-xxl);
 }
 
-@media (--desktop) {
-  .title {
-    font-size: 25px;
-    line-height: 37px;
-  }
+.grid {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: auto;
 
-  .imageCard_first {
-    margin-bottom: var(--space-xxl);
+  @media (--mobile) {
+    display: block;
   }
 }
 
-@media (--mobile-m) {
-  .imageBlock,
-  .title,
-  .buttonTabs {
-    padding: 0 var(--space-s);
-  }
+.imageWrapper {
+  position: relative;
 
-  .title {
-    font-size: 22px;
-    line-height: 26px;
-  }
+  height: 0;
+  padding-bottom: 62.5%;
+  overflow: hidden;
+}
 
-  .imageCard_first {
-    width: calc(100vw - 2 * var(--space-s));
-    height: calc(0.625 * (100vw - 2 * var(--space-s)));
-    margin-bottom: var(--space-n);
-  }
+.imageItem {
+  overflow: hidden;
+}
 
-  .imageCard_vertical {
-    width: calc(50vw - var(--space-s) - 0.5 * var(--space-n));
-    height: calc(0.625 * (50vw - var(--space-s) - 0.5 * var(--space-n)));
-  }
+/*каждый 1-й из 5*/
+.imageItem:nth-child(5n - 4) {
+  grid-area: top;
+  grid-row: span 1;
 
-  .imageCard_horizontal {
-    width: calc(50vw - var(--space-s) - 0.5 * var(--space-n));
-    height: calc(16 / 10 * (50vw - var(--space-s) - 0.5 * var(--space-n)));
-  }
+  grid-column: span 2;
+}
 
-  .leftBlock {
-    margin-right: var(--space-n);
-  }
+/*каждый 3-й из 5*/
+/*каждый 4-й из 5*/
+.imageItem:nth-child(5n - 1),
+.imageItem:nth-child(5n - 2) {
+  grid-row: span 2;
+  grid-column: span 1;
 
-  .imageCard_bottomMargin {
-    margin-bottom: var(--space-n);
+  .imageWrapper {
+    padding-bottom: 160%;
   }
 }
 
-@media (--mobile) {
-  .title {
-    font-size: 20px;
-    line-height: 26px;
+.imageItem:nth-child(5n),
+.imageItem:nth-child(5n - 3) {
+  grid-area: e;
+
+  grid-row: span 1;
+  grid-column: span 1;
+}
+
+.imageInner {
+  line-height: 0;
+
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+
+    transform: translate(-50%, -50%);
   }
 
-  .imageBlock_subWrapper {
-    flex-direction: column;
-  }
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-  .imageCard_vertical {
-    width: calc(100vw - 2 * var(--space-s));
-    height: calc(0.625 * (100vw - 2 * var(--space-s)));
-    margin-bottom: var(--space-s);
+    flex-shrink: 0;
+    min-width: 100%;
+    max-width: none;
+    min-height: 100%;
+    max-height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
   }
+}
+/*каждый 2-й из 5*/
+/*каждый 4-й из 5*/
+.imageItem:nth-child(5n - 2) .imageInner,
+.imageItem:nth-child(5n - 1) .imageInner {
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-  .imageCard_horizontal {
-    width: calc(100vw - 2 * var(--space-s));
-    height: calc(0.625 * (100vw - 2 * var(--space-s)));
-    margin-bottom: var(--space-s);
+    width: 160%;
+    height: 100%;
+    padding: 0;
   }
+}
 
-  .buttonMore {
-    margin-top: var(--space-m);
-  }
+.pinWrapper {
+  position: absolute;
+
+  padding: 15px;
+
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.pin {
+  box-sizing: border-box;
+  width: 34px;
+  height: 34px;
+
+  background: var(--color-white);
+  border: 11px solid var(--color-medium-gray);
+
+  border-radius: 50%;
+}
+
+.modal {
+  position: absolute;
+  right: 50%;
+  left: 50%;
+  z-index: 150;
+
+  width: 50px;
+  height: 50px;
+
+  background: red;
+}
+
+.buttonMore {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
 }
