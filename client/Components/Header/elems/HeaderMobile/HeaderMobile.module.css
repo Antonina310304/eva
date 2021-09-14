@@ -9,14 +9,14 @@
 
   background: var(--color-white);
 
-  transition: box-shadow 0.4s;
+  transition: box-shadow 0.4s, top 0.4s;
 
   &.fixed {
     position: fixed;
     top: calc(var(--header-height) * -1);
     right: 0;
     left: 0;
-    z-index: 999;
+    z-index: 20;
   }
 
   &.visible {
@@ -25,8 +25,6 @@
 
   &.visible.withShadow {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-
-    transition: box-shadow 0.4s, top 0.4s;
   }
 }
 
