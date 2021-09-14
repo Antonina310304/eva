@@ -23,7 +23,7 @@ export interface NotifyAboutReceiptModalProps {
 const NotifyAboutReceiptModal: FC<NotifyAboutReceiptModalProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const [, { closeModal }] = useModals();
-
+  console.log(modal);
   const handleClose = useCallback(() => {
     closeModal(modal.id);
   }, [closeModal, modal.id]);

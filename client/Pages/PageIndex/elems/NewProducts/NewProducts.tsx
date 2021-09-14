@@ -1,7 +1,6 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
-import SectionTitle from '@Components/SectionTitle/SectionTitle';
-import Container from '@Components/Container';
+
 import { InstagramPostData } from '@Types/InstagramPost';
 import CrossSaleSection from '@Components/CrossSaleSection/CrossSaleSection';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard/CrossSaleProductCard';

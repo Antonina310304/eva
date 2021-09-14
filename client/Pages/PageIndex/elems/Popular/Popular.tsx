@@ -1,16 +1,15 @@
-import React, { FC, HTMLAttributes, useCallback, useState } from 'react';
+import React, { FC, HTMLAttributes } from 'react';
 import cn from 'classnames';
-import SectionTitle from '@Components/SectionTitle';
-import Container from '@Components/Container';
-import PopularCard from '@Pages/PageIndex/elems/PopularCard/PopularCard';
 
-import Gallery from '@UI/Gallery';
+import Container from '@Components/Container';
+
 import NavArrows from '@UI/NavArrows/NavArrows';
 import PopularSlider from '@Pages/PageIndex/elems/PopularSlider';
 import useMedias from '@Hooks/useMedias';
-import Pagination from '@UI/Pagination';
+
 import GalleryWithPagination from '@Components/GalleryWithPagination';
-import NavSideArrows from '@UI/NavSideArrows/NavSideArrows';
+
+import Section from '@Components/Section';
 import styles from './Popular.module.css';
 
 export interface PopularProps extends HTMLAttributes<HTMLDivElement> {
@@ -58,10 +57,14 @@ const Popular: FC<PopularProps> = ({ className, data }) => {
           <GalleryWithPagination
             className={styles.gallery}
             buttons={(handlePrev, handleNext) => (
-              <div className={styles.headerWrapper}>
-                <SectionTitle title={data.title} className={styles.title} />
-                <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
-              </div>
+              <Section
+                className={styles.headerWrapper}
+                title='Популярные категории'
+                additional={
+                  <NavArrows className={styles.arrows} onPrev={handlePrev} onNext={handleNext} />
+                }
+                additionalBreakup
+              />
             )}
             slides={productsGroup.length}
           >

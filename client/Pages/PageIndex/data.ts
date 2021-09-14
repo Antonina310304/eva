@@ -1200,7 +1200,7 @@ export const ideasData: IdeasPostData = {
           id: 65465,
           name: 'Диван угловой Росис Velvet Blue',
           link: 'link',
-          src: 'react/static/img/mockIdeas/6.png',
+          src: 'react/static/img/mockIdeas/2931135.jpg',
           coords: [30, 45],
           price: {
             actual: 12990,
@@ -1238,7 +1238,7 @@ export const ideasData: IdeasPostData = {
           id: 65465,
           name: 'Роттердам Velvet Yellow',
           link: 'link',
-          src: 'react/static/img/mockIdeas/6.png',
+          src: 'react/static/img/mockIdeas/2931243.jpg',
           coords: [70, 70],
           price: {
             actual: 39900,
@@ -1268,7 +1268,7 @@ export const ideasData: IdeasPostData = {
           src: 'react/static/img/mockIdeas/2.png',
           name: 'Теджонс-2 Time Deco Aquamarine',
           link: 'link',
-          coords: [30, 45],
+          coords: [20, 60],
           price: {
             actual: 12990,
             discount: 23,

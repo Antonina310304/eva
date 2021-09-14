@@ -1,5 +1,5 @@
 .sectionWrapper {
-  margin-bottom: var(--space-xxe);
+  /*margin-bottom: var(--space-xxe);*/
 
   overflow: hidden;
 }
@@ -32,9 +32,9 @@
 }
 
 @media (--desktop-m) {
-  .sectionWrapper {
+  /*.sectionWrapper {
     margin-bottom: var(--space-e);
-  }
+  }*/
 
   .slide {
     width: 400px;
@@ -43,9 +43,9 @@
 }
 
 @media (--desktop) {
-  .sectionWrapper {
+  /*.sectionWrapper {
     margin-bottom: var(--space-xb);
-  }
+  }*/
 
   .slide {
     width: 300px;

@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes, useMemo, useCallback, memo, useState } from 'react';
 
-import SectionTitle from '@Components/SectionTitle/SectionTitle';
 import Container from '@Components/Container';
 import cn from 'classnames';
 import IdeasPopup from '@Pages/PageIndex/elems/Ideas/IdeasPopup/IdeasPopup';
@@ -8,7 +7,7 @@ import ButtonTabs from '@UI/ButtonTabs/ButtonTabs';
 import Link from '@UI/Link/Link';
 import Button from '@UI/Button/Button';
 import { IdeasPostData } from '@Types/Ideas';
-import useModals from '@Hooks/useModals';
+import Section from '@Components/Section/Section';
 import styles from './Ideas.module.css';
 
 export interface IdeasProps extends HTMLAttributes<HTMLDivElement> {
@@ -20,7 +19,6 @@ const Ideas: FC<IdeasProps> = ({ className, ideasData }) => {
   const [selectedTab, setSelectedTab] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState({ imgId: -1, product: {} });
   const MAX_COUNT_IMAGE = 5;
-  const [, { openModal }] = useModals();
 
   const tabsIdeas = useMemo(() => {
     if (!ideasData?.images) return [];
@@ -38,13 +36,9 @@ const Ideas: FC<IdeasProps> = ({ className, ideasData }) => {
     return tabs;
   }, [ideasData]);
 
-  const onClick = useCallback(() => {
-    openModal('ProductIdeasForHome', {});
-  }, [openModal]);
-
   const onChangeTab = useCallback(
     (id) => {
-      setSelectedProduct({ imgId: -1, product: {} });
+      setSelectedProduct((prevState) => ({ ...prevState, imgId: -1 }));
       setSelectedTab(id);
     },
     [setSelectedTab, setSelectedProduct],
@@ -63,9 +57,7 @@ const Ideas: FC<IdeasProps> = ({ className, ideasData }) => {
 
   return (
     <div className={className}>
-      <Container>
-        {ideasData.title && <SectionTitle title={ideasData.title} className={styles.title} />}
-      </Container>
+      {ideasData.title && <Section className={styles.title} title={ideasData.title} />}
       <div className={styles.tabWrapper}>
         <ButtonTabs
           defaultValue={tabsIdeas[0].id}
@@ -81,23 +73,19 @@ const Ideas: FC<IdeasProps> = ({ className, ideasData }) => {
           {filteredTabsIdeas.slice(0, MAX_COUNT_IMAGE).map((img) => {
             return (
               <div key={img.id} className={styles.imageItem}>
+                <IdeasPopup
+                  productData={selectedProduct?.product || {}}
+                  visible={selectedProduct.imgId === img.id}
+                  onClose={() => setSelectedProduct((prevState) => ({ ...prevState, imgId: -1 }))}
+                />
                 <div className={cn(styles.imageWrapper, 'imageInner')}>
-                  {selectedProduct.imgId === img.id && (
-                    <IdeasPopup
-                      productData={selectedProduct.product}
-                      visible={selectedProduct.imgId === img.id}
-                      onClose={() => setSelectedProduct({ imgId: -1, product: {} })}
-                    />
-                  )}
-
                   <div className={styles.imageInner}>
                     <img src={img.src} alt='' />
                     {img.products.map((product, index) => {
                       return (
                         <div
                           onClick={() => {
-                            onClick();
-                            // setSelectedProduct({ imgId: img.id, product });
+                            setSelectedProduct({ imgId: img.id, product });
                           }}
                           className={styles.pinWrapper}
                           key={index}

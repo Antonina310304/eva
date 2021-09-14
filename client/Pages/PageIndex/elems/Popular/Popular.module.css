@@ -24,5 +24,13 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 0 0 30px;
+  margin: 0 -70px 30px;
+
+  @media (--desktop-m) {
+    margin: 0 -40px 30px;
+  }
+
+  @media (--mobile-m) {
+    margin: 0 -15px 30px;
+  }
 }
