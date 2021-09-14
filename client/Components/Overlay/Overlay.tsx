@@ -1,5 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
+
 import styles from './Overlay.module.css';
 
 export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,16 +13,9 @@ const Overlay: FC<OverlayProps> = (props) => {
   const { className, visible, ...restProps } = props;
 
   return (
-    <div
-      {...restProps}
-      className={cn(
-        styles.overlay,
-        {
-          [styles.visible]: visible,
-        },
-        className,
-      )}
-    />
+    <CSSTransition timeout={400} classNames={{ ...styles }} unmountOnExit in={visible}>
+      <div {...restProps} className={cn(styles.overlay, className)} />
+    </CSSTransition>
   );
 };
 

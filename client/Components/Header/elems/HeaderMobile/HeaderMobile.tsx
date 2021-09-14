@@ -61,7 +61,7 @@ const HeaderMobile = () => {
       })}
     >
       <div className={styles.wrapper}>
-        <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
+        <Overlay visible={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={handleClickBurger} className={styles.burger} />
         <div className={styles.in}>
           <div className={styles.sliderWrapper}>

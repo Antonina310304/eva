@@ -79,7 +79,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
           </div>
         </div>
       </div>
-      <Overlay isOpen={isFirstClick} />
+      <Overlay visible={isFirstClick} />
     </div>
   );
 };
