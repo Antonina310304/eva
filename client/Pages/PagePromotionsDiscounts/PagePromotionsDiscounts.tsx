@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 
 import mockCategories from '@Pages/PagePromotionsDiscounts/elems/Trends/Mock/mockCategories';
+import { ProductData } from '@Types/Product';
 import CurrentPromotions from './elems/CurrentPromotions';
 import CurrentDiscounts from './elems/CurrentDiscounts';
 import FreeServices from './elems/FreeServices';
@@ -8,6 +9,7 @@ import Trends from './elems/Trends';
 import Top10 from './elems/Top10';
 
 import mockPromoCardData from './mockPromoCardData';
+import mockProductsData from './mockProductsData';
 
 import styles from './PagePromotionDiscounts.module.css';
 
@@ -19,6 +21,8 @@ const serviceCards = mockPromoCardData.filter((card) => {
   return card.type === 'service';
 });
 
+const mockProducts = (mockProductsData as unknown) as ProductData[]; // скопированы данные, которые приходят с сервера для другого аналогичного компонента
+
 const PagePromotionsDiscounts: FC = () => {
   return (
     <div>
@@ -27,7 +31,7 @@ const PagePromotionsDiscounts: FC = () => {
       <CurrentDiscounts />
       <FreeServices cards={serviceCards} />
       <Trends categories={mockCategories} />
-      <Top10 />
+      <Top10 products={mockProducts} />
     </div>
   );
 };
