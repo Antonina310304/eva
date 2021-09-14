@@ -1,7 +1,6 @@
-import { IUserMenu } from '@Types/UserMenu';
 import ISiteNav from '@Types/SiteNav';
 
-export const userBottomMenu: IUserMenu[] = [
+export const userBottomMenu = [
   {
     title: 'Войти/зарегистрироваться',
     icon: 'user.svg',
@@ -18,38 +17,6 @@ export const userBottomMenu: IUserMenu[] = [
   {
     title: 'Ваш город',
     icon: 'location.svg',
-  },
-];
-
-export const UserMenuMobile: IUserMenu[] = [
-  {
-    title: 'Избранное',
-    icon: 'favorites',
-    link: 'favorites',
-  },
-  {
-    title: 'Корзина',
-    icon: 'basket',
-    link: 'basket',
-  },
-];
-export const UserMenuDesktop: IUserMenu[] = [
-  {
-    title: 'Личный кабинет',
-    icon: 'user',
-    link: 'personal',
-  },
-  {
-    title: 'Избранное',
-    icon: 'favorites',
-    link: 'favorites',
-  },
-  {
-    title: 'Корзина',
-    icon: 'basket',
-    link: 'basket',
-    count: 5,
-    isDisabled: true,
   },
 ];
 

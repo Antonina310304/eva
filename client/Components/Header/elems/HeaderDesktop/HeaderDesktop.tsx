@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import UserMenu from '@Components/UserMenu';
-import { UserMenuDesktop } from '@Components/Header/data';
 import Overlay from '@Components/Overlay';
 import Link from '@UI/Link';
 import useScrollPosition from '@Hooks/useScrollPosition';
@@ -71,9 +70,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
                   {meta.data.region.name}
                 </Link>
                 <Phone />
-                {hideOnScroll && (
-                  <UserMenu className={styles.userMenu} userMenuList={UserMenuDesktop} />
-                )}
+                {hideOnScroll && <UserMenu className={styles.userMenu} />}
               </div>
             </div>
           </div>

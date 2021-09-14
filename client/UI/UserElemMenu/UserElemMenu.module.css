@@ -10,25 +10,12 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  cursor: pointer;
 
-  transition: background 150ms ease-in;
-
-  &:hover {
-    transition: background 150ms ease-in;
-  }
-
-  &:focus {
-    transition: background 150ms ease-in;
-  }
-
-  &:active {
-    transition: background 150ms ease-in;
-  }
+  transition: background-color 150ms ease-in;
 
   &.disabled {
     cursor: default;
-
-    transition: background 150ms ease-in;
   }
 }
 

@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
-import { UserMenuMobile } from '@Components/Header/data';
 import useMedias from '@Hooks/useMedias';
 import useScrollPosition from '@Hooks/useScrollPosition';
 import HeaderLogo from '../HeaderLogo';
@@ -72,7 +71,7 @@ const HeaderMobile = () => {
             <div className={styles.search}>
               <Search className={styles.search} />
             </div>
-            {!isMobile && <UserMenu className={styles.userMenu} userMenuList={UserMenuMobile} />}
+            {!isMobile && <UserMenu className={styles.userMenu} />}
           </div>
         </div>
       </div>

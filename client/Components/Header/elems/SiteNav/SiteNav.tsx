@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import Link from '@UI/Link';
 import UserMenu from '@Components/UserMenu';
-import { siteNavList, UserMenuDesktop } from '@Components/Header/data';
+import { siteNavList } from '@Components/Header/data';
 import MainNav from '../MainNav';
 import styles from './SiteNav.module.css';
 
@@ -60,7 +60,7 @@ const SiteNav: FC<SiteNavProp> = ({ isFirstClick, hideOnScroll, setIsFirstClick 
                         className={styles.mainNav}
                         hideOnScroll={hideOnScroll}
                       />
-                      {!hideOnScroll && <UserMenu userMenuList={UserMenuDesktop} />}
+                      {!hideOnScroll && <UserMenu />}
                     </div>
                   </div>
                 </div>
