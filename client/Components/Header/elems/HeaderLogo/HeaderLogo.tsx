@@ -11,7 +11,7 @@ export interface IHeaderLogo extends HTMLAttributes<HTMLDivElement> {
 const HeaderLogo: FC<IHeaderLogo> = ({ className }) => {
   return (
     <div className={cn(className, styles.wrapper)}>
-      <Logotype />
+      <Logotype roller />
       <div className={styles.icon}>
         <img src='/react/static/img/topSlider/icon.svg' alt='' />
       </div>

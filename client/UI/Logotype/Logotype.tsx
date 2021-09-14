@@ -1,52 +1,60 @@
-import React, { FC, useEffect, useState, memo } from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import { virtualize } from 'react-swipeable-views-utils';
-import { mod } from 'react-swipeable-views-core';
+import React, { useCallback, useState, memo, HTMLAttributes, FC } from 'react';
+import cn from 'classnames';
 
-import divanSlider from './data';
+import Icon28LogoTextRus from '@divanru/icons/dist/28/logo_text_rus';
+import Icon46LogoTextBlr from '@divanru/icons/dist/46/logo_text_blr';
+
+import { CountryData } from '@Types/Base';
 import styles from './Logotype.module.css';
 
-const VirtualizeSwipeableViews = virtualize(SwipeableViews);
+export interface LogotypeProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  roller?: boolean;
+  country?: CountryData;
+}
 
-const Logotype: FC = () => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [hover, setHover] = useState<boolean>(false);
+const Logotype: FC<LogotypeProps> = (props) => {
+  const { className, roller, country = 'RUS', ...restProps } = props;
+  const [position, setPosition] = useState(0);
 
-  useEffect(() => {
-    if (hover) {
-      setCurrentIndex((ind) => ind + 1);
-    }
-  }, [hover]);
+  const handleLogoRoller = useCallback(() => {
+    if (!roller) return;
 
-  function slideRenderer(params: any) {
-    const { index, key } = params;
-
-    return (
-      <div className={styles.slide} key={key}>
-        <img src={divanSlider[mod(index, divanSlider.length)]} alt='диваны.ру' />
-      </div>
-    );
-  }
-
-  function handleChangeIndex() {
-    setCurrentIndex(currentIndex);
-  }
+    setPosition((prev) => prev + 31);
+  }, [roller]);
 
   return (
-    <VirtualizeSwipeableViews
-      onMouseOver={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      index={currentIndex}
-      className={styles.slideContainer}
-      containerStyle={{
-        width: 78,
-        height: 27,
-      }}
-      onChangeIndex={handleChangeIndex}
-      axis='y'
-      enableMouseEvents
-      slideRenderer={slideRenderer}
-    />
+    <div
+      {...restProps}
+      className={cn(
+        styles.logotype,
+        {
+          [styles.isRoller]: roller,
+          [styles.isBlr]: country === 'BLR',
+          [styles.isRus]: country === 'RUS',
+        },
+        [className],
+      )}
+      onMouseEnter={handleLogoRoller}
+    >
+      <div
+        className={styles.roller}
+        style={{
+          backgroundPosition: `0 ${position}px`,
+          backgroundImage: `url('/react/static/img/logotype/roller.png')`,
+        }}
+      />
+
+      <div
+        className={styles.icon}
+        style={{
+          backgroundImage:
+            country === 'RUS'
+              ? 'url(/react/static/img/logotype/iconRus.svg)'
+              : 'url(/react/static/img/logotype/iconBlr.svg)',
+        }}
+      />
+    </div>
   );
 };
 
