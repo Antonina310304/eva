@@ -1,0 +1,87 @@
+.phone {
+  position: relative;
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-s);
+  line-height: 150%;
+
+  cursor: pointer;
+
+  transition: color 105ms ease-in;
+
+  .arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: var(--space-xxs);
+
+    background-image: url('arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    transition: transform 150ms ease-in;
+  }
+
+  .number {
+    &:before {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+
+      display: block;
+      width: 0;
+      height: 0;
+
+      border-bottom: 1px solid var(--color-black);
+
+      transition: width 150ms ease-in;
+
+      content: '';
+    }
+  }
+
+  &:hover {
+    color: var(--color-black);
+
+    transition: color 105ms ease-in;
+
+    .arrow {
+      background-image: url('arrow-hover.svg');
+
+      transition: transform 150ms ease-in, background-color 150ms ease-in;
+    }
+  }
+
+  &:active {
+    .number {
+      position: relative;
+
+      &:before {
+        width: 100%;
+
+        transition: width 150ms ease-in;
+      }
+    }
+
+    .arrow {
+      background-image: url('arrow-hover.svg');
+
+      transition: transform 150ms ease-in, background-color 150ms ease-in;
+    }
+  }
+
+  &:focus {
+    color: var(--color-dark-gray);
+
+    transition: color 150ms ease-in;
+  }
+
+  &.open {
+    .arrow {
+      transform: rotate(180deg);
+
+      transition: transform 150ms ease-in, background-color 150ms ease-in;
+    }
+  }
+}

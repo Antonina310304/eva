@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.userMenuItem {
+  margin-right: 15px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.link {
+  position: relative;
+
+  display: block;
+  width: 30px;
+  height: 30px;
+
+  font-size: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  transition: background 150ms ease-in;
+}

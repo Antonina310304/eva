@@ -3,7 +3,7 @@
   box-sizing: border-box;
   width: 100%;
   padding-top: var(--space-xxl);
-  padding-bottom: 60px;
+  padding-bottom: var(--space-xb);
 
   background: var(--color-light-gray);
 }

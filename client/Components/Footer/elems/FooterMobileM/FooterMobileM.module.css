@@ -21,11 +21,11 @@
 }
 
 .footerText {
+  composes: s from 'sizes';
+
   margin: 0;
 
   color: var(--color-dark-gray);
-  font-size: var(--size-s);
-  line-height: 21px;
   text-decoration: none;
 }
 
@@ -38,21 +38,19 @@
 }
 
 .madeIn {
-  margin: 70px 0 0;
+  composes: s from 'sizes';
+
+  margin: var(--space-xxb) 0 0;
 
   color: var(--color-black);
-  font-size: var(--size-s);
-  line-height: 25px;
 }
 
 .footerText {
   margin: 0;
 
   color: var(--color-dark-gray);
-  font-size: var(--size-s);
-  line-height: 21px;
 }
 
 .wrapperMedium {
-  margin-bottom: 25px;
+  margin-bottom: var(--space-m);
 }

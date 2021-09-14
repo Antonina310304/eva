@@ -1,11 +1,12 @@
 stages:
   - prepare
-  - lint
   - build
   - push
   - review
+  - lint
   - deploy
   - clear_review
+
 prepare:
   tags:
     - divan

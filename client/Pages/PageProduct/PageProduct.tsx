@@ -44,6 +44,7 @@ const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
 const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
+const headerHeight = 90;
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const [, { openModal }] = useModals();
@@ -95,7 +96,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const handleCalc = useCallback(() => {
     const rectSidebar = refSidebar.current.getBoundingClientRect();
 
-    howManyCanScroll.current = rectSidebar.height - window.innerHeight + 30;
+    howManyCanScroll.current = rectSidebar.height - window.innerHeight + 30 + headerHeight;
   }, []);
 
   const handleCalcMatrasy = useCallback(() => {
@@ -143,7 +144,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       howRestScroll.current = howManyCanScroll.current;
     }
 
-    if (rectSidebar.top <= 0) {
+    if (rectSidebar.top <= headerHeight) {
       howRestScroll.current += diffScroll;
     }
 
@@ -159,7 +160,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     // И прерываем последующие расчеты позиции
     if (
       Math.round(rectContent.bottom) <= Math.round(rectSidebar.bottom) &&
-      Math.round(rectSidebar.top) <= 0
+      Math.round(rectSidebar.top) <= headerHeight
     ) {
       setPositionSidebar({
         position: 'absolute',
@@ -171,7 +172,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     }
 
     // Фиксируем нижнюю границу сайдбара и искусственно смещаем по оси Y на кол-во оставшегося скрола
-    if (Math.round(rectContent.top) <= 0) {
+    if (Math.round(rectContent.top) <= headerHeight) {
       setPositionSidebar({
         position: 'fixed',
         bottom: 30,
