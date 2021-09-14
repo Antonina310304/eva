@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1176px;
   margin: auto;
-  padding: 0 var(--space-xxl);
+  padding: 0 var(--space-xxl) var(--space-e);
 
   :global(.h1style) {
     margin: var(--space-xl) 0px;
@@ -33,13 +33,24 @@
 @media (--desktop-m) {
   .wrapper {
     max-width: 1066px;
+
+    :global(.h1style) {
+      font-size: var(--size-b);
+      line-height: var(--lh-b);
+    }
   }
 }
 
 @media (--desktop) {
-  .wrapper h1 {
-    font-size: var(--size-b);
-    line-height: var(--lh-b);
+  .page {
+    padding-bottom: var(--space-xb);
+  }
+
+  .wrapper {
+    :global(.h1style) {
+      font-size: var(--size-xxl);
+      line-height: var(--lh-xxl);
+    }
   }
 }
 
@@ -47,16 +58,9 @@
   .wrapper {
     padding: 0 var(--space-s);
 
-    h1 {
-      font-size: var(--size-xxl);
+    :global(.h1style) {
+      font-size: var(--size-xl);
       line-height: var(--lh-xxl);
     }
-  }
-}
-
-@media (--mobile) {
-  .wrapper h1 {
-    font-size: var(--size-xl);
-    line-height: var(--lh-xl);
   }
 }

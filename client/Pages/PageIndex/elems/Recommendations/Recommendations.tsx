@@ -49,7 +49,7 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
   return (
     <div className={cn(className, styles.wrapper)}>
       <Section
-        className={cn(styles.sectionWrapper, 'test')}
+        className={styles.sectionWrapper}
         title='Рекомендуем сегодня'
         additional={
           track?.width < 100 && (
@@ -69,7 +69,7 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
           >
             {cards.map((card, index) => {
               return (
-                <div key={index} className={cn(styles.slide, 'test-slide')}>
+                <div key={index} className={styles.slide}>
                   <PromoCard {...card} />
                 </div>
               );

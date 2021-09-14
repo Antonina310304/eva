@@ -2,23 +2,22 @@ import React, { FC, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import usePage from '@Queries/usePage';
+import useMeta from '@Queries/useMeta';
+import { useCart } from '@Stores/Cart';
 import TemplateMain from '@Templates/TemplateMain';
 import PageDelivery from '@Pages/PageDelivery';
-import useMeta from '@Queries/useMeta';
-import CartStore from '@Stores/Cart';
 
 const RouteDelivery: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const page = usePage({ path: pathname });
+  const cart = useCart();
+  const meta = useMeta();
 
-  if (!page.isSuccess || !meta.isSuccess) return null;
-
-  CartStore.init(page.data.cart);
+  if (!page.isSuccess || !meta.isSuccess || !cart) return null;
 
   return (
-    <TemplateMain>
-      <PageDelivery page={page.data} meta={meta.data} />
+    <TemplateMain hideDeliveryInfo meta={meta.data}>
+      <PageDelivery page={page.data} meta={meta.data} cart={cart} />
     </TemplateMain>
   );
 };

@@ -4,29 +4,11 @@ import cn from 'classnames';
 import PressDetails from '@Components/PressDetails';
 import { Modal as IModal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
-import useMeta from '@Queries/useMeta';
-import { MetaDataSocial } from '@Types/Meta';
+import { ArticleData } from '@Types/Press';
 import styles from './ArticleModal.module.css';
-
-export interface SocialItem {
-  id: number;
-  link: string;
-}
-
-export interface ArticleData {
-  link: string;
-  preview: string;
-  src: string;
-  logo: string;
-  text: string;
-  index: number;
-  href: string;
-  images: string[];
-}
 
 export interface ArticleModalData {
   articles: ArticleData[];
-  socials: MetaDataSocial[];
   index: number;
 }
 
@@ -36,14 +18,11 @@ export interface ArticleModal extends IModal {
 
 export interface ArticleModalProps extends ModalMainProps {
   modal: ArticleModal;
-  index: number;
-  socials: SocialItem;
 }
 
-const ArticleModal: FC<ModalMainProps> = (props) => {
+const ArticleModal: FC<ArticleModalProps> = (props) => {
   const { className, modal, onClose, ...restProps } = props;
   const { articles, index } = modal.data;
-  const meta = useMeta({ ssr: true });
   const [currentIndex, setCurrentIndex] = useState<number>(index);
   const currentArticle = articles[currentIndex];
 
@@ -76,7 +55,7 @@ const ArticleModal: FC<ModalMainProps> = (props) => {
       onClose={onClose}
     >
       <div className={styles.container}>
-        <PressDetails article={currentArticle} socials={meta.data.socials} />
+        <PressDetails article={currentArticle} />
       </div>
     </ModalMain>
   );

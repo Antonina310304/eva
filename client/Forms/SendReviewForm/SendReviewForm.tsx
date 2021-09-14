@@ -85,7 +85,7 @@ const SendReviewForm: FC<SendReviewFormProps> = (props) => {
         } else {
           openModal('Info', {
             title: 'Спасибо!',
-            message: 'Ваше сообщение отправлено.',
+            text: 'Ваше сообщение отправлено.',
           });
         }
 

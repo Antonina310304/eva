@@ -58,18 +58,6 @@
   }
 }
 
-.boldText {
-  font-weight: 500;
-
-  opacity: 0;
-
-  user-select: none;
-}
-
-.text {
-  position: absolute;
-}
-
 .galleryViewport {
   overflow: visible;
 }

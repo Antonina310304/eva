@@ -7,7 +7,7 @@
 
 @media (--mobile) {
   .container {
-    width: 100%;
+    width: 100vw;
     padding: var(--space-xl) var(--space-s);
   }
 }

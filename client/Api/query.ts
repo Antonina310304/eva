@@ -1,13 +1,13 @@
 import fetch from 'cross-fetch';
 
 import { Api } from '@Api/index';
+import { isAbsoluteLink } from '../../utils/isAbsoluteLink';
 
 const isClient = typeof window !== 'undefined';
 
 export default async <T>(path: string, opts?: RequestInit): Promise<T> => {
   const request = Api.getRequest();
-  const isAbsolute = path.match(/^https?:\/\//);
-  const url = isAbsolute ? path : `${request.origin}${path}`;
+  const url = isAbsoluteLink(path) ? path : `${request.origin}${path}`;
   const queryUrl = new URL(url);
   const options = opts || {};
   const headers = options.headers || {};

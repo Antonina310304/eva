@@ -1,12 +1,21 @@
 import React, { FC, memo } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import TemplateMain from '@Templates/TemplateMain';
 import PageIndex from '@Pages/PageIndex';
+import usePage from '@Queries/usePage';
+import useMeta from '@Queries/useMeta';
 
 const RouteCategory: FC = () => {
+  const { pathname } = useLocation();
+  const page = usePage({ path: pathname });
+  const meta = useMeta();
+
+  if (!page.isSuccess || !meta.isSuccess) return null;
+
   return (
-    <TemplateMain>
-      <PageIndex />
+    <TemplateMain meta={meta.data}>
+      <PageIndex page={page.data as any} meta={meta.data} />
     </TemplateMain>
   );
 };

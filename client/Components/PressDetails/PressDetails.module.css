@@ -24,6 +24,7 @@
 }
 
 .mainGalleryPreview {
+  background-position: center;
   background-size: cover;
 
   &:before {
@@ -44,6 +45,7 @@
 }
 
 .secondGalleryPreview {
+  background-position: center;
   background-size: cover;
 
   &:before {

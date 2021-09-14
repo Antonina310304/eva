@@ -1,0 +1,72 @@
+.icon {
+  position: relative;
+
+  display: block;
+
+  font-size: 0;
+  line-height: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0;
+
+    transition: opacity 0.2s ease-in;
+
+    content: '';
+  }
+
+  &:hover {
+    &:before {
+      opacity: 1;
+
+      transition: opacity 0.2s ease-in;
+    }
+  }
+}
+
+.masterCard {
+  width: 40px;
+  height: 25px;
+
+  background-image: url('./icons/master_card_default.svg');
+
+  &:before {
+    background-image: url('./icons/master_card_hover.svg');
+  }
+}
+
+.visa {
+  width: 50px;
+  height: 16px;
+
+  background-image: url('./icons/visa_default.svg');
+
+  &:before {
+    background-image: url('./icons/visa_hover.svg');
+  }
+}
+
+.mir {
+  width: 52px;
+  height: 14px;
+
+  background-image: url('./icons/mir_default.svg');
+
+  &:before {
+    background-image: url('./icons/mir_hover.svg');
+  }
+}
