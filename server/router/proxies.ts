@@ -5,6 +5,7 @@ import proxy, { ProxyOptions } from 'express-http-proxy';
 
 import { envs } from '../../utils/envs';
 import { paths } from '../../utils/paths';
+import { isAbsoluteLink } from '../../utils/isAbsoluteLink';
 
 dotenv.config();
 
@@ -51,8 +52,7 @@ routes.forEach((route) => {
 
 router.use('/p/:path', (req, res, next) => {
   const { path } = req.params;
-  const isAbsolute = path.match(/^https?:\/\//);
-  const url = isAbsolute ? path : `${backend}${path}`;
+  const url = isAbsoluteLink(path) ? path : `${backend}${path}`;
 
   proxy(url, {
     proxyReqPathResolver: (proxyReq) => {
