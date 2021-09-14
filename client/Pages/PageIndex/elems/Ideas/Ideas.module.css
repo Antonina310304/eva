@@ -7,7 +7,7 @@
 .tabWrapper {
   composes: main from 'containers';
 
-  min-height: 38px;
+  min-height: 40px;
   margin: 0 auto 40px;
   overflow: hidden;
 }
