@@ -31,8 +31,6 @@ const Filters: FC<FiltersProps> = (props) => {
 
   const countSamples = useCallback(() => {
     const arr = [];
-    const filtri = Object.keys(filtrator.parameters);
-
     const parameters = filtrator.parameters[40]?.default || [];
 
     parameters.forEach((param) => {

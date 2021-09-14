@@ -20,6 +20,7 @@ const PageTextileSamples: FC<PageTextileSamplesProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const { title, orderSamples } = page;
 
+  // Подготавливаем данные под формат, воспринимаемый Фильтратором
   const colorsFilter = useMemo(() => {
     return Object.values(page.tags.colors).map((color) => {
       return {
@@ -62,7 +63,7 @@ const PageTextileSamples: FC<PageTextileSamplesProps> = (props) => {
     });
   }, [page.tags.collections]);
 
-  const filters = useMemo(() => {
+  const filters: any = useMemo(() => {
     return {
       id: 'textileSamples',
       inited: false,

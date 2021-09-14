@@ -5,7 +5,7 @@
 }
 
 .constructorGroup.visible {
-  background: var(--color-default);
+  background: var(--color-white);
 
   .tags {
     transition-delay: unset;
@@ -31,7 +31,7 @@
 
   opacity: 0;
 
-  transition: var(--animation-duration) ease 0.5s;
+  transition: 0.4s ease 0.5s;
 }
 
 .tags.visible {
@@ -54,7 +54,7 @@
 .toggle {
   display: block;
 
-  transition: all var(--animation-duration-fast) 0s ease-out;
+  transition: all 0.2s 0s ease-out;
 
   &:hover {
     cursor: pointer;
@@ -71,7 +71,7 @@
 
 .subhead {
   display: none;
-  margin: var(--space-2xs) 0 var(--space-s);
+  margin: var(--space-xxs) 0 var(--space-s);
 }
 
 .info {
@@ -106,7 +106,7 @@
     padding: 0;
     padding-top: 0;
     padding-bottom: 0;
-    padding-left: 30px;
+    padding-left: var(--space-l);
   }
 
   .catalog.desktopView {

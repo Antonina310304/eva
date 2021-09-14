@@ -2,11 +2,11 @@
 }
 
 .pageTitle {
-  margin-top: 35px;
+  margin-top: var(--space-xl);
 }
 
 .orderTextileSamples {
-  margin-top: 60px;
+  margin-top: var(--space-xb);
 }
 
 .wrapper {
@@ -15,14 +15,14 @@
 }
 
 .text {
-  margin-top: 60px;
+  margin-top: var(--space-xb);
 
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
 }
 
 .textileSelector {
-  margin-top: 100px;
+  margin-top: var(--space-xxe);
 }
 
 .callBack {
@@ -31,8 +31,8 @@
   align-items: center;
   max-width: 574px;
   margin: 0 auto;
-  margin-top: 100px;
-  margin-bottom: 80px;
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-e);
 
   text-align: center;
 }
@@ -43,12 +43,12 @@
   }
 
   .textileSelector {
-    margin-top: 80px;
+    margin-top: var(--space-e);
   }
 
   .callBack {
-    margin-top: 80px;
-    margin-bottom: 60px;
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-xb);
   }
 }
 
@@ -58,25 +58,25 @@
   }
 
   .text {
-    margin-top: 40px;
+    margin-top: var(--space-xxl);
   }
 
   .textileSelector {
-    margin-top: 60px;
+    margin-top: var(--space-xb);
   }
 
   .callBack {
-    margin-top: 60px;
+    margin-top: var(--space-xb);
   }
 }
 
 @media (--mobile-m) {
   .wrapper {
     max-width: 100%;
-    padding: 0 15px;
+    padding: 0 var(--space-s);
   }
 
   .orderTextileSamples {
-    margin-top: 40px;
+    margin-top: var(--space-xxl);
   }
 }

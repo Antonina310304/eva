@@ -1,6 +1,6 @@
 .orderTextileSamplesBlock {
   box-sizing: border-box;
-  padding: 60px 0;
+  padding: var(--space-xb) 0;
 
   background: #d8f1f1;
 }
@@ -9,15 +9,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15px;
+  padding: 0 var(--space-s);
 
   cursor: pointer;
 }
 
 .orderTextileTitle {
   font-weight: 500;
-  font-size: 22px;
-  line-height: 26px;
+  font-size: var(--size-l);
+  line-height: var(--lh-m);
   text-align: center;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .content {
-  padding: 0 15px;
+  padding: 0 var(--space-s);
   padding-top: var(--space-l);
 }
 
@@ -53,7 +53,7 @@
   justify-content: space-between;
   max-width: 1176px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: var(--space-xb);
 }
 
 .orderRulesItem {
@@ -84,12 +84,12 @@
 
 @media (--desktop) {
   .orderTextileSamplesBlock {
-    padding: 40px 0;
+    padding: var(--space-xxl) 0;
   }
 
   .wrapper {
     max-width: 944px;
-    margin-top: 30px;
+    margin-top: var(--space-l);
   }
 
   .orderRulesItem {
@@ -103,8 +103,8 @@
     margin-top: 0;
 
     & :last-child {
-      font-size: 14px;
-      line-height: 21px;
+      font-size: var(--size-s);
+      line-height: var(--lh-s);
     }
   }
 
@@ -112,13 +112,13 @@
     flex-direction: row;
     align-items: center;
     max-width: 290px;
-    margin-top: 30px;
+    margin-top: var(--space-l);
 
     text-align: left;
   }
 
   .iconRight {
-    margin: 0 35px;
+    margin: 0 var(--space-xl);
 
     &:nth-child(4) {
       display: none;
@@ -128,7 +128,7 @@
 
 @media (--mobile) {
   .orderTextileTitle {
-    margin-right: 20px;
+    margin-right: var(--space-n);
 
     text-align: start;
   }

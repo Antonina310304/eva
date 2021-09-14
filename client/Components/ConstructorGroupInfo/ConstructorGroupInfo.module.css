@@ -25,16 +25,10 @@
   margin-bottom: var(--space-m);
 
   font-size: var(--size-s);
-  line-height: 21px;
+  line-height: var(--lh-s);
 }
 
-.paramName {
-  color: var(--color-text-secondary);
+.param {
   font-size: var(--size-s);
-  line-height: 21px;
-}
-
-.paramValue {
-  font-size: var(--size-s);
-  line-height: 21px;
+  line-height: var(--lh-s);
 }

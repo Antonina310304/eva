@@ -95,20 +95,20 @@
 }
 
 .name {
-  margin-top: 15px;
+  margin-top: var(--space-s);
 
   font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
   text-align: center;
 }
 
 .moreInfo {
-  margin-top: 10px;
+  margin-top: var(--space-xs);
 
   color: var(--color-dark-gray);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
   text-align: center;
 
   cursor: pointer;

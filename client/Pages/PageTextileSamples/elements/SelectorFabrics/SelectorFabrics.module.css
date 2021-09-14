@@ -2,7 +2,7 @@
 }
 
 .title {
-  padding-bottom: 30px;
+  padding-bottom: var(--space-l);
 
   text-align: center;
 
@@ -16,8 +16,8 @@
 .wrapperMainContent {
   display: flex;
   flex-direction: column;
-  margin-right: -30px;
-  margin-left: -30px;
+  margin-right: var(--space-l-neg);
+  margin-left: var(--space-l-neg);
 }
 
 .left {
@@ -30,8 +30,8 @@
   padding-bottom: 0;
 
   font-weight: 500;
-  font-size: 22px;
-  line-height: 33px;
+  font-size: var(--size-l);
+  line-height: var(--lh-xl);
 }
 
 .fabricExtraSample {
@@ -42,13 +42,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 0;
-
-  color: var(--color-text-secondary);
+  padding: var(--space-xb) 0;
 }
 
 .notFoundTitle {
-  color: var(--color-text-primary);
   font-weight: 600;
 }
 
@@ -68,7 +65,7 @@
   justify-content: space-between;
   box-sizing: border-box;
   width: 100%;
-  padding: 20px;
+  padding: var(--space-n);
 
   border: 1px dashed var(--color-medium-gray);
   border-radius: 4px;
@@ -77,7 +74,7 @@
 .exampleMobile {
   width: 90px;
   height: 90px;
-  margin-right: 20px;
+  margin-right: var(--space-n);
 
   &:last-child {
     margin-right: 0;
@@ -91,7 +88,7 @@
 }
 
 .input {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-n);
 
   &:last-child {
     margin-bottom: 0;
@@ -100,7 +97,7 @@
 
 .submit {
   width: 100%;
-  margin-top: 30px;
+  margin-top: var(--space-l);
 }
 
 .samplesFormInfo {
@@ -115,7 +112,7 @@
   z-index: 2;
 
   width: 100%;
-  padding: 60px 0;
+  padding: var(--space-xb) 0;
 
   background: var(--color-light-gray);
 }
@@ -143,12 +140,8 @@
 .samplesFormInfoMobile {
   color: var(--color-dark-gray);
 
-  font-size: 12px;
-  line-height: 18px;
-}
-
-.basket {
-  color: var(--color-default);
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
 }
 
 .containerForm {
@@ -167,26 +160,26 @@
 
 @media (--desktop) {
   .constructorGroup {
-    margin-top: 20px;
+    margin-top: var(--space-n);
   }
 
   .mobileForm {
-    padding: 40px 0;
+    padding: var(--space-xxl) 0;
   }
 
   .formContainer {
     max-width: 600px;
-    margin-top: 30px;
+    margin-top: var(--space-l);
   }
 
   .examples {
-    padding: 15px;
+    padding: var(--space-s);
   }
 
   .exampleMobile {
     width: 50px;
     height: 50px;
-    margin-right: 10px;
+    margin-right: var(--space-xs);
 
     &:last-child {
       margin-right: 0;
@@ -200,24 +193,24 @@
 
 @media (--mobile-m) {
   .wrapperMainContent {
-    margin-right: -15px;
-    margin-left: -30px;
+    margin-right: var(--space-s-neg);
+    margin-left: var(--space-l-neg);
   }
 
   .constructorGroup {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 }
 
 @media (--mobile) {
   .formContainer {
     flex-direction: column;
-    padding: 0 15px;
+    padding: 0 var(--space-s);
   }
 
   .samplesFormWrapperInfo {
-    margin-top: 30px;
+    margin-top: var(--space-l);
   }
 
   .inputs {
@@ -225,6 +218,6 @@
   }
 
   .samplesFormInfoMobile {
-    margin-top: 15px;
+    margin-top: var(--space-s);
   }
 }

@@ -13,9 +13,9 @@
 }
 
 .selectedFilters {
-  margin-top: 20px;
+  margin-top: var(--space-n);
 
   color: var(--color-dark-gray);
-  font-size: 12px;
-  line-height: 18px;
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
 }

@@ -8,7 +8,7 @@
   width: 50px;
   height: 50px;
 
-  background-color: white;
+  background-color: var(--color-white);
 
   &::before {
     position: absolute;
@@ -62,7 +62,7 @@
 
   background-size: cover;
 
-  transition: all var(--animation-duration);
+  transition: all 0.4s;
 }
 
 .enter {

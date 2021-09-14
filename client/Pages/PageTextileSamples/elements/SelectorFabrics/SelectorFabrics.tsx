@@ -209,6 +209,7 @@ const SelectorFabrics: FC<SelectorFabricsProps> = (props) => {
     return result;
   }, [orderFabrics, pageData.tags.types, selectedCollections, selectedColors, selectedTags]);
 
+  // Считает общее кол-во образцов тканей
   Filtrator.updateTotalCount(
     groups.reduce((total, item) => {
       let newTotal = total;
