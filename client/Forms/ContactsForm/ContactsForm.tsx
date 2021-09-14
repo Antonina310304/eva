@@ -43,7 +43,7 @@ const ContactsForm: FC<ContactsFormProps> = (props) => {
         openModal('Info', {
           view: 'success',
           title: 'Спасибо!',
-          message: 'Ваше сообщение отправлено.',
+          test: 'Ваше сообщение отправлено.',
         });
 
         (window.dataLayer = window.dataLayer || []).push({

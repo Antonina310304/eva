@@ -1,0 +1,82 @@
+.page {
+}
+
+.pageTitle {
+  margin-top: var(--space-xl);
+}
+
+.orderTextileSamples {
+  margin-top: var(--space-xb);
+}
+
+.wrapper {
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.text {
+  margin-top: var(--space-xb);
+
+  font-size: var(--size-m);
+  line-height: var(--lh-xm);
+}
+
+.textileSelector {
+  margin-top: var(--space-xxe);
+}
+
+.callBack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 574px;
+  margin: 0 auto;
+  margin-top: var(--space-xxe);
+  margin-bottom: var(--space-e);
+
+  text-align: center;
+}
+
+@media (--desktop-m) {
+  .wrapper {
+    max-width: 1080px;
+  }
+
+  .textileSelector {
+    margin-top: var(--space-e);
+  }
+
+  .callBack {
+    margin-top: var(--space-e);
+    margin-bottom: var(--space-xb);
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    max-width: 944px;
+  }
+
+  .text {
+    margin-top: var(--space-xxl);
+  }
+
+  .textileSelector {
+    margin-top: var(--space-xb);
+  }
+
+  .callBack {
+    margin-top: var(--space-xb);
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    max-width: 100%;
+    padding: 0 var(--space-s);
+  }
+
+  .orderTextileSamples {
+    margin-top: var(--space-xxl);
+  }
+}
