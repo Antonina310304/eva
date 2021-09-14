@@ -1,15 +1,17 @@
-import React, { FC, HTMLAttributes, memo, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import SiteNav from '@Components/Header/elems/SiteNav/SiteNav';
 import Search from '@Components/Header/elems/Search';
-import Location from '@Components/Header/elems/Location';
 import Phone from '@Components/Header/elems/Phone';
 import UserMenu from '@Components/UserMenu';
 import { UserMenuDesktop } from '@Components/Header/data';
 import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import Overlay from '@Components/Overlay';
+import Link from '@UI/Link';
 import useScrollPosition from '@Hooks/useScrollPosition';
+import useModals from '@Hooks/useModals';
+import useMeta from '@Queries/useMeta';
 import styles from './HeaderDesktop.module.css';
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -17,8 +19,14 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const HeaderDesktop: FC<HeaderProps> = () => {
-  const [hideOnScroll, setHideOnScroll] = useState<boolean>(false);
-  const [isFirstClick, setIsFirstClick] = useState<boolean>(false);
+  const [hideOnScroll, setHideOnScroll] = useState(false);
+  const [isFirstClick, setIsFirstClick] = useState(false);
+  const [, { openModal }] = useModals();
+  const meta = useMeta();
+
+  const handleClickLocation = useCallback(() => {
+    openModal('RegionSelector');
+  }, [openModal]);
 
   useScrollPosition(({ current }) => {
     if (current.y > 2) {
@@ -28,6 +36,8 @@ const HeaderDesktop: FC<HeaderProps> = () => {
       setIsFirstClick(false);
     }
   });
+
+  if (!meta.isSuccess) return null;
 
   return (
     <header
@@ -51,7 +61,15 @@ const HeaderDesktop: FC<HeaderProps> = () => {
               </div>
 
               <div className={styles.right}>
-                <Location className={styles.location} location='Москва' />
+                <Link
+                  preventDefault
+                  className={styles.location}
+                  to='#'
+                  view='secondary'
+                  onClick={handleClickLocation}
+                >
+                  {meta.data.region.name}
+                </Link>
                 <Phone />
                 {hideOnScroll && (
                   <UserMenu className={styles.userMenu} userMenuList={UserMenuDesktop} />
