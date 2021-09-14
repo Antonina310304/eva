@@ -9,7 +9,7 @@ export interface IBannerMenu {
   img?: string;
   link?: string;
   textLink?: string;
-  badge?: string;
+  badge?: 'sale';
 }
 
 export interface IMainNavSubmenu {
