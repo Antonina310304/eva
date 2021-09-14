@@ -1,5 +1,5 @@
 .modalView {
-  width: 100%;
+  width: 100vw;
   max-width: 1382px;
 
   font-size: var(--size-n);

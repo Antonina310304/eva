@@ -1,6 +1,6 @@
 .container {
   box-sizing: border-box;
-  width: 100%;
+  width: 100vw;
   max-width: 423px;
   margin: 0 auto;
   padding: var(--space-l);
@@ -25,7 +25,6 @@
 
 @media (--mobile) {
   .container {
-    width: 100%;
     max-width: 100%;
     padding: var(--space-m) var(--space-s) var(--space-l);
 

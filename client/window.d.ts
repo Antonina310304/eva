@@ -14,4 +14,7 @@ interface Window {
   dataLayer: any;
   ymaps?: any;
   directCrm?: any;
+  ctSendCallbackRequest?: any;
+  ctGetCallbackRequestStatus?: any;
+  ctCheckCallbackShouldBeProcessed?: any;
 }
