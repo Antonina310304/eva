@@ -92,6 +92,10 @@
 }
 
 @media (--mobile) {
+  .container {
+    border-radius: 0;
+  }
+
   .image {
     border-radius: 0;
   }
