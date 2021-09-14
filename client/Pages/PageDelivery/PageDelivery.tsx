@@ -1,8 +1,7 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
-import { ApiPecom } from '@Api/Pecom';
-import { useCart } from '@Stores/Cart';
+import * as ApiPecom from '@Api/Pecom';
 import useModals from '@Hooks/useModals';
 import CartBlock from '@Components/CartBlock';
 import InformationTabsNavigation from '@Components/InformationTabsNavigation';
@@ -15,6 +14,8 @@ import List from '@UI/List';
 import Image from '@UI/Image';
 import RadioButton from '@UI/RadioButton';
 import FormattedText from '@Pages/PageDelivery/FormattedText';
+import { UseCartResult } from '@Stores/Cart';
+import useLayout from '@Queries/useLayout';
 import OrderedList from './elements/OrderedList';
 import FreeDeliveryBanner from './elements/FreeDeliveryBanner';
 import Attention from './elements/Attention';
@@ -44,6 +45,7 @@ export interface PageDeliveryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
   meta: MetaData;
+  cart?: UseCartResult;
 }
 
 const tabs = [
@@ -51,7 +53,7 @@ const tabs = [
   { id: '1', label: 'Сборка' },
 ];
 const PageDelivery: FC<PageDeliveryProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, meta, cart, ...restProps } = props;
   const {
     title,
     pageMenu,
@@ -62,14 +64,17 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
     acceptanceProduct,
     attention,
     deliveryTypes,
-    layout,
     productIds = [],
   } = page;
   const [currentTab, setCurrentTab] = useState('0');
   const [checkedDelivery, setCheckedDelivery] = useState(deliveryTypes ? deliveryTypes[0] : null);
-  const cart = useCart();
   const [deliveryCost, setDeliveryCost] = useState(null);
   const [, { openModal }] = useModals();
+  const layout = useLayout();
+  const isRus = meta.country === 'RUS';
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const ids = useMemo(() => productIds, []);
 
   const goodsInfo = useMemo(() => {
     const result = [];
@@ -84,7 +89,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
         });
       });
     } else {
-      productIds.forEach((producId) => {
+      ids.forEach((producId) => {
         result.push({
           id: producId,
           quantity: 1,
@@ -93,9 +98,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
     }
 
     return result;
-  }, [cart.positions, productIds]);
-
-  const isRus = meta.country === 'RUS';
+  }, [cart.positions, ids]);
 
   const handleChangeDeliveryType = useCallback((delivery) => {
     setCheckedDelivery(delivery);
@@ -122,12 +125,12 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
         receiverCityInfo: meta.region.name,
       };
       const [courierSum, pickupSum] = await Promise.all([
-        await ApiPecom.getDeliveryCost({
+        ApiPecom.getDeliveryCost({
           ...options,
           isDelivery: true,
           courierAddress: `${meta.region.name}, улица Ленина, д. 1`,
         }),
-        await ApiPecom.getDeliveryCost({
+        ApiPecom.getDeliveryCost({
           ...options,
           isDelivery: false,
           courierAddress: '',
@@ -142,8 +145,12 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
   }, [goodsInfo, meta.region.name]);
 
   useEffect(() => {
+    if (!meta.region.isPec || !cart) return;
+
     load();
-  }, [load]);
+  }, [cart, load, meta.region.isPec]);
+
+  if (!layout.isSuccess) return null;
 
   return (
     <div {...restProps} className={cn(styles.page, [className])}>
@@ -211,7 +218,7 @@ const PageDelivery: FC<PageDeliveryProps> = (props) => {
               Свяжитесь с нами, чтобы получить информацию об оптимальных условиях доставки в ваш
               город.
             </div>
-            <div className={styles.deliveryPhone}>{layout.footer.contacts.items[0].text}</div>
+            <div className={styles.deliveryPhone}>{layout.data.footer.contacts.items[0].text}</div>
           </div>
         </>
       ) : (

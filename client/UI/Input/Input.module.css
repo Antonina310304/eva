@@ -37,8 +37,15 @@
     border-color: var(--color-red);
   }
 
-  &.viewPlain:not(&.errored) {
+  &.viewPlain {
     border-color: var(--color-white);
+  }
+  &.viewPlain:hover,
+  &.viewPlain.focused {
+    border-color: var(--color-medium-gray);
+  }
+  &.viewPlain.errored {
+    border-color: var(--color-red);
   }
 
   &.rounded {

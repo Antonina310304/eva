@@ -1,0 +1,33 @@
+.constructorTag {
+  display: inline-flex;
+  align-items: center;
+}
+
+.constructorTag.s {
+  .image {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.constructorTag.m {
+  .image {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.image {
+  flex-shrink: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.title {
+  margin-left: var(--space-xs);
+
+  font-size: var(--size-xs);
+  white-space: nowrap;
+}

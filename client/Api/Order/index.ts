@@ -1,16 +1,6 @@
-import getBonuses from './getBonuses';
-import getDeliveryInfo from './getDeliveryInfo';
-import getInstallmentVariants from './getInstallmentVariants';
-import getPay from './getPay';
-import getOfertaInfo from './getOfertaInfo';
-
-export * from './getDeliveryInfo';
-
-export const ApiOrder = {
-  getBonuses,
-  getDeliveryInfo,
-  getInstallmentVariants,
-  getPay,
-  getOfertaInfo,
-};
-export default null;
+export { default as getBonuses } from './getBonuses';
+export { default as getCartInfo } from './getCartInfo';
+export { default as getDeliveryInfo } from './getDeliveryInfo';
+export { default as getInstallmentVariants } from './getInstallmentVariants';
+export { default as getPay } from './getPay';
+export { default as getOfertaInfo } from './getOfertaInfo';

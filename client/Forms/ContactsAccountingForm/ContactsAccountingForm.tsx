@@ -43,7 +43,7 @@ const ContactsAccountingForm: FC<ContactsAccountingFormProps> = (props) => {
         openModal('Info', {
           view: 'success',
           title: 'Спасибо!',
-          message: 'Ваше сообщение отправлено.',
+          text: 'Ваше сообщение отправлено.',
         });
         (window.dataLayer = window.dataLayer || []).push({
           eCategory: 'proposalForCooperationForm',

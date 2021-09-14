@@ -1,6 +1,2 @@
-import fetchPage from './fetchPage';
-
-export const ApiPages = {
-  fetchPage,
-};
+export { default as fetchPage } from './fetchPage';
 export default null;

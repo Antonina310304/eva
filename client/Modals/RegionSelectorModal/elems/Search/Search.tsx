@@ -2,7 +2,7 @@ import React, { useCallback, useState, useRef, FC, HTMLAttributes, ChangeEvent, 
 import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 
-import { ApiMeta } from '@Api/Meta';
+import * as ApiMeta from '@Api/Meta';
 import Input from '@UI/Input';
 import { RegionHintData } from '@Types/Region';
 import styles from './Search.module.css';

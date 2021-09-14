@@ -29,7 +29,14 @@ export type ModalId =
   | 'RegionSelector'
   | 'OfferAgreement'
   | 'DeliveryInfo'
+  | 'Publication'
   | 'Authorization'
+  | 'VideoConsultation'
+  | 'DesignerServices'
+  | 'Question'
+  | 'Callback'
+  | 'WriteToManagement'
+  | 'Cooperation'
   | 'ProductIdeasForHome';
 
 export interface Modal {
@@ -47,5 +54,5 @@ export interface ModalsState {
 export interface ModalsMethods {
   openModal: (id: ModalId, data?: unknown) => void;
   closeModal: (id: ModalId) => void;
-  closeAllModals: () => void;
+  closeAllModals: () => Promise<void>;
 }
