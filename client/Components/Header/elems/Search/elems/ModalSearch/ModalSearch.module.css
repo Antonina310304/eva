@@ -45,10 +45,10 @@
   @media (--desktop-l) {
     width: 1105px;
   }
-}
 
-.modalDesktop.show {
-  display: block;
+  &.visible {
+    display: block;
+  }
 }
 
 .buttonClose {

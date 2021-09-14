@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, memo, ReactNode, forwardRef, MouseEvent } from 'react';
+import React, { HTMLAttributes, memo, ReactNode, MouseEvent, FC } from 'react';
 import cn from 'classnames';
 
 import IconClose from '@UI/IconClose/IconClose';
@@ -11,32 +11,29 @@ export interface ModalSearchProps extends HTMLAttributes<HTMLDivElement> {
   onClose?: (e: MouseEvent) => void;
 }
 
-const ModalSearch = forwardRef<HTMLDivElement, ModalSearchProps>(
-  ({ visible, onClose, children }, ref) => {
-    const { isOnlyMobile } = useMedias();
+const ModalSearch: FC<ModalSearchProps> = ({ visible, children, onClose }) => {
+  const { isOnlyMobile } = useMedias();
 
-    return (
-      <div
-        className={cn({
-          [styles.modal]: isOnlyMobile,
-          [styles.modalDesktop]: !isOnlyMobile,
-          [styles.show]: visible,
-        })}
-        ref={ref}
-      >
-        {isOnlyMobile && (
-          <button type='button' onClick={onClose} className={styles.buttonClose}>
-            <IconClose />
-          </button>
-        )}
+  return (
+    <div
+      className={cn({
+        [styles.modal]: isOnlyMobile,
+        [styles.modalDesktop]: !isOnlyMobile,
+        [styles.visible]: visible,
+      })}
+    >
+      {isOnlyMobile && (
+        <button type='button' className={styles.buttonClose} onClick={onClose}>
+          <IconClose />
+        </button>
+      )}
 
-        <div className={styles.inner}>
-          {children}
-          <div />
-        </div>
+      <div className={styles.inner}>
+        {children}
+        <div />
       </div>
-    );
-  },
-);
+    </div>
+  );
+};
 
 export default memo(ModalSearch);

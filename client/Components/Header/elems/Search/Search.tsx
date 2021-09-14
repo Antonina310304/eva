@@ -107,10 +107,8 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
   );
 
   const handleFocus = useCallback(() => {
-    setTimeout(() => {
-      setIsShowModal(true);
-      setIsShowInput(true);
-    }, 100);
+    setIsShowModal(true);
+    setIsShowInput(true);
   }, []);
 
   // Блокируем скролл на странице
@@ -126,10 +124,10 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
     return cleanup;
   }, [isOnlyDesktop, isShowModal]);
 
-  const refPopup = useOnClickOutside(hideModal, !isShowModal);
+  const formRef = useOnClickOutside(hideModal, !isShowModal) as any;
 
   return (
-    <form className={cn(styles.search, className)} onSubmit={handleSubmit}>
+    <form className={cn(styles.search, className)} ref={formRef} onSubmit={handleSubmit}>
       <div
         className={cn(styles.inputWrapper, {
           [styles.show]: isShowInput,
@@ -166,7 +164,7 @@ const Search: FC<SearchData> = ({ className, isMenu }) => {
 
       {isShowModal && (
         <Suspense fallback={null}>
-          <ModalSearch visible={isShowModal} ref={refPopup} onClose={hideModal}>
+          <ModalSearch visible={isShowModal} onClose={hideModal}>
             <ModalSearchContent
               request={searchResult}
               hits={hits}
