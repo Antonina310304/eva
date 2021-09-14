@@ -10,7 +10,9 @@ interface CategoryCardInterface extends HTMLAttributes<HTMLDivElement> {
 const CategoryCard: React.FC<CategoryCardInterface> = ({ imageUrl, title, description }) => {
   return (
     <div className={styles.wrapper}>
-      <img className={styles.image} src={imageUrl} />
+      <div className={styles.imageWrapper}>
+        <img className={styles.image} src={imageUrl} alt='' />
+      </div>
       <div className={styles.title}>{title}</div>
       <div className={styles.description}>{description}</div>
     </div>

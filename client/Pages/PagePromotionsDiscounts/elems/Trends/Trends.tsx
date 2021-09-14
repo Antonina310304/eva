@@ -1,13 +1,10 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
-import CategoryCard from '@Pages/PagePromotionsDiscounts/elems/Trends/CategoryCard/CategoryCard';
-import TrendsLogo from '@Pages/PagePromotionsDiscounts/elems/Trends/TrendsLogo';
 import cn from 'classnames';
 import NavArrows from '@UI/NavArrows/NavArrows';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar/ProgressBar';
 import Section from '@Components/Section';
-import Line from '@Pages/PagePromotionsDiscounts/elems/Trends/Line';
-import useMedias from '@Hooks/useMedias';
+import CategoryCard from './CategoryCard';
 import { MockCategoryInterface } from './mock/mockCategories';
 import styles from './Trends.module.css';
 
@@ -48,11 +45,11 @@ const Trends: React.FC<InTrendProps> = ({ categories, className }) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
-  const mediaMatches = useMedias();
-
   return (
     <>
-      <div className={styles.logoWrapper} />
+      <div className={styles.logoSectionWrapper}>
+        <div className={styles.logoSection} />
+      </div>
 
       <div className={styles.wrapper}>
         <Section
@@ -85,8 +82,8 @@ const Trends: React.FC<InTrendProps> = ({ categories, className }) => {
                 </div>
               ))}
             </Gallery>
+            {track?.width < 100 && <ProgressBar track={track} className={styles.progressBar} />}
           </div>
-          {track?.width < 100 && <ProgressBar track={track} className={styles.progressBar} />}
         </Section>
       </div>
     </>

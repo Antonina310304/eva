@@ -1,84 +1,154 @@
-.wrapper {
-  display: flex;
-  width: 100%;
-  max-width: 1780px;
-  margin: var(--space-xxl) auto 0 auto;
+.logoSection {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 1920px;
+  height: 100%;
+
+  margin-left: -960px;
+
+  background: url('./img/TrendsLogo.svg') no-repeat center;
+
+  transform: translateX(-55px);
+
+  &::after {
+    position: absolute;
+    right: -70px;
+    bottom: 0;
+
+    width: 70px;
+    height: 1px;
+
+    background: #b3b3b3;
+
+    transform: rotate(180deg);
+
+    content: '';
+  }
 }
 
-.section {
+.logoSectionWrapper {
+  position: relative;
+
+  width: 100%;
+  height: 121px;
+
+  margin-bottom: var(--space-xxl);
+
   overflow: hidden;
 }
 
-.logoWrapper {
-  box-sizing: border-box;
+.wrapper {
   width: 100%;
-  max-width: 1920px;
-  height: 123px;
+}
 
-  background: url('../../../../../static/svg/promotionsDiscounts/TrendsLogo.svg');
-  background-position: right center;
-  background-size: cover;
+.section {
+  margin-bottom: var(--space-xxe);
+
+  overflow: hidden;
 }
 
 .wrapperGallery {
-  margin: var(--space-l) 0;
-  padding: 0 var(--space-xxb);
-}
-.slide {
-  box-sizing: content-box;
-  margin-right: var(--space-l);
+  composes: main from 'containers';
+
+  margin: var(--space-l) auto 0;
 }
 
-.slide:last-child {
-  margin-right: 0;
+.gallery {
+  margin: 0 var(--space-s-neg);
+}
+
+.slide {
+  box-sizing: content-box;
+
+  width: 422px;
+
+  padding: 0 var(--space-s);
 }
 
 .progressBar {
-  margin: 0 var(--space-xxb);
+  margin-top: var(--space-l);
 }
 
 @media (--desktop-m) {
-  .wrapperGallery {
-    padding: 0 var(--space-xxl);
+  .section {
+    margin-bottom: var(--space-e);
   }
 
-  .trendsLogo {
-    margin-right: 40px;
+  .logoSection {
+    right: 0;
+    left: auto;
+
+    margin-left: 0;
+
+    transform: translateX(var(--space-n-neg));
   }
 
-  .progressBar {
-    margin: 0 var(--space-xxl);
+  .slide {
+    width: 398px;
+  }
+}
+
+@media (max-width: 1770px) {
+  .logoSection {
+    transform: translateX(var(--space-l));
   }
 }
 
 @media (--desktop) {
+  .section {
+    margin-bottom: var(--space-xb);
+  }
+
+  .gallery {
+    margin: 0 var(--space-xs-neg);
+  }
+
   .slide {
-    margin-right: var(--space-n);
-  }
+    width: 300px;
 
-  .slide:last-child {
-    margin-right: 0;
+    padding: 0 var(--space-xs);
   }
+}
 
-  .trendsLogo {
-    width: 472px;
-    height: 82px;
-  }
-  .leftLine_wrapper {
-    width: calc(100% - 472px);
-  }
-
-  .leftLine {
+@media (max-width: 1280px) {
+  .logoSectionWrapper {
     height: 82px;
   }
 
-  .logoWrapper1 {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 1366px;
+  .logoSection {
+    width: 1310px;
 
-    background: url('../../../../../static/svg/promotionsDiscounts/TrendsLogoDesktop.svg') right
-      center;
     background-size: cover;
+
+    transform: translateX(var(--space-xs));
+  }
+}
+
+@media (--mobile-m) {
+  .logoSectionWrapper {
+    height: 65px;
+  }
+
+  .logoSection {
+    width: 1024px;
+
+    transform: translateX(18px);
+  }
+}
+
+@media (max-width: 480px) {
+  .logoSectionWrapper {
+    height: 44px;
+  }
+
+  .logoSection {
+    width: 508px;
+
+    background: url('./img/trendsLogoMobile.svg') no-repeat center;
+    background-size: cover;
+
+    transform: translateX(var(--space-s-neg));
   }
 }
