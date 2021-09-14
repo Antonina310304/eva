@@ -9,7 +9,6 @@ import { RequestHandler } from 'express';
 import RequestProvider from '../../client/Contexts/Request/RequestProvider';
 
 import { paths } from '../../utils/paths';
-import { envs } from '../../utils/envs';
 import { renderPage } from '../helpers';
 
 const render: RequestHandler = async (req, res, next) => {
@@ -30,7 +29,7 @@ const render: RequestHandler = async (req, res, next) => {
       const components = (
         <StaticRouter location={req.url} context={routerContext}>
           <RequestProvider
-            origin={`${req.protocol}://${req.hostname}${envs.isDev ? `:${envs.port}` : ''}`}
+            origin={`${req.protocol}://${req.headers.host}`}
             cookie={req.headers.cookie}
           >
             <QueryClientProvider client={queryClient}>
