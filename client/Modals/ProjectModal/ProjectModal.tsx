@@ -12,6 +12,14 @@ import ProgressBar from '@UI/ProgressBar';
 import IconClose from '@UI/IconClose';
 import styles from './ProjectModal.module.css';
 
+export interface ImagesData {
+  height: number;
+  projectId: number;
+  src: string;
+  text: string[];
+  title: string;
+  width: number;
+}
 export interface ProjectData {
   height: number;
   projectId: number;
@@ -21,7 +29,7 @@ export interface ProjectData {
   width: number;
 }
 export interface ModalData {
-  images: any[];
+  images: ImagesData[];
   startSlideIndex?: number;
   projectIndex: number;
   uniqueProjects: ProjectData;
@@ -30,7 +38,7 @@ export interface ModalData {
 const ProjectModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
   const { images: medias, uniqueProjects, startSlideIndex, projectIndex } = modal.data as ModalData;
-  const [, { closeModal, openModal }] = useModals();
+  const [, { closeModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
@@ -98,15 +106,8 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
       if (window.cancelClick) return;
 
       if (!isMobileM) setMainMediaIndex(index);
-
-      if (isMobileM && medias[index].video) {
-        openModal('Video', {
-          videoId: medias[index].video,
-          previousModal: { images: medias, startSlideIndex: index },
-        });
-      }
     },
-    [isMobileM, medias, openModal],
+    [isMobileM],
   );
 
   useKeyboardEvents({
@@ -149,14 +150,12 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                     key={indexMedia}
                     onClick={(e) => handleClickPreviewMedia(e, indexMedia)}
                   >
-                    {!media.video && (
-                      <img
-                        className={cn(styles.media, {
-                          [styles.active]: indexMedia === mainMediaIndex,
-                        })}
-                        src={media.src}
-                      />
-                    )}
+                    <img
+                      className={cn(styles.media, {
+                        [styles.active]: indexMedia === mainMediaIndex,
+                      })}
+                      src={media.src}
+                    />
                   </div>
                 ))}
               </div>
@@ -182,12 +181,10 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
               </div>
             </div>
 
-            {!medias[mainMediaIndex].video && (
-              <>
-                <div className={cn(styles.arrow, styles.prev)} onClick={handleClickPrev} />
-                <div className={cn(styles.arrow, styles.next)} onClick={handleClickNext} />
-              </>
-            )}
+            <>
+              <div className={cn(styles.arrow, styles.prev)} onClick={handleClickPrev} />
+              <div className={cn(styles.arrow, styles.next)} onClick={handleClickNext} />
+            </>
           </div>
 
           {isDesktop && (

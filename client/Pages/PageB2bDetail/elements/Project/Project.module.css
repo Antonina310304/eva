@@ -15,21 +15,35 @@
 }
 
 .galleryItem:not(:last-child) {
-  margin-right: var(--space-l);
+  padding-right: var(--space-l);
 }
 
 .horizontal {
   width: 752px;
-  height: 498px;
 
-  background-size: 100% 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.horizontal:before {
+  display: block;
+  padding: 0 0 66%;
+
+  content: '';
 }
 
 .vertical {
   width: 458px;
-  height: 758px;
 
-  background-size: 100% 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.vertical:before {
+  display: block;
+  padding: 0 0 151%;
+
+  content: '';
 }
 
 .galleryItem:first-child {
@@ -66,12 +80,10 @@
 
   .horizontal {
     width: 554px;
-    height: 367px;
   }
 
   .vertical {
-    width: 554px;
-    height: 367px;
+    width: 367px;
   }
 
   .galleryItem:first-child {
@@ -79,7 +91,7 @@
   }
 
   .galleryItem:not(:last-child) {
-    margin-right: var(--space-n);
+    padding-right: var(--space-n);
   }
 }
 
@@ -94,16 +106,18 @@
 
   .horizontal {
     width: 414px;
-    height: 275px;
   }
 
   .vertical {
     width: 275px;
-    height: 414px;
   }
 
   .galleryItem:first-child {
     padding-left: var(--space-s);
+  }
+
+  .arrows {
+    display: none;
   }
 
   .progressBar {
@@ -114,11 +128,9 @@
 @media (--mobile) {
   .horizontal {
     width: 310px;
-    height: 205px;
   }
 
   .vertical {
     width: 205px;
-    height: 310px;
   }
 }

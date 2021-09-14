@@ -14,8 +14,6 @@ export interface ProjectItem {
   text?: string[];
   title?: string;
   width?: number;
-  length?: number;
-  slice?: any;
 }
 export interface ArticleItem {
   id: number;
@@ -36,6 +34,5 @@ export interface PageB2bDetailData {
   title: string;
   teaser: string;
   examples: ExamplesData[];
-  test: any;
   articles: ArticleItem[];
 }

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
@@ -23,7 +23,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
       projectsMap[example.projectId] = example;
     }
   });
-  const uniqueProjects: ProjectItem = Object.values(projectsMap);
+  const uniqueProjects: ProjectItem[] = Object.values(projectsMap);
   const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
 
   const onClickMore = useCallback(() => {
