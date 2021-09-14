@@ -9,7 +9,7 @@
 }
 
 .gallery {
-  margin: 0 calc(var(--space-s) / -2);
+  margin: 0 var(--space-s-neg);
 }
 
 .galleryContainer {
@@ -22,7 +22,7 @@
   box-sizing: content-box;
   width: 573px;
   height: 780px;
-  padding: 0 var(--space-xs);
+  padding: 0 var(--space-s);
 
   vertical-align: top;
 }
@@ -47,8 +47,14 @@
     margin-bottom: var(--space-xb);
   }
 
+  .gallery {
+    margin: 0 var(--space-xs-neg);
+  }
+
   .slide {
     width: 300px;
     height: 408px;
+
+    padding: 0 var(--space-xs);
   }
 }
