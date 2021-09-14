@@ -3,17 +3,23 @@ import cn from 'classnames';
 import styles from './Overlay.module.css';
 
 export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
-  isOpen: boolean;
-  onClick?: () => void;
+  className?: string;
+  visible?: boolean;
 }
 
-const Overlay: FC<OverlayProps> = ({ isOpen, onClick }) => {
+const Overlay: FC<OverlayProps> = (props) => {
+  const { className, visible, ...restProps } = props;
+
   return (
     <div
-      onClick={onClick}
-      className={cn(styles.overlay, {
-        [styles.show]: isOpen === true,
-      })}
+      {...restProps}
+      className={cn(
+        styles.overlay,
+        {
+          [styles.visible]: visible,
+        },
+        className,
+      )}
     />
   );
 };

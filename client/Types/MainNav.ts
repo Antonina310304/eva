@@ -1,5 +1,3 @@
-import { BadgeData } from '@Types/Badge';
-
 export interface IMainNavSubmenuItems {
   title: string;
   link: string;
@@ -11,7 +9,7 @@ export interface IBannerMenu {
   img?: string;
   link?: string;
   textLink?: string;
-  badge?: BadgeData;
+  badge?: string;
 }
 
 export interface IMainNavSubmenu {
