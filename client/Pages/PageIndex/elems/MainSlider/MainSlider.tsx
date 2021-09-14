@@ -33,7 +33,7 @@ const MainSlider: FC<MainSliderProps> = ({ slidesList }) => {
         <div className={styles.titleWrapper}>
           {period && <p className={styles.date}>{period}</p>}
           {header && <p className={styles.header}>{header}</p>}
-          {subtitle && <p className={styles.subtitle}>Скидки на товары из конструктора до -30%</p>}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
           {link && (
             <Link view='primary' to={link}>
               {textLink}

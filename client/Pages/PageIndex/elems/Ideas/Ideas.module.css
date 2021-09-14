@@ -3,7 +3,13 @@
 }
 
 .buttonTabs {
-  margin-bottom: 40px;
+}
+.tabWrapper {
+
+  composes: main from 'containers';
+
+  min-height: 38px;
+  margin: 0 0 40px;
   overflow: hidden;
 }
 

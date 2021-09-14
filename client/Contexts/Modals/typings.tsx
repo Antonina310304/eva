@@ -29,7 +29,8 @@ export type ModalId =
   | 'RegionSelector'
   | 'OfferAgreement'
   | 'DeliveryInfo'
-  | 'Authorization';
+  | 'Authorization'
+  | 'ProductIdeasForHome';
 
 export interface Modal {
   id: ModalId;
