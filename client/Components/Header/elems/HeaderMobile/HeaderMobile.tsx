@@ -30,22 +30,9 @@ const HeaderMobile = () => {
    */
   const [isShowSubMenuContent, setIsShowSubMenuContent] = useState<boolean>(false);
 
-  const [hideOnScroll, setHideOnScroll] = useState(true);
-  const [hide, setHide] = useState('default');
-
-  useScrollPosition(({ previous, current }) => {
-    const isShow = current.y < previous.y;
-
-    if (isShow && current.y !== 0) {
-      setHide('top');
-    } else if (!isShow && current.y !== 0) {
-      setHide('bottom');
-    } else if (current.y === 0) {
-      setHide('default');
-    }
-
-    if (isShow !== hideOnScroll) setHideOnScroll(isShow);
-  });
+  const [visible, setVisible] = useState(true);
+  const [fixed, setFixed] = useState(true);
+  const [withShadow, setWithShadow] = useState(false);
 
   const showSideBar = useCallback(() => {
     setIsOpenSideBar(true);
@@ -56,11 +43,22 @@ const HeaderMobile = () => {
     setIsOpenSideBar(false);
   }, []);
 
+  // Ставим модификаторы для шапки во время скрола
+  useScrollPosition(({ previous, current }) => {
+    const isUp = previous.y > current.y;
+    const newFixed = isUp ? fixed : current.y > 79;
+
+    setVisible(isUp);
+    setFixed(newFixed);
+    setWithShadow(newFixed && current.y > 5);
+  });
+
   return (
     <header
       className={cn(styles.header, {
-        [styles.show]: hide === 'top',
-        [styles.hide]: hide === 'bottom',
+        [styles.fixed]: fixed,
+        [styles.visible]: visible,
+        [styles.withShadow]: withShadow,
       })}
     >
       <div className={styles.wrapper}>

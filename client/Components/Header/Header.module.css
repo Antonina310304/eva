@@ -1,0 +1,9 @@
+.header {
+  height: 143px;
+}
+
+@media (--desktop) {
+  .header {
+    height: 79px;
+  }
+}
