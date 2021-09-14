@@ -1,16 +1,14 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, memo } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import { mod } from 'react-swipeable-views-core';
 
 import divanSlider from './data';
-import styles from './Slider.module.css';
+import styles from './Logotype.module.css';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
-export type SliderData = HTMLAttributes<HTMLDivElement>;
-
-const Slider: FC<SliderData> = () => {
+const Logotype: FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [hover, setHover] = useState<boolean>(false);
 
@@ -52,4 +50,4 @@ const Slider: FC<SliderData> = () => {
   );
 };
 
-export default Slider;
+export default memo(Logotype);
