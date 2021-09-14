@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 import useMeta from '@Queries/useMeta';
 import prefetchUrl from '@Navigation/prefetchUrl';
 import useModals from '@Hooks/useModals';
-import isAbsoluteLink from '@Utils/isAbsoluteLink';
+import { isAbsoluteLink } from '../../../utils/isAbsoluteLink';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
