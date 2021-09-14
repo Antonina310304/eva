@@ -38,4 +38,8 @@
     width: 30px;
     height: 30px;
   }
+
+  &.themeInverse {
+    background-image: url('./close-inverse.svg');
+  }
 }

@@ -1,5 +1,5 @@
-import isAbsoluteLink from '@Utils/isAbsoluteLink';
 import { Api } from './index';
+import { isAbsoluteLink } from '../../utils/isAbsoluteLink';
 
 export default async <T>(url: string, opts?: RequestInit): Promise<T> => {
   const region = Api.getRegion();

@@ -4,16 +4,16 @@ import cn from 'classnames';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import IconClose from '@UI/IconClose';
-import CallbackForm from '@Forms/CallbackForm';
-import styles from './CallbackModal.module.css';
+import SendMessageForm from '@Forms/SendMessageForm';
+import styles from './QuestionModal.module.css';
 
-const CallbackModal: FC<ModalMainProps> = (props) => {
+const QuestionModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const [, { closeModal }] = useModals();
+  const [, { closeAllModals }] = useModals();
 
   const handleClose = useCallback(() => {
-    closeModal(modal.id);
-  }, [closeModal, modal.id]);
+    closeAllModals();
+  }, [closeAllModals]);
 
   return (
     <ModalMain
@@ -24,11 +24,11 @@ const CallbackModal: FC<ModalMainProps> = (props) => {
     >
       <div className={styles.container}>
         <IconClose className={styles.iconClose} onClick={handleClose} />
-        <div className={styles.title}>Заказать обратный звонок</div>
-        <CallbackForm className={styles.form} />
+        <div className={styles.title}>Задать вопрос</div>
+        <SendMessageForm className={styles.form} />
       </div>
     </ModalMain>
   );
 };
 
-export default memo(CallbackModal);
+export default memo(QuestionModal);

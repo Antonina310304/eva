@@ -1,14 +1,14 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
 import Input from '@UI/Input';
-import InputPhone from '@Components/InputPhone';
-import Textarea from '@UI/Textarea';
 import FormItem from '@UI/FormItem';
 import Form from '@UI/Form';
 import Link from '@UI/Link';
+import analytics from '@Utils/analytics';
 import useModals from '@Hooks/useModals';
+import InputPhone from '@Components/InputPhone';
 import styles from './CallbackForm.module.css';
 
 export interface CallbackFormProps extends HTMLAttributes<HTMLDivElement> {
@@ -20,6 +20,24 @@ const CallbackForm: FC<CallbackFormProps> = (props) => {
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const [, { openModal }] = useModals();
+
+  function isWorkTime() {
+    const time = new Date();
+    const timezone = +3;
+    const hour = time.getUTCHours() + timezone;
+
+    return hour >= 9 && hour < 22;
+  }
+
+  function hasCalltouch() {
+    return typeof window.ctCheckCallbackShouldBeProcessed === 'function';
+  }
+
+  function normalizePhone(_phone) {
+    const purePhone = _phone.toString().replace(/\D/g, '');
+
+    return purePhone.charAt(0) === '7' ? `+${purePhone}` : `+7${purePhone}`;
+  }
 
   const handleSubmit = useCallback(() => {
     setLoading(true);
@@ -36,9 +54,37 @@ const CallbackForm: FC<CallbackFormProps> = (props) => {
   }, [openModal]);
 
   const handleResponse = useCallback(
-    (response) => {
+    (response, data) => {
       setLoading(false);
       if (response.status === 'ok') {
+        const inputName = data['CallbackForm[name]'];
+        const inputPhone = normalizePhone(data['CallbackForm[phone]']);
+
+        if (isWorkTime() && hasCalltouch && window.ctSendCallbackRequest) {
+          window.ctSendCallbackRequest(inputPhone);
+
+          const timer = setInterval(() => {
+            const requestStatus = window.ctGetCallbackRequestStatus();
+
+            if (requestStatus !== 'Попытка отправки заявки на обратный звонок.') {
+              clearInterval(timer);
+            }
+          }, 500);
+        } else {
+          (window.dataLayer = window.dataLayer || []).push({
+            eCategory: 'callBackForm',
+            eAction: 'send',
+            eLabel: '',
+            eNI: false,
+            event: 'GAEvent',
+          });
+        }
+
+        analytics.formCallMeSend({
+          name: inputName,
+          phone: inputPhone,
+        });
+
         openModal('Info', {
           view: 'success',
           title: 'Спасибо!',
@@ -60,7 +106,7 @@ const CallbackForm: FC<CallbackFormProps> = (props) => {
   return (
     <Form
       {...restProps}
-      className={cn(styles.callbackForm, className)}
+      className={cn(styles.form, className)}
       action='/site/send-callback'
       validationSchemaUrl='/json-schema/callback-form.json'
       serverErrors={serverErrors}

@@ -1,23 +1,21 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
 import Input from '@UI/Input';
-import InputPhone from '@Components/InputPhone';
 import Textarea from '@UI/Textarea';
 import FormItem from '@UI/FormItem';
-import Link from '@UI/Link';
 import Form from '@UI/Form';
+import Link from '@UI/Link';
 import useModals from '@Hooks/useModals';
-import styles from './ContactsAccountingForm.module.css';
+import styles from './SendMessageForm.module.css';
 
-export interface ContactsAccountingFormProps extends HTMLAttributes<HTMLDivElement> {
+export interface SendMessageFormProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  mailTo: string;
 }
 
-const ContactsAccountingForm: FC<ContactsAccountingFormProps> = (props) => {
-  const { className, mailTo, ...restProps } = props;
+const SendMessageForm: FC<SendMessageFormProps> = (props) => {
+  const { className, ...restProps } = props;
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState([]);
   const [, { openModal }] = useModals();
@@ -45,8 +43,9 @@ const ContactsAccountingForm: FC<ContactsAccountingFormProps> = (props) => {
           title: 'Спасибо!',
           text: 'Ваше сообщение отправлено.',
         });
+
         (window.dataLayer = window.dataLayer || []).push({
-          eCategory: 'proposalForCooperationForm',
+          eCategory: 'askQuestionForm',
           eAction: 'send',
           eLabel: '',
           eNI: false,
@@ -65,53 +64,37 @@ const ContactsAccountingForm: FC<ContactsAccountingFormProps> = (props) => {
     [handleError, openModal],
   );
 
-  useEffect(() => {
-    (window.dataLayer = window.dataLayer || []).push({
-      eCategory: 'proposalForCooperationForm',
-      eAction: 'open',
-      eLabel: '',
-      eNI: false,
-      event: 'GAEvent',
-    });
-  }, []);
-
   return (
     <Form
       {...restProps}
-      className={cn(styles.contactsAccountingForm, className)}
-      action='/site/message-for-accounting-department'
-      validationSchemaUrl='/json-schema/contacts-accounting-form.json'
+      className={cn(styles.form, className)}
+      action='/site/send-message'
+      validationSchemaUrl='/json-schema/contact-form.json'
       serverErrors={serverErrors}
       onSubmit={handleSubmit}
       onResponse={handleResponse}
       onError={handleError}
     >
       <FormItem>
-        <Input type='text' placeholder='ИНН организации/ИП' name='ContactsAccountingForm[name]' />
+        <Input type='text' placeholder='Имя' name='ContactForm[name]' />
       </FormItem>
 
       <FormItem>
-        <InputPhone type='text' placeholder='Телефон' name='ContactsAccountingForm[phone]' />
-      </FormItem>
-
-      <FormItem>
-        <Input type='text' placeholder='Электронная почта' name='ContactsAccountingForm[email]' />
+        <Input type='text' placeholder='E-mail' name='ContactForm[email]' />
       </FormItem>
 
       <FormItem>
         <Textarea
           className={styles.textarea}
-          placeholder='Обращение'
-          name='ContactsAccountingForm[text]'
+          placeholder='Ваше сообщение'
+          name='ContactForm[body]'
         />
       </FormItem>
 
-      <input type='hidden' name='ContactsAccountingForm[mailTo]' value={mailTo} />
-
       <FormItem>
-        <div className={styles.ctions}>
-          <Button className={styles.ction} wide type='submit' waiting={loading}>
-            Отправить
+        <div className={styles.actions}>
+          <Button className={styles.action} wide type='submit' waiting={loading}>
+            Отправить сообщение
           </Button>
         </div>
       </FormItem>
@@ -127,4 +110,4 @@ const ContactsAccountingForm: FC<ContactsAccountingFormProps> = (props) => {
   );
 };
 
-export default memo(ContactsAccountingForm);
+export default memo(SendMessageForm);
