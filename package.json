@@ -8,6 +8,7 @@
     "build": "NODE_ENV=production npm run compile && NODE_ENV=production webpack --config webpack/configs/main.ts",
     "prod": "npm run build && npm run start",
     "dev": "NODE_ENV=development nodemon server/index.dev.ts",
+    "dev:win": "set NODE_ENV=development&& nodemon server/index.dev.ts",
     "compile": "tsc server/index.ts --jsx react --skipLibCheck --esModuleInterop --outDir dist",
     "start": "NODE_ENV=production node dist/server/index.js",
     "analyzer:node": "mkdir -p webpack/stats && NODE_ENV=production webpack --config webpack/configs/node.ts --profile --json > webpack/stats/node.json && webpack-bundle-analyzer webpack/stats/node.json dist/node",
