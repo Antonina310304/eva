@@ -22,8 +22,8 @@
   position: relative;
   z-index: 2;
 
-  padding-top: 40px;
-  padding-bottom: 15px;
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-s);
 
   background: var(--color-white);
 }
@@ -39,13 +39,13 @@
 }
 
 .userMenu {
-  margin-left: 30px;
+  margin-left: var(--space-ll);
 }
 
 .mainNav {
   width: auto;
   max-width: 100%;
-  margin-right: 80px;
+  margin-right: var(--space-e);
 }
 
 .maxWidth {
@@ -58,14 +58,14 @@
 .search {
   flex: 0 0 auto;
   width: 240px;
-  margin-right: 35px;
+  margin-right: var(--space-xl);
 }
 
 .slider {
   display: flex;
   align-items: flex-end;
   width: 117px;
-  margin-right: 35px;
+  margin-right: var(--space-xl);
 }
 
 .in {
@@ -77,7 +77,7 @@
 }
 
 .location {
-  margin-right: 15px;
+  margin-right: var(--space-s);
 
   font-size: var(--size-s);
 }

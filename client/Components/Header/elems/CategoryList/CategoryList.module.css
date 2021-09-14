@@ -7,8 +7,8 @@
 
 .item .link {
   display: inline-block;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
 
   color: var(--color-black);
 
@@ -20,7 +20,7 @@
   }
 
   @media (--only-desktop) {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: var(--space-xxs);
+    padding-bottom: var(--space-xxs);
   }
 }

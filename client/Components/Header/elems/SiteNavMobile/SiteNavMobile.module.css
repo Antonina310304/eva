@@ -14,7 +14,7 @@
 
 .item {
   display: block;
-  margin-right: 33px;
+  margin-right: var(--space-xl);
 
   &:last-child {
     margin-right: 0;

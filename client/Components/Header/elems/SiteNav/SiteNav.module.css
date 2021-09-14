@@ -14,7 +14,7 @@
 
 .siteNavItem {
   display: block;
-  margin-right: 10px;
+  margin-right: var(--space-xs);
 
   &:last-child {
     margin-right: 0;
@@ -48,14 +48,14 @@
   display: block;
 
   @media (--desktop-l) {
-    padding-right: 20px;
-    padding-bottom: 20px;
+    padding-right: var(--space-n);
+    padding-bottom: var(--space-n);
   }
 
   @media (--only-desktop) {
-    padding-right: 15px;
-    padding-bottom: 20px;
-    padding-left: 15px;
+    padding-right: var(--space-s);
+    padding-bottom: var(--space-n);
+    padding-left: var(--space-s);
   }
 }
 
@@ -75,7 +75,7 @@
   display: block;
 
   margin: 0;
-  padding-bottom: 5px;
+  padding-bottom: var(--space-xxs);
 
   color: var(--color-dark-gray);
 
@@ -146,7 +146,7 @@
 
 .siteNavItem {
   display: block;
-  margin-bottom: -20px;
+  margin-bottom: var(--space-n-neg);
 }
 
 .siteNavItem.active .headerBottom {
@@ -154,7 +154,7 @@
 }
 
 .siteNavItem.active .headerBottomFloat {
-  transform: translateY(-50px);
+  transform: translateY(var(--space-b-neg));
   visibility: hidden;
   opacity: 0;
 

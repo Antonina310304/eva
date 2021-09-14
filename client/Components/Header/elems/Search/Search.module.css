@@ -10,7 +10,7 @@
   border-radius: 29px;
 
   input {
-    padding: 7px 15px 7px 46px;
+    padding: 7px var(--space-s) 7px 46px;
     overflow: hidden;
   }
 
@@ -62,7 +62,7 @@
   transform: translateY(-50%);
   cursor: pointer;
 
-  transition: background 250ms ease-in, transform 250ms linear;
+  transition: background-color 250ms ease-in, transform 250ms linear;
 }
 
 .changeable.show .button {
@@ -103,7 +103,7 @@
 .buttonReset {
   position: absolute;
   top: 50%;
-  right: 15px;
+  right: var(--space-s);
 
   z-index: 5;
 

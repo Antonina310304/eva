@@ -16,7 +16,7 @@
 
 .titleBlock {
   position: absolute;
-  bottom: 20px;
+  bottom: var(--space-n);
 }
 
 .type {
@@ -32,7 +32,7 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-xs);
 }
 
 .title {
@@ -76,13 +76,13 @@
 
 .inner {
   height: 100%;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: var(--space-n);
+  padding-bottom: var(--space-xs);
   overflow: hidden;
 }
 
 .section {
-  margin-bottom: 40px;
+  margin-bottom: var(--space-xxl);
 }
 
 .subcategory {
@@ -95,9 +95,9 @@
 .scroller {
   box-sizing: border-box;
   height: 100%;
-  padding-bottom: 40px;
+  padding-bottom: var(--space-xxl);
 }
 
 .scrollerInner {
-  padding-right: 20px;
+  padding-right: var(--space-n);
 }

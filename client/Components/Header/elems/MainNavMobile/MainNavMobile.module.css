@@ -2,16 +2,16 @@
   display: block;
   box-sizing: border-box;
   width: 100%;
-  padding: 25px 40px 60px;
+  padding: var(--space-m) var(--space-xxl) var(--space-xb);
 
   @media (--mobile) {
-    padding: 25px 15px 60px;
+    padding: var(--space-m) var(--space-s) var(--space-xb);
   }
 }
 
 .item {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: var(--space-s);
 }
 
 .submenu {

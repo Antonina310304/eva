@@ -1,6 +1,6 @@
 .wrapper {
   margin-top: auto;
-  padding: 30px 15px;
+  padding: var(--space-l) var(--space-s);
 
   background: var(--color-light-gray);
 }
@@ -14,8 +14,8 @@
 .link {
   display: flex;
   width: 100%;
-  margin: 0 -15px;
-  padding: 10px 15px;
+  margin: 0 var(--space-s-neg);
+  padding: var(--space-xs) var(--space-s);
 
   color: var(--color-black);
   font-size: var(--size-s);
@@ -34,7 +34,7 @@
     width: 34px;
     height: 25px;
     margin: 0;
-    margin-right: 25px;
+    margin-right: var(--space-m);
 
     background-repeat: no-repeat;
     background-position: center;

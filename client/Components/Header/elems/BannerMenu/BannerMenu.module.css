@@ -12,16 +12,16 @@
 }
 
 .content {
-  padding: 30px 30px 20px;
+  padding: var(--space-l) var(--space-l) var(--space-n);
 
   @media (--desktop-l) {
     padding-right: 17px;
-    padding-bottom: 30px;
+    padding-bottom: var(--space-l);
   }
 }
 
 .title {
-  margin: 0 0 20px;
+  margin: 0 0 var(--space-n);
 
   color: var(--color-black);
   font-weight: 500;
@@ -37,14 +37,14 @@
 }
 
 .text {
-  margin: 0 0 30px;
+  margin: 0 0 var(--space-l);
 
-  font-size: 16px;
+  font-size: var(--size-n);
   font-family: var(--font-main);
   line-height: 150%;
 
   @media (--desktop-l) {
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-m);
   }
 }
 
@@ -87,7 +87,7 @@
 
 .badge {
   position: absolute;
-  right: 25px;
-  bottom: 25px;
+  right: var(--space-m);
+  bottom: var(--space-m);
   z-index: 5;
 }

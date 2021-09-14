@@ -47,7 +47,7 @@
   width: 34px;
   height: 25px;
   margin: 0;
-  margin-right: 25px;
+  margin-right: var(--space-m);
 
   background-repeat: no-repeat;
   background-size: contain;

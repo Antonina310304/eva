@@ -42,7 +42,7 @@
   position: relative;
   z-index: 6;
 
-  margin-right: 30px;
+  margin-right: var(--space-l);
 
   @media (--mobile) {
     z-index: 5;
@@ -74,7 +74,7 @@
 }
 
 .burger {
-  margin-right: 20px;
+  margin-right: var(--space-n);
 }
 
 .wrapper {

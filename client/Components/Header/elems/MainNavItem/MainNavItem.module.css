@@ -20,7 +20,7 @@
 .title {
   display: block;
   margin: 0;
-  padding: 10px 35px 10px 0;
+  padding: var(--space-xs) var(--space-xl) var(--space-xs) 0;
 
   color: var(--color-black);
 
@@ -42,7 +42,7 @@
 }
 
 .subtitle {
-  margin: 0 0 15px;
+  margin: 0 0 var(--space-s);
 
   color: var(--color-black);
   font-weight: 500;
@@ -53,14 +53,14 @@
 .wrapper {
   display: block;
   max-width: 25%;
-  margin-right: 80px;
+  margin-right: var(--space-e);
 
   &:last-child {
     margin-right: 0;
   }
 
   @media (--desktop-l) {
-    margin-right: 100px;
+    margin-right: var(--space-xxe);
   }
 }
 
@@ -81,9 +81,9 @@
 }
 
 .banner {
-  margin-left: 60px;
+  margin-left: var(--space-xb);
 }
 
 .categoryList {
-  margin-bottom: 25px;
+  margin-bottom: var(--space-m);
 }

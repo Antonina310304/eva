@@ -13,7 +13,7 @@
     display: inline-block;
     width: 10px;
     height: 10px;
-    margin-left: 10px;
+    margin-left: var(--space-xxs);
 
     background-image: url('arrow.svg');
     background-repeat: no-repeat;
@@ -49,7 +49,7 @@
     .arrow {
       background-image: url('arrow-hover.svg');
 
-      transition: transform 150ms ease-in, background 150ms ease-in;
+      transition: transform 150ms ease-in, background-color 150ms ease-in;
     }
   }
 
@@ -67,7 +67,7 @@
     .arrow {
       background-image: url('arrow-hover.svg');
 
-      transition: transform 150ms ease-in, background 150ms ease-in;
+      transition: transform 150ms ease-in, background-color 150ms ease-in;
     }
   }
 
@@ -81,7 +81,7 @@
     .arrow {
       transform: rotate(180deg);
 
-      transition: transform 150ms ease-in, background 150ms ease-in;
+      transition: transform 150ms ease-in, background-color 150ms ease-in;
     }
   }
 }
