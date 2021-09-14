@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
-import Slider from '@Components/Header/elems/Slider';
 import cn from 'classnames';
+
+import Slider from '../Slider';
 import styles from './HeaderLogo.module.css';
 
 export interface IHeaderLogo extends HTMLAttributes<HTMLDivElement> {

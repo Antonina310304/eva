@@ -1,13 +1,9 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 
-import cn from 'classnames';
 import Link from '@UI/Link';
-import ProductList from '@Components/Header/elems/Search/elems/ProductList';
-
 import { SearchResultData } from '@Types/SearchResultData';
-
-import List from '@Components/Header/elems/Search/elems/List';
-import Flex from '@Components/Flex';
+import ProductList from '../ProductList';
+import List from '../List';
 import styles from './SearchResult.module.css';
 
 export interface SearchResultProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,7 +11,7 @@ export interface SearchResultProps extends HTMLAttributes<HTMLDivElement> {
   result: SearchResultData;
 }
 
-const SearchResult: FC<SearchResultProps> = ({ result, className }) => {
+const SearchResult: FC<SearchResultProps> = ({ result }) => {
   return (
     <div>
       {result?.products.length ? (
@@ -27,7 +23,7 @@ const SearchResult: FC<SearchResultProps> = ({ result, className }) => {
             <div className={styles.header}>
               <p className={styles.title}>Товары</p>
               <p className={styles.count}>{`Найдено ${result.products.length}`}</p>
-              <Link className={styles.link} to={result.link}>
+              <Link className={styles.link} to='#'>
                 Все результаты поиска
               </Link>
             </div>

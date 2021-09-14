@@ -1,9 +1,8 @@
 import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
-
 import cn from 'classnames';
 
-import MainNavItem from '@Components/Header/elems/MainNavItem';
 import { IMainNav } from '@Types/MainNav';
+import MainNavItem from '../MainNavItem';
 import styles from './MainNav.module.css';
 
 export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {

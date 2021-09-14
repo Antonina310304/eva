@@ -1,7 +1,8 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
-import { IUserMenu } from '@Types/UserMenu';
-import Link from '@UI/Link/Link';
 import cn from 'classnames';
+
+import { IUserMenu } from '@Types/UserMenu';
+import Link from '@UI/Link';
 import styles from './UserElemMenu.module.css';
 
 export interface UserElemMenuProp extends HTMLAttributes<HTMLDivElement> {

@@ -1,6 +1,6 @@
-import React, { FC, HTMLAttributes, memo, ReactChild, ReactNode } from 'react';
-
+import React, { FC, HTMLAttributes, memo, ReactNode } from 'react';
 import cn from 'classnames';
+
 import styles from './MobileNavContainer.module.css';
 
 export interface MobileNavContainerProps extends HTMLAttributes<HTMLDivElement> {

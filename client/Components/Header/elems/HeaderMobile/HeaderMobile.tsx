@@ -1,35 +1,22 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import Burger from '@Components/Header/elems/Burger';
-import Search from '@Components/Header/elems/Search';
-import Sidebar from '@Components/Header/elems/SideBar';
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
 import { UserMenuMobile } from '@Components/Header/data';
-import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import useMedias from '@Hooks/useMedias';
 import useScrollPosition from '@Hooks/useScrollPosition';
+import HeaderLogo from '../HeaderLogo';
+import Burger from '../Burger';
+import Search from '../Search';
+import Sidebar from '../SideBar';
 import styles from './HeaderMobile.module.css';
 
 const HeaderMobile = () => {
   const { isMobile } = useMedias();
-  /**
-   * анимация открытия и закрытия меню 1 уровня
-   */
-
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
-
-  /**
-   * анимация открытия и закрытия меню 2 уровня
-   */
   const [isShowSubMenu, setIsShowSubMenu] = useState<boolean>(false);
-
-  /**
-   * меняет состояние активного меню после отработки анимации закрытия (используется в самом низком компоненте)
-   */
   const [isShowSubMenuContent, setIsShowSubMenuContent] = useState<boolean>(false);
-
   const [visible, setVisible] = useState(true);
   const [fixed, setFixed] = useState(true);
   const [withShadow, setWithShadow] = useState(false);
@@ -66,7 +53,7 @@ const HeaderMobile = () => {
   }, [isOpenSideBar]);
 
   return (
-    <header
+    <div
       className={cn(styles.header, {
         [styles.fixed]: fixed,
         [styles.visible]: visible,
@@ -97,7 +84,7 @@ const HeaderMobile = () => {
         setIsShowSubMenuContent={setIsShowSubMenuContent}
         hideSideBar={hideSideBar}
       />
-    </header>
+    </div>
   );
 };
 

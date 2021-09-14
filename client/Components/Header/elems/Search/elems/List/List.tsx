@@ -1,8 +1,7 @@
 import React, { FC, HTMLAttributes } from 'react';
-import Link from '@UI/Link';
-
 import cn from 'classnames';
-import { ProductSearchData } from '@Types/Product';
+
+import Link from '@UI/Link';
 import { OfferSearchData } from '@Types/SearchResultData';
 import styles from './List.module.css';
 

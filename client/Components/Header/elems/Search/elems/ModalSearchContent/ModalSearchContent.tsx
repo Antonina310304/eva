@@ -1,10 +1,10 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 
-import List from '@Components/Header/elems/Search/elems/List';
-import ProductList from '@Components/Header/elems/Search/elems/ProductList';
-import SearchResult from '@Components/Header/elems/Search/elems/SearchResult/SearchResult';
 import { OfferSearchData, SearchResultData } from '@Types/SearchResultData';
 import { ProductSearchData } from '@Types/Product';
+import List from '../List';
+import ProductList from '../ProductList';
+import SearchResult from '../SearchResult/SearchResult';
 import styles from './ModalSearchContent.module.css';
 
 export interface ModalSearchContentProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,6 +13,7 @@ export interface ModalSearchContentProps extends HTMLAttributes<HTMLDivElement> 
   offers: OfferSearchData[];
   request: SearchResultData;
 }
+
 const ModalSearchContent: FC<ModalSearchContentProps> = ({ hits, viewed, offers, request }) => {
   return (
     <div>

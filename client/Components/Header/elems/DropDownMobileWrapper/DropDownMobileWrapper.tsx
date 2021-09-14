@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, ReactChild, useEffect, useState } from 'react';
-
 import cn from 'classnames';
-import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
+
+import MobileNavContainer from '../MobileNavContainer';
 import styles from './DropDownMobileWrapper.module.css';
 
 export interface DropDownMobileWrapperProps extends HTMLAttributes<HTMLDivElement> {

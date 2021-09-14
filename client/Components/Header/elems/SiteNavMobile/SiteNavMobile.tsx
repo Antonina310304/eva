@@ -1,8 +1,7 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
-import Link from '@UI/Link';
-
+import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import Link from '@UI/Link';
 import { siteNavList } from '@Components/Header/data';
 import styles from './SiteNavMobile.module.css';
 
@@ -25,7 +24,6 @@ const SiteNavMobile: FC<SiteNavProp> = ({ activeMenu, setActiveMenu }) => {
               key={item.title}
             >
               <Link
-                view='navigation'
                 preventDefault
                 onClick={() => setActiveMenu(item.link)}
                 className={cn({ [styles.active]: item.link === activeMenu }, styles.link)}

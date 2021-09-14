@@ -1,12 +1,12 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 
-import AnimatedWrapper from '@Components/Header/elems/AnimatedWrapper';
-import MobileNavContainer from '@Components/Header/elems/MobileNavContainer/MobileNavContainer';
-import Search from '@Components/Header/elems/Search';
-import SiteNavMobile from '@Components/Header/elems/SiteNavMobile';
-import MainNavMobile from '@Components/Header/elems/MainNavMobile';
-import UserBottomMenuMobile from '@Components/Header/elems/UserBottomMenuMobile/UserBottomMenuMobile';
+import AnimatedWrapper from '../AnimatedWrapper';
+import MobileNavContainer from '../MobileNavContainer';
+import Search from '../Search';
+import SiteNavMobile from '../SiteNavMobile';
+import MainNavMobile from '../MainNavMobile';
+import UserBottomMenuMobile from '../UserBottomMenuMobile';
 import styles from './SideBar.module.css';
 
 export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -19,9 +19,6 @@ export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
   hideSideBar: () => void;
 }
 
-/**
- * тут оставляем только функционал открытия и закрытия sidebar
- * */
 const SideBar: FC<SideBarProps> = ({
   isShowSubMenuContent,
   isShowSubMenu,
@@ -48,7 +45,6 @@ const SideBar: FC<SideBarProps> = ({
         left: '-100%',
         onRest: () => {
           setIsShowSubMenu(false);
-          // вернуться в исходное состояние при закрытии всего sidebar
         },
       });
     }

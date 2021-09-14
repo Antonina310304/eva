@@ -1,8 +1,9 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import divanSlider from '@Components/Header/elems/Slider/data';
 import { virtualize } from 'react-swipeable-views-utils';
 import { mod } from 'react-swipeable-views-core';
+
+import divanSlider from './data';
 import styles from './Slider.module.css';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);

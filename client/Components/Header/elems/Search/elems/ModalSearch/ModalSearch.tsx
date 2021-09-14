@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, memo, ReactNode, MouseEvent, FC } from 'react';
 import cn from 'classnames';
 
-import IconClose from '@UI/IconClose/IconClose';
+import IconClose from '@UI/IconClose';
 import useMedias from '@Hooks/useMedias';
 import styles from './ModalSearch.module.css';
 

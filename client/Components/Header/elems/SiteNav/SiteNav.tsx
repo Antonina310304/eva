@@ -2,9 +2,9 @@ import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';
-import MainNav from '@Components/Header/elems/MainNav/MainNav';
-import UserMenu from '@Components/UserMenu/UserMenu';
+import UserMenu from '@Components/UserMenu';
 import { siteNavList, UserMenuDesktop } from '@Components/Header/data';
+import MainNav from '../MainNav';
 import styles from './SiteNav.module.css';
 
 export interface SiteNavProp extends HTMLAttributes<HTMLDivElement> {

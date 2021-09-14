@@ -1,17 +1,17 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
-import SiteNav from '@Components/Header/elems/SiteNav/SiteNav';
-import Search from '@Components/Header/elems/Search';
-import Phone from '@Components/Header/elems/Phone';
 import UserMenu from '@Components/UserMenu';
 import { UserMenuDesktop } from '@Components/Header/data';
-import HeaderLogo from '@Components/Header/elems/HeaderLogo';
 import Overlay from '@Components/Overlay';
 import Link from '@UI/Link';
 import useScrollPosition from '@Hooks/useScrollPosition';
 import useModals from '@Hooks/useModals';
 import useMeta from '@Queries/useMeta';
+import HeaderLogo from '../HeaderLogo';
+import SiteNav from '../SiteNav';
+import Search from '../Search';
+import Phone from '../Phone';
 import styles from './HeaderDesktop.module.css';
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -40,7 +40,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
   if (!meta.isSuccess) return null;
 
   return (
-    <header
+    <div
       className={cn(styles.header, {
         [styles.scroll]: hideOnScroll,
       })}
@@ -80,7 +80,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
         </div>
       </div>
       <Overlay isOpen={isFirstClick} />
-    </header>
+    </div>
   );
 };
 

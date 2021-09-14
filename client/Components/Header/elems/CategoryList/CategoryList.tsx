@@ -1,7 +1,8 @@
 import React, { FC, HTMLAttributes } from 'react';
-import { IMainNavSubmenu } from '@Types/MainNav';
+
 import Link from '@UI/Link';
 import Boldik from '@UI/Boldik';
+import { IMainNavSubmenu } from '@Types/MainNav';
 import styles from './CategoryList.module.css';
 
 export interface CategoryListProps extends HTMLAttributes<HTMLDivElement> {

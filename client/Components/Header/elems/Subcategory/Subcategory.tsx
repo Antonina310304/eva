@@ -1,9 +1,10 @@
 import React, { FC, HTMLAttributes } from 'react';
+
 import { IMainNav } from '@Types/MainNav';
-import CategoryList from '@Components/Header/elems/CategoryList';
 import Link from '@UI/Link';
-import MobileNavContainer from '@Components/Header/elems/MobileNavContainer';
 import Scroller from '@UI/Scroller';
+import MobileNavContainer from '../MobileNavContainer';
+import CategoryList from '../CategoryList';
 import styles from './Subcategory.module.css';
 
 export interface SubcategoryProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,9 +34,7 @@ const Subcategory: FC<SubcategoryProps> = ({ category }) => {
                 <div key={categoryItem.name} className={styles.section}>
                   <div className={styles.wrapper}>
                     <p className={styles.type}>{categoryItem.name}</p>
-                    <Link view='grayString' to={categoryItem.link}>
-                      {categoryItem.textLink}
-                    </Link>
+                    <Link to={categoryItem.link}>{categoryItem.textLink}</Link>
                   </div>
                   <CategoryList category={categoryItem} />
                 </div>

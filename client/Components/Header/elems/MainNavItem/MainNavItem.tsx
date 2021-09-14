@@ -3,10 +3,10 @@ import cn from 'classnames';
 
 import Link from '@UI/Link';
 import Boldik from '@UI/Boldik';
-import DropDownWrapper from '@Components/Header/elems/DropDownWrapper';
-import CategoryList from '@Components/Header/elems/CategoryList';
-import BannerMenu from '@Components/Header/elems/BannerMenu';
 import { IMainNav } from '@Types/MainNav';
+import DropDownWrapper from '../DropDownWrapper';
+import CategoryList from '../CategoryList';
+import BannerMenu from '../BannerMenu';
 import styles from './MainNavItem.module.css';
 
 export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {

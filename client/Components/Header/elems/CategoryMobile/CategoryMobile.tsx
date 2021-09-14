@@ -1,9 +1,9 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
-import DropDownMobileWrapper from '@Components/Header/elems/DropDownMobileWrapper';
-import { IMainNav } from '@Types/MainNav';
 
-import Subcategory from '@Components/Header/elems/Subcategory';
 import Link from '@UI/Link';
+import { IMainNav } from '@Types/MainNav';
+import DropDownMobileWrapper from '../DropDownMobileWrapper';
+import Subcategory from '../Subcategory';
 import styles from './CategoryMobile.module.css';
 
 export interface CategoryMobileProps extends HTMLAttributes<HTMLDivElement> {

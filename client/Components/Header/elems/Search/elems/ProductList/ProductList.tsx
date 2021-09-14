@@ -1,8 +1,7 @@
 import React, { FC, HTMLAttributes } from 'react';
+
 import Link from '@UI/Link';
-
 import { ProductSearchData } from '@Types/Product';
-
 import styles from './ProductList.module.css';
 
 export interface ProductListProps extends HTMLAttributes<HTMLDivElement> {

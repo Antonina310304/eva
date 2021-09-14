@@ -1,8 +1,8 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
-import { siteNavList } from '@Components/Header/data';
-
-import CategoryMobile from '@Components/Header/elems/CategoryMobile';
 import cn from 'classnames';
+
+import { siteNavList } from '@Components/Header/data';
+import CategoryMobile from '../CategoryMobile';
 import styles from './MainNavMobile.module.css';
 
 export interface MainNavListProps extends HTMLAttributes<HTMLDivElement> {
