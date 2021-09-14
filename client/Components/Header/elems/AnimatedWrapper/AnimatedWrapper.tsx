@@ -26,9 +26,6 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({
     if (isShowSubMenu) {
       api.start({
         left: `-100%`,
-        onRest: () => {
-          document.querySelector('body').style.overflow = 'hidden';
-        },
       });
       setIsShowSubMenuContent(true);
     } else {
@@ -36,7 +33,6 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({
       api.start({
         left: `0%`,
         onRest: () => {
-          document.querySelector('body').style.overflow = 'hidden';
           setIsShowSubMenuContent(false);
         },
       });

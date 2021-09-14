@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import Burger from '@Components/Header/elems/Burger';
@@ -34,9 +34,8 @@ const HeaderMobile = () => {
   const [fixed, setFixed] = useState(true);
   const [withShadow, setWithShadow] = useState(false);
 
-  const showSideBar = useCallback(() => {
+  const handleClickBurger = useCallback(() => {
     setIsOpenSideBar(true);
-    document.querySelector('body').style.overflow = 'hidden';
   }, []);
 
   const hideSideBar = useCallback(() => {
@@ -53,6 +52,19 @@ const HeaderMobile = () => {
     setWithShadow(newFixed && current.y > 5);
   });
 
+  // Блокируем скролл, когда меню открыто
+  useEffect(() => {
+    function cleanup() {
+      document.documentElement.style.overflow = '';
+    }
+
+    if (!isOpenSideBar) return cleanup;
+
+    document.documentElement.style.overflow = 'hidden';
+
+    return cleanup;
+  }, [isOpenSideBar]);
+
   return (
     <header
       className={cn(styles.header, {
@@ -63,7 +75,7 @@ const HeaderMobile = () => {
     >
       <div className={styles.wrapper}>
         <Overlay isOpen={isOpenSideBar} onClick={hideSideBar} />
-        <Burger onClick={showSideBar} className={styles.burger} />
+        <Burger onClick={handleClickBurger} className={styles.burger} />
         <div className={styles.in}>
           <div className={styles.sliderWrapper}>
             <HeaderLogo />
