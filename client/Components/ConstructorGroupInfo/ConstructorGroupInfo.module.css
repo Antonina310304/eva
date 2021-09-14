@@ -1,0 +1,34 @@
+.constructorGroupInfo {
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  margin-right: var(--space-s);
+  margin-bottom: var(--space-s);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.icon {
+  display: block;
+  width: auto;
+  height: 26px;
+}
+
+.text {
+  margin-bottom: var(--space-m);
+
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+.param {
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}

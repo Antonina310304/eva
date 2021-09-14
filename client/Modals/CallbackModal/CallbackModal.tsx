@@ -9,11 +9,11 @@ import styles from './CallbackModal.module.css';
 
 const CallbackModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const [, { closeAllModals }] = useModals();
+  const [, { closeModal }] = useModals();
 
   const handleClose = useCallback(() => {
-    closeAllModals();
-  }, [closeAllModals]);
+    closeModal(modal.id);
+  }, [closeModal, modal.id]);
 
   return (
     <ModalMain

@@ -34,6 +34,7 @@ const routes = [
   '/order/pay',
   '/site/message-for-department',
   '/site/message-for-accounting-department',
+  '/site/fabrics-form',
   '/site/send-video-consultation',
   '/site/send-designer-service',
   '/site/send-message',
