@@ -5,28 +5,22 @@
   list-style: none;
 }
 
-.item {
-  margin-bottom: 0;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
 .item .link {
+  display: inline-block;
   padding-top: 10px;
   padding-bottom: 10px;
 
+  color: var(--color-black);
+
   font-size: var(--size-n);
+  line-height: var(--lh-n);
+
+  &:hover {
+    font-weight: 500;
+  }
 
   @media (--only-desktop) {
     padding-top: 5px;
     padding-bottom: 5px;
   }
-}
-
-.link {
-  color: var(--color-black);
-  font-size: var(--size-s);
-  line-height: 150%;
 }

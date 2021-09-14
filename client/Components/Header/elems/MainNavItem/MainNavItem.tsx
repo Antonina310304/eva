@@ -1,13 +1,12 @@
 import React, { FC, HTMLAttributes, memo, useEffect, useState } from 'react';
-
-import CategoryList from '@Components/Header/elems/CategoryList';
-
-import { IMainNav } from '@Types/MainNav';
-import DropDownWrapper from '@Components/Header/elems/DropDownWrapper';
+import cn from 'classnames';
 
 import Link from '@UI/Link';
+import Boldik from '@UI/Boldik';
+import DropDownWrapper from '@Components/Header/elems/DropDownWrapper';
+import CategoryList from '@Components/Header/elems/CategoryList';
 import BannerMenu from '@Components/Header/elems/BannerMenu';
-import cn from 'classnames';
+import { IMainNav } from '@Types/MainNav';
 import styles from './MainNavItem.module.css';
 
 export interface MainNavProps extends HTMLAttributes<HTMLDivElement> {
@@ -57,7 +56,7 @@ const MainNavItem: FC<MainNavProps> = ({
     >
       {mainNavItem.dropDown ? (
         <>
-          <p className={styles.title}>{mainNavItem.title}</p>
+          <Boldik className={styles.title}>{mainNavItem.title}</Boldik>
           <DropDownWrapper isFirst={isFirst} isShow={isShowSubmenu}>
             <div className={styles.flex}>
               <div className={styles.wrapperList}>
@@ -67,7 +66,7 @@ const MainNavItem: FC<MainNavProps> = ({
                     <div className={styles.categoryList}>
                       <CategoryList category={i} />
                     </div>
-                    <Link view='grayString' to={i.link}>
+                    <Link className={styles.linkAll} to={i.link} view='secondary'>
                       {i.textLink}
                     </Link>
                   </div>
@@ -85,7 +84,7 @@ const MainNavItem: FC<MainNavProps> = ({
         </>
       ) : (
         <Link to={mainNavItem.link} className={styles.title}>
-          {mainNavItem.title}
+          <Boldik>{mainNavItem.title}</Boldik>
         </Link>
       )}
     </div>

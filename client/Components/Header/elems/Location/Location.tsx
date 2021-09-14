@@ -11,7 +11,7 @@ export interface LocationProps extends HTMLAttributes<HTMLDivElement> {
 
 const Location: FC<LocationProps> = ({ location }) => {
   return (
-    <Link className={styles.location} view='grayString' to='/'>
+    <Link className={styles.location} view='secondary' to='/'>
       {location}
     </Link>
   );
