@@ -46,9 +46,11 @@ const PopularSlider: FC<PopularSliderProps> = ({ product, count }) => {
         break;
       default:
         grid = (
-          <div>
-            <PopularCard data={product} cardFit='mobile' />
-          </div>
+          <>
+            {product.map((item) => (
+              <PopularCard key={item.id} data={item} cardFit='mobile' />
+            ))}
+          </>
         );
     }
     return grid;

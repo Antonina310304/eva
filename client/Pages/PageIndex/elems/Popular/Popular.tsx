@@ -35,9 +35,6 @@ const Popular: FC<PopularProps> = ({ className, data }) => {
   }
 
   const transformArray = () => {
-    if (getCountCardInSlide() === 1) {
-      return data.products;
-    }
     return data.products.reduce((result, item, index) => {
       if (typeof result[Math.floor(index / getCountCardInSlide())] === 'undefined') {
         // eslint-disable-next-line no-param-reassign
