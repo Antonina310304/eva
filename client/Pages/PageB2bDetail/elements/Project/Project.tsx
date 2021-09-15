@@ -16,8 +16,6 @@ export interface ProjectItem {
   text?: string[];
   title?: string;
   width?: number;
-  length?: number;
-  slice?: any;
 }
 
 export interface ExamplesData {
