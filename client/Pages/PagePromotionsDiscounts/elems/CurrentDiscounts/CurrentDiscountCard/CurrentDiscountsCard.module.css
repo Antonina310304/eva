@@ -19,6 +19,11 @@
   justify-content: space-between;
 }
 
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .header {
   display: flex;
   margin: var(--space-n) var(--space-n) 0 var(--space-n);

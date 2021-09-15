@@ -13,14 +13,14 @@
 
 .slide {
   display: flex;
-  flex: 1 1 auto;
-  max-width: 422px;
+  flex: 0 1 auto;
+  width: calc(25% - var(--space-l));
   padding: 0 calc(var(--space-l) / 2);
 }
 
 @media (--desktop) {
   .slide {
-    max-width: 417px;
+    width: calc(33% - var(--space-n));
     padding: 0 calc(var(--space-n) / 2);
   }
 
@@ -35,7 +35,7 @@
 
 @media (--mobile-m) {
   .slide {
-    max-width: 482px;
+    width: calc(50% - var(--space-l));
     padding: 0 calc(var(--space-l) / 2);
   }
   .line_margin {
@@ -45,7 +45,7 @@
 
 @media (--mobile) {
   .slide {
-    max-width: 767px;
+    width: calc(100% - var(--space-l));
     padding: 0 calc(var(--space-l) / 2);
   }
 
