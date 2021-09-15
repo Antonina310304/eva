@@ -14,6 +14,7 @@
 }
 
 .content {
+  flex-grow: 1;
   width: calc(100% - 300px - var(--space-xe));
   margin-right: var(--space-xe);
 }
@@ -30,7 +31,7 @@
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
-  padding: var(--space-xxl) var(--space-s) 0;
+  padding: var(--space-xxl) 0 0;
 }
 
 .title {
@@ -129,5 +130,11 @@
   .formTitle {
     font-size: var(--size-l);
     line-height: var(--lh-l);
+  }
+}
+
+@media (--mobile) {
+  .sidebar {
+    padding: var(--space-xxl) var(--space-s) 0;
   }
 }

@@ -4,10 +4,10 @@ import cn from 'classnames';
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
 import Link from '@UI/Link';
+import Logotype from '@UI/Logotype';
 import useScrollPosition from '@Hooks/useScrollPosition';
 import useModals from '@Hooks/useModals';
 import useMeta from '@Queries/useMeta';
-import HeaderLogo from '../HeaderLogo';
 import SiteNav from '../SiteNav';
 import Search from '../Search';
 import Phone from '../Phone';
@@ -28,9 +28,11 @@ const HeaderDesktop: FC<HeaderProps> = () => {
   }, [openModal]);
 
   useScrollPosition(({ current }) => {
+    const { clientHeight, scrollHeight } = document.documentElement;
+
     if (current.y > 2) {
       setHideOnScroll(true);
-    } else {
+    } else if (clientHeight !== scrollHeight) {
       setHideOnScroll(false);
       setIsFirstClick(false);
     }
@@ -49,7 +51,10 @@ const HeaderDesktop: FC<HeaderProps> = () => {
           <div className={styles.container}>
             <div className={styles.headerIn}>
               <div className={styles.maxWidth}>
-                <HeaderLogo className={styles.slider} />
+                <Link className={styles.slider} to='/'>
+                  <Logotype roller />
+                </Link>
+
                 <Search className={styles.search} />
                 <SiteNav
                   isFirstClick={isFirstClick}

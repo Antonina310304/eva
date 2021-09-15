@@ -3,9 +3,10 @@ import cn from 'classnames';
 
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
+import Logotype from '@UI/Logotype';
+import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
 import useScrollPosition from '@Hooks/useScrollPosition';
-import HeaderLogo from '../HeaderLogo';
 import Burger from '../Burger';
 import Search from '../Search';
 import Sidebar from '../SideBar';
@@ -30,6 +31,10 @@ const HeaderMobile = () => {
 
   // Ставим модификаторы для шапки во время скрола
   useScrollPosition(({ previous, current }) => {
+    const { clientHeight, scrollHeight } = document.documentElement;
+
+    if (clientHeight === scrollHeight) return;
+
     const isUp = previous.y > current.y;
     const newFixed = isUp ? fixed : current.y > 79;
 
@@ -63,9 +68,9 @@ const HeaderMobile = () => {
         <Overlay visible={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={handleClickBurger} className={styles.burger} />
         <div className={styles.in}>
-          <div className={styles.sliderWrapper}>
-            <HeaderLogo />
-          </div>
+          <Link className={styles.sliderWrapper} to='/'>
+            <Logotype />
+          </Link>
 
           <div className={styles.flexWrapper}>
             <div className={styles.search}>
