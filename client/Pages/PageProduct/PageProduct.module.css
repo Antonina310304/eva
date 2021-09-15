@@ -86,7 +86,8 @@
 }
 
 .sectionReviews {
-  margin-top: var(--space-e);
+  margin-top: var(--space-xxl);
+  padding-top: var(--space-xxl);
 }
 
 .sectionSimilar,
@@ -217,9 +218,13 @@
 
   .sectionSimilar,
   .sectionHistory,
-  .sectionDelivery,
-  .sectionReviews {
+  .sectionDelivery {
     margin-top: var(--space-xb);
+  }
+
+  .sectionReviews {
+    margin-top: var(--space-l);
+    padding-top: var(--space-l);
   }
 
   .mattressesBanner {
