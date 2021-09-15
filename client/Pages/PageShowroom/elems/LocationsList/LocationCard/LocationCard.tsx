@@ -1,8 +1,8 @@
 import React, { FC, memo } from 'react';
 import { SellPointData } from '@Pages/PageB2b/typings';
 import cn from 'classnames';
-import LocationIcon from '@Pages/PageShowroom/elems/LocationsList/LocationCard/LocationIcon';
 import Button from '@UI/Button';
+import LocationIcon from './LocationIcon';
 import styles from './LocationCard.module.css';
 
 interface LocationCardProps {
@@ -24,6 +24,7 @@ const LocationCard: FC<LocationCardProps> = ({ className, pickUpPoint }) => {
         <div className={styles.textBlock}>
           <div
             className={styles.location}
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: pickUpPoint.address }}
           />
           <Button theme='linkSecondary' className={styles.showOnMap}>

@@ -115,4 +115,16 @@
     margin-top: var(--space-n);
     padding-left: 50px;
   }
+
+  .infoBlock {
+    margin-right: 0;
+  }
+
+  .textBlock {
+    width: calc(100% - 50px);
+  }
+
+  .phone {
+    margin-bottom: 5px;
+  }
 }

@@ -26,3 +26,9 @@
     margin-bottom: var(--space-xb);
   }
 }
+
+@media (--mobile) {
+  .wrapper {
+    width: 100%;
+  }
+}
