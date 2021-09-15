@@ -82,6 +82,7 @@ const Popup: FC<PopupProps> = (props) => {
           [styles.wide]: wide,
           [styles.disabled]: disabled,
           [styles.faked]: faked,
+          [styles.checked]: checked.length > 0,
         },
         className,
       )}
@@ -89,7 +90,12 @@ const Popup: FC<PopupProps> = (props) => {
       <div className={styles.field} onClick={handleClick}>
         <div className={styles.fieldValue}>
           <div className={styles.fieldText}>
-            {title && <span className={styles.fieldTitle}>{`${title}: `}</span>}
+            {title && (
+              <span className={styles.fieldTitle}>
+                {' '}
+                {`${title}${fieldText?.length > 0 ? ': ' : ''}`}
+              </span>
+            )}
             <span className={styles.checkedValue}>{fieldText}</span>
           </div>
         </div>

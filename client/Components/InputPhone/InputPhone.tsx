@@ -14,7 +14,7 @@ const masks = {
 
 const InputPhone: FC<InputPhoneProps> = (props: InputPhoneProps) => {
   const { country, ...restProps } = props;
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
 
   /**
    * Если в поле ввода вставляют полный номер телефона в котором первый символ отличается от символа

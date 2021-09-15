@@ -50,6 +50,9 @@ const routes: RoutesMap = {
   press: {
     path: '/site/press',
   },
+  siteFabrics: {
+    path: '/site/fabrics',
+  },
 
   //
   privacyPolicy: {

@@ -27,7 +27,7 @@ export interface SidebarProps extends HTMLAttributes<HTMLDivElement> {
 const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
   const { className, delivery, prepaymentPercent, profile, ...restProps } = props;
   const [, { openModal }] = useModals();
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const cart = useCart();
 
   const handleClickOferta = useCallback(() => {

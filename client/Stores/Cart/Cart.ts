@@ -1,8 +1,10 @@
+import { useQuery, useQueryClient } from 'react-query';
 import { createDerived, createStore, getValue, update } from '@kundinos/nanostores';
 import { useStore } from '@kundinos/nanostores/react';
 import equal from 'fast-deep-equal';
 
 import * as ApiCart from '@Api/Cart';
+import * as ApiOrder from '@Api/Order';
 import { CartPositionData, CartProductData } from '@Types/Cart';
 import { NetworkStatus } from '@Types/Base';
 import { CartStoreValue, UseCart } from './typings';
@@ -62,19 +64,11 @@ const findProductById = (productId: number): CartProductData => {
 
 // Получить основную информацию о корзине
 const loadInitData = async () => {
-  networkStore.set('loading');
+  if (getValue(cartStore)) return;
 
-  try {
-    const { cart, deliveryTypes } = await ApiCart.info();
+  const { cart, deliveryTypes } = await ApiCart.info();
 
-    cartStore.set({ ...cart, deliveryTypes });
-    networkStore.set('success');
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
-
-    networkStore.set('error');
-  }
+  cartStore.set({ ...cart, deliveryTypes });
 };
 
 // Добавить товары в корзину
@@ -254,7 +248,27 @@ const init = (initialValue: CartStoreValue): void => {
   }
 };
 
-export const useCart: UseCart = () => {
+export const useCart: UseCart = (params) => {
+  const { ssr = true } = params || {};
+  const keys = ['cart', ssr && 'ssr'];
+
+  const queryClient = useQueryClient();
+  const result = useQuery(keys, () => ApiOrder.getCartInfo(), {
+    enabled: ssr,
+    keepPreviousData: true,
+    retryOnMount: false,
+    refetchOnMount: false,
+  });
+
+  if (result.data) {
+    init(result.data);
+  }
+
+  // Sync nanostores with react-query store
+  cartStore.listen((value) => {
+    queryClient.setQueryData(keys, value);
+  });
+
   return {
     ...useStore(cartStore),
     network: useStore(networkStore),

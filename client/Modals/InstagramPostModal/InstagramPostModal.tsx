@@ -32,7 +32,7 @@ const InstagramPostModal: FC<ModalMainProps> = (props) => {
   );
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [slideIndex, setSlideIndex] = useState(0);
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const currentPost = useMemo(() => posts[postIndex], [postIndex, posts]);
 
   const handleClose = useCallback(() => {

@@ -1,0 +1,127 @@
+.fabricExtraSample {
+  display: inline-block;
+  margin-bottom: var(--space-m);
+
+  vertical-align: top;
+}
+
+.fabricExtraSample.modalView {
+  padding: 0 var(--space-xs);
+}
+
+.fabricExtraSample.gray {
+  .mask {
+    color: var(--color-dark-gray);
+  }
+}
+
+.fabricExtraSample.white {
+  .mask {
+    color: var(--color-white);
+  }
+}
+
+.wrapperImage {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+
+    .iconAdd {
+      opacity: 1;
+    }
+  }
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  width: 145px;
+  height: 145px;
+
+  background-image: url('./mask.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.image {
+  position: relative;
+  z-index: 1;
+
+  flex-shrink: 0;
+
+  width: 145px;
+  height: 145px;
+}
+
+.wrapperIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconDel {
+  width: 36px;
+  height: 36px;
+
+  background-image: url('./del.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.iconAdd {
+  width: 50px;
+  height: 50px;
+
+  background-image: url('./plus.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0;
+}
+
+.name {
+  margin-top: var(--space-s);
+
+  font-weight: 400;
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+  text-align: center;
+}
+
+.moreInfo {
+  margin-top: var(--space-xs);
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+  text-align: center;
+
+  cursor: pointer;
+}
+
+@media (--mobile-m) {
+  .mask {
+    width: 90px;
+    height: 90px;
+  }
+
+  .image {
+    width: 90px;
+    height: 90px;
+  }
+}

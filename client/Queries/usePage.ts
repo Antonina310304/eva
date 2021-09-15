@@ -9,9 +9,9 @@ export interface Params {
 
 export type UsePageResult = any;
 
-const usePage = (params: Params): UseQueryResult<UsePageResult> => {
-  const { path, ssr } = params;
-  const keys = ['page', ssr && 'ssr', path];
+const usePage = (params?: Params): UseQueryResult<UsePageResult> => {
+  const { path, ssr = true } = params || {};
+  const keys = ['page', ssr && 'ssr', path].filter(Boolean);
 
   const result = useQuery(keys, () => ApiPages.fetchPage({ path }), {
     keepPreviousData: true,

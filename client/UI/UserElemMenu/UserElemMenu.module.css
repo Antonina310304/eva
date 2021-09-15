@@ -1,0 +1,200 @@
+.link {
+  position: relative;
+
+  display: block;
+  width: 30px;
+  height: 30px;
+
+  font-size: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+
+  transition: background-color 150ms ease-in;
+
+  &.disabled {
+    cursor: default;
+  }
+}
+
+.user {
+  background-image: url('icons/user.svg');
+
+  &:hover {
+    background-image: url('icons/user-hover.svg');
+  }
+
+  &:focus {
+    background-image: url('icons/user-focus.svg');
+  }
+
+  &:active {
+    background-image: url('icons/user-active.svg');
+  }
+
+  &.disabled {
+    background-image: url('icons/user-disabled.svg');
+  }
+}
+
+.favorites {
+  background-image: url('icons/favorites.svg');
+
+  &:hover {
+    background-image: url('icons/favorites-hover.svg');
+  }
+
+  &:focus {
+    background-image: url('icons/favorites-focus.svg');
+  }
+
+  &:active {
+    background-image: url('icons/favorites-active.svg');
+  }
+
+  &.disabled {
+    background-image: url('icons/favorites-disabled.svg');
+  }
+
+  &.full.disabled {
+    background-image: url('icons/favorites-full-disabled.svg');
+  }
+
+  &.full {
+    background-image: url('icons/favorites-full.svg');
+
+    span {
+      position: absolute;
+      top: 1px;
+      right: 0px;
+
+      width: 13px;
+      height: 13px;
+
+      color: var(--color-grafit);
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 13px;
+
+      transition: color 105ms ease-in;
+    }
+
+    &:hover {
+      background-image: url('icons/favorites-full-hover.svg');
+    }
+
+    &:focus {
+      background-image: url('icons/favorites-full-focus.svg');
+    }
+
+    &:active {
+      background-image: url('icons/favorites-full-active.svg');
+    }
+  }
+}
+
+.basket {
+  background-image: url('icons/basket.svg');
+
+  &:hover {
+    background-image: url('icons/basket-hover.svg');
+  }
+
+  &:focus {
+    background-image: url('icons/basket-focus.svg');
+  }
+
+  &:active {
+    background-image: url('icons/basket-active.svg');
+  }
+
+  &.full {
+    height: 32px;
+
+    background-image: url('icons/basket-full.svg');
+    background-position: bottom;
+
+    span {
+      top: 0px;
+      left: 11px;
+
+      width: 19px;
+      height: 19px;
+
+      text-align: center;
+    }
+
+    &:hover {
+      background-image: url('icons/basket-full-hover.svg');
+    }
+
+    &:focus {
+      background-image: url('icons/basket-full-focus.svg');
+    }
+
+    &:active {
+      background-image: url('icons/basket-full-active.svg');
+    }
+  }
+
+  &.full.disabled {
+    background-image: url('icons/basket-full-disabled.svg');
+  }
+}
+
+.phone {
+  background-image: url('icons/phone.svg');
+}
+
+.message {
+  background-image: url('icons/message.svg');
+}
+
+.full {
+  span {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-grafit);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 13px;
+
+    transition: color 150ms ease-in;
+  }
+
+  &:hover {
+    span {
+      color: var(--color-dark-gray);
+
+      transition: color 150ms ease-in;
+    }
+  }
+
+  &:focus {
+    span {
+      color: var(--color-black);
+
+      transition: color 150ms ease-in;
+    }
+  }
+
+  &:active {
+    span {
+      color: var(--color-black);
+
+      transition: color 150ms ease-in;
+    }
+  }
+
+  &.disabled {
+    span {
+      color: var(--color-medium-gray);
+    }
+  }
+}

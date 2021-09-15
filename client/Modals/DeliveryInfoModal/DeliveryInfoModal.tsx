@@ -7,6 +7,7 @@ import useModals from '@Hooks/useModals';
 import logger from '@Utils/logger';
 import Payments from './elems/Payments';
 import styles from './DeliveryInfoModal.module.css';
+import './Raw.css';
 
 const DeliveryInfoModal: FC<ModalSidebarProps> = (props) => {
   const { modal, onClose, ...restProps } = props;

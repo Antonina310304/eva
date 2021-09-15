@@ -11,7 +11,7 @@
 
 .container {
   box-sizing: border-box;
-  width: 100%;
+  width: 100vw;
   padding: var(--space-n);
   padding-bottom: var(--space-xxl);
   padding-left: var(--space-xs);
@@ -95,7 +95,6 @@
   }
 
   .container {
-    width: 100%;
     height: 100vh;
     padding: 0;
   }

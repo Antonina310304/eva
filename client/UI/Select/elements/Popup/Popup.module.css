@@ -32,6 +32,13 @@
       transform: rotate(-180deg);
     }
   }
+
+  &.checked {
+    .fieldTitle {
+      color: var(--color-black);
+      font-weight: 500;
+    }
+  }
 }
 
 .field {
@@ -50,7 +57,7 @@
   overflow: hidden;
 
   font-size: var(--size-n);
-  line-height: var(--lh-n);
+  line-height: 28px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -88,7 +95,7 @@
 .fieldTitle {
   composes: n from 'sizes';
 
-  font-weight: 500;
+  color: var(--color-dark-gray);
 }
 
 .field {
@@ -118,6 +125,24 @@
   padding: var(--space-xs);
 
   background: var(--color-white);
+}
+
+@media (--desktop-m) {
+  .fieldText {
+    font-size: var(--size-s);
+    line-height: var(--lh-s);
+  }
+
+  .fieldTitle {
+    font-size: var(--size-s);
+    line-height: 20px;
+  }
+}
+
+@media (--mobile-m) {
+  .field {
+    padding: 7px var(--space-xs);
+  }
 }
 
 @media (--mobile) {

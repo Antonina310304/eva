@@ -1,0 +1,22 @@
+.mainNav {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.wrap {
+  background: transparent;
+}
+
+.title {
+  margin: 0;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}

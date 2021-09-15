@@ -8,8 +8,8 @@ import useMeta from '@Queries/useMeta';
 
 const RouteB2b: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage({ path: pathname, ssr: true });
-  const meta = useMeta({ ssr: true });
+  const page = usePage({ path: pathname });
+  const meta = useMeta();
 
   if (!page.isSuccess || !meta.isSuccess) return null;
 

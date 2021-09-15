@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 import useMeta from '@Queries/useMeta';
 import prefetchUrl from '@Navigation/prefetchUrl';
 import useModals from '@Hooks/useModals';
-import isAbsoluteLink from '@Utils/isAbsoluteLink';
+import { isAbsoluteLink } from '../../../utils/isAbsoluteLink';
 import styles from './Link.module.css';
 
 export interface LinkProps extends BaseLinkProps {
@@ -34,7 +34,7 @@ const Link: FC<LinkProps> = (props) => {
   } = props;
   const queryClient = useQueryClient();
   const history = useHistory();
-  const meta = useMeta({ ssr: true });
+  const meta = useMeta();
   const [, { closeAllModals }] = useModals();
 
   const isExternal = isAbsoluteLink(to || '');
@@ -74,7 +74,7 @@ const Link: FC<LinkProps> = (props) => {
 
       if (needFetch) {
         await prefetchUrl(href, queryClient);
-        closeAllModals();
+        await closeAllModals();
         history.push(href);
         window.scrollTo({ top: 0 });
       }

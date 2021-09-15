@@ -101,11 +101,9 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         .map((item) => item.title)
         .join(', ');
     }
-    if (result.length === 0) {
-      result = title;
-    }
+
     return result;
-  }, [checked, items, title]);
+  }, [checked, items]);
 
   // Формируем value выбранных опций
   const inputValue = useMemo(() => {
@@ -371,6 +369,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
           [styles.wide]: wide,
           [styles.disabled]: disabled,
           [styles.faked]: faked,
+          [styles.checked]: checked.length > 0,
         },
         className,
       )}
@@ -386,7 +385,11 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
         >
           <div className={styles.fieldValue}>
             <div className={styles.fieldText}>
-              {title && <span className={styles.fieldTitle}>{`${title}: `}</span>}
+              {title && (
+                <span className={styles.fieldTitle}>
+                  {`${title}${fieldText?.length > 0 ? ': ' : ''}`}
+                </span>
+              )}
               {fieldText}
             </div>
           </div>

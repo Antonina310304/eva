@@ -10,7 +10,7 @@
 
 .wrapper {
   position: absolute;
-  inset: 0px;
+  inset: 0;
 
   overflow: hidden;
 }
@@ -19,7 +19,7 @@
   position: absolute;
 
   overflow: hidden scroll;
-  inset: 0px;
+  inset: 0;
 }
 
 .content {
@@ -31,11 +31,11 @@
 .trackY {
   position: absolute;
   top: 0;
-  right: 0px;
+  right: 0;
 
   width: 5px;
   height: 100%;
-  padding-right: 0px;
+  padding-right: 0;
   overflow: hidden;
 
   background: transparent;
