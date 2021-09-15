@@ -25,7 +25,7 @@ const HeaderMobile = () => {
     setIsOpenSideBar(true);
   }, []);
 
-  const hideSideBar = useCallback(() => {
+  const handlClose = useCallback(() => {
     setIsOpenSideBar(false);
   }, []);
 
@@ -65,7 +65,7 @@ const HeaderMobile = () => {
       })}
     >
       <div className={styles.wrapper}>
-        <Overlay visible={isOpenSideBar} onClick={hideSideBar} />
+        <Overlay visible={isOpenSideBar} onClick={handlClose} />
         <Burger onClick={handleClickBurger} className={styles.burger} />
         <div className={styles.in}>
           <Link className={styles.sliderWrapper} to='/'>
@@ -86,7 +86,7 @@ const HeaderMobile = () => {
         isShowSubMenuContent={isShowSubMenuContent}
         isShowSubMenu={isShowSubMenu}
         setIsShowSubMenuContent={setIsShowSubMenuContent}
-        hideSideBar={hideSideBar}
+        onClose={handlClose}
       />
     </div>
   );

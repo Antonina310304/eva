@@ -45,7 +45,7 @@ const SideBar: FC<SideBarProps> = (props) => {
               <MobileNavContainer className={styles.header}>
                 <div className={styles.wrapperSearch}>
                   <Search isMenu className={styles.search} />
-                  <button className={styles.close} onClick={onClose} type='button' />
+                  <button className={styles.close} type='button' onClick={onClose} />
                 </div>
               </MobileNavContainer>
               <MobileNavContainer>
