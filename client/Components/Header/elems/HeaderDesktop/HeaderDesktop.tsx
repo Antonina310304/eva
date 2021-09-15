@@ -28,9 +28,11 @@ const HeaderDesktop: FC<HeaderProps> = () => {
   }, [openModal]);
 
   useScrollPosition(({ current }) => {
+    const { clientHeight, scrollHeight } = document.documentElement;
+
     if (current.y > 2) {
       setHideOnScroll(true);
-    } else {
+    } else if (clientHeight !== scrollHeight) {
       setHideOnScroll(false);
       setIsFirstClick(false);
     }
