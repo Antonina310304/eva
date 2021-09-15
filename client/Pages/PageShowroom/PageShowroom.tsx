@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 
+import pickupPoints from '@Pages/PageShowroom/data';
 import MainBanner from './elems/MainBanner';
 import LocationsList from './elems/LocationsList';
 import LocationsSlider from './elems/LocationsSlider';
@@ -14,7 +15,7 @@ const PageShowRoom: FC = () => {
       <h1 className={styles.title}>Адреса магазинов</h1>
       <MainBanner />
       <LocationsList />
-      <LocationsSlider />
+      <LocationsSlider pickupPoints={pickupPoints} />
       <Showroom />
       <MapSection />
     </div>
