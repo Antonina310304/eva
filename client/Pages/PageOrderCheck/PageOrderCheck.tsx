@@ -17,6 +17,7 @@ export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   profile?: Profile;
 }
 
+const headerHeight = 90;
 const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const { className, page, profile, ...restProps } = props;
   const { isMobileM } = useMedias();
@@ -36,7 +37,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
     const boxInfoBottom = Math.round(rectSidebar.bottom);
     const boxInfoTop = Math.round(rectSidebar.top);
 
-    if (boxContentBottom <= boxInfoBottom && boxInfoTop <= 0) {
+    if (boxContentBottom <= boxInfoBottom && boxInfoTop <= headerHeight) {
       setSidebarStyles({
         position: 'absolute',
         bottom: 0,
@@ -44,10 +45,10 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
       return;
     }
 
-    if (boxContentTop <= 0) {
+    if (boxContentTop <= headerHeight) {
       setSidebarStyles({
         position: 'fixed',
-        top: 0,
+        top: headerHeight,
         left: rectSidebar.left,
       });
     } else {
