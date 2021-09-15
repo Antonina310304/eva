@@ -1,6 +1,5 @@
 import React, { FC, memo } from 'react';
 
-import mockPickupPoints from '@Pages/PageShowroom/elems/LocationsList/Mock/mockLocations';
 import pickupPoints from './data';
 import MainBanner from './elems/MainBanner';
 import LocationsList from './elems/LocationsList';
@@ -15,8 +14,8 @@ const PageShowRoom: FC = () => {
     <div>
       <h1 className={styles.title}>Адреса магазинов</h1>
       <MainBanner />
-      <LocationsSlider pickupPoints={mockPickupPoints} />
       <LocationsList pickUpPoints={pickupPoints} />
+      <LocationsSlider pickupPoints={pickupPoints} />
       <Showroom />
       <MapSection />
     </div>
