@@ -84,8 +84,9 @@ const Filters: FC<FiltersProps> = (props) => {
       label: labelSort,
       options: filtrator.sort,
       onClose: () => setOpenedOptions(false),
+      onCheckOption: handleChangeSort,
     });
-  }, [filtrator.sort, isMobile, labelSort, openModal]);
+  }, [filtrator.sort, handleChangeSort, isMobile, labelSort, openModal]);
 
   return (
     <div {...restProps} className={cn(styles.filters, className)}>
