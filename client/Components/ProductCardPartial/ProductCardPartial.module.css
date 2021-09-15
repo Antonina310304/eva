@@ -3,5 +3,51 @@
 }
 
 .img {
+  position: relative;
+}
 
+.actions {
+  position: absolute;
+  top: var(--space-n);
+  right: var(--space-n);
+  z-index: 2;
+}
+
+.tags {
+  position: absolute;
+  right: var(--space-s);
+  bottom: var(--space-s);
+  z-index: 2;
+}
+
+.info {
+  margin-top: var(--space-n);
+}
+
+.name {
+  composes: black from 'colors';
+
+  display: inline-block;
+  max-width: 100%;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.actualPrice {
+  composes: m from 'sizes';
+
+  font-weight: 500;
+}
+
+.expiredPrice {
+  margin-left: var(--space-xs);
+}
+
+.discount {
+  display: inline-flex;
+
+  margin-left: var(--space-xs);
 }

@@ -20,8 +20,7 @@
 
 .slide {
   box-sizing: content-box;
-  width: 573px;
-  height: 780px;
+  width: 422px;
   padding: 0 var(--space-s);
 
   vertical-align: top;
@@ -31,6 +30,21 @@
   margin-top: var(--space-l);
 }
 
+.btnWrapper {
+  margin-top: 50px;
+}
+
+.moreLink {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.btn {
+  width: 100%;
+}
+
 @media (--desktop-m) {
   .sectionWrapper {
     margin-bottom: var(--space-e);
@@ -38,7 +52,10 @@
 
   .slide {
     width: 400px;
-    height: 544px;
+  }
+
+  .moreLink {
+    max-width: 252px;
   }
 }
 
@@ -53,7 +70,6 @@
 
   .slide {
     width: 300px;
-    height: 408px;
 
     padding: 0 var(--space-xs);
   }

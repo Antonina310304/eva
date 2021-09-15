@@ -6,6 +6,8 @@ import cn from 'classnames';
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import NavArrows from '@UI/NavArrows/NavArrows';
+import Link from '@UI/Link/Link';
+import Button from '@UI/Button';
 import ProductCardPartial from '@Components/ProductCardPartial';
 import { ProductData } from '@Types/Product';
 
@@ -69,7 +71,7 @@ const Top10: FC<Top10Props> = ({ className, products }) => {
             onChangeProgress={handleChangeProgress}
             onChangeCurrent={handleChangeCurrent}
           >
-            {products.map((product, index) => {
+            {products.map((product) => {
               return (
                 <div key={product.id} className={styles.slide}>
                   <ProductCardPartial product={product} />
@@ -78,6 +80,13 @@ const Top10: FC<Top10Props> = ({ className, products }) => {
             })}
           </Gallery>
           {track && track.width < 100 && <ProgressBar className={styles.track} track={track} />}
+        </div>
+        <div className={styles.btnWrapper}>
+          <Link className={styles.moreLink} to='/'>
+            <Button className={styles.btn} theme='dirty'>
+              Смотреть еще
+            </Button>
+          </Link>
         </div>
       </Section>
     </div>
