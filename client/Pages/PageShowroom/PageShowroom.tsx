@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-import pickupPoints from './data';
+import pickupPoints, { map } from './data';
 import MainBanner from './elems/MainBanner';
 import LocationsList from './elems/LocationsList';
 import LocationsSlider from './elems/LocationsSlider';
@@ -17,7 +17,7 @@ const PageShowRoom: FC = () => {
       <LocationsList pickUpPoints={pickupPoints} />
       <LocationsSlider pickupPoints={pickupPoints} />
       <Showroom />
-      <MapSection />
+      <MapSection map={map} pickupPoints={pickupPoints} />
     </div>
   );
 };
