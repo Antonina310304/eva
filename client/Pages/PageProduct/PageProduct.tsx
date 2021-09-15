@@ -7,6 +7,7 @@ import React, {
   useState,
   useRef,
   useEffect,
+  MutableRefObject,
 } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
@@ -44,11 +45,10 @@ const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
 const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
-const headerHeight = 90;
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const [, { openModal }] = useModals();
-  const { isMobileM } = useMedias();
+  const { isDesktop, isMobileM } = useMedias();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
   const [positionSidebar, setPositionSidebar] = useState(null);
   const refCharacteristics = useRef<HTMLDivElement>();
@@ -59,6 +59,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const refLastScroll = useRef(0);
   const howManyCanScroll = useRef(null);
   const howRestScroll = useRef(null);
+  const headerHeight = isDesktop ? 0 : 90;
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -93,11 +94,23 @@ const PageProduct: FC<PageProductProps> = (props) => {
     });
   }, [page, selectedCrossSaleTab]);
 
+  const scrollToRef = useCallback(
+    (ref: MutableRefObject<HTMLDivElement>) => {
+      if (!ref?.current) return;
+
+      const rect = ref.current.getBoundingClientRect();
+      const top = window.scrollY + rect.top - headerHeight;
+
+      window.scrollTo({ top, behavior: 'smooth' });
+    },
+    [headerHeight],
+  );
+
   const handleCalc = useCallback(() => {
     const rectSidebar = refSidebar.current.getBoundingClientRect();
 
     howManyCanScroll.current = rectSidebar.height - window.innerHeight + 30 + headerHeight;
-  }, []);
+  }, [headerHeight]);
 
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
@@ -112,16 +125,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
   }, []);
 
   const handleClickCharacteristics = useCallback(() => {
-    if (!refCharacteristics.current) return;
-
-    refCharacteristics.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+    scrollToRef(refCharacteristics);
+  }, [scrollToRef]);
 
   const handleClickReviews = useCallback(() => {
-    if (!refReviews.current) return;
-
-    refReviews.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+    scrollToRef(refReviews);
+  }, [scrollToRef]);
 
   const handleChangePositionSidebar = useCallback(() => {
     // Для расчета позиции скрола используем Math.abs(rectDocument.top) вместо window.pageYOffset
@@ -183,7 +192,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     } else {
       setPositionSidebar(null);
     }
-  }, []);
+  }, [headerHeight]);
 
   useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 
