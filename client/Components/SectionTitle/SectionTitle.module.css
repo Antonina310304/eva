@@ -16,13 +16,8 @@
     line-height: 150%;
   }
 
-  @media (--mobile-m) {
-    font-size: var(--size-l);
-    line-height: 120%;
-  }
-
   @media (--mobile) {
-    font-size: var(--size-xm);
+    font-size: var(--size-l);
     line-height: 26px;
   }
 }
