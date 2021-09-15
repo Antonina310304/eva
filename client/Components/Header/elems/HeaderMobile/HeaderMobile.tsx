@@ -30,6 +30,10 @@ const HeaderMobile = () => {
 
   // Ставим модификаторы для шапки во время скрола
   useScrollPosition(({ previous, current }) => {
+    const { clientHeight, scrollHeight } = document.documentElement;
+
+    if (clientHeight === scrollHeight) return;
+
     const isUp = previous.y > current.y;
     const newFixed = isUp ? fixed : current.y > 79;
 
