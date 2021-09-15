@@ -5,7 +5,6 @@ export interface ExamplesData {
   text: string[];
   title: string;
   width: number;
-  length: number;
 }
 export interface ProjectItem {
   height?: number;

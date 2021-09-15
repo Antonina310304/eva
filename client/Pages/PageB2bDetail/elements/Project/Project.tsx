@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import Section from '@Components/Section';
@@ -27,7 +27,6 @@ export interface ExamplesData {
   text: string[];
   title: string;
   width: number;
-  length: number;
 }
 
 export interface ProjectProps extends HTMLAttributes<HTMLDivElement> {
@@ -48,7 +47,10 @@ const Project: FC<ProjectProps> = (props) => {
       projectsMap[example.projectId] = example;
     }
   });
-  const uniqueProjects: ProjectItem = Object.values(projectsMap);
+
+  const uniqueProjects: ProjectItem[] = useMemo(() => {
+    return Object.values(projectsMap);
+  }, [projectsMap]);
 
   /* eslint-disable no-param-reassign */
   const gallery = examples.reduce((a, c) => {

@@ -20,7 +20,7 @@ export interface ImagesData {
   title: string;
   width: number;
 }
-export interface ProjectData {
+export interface ProjectItem {
   height: number;
   projectId: number;
   src: string;
@@ -29,10 +29,10 @@ export interface ProjectData {
   width: number;
 }
 export interface ModalData {
-  images: ImagesData[];
+  images: ImagesData[][];
   startSlideIndex?: number;
   projectIndex: number;
-  uniqueProjects: ProjectData;
+  uniqueProjects: ProjectItem[];
 }
 
 const ProjectModal: FC<ModalMainProps> = (props) => {

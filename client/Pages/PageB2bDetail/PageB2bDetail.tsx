@@ -5,9 +5,17 @@ import Button from '@UI/Button';
 import FeedbackForm from '@Forms/FeedbackForm';
 import PressGallery from '@Components/PressGallery';
 import Project from './elements/Project';
-import { PageB2bDetailData, ProjectItem } from './typings';
+import { PageB2bDetailData } from './typings';
 import styles from './PageB2bDetail.module.css';
 
+export interface ProjectItem {
+  height?: number;
+  projectId?: number;
+  src?: string;
+  text?: string[];
+  title?: string;
+  width?: number;
+}
 export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: PageB2bDetailData;
@@ -23,7 +31,11 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
       projectsMap[example.projectId] = example;
     }
   });
-  const uniqueProjects: ProjectItem[] = Object.values(projectsMap);
+
+  const uniqueProjects: ProjectItem[] = useMemo(() => {
+    return Object.values(projectsMap);
+  }, [projectsMap]);
+
   const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
 
   const onClickMore = useCallback(() => {
