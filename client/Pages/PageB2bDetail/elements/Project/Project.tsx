@@ -120,9 +120,10 @@ const Project: FC<ProjectProps> = (props) => {
                 onClick={(e) => handleOpen(e, index)}
               >
                 <Image
-                  className={
-                    element.height / element.width < 1 ? styles.horizontal : styles.vertical
-                  }
+                  className={cn(styles.galleryImage, {
+                    [styles.horizontal]: element.height / element.width < 1,
+                    [styles.vertical]: element.height / element.width > 1,
+                  })}
                   src={element.src}
                 />
               </div>

@@ -20,11 +20,13 @@
   padding-right: var(--space-l);
 }
 
-.horizontal {
-  width: 752px;
-
+.galleryImage {
   background-position: center;
   background-size: cover;
+}
+
+.horizontal {
+  width: 752px;
 }
 
 .horizontal:before {
@@ -36,9 +38,6 @@
 
 .vertical {
   width: 458px;
-
-  background-position: center;
-  background-size: cover;
 }
 
 .vertical:before {
@@ -46,15 +45,6 @@
   padding: 0 0 151%;
 
   content: '';
-}
-
-.galleryImage {
-  width: 100%;
-  height: 100%;
-  margin-right: var(--space-l);
-
-  background-position: bottom;
-  background-size: contain;
 }
 
 @media (--desktop-m) {
