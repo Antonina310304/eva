@@ -51,7 +51,10 @@ const HeaderDesktop: FC<HeaderProps> = () => {
           <div className={styles.container}>
             <div className={styles.headerIn}>
               <div className={styles.maxWidth}>
-                <Logotype className={styles.slider} roller />
+                <Link className={styles.slider} to='/'>
+                  <Logotype roller />
+                </Link>
+
                 <Search className={styles.search} />
                 <SiteNav
                   isFirstClick={isFirstClick}

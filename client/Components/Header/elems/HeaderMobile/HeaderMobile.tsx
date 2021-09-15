@@ -4,6 +4,7 @@ import cn from 'classnames';
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
 import Logotype from '@UI/Logotype';
+import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
 import useScrollPosition from '@Hooks/useScrollPosition';
 import Burger from '../Burger';
@@ -67,9 +68,9 @@ const HeaderMobile = () => {
         <Overlay visible={isOpenSideBar} onClick={hideSideBar} />
         <Burger onClick={handleClickBurger} className={styles.burger} />
         <div className={styles.in}>
-          <div className={styles.sliderWrapper}>
+          <Link className={styles.sliderWrapper} to='/'>
             <Logotype />
-          </div>
+          </Link>
 
           <div className={styles.flexWrapper}>
             <div className={styles.search}>
