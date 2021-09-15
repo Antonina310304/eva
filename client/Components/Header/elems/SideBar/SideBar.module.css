@@ -10,6 +10,12 @@
   overflow-x: hidden;
 
   background: var(--color-white);
+
+  transition: left 0.4s;
+
+  &.opened {
+    left: 0;
+  }
 }
 
 .header {
