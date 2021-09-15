@@ -63,9 +63,11 @@ const PromoCard: FC<PromoCardProps> = ({
         )}
         <div className={cn(styles.title, { [styles.lightText]: theme === 'dark' })}>{title}</div>
         {!!description && (
-          <div className={cn(styles.description, { [styles.lightText]: theme === 'dark' })}>
-            {description}
-          </div>
+          <div
+            className={cn(styles.description, { [styles.lightText]: theme === 'dark' })}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: description }} // чтобы можно было вставлять текст с неразрывными пробелами
+          />
         )}
         {!!discount && <div className={styles.discount}>{discount}</div>}
         {!!buttonText && (

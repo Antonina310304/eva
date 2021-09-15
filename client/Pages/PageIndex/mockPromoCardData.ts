@@ -41,7 +41,7 @@ const mockPromoCardData: PromoCardProps[] = [
   {
     type: 'service',
     title: 'Доставка за наш счет',
-    description: 'Привезём бесплатно при заказе от 45 000 ₽',
+    description: 'Привезём бесплатно при заказе от&nbsp;45&nbsp;000&nbsp;₽',
     bgImage: '/react/static/promoCards/promo5.svg',
     bgColor: '#FFD9E0',
     theme: 'light',
