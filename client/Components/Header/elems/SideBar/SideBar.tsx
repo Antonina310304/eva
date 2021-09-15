@@ -20,25 +20,12 @@ export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const SideBar: FC<SideBarProps> = (props) => {
-  const {
-    isShowSubMenuContent,
-    isShowSubMenu,
-    setIsShowSubMenu,
-    isOpenSideBar,
-    setIsShowSubMenuContent,
-    onClose,
-  } = props;
+  const { isShowSubMenuContent, isShowSubMenu, setIsShowSubMenu, isOpenSideBar, onClose } = props;
   const [activeMenu, setActiveMenu] = useState('catalog');
 
   return (
     <div className={cn(styles.sideBar, { [styles.opened]: isOpenSideBar })}>
-      <AnimatedWrapper
-        setIsShowSubMenu={setIsShowSubMenu}
-        isShowSubMenu={isShowSubMenu}
-        className={styles.inner}
-        isShowSubMenuContent={isShowSubMenuContent}
-        setIsShowSubMenuContent={setIsShowSubMenuContent}
-      >
+      <AnimatedWrapper isShowSubMenu={isShowSubMenu}>
         {(ref: React.LegacyRef<HTMLDivElement>) => (
           <div className={styles.inWrap}>
             <div ref={ref} className={styles.inWrap}>
