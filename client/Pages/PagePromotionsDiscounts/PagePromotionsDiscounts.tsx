@@ -2,6 +2,7 @@ import React, { FC, memo } from 'react';
 
 import mockCategories from '@Pages/PagePromotionsDiscounts/elems/Trends/Mock/mockCategories';
 import { ProductData } from '@Types/Product';
+import { mockCategoriesForCurrentDiscounts } from '@Pages/PagePromotionsDiscounts/elems/CurrentDiscounts/Mock/mockCategories';
 import CurrentPromotions from './elems/CurrentPromotions';
 import CurrentDiscounts from './elems/CurrentDiscounts';
 import FreeServices from './elems/FreeServices';
@@ -28,7 +29,7 @@ const PagePromotionsDiscounts: FC = () => {
     <div>
       <h1 className={styles.title}>Акции и скидки</h1>
       <CurrentPromotions cards={eventCards} />
-      <CurrentDiscounts />
+      <CurrentDiscounts categories={mockCategoriesForCurrentDiscounts} />
       <FreeServices cards={serviceCards} />
       <Trends categories={mockCategories} />
       <Top10 products={mockProducts} />
