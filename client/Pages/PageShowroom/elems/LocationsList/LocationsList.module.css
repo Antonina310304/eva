@@ -1,0 +1,28 @@
+.wrapper {
+  composes: main from 'containers';
+
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0 auto var(--space-e) auto;
+}
+
+.card {
+  margin-bottom: var(--space-xxl);
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+@media (--desktop) {
+  .wrapper {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    margin-bottom: var(--space-xb);
+  }
+}
