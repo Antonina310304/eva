@@ -1,4 +1,6 @@
-const pickupPoints = [
+import { SellPointData } from '@Pages/PageB2b/typings';
+
+const pickupPoints: SellPointData[] = [
   {
     id: 'showroom_empire',
     regionId: 1,
