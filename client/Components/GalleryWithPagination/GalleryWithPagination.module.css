@@ -1,0 +1,12 @@
+.galleryWrapper {
+  overflow: hidden;
+}
+
+.gallery {
+  margin: 0 -15px;
+  overflow: hidden;
+}
+
+.gallery > div {
+  display: flex;
+}
