@@ -53,6 +53,9 @@ const routes: RoutesMap = {
   siteFabrics: {
     path: '/site/fabrics',
   },
+  siteMap: {
+    path: '/site/site-map',
+  },
 
   //
   privacyPolicy: {
