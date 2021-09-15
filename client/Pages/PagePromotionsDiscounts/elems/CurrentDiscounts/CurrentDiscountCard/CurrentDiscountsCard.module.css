@@ -88,3 +88,9 @@
 
   content: '';
 }
+
+@media (--mobile) {
+  .wrapper {
+    padding-bottom: 64.8%;
+  }
+}

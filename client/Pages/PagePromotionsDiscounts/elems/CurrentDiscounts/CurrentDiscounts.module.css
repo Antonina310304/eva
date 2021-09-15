@@ -36,3 +36,9 @@
     margin: 0 auto var(--space-xb) auto;
   }
 }
+
+@media (--mobile) {
+  .title > p {
+    font-size: var(--size-l);
+  }
+}
