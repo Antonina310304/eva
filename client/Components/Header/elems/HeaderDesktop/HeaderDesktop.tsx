@@ -4,10 +4,10 @@ import cn from 'classnames';
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
 import Link from '@UI/Link';
+import Logotype from '@UI/Logotype';
 import useScrollPosition from '@Hooks/useScrollPosition';
 import useModals from '@Hooks/useModals';
 import useMeta from '@Queries/useMeta';
-import HeaderLogo from '../HeaderLogo';
 import SiteNav from '../SiteNav';
 import Search from '../Search';
 import Phone from '../Phone';
@@ -51,7 +51,7 @@ const HeaderDesktop: FC<HeaderProps> = () => {
           <div className={styles.container}>
             <div className={styles.headerIn}>
               <div className={styles.maxWidth}>
-                <HeaderLogo className={styles.slider} />
+                <Logotype className={styles.slider} roller />
                 <Search className={styles.search} />
                 <SiteNav
                   isFirstClick={isFirstClick}

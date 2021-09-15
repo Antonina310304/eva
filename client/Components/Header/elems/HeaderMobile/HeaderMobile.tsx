@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 import UserMenu from '@Components/UserMenu';
 import Overlay from '@Components/Overlay';
+import Logotype from '@UI/Logotype';
 import useMedias from '@Hooks/useMedias';
 import useScrollPosition from '@Hooks/useScrollPosition';
-import HeaderLogo from '../HeaderLogo';
 import Burger from '../Burger';
 import Search from '../Search';
 import Sidebar from '../SideBar';
@@ -68,7 +68,7 @@ const HeaderMobile = () => {
         <Burger onClick={handleClickBurger} className={styles.burger} />
         <div className={styles.in}>
           <div className={styles.sliderWrapper}>
-            <HeaderLogo />
+            <Logotype />
           </div>
 
           <div className={styles.flexWrapper}>
