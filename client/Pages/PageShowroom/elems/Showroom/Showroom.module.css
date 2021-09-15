@@ -1,5 +1,5 @@
 .sectionWrapper {
-  margin-bottom: var(--space-xxe);
+  margin-bottom: var(--space-e);
 }
 
 .wrapper {
@@ -49,6 +49,10 @@
 }
 
 @media (--desktop) {
+  .sectionWrapper {
+    margin-bottom: var(--space-xb);
+  }
+
   .productsWrapper {
     --columns: 3;
     --gap-h: var(--space-n);
