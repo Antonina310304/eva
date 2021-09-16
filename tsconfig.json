@@ -33,9 +33,11 @@
       "@UI/*": ["./client/UI/*"],
       "@Utils/*": ["./client/Utils/*"]
     },
+    "types": ["cypress"],
     "typeRoots": ["./typings", "node_modules/@types"]
   },
   "include": [
+    "cypress",
     "client/**/*.js",
     "client/**/*.jsx",
     "client/**/*.ts",

@@ -4,6 +4,7 @@ import cn from 'classnames';
 import OrderForm from '@Forms/OrderForm';
 import { useOrderForm } from '@Stores/OrderForm';
 import useMedias from '@Hooks/useMedias';
+import useScrollPosition from '@Hooks/useScrollPosition';
 import { Profile } from '@Types/Profile';
 import { PageOrderCheckData } from './typings';
 import WrapperForm from './elems/WrapperForm';
@@ -17,16 +18,17 @@ export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   profile?: Profile;
 }
 
-const headerHeight = 90;
 const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const { className, page, profile, ...restProps } = props;
-  const { isMobileM } = useMedias();
+  const { isDesktop, isMobileM } = useMedias();
   const [sidebarStyles, setSidebarStyles] = useState(null);
   const orderForm = useOrderForm();
   const refContent = useRef<HTMLDivElement>(null);
   const refSidebar = useRef<HTMLDivElement>(null);
+  const headerHeight = isDesktop ? 0 : 90;
 
   const handleScroll = useCallback(() => {
+    if (isMobileM) return;
     if (!refContent.current || !refSidebar.current) return;
 
     const rectContent = refContent.current.getBoundingClientRect();
@@ -54,22 +56,16 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
     } else {
       setSidebarStyles(null);
     }
-  }, []);
+  }, [headerHeight, isMobileM]);
 
-  // Плавающий блок информации в сайдбаре
+  useScrollPosition(handleScroll);
+
+  // Reset sidebar position on mobile
   useEffect(() => {
-    function cleanup() {
-      setSidebarStyles(null);
-      window.removeEventListener('scroll', handleScroll);
-    }
+    if (!isMobileM) return;
 
-    if (isMobileM) return cleanup;
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-
-    return cleanup;
-  }, [handleScroll, isMobileM]);
+    setSidebarStyles(null);
+  }, [isMobileM]);
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
