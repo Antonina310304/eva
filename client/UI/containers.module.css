@@ -9,6 +9,17 @@
   padding-left: var(--gap);
 }
 
+.wide {
+  --gap: var(--space-xxb);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--gap);
+  padding-left: var(--gap);
+}
+
 .narrow {
   --gap: var(--space-xxl);
   --width: 1256px;
@@ -29,6 +40,10 @@
   .narrow {
     --width: 1146px;
   }
+
+  .wide {
+    --gap: var(--space-xxl);
+  }
 }
 
 @media (--mobile-m) {
@@ -37,6 +52,10 @@
   }
 
   .narrow {
+    --gap: var(--space-s);
+  }
+
+  .wide {
     --gap: var(--space-s);
   }
 }

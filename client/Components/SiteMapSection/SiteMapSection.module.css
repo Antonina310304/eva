@@ -1,5 +1,5 @@
 .section {
-  padding: 60px 0;
+  padding: var(--space-xb) 0;
 }
 
 .title {
@@ -56,7 +56,7 @@
 
   .title {
     font-size: var(--size-l);
-    line-height: 1.2;
+    line-height: var(--lh-l);
   }
 
   .list {

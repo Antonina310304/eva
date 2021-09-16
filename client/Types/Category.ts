@@ -12,11 +12,12 @@ export interface ProductModel {
 }
 
 export interface SubcategoryData {
-  height: number;
+  id: number;
+  count: number;
+  link: string;
   icon: string;
   title: string;
-  url: string;
-  width: number;
+  actived?: boolean;
 }
 
 export interface PopularLinkData {
