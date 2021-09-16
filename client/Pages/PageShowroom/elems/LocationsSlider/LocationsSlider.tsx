@@ -78,7 +78,10 @@ const LocationsSlider: FC<LocationsSliderProps> = ({ pickupPoints }) => {
   }, [normalizeSlide, track]);
 
   return (
-    <div>
+    <div className={styles.slider}>
+      <div className={styles.wrapper}>
+        <div className={styles.separator} />
+      </div>
       <Section className={styles.title} title='Магазины Диван.ру' />
       <div>
         <div className={styles.tabWrapper}>
@@ -101,8 +104,13 @@ const LocationsSlider: FC<LocationsSliderProps> = ({ pickupPoints }) => {
               onChangeCurrent={handleChangeCurrent}
             >
               {filteredImageShop.map((src) => (
-                <div key={src} className={styles.slide}>
-                  <div style={{ backgroundImage: `url('${src}')` }} className={styles.imgWrapper} />
+                <div className={styles.slideWrapper}>
+                  <div key={src} className={styles.slide}>
+                    <div
+                      style={{ backgroundImage: `url('${src}')` }}
+                      className={styles.imgWrapper}
+                    />
+                  </div>
                 </div>
               ))}
             </Gallery>
@@ -132,7 +140,7 @@ const LocationsSlider: FC<LocationsSliderProps> = ({ pickupPoints }) => {
           )}
         </div>
         {track && track.width < 100 && (
-          <div className={styles.trackWrapper}>
+          <div className={styles.wrapper}>
             <ProgressBar track={track} />
           </div>
         )}

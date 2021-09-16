@@ -1,3 +1,9 @@
 .container {
   composes: main from 'containers';
+
+  margin-bottom: 80px;
+
+  @media (--desktop-m) {
+    margin-bottom: 60px;
+  }
 }
