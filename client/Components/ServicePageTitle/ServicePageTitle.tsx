@@ -14,7 +14,7 @@ const ServicePageTitle: FC<ServicePageTitleProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.pageTitle, className)}>
-      <div className={cn(styles.title, { [styles.bordered]: view === 'bordered' })}>{title}</div>
+      <h1 className={cn(styles.title, { [styles.bordered]: view === 'bordered' })}>{title}</h1>
     </div>
   );
 };
