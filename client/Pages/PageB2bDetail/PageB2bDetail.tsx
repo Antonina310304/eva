@@ -5,17 +5,9 @@ import Button from '@UI/Button';
 import FeedbackForm from '@Forms/FeedbackForm';
 import PressGallery from '@Components/PressGallery';
 import Project from './elements/Project';
-import { PageB2bDetailData } from './typings';
+import { PageB2bDetailData, ProjectItem } from './typings';
 import styles from './PageB2bDetail.module.css';
 
-export interface ProjectItem {
-  height?: number;
-  projectId?: number;
-  src?: string;
-  text?: string[];
-  title?: string;
-  width?: number;
-}
 export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: PageB2bDetailData;
@@ -24,19 +16,23 @@ export interface PageB2bDetailProps extends HTMLAttributes<HTMLDivElement> {
 const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
   const { className, page, ...restProps } = props;
   const { title, teaser, examples, articles, projects } = page;
-
-  const projectsMap = {};
-  examples.forEach((example) => {
-    if (!projectsMap[example.projectId]) {
-      projectsMap[example.projectId] = example;
-    }
-  });
+  const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
 
   const uniqueProjects: ProjectItem[] = useMemo(() => {
-    return Object.values(projectsMap);
-  }, [projectsMap]);
+    const projectsMap = {};
+    examples.forEach((example) => {
+      if (!projectsMap[example.projectId]) {
+        projectsMap[example.projectId] = example;
+      }
+    });
 
-  const [visibleItems, setVisibleItems] = useState(examples.length > 3 ? 3 : examples.length);
+    return Object.values(projectsMap);
+  }, [examples]);
+
+  const visibleProjects = useMemo(() => uniqueProjects.slice(0, visibleItems), [
+    uniqueProjects,
+    visibleItems,
+  ]);
 
   const onClickMore = useCallback(() => {
     setVisibleItems(visibleItems + 3);
@@ -51,13 +47,16 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
         <div className={styles.teaser}>{teaser}</div>
       </div>
       <h2 className={styles.subheading}>{projects.title}</h2>
-      {uniqueProjects.slice(0, visibleItems).map((item, projectIndex) => (
-        <div className={styles.contentWrapper}>
-          <Project examples={examples} index={projectIndex} />
+      {visibleProjects.map((project) => (
+        <div className={styles.contentWrapper} key={project.projectId}>
+          <Project
+            examples={examples.filter((example) => example.projectId === project.projectId)}
+            project={project}
+          />
           <div className={styles.descriptionWrapper}>
-            <h3 className={styles.projectName}>{item.title}</h3>
+            <h3 className={styles.projectName}>{project.title}</h3>
             <div className={styles.textWrapper}>
-              {item.text.map((elem, elemIndex: number) => (
+              {project.text.map((elem, elemIndex: number) => (
                 <div className={styles.description} key={elemIndex}>
                   {elem}
                 </div>

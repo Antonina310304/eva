@@ -12,7 +12,7 @@ import ProgressBar from '@UI/ProgressBar';
 import IconClose from '@UI/IconClose';
 import styles from './ProjectModal.module.css';
 
-export interface ImagesData {
+export interface ProjectData {
   height: number;
   projectId: number;
   src: string;
@@ -20,41 +20,33 @@ export interface ImagesData {
   title: string;
   width: number;
 }
-export interface ProjectItem {
-  height: number;
-  projectId: number;
-  src: string;
-  text: string[];
-  title: string;
-  width: number;
-}
+
 export interface ModalData {
-  images: ImagesData[][];
   startSlideIndex?: number;
-  projectIndex: number;
-  uniqueProjects: ProjectItem[];
+  imageIndex: number;
+  uniqueProjects: ProjectData[];
 }
 
 const ProjectModal: FC<ModalMainProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { images: medias, uniqueProjects, startSlideIndex, projectIndex } = modal.data as ModalData;
+  const { uniqueProjects, startSlideIndex, imageIndex } = modal.data as ModalData;
   const [, { closeModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
-  const [mainMediaIndex, setMainMediaIndex] = useState(0);
+  const [mainMediaIndex, setMainMediaIndex] = useState(imageIndex || 0);
   const [scrollTop, setScrollTop] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const refScroll = useRef(null);
 
   const normalizeIndex = useCallback(
     (value: number) => {
-      if (value < 0) return medias.length - 1;
-      if (value > medias.length - 1) return 0;
+      if (value < 0) return uniqueProjects.length - 1;
+      if (value > uniqueProjects.length - 1) return 0;
 
       return value;
     },
-    [medias.length],
+    [uniqueProjects.length],
   );
 
   const scrollTo = useCallback((index) => {
@@ -144,7 +136,7 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
               onScroll={(values) => setScrollTop(values.scrollTop)}
             >
               <div className={styles.leftScrollContainer} ref={refScroll}>
-                {medias[projectIndex].map((media, indexMedia) => (
+                {uniqueProjects.map((media, indexMedia) => (
                   <div
                     className={styles.mediaWrapper}
                     key={indexMedia}
@@ -155,6 +147,7 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                         [styles.active]: indexMedia === mainMediaIndex,
                       })}
                       src={media.src}
+                      alt=''
                     />
                   </div>
                 ))}
@@ -164,15 +157,11 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
 
           <div className={styles.mainWrapper}>
             <div className={styles.mainMediaWrapper}>
-              <img
-                className={styles.mainMedia}
-                src={medias[projectIndex][mainMediaIndex].src}
-                alt=''
-              />
+              <img className={styles.mainMedia} src={uniqueProjects[mainMediaIndex].src} alt='' />
               <div className={styles.descriptionWrapper}>
-                <h3 className={styles.projectName}>{uniqueProjects[projectIndex].title}</h3>
+                <h3 className={styles.projectName}>{uniqueProjects[0].title}</h3>
                 <div className={styles.textWrapper}>
-                  {uniqueProjects[projectIndex].text.map((elem, elemIndex: number) => (
+                  {uniqueProjects[0].text.map((elem, elemIndex: number) => (
                     <div className={styles.description} key={elemIndex}>
                       {elem}
                     </div>
@@ -195,7 +184,7 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                 onChangeCurrent={handleChangeCurrent}
                 onChangeProgress={handleChangeProgress}
               >
-                {medias[projectIndex].map((media, indexItem) => (
+                {uniqueProjects.map((media, indexItem) => (
                   <div
                     className={styles.mediaWrapper}
                     key={indexItem}
@@ -206,6 +195,7 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
                         [styles.active]: indexItem === mainMediaIndex,
                       })}
                       src={media.src}
+                      alt=''
                     />
                   </div>
                 ))}

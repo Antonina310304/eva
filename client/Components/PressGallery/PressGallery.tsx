@@ -11,10 +11,6 @@ import useMedias from '@Hooks/useMedias';
 import { ArticleItem } from '@Pages/PageB2b/typings';
 import styles from './PressGallery.module.css';
 
-export interface SocialItem {
-  id: number;
-  link: string;
-}
 export interface PressGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   articles: ArticleItem[];
