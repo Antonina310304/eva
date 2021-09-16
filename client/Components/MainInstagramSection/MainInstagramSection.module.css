@@ -1,0 +1,9 @@
+.section {
+}
+
+.instagramDescription {
+  composes: m from 'sizes';
+
+  width: 100%;
+  max-width: 875px;
+}

@@ -1,8 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import Link from '@UI/Link';
-import InstagramSection from '@Components/InstagramSection';
+import MainInstagramSection from '@Components/MainInstagramSection';
 import { MetaData } from '@Types/Meta';
 import { ProductData } from '@Types/Product';
 import MainGallery from './elems/MainGallery';
@@ -40,26 +39,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
       </div>
 
       <div className={styles.section}>
-        <InstagramSection
-          className={styles.instagram}
-          hasPromoPlaceholder
-          title='Ищите вдохновение в инстаграм @official_divan.ru'
-          description={
-            <div className={styles.instagramDescription}>
-              {`Cтилизуете интерьер вместе с Divan.ru – отмечайте `}
-              <Link
-                view='native'
-                target='_blank'
-                to='https://www.instagram.com/official_divan.ru/?hl=ru'
-              >
-                @official_divan.ru
-              </Link>
-              {` на фото в своем аккаунте Instagram,
-                добавляйте хештег #купилвдиванру. Мы публикуем лучшие кадры.`}
-            </div>
-          }
-          posts={page.instagram.items}
-        />
+        <MainInstagramSection className={styles.instagram} posts={page.instagram.items} />
       </div>
     </div>
   );
