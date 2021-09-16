@@ -103,9 +103,9 @@ const LocationsSlider: FC<LocationsSliderProps> = ({ pickupPoints }) => {
               onChangeProgress={handleChangeProgress}
               onChangeCurrent={handleChangeCurrent}
             >
-              {filteredImageShop.map((src) => (
-                <div className={styles.slideWrapper}>
-                  <div key={src} className={styles.slide}>
+              {filteredImageShop.map((src, ind) => (
+                <div key={ind} className={styles.slideWrapper}>
+                  <div className={styles.slide}>
                     <div
                       style={{ backgroundImage: `url('${src}')` }}
                       className={styles.imgWrapper}
@@ -122,7 +122,7 @@ const LocationsSlider: FC<LocationsSliderProps> = ({ pickupPoints }) => {
                   const selected = slideIndex === index;
                   return (
                     <div
-                      key={src}
+                      key={index}
                       onClick={() => handleChangeCurrent({ current: index })}
                       className={cn(styles.slidePagination, { [styles.active]: selected })}
                     >
