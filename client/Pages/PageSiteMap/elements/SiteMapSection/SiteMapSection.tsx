@@ -3,13 +3,13 @@ import cn from 'classnames';
 
 import Link from '@UI/Link';
 import Image from '@UI/Image';
-import { CategoryProps } from '../../typings';
+import { CategoryData } from '@Pages/PageSiteMap/typings';
 import styles from './SiteMapSection.module.css';
 
 interface SiteMapSectionProps {
   className?: string;
   name: string;
-  subcategories: CategoryProps[];
+  subcategories: CategoryData[];
 }
 
 const SiteMapSection: FC<SiteMapSectionProps> = (props) => {

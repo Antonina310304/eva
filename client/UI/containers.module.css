@@ -44,6 +44,10 @@
   .narrow {
     --width: 1146px;
   }
+
+  .wide {
+    --gap: var(--space-xxl);
+  }
 }
 
 @media (--mobile-m) {

@@ -35,9 +35,9 @@ const SideBar: FC<SideBarProps> = (props) => {
                   <button className={styles.close} type='button' onClick={onClose} />
                 </div>
               </MobileNavContainer>
-              <MobileNavContainer>
-                <SiteNavMobile activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-              </MobileNavContainer>
+
+              <SiteNavMobile activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+
               <MainNavMobile
                 activeMenu={activeMenu}
                 hideSideBar={onClose}
