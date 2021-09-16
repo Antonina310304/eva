@@ -34,7 +34,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
     visibleItems,
   ]);
 
-  const onClickMore = useCallback(() => {
+  const handleClickMore = useCallback(() => {
     setVisibleItems(visibleItems + 3);
   }, [visibleItems]);
 
@@ -68,7 +68,7 @@ const PageB2bDetail: FC<PageB2bDetailProps> = (props) => {
 
       {balance > 0 && (
         <div className={styles.buttonWrapper}>
-          <Button className={styles.button} type='button' theme='dirty' onClick={onClickMore}>
+          <Button className={styles.button} type='button' theme='dirty' onClick={handleClickMore}>
             {`Смотреть еще ${balance}`}
           </Button>
         </div>
