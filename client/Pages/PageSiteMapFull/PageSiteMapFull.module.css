@@ -1,5 +1,5 @@
 .section {
-  border-top: 1px solid var(--color-medium-gray);
+  border-top: 1px solid var(--color-white);
 
   &:first-child {
     border-top: none;
@@ -22,6 +22,10 @@
   font-weight: 500;
   font-size: var(--size-xxl);
   line-height: var(--lh-xxl);
+}
+
+.title {
+  margin-bottom: var(--space-xl);
 }
 
 @media (--desktop) {

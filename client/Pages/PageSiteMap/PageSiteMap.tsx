@@ -2,9 +2,9 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import ServicePageTitle from '@Components/ServicePageTitle';
-import SiteMapSection from '@Components/SiteMapSection';
 import { MetaData } from '@Types/Meta';
 import { PageSiteMapData } from './typings';
+import SiteMapSection from './elements/SiteMapSection';
 import styles from './PageSiteMap.module.css';
 
 export interface PageSiteMapProps extends HTMLAttributes<HTMLDivElement> {

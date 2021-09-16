@@ -37,6 +37,10 @@
     --gap: var(--space-xxl);
   }
 
+  .wide {
+    --gap: var(--space-xxl);
+  }
+
   .narrow {
     --width: 1146px;
   }
