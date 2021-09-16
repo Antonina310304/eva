@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';
+import Gallery from '@UI/Gallery';
 import { siteNavList } from '@Components/Header/data';
 import styles from './SiteNavMobile.module.css';
 
@@ -13,29 +14,27 @@ export interface SiteNavProp extends HTMLAttributes<HTMLDivElement> {
 
 const SiteNavMobile: FC<SiteNavProp> = ({ activeMenu, setActiveMenu }) => {
   return (
-    <nav>
-      <ul className={styles.siteNav}>
-        {siteNavList.map((item) => {
-          return (
-            <li
-              className={cn(styles.item, {
-                [styles.active]: item.link === activeMenu,
-              })}
-              key={item.title}
+    <div className={styles.wrapper}>
+      <Gallery className={styles.siteNav}>
+        {siteNavList.map((item) => (
+          <div
+            className={cn(styles.item, {
+              [styles.active]: item.link === activeMenu,
+            })}
+            key={item.title}
+          >
+            <Link
+              preventDefault
+              onClick={() => setActiveMenu(item.link)}
+              className={cn(styles.link, { [styles.actived]: item.link === activeMenu })}
+              to={item.link}
             >
-              <Link
-                preventDefault
-                onClick={() => setActiveMenu(item.link)}
-                className={cn({ [styles.active]: item.link === activeMenu }, styles.link)}
-                to={item.link}
-              >
-                {item.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+              {item.title}
+            </Link>
+          </div>
+        ))}
+      </Gallery>
+    </div>
   );
 };
 
