@@ -13,13 +13,9 @@ import styles from './PageShowroom.module.css';
 const PageShowRoom: FC = () => {
   return (
     <div>
-      <div className={styles.locationWrapper}>
-        <div>
-          <h1 className={styles.title}>Адреса магазинов</h1>
-          <MainBanner {...mockMainBannerProps} />
-        </div>
-        <LocationsList pickUpPoints={pickupPoints} />
-      </div>
+      <h1 className={styles.title}>Адреса магазинов</h1>
+      <MainBanner {...mockMainBannerProps} />
+      <LocationsList pickUpPoints={pickupPoints} />
       <LocationsSlider pickupPoints={pickupPoints} />
       <Showroom />
       <MapSection map={map} pickupPoints={pickupPoints} />

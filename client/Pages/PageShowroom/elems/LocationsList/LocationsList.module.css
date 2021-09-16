@@ -18,7 +18,7 @@
 
 @media (--desktop) {
   .wrapper {
-    margin: var(--space-xl) auto 0 auto;
+    margin: 0 auto var(--space-xb) auto;
   }
 }
 
