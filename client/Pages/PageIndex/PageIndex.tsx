@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import MainInstagramSection from '@Components/MainInstagramSection';
 import { MetaData } from '@Types/Meta';
 import { ProductData } from '@Types/Product';
@@ -36,6 +37,16 @@ const PageIndex: FC<PageIndexProps> = (props) => {
 
       <div className={styles.section}>
         <Recommendations cards={mockPromoCardData as PromoCardData[]} />
+      </div>
+
+      <div className={styles.container}>
+        <div className={styles.section}>
+          <SectionShowroomsMap
+            className={styles.map}
+            datasForMap={page.map}
+            pickupPoints={page.sellPoints}
+          />
+        </div>
       </div>
 
       <div className={styles.section}>

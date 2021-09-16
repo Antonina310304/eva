@@ -11,6 +11,10 @@
   font-size: var(--size-xl);
 }
 
+.container {
+  composes: main from 'containers';
+}
+
 .map {
   display: block;
 }
