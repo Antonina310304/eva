@@ -2,8 +2,6 @@ import React, { useCallback, memo, FC } from 'react';
 import loadable from '@loadable/component';
 import { Options, YouTubeProps } from 'react-youtube';
 
-export type OnReadyCallback = (event: { target: YT.Player }) => void;
-
 export interface AsyncYouTubeProps extends YouTubeProps {
   className?: string;
   opts: Options;
@@ -28,7 +26,7 @@ const AsyncYouTube: FC<AsyncYouTubeProps> = (props) => {
   }
 
   //
-  const handleReady = useCallback<OnReadyCallback>(
+  const handleReady = useCallback(
     (e) => {
       // Принудительно включаем видео, если есть опция autoplay,
       // потому что на мобилках опция работает некорректно
