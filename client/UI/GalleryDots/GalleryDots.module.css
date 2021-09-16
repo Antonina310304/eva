@@ -1,0 +1,43 @@
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px -5px 0;
+  padding: 0;
+
+  list-style: none;
+
+  @media (--mobile-m) {
+    margin-top: 20px;
+  }
+}
+
+.item {
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+
+  font-size: 0;
+
+  border: 1px solid var(--color-medium-gray);
+  border-radius: 50%;
+  cursor: pointer;
+
+  @media (--mobile-m) {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+.item.actived {
+  width: 14px;
+  height: 14px;
+
+  background: var(--color-medium-gray);
+
+  @media (--mobile-m) {
+    width: 6px;
+    height: 6px;
+  }
+}

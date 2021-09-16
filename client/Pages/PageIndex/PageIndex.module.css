@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 
@@ -10,6 +9,36 @@
   margin-bottom: var(--space-m);
 
   font-size: var(--size-xl);
+}
+
+.map {
+  display: block;
+}
+
+.instagram {
+  display: block;
+}
+
+.instagramDescription {
+  font-size: var(--size-m);
+  font-family: var(--font-main);
+  line-height: 150%;
+
+  @media (--desktop) {
+    font-size: var(--size-n);
+  }
+}
+
+.section {
+  width: 100%;
+  margin-bottom: 100px;
+
+  @media (--desktop-m) {
+    margin-bottom: 80px;
+  }
+  @media (--desktop) {
+    margin-bottom: 60px;
+  }
 }
 
 .button {
