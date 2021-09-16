@@ -43,13 +43,7 @@ const Rating: FC<RatingProps> = (props) => {
   const [selectedStar, setSelectedStar] = useState(defaultValue || value);
 
   const stars: number[] = useMemo(() => {
-    const items = [];
-
-    for (let i = 0; i < countStars; i += 1) {
-      items.push(i + 1);
-    }
-
-    return items;
+    return new Array(countStars).fill('').map((_, index) => index);
   }, [countStars]);
 
   const handleClickStar: OnChangeStarCallback = useCallback(
