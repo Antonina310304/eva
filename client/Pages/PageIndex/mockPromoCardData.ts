@@ -1,6 +1,4 @@
-import { PromoCardProps } from '@Components/PromoCard';
-
-const mockPromoCardData: PromoCardProps[] = [
+const mockPromoCardData = [
   {
     type: 'event',
     title: 'Ультрамодные фасады',
