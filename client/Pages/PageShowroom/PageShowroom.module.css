@@ -10,11 +10,6 @@
   text-align: center;
 }
 
-.locationWrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 @media (--desktop-m) {
   .title {
     font-size: var(--size-b);
@@ -22,19 +17,9 @@
   }
 }
 
-@media (--desktop) {
-  .locationWrapper {
-    flex-direction: column-reverse;
-  }
-}
-
 @media (--mobile-m) {
   .title {
     font-size: var(--size-xl);
     line-height: 1.5;
-  }
-
-  .locationWrapper {
-    flex-direction: column;
   }
 }
