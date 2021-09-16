@@ -55,14 +55,13 @@ const InstragramSection: FC<InstagramSectionProps> = (props) => {
       className={cn(styles.section, className)}
       title={title}
       description={description}
-      additional={
+      arrows={
         track?.width < 100 && (
           <div className={styles.navArrows}>
             <NavArrows onPrev={handlePrev} onNext={handleNext} />
           </div>
         )
       }
-      additionalBreakup
     >
       <div className={styles.wrapperGallery}>
         <InstagramGallery

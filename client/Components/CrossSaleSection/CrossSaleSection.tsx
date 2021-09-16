@@ -66,7 +66,7 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
       {...restProps}
       className={cn(styles.section, className)}
       title={title}
-      additional={
+      arrows={
         <NavArrows
           className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
           onPrev={handlePrev}

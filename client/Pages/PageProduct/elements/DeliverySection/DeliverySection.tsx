@@ -35,7 +35,6 @@ const DeliverySection: FC<DeliverySectionProps> = (props) => {
       additional={
         <ButtonTabs defaultValue={selectedTab.id} tabs={tabs} onChangeTab={handleChangeTab} />
       }
-      additionalBreakup
     >
       <div className={styles.content}>
         {selectedTab.id === 'delivery' && (

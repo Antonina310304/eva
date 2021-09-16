@@ -50,14 +50,13 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
       <Section
         className={styles.sectionWrapper}
         title='Рекомендуем сегодня'
-        additional={
+        arrows={
           track?.width < 100 && (
             <div className={styles.navArrows}>
               <NavArrows onPrev={handlePrev} onNext={handleNext} />
             </div>
           )
         }
-        additionalBreakup
       >
         <div className={styles.galleryContainer}>
           <Gallery

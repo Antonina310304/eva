@@ -7,7 +7,6 @@ import NavArrows from '@UI/NavArrows';
 import ProgressBar from '@UI/ProgressBar';
 import Image from '@UI/Image';
 import useModals from '@Hooks/useModals';
-import useMedias from '@Hooks/useMedias';
 import { ArticleItem } from '@Pages/PageB2b/typings';
 import styles from './PressGallery.module.css';
 
@@ -22,7 +21,6 @@ export interface PressGalleryProps extends HTMLAttributes<HTMLDivElement> {
 
 const PressGallery: FC<PressGalleryProps> = (props) => {
   const { className, articles, ...restProps } = props;
-  const { isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();
@@ -70,14 +68,12 @@ const PressGallery: FC<PressGalleryProps> = (props) => {
       {...restProps}
       className={cn(styles.section, className)}
       title='Мы в прессе:'
-      additional={
-        !isMobileM && (
-          <NavArrows
-            className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
-            onPrev={handlePrev}
-            onNext={handleNext}
-          />
-        )
+      arrows={
+        <NavArrows
+          className={cn(styles.arrows, { [styles.visible]: track?.width < 100 })}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
       }
     >
       <div className={styles.wrapperGallery}>
