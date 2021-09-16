@@ -1,4 +1,4 @@
-export interface MetaDataPhone {
+export interface MetaPhoneData {
   code: string;
   country: string;
   operator: string;
@@ -36,7 +36,7 @@ export interface MetaData {
     link: string;
   };
   pathRedirectToCart: string;
-  phones: MetaDataPhone[];
+  phones: MetaPhoneData[];
   region: MetaDataRegion;
   resources: string;
   socials: MetaDataSocial[];

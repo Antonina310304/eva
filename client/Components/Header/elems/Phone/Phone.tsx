@@ -1,6 +1,8 @@
 import React, { FC, HTMLAttributes, useState, memo, useCallback } from 'react';
 import cn from 'classnames';
 
+import PhoneNumber from '@UI/PhoneNumber';
+import useMeta from '@Queries/useMeta';
 import styles from './Phone.module.css';
 
 export interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
@@ -9,21 +11,28 @@ export interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
 
 const Phone: FC<PhoneProps> = (props) => {
   const { className, ...restProps } = props;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [opened, setOpened] = useState(false);
+  const meta = useMeta();
 
   const handleClick = useCallback(() => {
-    setIsOpen((prev) => !prev);
+    setOpened((prev) => !prev);
   }, []);
+
+  if (!meta.isSuccess) return null;
 
   return (
     <div
       {...restProps}
-      className={cn(className, styles.phone, {
-        [styles.open]: isOpen,
-      })}
+      className={cn(
+        styles.phone,
+        {
+          [styles.opened]: opened,
+        },
+        className,
+      )}
       onClick={handleClick}
     >
-      <span className={styles.number}>+7 (495) 266 78 12</span>
+      <PhoneNumber className={styles.number} phone={meta.data.phones[0]} />
       <span className={styles.arrow} />
     </div>
   );
