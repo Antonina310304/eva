@@ -1,0 +1,60 @@
+.wrapper {
+  width: 100%;
+}
+
+.sectionCrossSale {
+}
+
+.title {
+  margin: 0 0 25px;
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--size-xb);
+  font-family: var(--font-hero);
+  line-height: var(--lh-xb);
+
+  @media (--desktop-m) {
+    font-size: var(--size-b);
+    line-height: var(--lh-b);
+  }
+
+  @media (--desktop) {
+    font-size: var(--size-xxl);
+    line-height: var(--lh-xxl);
+  }
+
+  @media (--mobile-m) {
+    font-size: var(--size-xl);
+    line-height: 150%;
+  }
+}
+
+.description {
+  margin: 0;
+
+  font-size: var(--size-m);
+  font-family: var(--font-main);
+  line-height: 150%;
+
+  @media (--desktop) {
+    font-size: var(--size-n);
+  }
+}
+
+.productItem {
+  width: 28.405vw;
+  min-width: 300px;
+  max-width: 422px;
+  padding: 0 var(--space-xs);
+}
+
+.header {
+  max-width: 1176px;
+  margin: 0 auto 40px;
+
+  text-align: center;
+}
+
+.wrapperGallery {
+}
