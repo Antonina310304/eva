@@ -22,7 +22,7 @@ export interface RenderItem {
 
 export interface CrossSaleSectionProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  title: string;
+  title?: string;
   products: ProductData[];
   tabs?: ReactElement;
   renderItem?: (props: RenderItem) => ReactElement;

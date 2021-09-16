@@ -39,11 +39,11 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   meta: MetaData;
 }
 
+const CrossSaleSection = loadable(() => import('@Components/CrossSaleSection'));
 const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
 const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
 const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
-const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
