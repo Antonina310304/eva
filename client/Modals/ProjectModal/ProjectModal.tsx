@@ -1,6 +1,7 @@
 import React, { FC, memo, useCallback, useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
+import { Modal } from '@Contexts/Modals';
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
@@ -21,15 +22,23 @@ export interface ProjectData {
   width: number;
 }
 
-export interface ModalData {
+export interface ProjectModalData {
   startSlideIndex?: number;
   imageIndex: number;
   uniqueProjects: ProjectData[];
 }
 
-const ProjectModal: FC<ModalMainProps> = (props) => {
+export interface ProjectModal extends Modal {
+  data: ProjectModalData;
+}
+
+export interface ProjectModalProps extends ModalMainProps {
+  modal: ProjectModal;
+}
+
+const ProjectModal: FC<ProjectModalProps> = (props) => {
   const { className, modal, ...restProps } = props;
-  const { uniqueProjects, startSlideIndex, imageIndex } = modal.data as ModalData;
+  const { uniqueProjects, startSlideIndex, imageIndex } = modal.data;
   const [, { closeModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();
   const [slide, setSlide] = useState(0);
@@ -96,7 +105,6 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
   const handleClickPreviewMedia = useCallback(
     (_e, index) => {
       if (window.cancelClick) return;
-
       if (!isMobileM) setMainMediaIndex(index);
     },
     [isMobileM],
@@ -112,8 +120,11 @@ const ProjectModal: FC<ModalMainProps> = (props) => {
   useEffect(() => {
     if (isMobileM) {
       const scrollPosition = startSlideIndex || mainMediaIndex;
+
       scrollTo(scrollPosition);
-    } else scrollTo(mainMediaIndex);
+    } else {
+      scrollTo(mainMediaIndex);
+    }
   }, [mainMediaIndex, startSlideIndex, scrollTo, isMobileM]);
 
   // Ждём завершения анимации открытия окна

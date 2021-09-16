@@ -6,6 +6,7 @@ export interface ExamplesData {
   title: string;
   width: number;
 }
+
 export interface ProjectItem {
   height?: number;
   projectId?: number;
@@ -14,20 +15,25 @@ export interface ProjectItem {
   title?: string;
   width?: number;
 }
+
+export interface ImageData {
+  src: string;
+}
+
 export interface ArticleItem {
   id: number;
   link: string;
   src: string;
   logo: string;
   preview: string;
-  images: any;
+  images: ImageData[];
 }
 
 export interface ProjectData {
   title: string;
 }
+
 export interface PageB2bDetailData {
-  uniqueProjects: ProjectItem[];
   projects: ProjectData;
   title: string;
   teaser: string;
