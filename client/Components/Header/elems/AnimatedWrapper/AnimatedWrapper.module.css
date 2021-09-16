@@ -1,0 +1,14 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  transition: left 0.2s;
+
+  &.isShowSubMenu {
+    left: -100%;
+  }
+}

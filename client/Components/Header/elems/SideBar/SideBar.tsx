@@ -1,5 +1,5 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
-import { useSpring, animated } from 'react-spring';
+import React, { FC, HTMLAttributes, useState } from 'react';
+import cn from 'classnames';
 
 import AnimatedWrapper from '../AnimatedWrapper';
 import MobileNavContainer from '../MobileNavContainer';
@@ -16,56 +16,23 @@ export interface SideBarProps extends HTMLAttributes<HTMLDivElement> {
   setIsShowSubMenuContent: (arg: boolean) => void;
   isShowSubMenuContent: boolean;
   isShowSubMenu: boolean;
-  hideSideBar: () => void;
+  onClose?: () => void;
 }
 
-const SideBar: FC<SideBarProps> = ({
-  isShowSubMenuContent,
-  isShowSubMenu,
-  setIsShowSubMenu,
-  isOpenSideBar,
-  hideSideBar,
-  setIsShowSubMenuContent,
-}) => {
+const SideBar: FC<SideBarProps> = (props) => {
+  const { isShowSubMenuContent, isShowSubMenu, setIsShowSubMenu, isOpenSideBar, onClose } = props;
   const [activeMenu, setActiveMenu] = useState('catalog');
 
-  const [{ left }, api] = useSpring(() => ({
-    from: { left: `-100%` },
-    config: { duration: 300 },
-  }));
-
-  useEffect(() => {
-    if (isOpenSideBar) {
-      api.start({
-        reset: true,
-        left: '0%',
-      });
-    } else {
-      api.start({
-        left: '-100%',
-        onRest: () => {
-          setIsShowSubMenu(false);
-        },
-      });
-    }
-  }, [setIsShowSubMenu, isOpenSideBar, api]);
-
   return (
-    <animated.div style={{ left }} className={styles.sideBar}>
-      <AnimatedWrapper
-        setIsShowSubMenu={setIsShowSubMenu}
-        isShowSubMenu={isShowSubMenu}
-        className={styles.inner}
-        isShowSubMenuContent={isShowSubMenuContent}
-        setIsShowSubMenuContent={setIsShowSubMenuContent}
-      >
+    <div className={cn(styles.sideBar, { [styles.opened]: isOpenSideBar })}>
+      <AnimatedWrapper isShowSubMenu={isShowSubMenu}>
         {(ref: React.LegacyRef<HTMLDivElement>) => (
           <div className={styles.inWrap}>
             <div ref={ref} className={styles.inWrap}>
               <MobileNavContainer className={styles.header}>
                 <div className={styles.wrapperSearch}>
                   <Search isMenu className={styles.search} />
-                  <button className={styles.close} onClick={hideSideBar} type='button' />
+                  <button className={styles.close} type='button' onClick={onClose} />
                 </div>
               </MobileNavContainer>
               <MobileNavContainer>
@@ -73,7 +40,7 @@ const SideBar: FC<SideBarProps> = ({
               </MobileNavContainer>
               <MainNavMobile
                 activeMenu={activeMenu}
-                hideSideBar={hideSideBar}
+                hideSideBar={onClose}
                 setIsShowSubMenu={setIsShowSubMenu}
                 isShowSubMenuContent={isShowSubMenuContent}
               />
@@ -82,7 +49,7 @@ const SideBar: FC<SideBarProps> = ({
           </div>
         )}
       </AnimatedWrapper>
-    </animated.div>
+    </div>
   );
 };
 

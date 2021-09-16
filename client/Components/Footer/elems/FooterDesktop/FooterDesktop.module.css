@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  max-width: 35%;
+  max-width: 20%;
 
   &:not(:last-child) {
     margin-right: var(--space-l);
@@ -19,7 +19,7 @@
 }
 
 .footerSubscription {
-  width: 240px;
+  width: 100%;
   max-width: 240px;
 }
 
