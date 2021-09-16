@@ -56,6 +56,9 @@ const routes: RoutesMap = {
   siteMap: {
     path: '/site/site-map',
   },
+  siteMapFull: {
+    path: '/site/site-map-full',
+  },
 
   //
   privacyPolicy: {

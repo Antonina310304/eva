@@ -1,15 +1,15 @@
 import React, { memo, FC } from 'react';
 import cn from 'classnames';
 
-import { SubcategoryData } from '@Types/Category';
 import Link from '@UI/Link';
 import Image from '@UI/Image';
+import { CategoryProps } from '../../typings';
 import styles from './SiteMapSection.module.css';
 
 interface SiteMapSectionProps {
   className?: string;
   name: string;
-  subcategories: SubcategoryData[];
+  subcategories: CategoryProps[];
 }
 
 const SiteMapSection: FC<SiteMapSectionProps> = (props) => {
