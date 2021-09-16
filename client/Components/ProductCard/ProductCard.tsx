@@ -61,6 +61,20 @@ const ProductCard: FC<ProductCardProps> = (props) => {
     });
   }, [openModal, product.id]);
 
+  const handleClickFastView = useCallback(() => {
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
+
+  const handleClickLike = useCallback(() => {
+    openModal('Info', {
+      title: 'Упс!',
+      text: 'Ещё не готово, заходите позже…',
+    });
+  }, [openModal]);
+
   return (
     <div
       {...restProps}
@@ -84,8 +98,11 @@ const ProductCard: FC<ProductCardProps> = (props) => {
               />
 
               <div className={styles.actions}>
-                <FastView className={cn(styles.action, styles.fastView)} />
-                <Like className={cn(styles.action, styles.like)} />
+                <FastView
+                  className={cn(styles.action, styles.fastView)}
+                  onClick={handleClickFastView}
+                />
+                <Like className={cn(styles.action, styles.like)} onClick={handleClickLike} />
               </div>
 
               {product.tags?.length > 0 && (

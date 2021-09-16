@@ -24,7 +24,8 @@
     "lint:css:fix": "stylelint **.css --fix",
     "code-style": "prettier --check .",
     "code-style:fix": "prettier --write .",
-    "type-check": "tsc -p tsconfig.json --noEmit"
+    "type-check": "tsc -p tsconfig.json --noEmit",
+    "cypress:open": "cypress open"
   },
   "author": "Yury Kundin",
   "license": "ISC",
@@ -113,6 +114,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.2.4",
     "css-minimizer-webpack-plugin": "^2.0.0",
+    "cypress": "^8.3.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-typescript": "^9.0.0",

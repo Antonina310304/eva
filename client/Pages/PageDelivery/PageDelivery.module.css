@@ -240,16 +240,16 @@
 }
 
 @media (--desktop-m) {
+  .page {
+    padding-bottom: var(--space-xb);
+  }
+
   .mainContainer {
     --gap: var(--space-xxl);
   }
 }
 
 @media (--desktop) {
-  .page {
-    padding-top: var(--space-xb);
-  }
-
   .mainContainer {
     margin-bottom: var(--space-xb);
   }

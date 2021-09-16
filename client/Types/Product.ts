@@ -62,3 +62,11 @@ export interface ProductData {
   units?: UnitData[];
   rating?: number;
 }
+
+export interface ProductSearchData {
+  id: number;
+  img: string;
+  link: string;
+  name: string;
+  price: number;
+}

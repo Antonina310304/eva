@@ -7,6 +7,7 @@ import React, {
   useState,
   useRef,
   useEffect,
+  MutableRefObject,
 } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
@@ -47,7 +48,7 @@ const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const [, { openModal }] = useModals();
-  const { isMobileM } = useMedias();
+  const { isDesktop, isMobileM } = useMedias();
   const [selectedCrossSaleTab, setSelectedCrossSaleTab] = useState('all');
   const [positionSidebar, setPositionSidebar] = useState(null);
   const refCharacteristics = useRef<HTMLDivElement>();
@@ -58,6 +59,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
   const refLastScroll = useRef(0);
   const howManyCanScroll = useRef(null);
   const howRestScroll = useRef(null);
+  const headerHeight = isDesktop ? 0 : 90;
 
   const siteReviews = useMemo(() => {
     return (page.reviewsSubgallery || []).filter((review: ReviewData) => {
@@ -92,11 +94,23 @@ const PageProduct: FC<PageProductProps> = (props) => {
     });
   }, [page, selectedCrossSaleTab]);
 
+  const scrollToRef = useCallback(
+    (ref: MutableRefObject<HTMLDivElement>) => {
+      if (!ref?.current) return;
+
+      const rect = ref.current.getBoundingClientRect();
+      const top = window.scrollY + rect.top - headerHeight;
+
+      window.scrollTo({ top, behavior: 'smooth' });
+    },
+    [headerHeight],
+  );
+
   const handleCalc = useCallback(() => {
     const rectSidebar = refSidebar.current.getBoundingClientRect();
 
-    howManyCanScroll.current = rectSidebar.height - window.innerHeight + 30;
-  }, []);
+    howManyCanScroll.current = rectSidebar.height - window.innerHeight + 30 + headerHeight;
+  }, [headerHeight]);
 
   const handleCalcMatrasy = useCallback(() => {
     console.log('Event to analytic!');
@@ -111,16 +125,12 @@ const PageProduct: FC<PageProductProps> = (props) => {
   }, []);
 
   const handleClickCharacteristics = useCallback(() => {
-    if (!refCharacteristics.current) return;
-
-    refCharacteristics.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+    scrollToRef(refCharacteristics);
+  }, [scrollToRef]);
 
   const handleClickReviews = useCallback(() => {
-    if (!refReviews.current) return;
-
-    refReviews.current.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+    scrollToRef(refReviews);
+  }, [scrollToRef]);
 
   const handleChangePositionSidebar = useCallback(() => {
     // Для расчета позиции скрола используем Math.abs(rectDocument.top) вместо window.pageYOffset
@@ -143,7 +153,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
       howRestScroll.current = howManyCanScroll.current;
     }
 
-    if (rectSidebar.top <= 0) {
+    if (rectSidebar.top <= headerHeight) {
       howRestScroll.current += diffScroll;
     }
 
@@ -159,7 +169,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     // И прерываем последующие расчеты позиции
     if (
       Math.round(rectContent.bottom) <= Math.round(rectSidebar.bottom) &&
-      Math.round(rectSidebar.top) <= 0
+      Math.round(rectSidebar.top) <= headerHeight
     ) {
       setPositionSidebar({
         position: 'absolute',
@@ -171,7 +181,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     }
 
     // Фиксируем нижнюю границу сайдбара и искусственно смещаем по оси Y на кол-во оставшегося скрола
-    if (Math.round(rectContent.top) <= 0) {
+    if (Math.round(rectContent.top) <= headerHeight) {
       setPositionSidebar({
         position: 'fixed',
         bottom: 30,
@@ -182,7 +192,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
     } else {
       setPositionSidebar(null);
     }
-  }, []);
+  }, [headerHeight]);
 
   useRelatedProducts({ productId: page.product.id, lists: page.relatedProducts });
 

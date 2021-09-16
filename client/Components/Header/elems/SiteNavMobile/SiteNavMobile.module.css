@@ -1,0 +1,42 @@
+.siteNav {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+
+  list-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.item {
+  display: block;
+  margin-right: var(--space-xl);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.siteNav .link {
+  display: block;
+
+  font-size: var(--size-n);
+  line-height: 150%;
+  white-space: nowrap;
+}
+
+.active {
+  color: var(--color-grafit);
+
+  transition: color 150ms ease-in;
+
+  &:before {
+    width: 100%;
+
+    transition: width 150ms ease-in;
+  }
+}

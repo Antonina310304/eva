@@ -48,7 +48,7 @@
     position: relative;
 
     box-sizing: border-box;
-    width: 100%;
+    width: 100vw;
     max-width: 100%;
     padding: var(--space-n) var(--space-s) var(--space-l);
   }

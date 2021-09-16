@@ -11,3 +11,7 @@
 
   font-size: var(--size-xl);
 }
+
+.button {
+  margin-top: var(--space-m);
+}

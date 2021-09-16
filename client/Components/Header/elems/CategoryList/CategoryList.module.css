@@ -1,0 +1,26 @@
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.item .link {
+  display: inline-block;
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
+
+  color: var(--color-black);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+
+  &:hover {
+    font-weight: 500;
+  }
+
+  @media (--only-desktop) {
+    padding-top: var(--space-xxs);
+    padding-bottom: var(--space-xxs);
+  }
+}

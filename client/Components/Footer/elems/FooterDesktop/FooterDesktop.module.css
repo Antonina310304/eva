@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  max-width: 35%;
+  max-width: 20%;
 
   &:not(:last-child) {
     margin-right: var(--space-l);
@@ -11,7 +11,7 @@
 }
 
 .wrapperMedium {
-  margin-bottom: 25px;
+  margin-bottom: var(--space-m);
 }
 
 .wrapperBig {
@@ -19,24 +19,24 @@
 }
 
 .footerSubscription {
-  width: 240px;
+  width: 100%;
   max-width: 240px;
 }
 
 .footerText {
+  composes: s from 'sizes';
+
   margin: 0;
 
   color: var(--color-dark-gray);
-  font-size: var(--size-s);
-  line-height: 21px;
 }
 
 .madeIn {
+  composes: s from 'sizes';
+
   margin: 0;
 
   color: var(--color-black);
-  font-size: var(--size-s);
-  line-height: 25px;
 }
 
 .marginTop95 {

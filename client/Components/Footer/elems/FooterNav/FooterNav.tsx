@@ -17,9 +17,10 @@ const FooterNav: FC<FooterNavProps> = (props) => {
 
   return (
     <ul className={styles.footerNav}>
-      {(linkList || []).map((item) => {
+      {/* TODO: удалить после полной замены фейковых данных на реальные */}
+      {(linkList || []).map((item, index) => {
         return (
-          <li key={item.title} className={styles.footerNavItem}>
+          <li key={index} className={styles.footerNavItem}>
             {item.url ? (
               <Link className={styles.footerNavLink} to={item.url}>
                 <Boldik>{item.title}</Boldik>
@@ -31,9 +32,9 @@ const FooterNav: FC<FooterNavProps> = (props) => {
         );
       })}
 
-      {(items || []).map((item) => {
+      {(items || []).map((item, index) => {
         return (
-          <li key={item.title} className={styles.footerNavItem}>
+          <li key={index} className={styles.footerNavItem}>
             {item.link ? (
               <Link className={styles.footerNavLink} to={item.link}>
                 <Boldik>{item.text}</Boldik>

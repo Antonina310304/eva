@@ -1,0 +1,34 @@
+.callBack {
+}
+
+.title {
+  font-size: var(--size-l);
+  line-height: var(--lh-m);
+}
+
+.text {
+  margin-top: var(--space-n);
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.button {
+  width: 100%;
+  max-width: 420px;
+  margin-top: var(--space-l);
+}
+
+.nuance {
+  margin-top: var(--space-l);
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
+}
+
+@media (--desktop) {
+  .button {
+    max-width: 300px;
+  }
+}

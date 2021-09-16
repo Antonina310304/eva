@@ -1,0 +1,21 @@
+.filters {
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--space-xs);
+}
+
+.selectedFilters {
+  margin-top: var(--space-n);
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-xs);
+  line-height: var(--lh-s);
+}
