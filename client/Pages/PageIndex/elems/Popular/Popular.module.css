@@ -1,0 +1,40 @@
+.wrapper {
+}
+
+.galleryWrapper {
+  overflow: hidden;
+}
+
+.gallery {
+  overflow: hidden;
+}
+
+.itemWrapper {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 15px;
+
+  @media (--only-desktop) {
+    padding: 0 15px;
+  }
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 -70px 30px;
+
+  @media (--desktop-m) {
+    margin: 0 -40px 30px;
+  }
+
+  @media (--mobile-m) {
+    margin: 0 -15px 30px;
+  }
+}
+
+.container {
+  composes: main from 'containers';
+}

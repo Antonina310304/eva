@@ -9,8 +9,9 @@ import MainGallery from './elems/MainGallery';
 import Hits from './elems/Hits';
 import Recommendations from './elems/Recommendations';
 import NewProducts from './elems/NewProducts';
+import Popular from './elems/Popular';
 import { PromoCardData } from './elems/PromoCard';
-import { sliderData, hits } from './data';
+import { sliderData, hits, popular } from './data';
 import mockPromoCardData from './mockPromoCardData';
 import styles from './PageIndex.module.css';
 
@@ -36,15 +37,19 @@ const PageIndex: FC<PageIndexProps> = (props) => {
         </Hits>
       </div>
 
+      <div className={styles.section}>
+        <Recommendations cards={mockPromoCardData as PromoCardData[]} />
+      </div>
+
+      <div className={styles.section}>
+        <Popular title='Популярные категории' categories={popular.products} />
+      </div>
+
       {page.novelties?.items.length > 0 && (
         <div className={styles.section}>
           <NewProducts title='Новинки' products={page.novelties.items} />
         </div>
       )}
-
-      <div className={styles.section}>
-        <Recommendations cards={mockPromoCardData as PromoCardData[]} />
-      </div>
 
       <div className={styles.container}>
         <div className={styles.section}>

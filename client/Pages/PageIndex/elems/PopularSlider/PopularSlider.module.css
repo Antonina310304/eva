@@ -1,0 +1,71 @@
+.mobileGrid {
+  display: inline-block;
+}
+
+.mobileGridItem {
+  width: 100%;
+}
+
+.mobileGridM {
+  display: inline-grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    'big big'
+    'small1 small2';
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mobileCardM:first-child {
+  grid-area: big;
+}
+
+.mobileCardM:nth-child(2) {
+  grid-area: small1;
+}
+.mobileCardM:nth-child(3) {
+  grid-area: small2;
+}
+
+.gridDesktop {
+  display: inline-grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    'big big  small3 small4'
+    'big big big2 big2'
+    'small1 small2 big2 big2';
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto;
+  box-sizing: border-box;
+  width: 100%;
+
+  @media (--only-desktop) {
+    grid-gap: 30px;
+  }
+}
+
+.cardDesktop {
+  grid-area: big;
+}
+
+.cardDesktop:nth-child(2) {
+  grid-area: small1;
+}
+
+.cardDesktop:nth-child(3) {
+  grid-area: small2;
+}
+
+.cardDesktop:nth-child(4) {
+  grid-area: small3;
+}
+
+.cardDesktop:nth-child(5) {
+  grid-area: small4;
+}
+
+.cardDesktop:nth-child(6) {
+  grid-area: big2;
+}

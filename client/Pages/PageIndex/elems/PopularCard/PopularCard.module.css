@@ -1,0 +1,155 @@
+.wrapper {
+  position: relative;
+
+  display: block;
+
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.imgWrapper {
+  position: relative;
+
+  height: 0;
+  margin: 0;
+  padding-bottom: 48.91%;
+  overflow: hidden;
+
+  line-height: 0;
+
+  background: var(--color-light-gray);
+  border-radius: 5px;
+
+  @media (--mobile-m) {
+    padding-bottom: 46.2%;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    flex-shrink: 0;
+    min-width: 100%;
+    max-width: none;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+  }
+}
+
+.imgWrapper.mobile {
+  padding-bottom: 73%;
+}
+
+.imgWrapper.long {
+  padding-bottom: 48.91%;
+
+  @media (--desktop-m) {
+    padding-bottom: 54.29%;
+  }
+
+  @media (--desktop) {
+    padding-bottom: 57.57%;
+  }
+
+  @media (--mobile-m) {
+    padding-bottom: 46.2%;
+  }
+}
+
+.imgWrapper.short {
+  padding-bottom: 55.14%;
+
+  @media (--desktop-m) {
+    padding-bottom: 71.23%;
+  }
+
+  @media (--desktop-m) {
+    padding-bottom: 71.23%;
+  }
+  @media (--desktop) {
+    padding-bottom: 75.56%;
+  }
+
+  @media (--mobile-m) {
+    padding-bottom: 59.33%;
+  }
+}
+
+.titleWrap {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  display: flex;
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--size-l);
+  line-height: 150%;
+
+  @media (--desktop) {
+    font-size: var(--size-m);
+    line-height: 23px;
+  }
+}
+
+.count {
+  margin-left: 5px;
+
+  color: var(--color-dark-gray);
+  font-size: 12px;
+  line-height: 150%;
+}
+
+.discount {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  z-index: 1;
+
+  margin-left: 24px;
+
+  padding: 10px 20px;
+  padding-left: 20px;
+
+  font-weight: 500;
+  font-size: var(--size-m);
+  line-height: 23px;
+
+  background-color: var(--color-white);
+
+  border-radius: 0 8px 8px 0;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: -24px;
+
+    width: 33px;
+    height: 100%;
+
+    background: url('./badge-corner.svg') no-repeat center;
+    background-size: contain;
+
+    content: '';
+  }
+}
+
+.fit-mobile {
+  padding-bottom: 73%;
+}
+
+.fit-mobileM-first {
+  padding-bottom: 73%;
+}
+
+.fit-mobileM-first {
+  padding-bottom: 73%;
+}
