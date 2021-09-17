@@ -25,23 +25,23 @@
 
 .instagramDescription {
   font-size: var(--size-m);
-  font-family: var(--font-main);
-  line-height: 150%;
+  line-height: var(--lh-m);
 
   @media (--desktop) {
     font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 }
 
 .section {
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: var(--space-xxe);
 
   @media (--desktop-m) {
-    margin-bottom: 80px;
+    margin-bottom: var(--space-e);
   }
   @media (--desktop) {
-    margin-bottom: 60px;
+    margin-bottom: var(--space-xb);
   }
 }
 

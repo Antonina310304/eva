@@ -6,7 +6,7 @@
   composes: main from 'containers';
 
   min-height: 40px;
-  margin: 0 auto 40px;
+  margin: 0 auto var(--space-xxl);
   overflow: hidden;
 }
 
@@ -14,7 +14,7 @@
   position: relative;
 
   @media (--mobile) {
-    margin-bottom: 15px;
+    margin-bottom: var(--space-s);
 
     &:last-child {
       margin-bottom: 0;
@@ -30,7 +30,7 @@
 
 .grid {
   display: grid;
-  grid-gap: 30px;
+  grid-gap: var(--space-l);
   grid-template-columns: auto;
 
   @media (--mobile) {
@@ -94,7 +94,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 40px;
+  margin-top: var(--space-xxl);
 }
 
 .container {

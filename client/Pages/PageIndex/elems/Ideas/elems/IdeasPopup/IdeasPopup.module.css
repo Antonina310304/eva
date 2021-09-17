@@ -2,7 +2,7 @@
   display: flex;
   box-sizing: border-box;
   width: 396px;
-  padding: 45px 20px 15px;
+  padding: 45px var(--space-n) var(--space-s);
 
   background: var(--color-white);
 }
@@ -25,8 +25,8 @@
 
 .tags {
   position: absolute;
-  right: 15px;
-  bottom: 20px;
+  right: var(--space-s);
+  bottom: var(--space-n);
 
   display: flex;
 }
@@ -36,7 +36,7 @@
   height: 60px;
 
   &:not(&:first-child) {
-    margin-left: 10px;
+    margin-left: var(--space-xs);
   }
 }
 
@@ -48,38 +48,35 @@
 }
 
 .title {
-  margin-top: 9px;
-  margin-bottom: 5px;
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xxs);
 
   color: var(--color-black);
-  line-height: 24px;
 }
 
 .totalPrice {
   color: var(--color-black);
   font-weight: 500;
-  font-size: 18px;
-  line-height: 23px;
+  font-size: var(--size-m);
 }
 
 .price {
-  margin-left: 10px;
+  margin-left: var(--space-xs);
 
   color: var(--color-dark-gray);
-  line-height: 24px;
 }
 
 .discount {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
+  margin-left: var(--space-xs);
 }
 
 .details {
   display: inline-block;
   width: fit-content;
-  margin-top: 25px;
+  margin-top: var(--space-m);
 
   border-bottom: 1px solid var(--color-dark-gray);
 }
@@ -88,11 +85,10 @@
   display: inline-block;
 
   color: var(--color-dark-gray);
-  line-height: 24px;
 }
 
 .like {
   position: absolute;
-  top: 21px;
-  right: 20px;
+  top: var(--space-n);
+  right: var(--space-n);
 }

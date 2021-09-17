@@ -2,7 +2,7 @@
   display: inline-flex;
   flex: 0 0 auto;
   width: 100%;
-  padding: 0 15px;
+  padding: 0 var(--space-s);
 }
 
 .galleryWrapper {
@@ -23,24 +23,24 @@
   justify-content: space-between;
   width: 100%;
   max-width: 606px;
-  padding: 60px 170px;
+  padding: var(--space-xb) 170px;
 
   @media (--desktop-m) {
-    padding: 40px 150px;
+    padding: var(--space-xxl) 150px;
   }
 
   @media (--desktop) {
     max-width: 340px;
-    padding: 30px 110px;
+    padding: var(--space-l) 110px;
   }
 
   @media (--mobile-m) {
     max-width: 260px;
-    padding: 20px 60px;
+    padding: var(--space-n) var(--space-xb);
   }
 
   @media (--mobile) {
-    padding: 15px 30px;
+    padding: var(--space-s) var(--space-l);
   }
 }
 
@@ -83,27 +83,29 @@
 }
 
 .date {
-  margin: 0 0 50px;
+  margin: 0 0 var(--space-b);
 
   color: var(--color-black);
   font-size: var(--size-l);
-  line-height: 150%;
+  line-height: var(--lh-l);
 
   @media (--desktop) {
-    margin-bottom: 26px;
+    margin-bottom: var(--space-m);
 
     font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 
   @media (--mobile-m) {
-    margin-bottom: 10px;
+    margin-bottom: var(--space-xs);
 
     font-size: var(--size-s);
+    line-height: var(--lh-s);
   }
 }
 
 .header {
-  margin: 0 0 20px;
+  margin: 0 0 var(--space-n);
 
   color: var(--color-black);
   font-weight: 500;
@@ -133,25 +135,26 @@
 }
 
 .subtitle {
-  margin: 0 0 40px;
+  margin: 0 0 var(--space-xxl);
 
-  font-size: 35px;
-  line-height: 150%;
+  font-size: var(--size-b);
+  line-height: var(--lh-b);
 
   @media (--desktop-m) {
-    font-size: 22px;
-    line-height: 150%;
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
   }
 
   @media (--desktop) {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-n);
 
-    font-size: 16px;
-    line-height: 150%;
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 
   @media (--mobile) {
-    font-size: 14px;
+    font-size: var(--size-s);
+    line-height: var(--lh-s);
   }
 }
 
@@ -160,23 +163,23 @@
 }
 
 .text {
-  margin: 0 0 5px;
+  margin: 0 0 var(--space-xxs);
 
   font-size: var(--size-n);
-  font-family: var(--font-main);
-  line-height: 150%;
+  line-height: var(--lh-n);
 
   @media (--desktop-m) {
     font-size: var(--size-s);
+    line-height: var(--lh-s);
   }
 
   @media (--mobile) {
-    margin: 0 0 10px;
+    margin: 0 0 var(--space-xs);
   }
 }
 
 .arrowWrapper {
-  padding: 0 40px;
+  padding: 0 var(--space-xxl);
 
   @media (--mobile-m) {
     display: none;

@@ -6,7 +6,7 @@
 }
 
 .sectionTitle {
-  margin-bottom: -40px;
+  margin-bottom: var(--space-xxl-neg);
 }
 
 .productItem {

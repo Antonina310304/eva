@@ -7,7 +7,7 @@
 
   display: block;
   margin: 0;
-  padding-right: 20px;
+  padding-right: var(--space-n);
 
   font-weight: 500;
   font-size: var(--size-xb);
@@ -17,7 +17,7 @@
   &:before {
     position: absolute;
     top: 50%;
-    right: 5px;
+    right: var(--space-xxs);
 
     transform: translateY(-50%);
 
@@ -46,13 +46,14 @@
 
 .description {
   margin: 0;
-  padding-right: 20px;
+  padding-right: var(--space-n);
 
   font-size: var(--size-s);
-  line-height: 150%;
+  line-height: var(--lh-s);
 
   @media (--desktop-m) {
     font-size: var(--size-xs);
+    line-height: var(--lh-xs);
   }
 
   @media (--mobile-m) {

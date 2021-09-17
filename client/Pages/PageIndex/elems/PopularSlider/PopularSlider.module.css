@@ -8,7 +8,7 @@
 
 .mobileGridM {
   display: inline-grid;
-  grid-gap: 20px;
+  grid-gap: var(--space-n);
   grid-template-areas:
     'big big'
     'small1 small2';
@@ -42,7 +42,7 @@
   width: 100%;
 
   @media (--only-desktop) {
-    grid-gap: 30px;
+    grid-gap: var(--space-l);
   }
 }
 

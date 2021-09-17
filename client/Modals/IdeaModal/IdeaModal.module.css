@@ -24,8 +24,8 @@
 
 .tags {
   position: absolute;
-  right: 15px;
-  bottom: 20px;
+  right: var(--space-s);
+  bottom: var(--space-n);
 
   display: flex;
 }
@@ -35,7 +35,7 @@
   height: 40px;
 
   &:not(&:first-child) {
-    margin-left: 10px;
+    margin-left: var(--space-xs);
   }
 }
 
@@ -47,11 +47,10 @@
 }
 
 .title {
-  margin-top: 9px;
-  margin-bottom: 5px;
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xxs);
 
   color: var(--color-black);
-  line-height: 24px;
 }
 
 .prices {
@@ -62,26 +61,23 @@
 .actualPrice {
   color: var(--color-black);
   font-weight: 500;
-  font-size: 18px;
-  line-height: 23px;
+  font-size: var(--size-m);
 }
 
 .expiredPrice {
-  margin-left: 10px;
+  margin-left: var(--space-xs);
 
   color: var(--color-dark-gray);
-  font-size: 16px;
-  line-height: 24px;
 }
 
 .discount {
-  margin-left: 10px;
+  margin-left: var(--space-xs);
 }
 
 .details {
   display: inline-block;
   width: fit-content;
-  margin: 25px auto 0;
+  margin: var(--space-m) auto 0;
 
   border-bottom: 1px solid var(--color-dark-gray);
 }
@@ -90,12 +86,11 @@
   display: inline-block;
 
   color: var(--color-dark-gray);
-  line-height: 24px;
 }
 
 .like {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: var(--space-n);
+  right: var(--space-n);
   z-index: 2;
 }

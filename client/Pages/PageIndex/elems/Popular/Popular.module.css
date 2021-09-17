@@ -13,25 +13,21 @@
   flex: 0 0 auto;
   box-sizing: border-box;
   width: 100%;
-  padding: 0 15px;
-
-  @media (--only-desktop) {
-    padding: 0 15px;
-  }
+  padding: 0 var(--space-s);
 }
 
 .headerWrapper {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 0 -70px 30px;
+  margin: 0 var(--space-xxb-neg) var(--space-l);
 
   @media (--desktop-m) {
-    margin: 0 -40px 30px;
+    margin: 0 var(--space-xxl-neg) var(--space-l);
   }
 
   @media (--mobile-m) {
-    margin: 0 -15px 30px;
+    margin: 0 var(--space-s-neg) var(--space-l);
   }
 }
 

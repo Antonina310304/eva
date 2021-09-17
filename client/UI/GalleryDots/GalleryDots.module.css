@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px -5px 0;
+  margin: var(--space-l) var(--space-xxs-neg) 0;
   padding: 0;
 
   list-style: none;
 
   @media (--mobile-m) {
-    margin-top: 20px;
+    margin-top: var(--space-n);
   }
 }
 
@@ -16,7 +16,7 @@
   box-sizing: border-box;
   width: 10px;
   height: 10px;
-  margin: 0 5px;
+  margin: 0 var(--space-xxs);
 
   font-size: 0;
 

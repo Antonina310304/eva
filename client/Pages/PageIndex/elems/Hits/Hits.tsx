@@ -24,19 +24,15 @@ const Hits: FC<HitsProps> = (props) => {
         </div>
       </div>
 
-      <div>
-        <div className={styles.wrapperGallery}>
-          <CrossSaleSection
-            className={styles.sectionCrossSale}
-            products={products}
-            renderItem={(productCardProps) => (
-              <div className={styles.productItem}>
-                <CrossSaleProductCard {...productCardProps} />
-              </div>
-            )}
-          />
-        </div>
-      </div>
+      <CrossSaleSection
+        className={styles.sectionCrossSale}
+        products={products}
+        renderItem={(productCardProps) => (
+          <div className={styles.productItem}>
+            <CrossSaleProductCard {...productCardProps} />
+          </div>
+        )}
+      />
     </div>
   );
 };

@@ -17,14 +17,14 @@
   min-height: 408px;
   max-height: 780px;
 
-  padding: 30px 20px 40px;
+  padding: var(--space-l) var(--space-n) var(--space-xxl);
 }
 
 .period {
   position: relative;
 
   font-size: var(--size-l);
-  line-height: 1.5;
+  line-height: var(--lh-l);
 }
 
 .title {
@@ -35,27 +35,27 @@
 
   font-weight: 500;
   font-size: var(--size-b);
-  line-height: 1.5;
+  line-height: var(--lh-b);
 }
 
 .description {
   position: relative;
 
   font-size: var(--size-l);
-  line-height: 1.5;
+  line-height: var(--lh-l);
 }
 
 .discount {
   position: absolute;
-  top: 30px;
-  right: 20px;
+  top: var(--space-l);
+  right: var(--space-n);
   z-index: 1;
 
-  padding: 11px 20px;
+  padding: var(--space-xs) var(--space-n);
 
   font-weight: 500;
   font-size: var(--size-xl);
-  line-height: 1.5;
+  line-height: var(--lh-xl);
 
   background-color: var(--color-white);
 
@@ -64,7 +64,7 @@
   &::after {
     position: absolute;
     top: 0;
-    left: -32px;
+    left: var(--space-l-neg);
 
     width: 33px;
     height: 100%;
@@ -137,16 +137,17 @@
 
 @media (--desktop) {
   .card {
-    padding: 20px 15px 30px;
+    padding: var(--space-n) var(--space-s) var(--space-l);
   }
 
   .discount {
     top: var(--space-n);
     right: var(--space-s);
 
-    padding: 5px 10px;
+    padding: var(--space-xxs) var(--space-xs);
 
     font-size: var(--size-n);
+    line-height: var(--lh-n);
 
     &::after {
       left: -17px;

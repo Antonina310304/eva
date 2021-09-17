@@ -3,7 +3,7 @@
 }
 
 .gallery {
-  margin: 0 -15px;
+  margin: 0 var(--space-s-neg);
   overflow: hidden;
 }
 

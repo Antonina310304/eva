@@ -6,7 +6,7 @@
 }
 
 .title {
-  margin: 0 0 25px;
+  margin: 0 0 var(--space-m);
 
   color: var(--color-black);
   font-weight: 500;
@@ -26,7 +26,7 @@
 
   @media (--mobile-m) {
     font-size: var(--size-xl);
-    line-height: 150%;
+    line-height: var(--lh-xl);
   }
 }
 
@@ -34,11 +34,11 @@
   margin: 0;
 
   font-size: var(--size-m);
-  font-family: var(--font-main);
-  line-height: 150%;
+  line-height: var(--lh-m);
 
   @media (--desktop) {
     font-size: var(--size-n);
+    line-height: var(--lh-n);
   }
 }
 
@@ -51,10 +51,7 @@
 
 .header {
   max-width: 1176px;
-  margin: 0 auto 40px;
+  margin: 0 auto var(--space-xxl);
 
   text-align: center;
-}
-
-.wrapperGallery {
 }

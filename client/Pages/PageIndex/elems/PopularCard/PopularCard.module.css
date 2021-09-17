@@ -83,8 +83,8 @@
 
 .titleWrap {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: var(--space-n);
+  left: var(--space-n);
 
   display: flex;
 }
@@ -92,7 +92,7 @@
 .title {
   font-weight: 500;
   font-size: var(--size-l);
-  line-height: 150%;
+  line-height: var(--lh-l);
 
   @media (--desktop) {
     font-size: var(--size-m);
@@ -101,23 +101,23 @@
 }
 
 .count {
-  margin-left: 5px;
+  margin-left: var(--space-xxs);
 
   color: var(--color-dark-gray);
-  font-size: 12px;
-  line-height: 150%;
+  font-size: var(--size-xs);
+  line-height: var(--lh-xs);
 }
 
 .discount {
   position: absolute;
-  bottom: 30px;
-  left: 20px;
+  bottom: var(--space-l);
+  left: var(--space-n);
   z-index: 1;
 
-  margin-left: 24px;
+  margin-left: var(--space-m);
 
-  padding: 10px 20px;
-  padding-left: 20px;
+  padding: var(--space-xs) var(--space-n);
+  padding-left: var(--space-n);
 
   font-weight: 500;
   font-size: var(--size-m);
@@ -130,7 +130,7 @@
   &::before {
     position: absolute;
     top: 0;
-    left: -24px;
+    left: var(--space-m-neg);
 
     width: 33px;
     height: 100%;
