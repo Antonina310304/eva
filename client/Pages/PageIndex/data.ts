@@ -936,7 +936,7 @@ export const products = [
 export const posts = [
   {
     id: '1334',
-    img: 'react/static/img/instagram/580x580_ffffff_100_1_2020061713570610800_80.jpg',
+    img: '/react/static/img/instagram/580x580_ffffff_100_1_2020061713570610800_80.jpg',
     link: 'https://www.instagram.com/p/CA-8HMxKCw9/',
     author: 'plastelinno',
     products: [
@@ -944,7 +944,7 @@ export const posts = [
         id: 45564,
         type: 'Пуф',
         name: 'Гритон Sherst Grey',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2021042712530610800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2021042712530610800_80.jpg',
         link: '/product/puf-griton-sherst-grey',
         price: { actual: 9990, expired: 11990, discount: 16 },
       },
@@ -952,7 +952,7 @@ export const posts = [
         id: 5033,
         type: 'Диван',
         name: 'Динс Sherst Grey',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2018060407142610800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2018060407142610800_80.jpg',
         link: '/product/divan-dins-sherst-grey',
         price: { actual: 39990, expired: 39990, discount: 0 },
       },
@@ -960,7 +960,7 @@ export const posts = [
   },
   {
     id: '302',
-    img: 'react/static/img/instagram/580x580_ffffff_100_1_2020050510060010800_80.jpg',
+    img: '/react/static/img/instagram/580x580_ffffff_100_1_2020050510060010800_80.jpg',
     link: 'https://www.instagram.com/p/B7D8f6GiXxQ',
     author: 'official_divan.ru',
     products: [
@@ -968,7 +968,7 @@ export const posts = [
         id: 86194,
         type: 'Кресло',
         name: 'Ньюбери 238',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2021012611582310800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2021012611582310800_80.jpg',
         link: '/product/kreslo-nyuberi-238',
         price: { actual: 11990, expired: 12990, discount: 7 },
       },
@@ -976,7 +976,7 @@ export const posts = [
         id: 5032,
         type: 'Диван',
         name: 'Динс Sherst Blue',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2018060406524410800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2018060406524410800_80.jpg',
         link: '/product/divan-dins-sherst-blue',
         price: { actual: 39990, expired: 39990, discount: 0 },
       },
@@ -984,7 +984,7 @@ export const posts = [
         id: 86195,
         type: 'Пуф',
         name: 'Ньюбери 238',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2021042311152810800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2021042311152810800_80.jpg',
         link: '/product/puf-nyuberi-238',
         price: { actual: 3990, expired: 3990, discount: 0 },
       },
@@ -992,7 +992,7 @@ export const posts = [
   },
   {
     id: '145',
-    img: 'react/static/img/instagram/580x580_ffffff_100_1_2020042912230610800_80.jpg',
+    img: '/react/static/img/instagram/580x580_ffffff_100_1_2020042912230610800_80.jpg',
     link: 'https://www.instagram.com/p/B7-pATVhXqY',
     author: 'dianajenia',
     products: [
@@ -1000,7 +1000,7 @@ export const posts = [
         id: 21515,
         type: 'Пуф',
         name: 'Динс Velvet Yellow',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2018102411562110800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2018102411562110800_80.jpg',
         link: '/product/puf-dins-velvet-yellow',
         price: { actual: 6990, expired: 6990, discount: 0 },
       },
@@ -1008,14 +1008,14 @@ export const posts = [
   },
   {
     id: '3229',
-    img: 'react/static/img/instagram/580x580_ffffff_100_1_2021051108275510800_80.jpg',
+    img: '/react/static/img/instagram/580x580_ffffff_100_1_2021051108275510800_80.jpg',
     link: 'https://www.instagram.com/p/CM7Zp5vFNtU/',
     author: 'nastavetrova',
     products: [],
   },
   {
     id: '3282',
-    img: 'react/static/img/instagram/580x580_ffffff_100_1_2021051108284310800_80.jpg',
+    img: '/react/static/img/instagram/580x580_ffffff_100_1_2021051108284310800_80.jpg',
     link: 'https://www.instagram.com/p/CNCoSPdjnC_/',
     author: 'aksy_home',
     products: [
@@ -1023,7 +1023,7 @@ export const posts = [
         id: 121960,
         type: 'Пуф',
         name: 'Ситено Velvet Ocean',
-        img: 'react/static/img/instagram/240x180_ffffff_100_0_2020093011560310800_80.jpg',
+        img: '/react/static/img/instagram/240x180_ffffff_100_0_2020093011560310800_80.jpg',
         link: '/product/puf-siteno-velvet-ocean',
         price: { actual: 5990, expired: 5990, discount: 0 },
       },
@@ -1053,7 +1053,7 @@ export const popular: PopularData = {
       title: 'Диваны',
       count: 4000,
       link: 'link',
-      img: 'react/static/popularImages/image_1.png',
+      img: '/react/static/popularImages/image_1.png',
       price: 14350,
     },
     {
@@ -1061,7 +1061,7 @@ export const popular: PopularData = {
       title: 'Текстиль',
       count: 5,
       link: 'link',
-      img: 'react/static/popularImages/image_2.png',
+      img: '/react/static/popularImages/image_2.png',
       price: 2490,
     },
     {
@@ -1069,7 +1069,7 @@ export const popular: PopularData = {
       title: 'Аксессуары',
       count: 193,
       link: 'link',
-      img: 'react/static/popularImages/image_3.png',
+      img: '/react/static/popularImages/image_3.png',
       price: 1300,
     },
     {
@@ -1077,7 +1077,7 @@ export const popular: PopularData = {
       title: 'Кухни',
       count: 400,
       link: 'link',
-      img: 'react/static/popularImages/image_4.png',
+      img: '/react/static/popularImages/image_4.png',
       price: 2490,
     },
     {
@@ -1085,7 +1085,7 @@ export const popular: PopularData = {
       title: 'Гостиная',
       count: 193,
       link: 'link',
-      img: 'react/static/popularImages/image_5.png',
+      img: '/react/static/popularImages/image_5.png',
       price: 1300,
     },
     {
@@ -1093,7 +1093,7 @@ export const popular: PopularData = {
       title: 'Шкафы',
       count: 203,
       link: 'link',
-      img: 'react/static/popularImages/image_6.png',
+      img: '/react/static/popularImages/image_6.png',
       price: 15000,
     },
     {
@@ -1101,7 +1101,7 @@ export const popular: PopularData = {
       title: 'Диваны',
       count: 4000,
       link: 'link',
-      img: 'react/static/popularImages/image_1.png',
+      img: '/react/static/popularImages/image_1.png',
       price: 14350,
     },
     {
@@ -1109,7 +1109,7 @@ export const popular: PopularData = {
       title: 'Текстиль',
       count: 5,
       link: 'link',
-      img: 'react/static/popularImages/image_2.png',
+      img: '/react/static/popularImages/image_2.png',
       price: 2490,
     },
     {
@@ -1117,7 +1117,7 @@ export const popular: PopularData = {
       title: 'Аксессуары',
       count: 193,
       link: 'link',
-      img: 'react/static/popularImages/image_3.png',
+      img: '/react/static/popularImages/image_3.png',
       price: 1300,
     },
     {
@@ -1125,7 +1125,7 @@ export const popular: PopularData = {
       title: 'Кухни',
       count: 400,
       link: 'link',
-      img: 'react/static/popularImages/image_4.png',
+      img: '/react/static/popularImages/image_4.png',
       price: 2490,
     },
     {
@@ -1133,7 +1133,7 @@ export const popular: PopularData = {
       title: 'Гостиная',
       count: 193,
       link: 'link',
-      img: 'react/static/popularImages/image_5.png',
+      img: '/react/static/popularImages/image_5.png',
       price: 1300,
     },
     {
@@ -1141,7 +1141,7 @@ export const popular: PopularData = {
       title: 'Шкафы',
       count: 203,
       link: 'link',
-      img: 'react/static/popularImages/image_6.png',
+      img: '/react/static/popularImages/image_6.png',
       price: 15000,
     },
   ],
@@ -1157,20 +1157,19 @@ export const sliderData: MainSliderData[] = [
     link: 'link',
     dateEnd: 1631436300,
     images: {
-      mobile: 'react/static/img/MainSlider/banner_mobile.png',
-      desktop: 'react/static/img/MainSlider/banner.png',
+      mobile: '/react/static/img/MainSlider/banner_mobile.png',
+      desktop: '/react/static/img/MainSlider/banner.png',
     },
   },
   {
     id: 135,
-    // period: '1 - 11 мая',
     header: 'Мягкая мебель в весенних оттенках со скидкой до 30%*',
     textLink: 'Узнать больше',
     link: 'link',
     dateEnd: 1631944800,
     images: {
-      mobile: 'react/static/img/MainSlider/banner_mobile.png',
-      desktop: 'react/static/img/MainSlider/banner.png',
+      mobile: '/react/static/img/MainSlider/banner_mobile.png',
+      desktop: '/react/static/img/MainSlider/banner.png',
     },
   },
   {
@@ -1182,506 +1181,530 @@ export const sliderData: MainSliderData[] = [
     link: 'link',
     dateEnd: 1631436300,
     images: {
-      mobile: 'react/static/img/MainSlider/banner_mobile.png',
-      desktop: 'react/static/img/MainSlider/banner.png',
+      mobile: '/react/static/img/MainSlider/banner_mobile.png',
+      desktop: '/react/static/img/MainSlider/banner.png',
     },
   },
 ];
 
-export const ideasData: IdeasPostData = {
+export const ideasData = {
   title: 'Идеи для дома',
   images: [
     {
       id: 0,
-      src: 'react/static/img/mockIdeas/6.png',
+      src: '/react/static/img/mockIdeas/6.png',
       type: 'Спальня',
-      products: [
+      pins: [
         {
-          id: 65465,
-          name: 'Диван угловой Росис Velvet Blue',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/2931135.jpg',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 65465,
+            name: 'Диван угловой Росис Velvet Blue',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/2931135.jpg', orientation: 'landscape' }],
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
         {
-          id: 65465,
-          name: 'Роттердам Velvet Yellow',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/2931243.jpg',
           coords: [70, 70],
-          price: {
-            actual: 39900,
-            discount: 15,
-            expired: 33990,
-          },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
+          product: {
+            id: 65465,
+            name: 'Роттердам Velvet Yellow',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/2931243.jpg', orientation: 'landscape' }],
+            price: {
+              actual: 39900,
+              discount: 15,
+              expired: 33990,
             },
-          ],
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
+          },
         },
       ],
     },
     {
       id: 1,
-      src: 'react/static/img/mockIdeas/2.png',
+      src: '/react/static/img/mockIdeas/2.png',
       type: 'Гостиная',
-      products: [
+      pins: [
         {
-          id: 16545,
-          src: 'react/static/img/mockIdeas/2.png',
-          name: 'Теджонс-2 Time Deco Aquamarine',
-          link: 'link',
           coords: [20, 60],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 16545,
+            images: [{ src: '/react/static/img/mockIdeas/2.png', orientation: 'landscape' }],
+            name: 'Теджонс-2 Time Deco Aquamarine',
+            link: 'link',
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 2,
-      src: 'react/static/img/mockIdeas/3.png',
+      src: '/react/static/img/mockIdeas/3.png',
       type: 'Кухня',
-      products: [
+      pins: [
         {
-          id: 654565,
-          name: 'Честер Barhat Salmon',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/3.png',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 654565,
+            name: 'Честер Barhat Salmon',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/3.png', orientation: 'landscape' }],
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 3,
-      src: 'react/static/img/mockIdeas/4.png',
+      src: '/react/static/img/mockIdeas/4.png',
       type: 'Рабочий кабинет',
-      products: [
+      pins: [
         {
-          id: 698798,
-          src: 'react/static/img/mockIdeas/4.png',
-          name: 'Сasual-Riverside 160x230',
-          link: 'link',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 698798,
+            images: [{ src: '/react/static/img/mockIdeas/4.png', orientation: 'landscape' }],
+            name: 'Сasual-Riverside 160x230',
+            link: 'link',
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 4,
-      src: 'react/static/img/mockIdeas/5.png',
+      src: '/react/static/img/mockIdeas/5.png',
       type: 'Дача и сад',
-      products: [
+      pins: [
         {
-          id: 987545,
-          name: 'Монреаль Премиум Barhat Grey',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/5.png',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 987545,
+            name: 'Монреаль Премиум Barhat Grey',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/5.png', orientation: 'landscape' }],
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 5,
-      src: 'react/static/img/mockIdeas/6.png',
+      src: '/react/static/img/mockIdeas/6.png',
       type: 'Спальня',
-      products: [
+      pins: [
         {
-          id: 65465,
-          name: 'Диван угловой Росис Velvet Blue',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/6.png',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 65465,
+            name: 'Диван угловой Росис Velvet Blue',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/6.png', orientation: 'landscape' }],
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
         {
-          id: 65465,
-          name: 'Роттердам Velvet Yellow',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/6.png',
           coords: [70, 70],
-          price: {
-            actual: 39900,
-            discount: 15,
-            expired: 33990,
-          },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
+          product: {
+            id: 65465,
+            name: 'Роттердам Velvet Yellow',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/6.png', orientation: 'landscape' }],
+            price: {
+              actual: 39900,
+              discount: 15,
+              expired: 33990,
             },
-          ],
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
+          },
         },
       ],
     },
     {
       id: 6,
-      src: 'react/static/img/mockIdeas/2.png',
+      src: '/react/static/img/mockIdeas/2.png',
       type: 'Гостиная',
-      products: [
+      pins: [
         {
-          id: 16545,
-          src: 'react/static/img/mockIdeas/2.png',
-          name: 'Теджонс-2 Time Deco Aquamarine',
-          link: 'link',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 16545,
+            images: [{ src: '/react/static/img/mockIdeas/2.png', orientation: 'landscape' }],
+            name: 'Теджонс-2 Time Deco Aquamarine',
+            link: 'link',
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 7,
-      src: 'react/static/img/mockIdeas/3.png',
+      src: '/react/static/img/mockIdeas/3.png',
       type: 'Кухня',
-      products: [
+      pins: [
         {
-          id: 654565,
-          name: 'Честер Barhat Salmon',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/3.png',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 654565,
+            name: 'Честер Barhat Salmon',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/3.png', orientation: 'landscape' }],
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 8,
-      src: 'react/static/img/mockIdeas/4.png',
+      src: '/react/static/img/mockIdeas/4.png',
       type: 'Рабочий кабинет',
-      products: [
+      pins: [
         {
-          id: 698798,
-          src: 'react/static/img/mockIdeas/4.png',
-          name: 'Сasual-Riverside 160x230',
-          link: 'link',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 698798,
+            images: [{ src: '/react/static/img/mockIdeas/4.png', orientation: 'landscape' }],
+            name: 'Сasual-Riverside 160x230',
+            link: 'link',
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },
     {
       id: 9,
-      src: 'react/static/img/mockIdeas/5.png',
+      src: '/react/static/img/mockIdeas/5.png',
       type: 'Дача и сад',
-      products: [
+      pins: [
         {
-          id: 987545,
-          name: 'Монреаль Премиум Barhat Grey',
-          link: 'link',
-          src: 'react/static/img/mockIdeas/5.png',
           coords: [30, 45],
-          price: {
-            actual: 12990,
-            discount: 23,
-            expired: 16990,
+          product: {
+            id: 987545,
+            name: 'Монреаль Премиум Barhat Grey',
+            link: 'link',
+            images: [{ src: '/react/static/img/mockIdeas/5.png', orientation: 'landscape' }],
+            price: {
+              actual: 12990,
+              discount: 23,
+              expired: 16990,
+            },
+            tags: [
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag3.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag2.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+              {
+                title: 'Новинка',
+                image: {
+                  src: '/react/static/img/mockIdeas/tags/tag1.svg',
+                  orientation: 'landscape',
+                },
+                location: 'down',
+              },
+            ],
           },
-          tags: [
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag3.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag2.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-            {
-              title: 'Новинка',
-              image: {
-                src: 'react/static/img/mockIdeas/tags/tag1.svg',
-                orientation: 'landscape',
-              },
-              location: 'down',
-            },
-          ],
         },
       ],
     },

@@ -10,8 +10,9 @@ import Hits from './elems/Hits';
 import Recommendations from './elems/Recommendations';
 import NewProducts from './elems/NewProducts';
 import Popular from './elems/Popular';
+import Ideas from './elems/Ideas';
 import { PromoCardData } from './elems/PromoCard';
-import { sliderData, hits, popular } from './data';
+import { sliderData, hits, popular, ideasData } from './data';
 import mockPromoCardData from './mockPromoCardData';
 import styles from './PageIndex.module.css';
 
@@ -43,6 +44,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
 
       <div className={styles.section}>
         <Popular title='Популярные категории' categories={popular.products} />
+      </div>
+
+      <div className={styles.section}>
+        <Ideas title='Идеи для дома' ideas={ideasData.images as any[]} />
       </div>
 
       {page.novelties?.items.length > 0 && (

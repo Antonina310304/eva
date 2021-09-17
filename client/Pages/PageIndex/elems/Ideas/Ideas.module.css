@@ -1,0 +1,102 @@
+.title {
+  margin: 0 0 var(--space-m);
+}
+
+.tabWrapper {
+  composes: main from 'containers';
+
+  min-height: 40px;
+  margin: 0 auto 40px;
+  overflow: hidden;
+}
+
+.imageItem {
+  position: relative;
+
+  @media (--mobile) {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.buttonMore {
+  align-self: center;
+  width: fit-content;
+  margin-top: var(--space-xxl);
+}
+
+.grid {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: auto;
+
+  @media (--mobile) {
+    display: block;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+
+  padding-bottom: 62.5%;
+
+  background-position: center;
+  background-size: cover;
+}
+
+/*каждый 1-й из 5*/
+.imageItem:nth-child(5n - 4) {
+  grid-area: top;
+  grid-row: span 1;
+
+  grid-column: span 2;
+}
+
+/*каждый 3-й из 5*/
+/*каждый 4-й из 5*/
+.imageItem:nth-child(5n - 1),
+.imageItem:nth-child(5n - 2) {
+  grid-row: span 2;
+  grid-column: span 1;
+
+  .imageWrapper {
+    padding-bottom: 160%;
+  }
+}
+
+.imageItem:nth-child(5n),
+.imageItem:nth-child(5n - 3) {
+  grid-area: e;
+
+  grid-row: span 1;
+  grid-column: span 1;
+}
+
+/*каждый 2-й из 5*/
+/*каждый 4-й из 5*/
+.imageItem:nth-child(5n - 2) .imageInner,
+.imageItem:nth-child(5n - 1) .imageInner {
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 160%;
+    height: 100%;
+    padding: 0;
+  }
+}
+
+.buttonMore {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.container {
+  composes: main from 'containers';
+}
