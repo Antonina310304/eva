@@ -38,6 +38,7 @@ export type ModalId =
   | 'Question'
   | 'Callback'
   | 'WriteToManagement'
+  | 'Idea'
   | 'Cooperation';
 
 export interface Modal {

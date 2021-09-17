@@ -14,9 +14,8 @@ import loadable from '@loadable/component';
 
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import NanoProductCard from '@Components/NanoProductCard';
-import InstagramSection from '@Components/InstagramSection';
+import MainInstagramSection from '@Components/MainInstagramSection';
 import { LazyProductModel } from '@Components/ProductModel';
-import Link from '@UI/Link';
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';
 import useModals from '@Hooks/useModals';
 import useMedias from '@Hooks/useMedias';
@@ -39,11 +38,11 @@ export interface PageProductProps extends HTMLAttributes<HTMLDivElement> {
   meta: MetaData;
 }
 
+const CrossSaleSection = loadable(() => import('@Components/CrossSaleSection'));
 const MattressesLayers = loadable(() => import('@Mattresses/MattressesLayers'));
 const ChooseMattressBanner = loadable(() => import('@Mattresses/ChooseMattressBanner'));
 const ModulesList = loadable(() => import('./elements/ModulesList'));
 const ProductFeatures = loadable(() => import('./elements/ProductFeatures'));
-const CrossSaleSection = loadable(() => import('./elements/CrossSaleSection'));
 
 const PageProduct: FC<PageProductProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
@@ -387,22 +386,7 @@ const PageProduct: FC<PageProductProps> = (props) => {
         </div>
 
         {page.instagram?.length > 0 && (
-          <InstagramSection
-            className={styles.sectionInstagram}
-            hasPromoPlaceholder
-            title='Обустраиваете дом? Мы хотим посмотреть!'
-            description={
-              <div className={styles.instagramDescription}>
-                {`Cтилизуете интерьер вместе с Divan.ru – отмечайте `}
-                <Link view='native' to='/'>
-                  @official_divan.ru
-                </Link>
-                {` на фото в своем аккаунте Instagram, добавляйте хештег #купилвдиванру. Мы публикуем
-                лучшие кадры.`}
-              </div>
-            }
-            posts={page.instagram}
-          />
+          <MainInstagramSection className={styles.sectionInstagram} posts={page.instagram} />
         )}
 
         <div className={cn(styles.littleContainer, styles.sectionDelivery)}>

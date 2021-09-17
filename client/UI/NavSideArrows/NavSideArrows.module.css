@@ -1,0 +1,47 @@
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+
+  font-size: 0;
+
+  background-color: var(--color-white);
+  background-image: url('arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px auto;
+  border: none;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  @media (--desktop) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.arrow.prev {
+  left: var(--space-xxl);
+
+  transform: translateY(-50%) rotate(180deg);
+
+  @media (--desktop-l) {
+    left: var(--space-xxb);
+  }
+}
+
+.arrow.next {
+  right: var(--space-xxl);
+
+  transform: translateY(-50%);
+
+  @media (--desktop-l) {
+    right: var(--space-xxb);
+  }
+}

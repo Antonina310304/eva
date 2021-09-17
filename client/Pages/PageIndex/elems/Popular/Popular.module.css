@@ -1,0 +1,36 @@
+.wrapper {
+}
+
+.galleryWrapper {
+  overflow: hidden;
+}
+
+.gallery {
+  overflow: hidden;
+}
+
+.itemWrapper {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 var(--space-s);
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 var(--space-xxb-neg) var(--space-l);
+
+  @media (--desktop-m) {
+    margin: 0 var(--space-xxl-neg) var(--space-l);
+  }
+
+  @media (--mobile-m) {
+    margin: 0 var(--space-s-neg) var(--space-l);
+  }
+}
+
+.container {
+  composes: main from 'containers';
+}

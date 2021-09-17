@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 
@@ -10,6 +9,40 @@
   margin-bottom: var(--space-m);
 
   font-size: var(--size-xl);
+}
+
+.container {
+  composes: main from 'containers';
+}
+
+.map {
+  display: block;
+}
+
+.instagram {
+  display: block;
+}
+
+.instagramDescription {
+  font-size: var(--size-m);
+  line-height: var(--lh-m);
+
+  @media (--desktop) {
+    font-size: var(--size-n);
+    line-height: var(--lh-n);
+  }
+}
+
+.section {
+  width: 100%;
+  margin-bottom: var(--space-xxe);
+
+  @media (--desktop-m) {
+    margin-bottom: var(--space-e);
+  }
+  @media (--desktop) {
+    margin-bottom: var(--space-xb);
+  }
 }
 
 .button {

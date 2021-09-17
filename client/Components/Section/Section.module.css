@@ -26,6 +26,10 @@
   margin-left: var(--space-xs);
 }
 
+.arrows {
+  margin-left: var(--space-xxs);
+}
+
 .additional {
   margin-left: var(--space-xxs);
 }
@@ -43,23 +47,25 @@
 }
 
 @media (--mobile-m) {
+  .head {
+    flex-direction: column;
+  }
+
   .title {
     font-size: var(--size-l);
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .additional {
+    margin-top: var(--space-n);
+    margin-left: 0;
   }
 }
 
 @media (--mobile) {
-  .section.additionalBreakup {
-    .head {
-      flex-direction: column;
-    }
-
-    .additional {
-      margin-top: var(--space-n);
-      margin-left: 0;
-    }
-  }
-
   .title {
     font-size: var(--size-l);
   }

@@ -1,0 +1,23 @@
+.wrapper {
+  position: absolute;
+  z-index: 2;
+}
+
+.pin {
+  box-sizing: border-box;
+  width: 34px;
+  height: 34px;
+
+  background: var(--color-white);
+  border: 11px solid var(--color-medium-gray);
+
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  bottom: calc(34px + var(--space-n));
+
+  transform: translateX(calc(-50% + 17px));
+}
