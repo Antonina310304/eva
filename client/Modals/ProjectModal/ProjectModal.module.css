@@ -1,0 +1,319 @@
+.wrapper {
+  box-sizing: border-box;
+  height: 100%;
+  padding: var(--space-xxe) var(--space-xxl) var(--space-e) var(--space-xxb);
+
+  background-color: var(--color-white);
+
+  &.loaded {
+    .arrow.prev {
+      cursor: url(./prev.svg), pointer;
+    }
+
+    .arrow.next {
+      cursor: url(./next.svg), pointer;
+    }
+  }
+}
+
+.closePanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 4;
+
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 100%;
+
+  cursor: pointer;
+
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--color-light-gray);
+    opacity: 0.7;
+  }
+}
+
+.iconClose {
+  width: 30px;
+  height: 30px;
+  margin: var(--space-xxl);
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.leftScroll {
+  flex-shrink: 0;
+  width: 214px;
+  height: inherit;
+}
+
+.scroller {
+  height: inherit;
+}
+
+.mediaWrapper {
+  margin-bottom: var(--space-n);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.media {
+  width: 180px;
+
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.media.active {
+  opacity: 1;
+}
+
+.videoHeight {
+  padding-top: 66.7%;
+}
+
+.mainWrapper {
+  position: relative;
+
+  width: 100%;
+  padding: 0 var(--space-l);
+}
+
+.mainMediaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1358px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.mainMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+
+  width: 50%;
+  height: 100%;
+}
+
+.arrow.prev {
+  left: 0;
+}
+
+.arrow.next {
+  right: 0;
+
+  transform: rotate(180deg);
+}
+
+.descriptionWrapper {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: var(--space-xxl);
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 55px;
+}
+
+.projectName {
+  width: 375px;
+  margin: 0;
+  padding-right: var(--space-xe);
+
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  line-height: var(--lh-xxl);
+}
+
+.description {
+  width: 300px;
+
+  font-size: var(--size-n);
+  line-height: var(--lh-n);
+}
+
+.description:not(:last-of-type) {
+  padding-right: var(--space-xxl);
+}
+
+@media (--desktop-m) {
+  .description {
+    width: 275px;
+  }
+
+  .projectName {
+    font-size: var(--size-xl);
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    padding: var(--space-xxe) var(--space-xxl) var(--space-xb) var(--space-xxl);
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .leftScroll,
+  .arrow {
+    display: none;
+  }
+
+  .mainWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 240px);
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrapperGallery {
+    max-width: 785px;
+    margin: 0 auto;
+    margin-top: var(--space-xl);
+  }
+
+  .mainMediaWrapper {
+    height: 90.25%;
+  }
+
+  .gallery {
+    overflow: hidden;
+  }
+
+  .progressBar {
+    margin-top: var(--space-s);
+  }
+
+  .mediaWrapper {
+    width: 105px;
+    height: unset;
+    height: 105px;
+    margin: 0;
+    padding: 0 var(--space-xxs);
+  }
+
+  .media {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .projectName {
+    width: 275px;
+
+    font-size: var(--size-l);
+    line-height: var(--lh-xm);
+  }
+
+  .textWrapper {
+    height: 82px;
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    padding: 0;
+    padding-bottom: var(--space-n);
+  }
+
+  .mainWrapper {
+    display: none;
+  }
+
+  .wrapperGallery {
+    display: none;
+  }
+
+  .leftScroll {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin-top: var(--space-b);
+  }
+
+  .scroller {
+    height: calc(100% - var(--space-m));
+  }
+
+  .mediaWrapper {
+    width: calc(100% + var(--space-s));
+    height: 100%;
+    margin: 0;
+    margin-right: var(--space-s-neg);
+    margin-bottom: var(--space-n);
+    padding: 0;
+  }
+
+  .media {
+    width: 100%;
+
+    cursor: default;
+    opacity: 1;
+  }
+
+  .closePanel {
+    justify-content: flex-end;
+    width: 100%;
+    height: 60px;
+
+    background-color: var(--color-white);
+  }
+
+  .iconClose {
+    margin: var(--space-s);
+  }
+
+  .projectName {
+    width: 233px;
+    padding-right: var(--space-xxl);
+  }
+
+  .description {
+    width: 213px;
+  }
+}
+
+@media (--mobile) {
+  .descriptionWrapper {
+    flex-direction: column;
+  }
+
+  .projectName {
+    width: 330px;
+    padding-right: 0;
+    padding-bottom: var(--space-n);
+  }
+
+  .textWrapper {
+    flex-wrap: nowrap;
+  }
+
+  .description {
+    width: 100%;
+  }
+}

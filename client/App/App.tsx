@@ -27,6 +27,7 @@ const RoutePrivacyPolicy = loadable(() => import('@Routes/RoutePrivacyPolicy'));
 const RouteOferta = loadable(() => import('@Routes/RouteOferta'));
 const RouteOrderStatus = loadable(() => import('@Routes/RouteOrderStatus'));
 const RouteOrderCheck = loadable(() => import('@Routes/RouteOrderCheck'));
+const RouteB2bDetail = loadable(() => import('@Routes/RouteB2bDetail'));
 const RouteTextileSamples = loadable(() => import('@Routes/RouteTextileSamples'));
 const RoutePress = loadable(() => import('@Routes/RoutePress'));
 const RouteSiteMap = loadable(() => import('@Routes/RouteSiteMap'));
@@ -93,6 +94,10 @@ const App: FC = () => {
 
       <Route {...routes.orderCheck}>
         <RouteOrderCheck />
+      </Route>
+
+      <Route {...routes.b2bDetail}>
+        <RouteB2bDetail />
       </Route>
 
       <Route {...routes.press}>

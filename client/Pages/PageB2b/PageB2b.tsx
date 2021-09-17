@@ -3,11 +3,11 @@ import cn from 'classnames';
 
 import Image from '@UI/Image';
 import FeedbackForm from '@Forms/FeedbackForm';
+import PressGallery from '@Components/PressGallery';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import { PageB2bData } from './typings';
 import Advantages from './elements/Advantages';
 import Rubrics from './elements/Rubrics';
-import PressGallery from './elements/PressGallery';
 import styles from './PageB2b.module.css';
 
 export interface PageB2bProps extends HTMLAttributes<HTMLDivElement> {

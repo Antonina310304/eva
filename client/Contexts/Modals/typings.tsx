@@ -23,6 +23,8 @@ export type ModalId =
   | 'MobileOptions'
   | 'Cart'
   | 'DeliveryInformation'
+  | 'Project'
+  | 'Authorization'
   | 'Article'
   | 'Contacts'
   | 'ContactsAccounting'

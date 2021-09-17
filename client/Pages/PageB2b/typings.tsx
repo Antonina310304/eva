@@ -51,7 +51,6 @@ export interface ArticleItem {
   src: string;
   logo: string;
   preview: string;
-  length: number;
   images: any;
 }
 

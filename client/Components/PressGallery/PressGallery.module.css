@@ -3,6 +3,9 @@
 
 .wrapperGallery {
   composes: main from 'containers';
+
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .gallery {
