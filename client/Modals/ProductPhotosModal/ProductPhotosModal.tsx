@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState, useEffect, useRef } from 'react';
+import { FC, memo, useCallback, useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';
@@ -20,7 +20,7 @@ export interface ModalData {
 }
 
 const ProductPhotosModal: FC<ModalMainProps> = (props) => {
-  const { className, modal, ...restProps } = props;
+  const { modal, ...restProps } = props;
   const { images: medias, startSlideIndex } = modal.data as ModalData;
   const [, { closeModal, openModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();

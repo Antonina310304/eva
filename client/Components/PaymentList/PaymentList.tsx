@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
 import PaySystem from '@UI/IconPaySystem/IconPaySystem';

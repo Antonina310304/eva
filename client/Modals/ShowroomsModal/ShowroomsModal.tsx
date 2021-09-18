@@ -1,4 +1,4 @@
-import React, { FC, memo, useState, useCallback } from 'react';
+import { FC, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';

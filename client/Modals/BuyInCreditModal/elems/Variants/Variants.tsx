@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import { FC, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import { InstallmentVariant } from '@Types/InstallmentBank';
@@ -13,7 +13,7 @@ export interface VariantsProps {
 }
 
 const Variants: FC<VariantsProps> = (props) => {
-  const { className, selectedVariant, variants, color, onChange, ...restProps } = props;
+  const { className, selectedVariant, variants, onChange, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.variants, className)}>

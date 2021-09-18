@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import { FC, HTMLAttributes, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
@@ -25,7 +25,7 @@ export interface PromoCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PromoCard: FC<PromoCardProps> = (props) => {
-  const { className, card, ...restProps } = props;
+  const { card, ...restProps } = props;
   const isService = card.type === 'service';
   const [, { openModal }] = useModals();
 

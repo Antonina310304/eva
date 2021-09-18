@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useMemo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
@@ -17,7 +17,7 @@ export interface PageTextileSamplesProps extends HTMLAttributes<HTMLDivElement> 
 }
 
 const PageTextileSamples: FC<PageTextileSamplesProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { title, orderSamples } = page;
 
   // Подготавливаем данные под формат, воспринимаемый Фильтратором

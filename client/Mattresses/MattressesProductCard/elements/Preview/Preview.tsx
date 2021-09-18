@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 
@@ -22,7 +22,7 @@ const Preview: FC<PreviewProps> = (props) => {
   const { className, images = [], link, onChangeSlide, ...restProps } = props;
   const [firstImage] = images;
   const hasGallery = images.length > 1;
-  const [slide, setSlide] = useState(0);
+  const [, setSlide] = useState(0);
   const [hovered, setHovered] = useState(false);
   const { isOnlyDesktop } = useMedias();
 

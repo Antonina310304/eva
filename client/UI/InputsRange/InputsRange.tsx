@@ -1,4 +1,4 @@
-import React, {
+import {
   useCallback,
   memo,
   HTMLAttributes,
@@ -37,11 +37,9 @@ const formatNumber = (val: number) => formatPrice(Number(val.toFixed(0)));
 
 const InputsRange: FC<InputsRangeProps> = (props) => {
   const {
-    id,
-    name,
     min,
     max,
-    step,
+
     valueMin,
     valueMax,
     className,

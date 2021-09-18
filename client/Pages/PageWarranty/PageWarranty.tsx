@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import { MetaData } from '@Types/Meta';
@@ -17,7 +17,7 @@ export interface PageWarrantyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageWarranty: FC<PageWarrantyProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const {
     breadcrumbs,
     pageList,

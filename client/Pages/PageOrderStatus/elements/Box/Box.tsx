@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import styles from './Box.module.css';
@@ -9,7 +9,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Box: FC<BoxProps> = (props) => {
-  const { className, title, view, children, ...restProps } = props;
+  const { className, view, children, ...restProps } = props;
 
   return (
     <div

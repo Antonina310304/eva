@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';

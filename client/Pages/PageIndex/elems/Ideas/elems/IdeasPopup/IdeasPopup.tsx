@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, MouseEvent } from 'react';
+import { forwardRef, memo, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';

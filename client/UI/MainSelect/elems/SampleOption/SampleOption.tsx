@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, MouseEvent } from 'react';
+import { FC, HTMLAttributes, memo, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';

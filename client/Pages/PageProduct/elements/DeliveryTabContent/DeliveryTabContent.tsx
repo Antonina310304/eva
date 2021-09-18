@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import DeliveryTable from '../DeliveryTable';
@@ -9,7 +9,7 @@ export interface DeliveryTabContentProps extends HTMLAttributes<HTMLDivElement> 
 }
 
 const DeliveryTabContent: FC<DeliveryTabContentProps> = (props) => {
-  const { className, title, ...restProps } = props;
+  const { className, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.content, className)}>

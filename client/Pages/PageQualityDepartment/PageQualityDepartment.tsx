@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import ServicePageWrapper from '@Components/ServicePageWrapper';
@@ -15,7 +15,7 @@ export interface PageQualityDepartmentProps extends HTMLAttributes<HTMLDivElemen
 }
 
 const PageQualityDepartment: FC<PageQualityDepartmentProps> = (props) => {
-  const { className, page, ...restProps } = props;
+  const { className, ...restProps } = props;
 
   // TODO убрать, когда будет получено соответствующее свойство от бэка
   const schedule = [

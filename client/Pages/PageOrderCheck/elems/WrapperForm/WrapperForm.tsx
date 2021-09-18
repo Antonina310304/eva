@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, ReactChild, memo } from 'react';
+import { FC, HTMLAttributes, ReactChild, memo } from 'react';
 import cn from 'classnames';
 
 import styles from './WrapperForm.module.css';

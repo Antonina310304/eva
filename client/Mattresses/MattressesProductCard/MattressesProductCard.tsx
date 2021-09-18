@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import cn from 'classnames';
 
@@ -11,7 +11,7 @@ import Link from '@UI/Link';
 import MainSelect from '@UI/MainSelect';
 import useMedias from '@Hooks/useMedias';
 import useModals from '@Hooks/useModals';
-import { ProductData, ProductParameterGroupData } from '@Types/Product';
+import { ProductData } from '@Types/Product';
 import Parameter from './elements/Parameter';
 import FastView from './elements/FastView';
 import Preview from './elements/Preview';

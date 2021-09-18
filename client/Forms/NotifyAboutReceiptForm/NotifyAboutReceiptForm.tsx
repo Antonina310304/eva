@@ -1,4 +1,4 @@
-import React, { useCallback, useState, memo, FC } from 'react';
+import { useCallback, useState, memo, FC } from 'react';
 import cn from 'classnames';
 
 import useModals from '@Hooks/useModals';
@@ -15,8 +15,8 @@ export interface NotifyAboutReceiptFormProps {
 }
 
 const NotifyAboutReceiptForm: FC<NotifyAboutReceiptFormProps> = (props) => {
-  const { className, product, ...restProps } = props;
-  const [loading, setLoading] = useState(false);
+  const { className, ...restProps } = props;
+  const [loading] = useState(false);
   const [, { openModal }] = useModals();
 
   const handleBeforeSubmit = useCallback(

@@ -1,4 +1,4 @@
-import React, { memo, FC, InputHTMLAttributes } from 'react';
+import { memo, FC, InputHTMLAttributes } from 'react';
 import cn from 'classnames';
 
 import Image from '../Image';

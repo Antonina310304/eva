@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import PublicationDetails from '@Components/PublicationDetails';

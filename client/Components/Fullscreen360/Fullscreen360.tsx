@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, FC, MouseEvent } from 'react';
+import { memo, useState, useCallback, FC, MouseEvent } from 'react';
 import cns from 'classnames';
 
 import MainSliderPanel from '@Components/MainSliderPanel';

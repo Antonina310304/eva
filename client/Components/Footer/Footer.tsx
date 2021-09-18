@@ -1,4 +1,4 @@
-import React, { FC, memo, HTMLAttributes, useCallback } from 'react';
+import { FC, memo, HTMLAttributes, useCallback } from 'react';
 
 import useMedias from '@Hooks/useMedias';
 import useLayout from '@Queries/useLayout';

@@ -1,4 +1,4 @@
-import React, { FC, memo, HTMLAttributes } from 'react';
+import { FC, memo, HTMLAttributes } from 'react';
 
 import useMedias from '@Hooks/useMedias';
 import HeaderMobile from './elems/HeaderMobile';

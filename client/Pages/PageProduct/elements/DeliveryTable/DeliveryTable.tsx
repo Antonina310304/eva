@@ -1,4 +1,4 @@
-import React, { FC, TableHTMLAttributes, memo, useMemo } from 'react';
+import { FC, TableHTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import List from '@UI/List';

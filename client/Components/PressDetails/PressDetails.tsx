@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState, memo } from 'react';
+import { FC, useCallback, useState, memo } from 'react';
 
 import cn from 'classnames';
 import Image from '@UI/Image';

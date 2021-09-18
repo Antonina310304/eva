@@ -15,7 +15,12 @@ const babelNodeLoader: RuleSetRule = {
           allExtensions: true,
         },
       ],
-      '@babel/preset-react',
+      [
+        '@babel/preset-react',
+        {
+          runtime: 'automatic',
+        },
+      ],
       [
         '@babel/preset-env',
         {

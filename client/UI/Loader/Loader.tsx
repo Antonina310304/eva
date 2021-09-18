@@ -1,4 +1,4 @@
-import React, { memo, HTMLAttributes, FC } from 'react';
+import { memo, HTMLAttributes, FC } from 'react';
 import cn from 'classnames';
 
 import styles from './Loader.module.css';

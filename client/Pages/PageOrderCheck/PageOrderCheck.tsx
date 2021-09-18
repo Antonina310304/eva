@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useRef, useEffect, useState, useCallback } from 'react';
+import { FC, HTMLAttributes, memo, useRef, useEffect, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import OrderForm from '@Forms/OrderForm';

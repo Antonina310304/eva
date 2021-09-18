@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Section from '@Components/Section';
@@ -17,7 +17,7 @@ export interface ProjectProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Project: FC<ProjectProps> = (props) => {
-  const { className, project, examples, ...restProps } = props;
+  const { className, examples, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();

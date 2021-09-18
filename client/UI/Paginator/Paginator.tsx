@@ -1,4 +1,4 @@
-import React, { useCallback, memo, FC, MouseEvent, ReactChild, useMemo } from 'react';
+import { useCallback, memo, FC, MouseEvent, ReactChild, useMemo } from 'react';
 import cn from 'classnames';
 
 import List from '@UI/List';

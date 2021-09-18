@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 import TemplateMain from '@Templates/TemplateMain';

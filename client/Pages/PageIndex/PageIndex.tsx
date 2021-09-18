@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
@@ -24,7 +24,7 @@ export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageIndex: FC<PageIndexProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>

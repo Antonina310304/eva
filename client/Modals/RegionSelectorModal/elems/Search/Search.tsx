@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, FC, HTMLAttributes, ChangeEvent, memo } from 'react';
+import { useCallback, useState, useRef, FC, HTMLAttributes, ChangeEvent, memo } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 
@@ -20,8 +20,8 @@ export interface SearchProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Search: FC<SearchProps> = (props) => {
-  const { className, examples, onChangeQuery, onChangeHints, ...restProps } = props;
-  const [loading, setLoading] = useState(false);
+  const { className, onChangeQuery, onChangeHints, ...restProps } = props;
+  const [, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const [error, setError] = useState(null);
   const abortController = useRef<AbortController>(null);

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback } from 'react';
+import { FC, HTMLAttributes, useCallback } from 'react';
 import cn from 'classnames';
 
 import Input from '@UI/Input/Input';

@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import * as ApiPecom from '@Api/Pecom';
@@ -7,7 +7,7 @@ import InputHelper, { InputHelperProps, InputHelperHint } from '@UI/InputHelper'
 export type InputHelperAddressProps = Omit<InputHelperProps, 'hints'>;
 
 const InputHelperAddress: FC<InputHelperAddressProps> = (props) => {
-  const { className, error, onSelectHint, ...restProps } = props;
+  const { error, onSelectHint, ...restProps } = props;
   const [loadingHints, setLoadingHints] = useState<boolean>(false);
   const [hints, setHints] = useState<InputHelperHint[]>([]);
 

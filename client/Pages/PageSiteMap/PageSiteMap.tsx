@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import ServicePageTitle from '@Components/ServicePageTitle';
@@ -14,7 +14,7 @@ export interface PageSiteMapProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageSiteMap: FC<PageSiteMapProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { h1, sitemap } = page;
 
   return (

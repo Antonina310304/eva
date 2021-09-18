@@ -1,5 +1,3 @@
-import { Api } from '@Api/index';
-
 export type Result = any;
 
 const fakeData = {

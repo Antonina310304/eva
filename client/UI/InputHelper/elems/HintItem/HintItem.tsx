@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, MouseEvent } from 'react';
+import { FC, HTMLAttributes, useCallback, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import { InputHelperHint } from '../../InputHelper';

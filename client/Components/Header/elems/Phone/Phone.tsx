@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useState, memo, useCallback } from 'react';
+import { FC, HTMLAttributes, useState, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import PhoneNumber from '@UI/PhoneNumber';

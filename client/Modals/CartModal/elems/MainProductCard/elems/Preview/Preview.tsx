@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
@@ -13,7 +13,7 @@ export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Preview: FC<PreviewProps> = (props) => {
-  const { className, product, onChangeSlide, ...restProps } = props;
+  const { className, product, ...restProps } = props;
 
   return (
     <div

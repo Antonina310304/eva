@@ -1,4 +1,3 @@
-import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import { renderToString } from 'react-dom/server';

@@ -1,4 +1,4 @@
-import React, { memo, FC, HTMLAttributes, ReactChild } from 'react';
+import { memo, FC, HTMLAttributes, ReactChild } from 'react';
 import cn from 'classnames';
 
 import styles from './FormItem.module.css';

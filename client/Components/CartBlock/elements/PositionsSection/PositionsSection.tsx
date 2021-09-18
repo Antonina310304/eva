@@ -1,12 +1,4 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  ReactElement,
-  memo,
-  useCallback,
-  useState,
-  cloneElement,
-} from 'react';
+import { FC, HTMLAttributes, ReactElement, memo, useCallback, useState, cloneElement } from 'react';
 import cn from 'classnames';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';

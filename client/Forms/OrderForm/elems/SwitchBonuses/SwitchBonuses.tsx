@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes, Suspense, memo, useState, useCallback, lazy } from 'react';
+import { FC, InputHTMLAttributes, Suspense, memo, useState, useCallback, lazy } from 'react';
 import cn from 'classnames';
 
 import Switch from '@UI/Switch';

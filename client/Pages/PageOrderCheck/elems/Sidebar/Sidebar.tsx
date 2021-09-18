@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, useCallback } from 'react';
+import { forwardRef, HTMLAttributes, useCallback } from 'react';
 import cn from 'classnames';
 
 import OrderBonuses from '@Components/OrderBonuses';

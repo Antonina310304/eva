@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 
 import { OfferSearchData, SearchResultData } from '@Types/SearchResultData';
 import { ProductSearchData } from '@Types/Product';

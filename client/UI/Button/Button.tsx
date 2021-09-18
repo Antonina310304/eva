@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, memo, ReactChild, forwardRef, useMemo } from 'react';
+import { ButtonHTMLAttributes, memo, ReactChild, forwardRef } from 'react';
 import cn from 'classnames';
 
 import Loader from '@UI/Loader';

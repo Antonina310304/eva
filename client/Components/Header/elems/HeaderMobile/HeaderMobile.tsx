@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import UserMenu from '@Components/UserMenu';

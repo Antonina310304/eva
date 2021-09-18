@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useRef } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useRef } from 'react';
 import cn from 'classnames';
 
 import PecomMap from '@Components/PecomMap';

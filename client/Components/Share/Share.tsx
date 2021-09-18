@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import { InstapaperShareButton, FacebookShareButton, VKShareButton } from 'react-share';

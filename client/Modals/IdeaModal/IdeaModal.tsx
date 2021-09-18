@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import Like from '@Components/Like';

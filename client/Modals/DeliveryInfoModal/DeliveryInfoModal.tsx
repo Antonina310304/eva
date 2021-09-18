@@ -1,4 +1,4 @@
-import React, { memo, FC, useState, useEffect, useCallback, useMemo } from 'react';
+import { memo, FC, useState, useEffect, useCallback, useMemo } from 'react';
 
 import * as ApiOrder from '@Api/Order';
 import { GetDeliveryInfoResult } from '@Api/Order/typings';

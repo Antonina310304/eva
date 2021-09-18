@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useMemo } from 'react';
 import cn from 'classnames';
 
 import styles from './Sizes.module.css';
@@ -15,7 +15,7 @@ export interface SizesProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Sizes: FC<SizesProps> = (props) => {
-  const { className, label, sizes, ...restProps } = props;
+  const { className, label, ...restProps } = props;
 
   const value = useMemo(() => {
     return '';

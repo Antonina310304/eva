@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, MouseEvent } from 'react';
+import { FC, HTMLAttributes, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import styles from './NavSideArrows.module.css';

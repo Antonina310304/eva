@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, Fragment, memo } from 'react';
+import { FC, HTMLAttributes, Fragment, memo } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, {
+import {
   DragEvent,
   MouseEvent as ReactMouseEvent,
   FC,
@@ -86,7 +86,7 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
     onEnd,
     onEndX,
     onEndY,
-    onClick,
+
     useCapture,
     children,
     ...restProps

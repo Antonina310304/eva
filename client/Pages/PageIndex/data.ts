@@ -1,7 +1,6 @@
 import { SellPointData } from '@Components/SectionShowroomsMap/typings';
 import MainSliderData from '@Types/MainSlider';
 import { PopularData } from '@Types/PopularCategory';
-import { IdeasPostData } from '@Types/Ideas';
 
 export const maps = {
   center: [55.751574, 37.573856],

@@ -1,4 +1,4 @@
-import React, { memo, FC, useState, useEffect, useCallback } from 'react';
+import { memo, FC, useState, useEffect, useCallback } from 'react';
 
 import * as ApiOrder from '@Api/Order';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';

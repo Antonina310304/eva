@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, memo, useCallback, useState, useEffect } from 'react';
+import { FC, FormEvent, memo, useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import { InputProps } from '@UI/Input';

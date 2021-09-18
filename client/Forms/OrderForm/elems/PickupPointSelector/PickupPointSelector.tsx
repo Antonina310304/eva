@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
@@ -12,7 +12,7 @@ export interface PickupPointSelectorProps extends HTMLAttributes<HTMLDivElement>
 const PickupPointSelector: FC<PickupPointSelectorProps> = (props) => {
   const { className, ...restProps } = props;
   const [, { openModal }] = useModals();
-  const [pickupPoint, setPickupPoint] = useState(null);
+  const [pickupPoint] = useState(null);
 
   const handleClickButton = useCallback(() => {
     openModal('Info', {

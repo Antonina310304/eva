@@ -1,12 +1,4 @@
-import React, {
-  FC,
-  memo,
-  HTMLAttributes,
-  useEffect,
-  useState,
-  useCallback,
-  MouseEvent,
-} from 'react';
+import { FC, memo, HTMLAttributes, useEffect, useState, useCallback, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import Icon36Reset from '@divanru/icons/dist/36/reset';

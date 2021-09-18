@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 
 import CartStore, { useCart } from '@Stores/Cart';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
@@ -12,7 +12,7 @@ import styles from './CartModal.module.css';
 
 const titles = ['товар', 'товара', 'товаров'];
 const CartModal: FC<ModalSidebarProps> = (props) => {
-  const { className, modal, ...restProps } = props;
+  const { modal, ...restProps } = props;
   const cart = useCart({ ssr: false });
   const titleCount = declOfNum(cart.count, titles);
 

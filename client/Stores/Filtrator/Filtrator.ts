@@ -249,7 +249,7 @@ const formatFiltersToObject = () => {
   // Сортировка
   filtrator.sort
     ?.filter((sortItem) => sortItem.selected)
-    .map((sortItem) => {
+    .forEach((sortItem) => {
       if (+sortItem.id === 0) return;
       items = { ...items, sort: sortItem.id };
     });
@@ -315,7 +315,7 @@ const toUrl = ({ categories }: { categories?: string[] }): string => {
   // Сортировка
   state.sort
     ?.filter((sortItem) => sortItem.selected)
-    .map((sortItem) => {
+    .forEach((sortItem) => {
       if (sortItem.id === '0') return;
       items.push(`sort=${sortItem.id}`);
     });

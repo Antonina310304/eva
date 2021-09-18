@@ -1,4 +1,4 @@
-import React, { useCallback, memo, FC } from 'react';
+import { useCallback, memo, FC } from 'react';
 import loadable from '@loadable/component';
 import { Options, YouTubeProps } from 'react-youtube';
 

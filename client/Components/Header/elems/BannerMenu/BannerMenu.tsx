@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 
 import Link from '@UI/Link';
 import { IBannerMenu } from '@Types/MainNav';

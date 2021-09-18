@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, MouseEvent, useState, useEffect } from 'react';
+import { FC, HTMLAttributes, memo, MouseEvent, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';
@@ -19,7 +19,7 @@ export interface ButtonArProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ButtonAr: FC<ButtonArProps> = (props) => {
-  const { className, ar, actived, expanded, onLoading, hiddenPopup, ...restProps } = props;
+  const { className, ar, onLoading, ...restProps } = props;
   const [visibled, setVisibled] = useState(false);
   const { isDesktop } = useMedias();
 

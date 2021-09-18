@@ -1,4 +1,4 @@
-import React, { memo, InputHTMLAttributes, FC, useState, useEffect } from 'react';
+import { memo, InputHTMLAttributes, FC, useState, useEffect } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 

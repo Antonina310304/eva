@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback, HTMLAttributes, memo } from 'react';
+import { FC, useState, useEffect, useCallback, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Link from '@UI/Link';

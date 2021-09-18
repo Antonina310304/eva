@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, Suspense, memo, useCallback, lazy, useState } from 'react';
+import { FC, HTMLAttributes, Suspense, memo, useCallback, lazy, useState } from 'react';
 import cn from 'classnames';
 
 import useOnClickOutside from '@Hooks/useOnClickOutside';
@@ -16,7 +16,7 @@ export interface PinProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'
 const IdeasPopup = lazy(() => import('../IdeasPopup'));
 
 const Pin: FC<PinProps> = (props) => {
-  const { className, pin, onClick, ...restProps } = props;
+  const { className, pin, ...restProps } = props;
   const [visible, setVisible] = useState(false);
   const [, { openModal }] = useModals();
   const { isMobile } = useMedias();

@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, memo } from 'react';
+import { forwardRef, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import styles from './Popup.module.css';

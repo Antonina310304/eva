@@ -1,13 +1,4 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  memo,
-  useCallback,
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-} from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useRef, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
 import debounce from '@Utils/debounce';
@@ -27,7 +18,7 @@ const Collapse: FC<CollapseProps> = (props) => {
     duration = 500,
     children,
     style,
-    triggerUpdate,
+
     ...restProps
   } = props;
   const [containerHeight, setContainerHeight] = useState(collapsed ? 0 : 'auto');

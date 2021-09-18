@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo } from 'react';
+import { FC, HTMLAttributes, MouseEvent, memo } from 'react';
 import cn from 'classnames';
 
 import Popup from '@UI/Popup';

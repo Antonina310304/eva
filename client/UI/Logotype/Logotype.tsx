@@ -1,8 +1,5 @@
-import React, { useCallback, useState, memo, HTMLAttributes, FC } from 'react';
+import { useCallback, useState, memo, HTMLAttributes, FC } from 'react';
 import cn from 'classnames';
-
-import Icon28LogoTextRus from '@divanru/icons/dist/28/logo_text_rus';
-import Icon46LogoTextBlr from '@divanru/icons/dist/46/logo_text_blr';
 
 import { CountryData } from '@Types/Base';
 import styles from './Logotype.module.css';

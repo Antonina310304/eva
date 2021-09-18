@@ -1,4 +1,4 @@
-import React, { FC, TextareaHTMLAttributes, memo, useState, useCallback } from 'react';
+import { FC, TextareaHTMLAttributes, memo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Collapse from '@UI/Collapse';

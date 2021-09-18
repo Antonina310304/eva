@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useEffect, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 import { useDebouncedCallback } from 'use-debounce';

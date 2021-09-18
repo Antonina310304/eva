@@ -1,4 +1,4 @@
-import React, { memo, FC, HTMLAttributes } from 'react';
+import { memo, FC, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';
@@ -15,7 +15,7 @@ export interface ConstructorTagProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ConstructorTag: FC<ConstructorTagProps> = (props) => {
-  const { className, view, title, expanded, icon, size, onClick, ...restProps } = props;
+  const { className, view, title, expanded, icon, size, ...restProps } = props;
 
   return (
     <div

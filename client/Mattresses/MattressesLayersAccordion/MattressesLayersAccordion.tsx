@@ -1,12 +1,4 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  memo,
-  useCallback,
-  useState,
-  useEffect,
-  MouseEvent,
-} from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useEffect, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import Icon11MinusThin from '@divanru/icons/dist/11/minus_thin';

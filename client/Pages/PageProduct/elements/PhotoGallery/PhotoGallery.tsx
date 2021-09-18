@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback, ReactElement } from 'react';
+import { FC, HTMLAttributes, memo, useMemo, useCallback, ReactElement } from 'react';
 import cn from 'classnames';
 
 import useMedias from '@Hooks/useMedias';
@@ -46,7 +46,7 @@ const Items: FC<ItemsProps> = (props) => {
 };
 
 const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
-  const { className, ar, category, images = [], tags = [], ...restProps } = props;
+  const { ar, category, images = [], tags = [], ...restProps } = props;
   const { isMobileM } = useMedias();
   const [, { openModal }] = useModals();
 

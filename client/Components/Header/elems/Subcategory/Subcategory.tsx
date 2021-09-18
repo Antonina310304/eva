@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes } from 'react';
 
 import { IMainNav } from '@Types/MainNav';
 import Link from '@UI/Link';

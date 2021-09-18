@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
+import { FC, HTMLAttributes, useEffect, useState } from 'react';
 
 import Link from '@UI/Link';
 import { IMainNav } from '@Types/MainNav';

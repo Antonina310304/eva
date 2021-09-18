@@ -1,4 +1,4 @@
-import React, { useState, useCallback, FC, HTMLAttributes, memo } from 'react';
+import { useState, useCallback, FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
 import Section from '@Components/Section';
