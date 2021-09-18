@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, memo, ReactNode, MouseEvent, FC } from 'react';
+import { HTMLAttributes, memo, ReactNode, MouseEvent, FC } from 'react';
 import cn from 'classnames';
 
 import IconClose from '@UI/IconClose';

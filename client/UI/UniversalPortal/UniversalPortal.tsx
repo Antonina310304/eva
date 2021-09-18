@@ -1,4 +1,4 @@
-import React, { memo, FC, ReactChild } from 'react';
+import { memo, FC, ReactChild } from 'react';
 
 import Portal from '@UI/Portal';
 

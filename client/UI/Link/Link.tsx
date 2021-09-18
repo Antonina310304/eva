@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useMemo, MouseEvent } from 'react';
+import { FC, memo, useCallback, useMemo, MouseEvent } from 'react';
 import cn from 'classnames';
 import { LinkProps as BaseLinkProps, useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';

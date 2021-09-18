@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState, useEffect, useRef } from 'react';
+import { FC, memo, useCallback, useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import { Modal } from '@Contexts/Modals';

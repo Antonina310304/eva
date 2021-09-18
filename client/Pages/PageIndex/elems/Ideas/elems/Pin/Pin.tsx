@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, Suspense, memo, useCallback, lazy, useState } from 'react';
+import { FC, HTMLAttributes, Suspense, memo, useCallback, lazy, useState } from 'react';
 import cn from 'classnames';
 
 import useOnClickOutside from '@Hooks/useOnClickOutside';

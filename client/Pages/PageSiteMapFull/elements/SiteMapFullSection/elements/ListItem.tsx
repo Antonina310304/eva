@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 
 import { SubCategoryProps } from '@Pages/PageSiteMapFull/typings';
 import Link from '@UI/Link';

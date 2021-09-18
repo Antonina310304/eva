@@ -1,4 +1,4 @@
-import React, { memo, InputHTMLAttributes, FC, useState, useCallback, useEffect } from 'react';
+import { memo, InputHTMLAttributes, FC, useState, useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import styles from './Switch.module.css';

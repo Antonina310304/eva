@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, FC, MouseEvent, memo } from 'react';
+import { HTMLAttributes, FC, MouseEvent, memo } from 'react';
 import cn from 'classnames';
 
 import Icon12CloseBold from '@divanru/icons/dist/12/close_bold';

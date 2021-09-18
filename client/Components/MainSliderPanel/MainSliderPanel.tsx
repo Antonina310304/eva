@@ -1,4 +1,4 @@
-import React, { memo, HTMLAttributes, FC, MouseEvent } from 'react';
+import { memo, HTMLAttributes, FC, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import styles from './MainSliderPanel.module.css';

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes } from 'react';
 
 import Link from '@UI/Link';
 import { ProductSearchData } from '@Types/Product';

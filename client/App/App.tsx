@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import loadable from '@loadable/component';
 
 import ModalsProvider from '@Contexts/Modals/ModalsProvider';

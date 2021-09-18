@@ -1,4 +1,4 @@
-import React, { useCallback, memo, FC } from 'react';
+import { useCallback, memo, FC } from 'react';
 import cn from 'classnames';
 
 import ModalMain, { ModalMainProps } from '@Components/ModalMain';

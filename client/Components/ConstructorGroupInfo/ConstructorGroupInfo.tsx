@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, FC } from 'react';
+import { HTMLAttributes, FC } from 'react';
 import cn from 'classnames';
 
 import ConstructorTag from '@Components/ConstructorTag';

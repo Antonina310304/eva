@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useEffect } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import PlacemarkImage from './Placemark.png';

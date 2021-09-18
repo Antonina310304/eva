@@ -1,4 +1,5 @@
-import React, { FC, HTMLAttributes, Ref, useRef } from 'react';
+import { FC, HTMLAttributes, Ref, useRef } from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 
 import styles from './AnimatedWrapper.module.css';

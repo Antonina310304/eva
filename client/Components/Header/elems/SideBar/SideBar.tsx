@@ -1,4 +1,5 @@
-import React, { FC, HTMLAttributes, useState } from 'react';
+import { FC, HTMLAttributes, useState } from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 
 import AnimatedWrapper from '../AnimatedWrapper';

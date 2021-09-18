@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, MouseEvent, memo, useRef, useEffect, useCallback } from 'react';
+import { FC, HTMLAttributes, MouseEvent, memo, useRef, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 
 import isValidHexColor from '@Utils/isValidHexColor';

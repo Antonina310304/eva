@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useMemo } from 'react';
+import { FC, HTMLAttributes, useMemo } from 'react';
 import cn from 'classnames';
 
 import NavArrows from '@UI/NavArrows';

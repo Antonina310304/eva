@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import cn from 'classnames';
 

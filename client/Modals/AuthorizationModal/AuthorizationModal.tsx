@@ -1,4 +1,4 @@
-import React, { useCallback, memo, MouseEvent, useState, useEffect, FC } from 'react';
+import { useCallback, memo, MouseEvent, useState, useEffect, FC } from 'react';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import AuthorizationForm from '@Forms/AuthorizationForm';

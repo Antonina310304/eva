@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, useRef, useState, FC, memo, useEffect } from 'react';
+import { MouseEvent, useCallback, useRef, useState, FC, memo, useEffect } from 'react';
 import cn from 'classnames';
 
 import Droplet, { DropletType } from './elements/Droplet';

@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useEffect, useRef, FC, MouseEvent, HTMLAttributes } from 'react';
+import { useCallback, memo, useEffect, useRef, FC, MouseEvent, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
 import { AR } from '@Types/AR';

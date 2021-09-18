@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, FC, HTMLAttributes, ChangeEvent, memo } from 'react';
+import { useCallback, useState, useRef, FC, HTMLAttributes, ChangeEvent, memo } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import cn from 'classnames';
 

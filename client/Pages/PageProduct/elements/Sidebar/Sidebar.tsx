@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, MouseEvent } from 'react';
 import loadable from '@loadable/component';
 import cn from 'classnames';
 

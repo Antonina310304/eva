@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, memo, FC, useMemo } from 'react';
+import { useCallback, useState, useEffect, memo, FC, useMemo } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 import { useQueryClient } from 'react-query';

@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import * as ApiPecom from '@Api/Pecom';

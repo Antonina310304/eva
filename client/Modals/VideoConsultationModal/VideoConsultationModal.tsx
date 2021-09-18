@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, memo, FC } from 'react';
+import { useCallback, useState, useEffect, memo, FC } from 'react';
 import cn from 'classnames';
 
 import useModals from '@Hooks/useModals';

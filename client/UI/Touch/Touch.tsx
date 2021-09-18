@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, {
+import {
   DragEvent,
   MouseEvent as ReactMouseEvent,
   FC,

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, FC, useCallback } from 'react';
+import { memo, useEffect, useState, FC, useCallback } from 'react';
 import cn from 'classnames';
 
 import * as ApiMeta from '@Api/Meta';

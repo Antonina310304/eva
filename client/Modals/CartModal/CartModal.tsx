@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 
 import CartStore, { useCart } from '@Stores/Cart';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';

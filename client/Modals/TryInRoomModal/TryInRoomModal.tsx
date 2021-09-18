@@ -1,4 +1,4 @@
-import React, { useCallback, memo, FC } from 'react';
+import { useCallback, memo, FC } from 'react';
 import QRCode from 'qrcode.react';
 import cn from 'classnames';
 

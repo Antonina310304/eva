@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, memo } from 'react';
+import { FC, HTMLAttributes, useCallback, memo } from 'react';
 
 import cn from 'classnames';
 

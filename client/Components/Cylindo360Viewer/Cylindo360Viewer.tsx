@@ -1,13 +1,4 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import cns from 'classnames';
 

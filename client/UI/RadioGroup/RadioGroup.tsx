@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, HTMLAttributes, memo, useCallback, useState } from 'react';
+import { FC, FormEvent, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Radio, { RadioProps } from '@UI/Radio';

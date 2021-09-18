@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, memo } from 'react';
+import { FC, ReactNode, memo } from 'react';
 import Scrollbar from 'react-scrollbars-custom';
 import cn from 'classnames';
 

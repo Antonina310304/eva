@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
+import { FC, HTMLAttributes, memo, useMemo, useCallback } from 'react';
 import cn from 'classnames';
 
 import RelatedProductsStore from '@Stores/RelatedProducts';

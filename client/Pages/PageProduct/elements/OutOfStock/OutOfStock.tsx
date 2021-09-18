@@ -1,4 +1,4 @@
-import React, { FC, memo, HTMLAttributes } from 'react';
+import { FC, memo, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
 import styles from './OutOfStock.module.css';

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 import { userBottomMenu } from '@Components/Header/data';
 import Link from '@UI/Link';

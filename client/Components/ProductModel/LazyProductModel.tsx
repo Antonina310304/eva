@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useState } from 'react';
 import loadable from '@loadable/component';
 import cn from 'classnames';
 import { useInView } from 'react-intersection-observer';

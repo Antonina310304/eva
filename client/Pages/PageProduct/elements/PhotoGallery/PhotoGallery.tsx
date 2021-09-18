@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useCallback, ReactElement } from 'react';
+import { FC, HTMLAttributes, memo, useMemo, useCallback, ReactElement } from 'react';
 import cn from 'classnames';
 
 import useMedias from '@Hooks/useMedias';

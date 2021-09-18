@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState, useCallback, FC, cloneElement, ReactElement } from 'react';
+import { memo, useRef, useState, useCallback, FC, cloneElement, ReactElement } from 'react';
 import cn from 'classnames';
 
 import Input, { InputProps } from '@UI/Input';

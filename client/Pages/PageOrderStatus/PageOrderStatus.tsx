@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useMemo, useState, useCallback } from 'react';
+import { FC, HTMLAttributes, memo, useMemo, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import * as ApiOrder from '@Api/Order';

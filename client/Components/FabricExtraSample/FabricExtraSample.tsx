@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, FC, memo, useCallback, useMemo, MutableRefObject } from 'react';
+import { HTMLAttributes, FC, memo, useCallback, useMemo, MutableRefObject } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';

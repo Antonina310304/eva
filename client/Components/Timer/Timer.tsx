@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, FC } from 'react';
+import { useState, useEffect, useCallback, FC } from 'react';
 
 import declOfNum from '@Utils/declOfNum';
 import styles from './Timer.module.css';

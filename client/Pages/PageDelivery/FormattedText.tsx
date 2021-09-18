@@ -1,4 +1,4 @@
-import React, { FC, Fragment, memo } from 'react';
+import { FC, Fragment, memo } from 'react';
 
 import CurrencySymbol from '@UI/CurrencySymbol';
 

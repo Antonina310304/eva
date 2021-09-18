@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 
 import PopularCard from '@Pages/PageIndex/elems/PopularCard/PopularCard';
 import { PopularCategoryData } from '@Types/PopularCategory';

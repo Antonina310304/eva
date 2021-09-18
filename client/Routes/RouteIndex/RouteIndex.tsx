@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import TemplateMain from '@Templates/TemplateMain';

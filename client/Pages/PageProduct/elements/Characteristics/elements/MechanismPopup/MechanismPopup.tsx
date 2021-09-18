@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo, HTMLAttributes, MouseEvent, forwardRef } from 'react';
+import { useState, useCallback, memo, HTMLAttributes, MouseEvent, forwardRef } from 'react';
 import cn from 'classnames';
 
 import Image from '@UI/Image';

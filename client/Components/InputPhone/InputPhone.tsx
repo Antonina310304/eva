@@ -1,4 +1,4 @@
-import React, { memo, FC, useCallback } from 'react';
+import { memo, FC, useCallback } from 'react';
 
 import useMeta from '@Queries/useMeta';
 import Input, { InputProps } from '@UI/Input';

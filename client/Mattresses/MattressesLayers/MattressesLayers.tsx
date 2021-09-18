@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, MouseEvent, useState, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, MouseEvent, useState, useMemo } from 'react';
 import cn from 'classnames';
 
 import MattressesStack from '@Mattresses/MattressesStack';

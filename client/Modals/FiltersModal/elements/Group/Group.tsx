@@ -1,4 +1,4 @@
-import React, { Children, FC, HTMLAttributes, memo, useCallback, useState } from 'react';
+import { Children, FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
 import Collapse from '@UI/Collapse';

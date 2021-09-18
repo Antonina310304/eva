@@ -1,4 +1,4 @@
-import React, { memo, HTMLAttributes, FC, useCallback } from 'react';
+import { memo, HTMLAttributes, FC, useCallback } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import cn from 'classnames';
 

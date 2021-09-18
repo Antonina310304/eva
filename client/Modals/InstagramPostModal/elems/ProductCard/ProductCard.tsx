@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, FC, memo } from 'react';
+import { HTMLAttributes, FC, memo } from 'react';
 import cn from 'classnames';
 
 import Price from '@UI/Price';

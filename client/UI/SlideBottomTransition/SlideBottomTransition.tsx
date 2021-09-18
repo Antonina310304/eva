@@ -1,4 +1,4 @@
-import React, { memo, ReactElement, FC } from 'react';
+import { memo, ReactElement, FC } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import styles from './SlideBottomTransition.module.css';

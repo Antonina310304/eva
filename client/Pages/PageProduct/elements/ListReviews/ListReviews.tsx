@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useState, useCallback, useMemo, useRef } from 'react';
+import { FC, HTMLAttributes, memo, useState, useCallback, useMemo, useRef } from 'react';
 import cn from 'classnames';
 
 import Review from '@Components/Review';

@@ -1,12 +1,4 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  MouseEvent,
-  memo,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
+import { FC, HTMLAttributes, MouseEvent, memo, useState, useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import Gallery from '@UI/Gallery';

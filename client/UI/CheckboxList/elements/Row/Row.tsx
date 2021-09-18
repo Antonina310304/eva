@@ -1,4 +1,4 @@
-import React, { memo, FC, HTMLAttributes, useState, useCallback, useEffect } from 'react';
+import { memo, FC, HTMLAttributes, useState, useCallback, useEffect } from 'react';
 import cn from 'classnames';
 
 import { CheckboxItemData } from '../../typings';

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, ReactElement } from 'react';
+import { FC, HTMLAttributes, memo, ReactElement } from 'react';
 import cn from 'classnames';
 import loadable from '@loadable/component';
 

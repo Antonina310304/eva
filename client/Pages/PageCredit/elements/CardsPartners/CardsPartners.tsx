@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useMemo } from 'react';
 import cn from 'classnames';
 
 import ButtonTabs, { Tab } from '@UI/ButtonTabs';

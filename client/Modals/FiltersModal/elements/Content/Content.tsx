@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, Fragment, memo, useCallback } from 'react';
+import { FC, HTMLAttributes, Fragment, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';

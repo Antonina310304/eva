@@ -1,4 +1,4 @@
-import React, { memo, FC, useCallback, useState, useEffect, useRef } from 'react';
+import { memo, FC, useCallback, useState, useEffect, useRef } from 'react';
 
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
 import Footer from './elements/Footer';

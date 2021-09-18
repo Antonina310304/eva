@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, ReactChild, useEffect, useState } from 'react';
+import { FC, HTMLAttributes, ReactChild, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import MobileNavContainer from '../MobileNavContainer';
