@@ -22,7 +22,9 @@ const fakeData = {
 };
 
 // TODO: временно возвращаем фейковые данные из-за проблем на бэкенде
-export default async (): Promise<Result> => {
+export default async ({ term }: Params, opts?: RequestInit): Promise<Result> => {
+  console.log(term, opts);
+
   return Promise.resolve(fakeData.data);
 
   // const searchParams = new URLSearchParams();
