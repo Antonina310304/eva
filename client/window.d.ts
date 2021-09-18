@@ -17,4 +17,10 @@ interface Window {
   ctSendCallbackRequest?: any;
   ctGetCallbackRequestStatus?: any;
   ctCheckCallbackShouldBeProcessed?: any;
+  /**
+   * Какое-то специфичное нестандартное свойство для определения платформы пользователя
+   *
+   * @see https://codengineering.ru/q/detect-if-device-is-ios-25101
+   */
+  MSStream: any;
 }
