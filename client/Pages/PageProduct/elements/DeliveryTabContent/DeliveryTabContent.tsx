@@ -9,7 +9,7 @@ export interface DeliveryTabContentProps extends HTMLAttributes<HTMLDivElement> 
 }
 
 const DeliveryTabContent: FC<DeliveryTabContentProps> = (props) => {
-  const { className, title, ...restProps } = props;
+  const { className, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.content, className)}>

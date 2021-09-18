@@ -13,7 +13,7 @@ export interface PreviewProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Preview: FC<PreviewProps> = (props) => {
-  const { className, product, onChangeSlide, ...restProps } = props;
+  const { className, product, ...restProps } = props;
 
   return (
     <div

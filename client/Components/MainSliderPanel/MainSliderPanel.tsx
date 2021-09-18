@@ -17,15 +17,13 @@ export interface MainSliderPanelProps extends HTMLAttributes<HTMLDivElement> {
 
 const MainSliderPanel: FC<MainSliderPanelProps> = (props) => {
   const {
-    crop,
     isFullscreen,
     isZoom,
-    arExpanded,
-    arHiddenPopup,
+
     className,
     onFullscreen,
     onZoom,
-    onLoading,
+
     ...restProps
   } = props;
 

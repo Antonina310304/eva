@@ -13,7 +13,7 @@ export interface VariantsProps {
 }
 
 const Variants: FC<VariantsProps> = (props) => {
-  const { className, selectedVariant, variants, color, onChange, ...restProps } = props;
+  const { className, selectedVariant, variants, onChange, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.variants, className)}>

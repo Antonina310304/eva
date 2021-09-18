@@ -25,7 +25,7 @@ export interface PromoCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PromoCard: FC<PromoCardProps> = (props) => {
-  const { className, card, ...restProps } = props;
+  const { card, ...restProps } = props;
   const isService = card.type === 'service';
   const [, { openModal }] = useModals();
 

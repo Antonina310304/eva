@@ -37,7 +37,7 @@ export interface ProjectModalProps extends ModalMainProps {
 }
 
 const ProjectModal: FC<ProjectModalProps> = (props) => {
-  const { className, modal, ...restProps } = props;
+  const { modal, ...restProps } = props;
   const { uniqueProjects, startSlideIndex, imageIndex } = modal.data;
   const [, { closeModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();

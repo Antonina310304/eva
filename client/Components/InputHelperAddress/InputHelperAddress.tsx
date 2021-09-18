@@ -7,7 +7,7 @@ import InputHelper, { InputHelperProps, InputHelperHint } from '@UI/InputHelper'
 export type InputHelperAddressProps = Omit<InputHelperProps, 'hints'>;
 
 const InputHelperAddress: FC<InputHelperAddressProps> = (props) => {
-  const { className, error, onSelectHint, ...restProps } = props;
+  const { error, onSelectHint, ...restProps } = props;
   const [loadingHints, setLoadingHints] = useState<boolean>(false);
   const [hints, setHints] = useState<InputHelperHint[]>([]);
 

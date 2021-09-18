@@ -21,7 +21,7 @@ export interface PagePressProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PagePress: FC<PagePressProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { pageMenu, news, publications, mail } = page;
   const { isDesktopL, isDesktopM, isMobileM } = useMedias();
   const [showAll, setShowAll] = useState(false);

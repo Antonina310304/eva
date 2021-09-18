@@ -22,7 +22,7 @@ const GalleryProductPreviews: FC<GalleryProductPreviewsProps> = (props) => {
   const { className, images = [], link, onChangeSlide, ...restProps } = props;
   const [firstImage] = images;
   const hasGallery = images.length > 1;
-  const [slide, setSlide] = useState(0);
+  const [, setSlide] = useState(0);
   const [hovered, setHovered] = useState(false);
   const { isOnlyDesktop } = useMedias();
   const orientation = firstImage.orientation || 'landscape';

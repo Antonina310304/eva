@@ -22,7 +22,7 @@ export interface PageOrderStatusProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageOrderStatus: FC<PageOrderStatusProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { uuid, number, status, positions, payment, price } = page;
   const [, { openModal }] = useModals();
   const [waiting, setWaiting] = useState(false);

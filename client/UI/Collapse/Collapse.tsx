@@ -18,7 +18,7 @@ const Collapse: FC<CollapseProps> = (props) => {
     duration = 500,
     children,
     style,
-    triggerUpdate,
+
     ...restProps
   } = props;
   const [containerHeight, setContainerHeight] = useState(collapsed ? 0 : 'auto');

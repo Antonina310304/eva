@@ -56,6 +56,7 @@ const start = async () => {
 
     res.statusCode = 500;
     res.send(`<h2>${err.message}</h2><code>${err.stack}</code>`);
+    next();
   });
 
   app.listen(envs.port, () => {

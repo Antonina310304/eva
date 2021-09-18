@@ -15,7 +15,7 @@ export interface ConstructorTagProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ConstructorTag: FC<ConstructorTagProps> = (props) => {
-  const { className, view, title, expanded, icon, size, onClick, ...restProps } = props;
+  const { className, view, title, expanded, icon, size, ...restProps } = props;
 
   return (
     <div

@@ -31,7 +31,7 @@ const DeliveryCourier = loadable(() => import('./elems/DeliveryCourier'));
 
 const OrderForm: FC<OrderFormProps> = (props) => {
   const { className, profile, ...restProps } = props;
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [wantBonuses, setWantBonuses] = useState(false);
   const [name, setName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');

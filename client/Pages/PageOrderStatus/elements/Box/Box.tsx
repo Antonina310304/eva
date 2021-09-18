@@ -9,7 +9,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Box: FC<BoxProps> = (props) => {
-  const { className, title, view, children, ...restProps } = props;
+  const { className, view, children, ...restProps } = props;
 
   return (
     <div

@@ -16,7 +16,7 @@ export interface PinProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'
 const IdeasPopup = lazy(() => import('../IdeasPopup'));
 
 const Pin: FC<PinProps> = (props) => {
-  const { className, pin, onClick, ...restProps } = props;
+  const { className, pin, ...restProps } = props;
   const [visible, setVisible] = useState(false);
   const [, { openModal }] = useModals();
   const { isMobile } = useMedias();

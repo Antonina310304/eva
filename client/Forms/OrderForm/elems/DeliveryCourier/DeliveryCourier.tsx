@@ -20,7 +20,7 @@ export interface DeliveryCourierProps extends HTMLAttributes<HTMLDivElement> {
 
 const DeliveryCourier: FC<DeliveryCourierProps> = (props) => {
   const { className, deliveryType, name, ...restProps } = props;
-  const [waiting, setWaiting] = useState(false);
+  const [, setWaiting] = useState(false);
   const cart = useCart();
   const meta = useMeta();
 

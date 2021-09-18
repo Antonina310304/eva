@@ -15,7 +15,7 @@ export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ProductCard: FC<ProductCardProps> = (props) => {
-  const { className, product, defaultCollapsed, ...restProps } = props;
+  const { className, product, ...restProps } = props;
   const hasParameters = product.groups && product.groups.length > 0;
 
   return (

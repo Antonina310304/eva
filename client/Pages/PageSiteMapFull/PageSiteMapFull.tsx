@@ -14,7 +14,7 @@ export interface PageSiteMapFullProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageSiteMapFull: FC<PageSiteMapFullProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { h1, sitemap } = page;
 
   return (

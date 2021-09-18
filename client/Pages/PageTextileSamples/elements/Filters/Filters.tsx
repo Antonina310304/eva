@@ -15,7 +15,7 @@ export interface FiltersProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Filters: FC<FiltersProps> = (props) => {
-  const { className, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
+  const { className, groups, onOpen, ...restProps } = props;
   const filtrator = useFiltrator();
 
   const secondaryFilters = useMemo(() => {

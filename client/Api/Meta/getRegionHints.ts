@@ -1,4 +1,3 @@
-import { Api } from '@Api/index';
 import { RegionHintData } from '@Types/Region';
 
 export interface Params {
@@ -23,7 +22,7 @@ const fakeData = {
 };
 
 // TODO: временно возвращаем фейковые данные из-за проблем на бэкенде
-export default async ({ term }: Params, opts?: RequestInit): Promise<Result> => {
+export default async (): Promise<Result> => {
   return Promise.resolve(fakeData.data);
 
   // const searchParams = new URLSearchParams();

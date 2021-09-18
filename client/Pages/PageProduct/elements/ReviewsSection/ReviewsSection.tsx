@@ -19,7 +19,7 @@ export interface ReviewsSectionProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ReviewsSection: FC<ReviewsSectionProps> = (props) => {
-  const { className, reviews, title, onAddReview, ...restProps } = props;
+  const { className, reviews, onAddReview, ...restProps } = props;
   const [slide, setSlide] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [, { openModal }] = useModals();

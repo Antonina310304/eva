@@ -15,7 +15,7 @@ export interface FabricSampleProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const FabricSample: FC<FabricSampleProps> = (props) => {
-  const { className, sample, checkedSamples, checkSample, ...restProps } = props;
+  const { className, sample, checkSample, ...restProps } = props;
   const removable = Boolean(restProps.removable && sample);
 
   const handleClick = useCallback(() => {

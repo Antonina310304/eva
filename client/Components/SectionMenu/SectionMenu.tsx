@@ -1,7 +1,6 @@
 import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import Link from '@UI/Link';
 import styles from './SectionMenu.module.css';
 
 export interface ListTitlesItemProps extends HTMLAttributes<HTMLDivElement> {

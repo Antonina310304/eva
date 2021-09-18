@@ -20,7 +20,7 @@ export interface ModalData {
 }
 
 const ProductPhotosModal: FC<ModalMainProps> = (props) => {
-  const { className, modal, ...restProps } = props;
+  const { modal, ...restProps } = props;
   const { images: medias, startSlideIndex } = modal.data as ModalData;
   const [, { closeModal, openModal }] = useModals();
   const { isDesktop, isMobileM } = useMedias();

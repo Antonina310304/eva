@@ -46,7 +46,7 @@ const Items: FC<ItemsProps> = (props) => {
 };
 
 const PhotoGallery: FC<PhotoGalleryProps> = (props) => {
-  const { className, ar, category, images = [], tags = [], ...restProps } = props;
+  const { ar, category, images = [], tags = [], ...restProps } = props;
   const { isMobileM } = useMedias();
   const [, { openModal }] = useModals();
 

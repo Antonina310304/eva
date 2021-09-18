@@ -18,7 +18,7 @@ export interface PageContactsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageContacts: FC<PageContactsProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { title, organization, forms, map, sellPoints, pickUpPoints } = page;
 
   // TODO убрать, когда будет получено соответствующее свойство от бэка

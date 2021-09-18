@@ -17,7 +17,7 @@ export interface PageWarrantyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PageWarranty: FC<PageWarrantyProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const {
     breadcrumbs,
     pageList,

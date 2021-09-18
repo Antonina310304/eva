@@ -21,10 +21,10 @@ const FabricExtraSample: FC<FabricExtraSampleProps> = (props) => {
   const {
     className,
     sample,
-    refCatalog,
+
     visible,
     modalView = true,
-    isFirstCollection,
+
     checkedSamples,
     checkSample,
     ...restProps

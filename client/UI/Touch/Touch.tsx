@@ -86,7 +86,7 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
     onEnd,
     onEndX,
     onEndY,
-    onClick,
+
     useCapture,
     children,
     ...restProps

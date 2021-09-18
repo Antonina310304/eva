@@ -17,7 +17,7 @@ export interface PageTextileSamplesProps extends HTMLAttributes<HTMLDivElement> 
 }
 
 const PageTextileSamples: FC<PageTextileSamplesProps> = (props) => {
-  const { className, page, meta, ...restProps } = props;
+  const { className, page, ...restProps } = props;
   const { title, orderSamples } = page;
 
   // Подготавливаем данные под формат, воспринимаемый Фильтратором

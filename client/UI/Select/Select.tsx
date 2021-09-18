@@ -66,7 +66,7 @@ const Select: FC<SelectProps> = (props: SelectProps) => {
     defaultChecked,
     items,
     className,
-    waiting,
+
     renderItem,
     onClick,
     onOpen,
