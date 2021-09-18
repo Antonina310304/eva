@@ -47,6 +47,8 @@
     "prettier/prettier": "error",
     "react/no-array-index-key": "off",
     "no-nested-ternary": "warn",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
     "react/jsx-wrap-multilines": [
