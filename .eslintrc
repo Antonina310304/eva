@@ -29,7 +29,7 @@
       "configFile": "./babel.config.js"
     }
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "autofix"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -45,25 +45,12 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "react/no-array-index-key": "off",
+
+    // Rules that can fixed automatically
+    "autofix/no-unused-vars": "warn",
+
+    // Default rules
     "no-nested-ternary": "warn",
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
-    "react/jsx-wrap-multilines": [
-      "error",
-      {
-        "declaration": "parens",
-        "assignment": "parens",
-        "return": "parens",
-        "arrow": "parens",
-        "condition": "ignore",
-        "logical": "ignore",
-        "prop": "ignore"
-      }
-    ],
-    "react/jsx-props-no-spreading": "off",
     "import/no-cycle": "off",
     "camelcase": "off",
     "no-underscore-dangle": "off",
@@ -82,6 +69,27 @@
       }
     ],
 
+    // Specific rules for React
+    "react/no-array-index-key": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens",
+        "assignment": "parens",
+        "return": "parens",
+        "arrow": "parens",
+        "condition": "ignore",
+        "logical": "ignore",
+        "prop": "ignore"
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+
+    // Accessibility rules
     "jsx-a11y/accessible-emoji": "off",
     "jsx-a11y/alt-text": "off",
     "jsx-a11y/anchor-has-content": "off",
