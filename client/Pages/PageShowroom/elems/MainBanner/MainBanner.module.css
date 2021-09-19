@@ -1,0 +1,150 @@
+.wrapper {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: var(--space-e);
+
+  background-color: #d5e3ee;
+}
+
+.imageWrapper {
+  position: relative;
+
+  display: flex;
+  width: 50%;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.content {
+  width: 588px;
+  margin: 60px 0;
+}
+
+.img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.title {
+  margin-bottom: var(--space-xs);
+
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: 25px;
+  font-family: var(--font-hero);
+  font-style: normal;
+  line-height: 150%;
+}
+
+.description {
+  margin-bottom: var(--space-m);
+
+  color: var(--color-black);
+  font-weight: normal;
+  font-size: 16px;
+  font-family: var(--font-main);
+  font-style: normal;
+  line-height: 150%;
+}
+
+.button {
+  width: fit-content;
+
+  padding: 9px 51px !important;
+
+  color: var(--color-white);
+  font-weight: normal;
+  font-size: 16px;
+
+  font-family: var(--font-main);
+  font-style: normal;
+  line-height: 150%;
+  text-align: center;
+
+  background: var(--color-grafit);
+}
+
+@media (--desktop-m) {
+  .content {
+    width: 533px;
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    margin-bottom: 60px;
+  }
+
+  .content {
+    width: 472px;
+    margin: var(--space-xxl) 0;
+  }
+}
+
+@media (--mobile-m) {
+  .content {
+    width: 369px;
+    margin: var(--space-xxl) 0 var(--space-xxl) 15px;
+  }
+
+  .imageWrapper {
+    display: none;
+  }
+
+  .contentWrapper {
+    align-items: flex-start;
+    width: 100%;
+
+    background: none;
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .button {
+    padding: 9px 60px !important;
+
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
+  .imageWrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  .contentWrapper {
+    width: 100%;
+
+    background: #d5e3ee;
+  }
+
+  .content {
+    width: calc(100% - 30px);
+    margin: var(--space-l) 15px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .img {
+    width: 100%;
+    height: calc(0.53 * 100vw);
+  }
+}

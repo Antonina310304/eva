@@ -1,0 +1,9 @@
+.title {
+  composes: main from 'containers';
+
+  padding: var(--space-xl) 0;
+}
+
+.banner {
+  margin-bottom: var(--space-e);
+}
