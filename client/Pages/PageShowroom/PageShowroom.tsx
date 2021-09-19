@@ -4,6 +4,7 @@ import ServicePageTitle from '@Components/ServicePageTitle';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import MainBanner from './elems/MainBanner';
 import SellPoints from './elems/SellPoints';
+import ShowroomsGallery from './elems/ShowroomsGallery';
 import styles from './PageShowroom.module.css';
 
 export interface PageShowRoomProps extends HTMLAttributes<HTMLDivElement> {
@@ -19,6 +20,8 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
       <MainBanner className={styles.banner} />
 
       <SellPoints sellPoints={page.sellPoints} />
+
+      <ShowroomsGallery sellPoints={page.sellPoints} />
 
       <div className={styles.container}>
         <SectionShowroomsMap
