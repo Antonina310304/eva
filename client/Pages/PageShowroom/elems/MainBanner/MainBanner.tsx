@@ -1,4 +1,4 @@
-import React, { FC, memo, HTMLAttributes, useCallback } from 'react';
+import { FC, memo, HTMLAttributes, useCallback } from 'react';
 import cn from 'classnames';
 
 import Button from '@UI/Button';

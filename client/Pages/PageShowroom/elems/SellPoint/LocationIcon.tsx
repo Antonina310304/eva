@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 interface LocationIconProps {
   // eslint-disable-next-line react/require-default-props
@@ -38,4 +38,4 @@ function LocationIcon({ className }: LocationIconProps) {
   );
 }
 
-export default React.memo(LocationIcon);
+export default memo(LocationIcon);

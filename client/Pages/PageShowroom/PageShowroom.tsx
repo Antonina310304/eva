@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 
 import ServicePageTitle from '@Components/ServicePageTitle';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
