@@ -15,18 +15,10 @@ import MainSelect from '@UI/MainSelect';
 import styles from './VideoConsultationModal.module.css';
 
 const VideoConsultationModal: FC<ModalMainProps> = (props) => {
-  const { className, modal, ...restProps } = props;
+  const { className, modal, onClose, ...restProps } = props;
   const [loading, setLoading] = useState(false);
-  const [, { closeModal, openModal }] = useModals();
-  const meta = useMeta({ ssr: true });
-  const { videoConsultationMessengers } = meta.data;
-  const selectItems = videoConsultationMessengers.map((item) => {
-    return { ...item, name: item.title };
-  });
-
-  const handleClose = useCallback(() => {
-    closeModal(modal.id);
-  }, [modal.id, closeModal]);
+  const [, { openModal }] = useModals();
+  const meta = useMeta();
 
   const handleSubmit = useCallback(() => {
     setLoading(true);
@@ -72,15 +64,20 @@ const VideoConsultationModal: FC<ModalMainProps> = (props) => {
     });
   }, []);
 
+  if (!meta.isSuccess) return null;
+
+  const { videoConsultationMessengers } = meta.data;
+  const selectItems = videoConsultationMessengers.map((item) => ({ ...item, name: item.title }));
+
   return (
     <ModalMain
       {...restProps}
       className={cn(styles.modal, className)}
       modal={modal}
-      onClose={handleClose}
+      onClose={onClose}
     >
       <div className={styles.container}>
-        <IconClose onClick={handleClose} theme='inverse' className={styles.close} />
+        <IconClose onClick={onClose} theme='inverse' className={styles.close} />
         <div className={styles.wrapper}>
           <div className={styles.image} />
           <div className={styles.content}>
