@@ -7,10 +7,11 @@ import MainBanner from './elems/MainBanner';
 import SellPoints from './elems/SellPoints';
 import ShowroomsGallery from './elems/ShowroomsGallery';
 import ShowroomProducts from './elems/ShowroomProducts';
+import { PageShowroomData } from './typings';
 import styles from './PageShowroom.module.css';
 
 export interface PageShowRoomProps extends HTMLAttributes<HTMLDivElement> {
-  page: any;
+  page: PageShowroomData;
 }
 
 const PageShowRoom: FC<PageShowRoomProps> = (props) => {
@@ -63,11 +64,7 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
       <ShowroomProducts key={selectedTab} defaultCatalog={defaultCatalog} />
 
       <div className={styles.container}>
-        <SectionShowroomsMap
-          className={styles.map}
-          datasForMap={page.map}
-          pickupPoints={page.sellPoints}
-        />
+        <SectionShowroomsMap className={styles.map} map={page.map} sellPoints={page.sellPoints} />
       </div>
     </div>
   );

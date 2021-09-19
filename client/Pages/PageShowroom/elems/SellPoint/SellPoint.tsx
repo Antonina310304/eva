@@ -1,8 +1,8 @@
 import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import { SellPointData } from '@Pages/PageB2b/typings';
 import Button from '@UI/Button';
+import { SellPointData } from '@Types/SellPoints';
 import LocationIcon from './LocationIcon';
 import styles from './SellPoint.module.css';
 

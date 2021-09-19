@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import { SellPointData } from '@Pages/PageB2b/typings';
+import { SellPointData } from '@Types/SellPoints';
 import SellPoint from '../SellPoint';
 import styles from './SellPoints.module.css';
 

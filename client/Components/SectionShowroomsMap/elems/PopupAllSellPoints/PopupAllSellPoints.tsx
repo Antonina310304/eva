@@ -4,7 +4,7 @@ import cn from 'classnames';
 import IconClose from '@UI/IconClose';
 import Button from '@UI/Button';
 import Scroller from '@UI/Scroller';
-import { SellPointData } from '../../typings';
+import { SellPointData } from '@Types/SellPoints';
 import styles from './PopupAllSellPoints.module.css';
 
 export interface PopupAllSellPointsProps extends HTMLAttributes<HTMLDivElement> {

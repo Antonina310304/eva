@@ -17,7 +17,7 @@ const RouteCategory: FC = () => {
   const location = useLocation();
   const { slug } = useParams<RouteParams>();
   const path = `${location.pathname}${location.search}`;
-  const page = usePage({ path });
+  const page = usePage<any>({ path });
   const category = useInfiniteCategory({ slug, search: location.search });
   const meta = useMeta();
 
