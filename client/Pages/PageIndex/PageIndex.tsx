@@ -58,11 +58,7 @@ const PageIndex: FC<PageIndexProps> = (props) => {
 
       <div className={styles.container}>
         <div className={styles.section}>
-          <SectionShowroomsMap
-            className={styles.map}
-            datasForMap={page.map}
-            pickupPoints={page.sellPoints}
-          />
+          <SectionShowroomsMap className={styles.map} map={page.map} sellPoints={page.sellPoints} />
         </div>
       </div>
 

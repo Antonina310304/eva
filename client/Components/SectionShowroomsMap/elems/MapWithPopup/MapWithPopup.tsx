@@ -2,7 +2,7 @@ import { FC, HTMLAttributes, memo, useCallback, useState, useRef } from 'react';
 import cn from 'classnames';
 
 import PecomMap from '@Components/PecomMap';
-import { SellPointData } from '../../typings';
+import { SellPointData } from '@Types/SellPoints';
 import PopupAllSellPoints from '../PopupAllSellPoints';
 import PopupSelectedSellPoint from '../PopupSelectedSellPoint';
 import SelectedIcon from './selectedIcon.png';
@@ -11,14 +11,14 @@ import styles from './MapWithPopup.module.css';
 
 export interface MapWithPopupProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  pickupPoints: SellPointData[];
+  sellPoints: SellPointData[];
 }
 
 const MapWithPopup: FC<MapWithPopupProps> = (props) => {
-  const { className, pickupPoints, ...restProps } = props;
+  const { className, sellPoints, ...restProps } = props;
   const [visiblePopup, setVisiblePopup] = useState(true);
   const [selectedPointId, setSelectedPointId] = useState(null);
-  const selectedPoint = pickupPoints.find((point) => point.id === selectedPointId);
+  const selectedPoint = sellPoints.find((point) => point.id === selectedPointId);
   const geoObjects = useRef(null);
   const selectedPlacemark = useRef(null);
 
@@ -90,7 +90,7 @@ const MapWithPopup: FC<MapWithPopupProps> = (props) => {
     <div {...restProps} className={cn(styles.mapWithPopup, className)}>
       <PecomMap
         className={styles.map}
-        pickupPoints={pickupPoints}
+        pickupPoints={sellPoints}
         balloon={false}
         contactsStyle
         onSelectPickupPoint={selectPoint}
@@ -100,7 +100,7 @@ const MapWithPopup: FC<MapWithPopupProps> = (props) => {
       <div className={cn(styles.popup, { [styles.visible]: visiblePopup })}>
         {!selectedPointId ? (
           <PopupAllSellPoints
-            pickupPoints={pickupPoints}
+            pickupPoints={sellPoints}
             closePopup={handleClose}
             selectPoint={handleClickMoreInfo}
           />

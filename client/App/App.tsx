@@ -32,6 +32,7 @@ const RouteTextileSamples = loadable(() => import('@Routes/RouteTextileSamples')
 const RoutePress = loadable(() => import('@Routes/RoutePress'));
 const RouteSiteMap = loadable(() => import('@Routes/RouteSiteMap'));
 const RouteSiteMapFull = loadable(() => import('@Routes/RouteSiteMapFull'));
+const RouteShowroom = loadable(() => import('@Routes/RouteShowroom'));
 
 const App: FC = () => {
   return (
@@ -110,6 +111,10 @@ const App: FC = () => {
 
       <Route {...routes.siteMapFull}>
         <RouteSiteMapFull />
+      </Route>
+
+      <Route {...routes.showroom}>
+        <RouteShowroom />
       </Route>
     </ModalsProvider>
   );

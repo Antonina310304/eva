@@ -59,6 +59,9 @@ const routes: RoutesMap = {
   siteMapFull: {
     path: '/site/site-map-full',
   },
+  showroom: {
+    path: '/site/showroom',
+  },
 
   //
   privacyPolicy: {

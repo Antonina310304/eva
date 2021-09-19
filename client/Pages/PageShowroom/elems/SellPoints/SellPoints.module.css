@@ -1,0 +1,35 @@
+.wrapper {
+  composes: main from 'containers';
+
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0 auto var(--space-e) auto;
+  padding: 0;
+}
+
+.item:not(:last-child) {
+  margin-bottom: var(--space-xxl);
+}
+
+@media (--desktop) {
+  .wrapper {
+    margin: 0 auto var(--space-xb) auto;
+  }
+}
+
+@media (--mobile-m) {
+  .wrapper {
+    width: 100%;
+    margin-bottom: var(--space-xb);
+    padding: 0 var(--space-s);
+  }
+}
+
+@media (--mobile) {
+  .wrapper {
+    width: 100%;
+    margin-top: 0;
+    padding: 0 var(--space-s);
+  }
+}

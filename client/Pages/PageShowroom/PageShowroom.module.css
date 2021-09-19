@@ -1,0 +1,31 @@
+.page {
+  padding-bottom: var(--space-e);
+}
+
+.title {
+  composes: main from 'containers';
+
+  padding: var(--space-xl) 0;
+}
+
+.banner {
+  margin-bottom: var(--space-e);
+}
+
+.container {
+  composes: main from 'containers';
+}
+
+.gallery {
+  margin-bottom: var(--space-e);
+
+  @media (--desktop) {
+    margin-bottom: var(--space-xb);
+  }
+}
+
+@media (--desktop-m) {
+  .page {
+    padding-bottom: var(--space-xb);
+  }
+}

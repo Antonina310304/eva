@@ -257,7 +257,7 @@ const Touch: FC<TouchProps> = forwardRef((props: TouchProps, ref: Ref<HTMLElemen
   useEffect(() => {
     function cleanup() {
       versions.forEach((events) => {
-        refContainer.current.removeEventListener(events[0], handleStart, listenerParams);
+        refContainer.current?.removeEventListener(events[0], handleStart, listenerParams);
         window.document.documentElement.removeEventListener(events[1], handleMove, listenerParams);
         window.document.documentElement.removeEventListener(events[2], handleEnd, listenerParams);
         window.document.documentElement.removeEventListener(events[3], handleEnd, listenerParams);

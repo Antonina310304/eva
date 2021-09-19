@@ -11,7 +11,7 @@ import OrderFormStore from '@Stores/OrderForm';
 
 const RouteOrderCheck: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage({ path: pathname });
+  const page = usePage<any>({ path: pathname });
   const meta = useMeta();
   const cart = useCart();
   const profile = useProfile({ ssr: true });

@@ -1,10 +1,5 @@
-export interface MapData {
-  center: number[];
-  zoom: number;
-  title: string;
-  description: string;
-  regionId: number;
-}
+import { SellPointData } from '@Types/SellPoints';
+import { MapData } from '@Types/Map';
 
 export interface PickUpPoint {
   isVisible: boolean;
@@ -26,18 +21,6 @@ export interface SocialsItem {
   link: string;
 }
 
-export interface SellPointData {
-  id: string;
-  regionId: number;
-  coordinates: number[];
-  name: string;
-  address: string;
-  phone: string;
-  worktime: string[];
-  holidaysSchedule: [];
-  tags: number[];
-  images: string[];
-}
 export interface RubricsItem {
   link: string;
   src: string;
@@ -59,9 +42,8 @@ export interface PressItem {
   description: string;
 }
 
-export type DescriptionData = string[];
 export interface TextItem {
-  descriptions: DescriptionData;
+  descriptions: string[];
   press: PressItem;
   title: string;
 }

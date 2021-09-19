@@ -20,7 +20,7 @@
 }
 
 .image {
-  background: var(--color-light-gray) url('./image.jpg') no-repeat center/cover;
+  background: var(--color-light-gray) url('/static/img/showroom/image.png') no-repeat center/cover;
   border-radius: 5px 5px 0 0;
 
   &:before {
