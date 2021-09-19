@@ -38,8 +38,8 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
     return page.sellPoints[selectedShowroomIndex];
   }, [page.sellPoints, selectedShowroomIndex]);
 
-  const defaultProducts = useMemo(() => {
-    return page.categories[selectedShowroomIndex].products;
+  const defaultCatalog = useMemo(() => {
+    return page.categories[selectedShowroomIndex];
   }, [page.categories, selectedShowroomIndex]);
 
   const handleChangeShoowroom = useCallback((_e, tab: Tab) => {
@@ -60,7 +60,7 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
         onChangeTab={handleChangeShoowroom}
       />
 
-      <ShowroomProducts key={selectedTab} defaultProducts={defaultProducts} />
+      <ShowroomProducts key={selectedTab} defaultCatalog={defaultCatalog} />
 
       <div className={styles.container}>
         <SectionShowroomsMap

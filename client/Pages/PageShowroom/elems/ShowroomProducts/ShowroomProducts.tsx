@@ -1,31 +1,44 @@
-import { FC, HTMLAttributes, memo, useState } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
+import * as ApiSite from '@Api/Site';
 import Section from '@Components/Section';
 import ProductCard from '@Components/ProductCard';
 import Button from '@UI/Button';
-import { ProductData } from '@Types/Product';
+import logger from '@Utils/logger';
+import { CatalogData } from '@Types/Catalog';
 import styles from './ShowroomProducts.module.css';
 
 export interface ShowroomProductsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  defaultProducts: ProductData[];
+  defaultCatalog: CatalogData;
 }
 
 const ShowroomProducts: FC<ShowroomProductsProps> = (props) => {
-  const { className, defaultProducts, ...restProps } = props;
-  const [products, setProducts] = useState<ProductData[]>(defaultProducts);
+  const { className, defaultCatalog, ...restProps } = props;
+  const [catalog, setCatalog] = useState(defaultCatalog);
   const [isLoading, setLoading] = useState(false);
 
-  const mockLoadMore = () => {
+  const handleClickMore = useCallback(async () => {
     setLoading(true);
 
-    setTimeout(() => {
-      const newProducts = [...products, ...defaultProducts];
-      setProducts(newProducts);
+    try {
+      const res = await ApiSite.getProductsByCategoryTranslite({
+        translite: catalog.translite,
+        page: catalog.page + 1,
+      });
+
+      setCatalog((prev) => ({
+        ...prev,
+        ...res,
+        products: [...prev.products, ...res.products],
+      }));
+    } catch (err) {
+      logger(err);
+    } finally {
       setLoading(false);
-    }, 500);
-  };
+    }
+  }, [catalog.page, catalog.translite]);
 
   return (
     <Section
@@ -35,25 +48,27 @@ const ShowroomProducts: FC<ShowroomProductsProps> = (props) => {
     >
       <div className={styles.productsWrapper}>
         <div className={styles.productsList}>
-          {products.map((item, index) => (
-            <div key={index} className={styles.productItem}>
-              <ProductCard product={item} view='mini' />
+          {catalog.products.map((product) => (
+            <div key={product.id} className={styles.productItem}>
+              <ProductCard product={product} view='mini' />
             </div>
           ))}
         </div>
       </div>
 
-      <div className={styles.btnWrapper}>
-        <Button
-          className={styles.btn}
-          theme='dirty'
-          onClick={mockLoadMore}
-          disabled={isLoading}
-          waiting={isLoading}
-        >
-          Смотреть еще
-        </Button>
-      </div>
+      {catalog.productsCountLeft && (
+        <div className={styles.btnWrapper}>
+          <Button
+            className={styles.btn}
+            theme='dirty'
+            disabled={isLoading}
+            waiting={isLoading}
+            onClick={handleClickMore}
+          >
+            Смотреть еще
+          </Button>
+        </div>
+      )}
     </Section>
   );
 };

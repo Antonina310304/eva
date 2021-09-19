@@ -9,4 +9,5 @@ export interface CatalogData {
   productsTotalCount: number;
   productsModel?: ProductModel[];
   sectionCountLeft?: number;
+  translite?: string;
 }
