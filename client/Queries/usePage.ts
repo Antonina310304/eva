@@ -7,9 +7,7 @@ export interface Params {
   ssr?: boolean;
 }
 
-export type UsePageResult = any;
-
-const usePage = (params?: Params): UseQueryResult<UsePageResult> => {
+function usePage<T>(params?: Params): UseQueryResult<T> {
   const { path, ssr = true } = params || {};
   const keys = ['page', ssr && 'ssr', path].filter(Boolean);
 
@@ -20,6 +18,6 @@ const usePage = (params?: Params): UseQueryResult<UsePageResult> => {
   });
 
   return result;
-};
+}
 
 export default usePage;
