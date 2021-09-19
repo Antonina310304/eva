@@ -42,8 +42,6 @@ const Initiator: FC<any> = ({ children }) => {
 
     const url = chunks.filter(Boolean).join('/');
 
-    console.log(chunks, 'url', url);
-
     return <Redirect to={`/${url}`} />;
   }
 
