@@ -1,7 +1,7 @@
-/* eslint-disable autofix/no-unused-vars */
 import React, { FC, HTMLAttributes, memo } from 'react';
 
 import ServicePageTitle from '@Components/ServicePageTitle';
+import TopProducts from './elems/TopProducts';
 import styles from './PagePromotionDiscounts.module.css';
 
 export interface PagePromotionsDiscountsProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,6 +14,8 @@ const PagePromotionsDiscounts: FC<PagePromotionsDiscountsProps> = (props) => {
   return (
     <div {...restProps}>
       <ServicePageTitle className={styles.title} title={page.title} />
+
+      <TopProducts title='Топ 10 из Divan.Trends' products={page.products} />
     </div>
   );
 };
