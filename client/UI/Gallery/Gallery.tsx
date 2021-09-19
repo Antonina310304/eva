@@ -311,7 +311,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Получить все нужные размеры
    */
   const getSizes = useCallback(() => {
-    if (!state.initialized) {
+    if (!state.initialized || !refViewport.current) {
       return {
         slides: [],
         viewportWidth: 0,
