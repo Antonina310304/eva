@@ -1,5 +1,6 @@
-import { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo, useState, useMemo, useCallback } from 'react';
 
+import { Tab } from '@UI/ButtonTabs';
 import ServicePageTitle from '@Components/ServicePageTitle';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import MainBanner from './elems/MainBanner';
@@ -15,6 +16,36 @@ export interface PageShowRoomProps extends HTMLAttributes<HTMLDivElement> {
 const PageShowRoom: FC<PageShowRoomProps> = (props) => {
   const { page } = props;
 
+  const tabs = useMemo(() => {
+    const result: Tab[] = [];
+
+    page.sellPoints.forEach((sellPoint) => {
+      if (!sellPoint.name || sellPoint.images.length < 1) return;
+
+      result.push({ id: sellPoint.name, label: sellPoint.name });
+    });
+
+    return result;
+  }, [page.sellPoints]);
+
+  const [selectedTab, setSelectedTab] = useState(tabs[0].id);
+
+  const selectedShowroomIndex = useMemo(() => {
+    return page.sellPoints.findIndex((sellPoint) => sellPoint.name === selectedTab);
+  }, [page.sellPoints, selectedTab]);
+
+  const selectedShowroom = useMemo(() => {
+    return page.sellPoints[selectedShowroomIndex];
+  }, [page.sellPoints, selectedShowroomIndex]);
+
+  const defaultProducts = useMemo(() => {
+    return page.categories[selectedShowroomIndex].products;
+  }, [page.categories, selectedShowroomIndex]);
+
+  const handleChangeShoowroom = useCallback((_e, tab: Tab) => {
+    setSelectedTab(tab.id);
+  }, []);
+
   return (
     <div className={styles.page}>
       <ServicePageTitle className={styles.title} title='Адреса магазинов' />
@@ -23,9 +54,13 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
 
       <SellPoints sellPoints={page.sellPoints} />
 
-      <ShowroomsGallery sellPoints={page.sellPoints} />
+      <ShowroomsGallery
+        tabs={tabs}
+        images={selectedShowroom.images}
+        onChangeTab={handleChangeShoowroom}
+      />
 
-      <ShowroomProducts defaultProducts={page.categories[0].products} />
+      <ShowroomProducts key={selectedTab} defaultProducts={defaultProducts} />
 
       <div className={styles.container}>
         <SectionShowroomsMap

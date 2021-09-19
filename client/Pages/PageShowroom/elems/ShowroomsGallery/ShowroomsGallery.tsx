@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, memo, useCallback, useMemo, useState } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, MouseEvent } from 'react';
 import cn from 'classnames';
 
 import useMedias from '@Hooks/useMedias';
@@ -8,37 +8,21 @@ import ProgressBar from '@UI/ProgressBar';
 import NavSideArrows from '@UI/NavSideArrows';
 import Image from '@UI/Image';
 import Section from '@Components/Section';
-import { SellPointData } from '@Pages/PageContacts/typings';
 import styles from './ShowroomsGallery.module.css';
 
 export interface ShowroomsGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  sellPoints: SellPointData[];
+  tabs: Tab[];
+  images: string[];
+  onChangeTab?: (e: MouseEvent, tab: Tab) => void;
 }
 
 const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
-  const { className, sellPoints, ...restProps } = props;
+  const { className, tabs, images, onChangeTab, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [slideIndex, setSlideIndex] = useState(0);
-
-  const tabs = useMemo(() => {
-    const result: Tab[] = [];
-
-    sellPoints.forEach((sellPoint) => {
-      if (!sellPoint.name || sellPoint.images.length < 1) return;
-
-      result.push({ id: sellPoint.name, label: sellPoint.name });
-    });
-
-    return result;
-  }, [sellPoints]);
-
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
-
-  const selectedShowroomImages = useMemo(() => {
-    return sellPoints.find((sellPoint) => sellPoint.name === selectedTab).images;
-  }, [sellPoints, selectedTab]);
 
   const handleChangeProgress = useCallback((opts: ProgressOptions) => {
     setTrack(opts);
@@ -51,11 +35,11 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
   const normalizeSlide = useCallback(
     (index: number) => {
       if (index < 0) return 0;
-      if (index > selectedShowroomImages.length) return selectedShowroomImages.length;
+      if (index > images.length) return images.length;
 
       return index;
     },
-    [selectedShowroomImages.length],
+    [images.length],
   );
 
   const handlePrev = useCallback(() => {
@@ -68,10 +52,15 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
     setSlideIndex((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
-  const handleChangeTab = useCallback((_e, tab) => {
-    setSelectedTab(tab.id);
-    setSlideIndex(0);
-  }, []);
+  const handleChangeTab = useCallback(
+    (e, tab) => {
+      setSelectedTab(tab.id);
+      setSlideIndex(0);
+
+      if (onChangeTab) onChangeTab(e, tab);
+    },
+    [onChangeTab],
+  );
 
   return (
     <div {...restProps} className={cn(styles.slider, className)}>
@@ -100,7 +89,7 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
             onChangeProgress={handleChangeProgress}
             onChangeCurrent={handleChangeCurrent}
           >
-            {selectedShowroomImages.map((src, index) => (
+            {images.map((src, index) => (
               <div key={index} className={styles.slideWrapper}>
                 <div className={styles.slide}>
                   <Image className={styles.imgWrapper} src={src} />
@@ -113,7 +102,7 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
         {!isMobileM && (
           <div className={styles.galleryPaginationWrapper}>
             <Gallery className={styles.galleryPagination} slideIndex={slideIndex}>
-              {selectedShowroomImages.map((src, index) => (
+              {images.map((src, index) => (
                 <div
                   key={index}
                   className={cn(styles.slidePagination, {
