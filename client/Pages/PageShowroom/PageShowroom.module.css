@@ -16,6 +16,14 @@
   composes: main from 'containers';
 }
 
+.gallery {
+  margin-bottom: var(--space-e);
+
+  @media (--desktop) {
+    margin-bottom: var(--space-xb);
+  }
+}
+
 @media (--desktop-m) {
   .page {
     padding-bottom: var(--space-xb);

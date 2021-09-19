@@ -55,11 +55,13 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
 
       <SellPoints sellPoints={page.sellPoints} />
 
-      <ShowroomsGallery
-        tabs={tabs}
-        images={selectedShowroom.images}
-        onChangeTab={handleChangeShoowroom}
-      />
+      <div className={styles.gallery}>
+        <ShowroomsGallery
+          tabs={tabs}
+          images={selectedShowroom.images}
+          onChangeTab={handleChangeShoowroom}
+        />
+      </div>
 
       <ShowroomProducts key={selectedTab} defaultCatalog={defaultCatalog} />
 

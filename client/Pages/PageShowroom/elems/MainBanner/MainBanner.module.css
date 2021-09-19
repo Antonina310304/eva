@@ -23,7 +23,7 @@
 
 .content {
   width: 588px;
-  margin: 60px 0;
+  margin: var(--space-xb) 0;
 }
 
 .img {
@@ -36,38 +36,22 @@
 
   color: var(--color-black);
   font-weight: 500;
-  font-size: 25px;
+  font-size: var(--size-xl);
   font-family: var(--font-hero);
-  font-style: normal;
-  line-height: 150%;
+  line-height: var(--lh-xl);
 }
 
 .description {
   margin-bottom: var(--space-m);
 
   color: var(--color-black);
-  font-weight: normal;
-  font-size: 16px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 150%;
 }
 
 .button {
-  width: fit-content;
-
-  padding: 9px 51px !important;
+  width: 100%;
+  max-width: 238px;
 
   color: var(--color-white);
-  font-weight: normal;
-  font-size: 16px;
-
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 150%;
-  text-align: center;
-
-  background: var(--color-grafit);
 }
 
 @media (--desktop-m) {
@@ -78,7 +62,7 @@
 
 @media (--desktop) {
   .wrapper {
-    margin-bottom: 60px;
+    margin-bottom: var(--space-xb);
   }
 
   .content {
@@ -90,7 +74,7 @@
 @media (--mobile-m) {
   .content {
     width: 369px;
-    margin: var(--space-xxl) 0 var(--space-xxl) 15px;
+    margin: var(--space-xxl) 0 var(--space-xxl) var(--space-ss);
   }
 
   .imageWrapper {
@@ -105,15 +89,8 @@
   }
 
   .title {
-    font-size: 22px;
-    line-height: 26px;
-  }
-
-  .button {
-    padding: 9px 60px !important;
-
-    font-size: 14px;
-    line-height: 21px;
+    font-size: var(--size-l);
+    line-height: var(--lh-l);
   }
 }
 
@@ -136,11 +113,7 @@
 
   .content {
     width: calc(100% - 30px);
-    margin: var(--space-l) 15px;
-  }
-
-  .button {
-    width: 100%;
+    margin: var(--space-l) var(--space-s);
   }
 
   .img {

@@ -6,7 +6,7 @@
 .infoBlock {
   display: flex;
   flex-shrink: 0;
-  margin-right: 90px;
+  margin-right: var(--space-xe);
 }
 
 .textBlock {
@@ -18,29 +18,21 @@
 }
 
 .icon {
-  margin-right: 20px;
+  margin-right: var(--space-n);
 }
 
 .location {
   margin-bottom: var(--space-xs);
 
   color: var(--color-black);
-  font-weight: normal;
-  font-size: 16px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 24px;
 }
 
 .showOnMap {
   width: fit-content;
 
   color: var(--color-dark-gray);
-  font-weight: normal;
-  font-size: 14px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 21px;
+  font-size: var(--size-s);
+  line-height: var(--lh-s);
 }
 
 .contactsBlock {
@@ -51,25 +43,16 @@
   display: flex;
   flex-shrink: 0;
   width: 200px;
-  margin-right: 90px;
+  margin-right: var(--space-xe);
 
   font-weight: 500;
-  font-size: 16px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 150%;
 }
 
 .workTime {
   display: flex;
   width: 236px;
 
-  color: var(--color-black);
   font-weight: 500;
-  font-size: 16px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 24px;
 }
 
 @media (--desktop-m) {
@@ -102,7 +85,7 @@
 
 @media (--mobile-m) {
   .textBlock {
-    width: calc(100% - 50px);
+    width: calc(100% - var(--space-b));
   }
 
   .phone {
@@ -130,7 +113,7 @@
   .contactsBlock {
     flex-direction: column;
     margin-top: var(--space-n);
-    padding-left: 50px;
+    padding-left: var(--space-b);
   }
 
   .infoBlock {
@@ -139,11 +122,11 @@
   }
 
   .textBlock {
-    width: calc(100% - 50px);
+    width: calc(100% - var(--space-b));
   }
 
   .phone {
-    margin-bottom: 5px;
+    margin-bottom: var(--space-xxs);
   }
 
   .workTime {
