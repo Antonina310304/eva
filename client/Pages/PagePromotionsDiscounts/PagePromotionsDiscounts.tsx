@@ -1,7 +1,9 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 
 import ServicePageTitle from '@Components/ServicePageTitle';
+import Trends from './elems/Trends';
 import TopProducts from './elems/TopProducts';
+import mocks from './mocks';
 import styles from './PagePromotionDiscounts.module.css';
 
 export interface PagePromotionsDiscountsProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,6 +16,8 @@ const PagePromotionsDiscounts: FC<PagePromotionsDiscountsProps> = (props) => {
   return (
     <div {...restProps}>
       <ServicePageTitle className={styles.title} title={page.title} />
+
+      <Trends title='Будь в тренде: яркий интерьер в деталях' categories={mocks.trends} />
 
       <TopProducts title='Топ 10 из Divan.Trends' products={page.products} />
     </div>
