@@ -1,0 +1,44 @@
+.wrapper {
+  width: 100%;
+  margin-bottom: var(--space-xxe);
+}
+
+.galleryWrapper {
+  composes: main from 'containers';
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-l);
+}
+
+.itemWrapper {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+
+  vertical-align: top;
+}
+
+.section {
+  overflow: hidden;
+}
+
+@media (--desktop-m) {
+  .wrapper {
+    margin: 0 auto var(--space-e) auto;
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    margin: 0 auto var(--space-xb) auto;
+  }
+}
+
+@media (--mobile) {
+  .title > p {
+    font-size: var(--size-l);
+  }
+}
