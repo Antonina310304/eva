@@ -39,8 +39,8 @@ const MapWithPopup: FC<MapWithPopupProps> = (props) => {
     setVisiblePopup(false);
   }, []);
 
-  const handleMore = useCallback((id) => {
-    setSelectedPoint(id);
+  const handleMore = useCallback((_e, sellPoint) => {
+    setSelectedPoint(sellPoint);
   }, []);
 
   const handleBack = useCallback(() => {
