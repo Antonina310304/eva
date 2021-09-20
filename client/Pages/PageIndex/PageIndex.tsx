@@ -1,6 +1,7 @@
-import React, { FC, HTMLAttributes, memo, useCallback } from 'react';
+import React, { FC, HTMLAttributes, memo, useCallback, useState } from 'react';
 import cn from 'classnames';
 
+import Slider from 'react-slick';
 import Button from '@UI/Button';
 import useModals from '@Hooks/useModals';
 import { MetaData } from '@Types/Meta';
@@ -19,6 +20,15 @@ export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
 const PageIndex: FC<PageIndexProps> = (props) => {
   const { className, page, meta, ...restProps } = props;
   const [, { openModal }] = useModals();
+  const [slide, setSlide] = useState(0);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
 
   const handleClickButton = useCallback(() => {
     openModal('RegionSelector');
@@ -31,6 +41,24 @@ const PageIndex: FC<PageIndexProps> = (props) => {
     { id: 'test5', title: 'test5', name: 'test5' },
     { id: 'test6', title: 'test6', name: 'test6' },
   ];
+
+  const slider = [
+    { img: 'react/static/img/slider-3.png' },
+    { img: 'react/static/img/slider-1.png' },
+    { img: 'react/static/img/slider-2.png' },
+    { img: 'react/static/img/slider-3.png' },
+    { img: 'react/static/img/slider-1.png' },
+  ];
+
+  const handleChangeCurrent = useCallback(
+    ({ current }) => {
+      if (current > slider.length - 3) {
+        return;
+      }
+      setSlide(current);
+    },
+    [slider],
+  );
 
   return (
     <div {...restProps} className={cn(styles.pageIndex, [className])}>
@@ -46,23 +74,41 @@ const PageIndex: FC<PageIndexProps> = (props) => {
         }}
       />
 
+      <Slider {...settings}>
+        {slider.map((item, index) => {
+          return (
+            <div key={index} className={styles.slideWrapper}>
+              <div className={styles.slideInner}>
+                <div className={styles.imgWrapper}>
+                  <img className={styles.img} src={item.img} alt='' />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </Slider>
+
       <div className={styles.slider}>
-        <Gallery slideIndex={1}>
-          {Array(7)
-            .fill('')
-            .map((item, index) => {
-              // const activeElem = index === slideIndex;
-              return (
-                <div key={index} className={styles.slideWrapper}>
-                  <div className={styles.slideInner}>
-                    <p>{index + 1}</p>
-                    <img src='slider.png' alt='' />
+        <Gallery
+          slideIndex={slide}
+          className={styles.sliderIn}
+          onChangeCurrent={handleChangeCurrent}
+        >
+          {slider.map((item, index) => {
+            const activeElem = index - 1 === slide;
+            return (
+              <div key={index} className={styles.slideWrapper}>
+                <div className={cn(activeElem && styles.active, styles.slideInner)}>
+                  <div className={styles.imgWrapper}>
+                    <img className={styles.img} src={item.img} alt='' />
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
         </Gallery>
       </div>
+
       <Button onClick={handleClickButton}>Change region</Button>
     </div>
   );
