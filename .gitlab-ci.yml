@@ -5,7 +5,6 @@ stages:
   - review
   - lint
   - deploy
-  - clear_review
 
 prepare:
   tags:
@@ -21,6 +20,7 @@ prepare:
   only:
     - merge_requests
 
+# Проверяем код на соответствие принятому стилю
 check_code_style:
   tags:
     - divan
@@ -36,6 +36,7 @@ check_code_style:
     - merge_requests
   allow_failure: true
 
+# Проверям валидность CSS
 lint_css_code:
   tags:
     - divan
@@ -51,6 +52,7 @@ lint_css_code:
     - merge_requests
   allow_failure: true
 
+# Проверяем валидность JavaScript/TypeScript кода
 lint_javascript_code:
   tags:
     - divan
@@ -66,6 +68,7 @@ lint_javascript_code:
     - merge_requests
   allow_failure: true
 
+# Проверяем корректность типизации кода
 check_types:
   tags:
     - divan
@@ -120,6 +123,7 @@ latest:
     - master
     - merge_requests
 
+# Выкладываем ветку в песочницу для проверки перед релизом
 review:
   tags:
     - divan
@@ -145,10 +149,11 @@ review:
     - master
     - merge_requests
 
+# Очищаем песочницу после принятия/закрытия merge request
 stop_review:
   tags:
     - divan
-  stage: clear_review
+  stage: review
   script:
     - kubectl delete namespace $CI_COMMIT_REF_SLUG
   variables:
