@@ -10,18 +10,18 @@ import styles from './SectionShowroomsMap.module.css';
 export interface SectionShowroomsMapProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   map: MapData;
-  sellPoints: SellPointData[];
+  defaultSellPoints?: SellPointData[];
 }
 
 const SectionShowroomsMap: FC<SectionShowroomsMapProps> = (props) => {
-  const { className, map, sellPoints, ...restProps } = props;
+  const { className, map, defaultSellPoints, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.section, className)}>
       {map.title && <ServicePageParagraphTitle className={styles.title} title={map.title} />}
       {map.description && <div className={styles.text}>{map.description}</div>}
 
-      <MapWithPopup className={styles.mapWithPopup} sellPoints={sellPoints} />
+      <MapWithPopup className={styles.mapWithPopup} defaultSellPoints={defaultSellPoints} />
     </div>
   );
 };

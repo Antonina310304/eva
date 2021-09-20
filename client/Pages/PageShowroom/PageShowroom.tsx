@@ -4,6 +4,7 @@ import { Tab } from '@UI/ButtonTabs';
 import ServicePageTitle from '@Components/ServicePageTitle';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import { MetaData } from '@Types/Meta';
+import { SellPointData } from '@Types/SellPoints';
 import MainBanner from './elems/MainBanner';
 import SellPoints from './elems/SellPoints';
 import ShowroomsGallery from './elems/ShowroomsGallery';
@@ -19,27 +20,34 @@ export interface PageShowRoomProps extends HTMLAttributes<HTMLDivElement> {
 const PageShowRoom: FC<PageShowRoomProps> = (props) => {
   const { page, meta } = props;
 
+  const sellPoints: SellPointData[] = useMemo(() => {
+    return page.currentSellPoints.map((sellPoint) => ({
+      ...sellPoint,
+      coordinates: sellPoint.coordinates.center,
+    }));
+  }, [page.currentSellPoints]);
+
   const tabs = useMemo(() => {
     const result: Tab[] = [];
 
-    page.sellPoints.forEach((sellPoint) => {
+    sellPoints.forEach((sellPoint) => {
       if (!sellPoint.name || sellPoint.images.length < 1) return;
 
       result.push({ id: sellPoint.name, label: sellPoint.name });
     });
 
     return result;
-  }, [page.sellPoints]);
+  }, [sellPoints]);
 
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
 
   const selectedShowroomIndex = useMemo(() => {
-    return page.sellPoints.findIndex((sellPoint) => sellPoint.name === selectedTab);
-  }, [page.sellPoints, selectedTab]);
+    return sellPoints.findIndex((sellPoint) => sellPoint.name === selectedTab);
+  }, [sellPoints, selectedTab]);
 
   const selectedShowroom = useMemo(() => {
-    return page.sellPoints[selectedShowroomIndex];
-  }, [page.sellPoints, selectedShowroomIndex]);
+    return sellPoints[selectedShowroomIndex];
+  }, [sellPoints, selectedShowroomIndex]);
 
   const defaultCatalog = useMemo(() => {
     return page.categories[selectedShowroomIndex];
@@ -64,7 +72,7 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
 
       <MainBanner className={styles.banner} />
 
-      <SellPoints sellPoints={page.sellPoints} />
+      <SellPoints sellPoints={sellPoints} />
 
       <div className={styles.gallery}>
         <ShowroomsGallery
@@ -82,7 +90,7 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
       />
 
       <div className={styles.container}>
-        <SectionShowroomsMap className={styles.map} map={page.map} sellPoints={page.sellPoints} />
+        <SectionShowroomsMap className={styles.map} map={page.map} />
       </div>
     </div>
   );
