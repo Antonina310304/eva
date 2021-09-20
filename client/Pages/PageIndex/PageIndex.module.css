@@ -11,3 +11,28 @@
 
   font-size: var(--size-xl);
 }
+
+.select {
+  width: 250px;
+  margin-bottom: 45px;
+}
+
+.slideWrapper {
+  display: inline-block;
+  width: 350px;
+
+  padding: 0 15px;
+}
+
+.slideInner {
+  width: 100%;
+  height: 250px;
+
+  background: red;
+}
+
+.slider {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
