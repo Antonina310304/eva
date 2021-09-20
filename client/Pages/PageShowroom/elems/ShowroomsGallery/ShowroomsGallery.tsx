@@ -12,13 +12,14 @@ import styles from './ShowroomsGallery.module.css';
 
 export interface ShowroomsGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  title: string;
   tabs: Tab[];
   images: string[];
   onChangeTab?: (e: MouseEvent, tab: Tab) => void;
 }
 
 const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
-  const { className, tabs, images, onChangeTab, ...restProps } = props;
+  const { className, title, tabs, images, onChangeTab, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [slideIndex, setSlideIndex] = useState(0);
@@ -68,7 +69,7 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
         <div className={styles.separator} />
       </div>
 
-      <Section className={styles.title} title='Магазины Диван.ру' />
+      <Section className={styles.title} title={title} />
 
       <div className={styles.tabWrapper}>
         <ButtonTabs

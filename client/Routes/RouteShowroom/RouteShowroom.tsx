@@ -15,7 +15,7 @@ const RouteCategory: FC = () => {
 
   return (
     <TemplateMain meta={meta.data}>
-      <PageShowRoom page={page.data} />
+      <PageShowRoom page={page.data} meta={meta.data} />
     </TemplateMain>
   );
 };

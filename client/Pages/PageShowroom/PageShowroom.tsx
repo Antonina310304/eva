@@ -3,6 +3,7 @@ import { FC, HTMLAttributes, memo, useState, useMemo, useCallback } from 'react'
 import { Tab } from '@UI/ButtonTabs';
 import ServicePageTitle from '@Components/ServicePageTitle';
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
+import { MetaData } from '@Types/Meta';
 import MainBanner from './elems/MainBanner';
 import SellPoints from './elems/SellPoints';
 import ShowroomsGallery from './elems/ShowroomsGallery';
@@ -12,10 +13,11 @@ import styles from './PageShowroom.module.css';
 
 export interface PageShowRoomProps extends HTMLAttributes<HTMLDivElement> {
   page: PageShowroomData;
+  meta: MetaData;
 }
 
 const PageShowRoom: FC<PageShowRoomProps> = (props) => {
-  const { page } = props;
+  const { page, meta } = props;
 
   const tabs = useMemo(() => {
     const result: Tab[] = [];
@@ -43,13 +45,22 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
     return page.categories[selectedShowroomIndex];
   }, [page.categories, selectedShowroomIndex]);
 
+  const showroomsGalleryTitle = useMemo(() => {
+    const titles = {
+      rus: 'Магазины Диван.ру',
+      blr: 'Магазины Диван.by',
+    };
+
+    return titles[meta.country.toLowerCase()];
+  }, [meta.country]);
+
   const handleChangeShoowroom = useCallback((_e, tab: Tab) => {
     setSelectedTab(tab.id);
   }, []);
 
   return (
     <div className={styles.page}>
-      <ServicePageTitle className={styles.title} title='Адреса магазинов' />
+      <ServicePageTitle className={styles.title} title={page.title} />
 
       <MainBanner className={styles.banner} />
 
@@ -57,13 +68,18 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
 
       <div className={styles.gallery}>
         <ShowroomsGallery
+          title={showroomsGalleryTitle}
           tabs={tabs}
           images={selectedShowroom.images}
           onChangeTab={handleChangeShoowroom}
         />
       </div>
 
-      <ShowroomProducts key={selectedTab} defaultCatalog={defaultCatalog} />
+      <ShowroomProducts
+        key={selectedTab}
+        title='Товары в шоу-руме'
+        defaultCatalog={defaultCatalog}
+      />
 
       <div className={styles.container}>
         <SectionShowroomsMap className={styles.map} map={page.map} sellPoints={page.sellPoints} />
