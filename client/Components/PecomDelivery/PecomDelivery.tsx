@@ -84,7 +84,7 @@ const PecomDelivery: FC<PecomDeliveryProps> = (props) => {
       </div>
 
       <div className={styles.map} ref={refMap}>
-        {inViewMap && pickupPoints.length > 0 && <PecomMap pickupPoints={pickupPoints} />}
+        {inViewMap && pickupPoints.length > 0 && <PecomMap sellPoints={pickupPoints} />}
       </div>
     </div>
   );

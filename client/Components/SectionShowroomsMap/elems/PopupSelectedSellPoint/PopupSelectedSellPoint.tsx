@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, MouseEvent, memo } from 'react';
 import cn from 'classnames';
 
 import IconClose from '@UI/IconClose';
@@ -11,22 +11,22 @@ import styles from './PopupSelectedSellPoint.module.css';
 export interface PopupSelectedSellPointProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   selectedPoint: SellPointData;
-  closePopup: () => void;
-  goBack: () => void;
+  onClose?: (e: MouseEvent) => void;
+  onBack?: (e: MouseEvent) => void;
 }
 
 const PopupSelectedSellPoint: FC<PopupSelectedSellPointProps> = (props) => {
-  const { className, closePopup, goBack, selectedPoint, ...restProps } = props;
+  const { className, onClose, onBack, selectedPoint, ...restProps } = props;
 
   return (
     <div {...restProps} className={cn(styles.popupSelectedSellPoint, className)}>
       <div>
         <div className={styles.head}>
-          <div className={styles.back} onClick={goBack}>
+          <div className={styles.back} onClick={onBack}>
             <div className={styles.arrowBack} />
             <div className={styles.backText}>Назад</div>
           </div>
-          <IconClose className={styles.iconClose} onClick={closePopup} />
+          <IconClose className={styles.iconClose} onClick={onClose} />
         </div>
 
         <Scroller className={styles.scrollerPoint}>

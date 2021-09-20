@@ -90,7 +90,7 @@ const PageShowRoom: FC<PageShowRoomProps> = (props) => {
       />
 
       <div className={styles.container}>
-        <SectionShowroomsMap className={styles.map} map={page.map} sellPoints={sellPoints} />
+        <SectionShowroomsMap className={styles.map} map={page.map} />
       </div>
     </div>
   );

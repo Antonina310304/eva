@@ -1,10 +1,10 @@
-import { FC, HTMLAttributes, memo, useCallback, useRef, useState, useEffect } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 
 import * as ApiPecom from '@Api/Pecom';
 import PecomMap from '@Components/PecomMap';
 import Price from '@UI/Price';
-import MarkerIcon from './pecmarker.svg';
+import logger from '@Utils/logger';
 import styles from './PickupPoint.module.css';
 
 export interface PickupPointProps extends HTMLAttributes<HTMLDivElement> {
@@ -14,21 +14,8 @@ export interface PickupPointProps extends HTMLAttributes<HTMLDivElement> {
 
 const PickupPoint: FC<PickupPointProps> = (props) => {
   const { className, region, ...restProps } = props;
-  const geoObjects = useRef(null);
   const [pickupPoints, setPickupPoints] = useState([]);
   const [loaded, setLoaded] = useState(false);
-
-  const getGeoObjects = useCallback((geoObjectsMass) => {
-    geoObjects.current = geoObjectsMass.map((item: any) => {
-      const obj = { ...item };
-      obj.options.set({
-        iconLayout: 'default#image',
-        iconImageHref: MarkerIcon,
-        iconImageSize: [52, 44],
-      });
-      return obj;
-    });
-  }, []);
 
   const loadWarehouses = useCallback(async () => {
     try {
@@ -36,8 +23,7 @@ const PickupPoint: FC<PickupPointProps> = (props) => {
 
       setPickupPoints(warehouses);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
+      logger(err);
     } finally {
       setLoaded(true);
     }
@@ -60,12 +46,7 @@ const PickupPoint: FC<PickupPointProps> = (props) => {
       </div>
       <div className={styles.mapTitle}>Адреса пунктов самовывоза:</div>
       {loaded && pickupPoints.length > 0 ? (
-        <PecomMap
-          className={styles.map}
-          pickupPoints={pickupPoints}
-          contactsStyle
-          getGeoObjects={getGeoObjects}
-        />
+        <PecomMap className={styles.map} sellPoints={pickupPoints} />
       ) : (
         <div className={styles.map} />
       )}
