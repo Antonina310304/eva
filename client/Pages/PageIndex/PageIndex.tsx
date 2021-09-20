@@ -11,6 +11,9 @@ import MainSelect from '@UI/MainSelect';
 import Gallery from '@UI/Gallery';
 import styles from './PageIndex.module.css';
 
+import './slick.css';
+import './slick-theme.css';
+
 export interface PageIndexProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
@@ -26,8 +29,10 @@ const PageIndex: FC<PageIndexProps> = (props) => {
     dots: true,
     infinite: true,
     speed: 500,
+    centerMode: true,
     slidesToShow: 3,
     slidesToScroll: 1,
+    centerPadding: 0,
   };
 
   const handleClickButton = useCallback(() => {
@@ -73,41 +78,45 @@ const PageIndex: FC<PageIndexProps> = (props) => {
           return <SampleOption item={itemProps} />;
         }}
       />
-
-      <Slider {...settings}>
-        {slider.map((item, index) => {
-          return (
-            <div key={index} className={styles.slideWrapper}>
-              <div className={styles.slideInner}>
-                <div className={styles.imgWrapper}>
-                  <img className={styles.img} src={item.img} alt='' />
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </Slider>
-
-      <div className={styles.slider}>
-        <Gallery
-          slideIndex={slide}
-          className={styles.sliderIn}
-          onChangeCurrent={handleChangeCurrent}
-        >
+      <div className={styles.wrap}>
+        <Slider {...settings}>
           {slider.map((item, index) => {
-            const activeElem = index - 1 === slide;
             return (
-              <div key={index} className={styles.slideWrapper}>
-                <div className={cn(activeElem && styles.active, styles.slideInner)}>
-                  <div className={styles.imgWrapper}>
-                    <img className={styles.img} src={item.img} alt='' />
+              <div key={index} className={styles.wrapperSlide}>
+                <div>
+                  <div>
+                    <p>
+                      слайдер
+                      {index}
+                    </p>
                   </div>
                 </div>
               </div>
             );
           })}
-        </Gallery>
+        </Slider>
       </div>
+
+      {/* <div className={styles.slider}> */}
+      {/*  <Gallery */}
+      {/*    slideIndex={slide} */}
+      {/*    className={styles.sliderIn} */}
+      {/*    onChangeCurrent={handleChangeCurrent} */}
+      {/*  > */}
+      {/*    {slider.map((item, index) => { */}
+      {/*      const activeElem = index - 1 === slide; */}
+      {/*      return ( */}
+      {/*        <div key={index} className={styles.slideWrapper}> */}
+      {/*          <div className={cn(activeElem && styles.active, styles.slideInner)}> */}
+      {/*            <div className={styles.imgWrapper}> */}
+      {/*              <img className={styles.img} src={item.img} alt='' /> */}
+      {/*            </div> */}
+      {/*          </div> */}
+      {/*        </div> */}
+      {/*      ); */}
+      {/*    })} */}
+      {/*  </Gallery> */}
+      {/* </div> */}
 
       <Button onClick={handleClickButton}>Change region</Button>
     </div>

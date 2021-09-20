@@ -100,3 +100,7 @@
 .slick-arrow.slick-hidden {
   display: none;
 }
+
+.slick-center {
+  background: green;
+}
