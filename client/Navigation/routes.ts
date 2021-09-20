@@ -78,6 +78,11 @@ const routes: RoutesMap = {
   b2bDetail: {
     path: '/b2b/detail/:slug',
   },
+
+  //
+  promoPrints: {
+    path: '/promo/prints',
+  },
 };
 
 export default routes;
