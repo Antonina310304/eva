@@ -78,6 +78,10 @@ const routes: RoutesMap = {
   b2bDetail: {
     path: '/b2b/detail/:slug',
   },
+
+  sleeper: {
+    path: '/sleeper',
+  },
 };
 
 export default routes;

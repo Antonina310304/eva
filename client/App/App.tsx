@@ -33,6 +33,7 @@ const RoutePress = loadable(() => import('@Routes/RoutePress'));
 const RouteSiteMap = loadable(() => import('@Routes/RouteSiteMap'));
 const RouteSiteMapFull = loadable(() => import('@Routes/RouteSiteMapFull'));
 const RouteShowroom = loadable(() => import('@Routes/RouteShowroom'));
+const RouteSleeper = loadable(() => import('@Routes/RouteSleeper'));
 
 const App: FC = () => {
   return (
@@ -115,6 +116,10 @@ const App: FC = () => {
 
       <Route {...routes.showroom}>
         <RouteShowroom />
+      </Route>
+
+      <Route {...routes.sleeper}>
+        <RouteSleeper />
       </Route>
     </ModalsProvider>
   );
