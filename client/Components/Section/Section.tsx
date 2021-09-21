@@ -48,7 +48,7 @@ const Section: FC<SectionProps> = (props) => {
         {additional && <div className={styles.additional}>{additional}</div>}
       </div>
 
-      <div className={styles.contentn}>{children}</div>
+      <div className={styles.content}>{children}</div>
     </div>
   );
 };

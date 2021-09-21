@@ -37,7 +37,7 @@ const PageB2b: FC<PageB2bProps> = (props) => {
       </div>
 
       <div className={styles.mapWrapper}>
-        <SectionShowroomsMap map={map} sellPoints={sellPoints} />
+        <SectionShowroomsMap map={map} defaultSellPoints={sellPoints} />
       </div>
     </div>
   );

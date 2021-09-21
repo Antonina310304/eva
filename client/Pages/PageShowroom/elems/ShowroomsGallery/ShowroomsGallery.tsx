@@ -12,25 +12,18 @@ import styles from './ShowroomsGallery.module.css';
 
 export interface ShowroomsGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  title: string;
   tabs: Tab[];
   images: string[];
   onChangeTab?: (e: MouseEvent, tab: Tab) => void;
 }
 
 const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
-  const { className, tabs, images, onChangeTab, ...restProps } = props;
+  const { className, title, tabs, images, onChangeTab, ...restProps } = props;
   const { isMobileM } = useMedias();
   const [track, setTrack] = useState<ProgressOptions>(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
-
-  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
-    setTrack(opts);
-  }, []);
-
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlideIndex(current);
-  }, []);
 
   const normalizeSlide = useCallback(
     (index: number) => {
@@ -41,6 +34,14 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
     },
     [images.length],
   );
+
+  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
+    setTrack(opts);
+  }, []);
+
+  const handleChangeCurrent = useCallback(({ current }) => {
+    setSlideIndex(current);
+  }, []);
 
   const handlePrev = useCallback(() => {
     setSlideIndex((prev) => normalizeSlide(prev - 1));
@@ -62,13 +63,19 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
     [onChangeTab],
   );
 
+  const handleClickPreview = useCallback((e, index) => {
+    if (window.cancelClick) return;
+
+    setSlideIndex(index);
+  }, []);
+
   return (
     <div {...restProps} className={cn(styles.slider, className)}>
       <div className={styles.wrapper}>
         <div className={styles.separator} />
       </div>
 
-      <Section className={styles.title} title='Магазины Диван.ру' />
+      <Section className={styles.title} title={title} />
 
       <div className={styles.tabWrapper}>
         <ButtonTabs
@@ -108,7 +115,7 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
                   className={cn(styles.slidePagination, {
                     [styles.actived]: slideIndex === index,
                   })}
-                  onClick={() => handleChangeCurrent({ current: index })}
+                  onClick={(e) => handleClickPreview(e, index)}
                 >
                   <Image className={styles.imgWrapper} src={src} />
                 </div>

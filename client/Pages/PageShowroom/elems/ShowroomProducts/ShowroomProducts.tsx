@@ -11,11 +11,12 @@ import styles from './ShowroomProducts.module.css';
 
 export interface ShowroomProductsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  title: string;
   defaultCatalog: CatalogData;
 }
 
 const ShowroomProducts: FC<ShowroomProductsProps> = (props) => {
-  const { className, defaultCatalog, ...restProps } = props;
+  const { className, title, defaultCatalog, ...restProps } = props;
   const [catalog, setCatalog] = useState(defaultCatalog);
   const [isLoading, setLoading] = useState(false);
 
@@ -41,11 +42,7 @@ const ShowroomProducts: FC<ShowroomProductsProps> = (props) => {
   }, [catalog.page, catalog.translite]);
 
   return (
-    <Section
-      {...restProps}
-      className={cn(styles.sectionWrapper, className)}
-      title='Товары в шоу-руме'
-    >
+    <Section {...restProps} className={cn(styles.sectionWrapper, className)} title={title}>
       <div className={styles.productsWrapper}>
         <div className={styles.productsList}>
           {catalog.products.map((product) => (
