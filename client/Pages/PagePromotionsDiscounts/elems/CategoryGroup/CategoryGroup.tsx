@@ -1,21 +1,22 @@
-import React, { FC } from 'react';
-import { CategoryInterface } from '@Pages/PagePromotionsDiscounts/elems/CurrentDiscounts/Mock/mockCategories';
+import React, { FC, useMemo, memo } from 'react';
 import cn from 'classnames';
-import CurrentDiscountsCard from '@Pages/PagePromotionsDiscounts/elems/CurrentDiscounts/CurrentDiscountCard/CurrentDiscountsCard';
+
+import { CategoryDiscountData } from '@Pages/PagePromotionsDiscounts/typings';
+import CurrentDiscountsCard from '../CurrentDiscountCard';
 import styles from './CategoryGroup.module.css';
 
-interface CategoryGroupProps {
-  categories: CategoryInterface[];
+export interface CategoryGroupProps {
+  categories: CategoryDiscountData[];
   className?: string;
 }
 
 const CategoryGroup: FC<CategoryGroupProps> = ({ categories, className }) => {
-  const topArray = React.useMemo(() => {
-    return categories.filter((category, index) => index % 2 === 0);
+  const topArray = useMemo(() => {
+    return categories.filter((_category, index) => index % 2 === 0);
   }, [categories]);
 
-  const bottomArray = React.useMemo(() => {
-    return categories.filter((category, index) => index % 2 !== 0);
+  const bottomArray = useMemo(() => {
+    return categories.filter((_category, index) => index % 2 !== 0);
   }, [categories]);
 
   return (
@@ -38,4 +39,4 @@ const CategoryGroup: FC<CategoryGroupProps> = ({ categories, className }) => {
   );
 };
 
-export default CategoryGroup;
+export default memo(CategoryGroup);

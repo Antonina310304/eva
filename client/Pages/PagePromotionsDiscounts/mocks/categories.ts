@@ -1,12 +1,4 @@
-export interface CategoryInterface {
-  categoryName: string;
-  countOfPositions: number;
-  maxDiscount: number;
-  imageUrl: string;
-  link: string;
-}
-
-export const mockCategoriesForCurrentDiscounts: CategoryInterface[] = [
+export default [
   {
     categoryName: 'Диваны',
     countOfPositions: 214,

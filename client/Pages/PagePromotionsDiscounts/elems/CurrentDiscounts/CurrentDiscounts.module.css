@@ -7,13 +7,7 @@
   composes: main from 'containers';
 }
 
-.headerWrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--space-l);
-}
-
-.itemWrapper {
+.item {
   flex: 0 0 auto;
   box-sizing: border-box;
   width: 100%;
@@ -34,11 +28,5 @@
 @media (--desktop) {
   .wrapper {
     margin: 0 auto var(--space-xb) auto;
-  }
-}
-
-@media (--mobile) {
-  .title > p {
-    font-size: var(--size-l);
   }
 }

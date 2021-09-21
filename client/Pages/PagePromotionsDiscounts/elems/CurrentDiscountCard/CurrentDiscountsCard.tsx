@@ -1,19 +1,20 @@
 import React from 'react';
-import { CategoryInterface } from '@Pages/PagePromotionsDiscounts/elems/CurrentDiscounts/Mock/mockCategories';
 import cn from 'classnames';
+
+import { CategoryDiscountData } from '@Pages/PagePromotionsDiscounts/typings';
 import Link from '@UI/Link';
 import styles from './CurrentDiscountsCard.module.css';
 
-interface CurrentDiscountsCardProps {
+export interface CurrentDiscountsCardProps {
   className?: string;
-  category: CategoryInterface;
+  category: CategoryDiscountData;
 }
 
 const CurrentDiscountsCard: React.FC<CurrentDiscountsCardProps> = ({ className, category }) => {
   return (
     <div
       className={cn(styles.wrapper, className)}
-      style={{ background: `url(${category.imageUrl})`, backgroundSize: 'cover' }}
+      style={{ backgroundImage: `url(${category.imageUrl})`, backgroundSize: 'cover' }}
     >
       <Link to={category.link} className={styles.link}>
         <div className={styles.content}>

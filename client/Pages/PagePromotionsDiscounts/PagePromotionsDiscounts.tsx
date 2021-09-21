@@ -3,6 +3,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 import ServicePageTitle from '@Components/ServicePageTitle';
 import { PromoCardData } from '@Components/PromoCard';
 import CurrentPromotions from './elems/CurrentPromotions';
+import CurrentDiscounts from './elems/CurrentDiscounts';
 import FreeServices from './elems/FreeServices';
 import Trends from './elems/Trends';
 import TopProducts from './elems/TopProducts';
@@ -10,6 +11,7 @@ import mocks from './mocks';
 import styles from './PagePromotionDiscounts.module.css';
 
 export interface PagePromotionsDiscountsProps extends HTMLAttributes<HTMLDivElement> {
+  // TODO: Write types for this
   page: any;
 }
 
@@ -21,6 +23,8 @@ const PagePromotionsDiscounts: FC<PagePromotionsDiscountsProps> = (props) => {
       <ServicePageTitle className={styles.title} title={page.title} />
 
       <CurrentPromotions title='Действующие акции' cards={mocks.events as PromoCardData[]} />
+
+      <CurrentDiscounts title='Актуальные скидки' categories={mocks.categories} />
 
       <FreeServices
         title='Воспользуйтесь бесплатными услугами'

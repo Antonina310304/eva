@@ -4,3 +4,11 @@ export interface TrendsCategoryData {
   description: string;
   link: string;
 }
+
+export interface CategoryDiscountData {
+  categoryName: string;
+  countOfPositions: number;
+  maxDiscount: number;
+  imageUrl: string;
+  link: string;
+}
