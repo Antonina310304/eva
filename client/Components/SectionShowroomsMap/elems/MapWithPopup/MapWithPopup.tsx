@@ -1,8 +1,9 @@
-import { FC, HTMLAttributes, memo, useCallback, useState, useEffect } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
 import * as ApiShowroom from '@Api/Showroom';
 import PecomMap from '@Components/PecomMap';
+import useMeta from '@Queries/useMeta';
 import logger from '@Utils/logger';
 import { SellPointData } from '@Types/SellPoints';
 import PopupAllSellPoints from '../PopupAllSellPoints';
@@ -19,6 +20,13 @@ const MapWithPopup: FC<MapWithPopupProps> = (props) => {
   const [visiblePopup, setVisiblePopup] = useState(true);
   const [selectedPoint, setSelectedPoint] = useState<SellPointData>(null);
   const [sellPoints, setSellPoints] = useState<SellPointData[]>(defaultSellPoints);
+  const meta = useMeta();
+
+  const sellpointsInCurrentRegion = useMemo(() => {
+    if (!meta.isSuccess) return [];
+
+    return sellPoints.filter((sellPoint) => sellPoint.regionId === meta.data.region.id);
+  }, [meta.data, meta.isSuccess, sellPoints]);
 
   const loadSellPoints = useCallback(async () => {
     try {
@@ -72,7 +80,15 @@ const MapWithPopup: FC<MapWithPopupProps> = (props) => {
             onBack={handleBack}
           />
         ) : (
-          <PopupAllSellPoints sellPoints={sellPoints} onClose={handleClose} onMore={handleMore} />
+          <>
+            {sellpointsInCurrentRegion.length > 0 && (
+              <PopupAllSellPoints
+                sellPoints={sellpointsInCurrentRegion}
+                onClose={handleClose}
+                onMore={handleMore}
+              />
+            )}
+          </>
         )}
       </div>
     </div>
