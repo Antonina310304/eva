@@ -168,6 +168,9 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         if (current > slides.length - 1) {
           current = slides.length - 1;
         }
+        if (current < 0) {
+          current = 0;
+        }
 
         const expectDeltaX = (deltaX / (Date.now() - startT.current.getTime())) * 240 * 0.6;
         const shift = shiftX + deltaX + expectDeltaX - max;
@@ -230,7 +233,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         const newShiftX = getIndent(normalizedNewCurrent);
         const newState = {
           ...state,
-          animation: state.initialized,
           current: normalizedNewCurrent,
           deltaX: 0,
           shiftX: newShiftX,
@@ -285,14 +287,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Получить все нужные размеры
    */
   const getSizes = useCallback(() => {
-    if (!state.initialized || !refViewport.current) {
-      return {
-        slides: [],
-        viewportWidth: 0,
-        layerWidth: 0,
-      };
-    }
-
     const slides: GallerySlidesState[] = Children.map(
       children,
       (_child: ReactElement, index: number): GallerySlidesState => {
@@ -304,7 +298,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         };
       },
     );
-    const viewportWidth = refViewport.current.offsetWidth;
+    const viewportWidth = refViewport.current?.offsetWidth || 0;
     const layerWidth = slides.reduce(
       (val: number, slide: GallerySlidesState) => slide.width + val,
       0,
@@ -315,7 +309,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       viewportWidth,
       layerWidth,
     };
-  }, [children, state.initialized]);
+  }, [children]);
 
   // Стили для всей галереи
   const styleGallery = useMemo(() => {
@@ -332,7 +326,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   /**
    * Стили для подвижного слоя
    */
-  const styleLayer = useMemo(() => {
+  const styleLayer: CSSProperties = useMemo(() => {
     const { generalIndent } = state;
 
     return {
@@ -455,7 +449,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   // Запускаем инициализацию при изменении кол-ва слайдов
   useEffect(() => {
     dispatch({ type: 'init', data: getSizes() });
-  }, [childrenCount, getSizes, state.initialized]);
+  }, [childrenCount, getSizes]);
 
   return (
     <Touch
