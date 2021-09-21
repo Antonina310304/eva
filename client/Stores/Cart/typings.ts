@@ -1,4 +1,3 @@
-import { NetworkStatus } from '@Types/Base';
 import { CartData, DeliveryTypeData, PaymentTypeData, PaymentVariantData } from '@Types/Cart';
 
 export interface UseCartParams {
@@ -11,8 +10,4 @@ export interface CartStoreValue extends CartData {
   paymentVariants: PaymentVariantData[];
 }
 
-export interface UseCartResult extends CartStoreValue {
-  network: NetworkStatus;
-}
-
-export type UseCart = (params?: UseCartParams) => UseCartResult;
+export type UseCart = (params?: UseCartParams) => CartStoreValue;

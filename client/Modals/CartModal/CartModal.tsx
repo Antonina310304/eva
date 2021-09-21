@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
 
 import CartStore, { useCart } from '@Stores/Cart';
 import ModalSidebar, { ModalSidebarProps } from '@Components/ModalSidebar';
@@ -6,22 +6,41 @@ import declOfNum from '@Utils/declOfNum';
 import Price from '@UI/Price';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
+import logger from '@Utils/logger';
 import MainProductCard from './elems/MainProductCard';
 import RelatedProductsSection from './elems/RelatedProductsSection';
 import styles from './CartModal.module.css';
 
 const titles = ['товар', 'товара', 'товаров'];
 const CartModal: FC<ModalSidebarProps> = (props) => {
-  const { modal, ...restProps } = props;
+  const { modal, onClose, ...restProps } = props;
+  const [loading, setLoading] = useState(true);
   const cart = useCart({ ssr: false });
   const titleCount = declOfNum(cart.count, titles);
 
-  const handleOpen = useCallback(() => {
+  // Закрываем модальное окно в случае ошибки, чтобы пользователь мог повторить попытку
+  const handleError = useCallback(
+    (err: unknown) => {
+      if (onClose) onClose(null);
+      logger(err);
+    },
+    [onClose],
+  );
+
+  const handleOpen = useCallback(async () => {
     const productIds = modal.data.products.map((product: any) => product.shopProductId);
 
-    CartStore.addProducts(modal.data.products);
-    CartStore.loadRelatedProducts({ productIds });
-  }, [modal.data.products]);
+    try {
+      await Promise.all([
+        CartStore.addProducts(modal.data.products),
+        CartStore.loadRelatedProducts({ productIds }),
+      ]);
+
+      setLoading(false);
+    } catch (err) {
+      handleError(err);
+    }
+  }, [handleError, modal.data.products]);
 
   useEffect(() => {
     if (!modal.visible) return;
@@ -34,12 +53,12 @@ const CartModal: FC<ModalSidebarProps> = (props) => {
       {...restProps}
       title='Товар в корзине'
       modal={modal}
-      loading={cart.network === 'loading'}
+      loading={loading}
       className={styles.wrapper}
       cnWrapperContent={styles.wrapperContent}
       cnHead={styles.head}
     >
-      {cart.network === 'success' && (
+      {!loading && (
         <>
           <div className={styles.mainContent}>
             <div className={styles.newProducts}>
