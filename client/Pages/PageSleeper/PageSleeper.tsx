@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 
+import mockQualitySection from '@Pages/PageSleeper/elems/QualitySection/Mock/mockQualitySection';
 import SleeperGallery from './elems/SleeperGallery';
 import FoamSection from './elems/FoamSection';
 import QualitySection from './elems/QualitySection';
@@ -15,7 +16,7 @@ const PageSleeper: FC = () => {
       <h1 className={styles.title}>Матрасы Sleeper</h1>
       <SleeperGallery />
       <FoamSection />
-      <QualitySection />
+      <QualitySection {...mockQualitySection} />
       <CaseAndPackaging />
       <SleeperBuy />
       <SleeperMap />
