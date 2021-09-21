@@ -51,8 +51,8 @@
 
 @media (--desktop-m) {
   .wrapper {
-    max-width: 1066px;
-    margin: 0 auto var(--space-e) auto;
+    max-width: calc(100vw - 300px);
+    margin: 0 150px var(--space-e) 150px;
   }
 }
 
