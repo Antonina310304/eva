@@ -1,0 +1,10 @@
+.newPositions {
+}
+
+.item {
+  width: 100%;
+}
+
+.progressBar {
+  margin-top: var(--space-xxl);
+}

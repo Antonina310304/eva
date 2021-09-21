@@ -7,7 +7,7 @@ import Price from '@UI/Price';
 import Button from '@UI/Button';
 import Link from '@UI/Link';
 import logger from '@Utils/logger';
-import MainProductCard from './elems/MainProductCard';
+import NewPositionsGallery from './elems/NewPositionsGallery';
 import RelatedProductsSection from './elems/RelatedProductsSection';
 import styles from './CartModal.module.css';
 
@@ -52,26 +52,19 @@ const CartModal: FC<ModalSidebarProps> = (props) => {
     <ModalSidebar
       {...restProps}
       title='Товар в корзине'
+      view='fullscreen'
       modal={modal}
       loading={loading}
       className={styles.wrapper}
       cnWrapperContent={styles.wrapperContent}
       cnHead={styles.head}
+      onClose={onClose}
     >
       {!loading && (
         <>
           <div className={styles.mainContent}>
-            <div className={styles.newProducts}>
-              {cart.newPositions.map((position) => {
-                return position.products.map((product) => (
-                  <MainProductCard
-                    className={styles.newProduct}
-                    product={product}
-                    position={position}
-                    key={product.id}
-                  />
-                ));
-              })}
+            <div className={styles.newPositions}>
+              <NewPositionsGallery positions={cart.newPositions} />
             </div>
 
             <div className={styles.sectionTotal}>
