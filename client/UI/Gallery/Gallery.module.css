@@ -22,12 +22,14 @@
 }
 
 .layer {
+  width: fit-content;
+  min-width: 100%;
   height: 100%;
 
   white-space: nowrap;
 }
 
-.child {
+.slide {
   display: inline-block;
   height: 100%;
 
