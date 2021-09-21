@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import SectionShowroomsMap from '@Components/SectionShowroomsMap';
 import MainInstagramSection from '@Components/MainInstagramSection';
+import { PromoCardData } from '@Components/PromoCard';
 import { MetaData } from '@Types/Meta';
 import { ProductData } from '@Types/Product';
 import MainGallery from './elems/MainGallery';
@@ -11,7 +12,6 @@ import Recommendations from './elems/Recommendations';
 import NewProducts from './elems/NewProducts';
 import Popular from './elems/Popular';
 import Ideas from './elems/Ideas';
-import { PromoCardData } from './elems/PromoCard';
 import { sliderData, hits, popular, ideasData } from './data';
 import mockPromoCardData from './mockPromoCardData';
 import styles from './PageIndex.module.css';

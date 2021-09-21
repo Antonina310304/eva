@@ -5,7 +5,7 @@ import Link, { LinkProps } from '@UI/Link';
 import { TrendsCategoryData } from '@Pages/PagePromotionsDiscounts/typings';
 import styles from './CategoryCard.module.css';
 
-export interface CategoryCardProps extends LinkProps {
+export interface CategoryCardProps extends Omit<LinkProps, 'to'> {
   className?: string;
   category: TrendsCategoryData;
 }
