@@ -33,6 +33,12 @@
   margin-top: var(--space-l);
 }
 
+@media (--mobile-m) {
+  .arrows {
+    display: none;
+  }
+}
+
 @media (--mobile) {
   .head,
   .wrapperGallery {
