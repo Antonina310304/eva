@@ -100,7 +100,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
                   price: orderForm.selectedDelivery?.sum,
                   description: page.deliveryCostDescription,
                 }}
-                prepaymentPercent={page.deliveryCostDescription}
+                prepaymentPercent={page.prepaymentPercent}
                 profile={profile}
                 ref={refSidebar}
                 style={sidebarStyles}

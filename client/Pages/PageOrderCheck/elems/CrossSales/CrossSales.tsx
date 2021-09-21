@@ -3,11 +3,12 @@ import cn from 'classnames';
 
 import CrossSaleSection from '@Components/CrossSaleSection';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
+import { SectionData } from '@Pages/PageOrderCheck/typings';
 import styles from './CrossSales.module.css';
 
 export interface CrossSalesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  sections: any[];
+  sections: SectionData[];
 }
 
 const CrossSales: FC<CrossSalesProps> = (props) => {

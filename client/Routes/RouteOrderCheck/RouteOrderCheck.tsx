@@ -5,13 +5,13 @@ import usePage from '@Queries/usePage';
 import useProfile from '@Queries/useProfile';
 import useMeta from '@Queries/useMeta';
 import TemplateMain from '@Templates/TemplateMain';
-import PageOrderCheck from '@Pages/PageOrderCheck';
+import PageOrderCheck, { PageOrderCheckData } from '@Pages/PageOrderCheck';
 import { useCart } from '@Stores/Cart';
 import OrderFormStore from '@Stores/OrderForm';
 
 const RouteOrderCheck: FC = () => {
   const { pathname } = useLocation();
-  const page = usePage<any>({ path: pathname });
+  const page = usePage<PageOrderCheckData>({ path: pathname });
   const meta = useMeta();
   const cart = useCart();
   const profile = useProfile({ ssr: true });
@@ -28,7 +28,7 @@ const RouteOrderCheck: FC = () => {
 
   return (
     <TemplateMain meta={meta.data}>
-      <PageOrderCheck page={page.data as any} profile={profile.data} />
+      <PageOrderCheck page={page.data} profile={profile.data} />
     </TemplateMain>
   );
 };
