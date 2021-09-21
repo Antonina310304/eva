@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useMemo, useState } from 'react';
+import { FC, memo, useCallback, useMemo, useState } from 'react';
 import cn from 'classnames';
 
 import { CategoryDiscountData } from '@Pages/PagePromotionsDiscounts/typings';

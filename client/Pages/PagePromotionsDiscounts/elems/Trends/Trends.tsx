@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, useState, memo } from 'react';
+import { FC, HTMLAttributes, useCallback, useState, memo } from 'react';
 import cn from 'classnames';
 import NavArrows from '@UI/NavArrows/NavArrows';
 import Gallery, { ProgressOptions } from '@UI/Gallery';

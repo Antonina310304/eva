@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, FC, memo, useCallback } from 'react';
+import { HTMLAttributes, FC, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import ProductTags from '@Components/ProductTags';
