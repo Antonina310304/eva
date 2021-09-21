@@ -1,24 +1,42 @@
 import React, { FC, memo, HTMLAttributes, useState, useCallback } from 'react';
 import cn from 'classnames';
 
-import Section from '@Components/Section';
-import Gallery, { ProgressOptions } from '@UI/Gallery';
+import Gallery, { GalleryProps, ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
-import PromoCard, { PromoCardProps } from '@Components/PromoCard';
-import NavArrows from '@UI/NavArrows/NavArrows';
-
+import NavArrows from '@UI/NavArrows';
+import PromoCard, { PromoCardData } from '@Components/PromoCard';
+import Section from '@Components/Section';
 import useMedias from '@Hooks/useMedias';
-
 import styles from './CurrentPromotions.module.css';
 
 export interface CurrentPromotionsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  cards: PromoCardProps[];
+  cards: PromoCardData[];
 }
 
-const CurrentPromotions: FC<CurrentPromotionsProps> = ({ className, cards }) => {
+const Container: FC<GalleryProps> = (props) => {
+  const { children, ...restProps } = props;
+  const { isDesktop } = useMedias();
+
+  return (
+    <div className={styles.galleryContainer}>
+      {isDesktop ? (
+        <Gallery {...restProps} className={styles.gallery}>
+          {children}
+        </Gallery>
+      ) : (
+        <div className={styles.list}>{children}</div>
+      )}
+    </div>
+  );
+};
+
+const CurrentPromotions: FC<CurrentPromotionsProps> = (props) => {
+  const { className, title, cards, ...restProps } = props;
   const [slideIndex, setSlideIndex] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
+  const { isDesktop } = useMedias();
+  const needNav = isDesktop && track?.width < 100;
 
   const normalizeSlide = useCallback(
     (value: number) => {
@@ -48,66 +66,32 @@ const CurrentPromotions: FC<CurrentPromotionsProps> = ({ className, cards }) => 
     setSlideIndex((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
-  const { isDesktop } = useMedias();
-
-  const renderGallery = useCallback(() => {
-    if (!cards.length) return null;
-
-    return (
-      <div className={styles.galleryContainer}>
-        <Gallery
-          className={styles.gallery}
-          slideIndex={slideIndex}
-          onChangeProgress={handleChangeProgress}
-          onChangeCurrent={handleChangeCurrent}
-        >
-          {cards.map((card, index) => {
-            return (
-              <div key={index} className={styles.slide}>
-                <PromoCard {...card} />
-              </div>
-            );
-          })}
-        </Gallery>
-        {track && track.width < 100 && <ProgressBar className={styles.track} track={track} />}
-      </div>
-    );
-  }, [cards, handleChangeCurrent, handleChangeProgress, slideIndex, track]);
-
-  const renderList = useCallback(() => {
-    if (!cards.length) return null;
-
-    return (
-      <div className={styles.galleryContainer}>
-        <ul className={styles.list}>
-          {cards.map((card, index) => {
-            return (
-              <li key={index} className={styles.item}>
-                <PromoCard {...card} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }, [cards]);
-
   return (
-    <div className={cn(className, styles.wrapper)}>
+    <div {...restProps} className={cn(styles.wrapper, className)}>
       <Section
         className={styles.sectionWrapper}
-        title='Действующие акции'
+        title={title}
         additional={
-          track?.width < 100 &&
-          isDesktop && (
+          needNav && (
             <div className={styles.navArrows}>
               <NavArrows onPrev={handlePrev} onNext={handleNext} />
             </div>
           )
         }
-        additionalBreakup
       >
-        {isDesktop ? renderGallery() : renderList()}
+        <Container
+          slideIndex={slideIndex}
+          onChangeProgress={handleChangeProgress}
+          onChangeCurrent={handleChangeCurrent}
+        >
+          {cards.map((card, index) => (
+            <div key={index} className={styles.item}>
+              <PromoCard card={card} />
+            </div>
+          ))}
+
+          {needNav && <ProgressBar className={styles.track} track={track} />}
+        </Container>
       </Section>
     </div>
   );

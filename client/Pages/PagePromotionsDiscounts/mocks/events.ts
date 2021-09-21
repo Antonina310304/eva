@@ -1,6 +1,4 @@
-import { PromoCardProps } from '@Components/PromoCard';
-
-const mockPromoCardData: PromoCardProps[] = [
+export default [
   {
     type: 'event',
     title: 'Ультрамодные фасады',
@@ -9,16 +7,6 @@ const mockPromoCardData: PromoCardProps[] = [
     bgImage: '/react/static/promoCards/promo.jpg',
     discount: 'до 50%',
     theme: 'light',
-  },
-  {
-    type: 'service',
-    title: 'Образцы тканей',
-    description: 'Закажите понравившиеся варианты, и курьер привезёт их по нужному адресу',
-    bgImage: '/react/static/promoCards/promo2.svg',
-    bgColor: '#F4FFC0',
-    theme: 'light',
-    buttonText: 'Заказать образцы',
-    buttonEvent: 'sampleOrder',
   },
   {
     type: 'event',
@@ -37,14 +25,6 @@ const mockPromoCardData: PromoCardProps[] = [
     bgImage: '/react/static/promoCards/promo4.jpg',
     discount: 'до 50%',
     theme: 'dark',
-  },
-  {
-    type: 'service',
-    title: 'Доставка за наш счет',
-    description: 'Привезём бесплатно при заказе от&nbsp;45&nbsp;000&nbsp;₽',
-    bgImage: '/react/static/promoCards/promo5.svg',
-    bgColor: '#FFD9E0',
-    theme: 'light',
   },
   {
     type: 'event',
@@ -66,16 +46,6 @@ const mockPromoCardData: PromoCardProps[] = [
     theme: 'light',
   },
   {
-    type: 'service',
-    title: 'Видеоконсультация со специалистом',
-    description: 'Поможем, расскажем, покажем вживую',
-    bgImage: '/react/static/promoCards/promo8.svg',
-    bgColor: '#D8F1F1',
-    buttonText: 'Отправить заявку',
-    buttonEvent: 'videoConsultation',
-    theme: 'light',
-  },
-  {
     type: 'event',
     title: 'Будь в тренде!',
     description: 'Скидки на главные актуальные новинки до -40%',
@@ -93,16 +63,4 @@ const mockPromoCardData: PromoCardProps[] = [
     discount: 'до 50%',
     theme: 'light',
   },
-  {
-    type: 'service',
-    title: 'Образцы тканей',
-    description: 'Закажите понравившиеся варианты, и курьер привезёт их по нужному адресу',
-    bgImage: '/react/static/promoCards/promo2.svg',
-    bgColor: '#F4FFC0',
-    theme: 'light',
-    buttonText: 'Заказать образцы',
-    buttonEvent: 'sampleOrder',
-  },
 ];
-
-export default mockPromoCardData;

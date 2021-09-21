@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, memo } from 'react';
 
 import ServicePageTitle from '@Components/ServicePageTitle';
 import { PromoCardData } from '@Components/PromoCard';
+import CurrentPromotions from './elems/CurrentPromotions';
 import FreeServices from './elems/FreeServices';
 import Trends from './elems/Trends';
 import TopProducts from './elems/TopProducts';
@@ -18,6 +19,8 @@ const PagePromotionsDiscounts: FC<PagePromotionsDiscountsProps> = (props) => {
   return (
     <div {...restProps}>
       <ServicePageTitle className={styles.title} title={page.title} />
+
+      <CurrentPromotions title='Действующие акции' cards={mocks.events as PromoCardData[]} />
 
       <FreeServices
         title='Воспользуйтесь бесплатными услугами'

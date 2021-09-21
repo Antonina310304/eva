@@ -18,15 +18,6 @@
   margin-top: var(--space-l);
 }
 
-.slide {
-  box-sizing: content-box;
-  width: 573px;
-  height: 780px;
-  padding: 0 var(--space-xs);
-
-  vertical-align: top;
-}
-
 .track {
   margin-top: var(--space-l);
 }
@@ -68,8 +59,12 @@
     margin-bottom: var(--space-xb);
   }
 
-  .slide {
+  .item {
+    box-sizing: content-box;
     width: 300px;
     height: 408px;
+    padding: 0 var(--space-xs);
+
+    vertical-align: top;
   }
 }
