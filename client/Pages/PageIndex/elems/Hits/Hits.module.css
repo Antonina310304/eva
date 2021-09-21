@@ -46,7 +46,6 @@
   width: 28.405vw;
   min-width: 300px;
   max-width: 422px;
-  padding: 0 var(--space-xs);
 }
 
 .header {

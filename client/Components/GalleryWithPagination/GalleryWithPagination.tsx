@@ -21,10 +21,11 @@ export type RenderButtons = (args: RenderButtonsArgs) => ReactElement;
 
 export interface GalleryWithPaginationProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  gap?: number;
   renderButtons?: RenderButtons;
 }
 const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
-  const { className, children, renderButtons, ...restProps } = props;
+  const { className, gap, children, renderButtons, ...restProps } = props;
   const numberOfSlides = Children.count(children);
   const [slide, setSlide] = useState(0);
 
@@ -62,8 +63,8 @@ const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
         <Gallery
           className={styles.gallery}
           slideIndex={slide}
+          gap={gap}
           onChangeCurrent={handleChangeCurrent}
-          onChangeProgress={() => true}
         >
           {children}
         </Gallery>
