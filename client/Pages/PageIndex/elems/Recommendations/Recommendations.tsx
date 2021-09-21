@@ -5,7 +5,7 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import NavArrows from '@UI/NavArrows';
 import Section from '@Components/Section';
-import PromoCard, { PromoCardData } from '../PromoCard';
+import PromoCard, { PromoCardData } from '@Components/PromoCard';
 import styles from './Recommendations.module.css';
 
 export interface RecommendationsProps extends HTMLAttributes<HTMLDivElement> {
