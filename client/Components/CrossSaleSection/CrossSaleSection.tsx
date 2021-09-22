@@ -71,8 +71,9 @@ const CrossSaleSection: FC<CrossSaleSectionProps> = (props) => {
       <div className={styles.wrapperGallery}>
         <Gallery
           className={styles.gallery}
-          slideIndex={slide}
           key={products.length}
+          slideIndex={slide}
+          gap={20}
           onChangeCurrent={handleChangeCurrent}
           onChangeProgress={handleChangeProgress}
         >

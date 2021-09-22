@@ -68,6 +68,7 @@ const GalleryProductPreviews: FC<GalleryProductPreviewsProps> = (props) => {
             {hasGallery ? (
               <Gallery
                 className={cn(styles.gallery, className)}
+                gap={2}
                 onChangeCurrent={handleChangeCurrent}
               >
                 {images.map((image, index) => (

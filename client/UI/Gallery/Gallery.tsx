@@ -10,13 +10,15 @@ import {
   useMemo,
   useReducer,
   cloneElement,
+  CSSProperties,
 } from 'react';
 import cn from 'classnames';
 
 import Touch, { TouchEvent, TouchEventHandler } from '@UI/Touch';
+import { ProgressOptions, GalleryState, CalcMinParams, GallerySlidesState } from './typings';
 import styles from './Gallery.module.css';
 
-type GetSlideRef = (index: number) => RefCallback<HTMLElement>;
+export type GetSlideRef = (index: number) => RefCallback<HTMLElement>;
 
 export interface GalleryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onDragStart' | 'onDragEnd'> {
@@ -30,38 +32,6 @@ export interface GalleryProps
   onChangeProgress?(params: ProgressOptions): void;
   onBegin?({ current }: { current: number }): void;
   onFinish?({ current }: { current: number }): void;
-}
-
-export interface GallerySlidesState {
-  coordX: number;
-  width: number;
-}
-
-export interface GalleryState {
-  slides: GallerySlidesState[];
-  min: number;
-  max: number;
-  viewportWidth: number;
-  layerWidth: number;
-  initialized: boolean;
-  shiftX: number;
-  deltaX: number;
-  dragging: boolean;
-  current: number;
-  animation: boolean;
-  canDrag: boolean;
-  generalIndent: number;
-}
-
-export interface ProgressOptions {
-  width: number;
-  offset: number;
-  finished: boolean;
-}
-
-export interface CalcMinParams {
-  viewportWidth: number;
-  layerWidth: number;
 }
 
 const initialState: GalleryState = {
@@ -198,6 +168,9 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         if (current > slides.length - 1) {
           current = slides.length - 1;
         }
+        if (current < 0) {
+          current = 0;
+        }
 
         const expectDeltaX = (deltaX / (Date.now() - startT.current.getTime())) * 240 * 0.6;
         const shift = shiftX + deltaX + expectDeltaX - max;
@@ -260,7 +233,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         const newShiftX = getIndent(normalizedNewCurrent);
         const newState = {
           ...state,
-          animation: state.initialized,
           current: normalizedNewCurrent,
           deltaX: 0,
           shiftX: newShiftX,
@@ -300,6 +272,10 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     current: slideIndex || 0,
   });
 
+  const hGap = useMemo(() => {
+    return gap / 2;
+  }, [gap]);
+
   /**
    * Добавить слайд во внутреннее хранилище
    */
@@ -311,14 +287,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
    * Получить все нужные размеры
    */
   const getSizes = useCallback(() => {
-    if (!state.initialized || !refViewport.current) {
-      return {
-        slides: [],
-        viewportWidth: 0,
-        layerWidth: 0,
-      };
-    }
-
     const slides: GallerySlidesState[] = Children.map(
       children,
       (_child: ReactElement, index: number): GallerySlidesState => {
@@ -330,11 +298,10 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         };
       },
     );
-    const viewportWidth = refViewport.current.offsetWidth;
-    const summGap = gap * (slides.length - 1);
+    const viewportWidth = refViewport.current?.offsetWidth || 0;
     const layerWidth = slides.reduce(
       (val: number, slide: GallerySlidesState) => slide.width + val,
-      summGap,
+      0,
     );
 
     return {
@@ -342,12 +309,24 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       viewportWidth,
       layerWidth,
     };
-  }, [children, gap, state.initialized]);
+  }, [children]);
+
+  // Стили для всей галереи
+  const styleGallery = useMemo(() => {
+    const style: CSSProperties = {};
+
+    if (hGap) {
+      style.marginLeft = `-${hGap}px`;
+      style.marginRight = `-${hGap}px`;
+    }
+
+    return style;
+  }, [hGap]);
 
   /**
    * Стили для подвижного слоя
    */
-  const styleLayer = useMemo(() => {
+  const styleLayer: CSSProperties = useMemo(() => {
     const { generalIndent } = state;
 
     return {
@@ -359,6 +338,18 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       transition: state.animation ? `transform ${duration}s cubic-bezier(.1, 0, .25, 1)` : 'none',
     };
   }, [state]);
+
+  // Стили для отдельного слайда
+  const styleSlide = useMemo(() => {
+    const style: CSSProperties = {};
+
+    if (hGap) {
+      style.paddingLeft = `${hGap}px`;
+      style.paddingRight = `${hGap}px`;
+    }
+
+    return style;
+  }, [hGap]);
 
   /**
    * Начали движение
@@ -409,14 +400,12 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     [onDragEnd],
   );
 
-  /**
-   * Изменился размер страницы
-   */
+  // Изменился размер страницы
   const handleResize = useCallback(() => {
     dispatch({ type: 'init', data: getSizes() });
   }, [getSizes]);
 
-  /** Подписываемся на DOM-события */
+  // Подписываемся на DOM-события
   useEffect(() => {
     function cleanup() {
       window.removeEventListener('resize', handleResize);
@@ -427,16 +416,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     return cleanup;
   }, [handleResize]);
 
-  /**
-   * Изменение кол-ва вложенных элементов
-   */
-  useEffect(() => {
-    if (!state.initialized) return;
-
-    dispatch({ type: 'init', data: getSizes() });
-  }, [childrenCount, getSizes, state.initialized]);
-
-  /** Генерируем событие изменения прогресса при изменении размеров и смещения */
+  // Генерируем событие изменения прогресса при изменении размеров и смещения
   useEffect(() => {
     if (!onChangeProgress) return;
     if (!state.initialized) return;
@@ -458,7 +438,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     onChangeProgress({ width, offset, finished });
   }, [onChangeProgress, state.shiftX, state.layerWidth, state.initialized, state.viewportWidth]);
 
-  /** Програмное изменение слайда */
+  // Програмное изменение слайда
   useEffect(() => {
     if (typeof slideIndex !== 'number') return;
     if (!state.initialized) return;
@@ -466,11 +446,10 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     dispatch({ type: 'slideTo', data: { newCurrent: slideIndex } });
   }, [slideIndex, state.initialized]);
 
+  // Запускаем инициализацию при изменении кол-ва слайдов
   useEffect(() => {
-    if (state.initialized) return;
-
     dispatch({ type: 'init', data: getSizes() });
-  }, [getSizes, state.initialized]);
+  }, [childrenCount, getSizes]);
 
   return (
     <Touch
@@ -481,22 +460,21 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
         className,
       )}
       ref={refViewport}
+      style={styleGallery}
       onStartX={handleStartX}
       onMoveX={handleMoveX}
       onEnd={handleEnd}
     >
       <div className={styles.layer} style={styleLayer}>
-        {Children.map(children, (child: ReactElement, index: number) => {
-          const isFirst = index === 0;
+        {Children.map(children, (slide: ReactElement, index: number) => {
+          if (!slide) return null;
 
-          if (!child) return null;
-
-          return cloneElement(child, {
-            ...child.props,
+          return cloneElement(slide, {
+            ...slide.props,
             key: index,
             ref: addSlideToStore(index),
-            style: isFirst || !gap ? {} : { marginLeft: `${gap}px` },
-            className: cn(styles.child, child.props.className),
+            style: styleSlide,
+            className: cn(styles.slide, slide.props.className),
           });
         })}
       </div>

@@ -50,7 +50,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
 
       <Price className={styles.price} price={cart.cost} />
 
-      {cart.bonusPoints.earnedAmount > 0 && (
+      {cart.bonusPoints?.earnedAmount > 0 && (
         <OrderBonuses className={styles.bonuses} count={cart.bonusPoints.earnedAmount} />
       )}
 

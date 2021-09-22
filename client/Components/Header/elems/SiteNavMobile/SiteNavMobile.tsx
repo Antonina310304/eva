@@ -15,14 +15,9 @@ export interface SiteNavProp extends HTMLAttributes<HTMLDivElement> {
 const SiteNavMobile: FC<SiteNavProp> = ({ activeMenu, setActiveMenu }) => {
   return (
     <div className={styles.wrapper}>
-      <Gallery className={styles.siteNav}>
+      <Gallery className={styles.siteNav} gap={20}>
         {siteNavList.map((item) => (
-          <div
-            className={cn(styles.item, {
-              [styles.active]: item.link === activeMenu,
-            })}
-            key={item.title}
-          >
+          <div key={item.title}>
             <Link
               preventDefault
               onClick={() => setActiveMenu(item.link)}
