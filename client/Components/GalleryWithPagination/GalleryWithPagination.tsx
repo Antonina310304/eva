@@ -55,6 +55,8 @@ const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
   }, [normalizeSlide]);
 
   useEffect(() => {
+    if (typeof slideIndex !== 'number') return;
+
     setSlide(slideIndex);
   }, [slideIndex]);
 
