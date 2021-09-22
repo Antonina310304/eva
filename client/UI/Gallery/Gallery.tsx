@@ -107,7 +107,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const storeSlides = useRef<any>({});
   const childrenCount = useMemo(() => Children.count(children), [children]);
   const duration = 0.24;
-
   function reducer(state: GalleryState, action: any) {
     /**
      * Валидирует отступ с учётом минимального и максимального значения
@@ -462,7 +461,6 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   useEffect(() => {
     if (typeof slideIndex !== 'number') return;
     if (!state.initialized) return;
-
     dispatch({ type: 'slideTo', data: { newCurrent: slideIndex } });
   }, [slideIndex, state.initialized]);
 
