@@ -19,6 +19,9 @@ const routes: RoutesMap = {
   product: {
     path: '/product/:slug',
   },
+  promotionsDiscounts: {
+    path: '/akcii-skidki',
+  },
 
   //
   orderCheck: {

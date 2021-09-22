@@ -26,8 +26,8 @@ export interface PromoCardProps extends HTMLAttributes<HTMLDivElement> {
 
 const PromoCard: FC<PromoCardProps> = (props) => {
   const { card, ...restProps } = props;
-  const isService = card.type === 'service';
   const [, { openModal }] = useModals();
+  const isService = card.type === 'service';
 
   const handleBtnClick = useCallback(() => {
     switch (card.buttonEvent) {
@@ -39,10 +39,7 @@ const PromoCard: FC<PromoCardProps> = (props) => {
         break;
 
       case 'videoConsultation':
-        openModal('Info', {
-          title: 'Упс!',
-          text: 'Ещё не готово, заходите позже…',
-        });
+        openModal('VideoConsultation');
         break;
 
       default:

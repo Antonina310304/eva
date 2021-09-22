@@ -1,19 +1,21 @@
-import { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import { FC, memo, HTMLAttributes, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
-import NavArrows from '@UI/NavArrows';
 import Section from '@Components/Section';
 import PromoCard, { PromoCardData } from '@Components/PromoCard';
-import styles from './Recommendations.module.css';
+import NavArrows from '@UI/NavArrows';
+import styles from './FreeServices.module.css';
 
-export interface RecommendationsProps extends HTMLAttributes<HTMLDivElement> {
+export interface FreeServicesProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
+  title: string;
   cards: PromoCardData[];
 }
 
-const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
+const FreeServices: FC<FreeServicesProps> = (props) => {
+  const { className, title, cards, ...restProps } = props;
   const [slideIndex, setSlideIndex] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
@@ -46,11 +48,11 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
   }, [normalizeSlide, track]);
 
   return (
-    <div className={cn(className, styles.wrapper)}>
+    <div {...restProps} className={cn(className, styles.wrapper)}>
       <Section
         className={styles.sectionWrapper}
-        title='Рекомендуем сегодня'
-        arrows={
+        title={title}
+        additional={
           track?.width < 100 && (
             <div className={styles.navArrows}>
               <NavArrows onPrev={handlePrev} onNext={handleNext} />
@@ -71,11 +73,12 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
               </div>
             ))}
           </Gallery>
-          {track && track.width < 100 && <ProgressBar className={styles.track} track={track} />}
+
+          {track?.width < 100 && <ProgressBar className={styles.track} track={track} />}
         </div>
       </Section>
     </div>
   );
 };
 
-export default memo(Recommendations);
+export default memo(FreeServices);

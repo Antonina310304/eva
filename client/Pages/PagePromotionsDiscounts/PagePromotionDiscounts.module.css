@@ -1,0 +1,5 @@
+.title {
+  composes: main from 'containers';
+
+  padding: var(--space-xl) 0;
+}
