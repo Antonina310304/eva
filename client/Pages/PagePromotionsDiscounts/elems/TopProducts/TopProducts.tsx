@@ -5,10 +5,10 @@ import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import NavArrows from '@UI/NavArrows';
 import Button from '@UI/Button';
+import Link from '@UI/Link';
 import Section from '@Components/Section';
 import CrossSaleProductCard from '@Components/CrossSaleProductCard';
 import { ProductData } from '@Types/Product';
-
 import styles from './TopProducts.module.css';
 
 export interface TopProductsProps extends HTMLAttributes<HTMLDivElement> {
@@ -50,10 +50,6 @@ const TopProducts: FC<TopProductsProps> = (props) => {
     setSlideIndex((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide, track]);
 
-  const handleClickMore = useCallback(() => {
-    console.log('Get more products!');
-  }, []);
-
   return (
     <div className={cn(className, styles.wrapper)}>
       <Section
@@ -84,9 +80,11 @@ const TopProducts: FC<TopProductsProps> = (props) => {
         </div>
 
         <div className={styles.btnWrapper}>
-          <Button className={styles.btn} theme='dirty' onClick={handleClickMore}>
-            Смотреть еще
-          </Button>
+          <Link to='/category/promo-bud-v-trende'>
+            <Button className={styles.btn} theme='dirty'>
+              Смотреть еще
+            </Button>
+          </Link>
         </div>
       </Section>
     </div>
