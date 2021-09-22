@@ -6,6 +6,7 @@ import Link from '@UI/Link';
 import useMedias from '@Hooks/useMedias';
 import useModals from '@Hooks/useModals';
 import Filtrator, { useFiltrator } from '@Stores/Filtrator';
+import mockFiltrator from '@Pages/PagePromoPrints/mockFiltrator';
 import { GroupData } from '@Pages/PageCategory/typings';
 import Dropdown from '../Dropdown';
 import styles from './Filters.module.css';
@@ -26,7 +27,10 @@ const Filters: FC<FiltersProps> = (props) => {
   const { className, count, groups, isMatrasyCategory, onOpen, onChangeSort, ...restProps } = props;
   const [openedGroups, setOpenedGroups] = useState(false);
   const [openedOptions, setOpenedOptions] = useState(false);
-  const filtrator = useFiltrator();
+  // const filtrator = useFiltrator(); // получение реальных данных закомментировано до интеграции страницы трендов, чтобы она не крашилась
+
+  type FiltratorType = ReturnType<typeof useFiltrator>;
+  const filtrator = (mockFiltrator as unknown) as FiltratorType; // для корректного отображения блока фильтров на странице трендов до ее интеграции, после интеграции будет не нужно
   const { isMobile } = useMedias();
   const [, { openModal }] = useModals();
 

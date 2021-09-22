@@ -1,11 +1,18 @@
 .wrapper {
   position: relative;
 
+  margin-bottom: var(--space-xxe);
   padding: 60px 0 50px;
+
   overflow: hidden;
 
   @media (--desktop-m) {
+    margin-bottom: var(--space-xb);
     padding: 30px 0 40px;
+  }
+
+  @media (--desktop) {
+    margin-bottom: var(--space-xxl);
   }
 }
 .curtain {
