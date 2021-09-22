@@ -1,6 +1,8 @@
 import React, { FC, memo } from 'react';
 
 import mockQualitySection from '@Pages/PageSleeper/elems/QualitySection/Mock/mockQualitySection';
+import { pickupPoints } from '@Pages/PageIndex/data';
+import { map } from '@Pages/PageSleeper/elems/SleeperMap/Mock/mockSleeperMap';
 import SleeperGallery from './elems/SleeperGallery';
 import FoamSection from './elems/FoamSection';
 import QualitySection from './elems/QualitySection';
@@ -19,7 +21,7 @@ const PageSleeper: FC = () => {
       <QualitySection {...mockQualitySection} />
       <CaseAndPackaging />
       <SleeperBuy />
-      <SleeperMap />
+      <SleeperMap pickupPoints={pickupPoints} map={map} />
     </div>
   );
 };
