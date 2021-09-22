@@ -33,6 +33,8 @@ const PageCategory: FC<PageCategoryProps> = (props) => {
   const isModels = category.data.pages[0].productsModel?.length > 0;
 
   const activeSubcategoryIds = useMemo(() => {
+    if (!page.rubrics) return [];
+
     const rubrics: any[] = page.rubrics[0] || [];
 
     return rubrics
