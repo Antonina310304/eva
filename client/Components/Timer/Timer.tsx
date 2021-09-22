@@ -15,39 +15,34 @@ export interface TimerProps {
   time: number;
 }
 
+const formatTime = (timeToFormat: number) => {
+  return timeToFormat < 10 ? `0${timeToFormat}` : `${timeToFormat}`;
+};
+
 const Timer: FC<TimerProps> = ({ time }) => {
   const dateNow = new Date().getTime() / 1000;
   const [counter, setCounter] = useState(time - dateNow);
 
-  const formatTime = useCallback((timeToFormat) => {
-    return String(timeToFormat).length === 1 ? `0${timeToFormat}` : `${timeToFormat}`;
-  }, []);
-
-  const format = useCallback(
-    (timeInSeconds): Record<TimerTypes, string> => {
-      if (timeInSeconds < 0) {
-        return {
-          days: '0',
-          hour: '0',
-          minutes: '0',
-        };
-      }
-      const secondsInDay = 86400;
-      const secondsInHour = 3600;
-      const days = Math.floor(timeInSeconds / secondsInDay);
-
-      const hour = Math.floor((timeInSeconds % secondsInDay) / secondsInHour);
-
-      const minutes = Math.floor(((timeInSeconds % secondsInDay) % secondsInHour) / 60);
-
+  const format = useCallback((timeInSeconds): Record<TimerTypes, string> => {
+    if (timeInSeconds < 0) {
       return {
-        days: formatTime(days),
-        hour: formatTime(hour),
-        minutes: formatTime(minutes),
+        days: formatTime(0),
+        hour: formatTime(0),
+        minutes: formatTime(0),
       };
-    },
-    [formatTime],
-  );
+    }
+    const secondsInDay = 86400;
+    const secondsInHour = 3600;
+    const days = Math.floor(timeInSeconds / secondsInDay);
+    const hour = Math.floor((timeInSeconds % secondsInDay) / secondsInHour);
+    const minutes = Math.floor(((timeInSeconds % secondsInDay) % secondsInHour) / 60);
+
+    return {
+      days: formatTime(days),
+      hour: formatTime(hour),
+      minutes: formatTime(minutes),
+    };
+  }, []);
 
   useEffect(() => {
     let timer;
