@@ -18,10 +18,9 @@ export default async <T>(path: string, opts?: RequestInit): Promise<T> => {
 
   const fullOpts: RequestInit = {
     ...options,
-    credentials: 'same-origin',
     headers: {
       ...headers,
-      Development: 'yes',
+      'X-Requested-With': 'XMLHttpRequest',
     },
   };
 

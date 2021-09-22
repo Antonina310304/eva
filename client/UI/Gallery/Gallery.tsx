@@ -79,9 +79,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
   const duration = 0.24;
 
   function reducer(state: GalleryState, action: any) {
-    /**
-     * Валидирует отступ с учётом минимального и максимального значения
-     */
+    // Валидирует отступ с учётом минимального и максимального значения
     const validateIndent = (value: number) => {
       const { min, max } = state;
 
@@ -96,9 +94,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       return value;
     };
 
-    /*
-     * Отступ слоя галереи
-     */
+    // Отступ слоя галереи
     const getIndent = (current: number) => {
       if (!state.canDrag) return 0;
 
@@ -115,9 +111,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       return 0;
     };
 
-    /*
-     * Отступ слоя галереи во время драга
-     */
+    // Отступ слоя галереи во время драга
     const getDragIndent = () => {
       const { min, max, shiftX, deltaX } = state;
 
@@ -134,16 +128,12 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
       return innerIndent;
     };
 
-    /**
-     * Основной отступ
-     */
+    // Основной отступ
     const getGeneralIndent = (currentState: GalleryState) => {
       return currentState.dragging ? getDragIndent() : getIndent(currentState.current);
     };
 
-    /**
-     * Рассчитать максимальную позицию галереи
-     */
+    // Рассчитать максимальную позицию галереи
     function calcMax() {
       return 0;
     }
@@ -158,6 +148,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
           max: calcMax(),
           canDrag: data.layerWidth > data.viewportWidth,
           initialized: true,
+          animation: true,
         };
       },
 
@@ -276,16 +267,12 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     return gap / 2;
   }, [gap]);
 
-  /**
-   * Добавить слайд во внутреннее хранилище
-   */
+  // Добавить слайд во внутреннее хранилище
   const addSlideToStore: GetSlideRef = (index: number) => (slide) => {
     storeSlides.current[index] = slide;
   };
 
-  /**
-   * Получить все нужные размеры
-   */
+  // Получить все нужные размеры
   const getSizes = useCallback(() => {
     const slides: GallerySlidesState[] = Children.map(
       children,
@@ -323,9 +310,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     return style;
   }, [hGap]);
 
-  /**
-   * Стили для подвижного слоя
-   */
+  // Стили для подвижного слоя
   const styleLayer: CSSProperties = useMemo(() => {
     const { generalIndent } = state;
 
@@ -351,9 +336,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     return style;
   }, [hGap]);
 
-  /**
-   * Начали движение
-   */
+  // Начали движение
   const handleStartX = useCallback((e: TouchEvent) => {
     startT.current = e.startT;
     window.draggableTarget = window.draggableTarget || refViewport.current;
@@ -361,9 +344,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     dispatch('disableAnimation');
   }, []);
 
-  /**
-   * Движение
-   */
+  // Движение
   const handleMoveX = useCallback(
     (e: TouchEvent) => {
       e.originalEvent.preventDefault();
@@ -383,9 +364,7 @@ const Gallery: FC<GalleryProps> = (props: GalleryProps) => {
     [onDragStart, state],
   );
 
-  /**
-   * Закончили движение
-   */
+  // Закончили движение
   const handleEnd = useCallback(
     (e: TouchEvent) => {
       if (e.isSlide) {
