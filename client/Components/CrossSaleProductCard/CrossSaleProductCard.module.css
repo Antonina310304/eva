@@ -1,17 +1,39 @@
 .card {
+  position: relative;
 }
 
-.containerInfo {
-  display: flex;
-  justify-content: space-between;
+.img {
+  position: relative;
+}
+
+.actions {
+  position: absolute;
+  top: var(--space-n);
+  right: var(--space-n);
+  z-index: 3;
+}
+
+.tags {
+  position: absolute;
+  right: var(--space-s);
+  bottom: var(--space-s);
+  z-index: 2;
+}
+
+.info {
   margin-top: var(--space-n);
 }
 
 .name {
-  max-height: calc(var(--lh-n) * 2);
+  composes: black from 'colors';
+
+  display: inline-block;
+  max-width: 100%;
+
   overflow: hidden;
 
-  white-space: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .price {
@@ -25,10 +47,7 @@
   font-weight: 500;
 }
 
-.expiredPrice {
-  margin-left: var(--space-xs);
-}
-
+.expiredPrice,
 .discount {
   margin-left: var(--space-xs);
 }

@@ -1,30 +1,35 @@
-import { FC, HTMLAttributes, memo, useState, useCallback } from 'react';
+import { FC, memo, HTMLAttributes, useState, useCallback } from 'react';
 import cn from 'classnames';
 
 import Gallery, { ProgressOptions } from '@UI/Gallery';
 import ProgressBar from '@UI/ProgressBar';
 import NavArrows from '@UI/NavArrows';
+import Button from '@UI/Button';
+import Link from '@UI/Link';
 import Section from '@Components/Section';
-import PromoCard, { PromoCardData } from '@Components/PromoCard';
-import styles from './Recommendations.module.css';
+import CrossSaleProductCard from '@Components/CrossSaleProductCard';
+import { ProductData } from '@Types/Product';
+import styles from './TopProducts.module.css';
 
-export interface RecommendationsProps extends HTMLAttributes<HTMLDivElement> {
+export interface TopProductsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  cards: PromoCardData[];
+  title: string;
+  products: ProductData[];
 }
 
-const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
+const TopProducts: FC<TopProductsProps> = (props) => {
+  const { className, title, products } = props;
   const [slideIndex, setSlideIndex] = useState(0);
   const [track, setTrack] = useState<ProgressOptions>(null);
 
   const normalizeSlide = useCallback(
     (value: number) => {
       if (value < 0) return 0;
-      if (value > cards.length) return cards.length;
+      if (value > products.length) return products.length;
 
       return value;
     },
-    [cards.length],
+    [products.length],
   );
 
   const handleChangeProgress = useCallback((opts: ProgressOptions) => {
@@ -49,8 +54,8 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
     <div className={cn(className, styles.wrapper)}>
       <Section
         className={styles.sectionWrapper}
-        title='Рекомендуем сегодня'
-        arrows={
+        title={title}
+        additional={
           track?.width < 100 && (
             <div className={styles.navArrows}>
               <NavArrows onPrev={handlePrev} onNext={handleNext} />
@@ -65,17 +70,25 @@ const Recommendations: FC<RecommendationsProps> = ({ className, cards }) => {
             onChangeProgress={handleChangeProgress}
             onChangeCurrent={handleChangeCurrent}
           >
-            {cards.map((card, index) => (
-              <div key={index} className={styles.slide}>
-                <PromoCard card={card} />
+            {products.map((product) => (
+              <div key={product.id} className={styles.galleryItem}>
+                <CrossSaleProductCard product={product} />
               </div>
             ))}
           </Gallery>
-          {track && track.width < 100 && <ProgressBar className={styles.track} track={track} />}
+          {track?.width < 100 && <ProgressBar className={styles.track} track={track} />}
+        </div>
+
+        <div className={styles.btnWrapper}>
+          <Link to='/category/promo-bud-v-trende'>
+            <Button className={styles.btn} theme='dirty'>
+              Смотреть еще
+            </Button>
+          </Link>
         </div>
       </Section>
     </div>
   );
 };
 
-export default memo(Recommendations);
+export default memo(TopProducts);

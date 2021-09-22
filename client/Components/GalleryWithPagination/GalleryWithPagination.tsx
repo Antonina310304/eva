@@ -1,14 +1,6 @@
-import {
-  FC,
-  HTMLAttributes,
-  useCallback,
-  useState,
-  MouseEvent,
-  ReactElement,
-  Children,
-} from 'react';
+import { FC, useCallback, useState, MouseEvent, ReactElement, Children, useEffect } from 'react';
 
-import Gallery from '@UI/Gallery';
+import Gallery, { GalleryProps } from '@UI/Gallery';
 import GalleryDots from '@UI/GalleryDots';
 import styles from './GalleryWithPagination.module.css';
 
@@ -19,13 +11,12 @@ export interface RenderButtonsArgs {
 
 export type RenderButtons = (args: RenderButtonsArgs) => ReactElement;
 
-export interface GalleryWithPaginationProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  gap?: number;
+export interface GalleryWithPaginationProps extends GalleryProps {
   renderButtons?: RenderButtons;
 }
+
 const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
-  const { className, gap, children, renderButtons, ...restProps } = props;
+  const { className, children, slideIndex, renderButtons, onChangeCurrent, ...restProps } = props;
   const numberOfSlides = Children.count(children);
   const [slide, setSlide] = useState(0);
 
@@ -39,13 +30,21 @@ const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
     [numberOfSlides],
   );
 
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlide(current);
-  }, []);
+  const handleChangeCurrent = useCallback(
+    ({ current }) => {
+      setSlide(current);
+      if (onChangeCurrent) onChangeCurrent({ current });
+    },
+    [onChangeCurrent],
+  );
 
-  const handleChangeSlide = useCallback((_e, index) => {
-    setSlide(index);
-  }, []);
+  const handleChangeSlide = useCallback(
+    (_e, index) => {
+      setSlide(index);
+      if (onChangeCurrent) onChangeCurrent({ current: index });
+    },
+    [onChangeCurrent],
+  );
 
   const handlePrev = useCallback(() => {
     setSlide((prev) => normalizeSlide(prev - 1));
@@ -55,15 +54,19 @@ const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
     setSlide((prev) => normalizeSlide(prev + 1));
   }, [normalizeSlide]);
 
+  useEffect(() => {
+    setSlide(slideIndex);
+  }, [slideIndex]);
+
   return (
-    <div {...restProps}>
+    <div>
       <div className={className}>
         {renderButtons && renderButtons({ onPrev: handlePrev, onNext: handleNext })}
 
         <Gallery
+          {...restProps}
           className={styles.gallery}
           slideIndex={slide}
-          gap={gap}
           onChangeCurrent={handleChangeCurrent}
         >
           {children}
