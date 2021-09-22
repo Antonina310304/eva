@@ -1,8 +1,8 @@
 import React, { FC, HTMLAttributes, memo, useCallback, useMemo, useState } from 'react';
+import cn from 'classnames';
 
 import { PrintSliderData } from '@Types/PrintOffers';
 import Gallery from '@UI/Gallery';
-import cn from 'classnames';
 import Tabs from '@Pages/PagePromoPrints/elems/PrintsGallery/elems/Tabs';
 import NavSideArrows from '@UI/NavSideArrows';
 import useMedias from '@Hooks/useMedias';

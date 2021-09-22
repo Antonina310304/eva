@@ -2,13 +2,13 @@
   position: relative;
 
   margin-bottom: var(--space-xxe);
-  padding: 60px 0 50px;
+  padding: var(--space-xb) 0 var(--space-b);
 
   overflow: hidden;
 
   @media (--desktop-m) {
     margin-bottom: var(--space-xb);
-    padding: 30px 0 40px;
+    padding: var(--space-l) 0 var(--space-xxl);
   }
 
   @media (--desktop) {
@@ -128,10 +128,10 @@
 }
 
 .arrows button:last-child {
-  right: calc(33.5% - 80px);
+  right: calc(33.5% - var(--space-e));
 
   @media (--mobile-m) {
-    right: calc(33.5% - 60px);
+    right: calc(33.5% - var(--space-xb));
   }
 
   @media (--mobile) {
@@ -264,7 +264,7 @@
 }
 
 .productName {
-  margin: 0 30px 0 0;
+  margin: 0 var(--space-l) 0 0;
 
   font-weight: 500;
   font-size: var(--size-xl);
@@ -278,7 +278,7 @@
 
   @media (--mobile) {
     margin-right: 0;
-    margin-bottom: 25px;
+    margin-bottom: var(--space-m);
   }
 }
 .discount {
@@ -293,7 +293,7 @@
   box-sizing: border-box;
   min-height: 60px;
   margin-left: 33px;
-  padding: 10px 20px;
+  padding: var(--space-xs) var(--space-n);
 
   background-color: var(--color-white);
   border-radius: 0 8px 8px 0;
@@ -329,7 +329,7 @@
 
   font-weight: 500;
   font-size: var(--size-l);
-  line-height: 33px;
+  line-height: var(--lh-xl);
 
   @media (--mobile-m) {
     font-size: var(--size-n);
@@ -339,7 +339,7 @@
 
 .priceOld {
   display: inline-block;
-  margin: 0 5px 0 0;
+  margin: 0 var(--space-xxs) 0 0;
 
   font-weight: 400;
   font-size: var(--size-n);
@@ -357,20 +357,17 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 50px 0 0;
+  margin: var(--space-b) 0 0;
 
   @media (--mobile-m) {
-    margin-top: 80px;
+    margin-top: var(--space-e);
   }
 
   @media (--mobile) {
     display: block;
     width: 100%;
-    margin-top: 50px;
+    margin-top: var(--space-b);
 
     text-align: center;
   }
-}
-
-.test {
 }
