@@ -47,4 +47,8 @@
   font-size: var(--size-m);
   line-height: 150%;
   text-align: center;
+
+  @media (--mobile-m) {
+    font-size: var(--size-n);
+  }
 }
