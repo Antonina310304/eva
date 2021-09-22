@@ -1,8 +1,8 @@
 .wrapper {
+  box-sizing: border-box;
   width: 100%;
   max-width: 1480px;
   margin: 0 auto var(--space-xxe) auto;
-  padding: 0;
   padding-bottom: 40px;
 
   background: var(--color-white);
@@ -33,7 +33,7 @@
 }
 
 .videoContent {
-  min-height: 600px;
+  min-height: 832px;
 }
 
 .video {
@@ -55,14 +55,17 @@
     max-width: calc(100vw - 300px);
     margin: 0 150px var(--space-e) 150px;
   }
+
+  .videoContent {
+    min-height: calc(0.5625 * (100vw - 2 * 150px));
+  }
 }
 
 @media (--desktop) {
   .wrapper {
-    composes: main from 'containers';
-
     max-width: 100%;
     margin: 0 auto var(--space-xb) auto;
+    padding: 0 var(--space-xxl);
   }
 
   .textWrapper {
@@ -78,11 +81,15 @@
     font-size: 18px;
     line-height: 150%;
   }
+
+  .videoContent {
+    min-height: calc(0.5625 * (100vw - 2 * var(--space-xxl)));
+  }
 }
 
 @media (--mobile-m) {
   .wrapper {
-    padding-bottom: var(--space-n);
+    padding: 0 var(--space-s) var(--space-n) var(--space-s);
   }
 
   .title {
@@ -93,5 +100,15 @@
   .description {
     font-size: 14px;
     line-height: 150%;
+  }
+
+  .videoContent {
+    min-height: calc(0.5625 * (100vw - 2 * var(--space-s)));
+  }
+}
+
+@media (--mobile) {
+  .videoContent {
+    min-height: calc(0.5625 * (100vw - 2 * var(--space-s)));
   }
 }
