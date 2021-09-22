@@ -11,11 +11,11 @@
 }
 
 .stepNumber {
-  margin: 30px 0 15px 0;
+  margin: var(--space-l) 0 var(--space-s) 0;
 
   color: var(--color-white);
   font-weight: 500;
-  font-size: 22px;
+  font-size: var(--size-l);
   font-family: var(--font-main);
   font-style: normal;
   line-height: 150%;
@@ -25,7 +25,7 @@
 .description {
   color: var(--color-white);
   font-weight: normal;
-  font-size: 16px;
+  font-size: var(--size-n);
   font-family: var(--font-main);
   font-style: normal;
   line-height: 150%;
@@ -40,12 +40,12 @@
 
 @media (--mobile-m) {
   .stepNumber {
-    font-size: 18px;
-    line-height: 37px;
+    font-size: var(--size-m);
+    line-height: var(--lh-m);
   }
 
   .description {
-    font-size: 14px;
+    font-size: var(--size-s);
     line-height: 21px;
   }
 }
@@ -57,11 +57,11 @@
   }
 
   .textWrapper {
-    margin-left: 30px;
+    margin-left: var(--space-l);
   }
 
   .stepNumber {
-    margin: 0 0 15px 0;
+    margin: 0 0 var(--space-s) 0;
 
     text-align: start;
   }
