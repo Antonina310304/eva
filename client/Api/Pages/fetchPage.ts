@@ -13,7 +13,12 @@ export default async (params: Params): Promise<any> => {
     path = path.slice(region.length + 1);
   }
 
-  const res = await Api.queryProxi<any>(path);
+  const res = await Api.queryProxi<any>(path, {
+    credentials: 'same-origin',
+    headers: {
+      Development: 'yes',
+    },
+  });
 
   return res.body.data;
 };
