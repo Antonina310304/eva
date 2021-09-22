@@ -23,8 +23,6 @@
   color: var(--color-black);
   font-weight: 500;
   font-size: var(--size-l);
-  font-family: CeraPro;
-  font-style: normal;
   line-height: var(--lh-xl);
 }
 
@@ -32,10 +30,7 @@
   margin-right: var(--space-n);
 
   color: var(--color-black);
-  font-weight: normal;
   font-size: var(--size-n);
-  font-family: CeraPro;
-  font-style: normal;
   line-height: var(--lh-n);
 }
 

@@ -35,19 +35,14 @@
   margin-right: var(--space-xxs);
 
   font-weight: 500;
-  font-size: 22px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 150%;
+  font-size: var(--size-l);
+  line-height: var(--lh-l);
 }
 
 .count {
-  color: #989898;
-  font-weight: normal;
-  font-size: 12px;
-  font-family: var(--font-main);
-  font-style: normal;
-  line-height: 150%;
+  color: var(--color-dark-gray);
+  font-size: var(--size-xs);
+  line-height: var(--lh-xs);
 }
 
 .footer {
@@ -56,19 +51,17 @@
 
 .discount {
   position: absolute;
-  bottom: 30px;
-  left: 20px;
+  bottom: var(--space-l);
+  left: var(--space-n);
   z-index: 1;
 
   margin-left: 24px;
 
-  padding: 10px 20px;
+  padding: var(--space-xs) var(--space-n);
 
   font-weight: 500;
   font-size: var(--size-m);
-
-  font-family: var(--font-main);
-  line-height: 23px;
+  line-height: var(--lh-m);
 
   background-color: #d8f0e2;
 
