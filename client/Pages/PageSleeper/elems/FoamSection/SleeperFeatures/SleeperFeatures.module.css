@@ -1,0 +1,18 @@
+.wrapper {
+  box-sizing: border-box;
+  padding: var(--space-xxe) 0;
+
+  background: var(--color-light-gray);
+}
+
+@media (--desktop-m) {
+  .wrapper {
+    padding: var(--space-e) 0;
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    padding: var(--space-xb) 0;
+  }
+}
