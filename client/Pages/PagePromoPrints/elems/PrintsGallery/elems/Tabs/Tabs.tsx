@@ -10,7 +10,6 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   handlerClick: (arg: string) => void;
 }
 const Tabs: FC<TabsProps> = ({ className, tabList, activeIdTab, handlerClick }) => {
-  console.log(tabList);
   return (
     <div className={cn(className, styles.tabs)}>
       {tabList.map((tab) => {
