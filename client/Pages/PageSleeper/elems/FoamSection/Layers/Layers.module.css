@@ -1,0 +1,186 @@
+.layers {
+  position: relative;
+
+  display: flex;
+  width: 100%;
+  max-width: 700px;
+  height: 577px;
+  margin: 0 auto;
+  margin-bottom: 140px;
+}
+
+.inner {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.layer {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  height: 0;
+  margin-bottom: 60px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.layer_1 {
+  top: 68%;
+
+  padding-top: 08.73%;
+
+  background-image: url('layer_1.png');
+  opacity: 0;
+
+  transition: top 500ms ease-in-out 450ms, opacity 500ms ease-in-out 600ms;
+}
+
+.open .layer_1 {
+  top: 0;
+
+  opacity: 1;
+
+  transition: top 500ms ease-in-out, opacity 300ms ease-in-out 10ms;
+}
+
+.layer_2 {
+  top: 50%;
+
+  padding-top: 10%;
+
+  background-image: url('layer_2.png');
+  opacity: 0;
+
+  transition: top 350ms ease-in-out 200ms, opacity 300ms ease-in-out 300ms;
+}
+
+.open .layer_2 {
+  top: 0;
+
+  opacity: 1;
+
+  transition: top 350ms ease-in-out 300ms, opacity 300ms ease-in-out 310ms;
+}
+
+.layer_3 {
+  top: 30%;
+
+  margin-bottom: 0;
+  padding-top: 15.9%;
+
+  background-image: url('layer_3.png');
+  opacity: 0;
+
+  transition: top 350ms ease-in-out, opacity 150ms ease-in-out 150ms;
+}
+
+.open .layer_3 {
+  top: 0;
+
+  opacity: 1;
+
+  transition: top 350ms ease-in-out 400ms, opacity 250ms ease-in-out 400ms;
+}
+
+.layer_4 {
+  top: 0;
+  z-index: 2;
+
+  margin-bottom: 0;
+  padding-top: 22.14%;
+
+  background-image: url('layer_4.png');
+
+  transition: top 500ms ease-in-out;
+}
+
+.open .layer_4 {
+  top: 10%;
+
+  transition: top 500ms ease-in-out;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.descriptionItem {
+  position: relative;
+
+  margin-bottom: 60px;
+  padding-left: 30px;
+
+  transform: translateY(300px);
+  opacity: 0;
+
+  transition: opacity 350ms ease-in-out, transform 350ms ease-in-out;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+    width: 5px;
+
+    background: #1f2354;
+
+    content: '';
+  }
+
+  @media (--desktop-m) {
+    margin-bottom: 40px;
+  }
+}
+
+.open .descriptionItem:first-child {
+  transform: translateY(0);
+  opacity: 1;
+
+  transition: opacity 500ms ease-in-out, transform 350ms ease-in-out;
+}
+
+.open .descriptionItem:nth-child(2) {
+  transform: translateY(0);
+  opacity: 1;
+
+  transition: opacity 400ms ease-in-out 400ms, transform 350ms ease-in-out 410ms;
+}
+
+.open .descriptionItem:nth-child(3) {
+  transform: translateY(0);
+  opacity: 1;
+
+  transition: opacity 400ms ease-in-out 700ms, transform 350ms ease-in-out 710ms;
+}
+
+.open .descriptionItem:nth-child(4) {
+  transform: translateY(0);
+  opacity: 1;
+
+  transition: opacity 400ms ease-in-out 900ms, transform 350ms ease-in-out 1100ms;
+}
+
+.title {
+  margin: 0 0 10px;
+
+  font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 150%;
+}
+
+.text {
+  margin: 0;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+}

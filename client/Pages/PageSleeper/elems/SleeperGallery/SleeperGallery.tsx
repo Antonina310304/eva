@@ -37,7 +37,7 @@ const SleeperGallery: FC<SleeperGalleryProps> = ({ slider, products }) => {
           }
         >
           {slider.map((item) => (
-            <div className={styles.sliderItem}>
+            <div key={item} className={styles.sliderItem}>
               <div className={styles.sliderInner} style={{ backgroundImage: `url(${item})` }} />
             </div>
           ))}
