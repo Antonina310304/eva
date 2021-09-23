@@ -18,7 +18,7 @@ const SleeperBuy: FC = () => {
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.textWrapper}>
-            <h2>{title}</h2>
+            <h2 className={styles.title}>{title}</h2>
             <div className={styles.subTitle}>{subTitle}</div>
             <div className={styles.description}>{description}</div>
             <Button theme='primary' className={styles.button}>
@@ -36,7 +36,7 @@ const SleeperBuy: FC = () => {
     return (
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          <h2>{title}</h2>
+          <h2 className={styles.title}>{title}</h2>
 
           <img className={styles.img} src={imgUrl} />
 

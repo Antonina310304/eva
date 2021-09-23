@@ -23,7 +23,15 @@
 }
 
 .title {
+  margin-top: 0;
+  margin-bottom: var(--space-l);
+
   color: var(--color-white);
+  font-weight: 500;
+  font-size: var(--size-xxl);
+  font-family: var(--font-hero);
+  font-style: normal;
+  line-height: var(--lh-xxl);
 }
 
 .description {
@@ -63,6 +71,11 @@
     max-width: 100%;
     margin: var(--space-xb) var(--space-xxl) var(--space-e) var(--space-xxl);
   }
+
+  .title {
+    font-size: var(--size-xl);
+    line-height: 150%;
+  }
 }
 
 @media (--mobile-m) {
@@ -82,6 +95,11 @@
 
   .content {
     margin: var(--space-xb) var(--space-s) var(--space-xxe) var(--space-s);
+  }
+
+  .title {
+    font-size: var(--size-l);
+    line-height: 150%;
   }
 }
 

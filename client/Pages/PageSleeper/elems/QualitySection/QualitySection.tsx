@@ -23,7 +23,7 @@ const QualitySection: FC<QualitySectionProps> = ({ className, previewImageSrc, v
   return (
     <div className={cn(className, styles.wrapper)}>
       <div className={styles.textWrapper}>
-        <h2>Качество, проверенное на практике</h2>
+        <h2 className={styles.title}>Качество, проверенное на практике</h2>
         <div className={styles.description}>
           Матрас Sleeper прошел все необходимые испытания на прочность. Автоматика, независимые
           эксперты, а главное — настоящие владельцы — признали его удобство и качество.
