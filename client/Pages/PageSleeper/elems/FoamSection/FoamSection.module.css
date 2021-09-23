@@ -36,7 +36,9 @@
 
 .bottomBlock_img {
   display: block;
+  align-self: center;
   width: 841px;
+  height: 426px;
 }
 
 .bottomBlock_title {
@@ -87,6 +89,7 @@
 
   .bottomBlock_img {
     width: 673px;
+    height: 340px;
   }
 
   .bottomBlock_title {
@@ -121,6 +124,7 @@
 
   .bottomBlock_img {
     width: 460px;
+    height: 233px;
   }
 
   .bottomBlock_title {
@@ -148,6 +152,7 @@
 
   .bottomBlock_img {
     width: 360px;
+    height: 182px;
   }
 
   .bottomBlock_title {
