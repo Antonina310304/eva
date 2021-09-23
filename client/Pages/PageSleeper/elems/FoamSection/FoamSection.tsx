@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 
 import SleeperFeatures from '@Pages/PageSleeper/elems/FoamSection/SleeperFeatures/SleeperFeatures';
+import Layers from './Layers';
 import styles from './FoamSection.module.css';
 
 const sleeperFeatures = [
@@ -29,7 +30,7 @@ const FoamSection: FC = () => {
           трех инновационных материалов.
         </div>
       </div>
-
+      <Layers />
       <SleeperFeatures features={sleeperFeatures} />
     </div>
   );
