@@ -6,6 +6,7 @@ import {
   MouseEvent,
   ReactElement,
   Children,
+  ReactChild,
 } from 'react';
 
 import Gallery from '@UI/Gallery';
@@ -22,9 +23,10 @@ export type RenderButtons = (args: RenderButtonsArgs) => ReactElement;
 export interface GalleryWithPaginationProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   renderButtons?: RenderButtons;
+  footerBlock?: ReactChild;
 }
 const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
-  const { className, children, renderButtons, ...restProps } = props;
+  const { className, children, renderButtons, footerBlock, ...restProps } = props;
   const numberOfSlides = Children.count(children);
   const [slide, setSlide] = useState(0);
 
@@ -68,7 +70,7 @@ const GalleryWithPagination: FC<GalleryWithPaginationProps> = (props) => {
           {children}
         </Gallery>
       </div>
-
+      {footerBlock}
       <GalleryDots count={numberOfSlides} actived={slide} onChangeSlide={handleChangeSlide} />
     </div>
   );

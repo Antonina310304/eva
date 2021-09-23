@@ -1,0 +1,183 @@
+.wrapper {
+  display: block;
+  padding: var(--space-l);
+
+  background: #e3edf3;
+
+  @media (--desktop) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  @media (--mobile-m) {
+    padding: var(--space-n) var(--space-s);
+  }
+
+  @media (--mobile) {
+    display: block;
+  }
+}
+
+.wpar {
+  @media (--desktop) {
+    flex: 0 0 auto;
+    width: 180px;
+    margin: 0;
+  }
+
+  @media (--mobile) {
+    width: auto;
+  }
+}
+
+.selectWrapper {
+  margin-bottom: var(--space-l);
+
+  @media (--desktop) {
+    width: 285px;
+    margin-bottom: 0;
+  }
+
+  @media (--mobile-m) {
+    width: 180px;
+    margin-bottom: 0;
+  }
+  @media (--mobile) {
+    width: auto;
+    margin-bottom: var(--space-n);
+  }
+}
+
+.select {
+  background: var(--color-white);
+  border-radius: 4px;
+}
+/* паддинг и отсутпы компонента select не соответствуют select макета Матрасы Sleeper  */
+.select > div > div {
+  width: 100%;
+  padding-top: 9px;
+  padding-bottom: 14px;
+
+  border: none !important;
+
+  @media (--desktop-l) {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  @media (--mobile-m) {
+    padding-top: 6px;
+    padding-bottom: 12px;
+  }
+
+  @media (--mobile) {
+    padding: 11px var(--space-s);
+  }
+}
+/* паддинг и отсутпы компонента select не соответствуют select макета Матрасы Sleeper  */
+.select > div > div > div {
+  @media (min-width: 768px) {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.currentPRice {
+  margin: 0;
+
+  font-weight: 500;
+  font-size: var(--size-xl);
+  font-family: var(--font-main);
+  line-height: 150%;
+}
+
+.oldPRice {
+  margin: 0 0 0 var(--space-s);
+
+  color: var(--color-dark-gray);
+  text-decoration-line: line-through;
+  font-size: var(--size-n);
+  line-height: 150%;
+}
+
+.discount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 66px;
+  min-height: 31px;
+  margin: 0 0 0 var(--space-s);
+  padding-top: 3px;
+  padding-bottom: 4px;
+
+  color: var(--color-dark-gray);
+  font-size: var(--size-n);
+  line-height: 150%;
+
+  background-image: url('badge.svg');
+}
+
+.discount span {
+  transform: translateX(var(--space-xxs));
+}
+
+.bonus {
+  position: relative;
+
+  margin: 10px 0 0;
+  padding-left: var(--space-m);
+
+  color: var(--color-black);
+  font-size: var(--size-s);
+  line-height: 150%;
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    background-image: url('bonus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform: translateY(-50%);
+
+    content: '';
+  }
+}
+
+.button {
+  margin-top: var(--space-l);
+
+  @media (--desktop) {
+    flex: 0 0 auto;
+    width: 180px;
+    margin: 0;
+    margin-top: 0;
+  }
+  @media (--mobile) {
+    width: auto;
+    margin-top: var(--space-m);
+  }
+}
+
+.title {
+  margin: 0 0 var(--space-xs);
+
+  font-weight: 500;
+  font-size: var(--size-s);
+  line-height: 150%;
+}
