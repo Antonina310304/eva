@@ -21,7 +21,7 @@ const SleeperBuy: FC = () => {
             <div className={styles.title}>{title}</div>
             <div className={styles.subTitle}>{subTitle}</div>
             <div className={styles.description}>{description}</div>
-            <Button theme='dirty' className={styles.button}>
+            <Button theme='primary' className={styles.button}>
               Купить матрас
             </Button>
           </div>
@@ -42,7 +42,7 @@ const SleeperBuy: FC = () => {
 
           <div className={styles.subTitle}>{subTitle}</div>
           <div className={styles.description}>{description}</div>
-          <Button theme='dirty' className={styles.button}>
+          <Button theme='primary' className={styles.button}>
             Купить матрас
           </Button>
         </div>

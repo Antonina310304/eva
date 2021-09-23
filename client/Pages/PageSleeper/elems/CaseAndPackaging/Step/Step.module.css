@@ -32,6 +32,11 @@
   text-align: center;
 }
 
+.logo {
+  display: flex;
+  flex-shrink: 0;
+}
+
 @media (--desktop-m) {
   .wrapper {
     width: 200px;
@@ -53,7 +58,7 @@
 @media (--mobile) {
   .wrapper {
     flex-direction: row;
-    width: 330px;
+    width: 100%;
   }
 
   .textWrapper {

@@ -107,6 +107,7 @@
   .stepsWrapper {
     grid-row-gap: var(--space-xxl);
     grid-template-columns: 1fr;
+    align-self: flex-start;
   }
 
   .title {
