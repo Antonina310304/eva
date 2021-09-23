@@ -1,0 +1,15 @@
+.wrapper {
+  margin-bottom: var(--space-xxe);
+}
+
+@media (--desktop-m) {
+  .wrapper {
+    margin-bottom: var(--space-e);
+  }
+}
+
+@media (--desktop) {
+  .wrapper {
+    margin-bottom: var(--space-xb);
+  }
+}

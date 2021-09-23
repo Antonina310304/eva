@@ -1,6 +1,10 @@
 import React from 'react';
 
-function StepLogo() {
+interface StepLogoProps {
+  className: string;
+}
+
+function StepLogo({ className }: StepLogoProps) {
   return (
     <svg
       width='113'
@@ -8,6 +12,7 @@ function StepLogo() {
       viewBox='0 0 113 71'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      className={className}
     >
       <path
         d='M62.9824 19.5168L64.8824 26.5168'

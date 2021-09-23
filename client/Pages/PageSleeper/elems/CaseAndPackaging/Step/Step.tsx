@@ -12,7 +12,7 @@ interface StepProps {
 const Step: React.FC<StepProps> = ({ number, description, className }) => {
   return (
     <div className={cn(className, styles.wrapper)}>
-      <StepLogo />
+      <StepLogo className={styles.logo} />
       <div className={styles.textWrapper}>
         <div className={styles.stepNumber}>{`Шаг ${number}`}</div>
         <div className={styles.description}>{description}</div>
