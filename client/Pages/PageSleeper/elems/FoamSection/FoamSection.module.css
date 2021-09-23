@@ -1,11 +1,10 @@
-.wrapper {
+.wrapper,
+.headContainer {
   margin-bottom: var(--space-xxe);
 }
 
 .headContainer {
   composes: main from 'containers';
-
-  margin-bottom: var(--space-xxe);
 }
 
 .title {
@@ -27,17 +26,15 @@
 }
 
 @media (--desktop-m) {
-  .wrapper {
-    margin-bottom: var(--space-e);
-  }
-
+  .wrapper,
   .headContainer {
     margin-bottom: var(--space-e);
   }
 }
 
 @media (--desktop) {
-  .wrapper {
+  .wrapper,
+  .headContainer {
     margin-bottom: var(--space-xb);
   }
 
@@ -45,11 +42,19 @@
     font-size: var(--size-xl);
     line-height: 1.5;
   }
+
+  .description {
+    font-size: var(--size-n);
+  }
 }
 
 @media (--mobile-m) {
   .title {
     font-size: var(--size-l);
     line-height: 1.2;
+  }
+
+  .description {
+    font-size: var(--size-s);
   }
 }
