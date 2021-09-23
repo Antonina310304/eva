@@ -1,4 +1,6 @@
 .wrapper {
+  position: relative;
+
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -8,11 +10,28 @@
 }
 
 .content {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 1480px;
-  margin: var(--space-e) 220px var(--space-xxe) 220px;
+  margin: var(--space-e) 0 var(--space-xxe);
+}
+
+.bgWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .stepsWrapper {
@@ -53,7 +72,7 @@
 
   .content {
     width: 100%;
-    margin: var(--space-xb) 150px var(--space-e) 150px;
+    margin: var(--space-xb) 0 var(--space-e);
   }
 
   .description {
@@ -69,7 +88,7 @@
 
   .content {
     max-width: 100%;
-    margin: var(--space-xb) var(--space-xxl) var(--space-e) var(--space-xxl);
+    margin: var(--space-xb) 0 var(--space-e);
   }
 
   .title {
@@ -94,7 +113,7 @@
   }
 
   .content {
-    margin: var(--space-xb) var(--space-s) var(--space-xxe) var(--space-s);
+    margin: var(--space-xb) 0 var(--space-xxe);
   }
 
   .title {
@@ -116,6 +135,6 @@
   }
 
   .content {
-    margin: var(--space-xb) var(--space-s) var(--space-e) var(--space-s);
+    margin: var(--space-xb) 0 var(--space-e);
   }
 }

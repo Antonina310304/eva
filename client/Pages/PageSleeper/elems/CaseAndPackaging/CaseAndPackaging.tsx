@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 import cn from 'classnames';
-import Step from '@Pages/PageSleeper/elems/CaseAndPackaging/Step';
+import Step from './Step';
+import NarrowContainer from '../NarrowContainer';
 import styles from './CaseAndPackaging.module.css';
 
 const bckUrl = 'react/static/img/sleeper/caseAndPacking/bck.png';
@@ -23,19 +24,22 @@ interface CaseAndPackagingProps {
 
 const CaseAndPackaging: FC<CaseAndPackagingProps> = ({ className }) => {
   return (
-    <div
-      className={cn(className, styles.wrapper)}
-      style={{ background: `url(${bckUrl}) center center /cover` }}
-    >
-      <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        <div className={styles.description}>{description}</div>
-        <div className={styles.stepsWrapper}>
-          {steps.map((step, index) => (
-            <Step key={index} number={index + 1} description={step} />
-          ))}
-        </div>
+    <div className={cn(className, styles.wrapper, 'wrapper')}>
+      <div className={styles.bgWrapper}>
+        {/* сюда вместо img нужно будет перенести canvas с анимацией со старого сайта */}
+        <img src={bckUrl} alt='' className={styles.bg} />
       </div>
+      <NarrowContainer>
+        <div className={styles.content}>
+          <h2 className={styles.title}>{title}</h2>
+          <div className={styles.description}>{description}</div>
+          <div className={styles.stepsWrapper}>
+            {steps.map((step, index) => (
+              <Step key={index} number={index + 1} description={step} />
+            ))}
+          </div>
+        </div>
+      </NarrowContainer>
     </div>
   );
 };
