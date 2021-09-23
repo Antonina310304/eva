@@ -57,7 +57,7 @@
   }
 
   .videoContent {
-    min-height: calc(0.5625 * (100% - 2 * 150px));
+    min-height: calc(0.5625 * (100vw - 2 * 150px));
   }
 }
 
@@ -83,7 +83,7 @@
   }
 
   .videoContent {
-    min-height: calc(0.5625 * (100% - 2 * var(--space-xxl)));
+    min-height: calc(0.5625 * (100vw - 2 * var(--space-xxl)));
   }
 }
 
@@ -103,12 +103,12 @@
   }
 
   .videoContent {
-    min-height: calc(0.5625 * (100% - 2 * var(--space-s)));
+    min-height: calc(0.5625 * (100vw - 2 * var(--space-s)));
   }
 }
 
 @media (--mobile) {
   .videoContent {
-    min-height: calc(0.5625 * (100% - 2 * var(--space-s)));
+    min-height: calc(0.5625 * (100vw - 2 * var(--space-s)));
   }
 }
