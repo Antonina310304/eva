@@ -1,0 +1,18 @@
+.narrow {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  padding: 0 220px;
+
+  @media (--desktop-m) {
+    padding: 0 150px;
+  }
+
+  @media (--desktop) {
+    padding: 0 var(--space-xxl);
+  }
+
+  @media (--mobile-m) {
+    padding: 0 var(--space-s);
+  }
+}

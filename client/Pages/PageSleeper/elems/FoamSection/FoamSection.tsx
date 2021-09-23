@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 
-import SleeperFeatures from '@Pages/PageSleeper/elems/FoamSection/SleeperFeatures/SleeperFeatures';
+import NarrowContainer from '../NarrowContainer/NarrowContainer';
+import SleeperFeatures from './SleeperFeatures';
 import Layers from './Layers';
 import styles from './FoamSection.module.css';
 
@@ -23,12 +24,14 @@ const FoamSection: FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.headContainer}>
-        <h2 className={styles.title}>Три слоя инновационной пены для безупречного комфорта</h2>
-        <div className={styles.description}>
-          Несколько циклов тестирования помогли нам найти идеальное наполнение для матраса Sleeper.
-          На первый взгляд кажется, что все просто. Однако внутри — тщательно продуманная комбинация
-          трех инновационных материалов.
-        </div>
+        <NarrowContainer>
+          <h2 className={styles.title}>Три слоя инновационной пены для безупречного комфорта</h2>
+          <div className={styles.description}>
+            Несколько циклов тестирования помогли нам найти идеальное наполнение для матраса
+            Sleeper. На первый взгляд кажется, что все просто. Однако внутри — тщательно продуманная
+            комбинация трех инновационных материалов.
+          </div>
+        </NarrowContainer>
       </div>
       <Layers />
       <SleeperFeatures features={sleeperFeatures} />

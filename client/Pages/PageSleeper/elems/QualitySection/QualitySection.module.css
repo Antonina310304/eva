@@ -1,11 +1,8 @@
 .wrapper {
   box-sizing: border-box;
   width: 100%;
-  max-width: 1480px;
   margin: 0 auto var(--space-xxe) auto;
   padding-bottom: var(--space-xxl);
-
-  background: var(--color-white);
 }
 
 .textWrapper {
@@ -34,39 +31,35 @@
 }
 
 .videoContent {
-  min-height: 832px;
+  position: relative;
+
+  height: 0;
+  padding-top: 56.25%;
 }
 
-.video {
-}
-
-.saveHeight {
-  width: 100%;
-  height: 600px;
-
-  border: 1px solid black;
+.previewBlock,
+.videoWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .preview {
-  padding-top: 55.94%;
+  padding-top: 56.25%;
 }
 
 @media (--desktop-m) {
   .wrapper {
-    max-width: calc(100% - 300px);
-    margin: 0 150px var(--space-e) 150px;
-  }
-
-  .videoContent {
-    min-height: calc(0.5625 * (100vw - 2 * 150px));
+    margin-bottom: var(--space-e);
   }
 }
 
 @media (--desktop) {
   .wrapper {
-    max-width: 100%;
-    margin: 0 auto var(--space-xb) auto;
-    padding: 0 var(--space-xxl);
+    margin-bottom: var(--space-xxe);
+    padding: 0;
   }
 
   .textWrapper {
@@ -82,15 +75,11 @@
     font-size: var(--size-m);
     line-height: 150%;
   }
-
-  .videoContent {
-    min-height: calc(0.5625 * (100vw - 2 * var(--space-xxl)));
-  }
 }
 
 @media (--mobile-m) {
   .wrapper {
-    padding: 0 var(--space-s) var(--space-n) var(--space-s);
+    margin-bottom: var(--space-e);
   }
 
   .title {
@@ -101,15 +90,5 @@
   .description {
     font-size: var(--size-s);
     line-height: 150%;
-  }
-
-  .videoContent {
-    min-height: calc(0.5625 * (100vw - 2 * var(--space-s)));
-  }
-}
-
-@media (--mobile) {
-  .videoContent {
-    min-height: calc(0.5625 * (100vw - 2 * var(--space-s)));
   }
 }

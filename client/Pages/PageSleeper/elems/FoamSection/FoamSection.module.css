@@ -3,10 +3,6 @@
   margin-bottom: var(--space-xxe);
 }
 
-.headContainer {
-  composes: main from 'containers';
-}
-
 .title {
   composes: xxl from 'sizes';
   composes: hero from 'fonts';
