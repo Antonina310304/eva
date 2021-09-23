@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
-import FeatureItem from '@Pages/PageSleeper/elems/FoamSection/SleeperFeatures/FeatureItem/FeatureItem';
+import FeatureItem from '@Pages/PageSleeper/elems/FoamSection/SleeperFeatures/elems/FeatureItem/FeatureItem';
 import styles from './SleeperFeatures.module.css';
 
 interface Features {

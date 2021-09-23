@@ -31,7 +31,7 @@ const Questions = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>Остались вопросы?</div>
+      <h2>Остались вопросы?</h2>
       <div className={styles.questionsWrapper}>
         {questions.map((question, index) => (
           <QuestionCard

@@ -14,7 +14,8 @@
 .textWrapper {
   display: flex;
   flex-direction: column;
-  width: 43.75%;
+  width: calc((100% - var(--space-xxe)) * 0.4375);
+  max-width: 623px;
   margin-right: var(--space-xxe);
   padding-top: 41px;
 }
@@ -53,11 +54,12 @@
 }
 
 .img {
-  width: 56.25%;
+  width: calc((100% - var(--space-xxe)) * 0.5625);
+  max-width: 801px;
 }
 .button {
   align-self: flex-start;
-  padding: 13px 154px !important;
+  min-width: 420px;
 }
 
 .breakLineWrapper {
@@ -84,7 +86,7 @@
   }
 
   .textWrapper {
-    width: 39.35%;
+    width: calc((100% - var(--space-e)) * 0.3935);
     margin-right: 80px;
   }
 
@@ -103,11 +105,11 @@
   }
 
   .img {
-    width: 60.6%;
+    width: calc((100% - var(--space-e)) * 0.6064);
   }
 
   .button {
-    padding: 9px 64px !important;
+    min-width: 240px;
   }
 }
 
@@ -122,11 +124,11 @@
   }
 
   .img {
-    width: 60.17%;
+    width: calc((100% - var(--space-xxl)) * 0.6017);
   }
 
   .textWrapper {
-    width: 38.82%;
+    width: calc((100% - var(--space-xxl)) * 0.3882);
     margin-right: var(--space-xxl);
   }
 
@@ -144,6 +146,7 @@
 
 @media (--mobile-m) {
   .wrapper {
+    width: 100%;
     margin-bottom: var(--space-e);
   }
 
