@@ -7,17 +7,17 @@
 
 .content {
   display: flex;
+  align-items: center;
   box-sizing: border-box;
-  padding: 0 220px;
 }
 
 .textWrapper {
   display: flex;
   flex-direction: column;
-  width: calc((100% - var(--space-xxe)) * 0.4375);
-  max-width: 623px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: calc((100% - var(--space-xxe)) * 0.4514);
   margin-right: var(--space-xxe);
-  padding-top: 41px;
 }
 
 .title {
@@ -54,8 +54,10 @@
 }
 
 .img {
-  width: calc((100% - var(--space-xxe)) * 0.5625);
+  width: calc((100% - var(--space-xxe)) * 0.5804);
   max-width: 801px;
+
+  transform: translateX(44px);
 }
 .button {
   align-self: flex-start;
@@ -82,7 +84,7 @@
   }
 
   .content {
-    padding: 0 150px var(--space-xxl) 150px;
+    padding: 0 0 var(--space-xxl);
   }
 
   .textWrapper {
@@ -105,7 +107,9 @@
   }
 
   .img {
-    width: calc((100% - var(--space-e)) * 0.6064);
+    width: calc((100% - var(--space-e)) * 0.6065);
+
+    transform: translateX(0);
   }
 
   .button {
@@ -119,12 +123,12 @@
   }
 
   .content {
-    margin: 0 var(--space-xxl) var(--space-xxl) var(--space-xxl);
+    margin-bottom: var(--space-xxl);
     padding: 0;
   }
 
   .img {
-    width: calc((100% - var(--space-xxl)) * 0.6017);
+    width: calc((100% - var(--space-xxl)) * 0.6018);
   }
 
   .textWrapper {
@@ -153,8 +157,7 @@
   .content {
     flex-direction: column;
     width: 100%;
-    max-width: calc(100% - 30px);
-    margin: 0 var(--space-s) 0 var(--space-s);
+    margin: 0;
   }
 
   .title {
@@ -171,6 +174,8 @@
   }
 
   .subTitle {
+    align-self: flex-start;
+
     font-size: var(--size-m);
     line-height: 150%;
   }
