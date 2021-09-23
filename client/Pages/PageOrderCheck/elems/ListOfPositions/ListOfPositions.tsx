@@ -15,10 +15,10 @@ const ListOfPositions: FC<ListOfPositionsProps> = (props) => {
   const cart = useCart();
 
   const allPositions = useMemo(() => {
-    if (cart.network !== 'success') return [];
+    const { positions = [], removedPositions = [] } = cart;
 
-    return [...cart.positions, ...cart.removedPositions];
-  }, [cart.network, cart.positions, cart.removedPositions]);
+    return [...positions, ...removedPositions];
+  }, [cart]);
 
   return (
     <div {...restProps} className={cn(styles.list, className)}>

@@ -11,7 +11,7 @@ export interface Response {
   data: CatalogData;
 }
 
-export default async (params: Params): Promise<any> => {
+export default async (params: Params): Promise<CatalogData> => {
   const { translite, page = 1 } = params;
   const searchParams = new URLSearchParams();
 

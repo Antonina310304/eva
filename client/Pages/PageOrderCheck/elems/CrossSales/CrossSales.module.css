@@ -1,0 +1,16 @@
+.crossSales {
+  padding: var(--space-xxl) 0 var(--space-xb);
+
+  background-color: var(--color-white);
+}
+
+.section:not(:last-child) {
+  margin-bottom: var(--space-xb);
+}
+
+.productItem {
+  width: 28.405vw;
+  min-width: 300px;
+  max-width: 422px;
+  padding: 0 var(--space-xs);
+}

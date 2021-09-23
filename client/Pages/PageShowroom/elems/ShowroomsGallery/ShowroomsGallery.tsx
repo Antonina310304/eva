@@ -25,14 +25,6 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
 
-  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
-    setTrack(opts);
-  }, []);
-
-  const handleChangeCurrent = useCallback(({ current }) => {
-    setSlideIndex(current);
-  }, []);
-
   const normalizeSlide = useCallback(
     (index: number) => {
       if (index < 0) return 0;
@@ -42,6 +34,14 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
     },
     [images.length],
   );
+
+  const handleChangeProgress = useCallback((opts: ProgressOptions) => {
+    setTrack(opts);
+  }, []);
+
+  const handleChangeCurrent = useCallback(({ current }) => {
+    setSlideIndex(current);
+  }, []);
 
   const handlePrev = useCallback(() => {
     setSlideIndex((prev) => normalizeSlide(prev - 1));
@@ -62,6 +62,12 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
     },
     [onChangeTab],
   );
+
+  const handleClickPreview = useCallback((e, index) => {
+    if (window.cancelClick) return;
+
+    setSlideIndex(index);
+  }, []);
 
   return (
     <div {...restProps} className={cn(styles.slider, className)}>
@@ -109,7 +115,7 @@ const ShowroomsGallery: FC<ShowroomsGalleryProps> = (props) => {
                   className={cn(styles.slidePagination, {
                     [styles.actived]: slideIndex === index,
                   })}
-                  onClick={() => handleChangeCurrent({ current: index })}
+                  onClick={(e) => handleClickPreview(e, index)}
                 >
                   <Image className={styles.imgWrapper} src={src} />
                 </div>

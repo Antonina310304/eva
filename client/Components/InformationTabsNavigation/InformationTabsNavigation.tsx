@@ -21,8 +21,8 @@ const InformationTabsNavigation: FC<InformationTabsNavigationProps> = (props) =>
   return (
     <nav {...restProps} className={cn(styles.navigation, className)}>
       <div className={styles.galleryWrapper}>
-        <Gallery className={styles.gallery} slideIndex={slideIndex} centered>
-          {navigation.map((item, index: number) => (
+        <Gallery slideIndex={slideIndex} gap={40} centered>
+          {navigation.map((item, index) => (
             <div className={styles.navigationItem} key={index}>
               <Link
                 to={item.href}

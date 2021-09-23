@@ -1,115 +1,94 @@
-import { FC, HTMLAttributes, memo, useCallback, useState, useRef } from 'react';
+import { FC, HTMLAttributes, memo, useCallback, useState, useEffect, useMemo } from 'react';
 import cn from 'classnames';
 
+import * as ApiShowroom from '@Api/Showroom';
 import PecomMap from '@Components/PecomMap';
+import useMeta from '@Queries/useMeta';
+import logger from '@Utils/logger';
 import { SellPointData } from '@Types/SellPoints';
 import PopupAllSellPoints from '../PopupAllSellPoints';
 import PopupSelectedSellPoint from '../PopupSelectedSellPoint';
-import SelectedIcon from './selectedIcon.png';
-import NotSelectedIcon from './notSelectedIcon.svg';
 import styles from './MapWithPopup.module.css';
 
 export interface MapWithPopupProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  sellPoints: SellPointData[];
+  defaultSellPoints?: SellPointData[];
 }
 
 const MapWithPopup: FC<MapWithPopupProps> = (props) => {
-  const { className, sellPoints, ...restProps } = props;
+  const { className, defaultSellPoints = [], ...restProps } = props;
   const [visiblePopup, setVisiblePopup] = useState(true);
-  const [selectedPointId, setSelectedPointId] = useState(null);
-  const selectedPoint = sellPoints.find((point) => point.id === selectedPointId);
-  const geoObjects = useRef(null);
-  const selectedPlacemark = useRef(null);
+  const [selectedPoint, setSelectedPoint] = useState<SellPointData>(null);
+  const [sellPoints, setSellPoints] = useState<SellPointData[]>(defaultSellPoints);
+  const meta = useMeta();
 
-  const handleClose = useCallback(() => {
-    if (selectedPlacemark) {
-      selectedPlacemark.current.options.set({
-        iconLayout: 'default#image',
-        iconImageHref: NotSelectedIcon,
-      });
+  const sellpointsInCurrentRegion = useMemo(() => {
+    if (!meta.isSuccess) return [];
+
+    return sellPoints.filter((sellPoint) => sellPoint.regionId === meta.data.region.id);
+  }, [meta.data, meta.isSuccess, sellPoints]);
+
+  const loadSellPoints = useCallback(async () => {
+    try {
+      const res = await ApiShowroom.getSellPoints();
+
+      setSellPoints(res.sellPoints);
+    } catch (err) {
+      logger(err);
     }
-
-    setVisiblePopup(false);
   }, []);
 
-  const handleClickMoreInfo = useCallback((id, index) => {
-    selectedPlacemark.current = geoObjects.current[index];
-
-    selectedPlacemark.current.options.set({
-      iconLayout: 'default#image',
-      iconImageHref: SelectedIcon,
-    });
-
-    setSelectedPointId(id);
-  }, []);
-
-  const handleClickBack = useCallback(() => {
-    if (selectedPlacemark) {
-      selectedPlacemark.current.options.set({
-        iconLayout: 'default#image',
-        iconImageHref: NotSelectedIcon,
-      });
-    }
-
-    setSelectedPointId(null);
-  }, []);
-
-  const selectPoint = useCallback((_e, selectedPickupPoint) => {
-    if (selectedPlacemark.current) {
-      selectedPlacemark.current.options.set({
-        iconLayout: 'default#image',
-        iconImageHref: NotSelectedIcon,
-      });
-    }
-
-    selectedPlacemark.current = _e.get('target');
-
-    selectedPlacemark.current.options.set({
-      iconLayout: 'default#image',
-      iconImageHref: SelectedIcon,
-    });
-
-    setSelectedPointId(selectedPickupPoint.id);
+  const handleSelectPoint = useCallback((_e, selectedPickupPoint) => {
+    setSelectedPoint(selectedPickupPoint);
     setVisiblePopup(true);
   }, []);
 
-  const getGeoObjects = useCallback((geoObjectsMass) => {
-    geoObjects.current = geoObjectsMass.map((item: any) => {
-      const obj = { ...item };
-      obj.options.set({
-        iconLayout: 'default#image',
-        iconImageHref: NotSelectedIcon,
-        iconImageSize: [52, 44],
-      });
-      return obj;
-    });
+  const handleClose = useCallback(() => {
+    setVisiblePopup(false);
   }, []);
+
+  const handleMore = useCallback((_e, sellPoint) => {
+    setSelectedPoint(sellPoint);
+  }, []);
+
+  const handleBack = useCallback(() => {
+    setSelectedPoint(null);
+  }, []);
+
+  // Если не указаны точки продаж по умолчанию, то загружаем их асинхронно
+  useEffect(() => {
+    if (defaultSellPoints.length > 0) return;
+    if (sellPoints.length > 0) return;
+
+    loadSellPoints();
+  }, [loadSellPoints, defaultSellPoints, sellPoints.length]);
 
   return (
     <div {...restProps} className={cn(styles.mapWithPopup, className)}>
       <PecomMap
         className={styles.map}
-        pickupPoints={sellPoints}
-        balloon={false}
-        contactsStyle
-        onSelectPickupPoint={selectPoint}
-        getGeoObjects={getGeoObjects}
+        sellPoints={sellPoints}
+        selectedPoint={selectedPoint}
+        onSelectPickupPoint={handleSelectPoint}
       />
 
       <div className={cn(styles.popup, { [styles.visible]: visiblePopup })}>
-        {!selectedPointId ? (
-          <PopupAllSellPoints
-            pickupPoints={sellPoints}
-            closePopup={handleClose}
-            selectPoint={handleClickMoreInfo}
+        {selectedPoint ? (
+          <PopupSelectedSellPoint
+            selectedPoint={selectedPoint}
+            onClose={handleClose}
+            onBack={handleBack}
           />
         ) : (
-          <PopupSelectedSellPoint
-            goBack={handleClickBack}
-            selectedPoint={selectedPoint}
-            closePopup={handleClose}
-          />
+          <>
+            {sellpointsInCurrentRegion.length > 0 && (
+              <PopupAllSellPoints
+                sellPoints={sellpointsInCurrentRegion}
+                onClose={handleClose}
+                onMore={handleMore}
+              />
+            )}
+          </>
         )}
       </div>
     </div>

@@ -2,15 +2,8 @@
 }
 
 .galleryWrapper {
+  padding: 0 var(--space-s);
   overflow: hidden;
-}
-
-.gallery {
-  margin: 0 var(--space-xxs-neg);
-}
-
-.navigationItem {
-  padding: 0 var(--space-n);
 }
 
 .navigationLink {

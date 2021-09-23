@@ -14,7 +14,7 @@ import List from '@UI/List';
 import Image from '@UI/Image';
 import RadioButton from '@UI/RadioButton';
 import FormattedText from '@Pages/PageDelivery/FormattedText';
-import { UseCartResult } from '@Stores/Cart';
+import { CartStoreValue } from '@Stores/Cart';
 import useLayout from '@Queries/useLayout';
 import OrderedList from './elements/OrderedList';
 import FreeDeliveryBanner from './elements/FreeDeliveryBanner';
@@ -45,7 +45,7 @@ export interface PageDeliveryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   page: any;
   meta: MetaData;
-  cart?: UseCartResult;
+  cart?: CartStoreValue;
 }
 
 const tabs = [

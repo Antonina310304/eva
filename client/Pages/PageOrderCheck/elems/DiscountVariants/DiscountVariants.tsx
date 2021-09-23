@@ -28,7 +28,9 @@ const DiscountVariants: FC<DiscountVariantsProps> = (props) => {
   const isPromocodeItem = selectedDiscountVariant === 'promocode';
 
   // TODO: удалить, когда разберемся почему не загружается профиль на /order/check
-  bonusPoints.availableAmount = 300;
+  if (bonusPoints) {
+    bonusPoints.availableAmount = 300;
+  }
 
   const handleCheck = useCallback((_e, item: string) => {
     OrderFormStore.selectDiscountVariant(item);

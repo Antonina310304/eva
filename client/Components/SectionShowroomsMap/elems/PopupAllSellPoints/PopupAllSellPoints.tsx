@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, MouseEvent, memo, useCallback } from 'react';
 import cn from 'classnames';
 
 import IconClose from '@UI/IconClose';
@@ -9,36 +9,43 @@ import styles from './PopupAllSellPoints.module.css';
 
 export interface PopupAllSellPointsProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  pickupPoints: SellPointData[];
-  closePopup: () => void;
-  selectPoint: (id: string, index: number) => void;
+  sellPoints: SellPointData[];
+  onClose?: (e: MouseEvent) => void;
+  onMore?: (e: MouseEvent, sellPoint: SellPointData) => void;
 }
 
 const PopupAllSellPoints: FC<PopupAllSellPointsProps> = (props) => {
-  const { className, pickupPoints, closePopup, selectPoint, ...restProps } = props;
+  const { className, sellPoints, onClose, onMore, ...restProps } = props;
+
+  const handleMore = useCallback(
+    (e, sellPoint) => {
+      if (onMore) onMore(e, sellPoint);
+    },
+    [onMore],
+  );
 
   return (
     <div {...restProps} className={cn(styles.popupAllSellPoints, className)}>
       <div className={styles.head}>
         <div className={styles.title}>Ждём в наших магазинах</div>
-        <IconClose className={styles.iconClose} onClick={closePopup} />
+        <IconClose className={styles.iconClose} onClick={onClose} />
       </div>
 
       <Scroller className={styles.scroller}>
-        {pickupPoints.map((point, index) => (
-          <div className={styles.item} key={point.id}>
+        {sellPoints.map((sellPoint) => (
+          <div className={styles.item} key={sellPoint.id}>
             <div className={styles.pointIcon} />
 
             <div className={styles.pointInfo}>
               <div
                 className={styles.pointAddress}
                 // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: point.address }}
+                dangerouslySetInnerHTML={{ __html: sellPoint.address }}
               />
 
               <Button
                 className={styles.moreInfo}
-                onClick={() => selectPoint(point.id, index)}
+                onClick={(e) => handleMore(e, sellPoint)}
                 theme='linkSecondary'
               >
                 Подробнее

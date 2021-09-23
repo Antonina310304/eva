@@ -74,6 +74,7 @@
 @media (--mobile) {
   .wrapper {
     .wrapperContent {
+      max-width: unset;
       padding: var(--space-n) 0 var(--space-l);
     }
   }

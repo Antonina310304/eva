@@ -5,12 +5,11 @@ import equal from 'fast-deep-equal';
 
 import * as ApiCart from '@Api/Cart';
 import * as ApiOrder from '@Api/Order';
+import logger from '@Utils/logger';
 import { CartPositionData, CartProductData } from '@Types/Cart';
-import { NetworkStatus } from '@Types/Base';
 import { CartStoreValue, UseCart } from './typings';
 
 const cartStore = createStore<CartStoreValue>();
-const networkStore = createStore<NetworkStatus>();
 
 // Все товары
 const allProductsStore = createDerived(cartStore, (cart) => {
@@ -93,10 +92,6 @@ const addProducts = async (inputsParams: any[], options: any = {}): Promise<void
   });
 
   try {
-    if (!options.isRelated) {
-      networkStore.set('loading');
-    }
-
     const res = await ApiCart.put({ body });
 
     update(cartStore, (prevCart) => ({
@@ -104,12 +99,9 @@ const addProducts = async (inputsParams: any[], options: any = {}): Promise<void
       ...res.cart,
       newPositions: options.isRelated ? prevCart.newPositions : res.cart.newPositions,
     }));
-    networkStore.set('success');
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
-
-    networkStore.set('error');
   }
 };
 
@@ -125,8 +117,7 @@ const removeProduct = async (params: any, options: any = {}) => {
 
     cartStore.set(result);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    logger(error);
   }
 };
 
@@ -142,8 +133,7 @@ const hidePosition = async ({ positionId }: { positionId: string }) => {
       ...cart,
     }));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+    logger(err);
   }
 };
 
@@ -167,8 +157,7 @@ const showPosition = async ({ positionId }: { positionId: string }) => {
       ...cart,
     }));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+    logger(err);
   }
 };
 
@@ -183,8 +172,7 @@ const changeCount = async (params: any) => {
       newPositions: cart.newPositions,
     }));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+    logger(err);
   }
 };
 
@@ -214,13 +202,7 @@ const loadRelatedProducts = async ({ productIds }: any): Promise<void> => {
       relatedTitle: response.title,
     }));
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-
-    // updateData({
-    //   processing: false,
-    //   error,
-    // });
+    logger(error);
   }
 };
 
@@ -244,7 +226,6 @@ const init = (initialValue: CartStoreValue): void => {
 
   if (initialValue && !equal(initialValue, value)) {
     cartStore.set(initialValue);
-    networkStore.set('success');
   }
 };
 
@@ -269,10 +250,7 @@ export const useCart: UseCart = (params) => {
     queryClient.setQueryData(keys, value);
   });
 
-  return {
-    ...useStore(cartStore),
-    network: useStore(networkStore),
-  };
+  return useStore(cartStore);
 };
 
 export default {

@@ -17,6 +17,10 @@
   }
 }
 
+.mainChunk {
+  font-weight: 500;
+}
+
 @media (--mobile) {
   .hint {
     padding: var(--space-xxs) var(--space-s);

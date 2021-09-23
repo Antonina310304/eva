@@ -1,7 +1,12 @@
 import { FC, HTMLAttributes, memo, useRef, useEffect, useState, useCallback } from 'react';
+import loadable from '@loadable/component';
 import cn from 'classnames';
 
+import Button from '@UI/Button';
+import Image from '@UI/Image';
+import Link from '@UI/Link';
 import OrderForm from '@Forms/OrderForm';
+import ServicePageTitle from '@Components/ServicePageTitle';
 import { useOrderForm } from '@Stores/OrderForm';
 import useMedias from '@Hooks/useMedias';
 import useScrollPosition from '@Hooks/useScrollPosition';
@@ -18,6 +23,8 @@ export interface PageOrderCheckProps extends HTMLAttributes<HTMLDivElement> {
   profile?: Profile;
 }
 
+const CrossSales = loadable(() => import('./elems/CrossSales'));
+
 const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const { className, page, profile, ...restProps } = props;
   const { isDesktop, isMobileM } = useMedias();
@@ -25,6 +32,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
   const orderForm = useOrderForm();
   const refContent = useRef<HTMLDivElement>(null);
   const refSidebar = useRef<HTMLDivElement>(null);
+  const hasPosition = orderForm.positions.length > 0 || orderForm.removedPositions.length > 0;
   const headerHeight = isDesktop ? 0 : 90;
 
   const handleScroll = useCallback(() => {
@@ -69,9 +77,9 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
 
   return (
     <div {...restProps} className={cn(styles.page, className)}>
-      {orderForm.count > 0 ? (
+      {hasPosition ? (
         <div className={styles.wrapper}>
-          <h1 className={styles.title}>Корзина</h1>
+          <ServicePageTitle className={styles.title} title='Оформление заказа' />
 
           <div className={styles.container}>
             <div className={styles.content} ref={refContent}>
@@ -92,7 +100,7 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
                   price: orderForm.selectedDelivery?.sum,
                   description: page.deliveryCostDescription,
                 }}
-                prepaymentPercent={page.deliveryCostDescription}
+                prepaymentPercent={page.prepaymentPercent}
                 profile={profile}
                 ref={refSidebar}
                 style={sidebarStyles}
@@ -101,7 +109,26 @@ const PageOrderCheck: FC<PageOrderCheckProps> = (props) => {
           </div>
         </div>
       ) : (
-        <div className={styles.empty}>Корзина пуста</div>
+        <div className={styles.wrapperEmpty}>
+          <ServicePageTitle title='Оформление заказа' />
+          <div className={styles.emptyDesc}>В вашей корзине пока нет товаров</div>
+
+          <Link to='/site/site-map'>
+            <Button className={styles.btnContinue} wide>
+              Продолжить покупки
+            </Button>
+          </Link>
+
+          <Image
+            className={styles.illustration}
+            src='/react/static/img/empty-cart-illustration.svg'
+            alt=''
+          />
+
+          {page.sections?.length > 0 && (
+            <CrossSales className={styles.crossSales} sections={page.sections} />
+          )}
+        </div>
       )}
     </div>
   );

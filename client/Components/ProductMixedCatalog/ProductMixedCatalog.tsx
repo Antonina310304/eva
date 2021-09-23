@@ -38,7 +38,7 @@ const ProductMixedCatalog: FC<ProductMixedCatalogProps> = (props) => {
   // Автоподгрузка при скроле
   const handleScroll = useCallback(
     (e) => {
-      if (!autoload || !onMore) return;
+      if (!autoload || !onMore || !ref.current) return;
 
       const pageYOffsetBottom = window.pageXOffset + document.documentElement.clientHeight;
       const rect = ref.current.getBoundingClientRect();

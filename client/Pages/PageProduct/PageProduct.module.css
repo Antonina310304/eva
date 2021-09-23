@@ -108,14 +108,12 @@
   width: 28.405vw;
   min-width: 300px;
   max-width: 422px;
-  padding: 0 var(--space-xs);
 }
 
 .nanoProductItem {
   width: 13.836vw;
   min-width: 140px;
   max-width: 189px;
-  padding: 0 var(--space-xs);
 
   vertical-align: bottom;
 }

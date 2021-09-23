@@ -33,6 +33,7 @@ const RoutePress = loadable(() => import('@Routes/RoutePress'));
 const RouteSiteMap = loadable(() => import('@Routes/RouteSiteMap'));
 const RouteSiteMapFull = loadable(() => import('@Routes/RouteSiteMapFull'));
 const RouteShowroom = loadable(() => import('@Routes/RouteShowroom'));
+const RoutePromotionsDiscounts = loadable(() => import('@Routes/RoutePromotionsDiscounts'));
 const RoutePromoPrints = loadable(() => import('@Routes/RoutePromoPrints'));
 
 const App: FC = () => {
@@ -116,6 +117,10 @@ const App: FC = () => {
 
       <Route {...routes.showroom}>
         <RouteShowroom />
+      </Route>
+
+      <Route {...routes.promotionsDiscounts}>
+        <RoutePromotionsDiscounts />
       </Route>
 
       <Route {...routes.promoPrints}>

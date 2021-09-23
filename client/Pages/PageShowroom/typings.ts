@@ -21,7 +21,6 @@ export interface PageShowroomData {
   breadcrumbs: BreadcrumbData[];
   categories: CatalogData[];
   currentSellPoints: CurrentSellPointData[];
-  sellPoints: SellPointData[];
   title: string;
   map: MapData;
 }
