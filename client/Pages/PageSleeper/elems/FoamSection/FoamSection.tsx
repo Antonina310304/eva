@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-import NarrowContainer from '../NarrowContainer/NarrowContainer';
+import NarrowContainer from '../NarrowContainer';
 import SleeperFeatures from './SleeperFeatures';
 import Layers from './Layers';
 import styles from './FoamSection.module.css';

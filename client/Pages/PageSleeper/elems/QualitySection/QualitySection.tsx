@@ -3,7 +3,7 @@ import cn from 'classnames';
 import AsyncVimeo from '@Modals/QualityGuaranteeModal/elems/AsyncVimeo';
 import VideoPreview from '@Components/VideoPreview/VideoPreview';
 import useMedias from '@Hooks/useMedias';
-import NarrowContainer from '../NarrowContainer/NarrowContainer';
+import NarrowContainer from '../NarrowContainer';
 import styles from './QualitySection.module.css';
 
 interface QualitySectionProps {

@@ -1,1 +1,1 @@
-export {} from './NarrowContainer';
+export { default } from './NarrowContainer';
