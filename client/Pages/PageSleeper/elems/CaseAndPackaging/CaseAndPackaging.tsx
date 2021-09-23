@@ -28,7 +28,7 @@ const CaseAndPackaging: FC<CaseAndPackagingProps> = ({ className }) => {
       style={{ background: `url(${bckUrl}) center center /cover` }}
     >
       <div className={styles.content}>
-        <div className={styles.title}>{title}</div>
+        <h2 className={styles.title}>{title}</h2>
         <div className={styles.description}>{description}</div>
         <div className={styles.stepsWrapper}>
           {steps.map((step, index) => (
