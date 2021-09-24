@@ -5,6 +5,11 @@
   background: var(--color-light-gray);
 }
 
+.featuresWrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
 @media (--desktop-m) {
   .wrapper {
     padding: var(--space-e) 0;
