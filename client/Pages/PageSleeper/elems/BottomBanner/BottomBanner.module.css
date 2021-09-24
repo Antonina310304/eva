@@ -3,6 +3,20 @@
 }
 
 .img {
-  display: block;
-  width: 100%;
+  padding-top: 22.08%;
+
+  background-position: center;
+  background-size: cover;
+}
+
+@media (--mobile-m) {
+  .img {
+    padding-top: 28.65%;
+  }
+}
+
+@media (--mobile) {
+  .img {
+    padding-top: 41.11%;
+  }
 }

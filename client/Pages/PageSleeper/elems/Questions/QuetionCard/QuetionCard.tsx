@@ -1,10 +1,10 @@
-import React from 'react';
-import MinusIcon from '@Pages/PageSleeper/elems/Questions/QuetionCard/MinusIcon';
-import PlusIcon from '@Pages/PageSleeper/elems/Questions/QuetionCard/PlusIcon';
+import React, { FC, memo, HTMLAttributes } from 'react';
 import cn from 'classnames';
+import MinusIcon from './MinusIcon';
+import PlusIcon from './PlusIcon';
 import styles from './QuetionCard.module.css';
 
-interface QuestionCardInterface {
+interface QuestionCardInterface extends HTMLAttributes<HTMLDivElement> {
   title: string;
   content: string;
   active: boolean;
@@ -12,7 +12,7 @@ interface QuestionCardInterface {
   className?: string;
 }
 
-const QuestionCard: React.FC<QuestionCardInterface> = ({
+const QuestionCard: FC<QuestionCardInterface> = ({
   content,
   title,
   active,
@@ -31,4 +31,4 @@ const QuestionCard: React.FC<QuestionCardInterface> = ({
   );
 };
 
-export default React.memo(QuestionCard);
+export default memo(QuestionCard);

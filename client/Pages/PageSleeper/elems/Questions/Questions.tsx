@@ -1,5 +1,5 @@
-import React from 'react';
-import QuestionCard from '@Pages/PageSleeper/elems/Questions/QuetionCard';
+import React, { FC, memo, useState, useCallback } from 'react';
+import QuestionCard from './QuetionCard';
 import styles from './Questions.module.css';
 
 const questions = [
@@ -13,12 +13,12 @@ const questions = [
   },
 ];
 
-const Questions = () => {
-  const [activeCardsNumber, setActiveCardNumber] = React.useState<boolean[]>(
+const Questions: FC = () => {
+  const [activeCardsNumber, setActiveCardNumber] = useState<boolean[]>(
     new Array(questions.length).fill(false),
   );
 
-  const handleCardClick = React.useCallback(
+  const handleCardClick = useCallback(
     (index: number) => {
       setActiveCardNumber([
         ...activeCardsNumber.slice(0, index),
@@ -47,4 +47,4 @@ const Questions = () => {
   );
 };
 
-export default React.memo(Questions);
+export default memo(Questions);
