@@ -1,4 +1,5 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
+import Image from '@UI/Image';
 
 import styles from './FeatureItem.module.css';
 
@@ -20,7 +21,9 @@ const FeatureItem: FC<FeatureItemProps> = ({ feature }) => {
         <div className={styles.title}>{feature.name}</div>
         <div className={styles.description}>{feature.description}</div>
       </div>
-      <img className={styles.img} src={feature.image} />
+      <div className={styles.imgWrapper}>
+        <Image className={styles.img} src={feature.image} />
+      </div>
     </div>
   );
 };

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { FC, memo } from 'react';
+import Image from '@UI/Image';
 import styles from './BottomBanner.module.css';
 
 const imgUrl = 'react/static/img/sleeper/bottomBanner/img.png';
 
-const BottomBanner = () => {
+const BottomBanner: FC = () => {
   return (
     <div className={styles.wrapper}>
-      <img className={styles.img} src={imgUrl} />
+      <div className={styles.imgWrapper}>
+        <Image className={styles.img} src={imgUrl} />
+      </div>
     </div>
   );
 };
 
-export default React.memo(BottomBanner);
+export default memo(BottomBanner);

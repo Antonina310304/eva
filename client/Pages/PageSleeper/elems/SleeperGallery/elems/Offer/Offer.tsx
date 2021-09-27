@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import { SleeperProductsData } from '@Types/SleeperGallery';
 import { SelectItemData } from '@UI/Select';
-
 import MainSelect from '@UI/MainSelect';
 
 import declOfNum from '@Utils/declOfNum';

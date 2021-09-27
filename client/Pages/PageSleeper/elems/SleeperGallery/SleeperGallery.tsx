@@ -1,14 +1,13 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, HTMLAttributes } from 'react';
 
 import GalleryWithPagination from '@Components/GalleryWithPagination';
 import NavSideArrows from '@UI/NavSideArrows';
-
 import useMedias from '@Hooks/useMedias';
-import Offer from '@Pages/PageSleeper/elems/SleeperGallery/elems/ Offer';
 import { SleeperProductsData } from '@Types/SleeperGallery';
+import Offer from './elems/Offer';
 import styles from './SleeperGallery.module.css';
 
-export interface SleeperGalleryProps {
+export interface SleeperGalleryProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   slider: string[];
   products: SleeperProductsData[];

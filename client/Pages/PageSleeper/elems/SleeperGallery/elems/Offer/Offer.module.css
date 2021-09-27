@@ -123,7 +123,7 @@
   font-size: var(--size-n);
   line-height: 150%;
 
-  background-image: url('badge.svg');
+  background-image: url('./badge.svg');
 }
 
 .discount span {
@@ -149,7 +149,7 @@
     width: 20px;
     height: 20px;
 
-    background-image: url('bonus.svg');
+    background-image: url('./bonus.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -166,7 +166,6 @@
     flex: 0 0 auto;
     width: 180px;
     margin: 0;
-    margin-top: 0;
   }
   @media (--mobile) {
     width: auto;

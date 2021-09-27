@@ -19,10 +19,12 @@ const ProductFeatures: FC<SleeperFeaturesProps> = (props) => {
   const { className, features, ...restProps } = props;
 
   return (
-    <div {...restProps} className={cn(styles.wrapper, [className])}>
-      {features.map((feature, index) => (
-        <FeatureItem feature={feature} key={index} />
-      ))}
+    <div {...restProps} className={cn(styles.wrapper, [className])} data-test='wrapper'>
+      <div className={styles.featuresWrapper}>
+        {features.map((feature) => (
+          <FeatureItem feature={feature} key={feature.name} />
+        ))}
+      </div>
     </div>
   );
 };
