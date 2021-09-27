@@ -99,6 +99,18 @@
   }
 }
 
+.slideWrapper:first-child {
+  @media (min-width: 768px) {
+    opacity: 0;
+  }
+}
+
+.slideWrapper:last-child {
+  @media (min-width: 768px) {
+    opacity: 0;
+  }
+}
+
 .slideWrapper.active {
   position: relative;
 
