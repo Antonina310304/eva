@@ -1,6 +1,7 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 
 import cn from 'classnames';
+import NarrowContainer from '@Pages/PageSleeper/elems/NarrowContainer';
 import styles from './Layers.module.css';
 
 const LayersData = [
@@ -33,29 +34,32 @@ const Layers: FC = () => {
     setIsOpen((prev) => !prev);
   }, []);
   return (
-    <div>
-      <div>Слои с анимацией</div>
-      <button type='button' onClick={handleClick}>
-        показать
-      </button>
-      <div className={styles.wrapper}>
-        <div className={cn(isOpen && styles.open, styles.layers)}>
-          <div className={styles.inner}>
-            <div className={cn(styles.layer, styles.layer_1)} />
-            <div className={cn(styles.layer, styles.layer_2)} />
-            <div className={cn(styles.layer, styles.layer_3)} />
-            <div className={cn(styles.layer, styles.layer_4)} />
+    <div className={styles.section}>
+      <NarrowContainer>
+        <div>Слои с анимацией</div>
+        <button type='button' onClick={handleClick}>
+          показать
+        </button>
+        <div className={cn(styles.wrapper, isOpen && styles.open)}>
+          <div className={cn(isOpen && styles.open, styles.layers)}>
+            <div className={styles.inner}>
+              <div className={styles.wrap}>
+                {new Array(4).fill('').map((i, index) => (
+                  <div key={index} className={styles.layer} />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className={cn(isOpen && styles.open, styles.description)}>
+            {LayersData.map((item, index) => (
+              <div key={index} className={styles.descriptionItem}>
+                <p className={styles.title}>{item.title}</p>
+                <p className={styles.text}>{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
-        <div className={cn(isOpen && styles.open, styles.description)}>
-          {LayersData.map((item) => (
-            <div className={styles.descriptionItem}>
-              <p className={styles.title}>{item.title}</p>
-              <p className={styles.text}>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      </NarrowContainer>
     </div>
   );
 };

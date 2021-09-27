@@ -2,11 +2,58 @@
   position: relative;
 
   display: flex;
+  flex: 0 0 auto;
+  width: 700px;
   width: 100%;
-  max-width: 700px;
-  height: 577px;
-  margin: 0 auto;
+  margin: 0;
+
+  @media (--desktop-m) {
+    width: 577px;
+  }
+
+  @media (--desktop) {
+    flex: 0 0 auto;
+    width: 493px;
+    height: auto;
+  }
+
+  @media (--mobile-m) {
+    width: 100%;
+    max-width: 493px;
+    height: auto;
+    margin: 0 auto 60px;
+  }
+
+  @media (--mobile) {
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    margin: 0 auto 60px;
+  }
+}
+
+.description {
+  @media (--desktop-l) {
+    margin-left: 160px;
+  }
+
+  @media (--desktop-m) {
+    max-width: 390px;
+    margin-left: 100px;
+  }
+
+  @media (--desktop) {
+    margin-left: 60px;
+  }
+
+  @media (--mobile-m) {
+    margin-left: 0;
+  }
+}
+
+.section {
   margin-bottom: 140px;
+  overflow: hidden;
 }
 
 .inner {
@@ -15,99 +62,314 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  @media (--desktop-l) {
+  }
+
+  @media (--desktop-m) {
+    flex: 0 0 auto;
+    padding-top: 22.14%;
+
+    transition: padding-top 500ms ease-in-out 900ms;
+  }
+
+  @media (--desktop) {
+  }
+
+  @media (--mobile-m) {
+    width: 100%;
+    height: 0;
+    padding-top: 22.14%;
+
+    transition: padding-top 500ms ease-in-out 600ms;
+  }
+}
+
+.open .inner {
+  @media (--desktop-l) {
+    padding-top: 93%;
+
+    transition: padding-top 500ms ease-in-out;
+  }
+
+  @media (--desktop-m) {
+    padding-top: 88%;
+
+    transition: padding-top 500ms ease-in-out;
+  }
+
+  @media (--desktop) {
+    padding-top: 82.42%;
+
+    transition: padding-top 500ms ease-in-out;
+  }
+
+  @media (--mobile-m) {
+    padding-top: 82%;
+
+    transition: padding-top 500ms ease-in-out;
+  }
+
+  @media (--mobile) {
+    padding-top: 93.03%;
+  }
+}
+
+.wrapper {
+  position: relative;
+  z-index: -1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translate(25%, -46%);
+
+  transition: transform 350ms ease-in-out 900ms;
+
+  @media (--mobile-m) {
+    z-index: auto;
+
+    display: block;
+
+    transform: none;
+
+    transition: none;
+  }
+}
+
+.wrapper.open {
+  transform: translate(0);
+
+  transition: transform 350ms ease-in-out;
+
+  @media (--mobile-m) {
+    z-index: auto;
+
+    display: block;
+
+    transition: none;
+  }
+}
+
+.wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .layer {
-  position: relative;
+  position: absolute;
+  top: auto;
+  bottom: 0;
   z-index: 5;
 
   width: 100%;
   height: 0;
-  margin-bottom: 60px;
 
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  opacity: 0;
+
+  @media (--desktop) {
+    transform: translateY(0);
+  }
 }
 
-.layer_1 {
-  top: 68%;
+.open .layer {
 
+  transform: translateY(100%);
+  opacity: 1;
+}
+
+.layer:first-child {
   padding-top: 08.73%;
 
   background-image: url('layer_1.png');
-  opacity: 0;
 
-  transition: top 500ms ease-in-out 450ms, opacity 500ms ease-in-out 600ms;
+  transition: bottom 800ms ease-in-out 550ms, opacity 700ms ease-in-out 550ms,
+    transform 700ms ease-in-out 650ms;
+
+  @media (--desktop-m) {
+    top: auto;
+
+    transition: bottom 800ms ease-in-out 550ms, opacity 700ms ease-in-out 550ms,
+      transform 700ms ease-in-out 650ms;
+  }
+
+  @media (--desktop) {
+    transition: bottom 800ms ease-in-out 550ms, opacity 700ms ease-in-out 550ms,
+      transform 700ms ease-in-out 650ms;
+  }
+
+  @media (--mobile-m) {
+    position: absolute;
+    top: auto;
+
+    transition: bottom 800ms ease-in-out 550ms, opacity 700ms ease-in-out 550ms,
+      transform 700ms ease-in-out 650ms;
+  }
 }
 
-.open .layer_1 {
-  top: 0;
+.open .layer:first-child {
+  transition: bottom 800ms ease-in-out, opacity 400ms ease-in-out 100ms,
+    transform 700ms ease-in-out 100ms;
 
-  opacity: 1;
+  @media (--desktop-m) {
+    top: auto;
+    bottom: 100%;
 
-  transition: top 500ms ease-in-out, opacity 300ms ease-in-out 10ms;
+    transition: bottom 800ms ease-in-out 100ms, opacity 400ms ease-in-out 100ms,
+      transform 700ms ease-in-out 100ms;
+  }
+
+  @media (--desktop) {
+    transition: bottom 800ms ease-in-out 100ms, opacity 400ms ease-in-out 100ms,
+      transform 700ms ease-in-out 100ms;
+  }
+
+  @media (--mobile-m) {
+    transition: bottom 800ms ease-in-out, opacity 400ms ease-in-out 100ms,
+      transform 700ms ease-in-out 100ms;
+  }
 }
 
-.layer_2 {
-  top: 50%;
-
+.layer:nth-child(2) {
   padding-top: 10%;
 
   background-image: url('layer_2.png');
-  opacity: 0;
 
-  transition: top 350ms ease-in-out 200ms, opacity 300ms ease-in-out 300ms;
+  transition: bottom 650ms ease-in-out 350ms, opacity 600ms ease-in-out 350ms,
+    transform 550ms ease-in-out 450ms;
+
+  @media (--desktop-m) {
+  }
+
+  @media (--desktop) {
+    position: absolute;
+  }
+
+  @media (--mobile-m) {
+    transition: bottom 650ms ease-in-out 350ms, opacity 600ms ease-in-out 350ms,
+      transform 550ms ease-in-out 450ms;
+  }
 }
 
-.open .layer_2 {
-  top: 0;
+.open .layer:nth-child(2) {
+  transition: bottom 650ms ease-in-out 350ms, opacity 600ms ease-in-out 350ms,
+    transform 550ms ease-in-out 450ms;
 
-  opacity: 1;
+  @media (--desktop-m) {
+    bottom: 78.5%;
 
-  transition: top 350ms ease-in-out 300ms, opacity 300ms ease-in-out 310ms;
+    transition: bottom 650ms ease-in-out 350ms, opacity 600ms ease-in-out 350ms,
+      transform 550ms ease-in-out 450ms;
+  }
+
+  @media (--desktop) {
+    bottom: 77.5%;
+
+    transition: bottom 650ms ease-in-out 350ms, opacity 600ms ease-in-out 350ms,
+      transform 550ms ease-in-out 450ms;
+  }
+
+  @media (--mobile-m) {
+    bottom: 79.5%;
+
+    transition: bottom 650ms ease-in-out 350ms, opacity 600ms ease-in-out 350ms,
+      transform 550ms ease-in-out 450ms;
+  }
+
+  @media (--mobile) {
+    bottom: 78%;
+  }
 }
 
-.layer_3 {
-  top: 30%;
-
-  margin-bottom: 0;
+.layer:nth-child(3) {
   padding-top: 15.9%;
 
   background-image: url('layer_3.png');
-  opacity: 0;
 
-  transition: top 350ms ease-in-out, opacity 150ms ease-in-out 150ms;
+  transition: bottom 650ms ease-in-out, opacity 550ms ease-in-out, transform 550ms ease-in-out 100ms;
+
+  @media (--desktop-m) {
+    position: absolute;
+
+    transition: bottom 650ms ease-in-out, opacity 550ms ease-in-out,
+      transform 550ms ease-in-out 100ms;
+  }
+
+  @media (--desktop) {
+    transition: bottom 650ms ease-in-out, opacity 550ms ease-in-out,
+      transform 550ms ease-in-out 100ms;
+  }
+
+  @media (--mobile-m) {
+    transition: bottom 650ms ease-in-out, opacity 550ms ease-in-out,
+      transform 550ms ease-in-out 100ms;
+  }
 }
 
-.open .layer_3 {
-  top: 0;
+.open .layer:nth-child(3) {
+  bottom: 57.5%;
 
-  opacity: 1;
+  transition: bottom 650ms ease-in-out 550ms, opacity 550ms ease-in-out 550ms,
+    transform 550ms ease-in-out 650ms;
 
-  transition: top 350ms ease-in-out 400ms, opacity 250ms ease-in-out 400ms;
+  @media (--desktop-m) {
+    bottom: 55.5%;
+
+    transition: bottom 650ms ease-in-out 550ms, opacity 550ms ease-in-out 550ms,
+      transform 550ms ease-in-out 650ms;
+  }
+
+  @media (--desktop) {
+    bottom: 54%;
+
+    transition: bottom 650ms ease-in-out 550ms, opacity 550ms ease-in-out 550ms,
+      transform 550ms ease-in-out 650ms;
+  }
+
+  @media (--mobile-m) {
+    bottom: 57.5%;
+  }
+
+  @media (--mobile) {
+    bottom: 54%;
+  }
 }
 
-.layer_4 {
-  top: 0;
+.layer:nth-child(4) {
+  position: absolute;
+  top: auto;
+  bottom: 0;
   z-index: 2;
 
-  margin-bottom: 0;
   padding-top: 22.14%;
 
   background-image: url('layer_4.png');
+  opacity: 1;
 
   transition: top 500ms ease-in-out;
+  transition: transform 350ms ease-in-out 200ms, opacity 300ms ease-in-out 300ms;
+
+  @media (--desktop-m) {
+    transform: translateX(0) !important;
+  }
+
+  @media (--desktop) {
+  }
+
+  @media (--mobile-m) {
+    transition: transform 350ms ease-in-out 200ms, opacity 300ms ease-in-out 300ms;
+  }
 }
 
-.open .layer_4 {
-  top: 10%;
-
+.open .layer:nth-child(4) {
   transition: top 500ms ease-in-out;
-}
-
-.wrapper {
-  display: flex;
 }
 
 .descriptionItem {
@@ -116,10 +378,7 @@
   margin-bottom: 60px;
   padding-left: 30px;
 
-  transform: translateY(300px);
   opacity: 0;
-
-  transition: opacity 350ms ease-in-out, transform 350ms ease-in-out;
 
   &:before {
     position: absolute;
@@ -138,34 +397,63 @@
   @media (--desktop-m) {
     margin-bottom: 40px;
   }
+
+  @media (--mobile-m) {
+    transform: none !important;
+    opacity: 1;
+  }
+}
+
+.descriptionItem:first-child {
+  transform: translateY(400px);
+
+  transition: transform 500ms ease-in-out 450ms, opacity 500ms ease-in-out 600ms;
 }
 
 .open .descriptionItem:first-child {
   transform: translateY(0);
   opacity: 1;
 
-  transition: opacity 500ms ease-in-out, transform 350ms ease-in-out;
+  transition: transform 500ms ease-in-out, opacity 300ms ease-in-out 10ms;
+}
+
+.descriptionItem:nth-child(2) {
+  transform: translateY(264px);
+
+  transition: transform 350ms ease-in-out 200ms, opacity 300ms ease-in-out 300ms;
 }
 
 .open .descriptionItem:nth-child(2) {
   transform: translateY(0);
   opacity: 1;
 
-  transition: opacity 400ms ease-in-out 400ms, transform 350ms ease-in-out 410ms;
+  transition: transform 350ms ease-in-out 300ms, opacity 300ms ease-in-out 310ms;
+}
+
+.descriptionItem:nth-child(3) {
+  transform: translateY(128px);
+
+  transition: transform 350ms ease-in-out, opacity 150ms ease-in-out 150ms;
 }
 
 .open .descriptionItem:nth-child(3) {
   transform: translateY(0);
   opacity: 1;
 
-  transition: opacity 400ms ease-in-out 700ms, transform 350ms ease-in-out 710ms;
+  transition: transform 350ms ease-in-out 400ms, opacity 250ms ease-in-out 400ms;
+}
+
+.descriptionItem:nth-child(4) {
+  transform: translateY(78px);
+
+  transition: transform 350ms ease-in-out, opacity 250ms ease-in-out;
 }
 
 .open .descriptionItem:nth-child(4) {
   transform: translateY(0);
   opacity: 1;
 
-  transition: opacity 400ms ease-in-out 900ms, transform 350ms ease-in-out 1100ms;
+  transition: transform 350ms ease-in-out 600ms, opacity 250ms ease-in-out 600ms;
 }
 
 .title {
