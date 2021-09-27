@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 
 import cn from 'classnames';
 import NarrowContainer from '@Pages/PageSleeper/elems/NarrowContainer';
@@ -40,11 +40,6 @@ const Layers: FC = () => {
     }
   }, [inView]);
 
-  // TODO не забыть удалить
-  const handleClick = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  }, []);
-
   return (
     <div className={styles.section}>
       <NarrowContainer>
@@ -53,7 +48,7 @@ const Layers: FC = () => {
             <div className={cn(isOpen && styles.open, styles.layers)}>
               <div className={styles.inner}>
                 <div className={styles.wrap}>
-                  {new Array(4).fill('').map((i, index) => (
+                  {LayersData.map((i, index) => (
                     <div key={index} className={styles.layer} />
                   ))}
                 </div>
