@@ -1,7 +1,8 @@
-import React, { FC, memo, useCallback, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 
 import cn from 'classnames';
 import NarrowContainer from '@Pages/PageSleeper/elems/NarrowContainer';
+import { useInView } from 'react-intersection-observer';
 import styles from './Layers.module.css';
 
 const LayersData = [
@@ -29,34 +30,43 @@ const LayersData = [
 
 const Layers: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [ref, inView] = useInView({
+    threshold: 0.5,
+  });
 
+  useEffect(() => {
+    if (inView) {
+      setIsOpen(true);
+    }
+  }, [inView]);
+
+  // TODO не забыть удалить
   const handleClick = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
+
   return (
     <div className={styles.section}>
       <NarrowContainer>
-        <div>Слои с анимацией</div>
-        <button type='button' onClick={handleClick}>
-          показать
-        </button>
-        <div className={cn(styles.wrapper, isOpen && styles.open)}>
-          <div className={cn(isOpen && styles.open, styles.layers)}>
-            <div className={styles.inner}>
-              <div className={styles.wrap}>
-                {new Array(4).fill('').map((i, index) => (
-                  <div key={index} className={styles.layer} />
-                ))}
+        <div ref={ref} className={cn(styles.wrapper, isOpen && styles.open)}>
+          <div className={styles.wrapperInner}>
+            <div className={cn(isOpen && styles.open, styles.layers)}>
+              <div className={styles.inner}>
+                <div className={styles.wrap}>
+                  {new Array(4).fill('').map((i, index) => (
+                    <div key={index} className={styles.layer} />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <div className={cn(isOpen && styles.open, styles.description)}>
-            {LayersData.map((item, index) => (
-              <div key={index} className={styles.descriptionItem}>
-                <p className={styles.title}>{item.title}</p>
-                <p className={styles.text}>{item.text}</p>
-              </div>
-            ))}
+            <div className={cn(isOpen && styles.open, styles.description)}>
+              {LayersData.map((item, index) => (
+                <div key={index} className={styles.descriptionItem}>
+                  <p className={styles.title}>{item.title}</p>
+                  <p className={styles.text}>{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </NarrowContainer>
